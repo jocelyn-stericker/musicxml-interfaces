@@ -1,0 +1,8 @@
+__test__library__
+dub.selections.json
+libripieno-musicxml.a
+libxml2
+libxslt
+.dub
+.*.swp
+.*.swo
