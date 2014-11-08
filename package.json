@@ -1,7 +1,7 @@
 {
     "name": "ripieno-musicxml",
     "description": "A MusicXML parser library for Ripieno",
-    "authors": ["Josh Netterfield"],
+    "authors": [ "Josh Netterfield" ],
     "homepage": "https://ripieno.io",
     "license": "MIT",
     "targetType": "library",
@@ -12,7 +12,17 @@
         "xslt"
     ],
     "stringImportPaths": [
-        "resources"
+        "resources/dtd",
+        "resources/tests"
     ],
-    "preGenerateCommands": ["./bind_libxml2.bash"]
+    "importPaths": [ "src", "." ],
+    "copyFiles": [
+        "util/xml-2.0.lib",
+        "util/xslt.lib",
+        "util/iconv.dll",
+        "util/libxml2.dll",
+        "util/libxslt.dll",
+        "util/zlib1.dll"
+    ],
+    "preGenerateCommands-linux": ["./bind_libxml2.bash"]
 }
