@@ -6,3 +6,9 @@ libxslt
 .dub
 .*.swp
 .*.swo
+*.dll
+*.lib
+*.sln
+*.suo
+*.visualdproj
+__test__librar*
