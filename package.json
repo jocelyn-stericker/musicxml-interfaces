@@ -5,8 +5,6 @@
     "homepage": "https://ripieno.io",
     "license": "MIT",
     "targetType": "library",
-    "dependencies": {
-    },
     "libs": [
         "xml-2.0",
         "xslt"
@@ -24,5 +22,6 @@
         "util/libxslt.dll",
         "util/zlib1.dll"
     ],
-    "preGenerateCommands-linux": ["./bind_libxml2.bash"]
+    "preGenerateCommands-linux": ["./bind_libxml2.bash"],
+    "versions": ["VibeCustomMain", "VibeExists", "VibeDebugCatchAll"]
 }
