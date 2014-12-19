@@ -10,5 +10,6 @@ libxslt
 *.lib
 *.sln
 *.suo
+*.a
 *.visualdproj
 __test__librar*

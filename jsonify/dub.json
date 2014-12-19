@@ -1,0 +1,25 @@
+{
+    "name": "ripieno-musicxml-jsonify",
+    "targetType": "library",
+    "sourcePaths": ["src"],
+    "importPaths": [
+        "src",
+        "../src",
+        ".."
+    ],
+    "stringImportPaths": [
+        "../resources/dtd",
+        "../resources/tests"
+    ],
+    "buildTypes": {
+        "debug": {
+            "buildOptions": ["debugMode"]
+        },
+        "unittest": {
+            "buildOptions": ["unittests", "debugMode"]
+        },
+        "release": {
+            "buildOptions": ["releaseMode", "optimize"]
+        }
+    }
+}

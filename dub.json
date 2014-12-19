@@ -13,8 +13,17 @@
         "resources/dtd",
         "resources/tests"
     ],
-    "importPaths": [ "src", "." ],
-    "copyFiles": [
+    "importPaths": [
+        "src",
+        "jsonify/src"
+    ],
+    "dependencies": {
+        "ripieno-musicxml-jsonify": {
+            "version": "*",
+            "path": "./jsonify"
+        }
+    },
+    "copyFiles-windows": [
         "util/xml-2.0.lib",
         "util/xslt.lib",
         "util/iconv.dll",
@@ -22,6 +31,15 @@
         "util/libxslt.dll",
         "util/zlib1.dll"
     ],
-    "preGenerateCommands-linux": ["./bind_libxml2.bash"],
-    "versions": ["VibeCustomMain", "VibeExists", "VibeDebugCatchAll"]
+    "buildTypes": {
+        "debug": {
+            "buildOptions": ["debugMode"]
+        },
+        "unittest": {
+            "buildOptions": ["unittests", "debugMode"]
+        },
+        "release": {
+            "buildOptions": ["releaseMode", "optimize"]
+        }
+    }
 }
