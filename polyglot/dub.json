@@ -1,0 +1,8 @@
+{
+    "name": "musicxml-interfaces-polyglot",
+    "version": "0.0.3-alpha1",
+    "description": "Creates type definitions for TypeScript and D.",
+    "copyright": "Copyright © Josh Netterfield 2014",
+    "license": "AGPLv3",
+    "authors": ["Josh Netterfield"]
+}

@@ -1,0 +1,45 @@
+{
+    "name": "musicxml-interfaces",
+    "description": "MusicXML parser and types",
+    "authors": [ "Josh Netterfield" ],
+    "homepage": "https://ripieno.github.io/musicxml-interfaces",
+    "license": "AGPLv3",
+    "targetType": "library",
+    "libs": [
+        "xml-2.0",
+        "xslt"
+    ],
+    "stringImportPaths": [
+        "resources/dtd",
+        "resources/tests"
+    ],
+    "importPaths": [
+        "src",
+        "jsonify/src"
+    ],
+    "dependencies": {
+        "ripieno-musicxml-jsonify": {
+            "version": "*",
+            "path": "./jsonify"
+        }
+    },
+    "copyFiles-windows": [
+        "util/xml-2.0.lib",
+        "util/xslt.lib",
+        "util/iconv.dll",
+        "util/libxml2.dll",
+        "util/libxslt.dll",
+        "util/zlib1.dll"
+    ],
+    "buildTypes": {
+        "debug": {
+            "buildOptions": ["debugMode"]
+        },
+        "unittest": {
+            "buildOptions": ["unittests", "debugMode"]
+        },
+        "release": {
+            "buildOptions": ["releaseMode", "optimize"]
+        }
+    }
+}
