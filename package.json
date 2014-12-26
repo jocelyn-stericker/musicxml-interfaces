@@ -5,7 +5,6 @@
 
     "author": "Josh Netterfield",
     "license": "AGPLv3",
-    "private": true,
 
     "dependencies": {
     },
@@ -17,14 +16,6 @@
 
     "main": "./typescript/release/musicXML_DOM.js",
     "files": "./typescript",
-    "typescript": {
-        "definition": "./typescript/release/musicML_DOM.d.ts"
-    },
-    "browserify": {
-        "transform": [
-            "node-lessify"
-        ]
-    },
     "scripts": {
         "start": "gulp build"
     }

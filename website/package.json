@@ -1,0 +1,35 @@
+{
+    "name": "musicxml-interfaces-website",
+    "version": "0.0.3-alpha1",
+    "description": "Docs/editor for a rendering and playback library for MusicXML",
+
+    "author": "Josh Netterfield",
+    "license": "AGPLv3",
+    "private": true,
+
+    "dependencies": {
+        "express": "4.10.6",
+        "lodash": "2.4.1",
+        "react": "0.12.2",
+        "react-bootstrap": "0.13.0",
+        "typed-react": "3.2.0"
+    },
+    "devDependencies": {
+        "body-parser": "1.10.0",
+        "browserify": "7.0.3",
+        "gulp": "3.8.10",
+        "gulp-streamify": "0.0.5",
+        "gulp-typescript": "git://github.com/jnetterf/gulp-typescript-react-jsx#fe6ced",
+        "gulp-uglify": "1.0.2",
+        "gulp-util": "3.0.1",
+        "vinyl-source-stream": "1.0.0",
+        "watchify": "2.2.1"
+    },
+
+    "main": "./src/main.ts",
+    "scripts": {
+        "start": "gulp watch",
+        "build": "gulp build",
+        "test": "gulp test-once"
+    }
+}

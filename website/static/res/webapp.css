@@ -1,0 +1,59 @@
+/**
+ * @file Styling common to all things
+ * 
+ * @copyright (C) Joshua Netterfield. Proprietary and confidential.
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ * Written by Joshua Netterfield <joshua@nettek.ca>, October 2014
+ */
+body,
+html {
+  background-color: #fff;
+  font-family: Alegreya;
+}
+@font-face {
+  font-family: Alegreya;
+  font-style: normal;
+  font-weight: 400;
+  src: local('Alegreya'), local('Alegreya-Regular'), url(/res/alegreya.woff) format('woff');
+}
+@font-face {
+  font-family: 'Overlock';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Overlock'), local('Overlock-Regular'), url(/res/Overlock-Regular.woff) format('woff');
+}
+@font-face {
+  font-family: 'Overlock';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Overlock-Bold'), url(/res/Overlock-Bold.woff) format('woff');
+}
+.main {
+    width: 100%;
+}
+.pageContent {
+    margin: 0 56px;
+}
+.minipad .panel-heading {
+    padding: 2px 4px;
+}
+.minipad .panel-body {
+    padding: 4px;
+}
+.collapsing {
+    -webkit-transition: height 0.01s;
+    transition: height 0.01s;
+}
+.container {
+    width: 100% !important;
+}
+
+.partialnav::after {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .ripieno-backlink {
+        display: none;
+    }
+}

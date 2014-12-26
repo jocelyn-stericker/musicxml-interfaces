@@ -13,3 +13,4 @@ libxslt
 *.a
 *.visualdproj
 __test__librar*
+node_modules
