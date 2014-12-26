@@ -245,7 +245,7 @@ class Spec extends TypedReact.Component<Spec.IProps, IState> {
         </div>
     }
     componentDidMount() {
-        ajax.getJSON("/spec", (response: any, request: XMLHttpRequest) => {
+        ajax.getJSON("spec", (response: any, request: XMLHttpRequest) => {
             this.setState({
                 spec: response
             });

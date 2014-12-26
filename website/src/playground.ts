@@ -63,7 +63,7 @@ class Playground extends TypedReact.Component<Playground.IProps, IState> {
 
     fetchSong() {
         this.setState({testSRC: "Loading..."});
-        ajax.getText("/tests/" + this.state.test + ".xml", (str: string) => {
+        ajax.getText("tests/" + this.state.test + ".xml", (str: string) => {
             this.syncJSON(str);
         });
     }
