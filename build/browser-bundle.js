@@ -221,7 +221,7 @@ var Playground = (function (_super) {
     Playground.prototype.fetchSong = function () {
         var _this = this;
         this.setState({ testSRC: "Loading..." });
-        ajax.getText("/tests/" + this.state.test + ".xml", function (str) {
+        ajax.getText("tests/" + this.state.test + ".xml", function (str) {
             _this.syncJSON(str);
         });
     };
@@ -450,7 +450,7 @@ var Spec = (function (_super) {
     };
     Spec.prototype.componentDidMount = function () {
         var _this = this;
-        ajax.getJSON("/spec", function (response, request) {
+        ajax.getJSON("spec", function (response, request) {
             _this.setState({
                 spec: response
             });
