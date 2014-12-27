@@ -138,7 +138,7 @@ var Page = (function (_super) {
 
                 , React.createElement("h3", null, "TypeScript Usage"), 
                 "To get a Timewise score,"
-                , React.createElement("pre", null, "import MusicXML = require(\"musicxml-interfaces\");\n", "/// <reference path=\"path/to/node_modules/musicxml-interfaces/typescript/release/musicXML_DOM.d.ts\"/>\n\n", "var score = MusicXML.parseXML(str);\n"), 
+                , React.createElement("pre", null, "import MusicXML = require(\"musicxml-interfaces\");\n", "/// <reference path=\"path/to/node_modules/musicxml-interfaces/typescript/dist/musicXML_DOM.d.ts\"/> // Or, even better, use \"tsd link\" in tsd 0.0.6.\n\n", "var score = MusicXML.parseXML(str);\n"), 
                 "The Score corresponds to the \"ScoreTimewise\" described below."
 
                 , React.createElement("h3", null, "JavaScript Usage"), 
@@ -262,7 +262,7 @@ var Playground;
 module.exports = Playground;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./ajax":"/media/psf/Home/ripieno/musicxml/website/.partialBuild/ajax.js","musicxml-interfaces":"/media/psf/Home/ripieno/musicxml/website/node_modules/musicxml-interfaces/typescript/release/musicXML_DOM.js","react":"/media/psf/Home/ripieno/musicxml/website/node_modules/react/react.js","react-bootstrap":"/media/psf/Home/ripieno/musicxml/website/node_modules/react-bootstrap/main.js","typed-react":"/media/psf/Home/ripieno/musicxml/website/node_modules/typed-react/dist/index.js"}],"/media/psf/Home/ripieno/musicxml/website/.partialBuild/spec.js":[function(require,module,exports){
+},{"./ajax":"/media/psf/Home/ripieno/musicxml/website/.partialBuild/ajax.js","musicxml-interfaces":"/media/psf/Home/ripieno/musicxml/website/node_modules/musicxml-interfaces/typescript/dist/musicXML_DOM.js","react":"/media/psf/Home/ripieno/musicxml/website/node_modules/react/react.js","react-bootstrap":"/media/psf/Home/ripieno/musicxml/website/node_modules/react-bootstrap/main.js","typed-react":"/media/psf/Home/ripieno/musicxml/website/node_modules/typed-react/dist/index.js"}],"/media/psf/Home/ripieno/musicxml/website/.partialBuild/spec.js":[function(require,module,exports){
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -8334,7 +8334,7 @@ function hasOwnProperty(obj, prop) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/media/psf/Home/ripieno/musicxml/website/node_modules/musicxml-interfaces/typescript/release/musicXML_DOM.js":[function(require,module,exports){
+},{}],"/media/psf/Home/ripieno/musicxml/website/node_modules/musicxml-interfaces/typescript/dist/musicXML_DOM.js":[function(require,module,exports){
 var assert = require("assert");
 function popFront(t) {
     t.slice(1);
@@ -15476,6 +15476,7 @@ function xmlToNote(node) {
     var ret = {};
     var foundAttack = false;
     var foundEndDynamics = false;
+    var foundPizzicato = false;
     var foundDynamics = false;
     var foundRelease = false;
     var foundDefaultX = false;
@@ -15603,6 +15604,7 @@ function xmlToNote(node) {
         if (ch2.name === "pizzicato") {
             var dataPizzicato = xmlToYesNo(ch2);
             ret.pizzicato = dataPizzicato;
+            foundPizzicato = true;
         }
         if (ch2.name === "dynamics") {
             var dataDynamics = getNumber(ch2, true);
@@ -15687,6 +15689,9 @@ function xmlToNote(node) {
     }
     if (!foundEndDynamics) {
         ret.endDynamics = 90;
+    }
+    if (!foundPizzicato) {
+        ret.pizzicato = false;
     }
     if (!foundDynamics) {
         ret.dynamics = 90;
