@@ -1078,6 +1078,7 @@
       "interface": {
         "time-only": {
           "type": "string",
+          "required": false,
           "//": "The value is a comma-separated list of\npositive integers arranged in ascending order, indicating which\ntimes through the repeated section that the element applies."
         }
       },
@@ -2967,6 +2968,8 @@
         },
         "pizzicato": {
           "type": "yes-no",
+          "required": false,
+          "std": false,
           "//": "The pizzicato attribute is used when just this note is sounded\npizzicato, vs. the pizzicato element which changes overall\nplayback between pizzicato and arco."
         }
       }

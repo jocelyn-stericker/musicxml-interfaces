@@ -5,6 +5,7 @@ if [ -f ./libxml2/parser.d -a -f ./libxml2/tree.d ]
     exit 0
 fi
 echo Assuming libxml is somewhere in /usr. If not, adjust bind_libxml2.bash.
+dub run dstep > /dev/null 2> /dev/null
 set -e
 pkg-config --exists libxml-2.0 || (echo "Could not find libxml-2.0"; exit 1)
 pkg-config --exists libxslt || (echo "Could not find libxslt"; exit 1)

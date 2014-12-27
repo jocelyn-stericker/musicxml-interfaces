@@ -18,7 +18,7 @@
 
 /* tslint:disable */
 
-/// <reference path="../../typescript/release/musicXML_DOM.d.ts"/>
+/// <reference path="../../typescript/dist/musicxml-interfaces.d.ts"/>
 
 import ajax         = require("./ajax");
 

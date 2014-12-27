@@ -6,16 +6,25 @@
     "author": "Josh Netterfield",
     "license": "AGPLv3",
 
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/ripieno/musicxml-interfaces"
+    },
+
     "dependencies": {
     },
     "devDependencies": {
+        "dts-bundle": "0.2.0",
         "event-stream": "3.1.7",
         "gulp": "3.8.10",
         "gulp-typescript": "git://github.com/jnetterf/gulp-typescript-react-jsx#fe6ced"
     },
 
-    "main": "./typescript/release/musicXML_DOM.js",
-    "files": "./typescript",
+    "main": "./typescript/dist/musicXML_DOM.js",
+    "files": ["./typescript"],
+    "typescript": {
+        "definition": "typescript/dist/musicxml-interfaces.d.ts"
+    },
     "scripts": {
         "start": "gulp build"
     }

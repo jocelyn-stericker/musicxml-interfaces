@@ -1,7 +1,7 @@
 {
     "name": "musicxml-interfaces-website",
     "version": "0.0.3-alpha1",
-    "description": "Docs/editor for a rendering and playback library for MusicXML",
+    "description": "Documentation, tests, and examples",
 
     "author": "Josh Netterfield",
     "license": "AGPLv3",

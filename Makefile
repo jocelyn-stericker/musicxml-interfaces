@@ -9,5 +9,5 @@ typescript: polyglot
 	npm install && npm start
 
 dlang: polyglot
-	cd dlang; dub test
+	cd dlang; ./bind_libxml2.bash && dub test
 

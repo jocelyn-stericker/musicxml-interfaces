@@ -43,7 +43,7 @@ var Page = (function (_super) {
 
                 , React.createElement("h3", null, "TypeScript Usage"), 
                 "To get a Timewise score,"
-                , React.createElement("pre", null, "import MusicXML = require(\"musicxml-interfaces\");\n", "/// <reference path=\"path/to/node_modules/musicxml-interfaces/typescript/release/musicXML_DOM.d.ts\"/>\n\n", "var score = MusicXML.parseXML(str);\n"), 
+                , React.createElement("pre", null, "import MusicXML = require(\"musicxml-interfaces\");\n", "/// <reference path=\"path/to/node_modules/musicxml-interfaces/typescript/dist/musicXML_DOM.d.ts\"/> // Or, even better, use \"tsd link\" in tsd 0.0.6.\n\n", "var score = MusicXML.parseXML(str);\n"), 
                 "The Score corresponds to the \"ScoreTimewise\" described below."
 
                 , React.createElement("h3", null, "JavaScript Usage"), 

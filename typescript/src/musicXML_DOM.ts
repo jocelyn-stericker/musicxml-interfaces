@@ -20,7 +20,7 @@
 
 
 /* tslint:disable */
-/// <reference path="./typings/node/node.d.ts" />
+/// <reference path="../typings/tsd.d.ts" />
 import assert = require("assert");
 
 function popFront(t: string) {
@@ -4822,7 +4822,7 @@ export function xmlToBendSound(node: Node) {
  * a repeated section.
  */
 export interface TimeOnly {
-    timeOnly: string;
+    timeOnly?: string;
 }
 
 /**
@@ -13035,7 +13035,7 @@ export interface Note extends EditorialVoice, PrintStyle, Printout, TimeOnly, Fu
     notations?: Notations[];
     stem?: Stem;
     noteType?: Type;
-    pizzicato: boolean;
+    pizzicato?: boolean;
     cue?: Cue;
     duration?: number;
     ties?: Tie[];
@@ -13091,6 +13091,7 @@ export function xmlToNote(node: Node) {
     var ret: Note = <any> {};
     var foundAttack = false;
     var foundEndDynamics = false;
+    var foundPizzicato = false;
     var foundDynamics = false;
     var foundRelease = false;
     var foundDefaultX = false;
@@ -13218,6 +13219,7 @@ export function xmlToNote(node: Node) {
         if (ch2.name === "pizzicato") {
             var dataPizzicato = xmlToYesNo(ch2) ;
             ret.pizzicato = dataPizzicato;
+            foundPizzicato = true;
         }
         if (ch2.name === "dynamics") {
             var dataDynamics = getNumber(ch2, true);
@@ -13302,6 +13304,9 @@ export function xmlToNote(node: Node) {
     }
     if (!foundEndDynamics) {
         ret.endDynamics = 90;
+    }
+    if (!foundPizzicato) {
+        ret.pizzicato = false;
     }
     if (!foundDynamics) {
         ret.dynamics = 90;

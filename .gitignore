@@ -14,3 +14,4 @@ libxslt
 *.visualdproj
 __test__librar*
 node_modules
+typescript/partial/*

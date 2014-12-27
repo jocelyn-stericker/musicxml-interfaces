@@ -1,5 +1,5 @@
 /* tslint:disable */
-/// <reference path="./typings/node/node.d.ts" />
+/// <reference path="../typings/tsd.d.ts" />
 import assert = require("assert");
 
 function popFront(t: string) {

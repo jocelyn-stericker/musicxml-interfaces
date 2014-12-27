@@ -10643,6 +10643,7 @@ export class Note {
     this(xmlNodePtr node) {
         bool foundAttack = false;
         bool foundEndDynamics = false;
+        bool foundPizzicato = false;
         bool foundDynamics = false;
         bool foundRelease = false;
         bool foundDefaultX = false;
@@ -10768,6 +10769,7 @@ export class Note {
             if (ch.name.toString == "pizzicato") {
                 auto data = getYesNo(ch, true);
                 this.pizzicato = data;
+                foundPizzicato = true;
             }
             if (ch.name.toString == "dynamics") {
                 auto data = getNumber(ch, true);
@@ -10852,6 +10854,9 @@ export class Note {
         }
         if (!foundEndDynamics) {
             endDynamics = 90;
+        }
+        if (!foundPizzicato) {
+            pizzicato = false;
         }
         if (!foundDynamics) {
             dynamics = 90;

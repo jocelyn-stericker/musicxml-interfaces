@@ -19,7 +19,7 @@
  */
 
 /* tslint:disable */
-/// <reference path="./typings/node/node.d.ts" />
+/// <reference path="../typings/tsd.d.ts" />
 import assert = require("assert");
 
 function popFront(t: string) {
@@ -2335,7 +2335,7 @@ export interface BendSoundComplete {
  * a repeated section.
  */
 export interface TimeOnly {
-    timeOnly: string;
+    timeOnly?: string;
 }
 
 /**
@@ -6058,7 +6058,7 @@ export interface Note extends EditorialVoice, PrintStyle, Printout, TimeOnly, Fu
     notations?: Notations[];
     stem?: Stem;
     noteType?: Type;
-    pizzicato: boolean;
+    pizzicato?: boolean;
     cue?: Cue;
     duration?: number;
     ties?: Tie[];

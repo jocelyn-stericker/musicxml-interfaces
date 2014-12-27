@@ -185,7 +185,7 @@ var Spec = (function (_super) {
     };
     Spec.prototype.componentDidMount = function () {
         var _this = this;
-        ajax.getJSON("/spec", function (response, request) {
+        ajax.getJSON("spec", function (response, request) {
             _this.setState({
                 spec: response
             });

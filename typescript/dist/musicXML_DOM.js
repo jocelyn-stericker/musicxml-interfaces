@@ -7139,6 +7139,7 @@ function xmlToNote(node) {
     var ret = {};
     var foundAttack = false;
     var foundEndDynamics = false;
+    var foundPizzicato = false;
     var foundDynamics = false;
     var foundRelease = false;
     var foundDefaultX = false;
@@ -7266,6 +7267,7 @@ function xmlToNote(node) {
         if (ch2.name === "pizzicato") {
             var dataPizzicato = xmlToYesNo(ch2);
             ret.pizzicato = dataPizzicato;
+            foundPizzicato = true;
         }
         if (ch2.name === "dynamics") {
             var dataDynamics = getNumber(ch2, true);
@@ -7350,6 +7352,9 @@ function xmlToNote(node) {
     }
     if (!foundEndDynamics) {
         ret.endDynamics = 90;
+    }
+    if (!foundPizzicato) {
+        ret.pizzicato = false;
     }
     if (!foundDynamics) {
         ret.dynamics = 90;

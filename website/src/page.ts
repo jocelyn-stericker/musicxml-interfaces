@@ -76,7 +76,7 @@ class Page extends TypedReact.Component<Header.IProps, IState> {
                 To get a Timewise score,
                 <!pre>
                     {"import MusicXML = require(\"musicxml-interfaces\");\n"}
-                    {"/// <reference path=\"path/to/node_modules/musicxml-interfaces/typescript/release/musicXML_DOM.d.ts\"/>\n\n"} 
+                    {"/// <reference path=\"path/to/node_modules/musicxml-interfaces/typescript/dist/musicXML_DOM.d.ts\"/> // Or, even better, use \"tsd link\" in tsd 0.0.6.\n\n"} 
                     {"var score = MusicXML.parseXML(str);\n"}
                 </pre>
                 The Score corresponds to the "ScoreTimewise" described below.

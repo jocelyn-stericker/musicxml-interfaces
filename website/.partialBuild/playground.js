@@ -39,7 +39,7 @@ var Playground = (function (_super) {
     Playground.prototype.fetchSong = function () {
         var _this = this;
         this.setState({ testSRC: "Loading..." });
-        ajax.getText("/tests/" + this.state.test + ".xml", function (str) {
+        ajax.getText("tests/" + this.state.test + ".xml", function (str) {
             _this.syncJSON(str);
         });
     };
