@@ -10,7 +10,7 @@ function parseXML(musicxmlBuffer) {
     var parser = new DOMParser();
     var dom = parser.parseFromString(musicxmlBuffer, "text/xml");
     dom = parttimeXSLProcessor.transformToDocument(dom);
-    var json = xmlToScoreTimewise(dom.children[0]);
+    var json = xmlToScoreTimewise(dom.documentElement);
     return json;
 }
 exports.parseXML = parseXML;
