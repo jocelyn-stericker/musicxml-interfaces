@@ -73,7 +73,10 @@ var Header = (function (_super) {
     }
     Header.prototype.render = function () {
         var brand = React.createElement("span", { style: { fontFamily: "Alegreya SC", fontSize: "14px", fontWeight: 900 } }, 
-            "MusicXML Interfaces");
+            "MusicXML Interfaces"
+            , React.createElement("span", { className: "ripieno-backlink-alt", role: "button", style: { fontFamily: "Alegreya SC", fontWeight: 400, marginLeft: 5 }, eventKey: 1 }, React.createElement("a", { href: "https://ripieno.io" }, 
+                    "from Ripieno.io »"
+                )));
         return React.createElement(Bootstrap.Navbar, { componentClass: "header", brand: brand, toggleNavKey: 0, role: "banner", staticTop: true }, React.createElement(Bootstrap.Nav, { className: "partialnav", role: "nav", style: { fontFamily: "Alegreya SC, Alegreya" }, eventKey: 0 }, React.createElement(Bootstrap.NavItem, { href: "#home", active: true }, 
                     "Home"
                 ), React.createElement(Bootstrap.NavItem, { href: "#start" }, 

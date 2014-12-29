@@ -57,3 +57,8 @@ html {
         display: none;
     }
 }
+@media (min-width: 769px) {
+    .ripieno-backlink-alt {
+        display: none;
+    }
+}

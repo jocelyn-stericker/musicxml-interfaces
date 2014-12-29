@@ -27,7 +27,15 @@ import assert       = require("assert");
 class Header extends TypedReact.Component<Header.IProps, IState> {
     render(): any {
         var brand = <!span style={{fontFamily: "Alegreya SC", fontSize: "14px", fontWeight: 900}}>
-            MusicXML Interfaces</span>;
+            MusicXML Interfaces
+            <!span className="ripieno-backlink-alt" role="button"
+                        style={{fontFamily: "Alegreya SC", fontWeight: 400, marginLeft: 5}}
+                    eventKey={1}>
+                <!a href="https://ripieno.io">
+                    from Ripieno.io »
+                </a>
+            </span>
+        </span>;
         return <!Bootstrap.Navbar componentClass="header" brand={brand} toggleNavKey={0} role="banner" staticTop={true}>
             <!Bootstrap.Nav className="partialnav"
                     role="nav" style={{fontFamily: "Alegreya SC, Alegreya"}}
