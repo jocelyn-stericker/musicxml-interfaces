@@ -159,3 +159,114 @@ export function xmlToPartAbbreviationDisplay(p: Node): PartAbbreviationDisplay {
     // TODO
     return null;
 }
+
+export function xmlToLyric(node: Node) {
+    "use strict";
+    var ret: Lyric = <any> {};
+    var foundNumber_ = false;
+    var foundJustify = false;
+    var foundDefaultX = false;
+    var foundRelativeY = false;
+    var foundDefaultY = false;
+    var foundRelativeX = false;
+    var foundPlacement = false;
+    var foundColor = false;
+    var foundPrintObject = false;
+    var foundName = false;
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+        if (ch.nodeName === "footnote") {
+            var dataFootnote = xmlToFootnote(ch) ;
+            ret.footnote = dataFootnote;
+        }
+        if (ch.nodeName === "level") {
+            var dataLevel = xmlToLevel(ch) ;
+            ret.level = dataLevel;
+        }
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+        if (ch2.name === "number") {
+            var dataNumber_ = getNumber(ch2, true);
+            ret.number_ = dataNumber_;
+            foundNumber_ = true;
+        }
+        if (ch2.name === "justify") {
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
+            ret.justify = dataJustify;
+            foundJustify = true;
+        }
+        if (ch2.name === "default-x") {
+            var dataDefaultX = getNumber(ch2, true);
+            ret.defaultX = dataDefaultX;
+            foundDefaultX = true;
+        }
+        if (ch2.name === "relative-y") {
+            var dataRelativeY = getNumber(ch2, true);
+            ret.relativeY = dataRelativeY;
+            foundRelativeY = true;
+        }
+        if (ch2.name === "default-y") {
+            var dataDefaultY = getNumber(ch2, true);
+            ret.defaultY = dataDefaultY;
+            foundDefaultY = true;
+        }
+        if (ch2.name === "relative-x") {
+            var dataRelativeX = getNumber(ch2, true);
+            ret.relativeX = dataRelativeX;
+            foundRelativeX = true;
+        }
+        if (ch2.name === "placement") {
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
+            ret.placement = dataPlacement;
+            foundPlacement = true;
+        }
+        if (ch2.name === "color") {
+            var dataColor = getString(ch2, true);
+            ret.color = dataColor;
+            foundColor = true;
+        }
+        if (ch2.name === "print-object") {
+            var dataPrintObject = xmlToYesNo(ch2) ;
+            ret.printObject = dataPrintObject;
+            foundPrintObject = true;
+        }
+        if (ch2.name === "name") {
+            var dataName = getString(ch2, true);
+            ret.name = dataName;
+            foundName = true;
+        }
+    }
+    ret.lyricParts = xmlToLyricParts(node);
+    if (!foundNumber_) {
+        ret.number_ = 1;
+    }
+    if (!foundJustify) {
+        ret.justify = LeftCenterRight.Left;
+    }
+    if (!foundDefaultX) {
+        ret.defaultX = NaN;
+    }
+    if (!foundRelativeY) {
+        ret.relativeY = 0;
+    }
+    if (!foundDefaultY) {
+        ret.defaultY = NaN;
+    }
+    if (!foundRelativeX) {
+        ret.relativeX = 0;
+    }
+    if (!foundPlacement) {
+        ret.placement = AboveBelow.Unspecified;
+    }
+    if (!foundColor) {
+        ret.color = "#000000";
+    }
+    if (!foundPrintObject) {
+        ret.printObject = true;
+    }
+    if (!foundName) {
+        ret.name = "";
+    }
+    return ret;
+}

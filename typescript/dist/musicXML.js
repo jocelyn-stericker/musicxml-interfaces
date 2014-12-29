@@ -360,6 +360,13 @@ var HoleClosedType = exports.HoleClosedType;
     BreathMarkType[BreathMarkType["Tick"] = 1] = "Tick";
 })(exports.BreathMarkType || (exports.BreathMarkType = {}));
 var BreathMarkType = exports.BreathMarkType;
+(function (SyllabicType) {
+    SyllabicType[SyllabicType["Single"] = 0] = "Single";
+    SyllabicType[SyllabicType["Begin"] = 1] = "Begin";
+    SyllabicType[SyllabicType["Middle"] = 3] = "Middle";
+    SyllabicType[SyllabicType["End"] = 2] = "End";
+})(exports.SyllabicType || (exports.SyllabicType = {}));
+var SyllabicType = exports.SyllabicType;
 (function (BarlineLocation) {
     BarlineLocation[BarlineLocation["Right"] = 1] = "Right";
     BarlineLocation[BarlineLocation["Middle"] = 2] = "Middle";

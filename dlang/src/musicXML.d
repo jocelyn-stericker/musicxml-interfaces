@@ -21943,173 +21943,99 @@ mixin template INonArpeggiate() {
     TopBottom type;
 }
 
-/**
- * Text underlays for lyrics, based on Humdrum with support
- * for other formats. The lyric number indicates multiple
- * lines, though a name can be used as well (as in Finale's
- * verse/chorus/section specification). Word extensions are
- * represented using the extend element. Hyphenation is
- * indicated by the syllabic element, which can be single,
- * begin, end, or middle. These represent single-syllable
- * words, word-beginning syllables, word-ending syllables,
- * and mid-word syllables. Multiple syllables on a single
- * note are separated by elision elements. A hyphen in the
- * text element should only be used for an actual hyphenated
- * word. Two text elements that are not separated by an
- * elision element are part of the same syllable, but may have
- * different text formatting.
- * 
- * Humming and laughing representations are taken from
- * Humdrum. The end-line and end-paragraph elements come
- * from RP-017 for Standard MIDI File Lyric meta-events;
- * they help facilitate lyric display for Karaoke and
- * similar applications. Language names for text elements
- * come from ISO 639, with optional country subcodes from
- * ISO 3166. Justification is center by default; placement is
- * below by default. The print-object attribute can override
- * a note's print-lyric attribute in cases where only some
- * lyrics on a note are printed, as when lyrics for later verses
- * are printed in a block of text rather than with each note.
- */
-export class Lyric {
-    mixin ILyric;
+export class Laughing {
+    mixin ILaughing;
     this(xmlNodePtr node) {
-        bool foundNumber_ = false;
-        bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundPlacement = false;
-        bool foundColor = false;
-        bool foundPrintObject = false;
-        bool foundName = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-            if (ch.name.toString == "extend") {
-                auto data = new Extend(ch) ;
-                this.extend = data;
-            }
-            if (ch.name.toString == "end-line") {
-                auto data = true;
-                this.endLine = data;
-            }
-            if (ch.name.toString == "syllabic") {
-                auto data = new Syllabic(ch) ;
-                this.syllabics ~= data;
-            }
-            if (ch.name.toString == "text") {
-                auto data = new Text(ch) ;
-                this.texts ~= data;
-            }
-            if (ch.name.toString == "laughing") {
-                auto data = true;
-                this.laughing = data;
-            }
-            if (ch.name.toString == "humming") {
-                auto data = true;
-                this.humming = data;
-            }
-            if (ch.name.toString == "footnote") {
-                auto data = new Footnote(ch) ;
-                this.footnote = data;
-            }
-            if (ch.name.toString == "level") {
-                auto data = new Level(ch) ;
-                this.level = data;
-            }
-            if (ch.name.toString == "end-paragraph") {
-                auto data = true;
-                this.endParagraph = data;
-            }
-            if (ch.name.toString == "elision") {
-                auto data = new Elision(ch) ;
-                this.elisions ~= data;
-            }
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
-            if (ch.name.toString == "number") {
-                auto data = getNumber(ch, true);
-                this.number_ = data;
-                foundNumber_ = true;
-            }
-            if (ch.name.toString == "justify") {
-                auto data = getLeftCenterRight(ch);
-                this.justify = data;
-                foundJustify = true;
-            }
-            if (ch.name.toString == "default-x") {
-                auto data = getNumber(ch, true);
-                this.defaultX = data;
-                foundDefaultX = true;
-            }
-            if (ch.name.toString == "relative-y") {
-                auto data = getNumber(ch, true);
-                this.relativeY = data;
-                foundRelativeY = true;
-            }
-            if (ch.name.toString == "default-y") {
-                auto data = getNumber(ch, true);
-                this.defaultY = data;
-                foundDefaultY = true;
-            }
-            if (ch.name.toString == "relative-x") {
-                auto data = getNumber(ch, true);
-                this.relativeX = data;
-                foundRelativeX = true;
-            }
-            if (ch.name.toString == "placement") {
-                auto data = getAboveBelow(ch);
-                this.placement = data;
-                foundPlacement = true;
-            }
-            if (ch.name.toString == "color") {
-                auto data = getString(ch, true);
-                this.color = data;
-                foundColor = true;
-            }
-            if (ch.name.toString == "print-object") {
-                auto data = getYesNo(ch, true);
-                this.printObject = data;
-                foundPrintObject = true;
-            }
-            if (ch.name.toString == "name") {
-                auto data = getString(ch, true);
-                this.name = data;
-                foundName = true;
-            }
-        }
-        if (!foundNumber_) {
-            number_ = 1;
-        }
-        if (!foundJustify) {
-            justify = LeftCenterRight.Left;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundPlacement) {
-            placement = AboveBelow.Unspecified;
-        }
-        if (!foundColor) {
-            color = "#000000";
-        }
-        if (!foundPrintObject) {
-            printObject = true;
-        }
-        if (!foundName) {
-            name = "";
         }
     }
 }
+
+mixin template ILaughing() {
+}
+
+export class Humming {
+    mixin IHumming;
+    this(xmlNodePtr node) {
+        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
+        }
+        for (auto ch = node.properties; ch; ch = ch.next) {
+        }
+    }
+}
+
+mixin template IHumming() {
+}
+
+export class EndLine {
+    mixin IEndLine;
+    this(xmlNodePtr node) {
+        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
+        }
+        for (auto ch = node.properties; ch; ch = ch.next) {
+        }
+    }
+}
+
+mixin template IEndLine() {
+}
+
+export class EndParagraph {
+    mixin IEndParagraph;
+    this(xmlNodePtr node) {
+        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
+        }
+        for (auto ch = node.properties; ch; ch = ch.next) {
+        }
+    }
+}
+
+mixin template IEndParagraph() {
+}
+
+Variant[] LyricParts(xmlNodePtr node) {
+    Variant[] rarr = [];
+        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
+            if (ch.name.toString == "extend") {
+                auto data = Variant(new Extend(ch) );
+                rarr ~= data;
+            }
+            if (ch.name.toString == "end-line") {
+                auto data = Variant(new EndLine(ch) );
+                rarr ~= data;
+            }
+            if (ch.name.toString == "syllabic") {
+                auto data = Variant(new Syllabic(ch) );
+                rarr ~= data;
+            }
+            if (ch.name.toString == "text") {
+                auto data = Variant(new Text(ch) );
+                rarr ~= data;
+            }
+            if (ch.name.toString == "laughing") {
+                auto data = Variant(new Laughing(ch) );
+                rarr ~= data;
+            }
+            if (ch.name.toString == "humming") {
+                auto data = Variant(new Humming(ch) );
+                rarr ~= data;
+            }
+            if (ch.name.toString == "end-paragraph") {
+                auto data = Variant(new EndParagraph(ch) );
+                rarr ~= data;
+            }
+            if (ch.name.toString == "elision") {
+                auto data = Variant(new Elision(ch) );
+                rarr ~= data;
+            }
+        }
+        for (auto ch = node.properties; ch; ch = ch.next) {
+        }
+    return rarr;
+}
+
 
 /**
  * Text underlays for lyrics, based on Humdrum with support
@@ -22146,15 +22072,8 @@ mixin template ILyric() {
     mixin IColor;
     mixin IPrintObject;
     mixin IEditorial;
-    Extend extend;
-    bool endLine;
-    Syllabic[] syllabics;
-    Text[] texts;
-    bool laughing;
-    bool humming;
+    Variant[] lyricParts;
     float number_;
-    bool endParagraph;
-    Elision[] elisions;
     string name;
 }
 
@@ -22280,6 +22199,29 @@ mixin template IText() {
     string data;
 }
 
+export enum SyllabicType {
+    Single = 0,
+    Begin = 1,
+    Middle = 3,
+    End = 2
+}
+
+SyllabicType getSyllabicType(T)(T p) {
+    string s = getString(p, true);
+    if (s == "single") {
+        return SyllabicType.Single;
+    }
+    if (s == "begin") {
+        return SyllabicType.Begin;
+    }
+    if (s == "middle") {
+        return SyllabicType.Middle;
+    }
+    if (s == "end") {
+        return SyllabicType.End;
+    }
+    assert(false, "Not reached");
+}
 export class Syllabic {
     mixin ISyllabic;
     this(xmlNodePtr node) {
@@ -22318,7 +22260,7 @@ export class Syllabic {
             }
         }
         auto ch = node;
-        auto data = getString(ch, true);
+        auto data = getSyllabicType(ch);
         this.data = data;
         if (!foundFontFamily) {
             fontFamily = "Alegreya, serif";
@@ -22341,7 +22283,7 @@ export class Syllabic {
 mixin template ISyllabic() {
     mixin IFont;
     mixin IColor;
-    string data;
+    SyllabicType data;
 }
 
 /**

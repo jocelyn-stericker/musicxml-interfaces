@@ -140,6 +140,117 @@ function xmlToPartAbbreviationDisplay(p) {
     return null;
 }
 exports.xmlToPartAbbreviationDisplay = xmlToPartAbbreviationDisplay;
+function xmlToLyric(node) {
+    "use strict";
+    var ret = {};
+    var foundNumber_ = false;
+    var foundJustify = false;
+    var foundDefaultX = false;
+    var foundRelativeY = false;
+    var foundDefaultY = false;
+    var foundRelativeX = false;
+    var foundPlacement = false;
+    var foundColor = false;
+    var foundPrintObject = false;
+    var foundName = false;
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+        if (ch.nodeName === "footnote") {
+            var dataFootnote = xmlToFootnote(ch);
+            ret.footnote = dataFootnote;
+        }
+        if (ch.nodeName === "level") {
+            var dataLevel = xmlToLevel(ch);
+            ret.level = dataLevel;
+        }
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+        if (ch2.name === "number") {
+            var dataNumber_ = getNumber(ch2, true);
+            ret.number_ = dataNumber_;
+            foundNumber_ = true;
+        }
+        if (ch2.name === "justify") {
+            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            ret.justify = dataJustify;
+            foundJustify = true;
+        }
+        if (ch2.name === "default-x") {
+            var dataDefaultX = getNumber(ch2, true);
+            ret.defaultX = dataDefaultX;
+            foundDefaultX = true;
+        }
+        if (ch2.name === "relative-y") {
+            var dataRelativeY = getNumber(ch2, true);
+            ret.relativeY = dataRelativeY;
+            foundRelativeY = true;
+        }
+        if (ch2.name === "default-y") {
+            var dataDefaultY = getNumber(ch2, true);
+            ret.defaultY = dataDefaultY;
+            foundDefaultY = true;
+        }
+        if (ch2.name === "relative-x") {
+            var dataRelativeX = getNumber(ch2, true);
+            ret.relativeX = dataRelativeX;
+            foundRelativeX = true;
+        }
+        if (ch2.name === "placement") {
+            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            ret.placement = dataPlacement;
+            foundPlacement = true;
+        }
+        if (ch2.name === "color") {
+            var dataColor = getString(ch2, true);
+            ret.color = dataColor;
+            foundColor = true;
+        }
+        if (ch2.name === "print-object") {
+            var dataPrintObject = xmlToYesNo(ch2);
+            ret.printObject = dataPrintObject;
+            foundPrintObject = true;
+        }
+        if (ch2.name === "name") {
+            var dataName = getString(ch2, true);
+            ret.name = dataName;
+            foundName = true;
+        }
+    }
+    ret.lyricParts = xmlToLyricParts(node);
+    if (!foundNumber_) {
+        ret.number_ = 1;
+    }
+    if (!foundJustify) {
+        ret.justify = 0 /* Left */;
+    }
+    if (!foundDefaultX) {
+        ret.defaultX = NaN;
+    }
+    if (!foundRelativeY) {
+        ret.relativeY = 0;
+    }
+    if (!foundDefaultY) {
+        ret.defaultY = NaN;
+    }
+    if (!foundRelativeX) {
+        ret.relativeX = 0;
+    }
+    if (!foundPlacement) {
+        ret.placement = 0 /* Unspecified */;
+    }
+    if (!foundColor) {
+        ret.color = "#000000";
+    }
+    if (!foundPrintObject) {
+        ret.printObject = true;
+    }
+    if (!foundName) {
+        ret.name = "";
+    }
+    return ret;
+}
+exports.xmlToLyric = xmlToLyric;
 function xmlToMode(node) {
     "use strict";
     var ret = {};
@@ -16512,148 +16623,106 @@ function xmlToNonArpeggiate(node) {
     return ret;
 }
 exports.xmlToNonArpeggiate = xmlToNonArpeggiate;
-function xmlToLyric(node) {
+function xmlToLaughing(node) {
     "use strict";
     var ret = {};
-    var foundNumber_ = false;
-    var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundPlacement = false;
-    var foundColor = false;
-    var foundPrintObject = false;
-    var foundName = false;
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+exports.xmlToLaughing = xmlToLaughing;
+function xmlToHumming(node) {
+    "use strict";
+    var ret = {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+exports.xmlToHumming = xmlToHumming;
+function xmlToEndLine(node) {
+    "use strict";
+    var ret = {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+exports.xmlToEndLine = xmlToEndLine;
+function xmlToEndParagraph(node) {
+    "use strict";
+    var ret = {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+exports.xmlToEndParagraph = xmlToEndParagraph;
+function xmlToLyricParts(node) {
+    "use strict";
+    var rarr = [];
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "extend") {
-            var dataExtend = xmlToExtend(ch);
-            ret.extend = dataExtend;
+            var data = xmlToExtend(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Extend";
         }
         if (ch.nodeName === "end-line") {
-            var dataEndLine = true;
-            ret.endLine = dataEndLine;
+            var data = xmlToEndLine(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "EndLine";
         }
         if (ch.nodeName === "syllabic") {
-            var dataSyllabics = xmlToSyllabic(ch);
-            ret.syllabics = (ret.syllabics || []).concat(dataSyllabics);
+            var data = xmlToSyllabic(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Syllabic";
         }
         if (ch.nodeName === "text") {
-            var dataTexts = xmlToText(ch);
-            ret.texts = (ret.texts || []).concat(dataTexts);
+            var data = xmlToText(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Text";
         }
         if (ch.nodeName === "laughing") {
-            var dataLaughing = true;
-            ret.laughing = dataLaughing;
+            var data = xmlToLaughing(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Laughing";
         }
         if (ch.nodeName === "humming") {
-            var dataHumming = true;
-            ret.humming = dataHumming;
-        }
-        if (ch.nodeName === "footnote") {
-            var dataFootnote = xmlToFootnote(ch);
-            ret.footnote = dataFootnote;
-        }
-        if (ch.nodeName === "level") {
-            var dataLevel = xmlToLevel(ch);
-            ret.level = dataLevel;
+            var data = xmlToHumming(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Humming";
         }
         if (ch.nodeName === "end-paragraph") {
-            var dataEndParagraph = true;
-            ret.endParagraph = dataEndParagraph;
+            var data = xmlToEndParagraph(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "EndParagraph";
         }
         if (ch.nodeName === "elision") {
-            var dataElisions = xmlToElision(ch);
-            ret.elisions = (ret.elisions || []).concat(dataElisions);
+            var data = xmlToElision(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Elision";
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
-            foundNumber_ = true;
-        }
-        if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
-            ret.justify = dataJustify;
-            foundJustify = true;
-        }
-        if (ch2.name === "default-x") {
-            var dataDefaultX = getNumber(ch2, true);
-            ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
-        }
-        if (ch2.name === "relative-y") {
-            var dataRelativeY = getNumber(ch2, true);
-            ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
-        }
-        if (ch2.name === "default-y") {
-            var dataDefaultY = getNumber(ch2, true);
-            ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
-        }
-        if (ch2.name === "relative-x") {
-            var dataRelativeX = getNumber(ch2, true);
-            ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
-        }
-        if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
-            ret.placement = dataPlacement;
-            foundPlacement = true;
-        }
-        if (ch2.name === "color") {
-            var dataColor = getString(ch2, true);
-            ret.color = dataColor;
-            foundColor = true;
-        }
-        if (ch2.name === "print-object") {
-            var dataPrintObject = xmlToYesNo(ch2);
-            ret.printObject = dataPrintObject;
-            foundPrintObject = true;
-        }
-        if (ch2.name === "name") {
-            var dataName = getString(ch2, true);
-            ret.name = dataName;
-            foundName = true;
-        }
     }
-    if (!foundNumber_) {
-        ret.number_ = 1;
-    }
-    if (!foundJustify) {
-        ret.justify = 0 /* Left */;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
-    }
-    if (!foundColor) {
-        ret.color = "#000000";
-    }
-    if (!foundPrintObject) {
-        ret.printObject = true;
-    }
-    if (!foundName) {
-        ret.name = "";
-    }
-    return ret;
+    return rarr;
 }
-exports.xmlToLyric = xmlToLyric;
+exports.xmlToLyricParts = xmlToLyricParts;
 function xmlToText(node) {
     "use strict";
     var ret = {};
@@ -16768,6 +16837,34 @@ function xmlToText(node) {
     return ret;
 }
 exports.xmlToText = xmlToText;
+(function (SyllabicType) {
+    SyllabicType[SyllabicType["Single"] = 0] = "Single";
+    SyllabicType[SyllabicType["Begin"] = 1] = "Begin";
+    SyllabicType[SyllabicType["Middle"] = 3] = "Middle";
+    SyllabicType[SyllabicType["End"] = 2] = "End";
+})(exports.SyllabicType || (exports.SyllabicType = {}));
+var SyllabicType = exports.SyllabicType;
+function getSyllabicType(node, fallbackVal) {
+    "use strict";
+    var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
+    if (s === "" && fallbackVal !== null && fallbackVal !== undefined) {
+        return fallbackVal;
+    }
+    if (s == "single") {
+        return 0 /* Single */;
+    }
+    if (s == "begin") {
+        return 1 /* Begin */;
+    }
+    if (s == "middle") {
+        return 3 /* Middle */;
+    }
+    if (s == "end") {
+        return 2 /* End */;
+    }
+    assert(false, "Not reached");
+}
+exports.getSyllabicType = getSyllabicType;
 function xmlToSyllabic(node) {
     "use strict";
     var ret = {};
@@ -16808,7 +16905,7 @@ function xmlToSyllabic(node) {
         }
     }
     var ch3 = node;
-    var dataData = getString(ch3, true);
+    var dataData = getSyllabicType(ch3, null);
     ret.data = dataData;
     if (!foundFontFamily) {
         ret.fontFamily = "Alegreya, serif";
@@ -24192,46 +24289,57 @@ function xmlToPart(node) {
         if (ch.nodeName === "note") {
             var data = xmlToNote(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Note";
         }
         if (ch.nodeName === "backup") {
             var data = xmlToBackup(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Backup";
         }
         if (ch.nodeName === "harmony") {
             var data = xmlToHarmony(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Harmony";
         }
         if (ch.nodeName === "forward") {
             var data = xmlToForward(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Forward";
         }
         if (ch.nodeName === "print") {
             var data = xmlToPrint(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Print";
         }
         if (ch.nodeName === "figured-bass") {
             var data = xmlToFiguredBass(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "FiguredBass";
         }
         if (ch.nodeName === "direction") {
             var data = xmlToDirection(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Direction";
         }
         if (ch.nodeName === "attributes") {
             var data = xmlToAttributes(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Attributes";
         }
         if (ch.nodeName === "sound") {
             var data = xmlToSound(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Sound";
         }
         if (ch.nodeName === "barline") {
             var data = xmlToBarline(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Barline";
         }
         if (ch.nodeName === "grouping") {
             var data = xmlToGrouping(ch);
             rarr = (rarr || []).concat(data);
+            data._class = "Grouping";
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {

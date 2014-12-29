@@ -20,6 +20,7 @@ declare module 'musicxml-interfaces' {
     export function xmlToNoteheadText(p: Node): NoteheadText;
     export function xmlToPartNameDisplay(p: Node): PartNameDisplay;
     export function xmlToPartAbbreviationDisplay(p: Node): PartAbbreviationDisplay;
+    export function xmlToLyric(node: Node): Lyric;
     export interface Mode extends String {
     }
     export function xmlToMode(node: Node): Mode;
@@ -2511,31 +2512,41 @@ declare module 'musicxml-interfaces' {
         type: TopBottom;
     }
     export function xmlToNonArpeggiate(node: Node): NonArpeggiate;
+    export interface Laughing {
+    }
+    export interface LaughingComplete {
+    }
+    export function xmlToLaughing(node: Node): Laughing;
+    export interface Humming {
+    }
+    export interface HummingComplete {
+    }
+    export function xmlToHumming(node: Node): Humming;
+    export interface EndLine {
+    }
+    export interface EndLineComplete {
+    }
+    export function xmlToEndLine(node: Node): EndLine;
+    export interface EndParagraph {
+    }
+    export interface EndParagraphComplete {
+    }
+    export function xmlToEndParagraph(node: Node): EndParagraph;
+    export interface LyricParts {
+    }
+    export interface LyricPartsComplete {
+    }
+    export function xmlToLyricParts(node: Node): any[];
     export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
-        extend?: Extend;
-        endLine: boolean;
-        syllabics?: Syllabic[];
-        texts?: Text[];
-        laughing: boolean;
-        humming: boolean;
+        lyricParts: any[];
         number_?: number;
-        endParagraph: boolean;
-        elisions?: Elision[];
         name?: string;
     }
     export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
-        extend: Extend;
-        endLine: boolean;
-        syllabics: Syllabic[];
-        texts: Text[];
-        laughing: boolean;
-        humming: boolean;
+        lyricParts: any[];
         number_: number;
-        endParagraph: boolean;
-        elisions: Elision[];
         name: string;
     }
-    export function xmlToLyric(node: Node): Lyric;
     export interface Text extends Font, Color, TextDecoration, TextRotation, LetterSpacing, TextDirection {
         data: string;
     }
@@ -2543,11 +2554,18 @@ declare module 'musicxml-interfaces' {
         data: string;
     }
     export function xmlToText(node: Node): Text;
+    export enum SyllabicType {
+        Single = 0,
+        Begin = 1,
+        Middle = 3,
+        End = 2,
+    }
+    export function getSyllabicType(node: Node, fallbackVal?: SyllabicType): SyllabicType;
     export interface Syllabic extends Font, Color {
-        data: string;
+        data: SyllabicType;
     }
     export interface SyllabicComplete extends FontComplete, ColorComplete {
-        data: string;
+        data: SyllabicType;
     }
     export function xmlToSyllabic(node: Node): Syllabic;
     export interface Elision extends Font, Color {

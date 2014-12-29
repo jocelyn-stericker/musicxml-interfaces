@@ -199,6 +199,117 @@ export function xmlToPartAbbreviationDisplay(p: Node): PartAbbreviationDisplay {
     return null;
 }
 
+export function xmlToLyric(node: Node) {
+    "use strict";
+    var ret: Lyric = <any> {};
+    var foundNumber_ = false;
+    var foundJustify = false;
+    var foundDefaultX = false;
+    var foundRelativeY = false;
+    var foundDefaultY = false;
+    var foundRelativeX = false;
+    var foundPlacement = false;
+    var foundColor = false;
+    var foundPrintObject = false;
+    var foundName = false;
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+        if (ch.nodeName === "footnote") {
+            var dataFootnote = xmlToFootnote(ch) ;
+            ret.footnote = dataFootnote;
+        }
+        if (ch.nodeName === "level") {
+            var dataLevel = xmlToLevel(ch) ;
+            ret.level = dataLevel;
+        }
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+        if (ch2.name === "number") {
+            var dataNumber_ = getNumber(ch2, true);
+            ret.number_ = dataNumber_;
+            foundNumber_ = true;
+        }
+        if (ch2.name === "justify") {
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
+            ret.justify = dataJustify;
+            foundJustify = true;
+        }
+        if (ch2.name === "default-x") {
+            var dataDefaultX = getNumber(ch2, true);
+            ret.defaultX = dataDefaultX;
+            foundDefaultX = true;
+        }
+        if (ch2.name === "relative-y") {
+            var dataRelativeY = getNumber(ch2, true);
+            ret.relativeY = dataRelativeY;
+            foundRelativeY = true;
+        }
+        if (ch2.name === "default-y") {
+            var dataDefaultY = getNumber(ch2, true);
+            ret.defaultY = dataDefaultY;
+            foundDefaultY = true;
+        }
+        if (ch2.name === "relative-x") {
+            var dataRelativeX = getNumber(ch2, true);
+            ret.relativeX = dataRelativeX;
+            foundRelativeX = true;
+        }
+        if (ch2.name === "placement") {
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
+            ret.placement = dataPlacement;
+            foundPlacement = true;
+        }
+        if (ch2.name === "color") {
+            var dataColor = getString(ch2, true);
+            ret.color = dataColor;
+            foundColor = true;
+        }
+        if (ch2.name === "print-object") {
+            var dataPrintObject = xmlToYesNo(ch2) ;
+            ret.printObject = dataPrintObject;
+            foundPrintObject = true;
+        }
+        if (ch2.name === "name") {
+            var dataName = getString(ch2, true);
+            ret.name = dataName;
+            foundName = true;
+        }
+    }
+    ret.lyricParts = xmlToLyricParts(node);
+    if (!foundNumber_) {
+        ret.number_ = 1;
+    }
+    if (!foundJustify) {
+        ret.justify = LeftCenterRight.Left;
+    }
+    if (!foundDefaultX) {
+        ret.defaultX = NaN;
+    }
+    if (!foundRelativeY) {
+        ret.relativeY = 0;
+    }
+    if (!foundDefaultY) {
+        ret.defaultY = NaN;
+    }
+    if (!foundRelativeX) {
+        ret.relativeX = 0;
+    }
+    if (!foundPlacement) {
+        ret.placement = AboveBelow.Unspecified;
+    }
+    if (!foundColor) {
+        ret.color = "#000000";
+    }
+    if (!foundPrintObject) {
+        ret.printObject = true;
+    }
+    if (!foundName) {
+        ret.name = "";
+    }
+    return ret;
+}
+
 /**
  * Traditional key signatures are represented by the number
  * of flats and sharps, plus an optional mode for major/
@@ -24924,6 +25035,141 @@ export function xmlToNonArpeggiate(node: Node) {
     return ret;
 }
 
+export interface Laughing {
+}
+
+export interface LaughingComplete {
+}
+
+
+export function xmlToLaughing(node: Node) {
+    "use strict";
+    var ret: Laughing = <any> {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+
+export interface Humming {
+}
+
+export interface HummingComplete {
+}
+
+
+export function xmlToHumming(node: Node) {
+    "use strict";
+    var ret: Humming = <any> {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+
+export interface EndLine {
+}
+
+export interface EndLineComplete {
+}
+
+
+export function xmlToEndLine(node: Node) {
+    "use strict";
+    var ret: EndLine = <any> {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+
+export interface EndParagraph {
+}
+
+export interface EndParagraphComplete {
+}
+
+
+export function xmlToEndParagraph(node: Node) {
+    "use strict";
+    var ret: EndParagraph = <any> {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return ret;
+}
+
+export interface LyricParts {
+}
+
+export interface LyricPartsComplete {
+}
+
+
+export function xmlToLyricParts(node: Node) {
+    "use strict";
+    var rarr: any[] = [];
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+        if (ch.nodeName === "extend") {
+            var data: any = xmlToExtend(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "Extend"
+        }
+        if (ch.nodeName === "end-line") {
+            var data: any = xmlToEndLine(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "EndLine"
+        }
+        if (ch.nodeName === "syllabic") {
+            var data: any = xmlToSyllabic(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "Syllabic"
+        }
+        if (ch.nodeName === "text") {
+            var data: any = xmlToText(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "Text"
+        }
+        if (ch.nodeName === "laughing") {
+            var data: any = xmlToLaughing(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "Laughing"
+        }
+        if (ch.nodeName === "humming") {
+            var data: any = xmlToHumming(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "Humming"
+        }
+        if (ch.nodeName === "end-paragraph") {
+            var data: any = xmlToEndParagraph(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "EndParagraph"
+        }
+        if (ch.nodeName === "elision") {
+            var data: any = xmlToElision(ch) ;
+            rarr = (rarr|| []).concat(data);
+            data._class = "Elision"
+        }
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+    }
+    return rarr;
+}
+
 /**
  * Text underlays for lyrics, based on Humdrum with support
  * for other formats. The lyric number indicates multiple
@@ -24953,15 +25199,8 @@ export function xmlToNonArpeggiate(node: Node) {
  * are printed in a block of text rather than with each note.
  */
 export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
-    extend?: Extend;
-    endLine: boolean;
-    syllabics?: Syllabic[];
-    texts?: Text[];
-    laughing: boolean;
-    humming: boolean;
+    lyricParts: any[];
     number_?: number;
-    endParagraph: boolean;
-    elisions?: Elision[];
     name?: string;
 }
 
@@ -24994,160 +25233,12 @@ export interface Lyric extends Justify, Position, Placement, Color, PrintObject,
  * are printed in a block of text rather than with each note.
  */
 export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
-    extend: Extend;
-    endLine: boolean;
-    syllabics: Syllabic[];
-    texts: Text[];
-    laughing: boolean;
-    humming: boolean;
+    lyricParts: any[];
     number_: number;
-    endParagraph: boolean;
-    elisions: Elision[];
     name: string;
 }
 
 
-export function xmlToLyric(node: Node) {
-    "use strict";
-    var ret: Lyric = <any> {};
-    var foundNumber_ = false;
-    var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundPlacement = false;
-    var foundColor = false;
-    var foundPrintObject = false;
-    var foundName = false;
-    for (var i = 0; i < node.childNodes.length; ++i) {
-        var ch = node.childNodes[i];
-        if (ch.nodeName === "extend") {
-            var dataExtend = xmlToExtend(ch) ;
-            ret.extend = dataExtend;
-        }
-        if (ch.nodeName === "end-line") {
-            var dataEndLine = true;
-            ret.endLine = dataEndLine;
-        }
-        if (ch.nodeName === "syllabic") {
-            var dataSyllabics = xmlToSyllabic(ch) ;
-            ret.syllabics = (ret.syllabics|| []).concat(dataSyllabics);
-        }
-        if (ch.nodeName === "text") {
-            var dataTexts = xmlToText(ch) ;
-            ret.texts = (ret.texts|| []).concat(dataTexts);
-        }
-        if (ch.nodeName === "laughing") {
-            var dataLaughing = true;
-            ret.laughing = dataLaughing;
-        }
-        if (ch.nodeName === "humming") {
-            var dataHumming = true;
-            ret.humming = dataHumming;
-        }
-        if (ch.nodeName === "footnote") {
-            var dataFootnote = xmlToFootnote(ch) ;
-            ret.footnote = dataFootnote;
-        }
-        if (ch.nodeName === "level") {
-            var dataLevel = xmlToLevel(ch) ;
-            ret.level = dataLevel;
-        }
-        if (ch.nodeName === "end-paragraph") {
-            var dataEndParagraph = true;
-            ret.endParagraph = dataEndParagraph;
-        }
-        if (ch.nodeName === "elision") {
-            var dataElisions = xmlToElision(ch) ;
-            ret.elisions = (ret.elisions|| []).concat(dataElisions);
-        }
-    }
-    for (var i = 0; i < node.attributes.length; ++i) {
-        var ch2 = node.attributes[i];
-        if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
-            foundNumber_ = true;
-        }
-        if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
-            ret.justify = dataJustify;
-            foundJustify = true;
-        }
-        if (ch2.name === "default-x") {
-            var dataDefaultX = getNumber(ch2, true);
-            ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
-        }
-        if (ch2.name === "relative-y") {
-            var dataRelativeY = getNumber(ch2, true);
-            ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
-        }
-        if (ch2.name === "default-y") {
-            var dataDefaultY = getNumber(ch2, true);
-            ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
-        }
-        if (ch2.name === "relative-x") {
-            var dataRelativeX = getNumber(ch2, true);
-            ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
-        }
-        if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
-            ret.placement = dataPlacement;
-            foundPlacement = true;
-        }
-        if (ch2.name === "color") {
-            var dataColor = getString(ch2, true);
-            ret.color = dataColor;
-            foundColor = true;
-        }
-        if (ch2.name === "print-object") {
-            var dataPrintObject = xmlToYesNo(ch2) ;
-            ret.printObject = dataPrintObject;
-            foundPrintObject = true;
-        }
-        if (ch2.name === "name") {
-            var dataName = getString(ch2, true);
-            ret.name = dataName;
-            foundName = true;
-        }
-    }
-    if (!foundNumber_) {
-        ret.number_ = 1;
-    }
-    if (!foundJustify) {
-        ret.justify = LeftCenterRight.Left;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundPlacement) {
-        ret.placement = AboveBelow.Unspecified;
-    }
-    if (!foundColor) {
-        ret.color = "#000000";
-    }
-    if (!foundPrintObject) {
-        ret.printObject = true;
-    }
-    if (!foundName) {
-        ret.name = "";
-    }
-    return ret;
-}
 
 export interface Text extends Font, Color, TextDecoration, TextRotation, LetterSpacing, TextDirection {
     data: string;
@@ -25272,12 +25363,41 @@ export function xmlToText(node: Node) {
     return ret;
 }
 
+export enum SyllabicType {
+    Single = 0,
+    Begin = 1,
+    Middle = 3,
+    End = 2
+}
+
+export function getSyllabicType(node: Node, fallbackVal?: SyllabicType) {
+    "use strict"
+    var s = (node.nodeType === node.ATTRIBUTE_NODE ? (<Attr>node).value : node.textContent).trim();
+    if (s === "" && fallbackVal !== null && fallbackVal !== undefined) {
+        return fallbackVal;
+    }
+    if (s == "single") {
+        return SyllabicType.Single;
+    }
+    if (s == "begin") {
+        return SyllabicType.Begin;
+    }
+    if (s == "middle") {
+        return SyllabicType.Middle;
+    }
+    if (s == "end") {
+        return SyllabicType.End;
+    }
+    assert(false, "Not reached");
+
+}
+
 export interface Syllabic extends Font, Color {
-    data: string;
+    data: SyllabicType;
 }
 
 export interface SyllabicComplete extends FontComplete, ColorComplete {
-    data: string;
+    data: SyllabicType;
 }
 
 
@@ -25321,7 +25441,7 @@ export function xmlToSyllabic(node: Node) {
         }
     }
     var ch3 = node;
-    var dataData = getString(ch3, true);
+    var dataData = getSyllabicType(ch3, null);
     ret.data = dataData;
     if (!foundFontFamily) {
         ret.fontFamily = "Alegreya, serif";
@@ -35799,46 +35919,57 @@ export function xmlToPart(node: Node) {
         if (ch.nodeName === "note") {
             var data: any = xmlToNote(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Note"
         }
         if (ch.nodeName === "backup") {
             var data: any = xmlToBackup(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Backup"
         }
         if (ch.nodeName === "harmony") {
             var data: any = xmlToHarmony(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Harmony"
         }
         if (ch.nodeName === "forward") {
             var data: any = xmlToForward(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Forward"
         }
         if (ch.nodeName === "print") {
             var data: any = xmlToPrint(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Print"
         }
         if (ch.nodeName === "figured-bass") {
             var data: any = xmlToFiguredBass(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "FiguredBass"
         }
         if (ch.nodeName === "direction") {
             var data: any = xmlToDirection(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Direction"
         }
         if (ch.nodeName === "attributes") {
             var data: any = xmlToAttributes(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Attributes"
         }
         if (ch.nodeName === "sound") {
             var data: any = xmlToSound(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Sound"
         }
         if (ch.nodeName === "barline") {
             var data: any = xmlToBarline(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Barline"
         }
         if (ch.nodeName === "grouping") {
             var data: any = xmlToGrouping(ch) ;
             rarr = (rarr|| []).concat(data);
+            data._class = "Grouping"
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {

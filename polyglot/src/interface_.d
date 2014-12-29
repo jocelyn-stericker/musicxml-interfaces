@@ -432,6 +432,10 @@ class PInterface : PEmittable {
         } else {
             toEmit ~= "xmlTo" ~ val.dTypeSingular ~ "(" ~ ch ~ ") " ~ ";\n";
             toEmit ~= indent ~ target ~ operation ~ dataName ~ close;
+
+            if (this.isOrdered) {
+                toEmit ~= indent ~ "data._class = \"" ~ val.dTypeSingular ~ "\"\n";
+            }
         }
 
         if (!isChild && !this.isOrdered && val.defaultValTS) {

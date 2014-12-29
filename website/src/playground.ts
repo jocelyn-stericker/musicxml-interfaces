@@ -69,8 +69,10 @@ class Playground extends TypedReact.Component<Playground.IProps, IState> {
     }
 
     renderHeader() {
-        return <!div>
+        return <!div >
+            <!span style={{fontFamily: "Alegreya"}}>
             Modify the code and see changes in realtime.
+            </span>
             <!select ref="select" value={this.state.test} style={{float: "right"}} onChange={this.handleSelectChanged}>
                 <!option value="01a">Lily 01a: Pitches/Pitches</option>
                 <!option value="01b">Lily 01b: Pitches/Intervals</option>

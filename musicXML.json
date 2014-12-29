@@ -4554,8 +4554,45 @@
       }
     },
     {
-      "//": "Text underlays for lyrics, based on Humdrum with support\nfor other formats. The lyric number indicates multiple\nlines, though a name can be used as well (as in Finale's\nverse/chorus/section specification). Word extensions are\nrepresented using the extend element. Hyphenation is\nindicated by the syllabic element, which can be single,\nbegin, end, or middle. These represent single-syllable\nwords, word-beginning syllables, word-ending syllables,\nand mid-word syllables. Multiple syllables on a single\nnote are separated by elision elements. A hyphen in the\ntext element should only be used for an actual hyphenated\nword. Two text elements that are not separated by an\nelision element are part of the same syllable, but may have\ndifferent text formatting.\n\nHumming and laughing representations are taken from\nHumdrum. The end-line and end-paragraph elements come\nfrom RP-017 for Standard MIDI File Lyric meta-events;\nthey help facilitate lyric display for Karaoke and\nsimilar applications. Language names for text elements\ncome from ISO 639, with optional country subcodes from\nISO 3166. Justification is center by default; placement is\nbelow by default. The print-object attribute can override\na note's print-lyric attribute in cases where only some\nlyrics on a note are printed, as when lyrics for later verses\nare printed in a block of text rather than with each note.",
+      "element": "laughing",
+      "interface": {},
+      "//": "Humming and laughing representations are taken from\nHumdrum."
+    },
+    {
+      "element": "humming",
+      "interface": {},
+      "//": "Humming and laughing representations are taken from\nHumdrum."
+    },
+    {
+      "element": "end-line",
+      "interface": {},
+      "//": "The end-line and end-paragraph elements come\nfrom RP-017 for Standard MIDI File Lyric meta-events;\nthey help facilitate lyric display for Karaoke and\nsimilar applications."
+    },
+    {
+      "element": "end-paragraph",
+      "interface": {},
+      "//": "The end-line and end-paragraph elements come\nfrom RP-017 for Standard MIDI File Lyric meta-events;\nthey help facilitate lyric display for Karaoke and\nsimilar applications."
+    },
+    {
+      "element": "lyric-parts",
+      "ordered": true,
+      "interface": {
+        "<syllabic>": {},
+        "<text>": {},
+        "<elision>": {},
+        "<extend>": {},
+        "<laughing>": {},
+        "<humming>": {},
+        "<end-line>": {},
+        "<end-paragraph>": {}
+      },
+      "//": "Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.",
+      "array": true
+    },
+    {
+      "//": "Text underlays for lyrics, based on Humdrum with support\nfor other formats.\n\nIMPORTANT: <lyric-parts> is fake. All children of lyric-parts\nare actually children of lyric. This is a construct invented by\nmusicxml-interfaces for separating ordered and unordered\ncontent.\n\nLanguage names for text elements come from ISO 639,\nwith optional country subcodes from ISO 3166. muiscxml-interfaces\ncurrently ignores this field. \n\nJustification is center by default; placement is\nbelow by default. The print-object attribute can override\na note's print-lyric attribute in cases where only some\nlyrics on a note are printed, as when lyrics for later verses\nare printed in a block of text rather than with each note.\n",
       "element": "lyric",
+      "auto": false,
       "interface": {
         "_extends": [
           "justify",
@@ -4565,29 +4602,12 @@
           "print-object",
           "editorial"
         ],
-        "<syllabic>": {
-          "array": true,
-          "required": false
-        },
-        "<text>": {
-          "array": true,
-          "required": false
-        },
-        "<elision>": {
-          "array": true,
-          "required": false
-        },
-        "<extend>": {
-          "required": false
-        },
-        "<laughing>": "__flag__",
-        "<humming>": "__flag__",
-        "<end-line>": "__flag__",
-        "<end-paragraph>": "__flag__",
+        "<lyric-parts>": {},
         "number": {
           "type": "number",
           "required": false,
-          "std": 1
+          "std": 1,
+          "//": "The lyric number indicates multiple lines, though a name\ncan be used as well (as in Finale's verse/chorus/section\nspecification). "
         },
         "name": {
           "type": "string",
@@ -4614,6 +4634,15 @@
       }
     },
     {
+      "entity": "syllabic-type",
+      "enum": {
+        "single": 0,
+        "begin": 1,
+        "end": 2,
+        "middle": 3
+      }
+    },
+    {
       "element": "syllabic",
       "interface": {
         "_extends": [
@@ -4621,13 +4650,14 @@
           "color"
         ],
         "data": {
-          "type": "string",
+          "type": "syllabic-type",
           "child": true
         }
-      }
+      },
+      "//": "Hyphenation is indicated by the syllabic element, which can be single,\nbegin, end, or middle. These represent single-syllable\nwords, word-beginning syllables, word-ending syllables,\nand mid-word syllables."
     },
     {
-      "//": "The elision element text specifies the symbol used to\ndisplay the elision. Common values are a no-break space\n(Unicode 00A0), an underscore (Unicode 005F), or an undertie\n(Unicode 203F).",
+      "//": "Multiple syllables on a single note are separated by elision\nelements. A hyphen in the text element should only be used\nfor an actual hyphenated word. Two text elements that are\nnot separated by an elision element are part of the same\nsyllable, but may have different text formatting.\n\nThe elision element text specifies the symbol used to\ndisplay the elision. Common values are a no-break space\n(Unicode 00A0), an underscore (Unicode 005F), or an undertie\n(Unicode 203F).",
       "element": "elision",
       "interface": {
         "_extends": [
@@ -4641,7 +4671,7 @@
       }
     },
     {
-      "//": "The extend element represents lyric word extension /\nmelisma lines as well as figured bass extensions. The\noptional type and position attributes are added in\nVersion 3.0 to provide better formatting control.",
+      "//": "Word extensions are represented using the extend element. \n\nThe extend element represents lyric word extension /\nmelisma lines as well as figured bass extensions. The\noptional type and position attributes are added in\nVersion 3.0 to provide better formatting control.",
       "element": "extend",
       "empty": true,
       "interface": {

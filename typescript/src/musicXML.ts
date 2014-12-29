@@ -8685,6 +8685,41 @@ export interface NonArpeggiateComplete extends PositionComplete, PlacementComple
 }
 
 
+export interface Laughing {
+}
+
+export interface LaughingComplete {
+}
+
+
+export interface Humming {
+}
+
+export interface HummingComplete {
+}
+
+
+export interface EndLine {
+}
+
+export interface EndLineComplete {
+}
+
+
+export interface EndParagraph {
+}
+
+export interface EndParagraphComplete {
+}
+
+
+export interface LyricParts {
+}
+
+export interface LyricPartsComplete {
+}
+
+
 /**
  * Text underlays for lyrics, based on Humdrum with support
  * for other formats. The lyric number indicates multiple
@@ -8714,15 +8749,8 @@ export interface NonArpeggiateComplete extends PositionComplete, PlacementComple
  * are printed in a block of text rather than with each note.
  */
 export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
-    extend?: Extend;
-    endLine: boolean;
-    syllabics?: Syllabic[];
-    texts?: Text[];
-    laughing: boolean;
-    humming: boolean;
+    lyricParts: any[];
     number_?: number;
-    endParagraph: boolean;
-    elisions?: Elision[];
     name?: string;
 }
 
@@ -8755,15 +8783,8 @@ export interface Lyric extends Justify, Position, Placement, Color, PrintObject,
  * are printed in a block of text rather than with each note.
  */
 export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
-    extend: Extend;
-    endLine: boolean;
-    syllabics: Syllabic[];
-    texts: Text[];
-    laughing: boolean;
-    humming: boolean;
+    lyricParts: any[];
     number_: number;
-    endParagraph: boolean;
-    elisions: Elision[];
     name: string;
 }
 
@@ -8777,12 +8798,19 @@ export interface TextComplete extends FontComplete, ColorComplete, TextDecoratio
 }
 
 
+export enum SyllabicType {
+    Single = 0,
+    Begin = 1,
+    Middle = 3,
+    End = 2
+}
+
 export interface Syllabic extends Font, Color {
-    data: string;
+    data: SyllabicType;
 }
 
 export interface SyllabicComplete extends FontComplete, ColorComplete {
-    data: string;
+    data: SyllabicType;
 }
 
 
