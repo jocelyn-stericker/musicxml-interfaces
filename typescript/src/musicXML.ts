@@ -5504,8 +5504,8 @@ export interface SlashDotComplete {
  * if not specified.
  */
 export interface MultipleRest {
-    multipleRest?: boolean;
-    data: string;
+    useSymbols?: boolean;
+    count: number;
 }
 
 /**
@@ -5516,8 +5516,8 @@ export interface MultipleRest {
  * if not specified.
  */
 export interface MultipleRestComplete {
-    multipleRest: boolean;
-    data: string;
+    useSymbols: boolean;
+    count: number;
 }
 
 
@@ -5701,7 +5701,7 @@ export interface MeasureStyleComplete extends FontComplete, ColorComplete {
 export interface Attributes extends Editorial {
     divisions?: number;
     partSymbol?: PartSymbol;
-    clef?: Clef;
+    clefs?: Clef[];
     measureStyle?: MeasureStyle;
     time?: Time;
     staffDetails?: StaffDetails;
@@ -5722,7 +5722,7 @@ export interface Attributes extends Editorial {
 export interface AttributesComplete extends EditorialComplete {
     divisions: number;
     partSymbol: PartSymbol;
-    clef: Clef;
+    clefs: Clef[];
     measureStyle: MeasureStyle;
     time: Time;
     staffDetails: StaffDetails;
@@ -8685,68 +8685,106 @@ export interface NonArpeggiateComplete extends PositionComplete, PlacementComple
 }
 
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface Laughing {
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface LaughingComplete {
 }
 
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface Humming {
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface HummingComplete {
 }
 
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndLine {
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndLineComplete {
 }
 
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndParagraph {
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndParagraphComplete {
 }
 
 
+/**
+ * Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.
+ */
 export interface LyricParts {
 }
 
+/**
+ * Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.
+ */
 export interface LyricPartsComplete {
 }
 
 
 /**
  * Text underlays for lyrics, based on Humdrum with support
- * for other formats. The lyric number indicates multiple
- * lines, though a name can be used as well (as in Finale's
- * verse/chorus/section specification). Word extensions are
- * represented using the extend element. Hyphenation is
- * indicated by the syllabic element, which can be single,
- * begin, end, or middle. These represent single-syllable
- * words, word-beginning syllables, word-ending syllables,
- * and mid-word syllables. Multiple syllables on a single
- * note are separated by elision elements. A hyphen in the
- * text element should only be used for an actual hyphenated
- * word. Two text elements that are not separated by an
- * elision element are part of the same syllable, but may have
- * different text formatting.
+ * for other formats.
  * 
- * Humming and laughing representations are taken from
- * Humdrum. The end-line and end-paragraph elements come
- * from RP-017 for Standard MIDI File Lyric meta-events;
- * they help facilitate lyric display for Karaoke and
- * similar applications. Language names for text elements
- * come from ISO 639, with optional country subcodes from
- * ISO 3166. Justification is center by default; placement is
+ * IMPORTANT: <lyric-parts> is fake. All children of lyric-parts
+ * are actually children of lyric. This is a construct invented by
+ * musicxml-interfaces for separating ordered and unordered
+ * content.
+ * 
+ * Language names for text elements come from ISO 639,
+ * with optional country subcodes from ISO 3166. muiscxml-interfaces
+ * currently ignores this field. 
+ * 
+ * Justification is center by default; placement is
  * below by default. The print-object attribute can override
  * a note's print-lyric attribute in cases where only some
  * lyrics on a note are printed, as when lyrics for later verses
  * are printed in a block of text rather than with each note.
+ * 
  */
 export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
     lyricParts: any[];
@@ -8756,31 +8794,23 @@ export interface Lyric extends Justify, Position, Placement, Color, PrintObject,
 
 /**
  * Text underlays for lyrics, based on Humdrum with support
- * for other formats. The lyric number indicates multiple
- * lines, though a name can be used as well (as in Finale's
- * verse/chorus/section specification). Word extensions are
- * represented using the extend element. Hyphenation is
- * indicated by the syllabic element, which can be single,
- * begin, end, or middle. These represent single-syllable
- * words, word-beginning syllables, word-ending syllables,
- * and mid-word syllables. Multiple syllables on a single
- * note are separated by elision elements. A hyphen in the
- * text element should only be used for an actual hyphenated
- * word. Two text elements that are not separated by an
- * elision element are part of the same syllable, but may have
- * different text formatting.
+ * for other formats.
  * 
- * Humming and laughing representations are taken from
- * Humdrum. The end-line and end-paragraph elements come
- * from RP-017 for Standard MIDI File Lyric meta-events;
- * they help facilitate lyric display for Karaoke and
- * similar applications. Language names for text elements
- * come from ISO 639, with optional country subcodes from
- * ISO 3166. Justification is center by default; placement is
+ * IMPORTANT: <lyric-parts> is fake. All children of lyric-parts
+ * are actually children of lyric. This is a construct invented by
+ * musicxml-interfaces for separating ordered and unordered
+ * content.
+ * 
+ * Language names for text elements come from ISO 639,
+ * with optional country subcodes from ISO 3166. muiscxml-interfaces
+ * currently ignores this field. 
+ * 
+ * Justification is center by default; placement is
  * below by default. The print-object attribute can override
  * a note's print-lyric attribute in cases where only some
  * lyrics on a note are printed, as when lyrics for later verses
  * are printed in a block of text rather than with each note.
+ * 
  */
 export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
     lyricParts: any[];
@@ -8805,16 +8835,34 @@ export enum SyllabicType {
     End = 2
 }
 
+/**
+ * Hyphenation is indicated by the syllabic element, which can be single,
+ * begin, end, or middle. These represent single-syllable
+ * words, word-beginning syllables, word-ending syllables,
+ * and mid-word syllables.
+ */
 export interface Syllabic extends Font, Color {
     data: SyllabicType;
 }
 
+/**
+ * Hyphenation is indicated by the syllabic element, which can be single,
+ * begin, end, or middle. These represent single-syllable
+ * words, word-beginning syllables, word-ending syllables,
+ * and mid-word syllables.
+ */
 export interface SyllabicComplete extends FontComplete, ColorComplete {
     data: SyllabicType;
 }
 
 
 /**
+ * Multiple syllables on a single note are separated by elision
+ * elements. A hyphen in the text element should only be used
+ * for an actual hyphenated word. Two text elements that are
+ * not separated by an elision element are part of the same
+ * syllable, but may have different text formatting.
+ * 
  * The elision element text specifies the symbol used to
  * display the elision. Common values are a no-break space
  * (Unicode 00A0), an underscore (Unicode 005F), or an undertie
@@ -8825,6 +8873,12 @@ export interface Elision extends Font, Color {
 }
 
 /**
+ * Multiple syllables on a single note are separated by elision
+ * elements. A hyphen in the text element should only be used
+ * for an actual hyphenated word. Two text elements that are
+ * not separated by an elision element are part of the same
+ * syllable, but may have different text formatting.
+ * 
  * The elision element text specifies the symbol used to
  * display the elision. Common values are a no-break space
  * (Unicode 00A0), an underscore (Unicode 005F), or an undertie
@@ -8836,6 +8890,8 @@ export interface ElisionComplete extends FontComplete, ColorComplete {
 
 
 /**
+ * Word extensions are represented using the extend element. 
+ * 
  * The extend element represents lyric word extension /
  * melisma lines as well as figured bass extensions. The
  * optional type and position attributes are added in
@@ -8846,6 +8902,8 @@ export interface Extend extends PrintStyle {
 }
 
 /**
+ * Word extensions are represented using the extend element. 
+ * 
  * The extend element represents lyric word extension /
  * melisma lines as well as figured bass extensions. The
  * optional type and position attributes are added in

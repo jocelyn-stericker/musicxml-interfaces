@@ -1544,45 +1544,25 @@ export float BeamLevel(xmlNodePtr p) {
 export class Position {
     mixin IPosition;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
     }
 }
@@ -1743,18 +1723,13 @@ mixin template IOrientation() {
 export class DirectiveEntity {
     mixin IDirectiveEntity;
     this(xmlNodePtr node) {
-        bool foundDirectiveEntity = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "directive-entity") {
                 auto data = getYesNo(ch, true);
                 this.directiveEntity = data;
-                foundDirectiveEntity = true;
             }
-        }
-        if (!foundDirectiveEntity) {
-            directiveEntity = false;
         }
     }
 }
@@ -1801,63 +1776,33 @@ mixin template IDirectiveEntity() {
 export class Bezier {
     mixin IBezier;
     this(xmlNodePtr node) {
-        bool foundBezierX2 = false;
-        bool foundBezierOffset = false;
-        bool foundBezierOffset2 = false;
-        bool foundBezierX = false;
-        bool foundBezierY = false;
-        bool foundBezierY2 = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "bezier-x2") {
                 auto data = getNumber(ch, true);
                 this.bezierX2 = data;
-                foundBezierX2 = true;
             }
             if (ch.name.toString == "bezier-offset") {
                 auto data = getNumber(ch, true);
                 this.bezierOffset = data;
-                foundBezierOffset = true;
             }
             if (ch.name.toString == "bezier-offset2") {
                 auto data = getNumber(ch, true);
                 this.bezierOffset2 = data;
-                foundBezierOffset2 = true;
             }
             if (ch.name.toString == "bezier-x") {
                 auto data = getNumber(ch, true);
                 this.bezierX = data;
-                foundBezierX = true;
             }
             if (ch.name.toString == "bezier-y") {
                 auto data = getNumber(ch, true);
                 this.bezierY = data;
-                foundBezierY = true;
             }
             if (ch.name.toString == "bezier-y2") {
                 auto data = getNumber(ch, true);
                 this.bezierY2 = data;
-                foundBezierY2 = true;
             }
-        }
-        if (!foundBezierX2) {
-            bezierX2 = float.nan;
-        }
-        if (!foundBezierOffset) {
-            bezierOffset = float.nan;
-        }
-        if (!foundBezierOffset2) {
-            bezierOffset2 = float.nan;
-        }
-        if (!foundBezierX) {
-            bezierX = float.nan;
-        }
-        if (!foundBezierY) {
-            bezierY = float.nan;
-        }
-        if (!foundBezierY2) {
-            bezierY2 = float.nan;
         }
     }
 }
@@ -1919,17 +1864,14 @@ mixin template IBezier() {
 export class Font {
     mixin IFont;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -1944,20 +1886,13 @@ export class Font {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
         }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
     }
 }
@@ -2621,14 +2556,8 @@ mixin template IEnclosure() {
 export class PrintStyle {
     mixin IPrintStyle;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -2636,27 +2565,22 @@ export class PrintStyle {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -2671,7 +2595,6 @@ export class PrintStyle {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -2679,29 +2602,11 @@ export class PrintStyle {
                 foundColor = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -2959,14 +2864,8 @@ export class TextFormatting {
     mixin ITextFormatting;
     this(xmlNodePtr node) {
         bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -2989,27 +2888,22 @@ export class TextFormatting {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -3024,7 +2918,6 @@ export class TextFormatting {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -3085,29 +2978,11 @@ export class TextFormatting {
         if (!foundJustify) {
             justify = LeftCenterRight.Left;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -3582,14 +3457,8 @@ export class Footnote {
     mixin IFootnote;
     this(xmlNodePtr node) {
         bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -3612,27 +3481,22 @@ export class Footnote {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -3647,7 +3511,6 @@ export class Footnote {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -3711,29 +3574,11 @@ export class Footnote {
         if (!foundJustify) {
             justify = LeftCenterRight.Left;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -3882,14 +3727,8 @@ export class Fermata {
     mixin IFermata;
     this(xmlNodePtr node) {
         bool foundShape = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundType = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -3898,27 +3737,22 @@ export class Fermata {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -3933,7 +3767,6 @@ export class Fermata {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -3952,29 +3785,11 @@ export class Fermata {
         if (!foundShape) {
             shape = NormalAngledSquare.Normal;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -4017,10 +3832,6 @@ export class WavyLine {
     mixin IWavyLine;
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundPlacement = false;
         bool foundColor = false;
         bool foundStartNote = false;
@@ -4041,22 +3852,18 @@ export class WavyLine {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "placement") {
                 auto data = getAboveBelow(ch);
@@ -4110,18 +3917,6 @@ export class WavyLine {
         }
         if (!foundNumber_) {
             number_ = 1;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
@@ -4207,14 +4002,8 @@ mixin template IStaff() {
 export class Segno {
     mixin ISegno;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -4224,27 +4013,22 @@ export class Segno {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -4259,7 +4043,6 @@ export class Segno {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -4277,29 +4060,11 @@ export class Segno {
                 foundValign = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -4332,14 +4097,8 @@ mixin template ISegno() {
 export class Coda {
     mixin ICoda;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -4349,27 +4108,22 @@ export class Coda {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -4384,7 +4138,6 @@ export class Coda {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -4402,29 +4155,11 @@ export class Coda {
                 foundValign = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -4592,14 +4327,8 @@ mixin template INormalDot() {
 export class Dynamics {
     mixin IDynamics;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -4710,27 +4439,22 @@ export class Dynamics {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -4745,7 +4469,6 @@ export class Dynamics {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -4788,29 +4511,11 @@ export class Dynamics {
                 foundEnclosure = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -4905,14 +4610,8 @@ export class Fingering {
     mixin IFingering;
     this(xmlNodePtr node) {
         bool foundSubstitution = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundAlternate = false;
@@ -4927,27 +4626,22 @@ export class Fingering {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -4962,7 +4656,6 @@ export class Fingering {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -4986,29 +4679,11 @@ export class Fingering {
         if (!foundSubstitution) {
             substitution = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -5049,10 +4724,8 @@ mixin template IFingering() {
 export class Fret {
     mixin IFret;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -5060,7 +4733,6 @@ export class Fret {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -5075,7 +4747,6 @@ export class Fret {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -5086,17 +4757,11 @@ export class Fret {
         auto ch = node;
         auto data = getNumber(ch, true);
         this.fret = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -5127,14 +4792,8 @@ mixin template IFret() {
 export class String {
     mixin IString;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -5143,27 +4802,22 @@ export class String {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -5178,7 +4832,6 @@ export class String {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -5194,29 +4847,11 @@ export class String {
         auto ch = node;
         auto data = getNumber(ch, true);
         this.stringNum = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -5308,14 +4943,8 @@ export class DisplayText {
     mixin IDisplayText;
     this(xmlNodePtr node) {
         bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -5338,27 +4967,22 @@ export class DisplayText {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -5373,7 +4997,6 @@ export class DisplayText {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -5437,29 +5060,11 @@ export class DisplayText {
         if (!foundJustify) {
             justify = LeftCenterRight.Left;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -5518,14 +5123,8 @@ export class AccidentalText {
     mixin IAccidentalText;
     this(xmlNodePtr node) {
         bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -5548,27 +5147,22 @@ export class AccidentalText {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -5583,7 +5177,6 @@ export class AccidentalText {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -5647,29 +5240,11 @@ export class AccidentalText {
         if (!foundJustify) {
             justify = LeftCenterRight.Left;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -6556,14 +6131,8 @@ export class LeftDivider {
     mixin ILeftDivider;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -6578,27 +6147,22 @@ export class LeftDivider {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -6613,7 +6177,6 @@ export class LeftDivider {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -6634,29 +6197,11 @@ export class LeftDivider {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -6709,14 +6254,8 @@ export class RightDivider {
     mixin IRightDivider;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -6731,27 +6270,22 @@ export class RightDivider {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -6766,7 +6300,6 @@ export class RightDivider {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -6787,29 +6320,11 @@ export class RightDivider {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -8280,14 +7795,8 @@ alias Divisions = float;
 export class Key {
     mixin IKey;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPrintObject = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -8328,27 +7837,22 @@ export class Key {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -8363,7 +7867,6 @@ export class Key {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -8376,29 +7879,11 @@ export class Key {
                 foundPrintObject = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -8512,14 +7997,8 @@ export class Time {
     this(xmlNodePtr node) {
         bool foundSymbol = false;
         bool foundSeparator = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -8556,27 +8035,22 @@ export class Time {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -8591,7 +8065,6 @@ export class Time {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -8620,29 +8093,11 @@ export class Time {
         if (!foundSeparator) {
             separator = SeparatorType.None;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -8879,10 +8334,6 @@ export class PartSymbol {
     mixin IPartSymbol;
     this(xmlNodePtr node) {
         bool foundTopStaff = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundColor = false;
         bool foundBottomStaff = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -8896,22 +8347,18 @@ export class PartSymbol {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -8929,18 +8376,6 @@ export class PartSymbol {
         this.type = data;
         if (!foundTopStaff) {
             topStaff = -1;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundColor) {
             color = "#000000";
@@ -9055,14 +8490,8 @@ export class Clef {
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
         bool foundSize = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPrintObject = false;
         bool foundAfterBarline = false;
@@ -9095,27 +8524,22 @@ export class Clef {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -9130,7 +8554,6 @@ export class Clef {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -9159,29 +8582,11 @@ export class Clef {
         if (!foundSize) {
             size = SymbolSize.Full;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -9615,14 +9020,8 @@ mixin template ITranspose() {
 export class Directive {
     mixin IDirective;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -9630,27 +9029,22 @@ export class Directive {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -9665,7 +9059,6 @@ export class Directive {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -9676,29 +9069,11 @@ export class Directive {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -9757,21 +9132,21 @@ mixin template ISlashDot() {
 export class MultipleRest {
     mixin IMultipleRest;
     this(xmlNodePtr node) {
-        bool foundMultipleRest = false;
+        bool foundUseSymbols = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
-            if (ch.name.toString == "multiple-rest") {
+            if (ch.name.toString == "use-symbols") {
                 auto data = getYesNo(ch, true);
-                this.multipleRest = data;
-                foundMultipleRest = true;
+                this.useSymbols = data;
+                foundUseSymbols = true;
             }
         }
         auto ch = node;
-        auto data = getString(ch, true);
-        this.data = data;
-        if (!foundMultipleRest) {
-            multipleRest = false;
+        auto data = getNumber(ch, true);
+        this.count = data;
+        if (!foundUseSymbols) {
+            useSymbols = false;
         }
     }
 }
@@ -9784,8 +9159,8 @@ export class MultipleRest {
  * if not specified.
  */
 mixin template IMultipleRest() {
-    bool multipleRest;
-    string data;
+    bool useSymbols;
+    float count;
 }
 
 /**
@@ -10012,10 +9387,8 @@ export class MeasureStyle {
     mixin IMeasureStyle;
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "measure-repeat") {
@@ -10044,7 +9417,6 @@ export class MeasureStyle {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -10059,7 +9431,6 @@ export class MeasureStyle {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -10070,17 +9441,11 @@ export class MeasureStyle {
         if (!foundNumber_) {
             number_ = 1;
         }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -10133,7 +9498,7 @@ export class Attributes {
             }
             if (ch.name.toString == "clef") {
                 auto data = new Clef(ch) ;
-                this.clef = data;
+                this.clefs ~= data;
             }
             if (ch.name.toString == "measure-style") {
                 auto data = new MeasureStyle(ch) ;
@@ -10192,7 +9557,7 @@ mixin template IAttributes() {
     mixin IEditorial;
     float divisions;
     PartSymbol partSymbol;
-    Clef clef;
+    Clef[] clefs;
     MeasureStyle measureStyle;
     Time time;
     StaffDetails staffDetails;
@@ -10646,14 +10011,8 @@ export class Note {
         bool foundPizzicato = false;
         bool foundDynamics = false;
         bool foundRelease = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPrintObject = false;
         bool foundPrintSpacing = false;
@@ -10784,27 +10143,22 @@ export class Note {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -10819,7 +10173,6 @@ export class Note {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -10864,29 +10217,11 @@ export class Note {
         if (!foundRelease) {
             release = float.nan;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -11057,14 +10392,8 @@ mixin template IType() {
 export class Dot {
     mixin IDot;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -11073,27 +10402,22 @@ export class Dot {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -11108,7 +10432,6 @@ export class Dot {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -11121,29 +10444,11 @@ export class Dot {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -11354,14 +10659,8 @@ export class Accidental {
         bool foundBracket = false;
         bool foundSize = false;
         bool foundParentheses = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundEditorial = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -11390,27 +10689,22 @@ export class Accidental {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -11425,7 +10719,6 @@ export class Accidental {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -11453,29 +10746,11 @@ export class Accidental {
         if (!foundParentheses) {
             parentheses = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -11612,10 +10887,6 @@ StemType getStemType(T)(T p) {
 export class Stem {
     mixin IStem;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -11623,22 +10894,18 @@ export class Stem {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -11649,18 +10916,6 @@ export class Stem {
         auto ch = node;
         auto data = getStemType(ch);
         this.type = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
         if (!foundColor) {
             color = "#000000";
         }
@@ -11832,10 +11087,8 @@ NoteheadType getNoteheadType(T)(T p) {
 export class Notehead {
     mixin INotehead;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -11843,7 +11096,6 @@ export class Notehead {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -11858,7 +11110,6 @@ export class Notehead {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -11877,17 +11128,11 @@ export class Notehead {
         auto ch = node;
         auto data = getNoteheadType(ch);
         this.type = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -12249,18 +11494,8 @@ export class Tied {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundPlacement = false;
         bool foundOrientation = false;
-        bool foundBezierX2 = false;
-        bool foundBezierOffset = false;
-        bool foundBezierOffset2 = false;
-        bool foundBezierX = false;
-        bool foundBezierY = false;
-        bool foundBezierY2 = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -12288,22 +11523,18 @@ export class Tied {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "placement") {
                 auto data = getAboveBelow(ch);
@@ -12318,32 +11549,26 @@ export class Tied {
             if (ch.name.toString == "bezier-x2") {
                 auto data = getNumber(ch, true);
                 this.bezierX2 = data;
-                foundBezierX2 = true;
             }
             if (ch.name.toString == "bezier-offset") {
                 auto data = getNumber(ch, true);
                 this.bezierOffset = data;
-                foundBezierOffset = true;
             }
             if (ch.name.toString == "bezier-offset2") {
                 auto data = getNumber(ch, true);
                 this.bezierOffset2 = data;
-                foundBezierOffset2 = true;
             }
             if (ch.name.toString == "bezier-x") {
                 auto data = getNumber(ch, true);
                 this.bezierX = data;
-                foundBezierX = true;
             }
             if (ch.name.toString == "bezier-y") {
                 auto data = getNumber(ch, true);
                 this.bezierY = data;
-                foundBezierY = true;
             }
             if (ch.name.toString == "bezier-y2") {
                 auto data = getNumber(ch, true);
                 this.bezierY2 = data;
-                foundBezierY2 = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -12367,41 +11592,11 @@ export class Tied {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
         }
         if (!foundOrientation) {
             orientation = OverUnder.Unspecified;
-        }
-        if (!foundBezierX2) {
-            bezierX2 = float.nan;
-        }
-        if (!foundBezierOffset) {
-            bezierOffset = float.nan;
-        }
-        if (!foundBezierOffset2) {
-            bezierOffset2 = float.nan;
-        }
-        if (!foundBezierX) {
-            bezierX = float.nan;
-        }
-        if (!foundBezierY) {
-            bezierY = float.nan;
-        }
-        if (!foundBezierY2) {
-            bezierY2 = float.nan;
         }
         if (!foundColor) {
             color = "#000000";
@@ -12445,18 +11640,8 @@ export class Slur {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundPlacement = false;
         bool foundOrientation = false;
-        bool foundBezierX2 = false;
-        bool foundBezierOffset = false;
-        bool foundBezierOffset2 = false;
-        bool foundBezierX = false;
-        bool foundBezierY = false;
-        bool foundBezierY2 = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -12484,22 +11669,18 @@ export class Slur {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "placement") {
                 auto data = getAboveBelow(ch);
@@ -12514,32 +11695,26 @@ export class Slur {
             if (ch.name.toString == "bezier-x2") {
                 auto data = getNumber(ch, true);
                 this.bezierX2 = data;
-                foundBezierX2 = true;
             }
             if (ch.name.toString == "bezier-offset") {
                 auto data = getNumber(ch, true);
                 this.bezierOffset = data;
-                foundBezierOffset = true;
             }
             if (ch.name.toString == "bezier-offset2") {
                 auto data = getNumber(ch, true);
                 this.bezierOffset2 = data;
-                foundBezierOffset2 = true;
             }
             if (ch.name.toString == "bezier-x") {
                 auto data = getNumber(ch, true);
                 this.bezierX = data;
-                foundBezierX = true;
             }
             if (ch.name.toString == "bezier-y") {
                 auto data = getNumber(ch, true);
                 this.bezierY = data;
-                foundBezierY = true;
             }
             if (ch.name.toString == "bezier-y2") {
                 auto data = getNumber(ch, true);
                 this.bezierY2 = data;
-                foundBezierY2 = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -12563,41 +11738,11 @@ export class Slur {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
         }
         if (!foundOrientation) {
             orientation = OverUnder.Unspecified;
-        }
-        if (!foundBezierX2) {
-            bezierX2 = float.nan;
-        }
-        if (!foundBezierOffset) {
-            bezierOffset = float.nan;
-        }
-        if (!foundBezierOffset2) {
-            bezierOffset2 = float.nan;
-        }
-        if (!foundBezierX) {
-            bezierX = float.nan;
-        }
-        if (!foundBezierY) {
-            bezierY = float.nan;
-        }
-        if (!foundBezierY2) {
-            bezierY2 = float.nan;
         }
         if (!foundColor) {
             color = "#000000";
@@ -12680,10 +11825,6 @@ export class Tuplet {
         bool foundBracket = false;
         bool foundShowNumber = false;
         bool foundLineShape = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundPlacement = false;
         bool foundShowType = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -12719,22 +11860,18 @@ export class Tuplet {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "placement") {
                 auto data = getAboveBelow(ch);
@@ -12759,18 +11896,6 @@ export class Tuplet {
         }
         if (!foundLineShape) {
             lineShape = StraightCurved.Straight;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
@@ -13039,10 +12164,8 @@ mixin template ITupletNormal() {
 export class TupletNumber {
     mixin ITupletNumber;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -13050,7 +12173,6 @@ export class TupletNumber {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -13065,7 +12187,6 @@ export class TupletNumber {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -13076,17 +12197,11 @@ export class TupletNumber {
         auto ch = node;
         auto data = getString(ch, true);
         this.text = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -13165,10 +12280,8 @@ mixin template ITupletNumber() {
 export class TupletType {
     mixin ITupletType;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -13176,7 +12289,6 @@ export class TupletType {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -13191,7 +12303,6 @@ export class TupletType {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -13202,17 +12313,11 @@ export class TupletType {
         auto ch = node;
         auto data = getString(ch, true);
         this.text = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -13291,10 +12396,8 @@ mixin template ITupletType() {
 export class TupletDot {
     mixin ITupletDot;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -13302,7 +12405,6 @@ export class TupletDot {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -13317,7 +12419,6 @@ export class TupletDot {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -13325,17 +12426,11 @@ export class TupletDot {
                 foundColor = true;
             }
         }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -13395,14 +12490,8 @@ export class Glissando {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundNormal = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -13426,27 +12515,22 @@ export class Glissando {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -13461,7 +12545,6 @@ export class Glissando {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -13490,29 +12573,11 @@ export class Glissando {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -13558,14 +12623,8 @@ export class Slide {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundAccelerate = false;
         bool foundBeats = false;
@@ -13593,27 +12652,22 @@ export class Slide {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -13628,7 +12682,6 @@ export class Slide {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -13677,29 +12730,11 @@ export class Slide {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -13754,14 +12789,8 @@ export class OtherNotation {
     mixin IOtherNotation;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -13775,27 +12804,22 @@ export class OtherNotation {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -13810,7 +12834,6 @@ export class OtherNotation {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -13833,29 +12856,11 @@ export class OtherNotation {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -13892,14 +12897,8 @@ export class OtherDirection {
     mixin IOtherDirection;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -13914,27 +12913,22 @@ export class OtherDirection {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -13949,7 +12943,6 @@ export class OtherDirection {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -13973,29 +12966,11 @@ export class OtherDirection {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -14030,14 +13005,8 @@ mixin template IOtherDirection() {
 export class Ornaments {
     mixin IOrnaments;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -14109,27 +13078,22 @@ export class Ornaments {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -14144,7 +13108,6 @@ export class Ornaments {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -14192,29 +13155,11 @@ export class Ornaments {
                 foundSecondBeat = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -14275,14 +13220,8 @@ mixin template IOrnaments() {
 export class TrillMark {
     mixin ITrillMark;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -14298,27 +13237,22 @@ export class TrillMark {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -14333,7 +13267,6 @@ export class TrillMark {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -14381,29 +13314,11 @@ export class TrillMark {
                 foundSecondBeat = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -14456,14 +13371,8 @@ export class Turn {
     mixin ITurn;
     this(xmlNodePtr node) {
         bool foundSlash = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -14484,27 +13393,22 @@ export class Turn {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -14519,7 +13423,6 @@ export class Turn {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -14570,29 +13473,11 @@ export class Turn {
         if (!foundSlash) {
             slash = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -14657,14 +13542,8 @@ export class DelayedTurn {
     mixin IDelayedTurn;
     this(xmlNodePtr node) {
         bool foundSlash = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -14685,27 +13564,22 @@ export class DelayedTurn {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -14720,7 +13594,6 @@ export class DelayedTurn {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -14771,29 +13644,11 @@ export class DelayedTurn {
         if (!foundSlash) {
             slash = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -14858,14 +13713,8 @@ export class InvertedTurn {
     mixin IInvertedTurn;
     this(xmlNodePtr node) {
         bool foundSlash = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -14886,27 +13735,22 @@ export class InvertedTurn {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -14921,7 +13765,6 @@ export class InvertedTurn {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -14972,29 +13815,11 @@ export class InvertedTurn {
         if (!foundSlash) {
             slash = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -15059,14 +13884,8 @@ export class DelayedInvertedTurn {
     mixin IDelayedInvertedTurn;
     this(xmlNodePtr node) {
         bool foundSlash = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -15087,27 +13906,22 @@ export class DelayedInvertedTurn {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -15122,7 +13936,6 @@ export class DelayedInvertedTurn {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -15173,29 +13986,11 @@ export class DelayedInvertedTurn {
         if (!foundSlash) {
             slash = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -15259,14 +14054,8 @@ mixin template IDelayedInvertedTurn() {
 export class VerticalTurn {
     mixin IVerticalTurn;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -15282,27 +14071,22 @@ export class VerticalTurn {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -15317,7 +14101,6 @@ export class VerticalTurn {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -15365,29 +14148,11 @@ export class VerticalTurn {
                 foundSecondBeat = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -15450,14 +14215,8 @@ mixin template IVerticalTurn() {
 export class Shake {
     mixin IShake;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -15473,27 +14232,22 @@ export class Shake {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -15508,7 +14262,6 @@ export class Shake {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -15556,29 +14309,11 @@ export class Shake {
                 foundSecondBeat = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -15639,14 +14374,8 @@ mixin template IShake() {
 export class Mordent {
     mixin IMordent;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -15674,27 +14403,22 @@ export class Mordent {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -15709,7 +14433,6 @@ export class Mordent {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -15757,29 +14480,11 @@ export class Mordent {
                 foundSecondBeat = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -15841,14 +14546,8 @@ mixin template IMordent() {
 export class InvertedMordent {
     mixin IInvertedMordent;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundStartNote = false;
@@ -15876,27 +14575,22 @@ export class InvertedMordent {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -15911,7 +14605,6 @@ export class InvertedMordent {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -15959,29 +14652,11 @@ export class InvertedMordent {
                 foundSecondBeat = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -16039,14 +14714,8 @@ mixin template IInvertedMordent() {
 export class Schleifer {
     mixin ISchleifer;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -16055,27 +14724,22 @@ export class Schleifer {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -16090,7 +14754,6 @@ export class Schleifer {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -16103,29 +14766,11 @@ export class Schleifer {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -16170,14 +14815,8 @@ mixin template ISchleifer() {
 export class Tremolo {
     mixin ITremolo;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundType = false;
@@ -16187,27 +14826,22 @@ export class Tremolo {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -16222,7 +14856,6 @@ export class Tremolo {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -16243,29 +14876,11 @@ export class Tremolo {
         auto ch = node;
         auto data = getString(ch, false);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -16315,14 +14930,8 @@ mixin template ITremolo() {
 export class OtherOrnament {
     mixin IOtherOrnament;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -16331,27 +14940,22 @@ export class OtherOrnament {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -16366,7 +14970,6 @@ export class OtherOrnament {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -16386,29 +14989,11 @@ export class OtherOrnament {
         auto ch = node;
         auto data = getString(ch, false);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -16440,14 +15025,8 @@ mixin template IOtherOrnament() {
 export class AccidentalMark {
     mixin IAccidentalMark;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -16456,27 +15035,22 @@ export class AccidentalMark {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -16491,7 +15065,6 @@ export class AccidentalMark {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -16507,29 +15080,11 @@ export class AccidentalMark {
         auto ch = node;
         auto data = getString(ch, true);
         this.mark = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -16701,14 +15256,8 @@ mixin template ITechnical() {
 export class UpBow {
     mixin IUpBow;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -16717,27 +15266,22 @@ export class UpBow {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -16752,7 +15296,6 @@ export class UpBow {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -16765,29 +15308,11 @@ export class UpBow {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -16816,14 +15341,8 @@ mixin template IUpBow() {
 export class DownBow {
     mixin IDownBow;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -16832,27 +15351,22 @@ export class DownBow {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -16867,7 +15381,6 @@ export class DownBow {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -16880,29 +15393,11 @@ export class DownBow {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -16941,14 +15436,8 @@ export class Harmonic {
     mixin IHarmonic;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -16982,27 +15471,22 @@ export class Harmonic {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17017,7 +15501,6 @@ export class Harmonic {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17033,29 +15516,11 @@ export class Harmonic {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17098,14 +15563,8 @@ mixin template IHarmonic() {
 export class OpenString {
     mixin IOpenString;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17114,27 +15573,22 @@ export class OpenString {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17149,7 +15603,6 @@ export class OpenString {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17162,29 +15615,11 @@ export class OpenString {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17213,14 +15648,8 @@ mixin template IOpenString() {
 export class ThumbPosition {
     mixin IThumbPosition;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17229,27 +15658,22 @@ export class ThumbPosition {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17264,7 +15688,6 @@ export class ThumbPosition {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17277,29 +15700,11 @@ export class ThumbPosition {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17331,14 +15736,8 @@ mixin template IThumbPosition() {
 export class Pluck {
     mixin IPluck;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17347,27 +15746,22 @@ export class Pluck {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17382,7 +15776,6 @@ export class Pluck {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17398,29 +15791,11 @@ export class Pluck {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17451,14 +15826,8 @@ mixin template IPluck() {
 export class DoubleTongue {
     mixin IDoubleTongue;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17467,27 +15836,22 @@ export class DoubleTongue {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17502,7 +15866,6 @@ export class DoubleTongue {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17515,29 +15878,11 @@ export class DoubleTongue {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17564,14 +15909,8 @@ mixin template IDoubleTongue() {
 export class TripleTongue {
     mixin ITripleTongue;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17580,27 +15919,22 @@ export class TripleTongue {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17615,7 +15949,6 @@ export class TripleTongue {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17628,29 +15961,11 @@ export class TripleTongue {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17677,14 +15992,8 @@ mixin template ITripleTongue() {
 export class Stopped {
     mixin IStopped;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17693,27 +16002,22 @@ export class Stopped {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17728,7 +16032,6 @@ export class Stopped {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17741,29 +16044,11 @@ export class Stopped {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17792,14 +16077,8 @@ mixin template IStopped() {
 export class SnapPizzicato {
     mixin ISnapPizzicato;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17808,27 +16087,22 @@ export class SnapPizzicato {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17843,7 +16117,6 @@ export class SnapPizzicato {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17856,29 +16129,11 @@ export class SnapPizzicato {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -17913,14 +16168,8 @@ export class HammerOn {
     mixin IHammerOn;
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -17934,27 +16183,22 @@ export class HammerOn {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -17969,7 +16213,6 @@ export class HammerOn {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -17992,29 +16235,11 @@ export class HammerOn {
         if (!foundNumber_) {
             number_ = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18055,14 +16280,8 @@ export class PullOff {
     mixin IPullOff;
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -18076,27 +16295,22 @@ export class PullOff {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -18111,7 +16325,6 @@ export class PullOff {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -18134,29 +16347,11 @@ export class PullOff {
         if (!foundNumber_) {
             number_ = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18199,14 +16394,8 @@ mixin template IPullOff() {
 export class Bend {
     mixin IBend;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundAccelerate = false;
         bool foundBeats = false;
@@ -18234,27 +16423,22 @@ export class Bend {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -18269,7 +16453,6 @@ export class Bend {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -18297,29 +16480,11 @@ export class Bend {
                 foundSecondBeat = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18375,14 +16540,8 @@ mixin template IBend() {
 export class WithBar {
     mixin IWithBar;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -18391,27 +16550,22 @@ export class WithBar {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -18426,7 +16580,6 @@ export class WithBar {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -18442,29 +16595,11 @@ export class WithBar {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18502,14 +16637,8 @@ mixin template IWithBar() {
 export class Tap {
     mixin ITap;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -18518,27 +16647,22 @@ export class Tap {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -18553,7 +16677,6 @@ export class Tap {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -18569,29 +16692,11 @@ export class Tap {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18622,14 +16727,8 @@ export class Heel {
     mixin IHeel;
     this(xmlNodePtr node) {
         bool foundSubstitution = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -18643,27 +16742,22 @@ export class Heel {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -18678,7 +16772,6 @@ export class Heel {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -18694,29 +16787,11 @@ export class Heel {
         if (!foundSubstitution) {
             substitution = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18745,14 +16820,8 @@ export class Toe {
     mixin IToe;
     this(xmlNodePtr node) {
         bool foundSubstitution = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -18766,27 +16835,22 @@ export class Toe {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -18801,7 +16865,6 @@ export class Toe {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -18817,29 +16880,11 @@ export class Toe {
         if (!foundSubstitution) {
             substitution = false;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18867,14 +16912,8 @@ mixin template IToe() {
 export class Fingernails {
     mixin IFingernails;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -18883,27 +16922,22 @@ export class Fingernails {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -18918,7 +16952,6 @@ export class Fingernails {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -18931,29 +16964,11 @@ export class Fingernails {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -18988,14 +17003,8 @@ mixin template IFingernails() {
 export class Hole {
     mixin IHole;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -19016,27 +17025,22 @@ export class Hole {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -19051,7 +17055,6 @@ export class Hole {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -19064,29 +17067,11 @@ export class Hole {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -19231,14 +17216,8 @@ mixin template IHoleClosed() {
 export class Arrow {
     mixin IArrow;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -19259,27 +17238,22 @@ export class Arrow {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -19294,7 +17268,6 @@ export class Arrow {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -19307,29 +17280,11 @@ export class Arrow {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -19381,14 +17336,8 @@ mixin template IArrow() {
 export class Handbell {
     mixin IHandbell;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -19397,27 +17346,22 @@ export class Handbell {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -19432,7 +17376,6 @@ export class Handbell {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -19448,29 +17391,11 @@ export class Handbell {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -19503,14 +17428,8 @@ mixin template IHandbell() {
 export class OtherTechnical {
     mixin IOtherTechnical;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -19519,27 +17438,22 @@ export class OtherTechnical {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -19554,7 +17468,6 @@ export class OtherTechnical {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -19570,29 +17483,11 @@ export class OtherTechnical {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -19717,14 +17612,8 @@ mixin template IArticulations() {
 export class Accent {
     mixin IAccent;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -19733,27 +17622,22 @@ export class Accent {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -19768,7 +17652,6 @@ export class Accent {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -19781,29 +17664,11 @@ export class Accent {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -19822,14 +17687,8 @@ mixin template IAccent() {
 export class StrongAccent {
     mixin IStrongAccent;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         bool foundType = false;
@@ -19839,27 +17698,22 @@ export class StrongAccent {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -19874,7 +17728,6 @@ export class StrongAccent {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -19892,29 +17745,11 @@ export class StrongAccent {
                 foundType = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -19941,14 +17776,8 @@ mixin template IStrongAccent() {
 export class Staccato {
     mixin IStaccato;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -19957,27 +17786,22 @@ export class Staccato {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -19992,7 +17816,6 @@ export class Staccato {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20005,29 +17828,11 @@ export class Staccato {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20050,14 +17855,8 @@ mixin template IStaccato() {
 export class Tenuto {
     mixin ITenuto;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -20066,27 +17865,22 @@ export class Tenuto {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -20101,7 +17895,6 @@ export class Tenuto {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20114,29 +17907,11 @@ export class Tenuto {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20155,14 +17930,8 @@ mixin template ITenuto() {
 export class DetachedLegato {
     mixin IDetachedLegato;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -20171,27 +17940,22 @@ export class DetachedLegato {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -20206,7 +17970,6 @@ export class DetachedLegato {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20219,29 +17982,11 @@ export class DetachedLegato {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20264,14 +18009,8 @@ mixin template IDetachedLegato() {
 export class Staccatissimo {
     mixin IStaccatissimo;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -20280,27 +18019,22 @@ export class Staccatissimo {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -20315,7 +18049,6 @@ export class Staccatissimo {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20328,29 +18061,11 @@ export class Staccatissimo {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20377,14 +18092,8 @@ mixin template IStaccatissimo() {
 export class Spiccato {
     mixin ISpiccato;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -20393,27 +18102,22 @@ export class Spiccato {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -20428,7 +18132,6 @@ export class Spiccato {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20441,29 +18144,11 @@ export class Spiccato {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20498,14 +18183,8 @@ export class Scoop {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -20534,27 +18213,22 @@ export class Scoop {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -20569,7 +18243,6 @@ export class Scoop {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20594,29 +18267,11 @@ export class Scoop {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20658,14 +18313,8 @@ export class Plop {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -20694,27 +18343,22 @@ export class Plop {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -20729,7 +18373,6 @@ export class Plop {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20754,29 +18397,11 @@ export class Plop {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20818,14 +18443,8 @@ export class Doit {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -20854,27 +18473,22 @@ export class Doit {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -20889,7 +18503,6 @@ export class Doit {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -20914,29 +18527,11 @@ export class Doit {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -20978,14 +18573,8 @@ export class Falloff {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -21014,27 +18603,22 @@ export class Falloff {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -21049,7 +18633,6 @@ export class Falloff {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -21074,29 +18657,11 @@ export class Falloff {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -21154,14 +18719,8 @@ export class BreathMark {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -21190,27 +18749,22 @@ export class BreathMark {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -21225,7 +18779,6 @@ export class BreathMark {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -21253,29 +18806,11 @@ export class BreathMark {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -21303,14 +18838,8 @@ mixin template IBreathMark() {
 export class Caesura {
     mixin ICaesura;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -21319,27 +18848,22 @@ export class Caesura {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -21354,7 +18878,6 @@ export class Caesura {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -21367,29 +18890,11 @@ export class Caesura {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -21408,14 +18913,8 @@ mixin template ICaesura() {
 export class Stress {
     mixin IStress;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -21424,27 +18923,22 @@ export class Stress {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -21459,7 +18953,6 @@ export class Stress {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -21472,29 +18965,11 @@ export class Stress {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -21513,14 +18988,8 @@ mixin template IStress() {
 export class Unstress {
     mixin IUnstress;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -21529,27 +18998,22 @@ export class Unstress {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -21564,7 +19028,6 @@ export class Unstress {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -21577,29 +19040,11 @@ export class Unstress {
                 foundPlacement = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -21624,14 +19069,8 @@ mixin template IUnstress() {
 export class OtherArticulation {
     mixin IOtherArticulation;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -21640,27 +19079,22 @@ export class OtherArticulation {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -21675,7 +19109,6 @@ export class OtherArticulation {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -21691,29 +19124,11 @@ export class OtherArticulation {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -21749,10 +19164,6 @@ export class Arpeggiate {
     mixin IArpeggiate;
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundPlacement = false;
         bool foundColor = false;
         bool foundDirection = false;
@@ -21767,22 +19178,18 @@ export class Arpeggiate {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "placement") {
                 auto data = getAboveBelow(ch);
@@ -21802,18 +19209,6 @@ export class Arpeggiate {
         }
         if (!foundNumber_) {
             number_ = 1;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
@@ -21855,10 +19250,6 @@ export class NonArpeggiate {
     mixin INonArpeggiate;
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundPlacement = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -21872,22 +19263,18 @@ export class NonArpeggiate {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "placement") {
                 auto data = getAboveBelow(ch);
@@ -21906,18 +19293,6 @@ export class NonArpeggiate {
         }
         if (!foundNumber_) {
             number_ = 1;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
@@ -21943,6 +19318,10 @@ mixin template INonArpeggiate() {
     TopBottom type;
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export class Laughing {
     mixin ILaughing;
     this(xmlNodePtr node) {
@@ -21953,9 +19332,17 @@ export class Laughing {
     }
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 mixin template ILaughing() {
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export class Humming {
     mixin IHumming;
     this(xmlNodePtr node) {
@@ -21966,9 +19353,19 @@ export class Humming {
     }
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 mixin template IHumming() {
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export class EndLine {
     mixin IEndLine;
     this(xmlNodePtr node) {
@@ -21979,9 +19376,21 @@ export class EndLine {
     }
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 mixin template IEndLine() {
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export class EndParagraph {
     mixin IEndParagraph;
     this(xmlNodePtr node) {
@@ -21992,9 +19401,18 @@ export class EndParagraph {
     }
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 mixin template IEndParagraph() {
 }
 
+/**
+ * Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.
+ */
 Variant[] LyricParts(xmlNodePtr node) {
     Variant[] rarr = [];
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -22039,31 +19457,23 @@ Variant[] LyricParts(xmlNodePtr node) {
 
 /**
  * Text underlays for lyrics, based on Humdrum with support
- * for other formats. The lyric number indicates multiple
- * lines, though a name can be used as well (as in Finale's
- * verse/chorus/section specification). Word extensions are
- * represented using the extend element. Hyphenation is
- * indicated by the syllabic element, which can be single,
- * begin, end, or middle. These represent single-syllable
- * words, word-beginning syllables, word-ending syllables,
- * and mid-word syllables. Multiple syllables on a single
- * note are separated by elision elements. A hyphen in the
- * text element should only be used for an actual hyphenated
- * word. Two text elements that are not separated by an
- * elision element are part of the same syllable, but may have
- * different text formatting.
+ * for other formats.
  * 
- * Humming and laughing representations are taken from
- * Humdrum. The end-line and end-paragraph elements come
- * from RP-017 for Standard MIDI File Lyric meta-events;
- * they help facilitate lyric display for Karaoke and
- * similar applications. Language names for text elements
- * come from ISO 639, with optional country subcodes from
- * ISO 3166. Justification is center by default; placement is
+ * IMPORTANT: <lyric-parts> is fake. All children of lyric-parts
+ * are actually children of lyric. This is a construct invented by
+ * musicxml-interfaces for separating ordered and unordered
+ * content.
+ * 
+ * Language names for text elements come from ISO 639,
+ * with optional country subcodes from ISO 3166. muiscxml-interfaces
+ * currently ignores this field. 
+ * 
+ * Justification is center by default; placement is
  * below by default. The print-object attribute can override
  * a note's print-lyric attribute in cases where only some
  * lyrics on a note are printed, as when lyrics for later verses
  * are printed in a block of text rather than with each note.
+ * 
  */
 mixin template ILyric() {
     mixin IJustify;
@@ -22080,10 +19490,8 @@ mixin template ILyric() {
 export class Text {
     mixin IText;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundUnderline = false;
         bool foundOverline = false;
@@ -22097,7 +19505,6 @@ export class Text {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22112,7 +19519,6 @@ export class Text {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22153,17 +19559,11 @@ export class Text {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22222,13 +19622,17 @@ SyllabicType getSyllabicType(T)(T p) {
     }
     assert(false, "Not reached");
 }
+/**
+ * Hyphenation is indicated by the syllabic element, which can be single,
+ * begin, end, or middle. These represent single-syllable
+ * words, word-beginning syllables, word-ending syllables,
+ * and mid-word syllables.
+ */
 export class Syllabic {
     mixin ISyllabic;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -22236,7 +19640,6 @@ export class Syllabic {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22251,7 +19654,6 @@ export class Syllabic {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22262,17 +19664,11 @@ export class Syllabic {
         auto ch = node;
         auto data = getSyllabicType(ch);
         this.data = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22280,6 +19676,12 @@ export class Syllabic {
     }
 }
 
+/**
+ * Hyphenation is indicated by the syllabic element, which can be single,
+ * begin, end, or middle. These represent single-syllable
+ * words, word-beginning syllables, word-ending syllables,
+ * and mid-word syllables.
+ */
 mixin template ISyllabic() {
     mixin IFont;
     mixin IColor;
@@ -22287,6 +19689,12 @@ mixin template ISyllabic() {
 }
 
 /**
+ * Multiple syllables on a single note are separated by elision
+ * elements. A hyphen in the text element should only be used
+ * for an actual hyphenated word. Two text elements that are
+ * not separated by an elision element are part of the same
+ * syllable, but may have different text formatting.
+ * 
  * The elision element text specifies the symbol used to
  * display the elision. Common values are a no-break space
  * (Unicode 00A0), an underscore (Unicode 005F), or an undertie
@@ -22295,10 +19703,8 @@ mixin template ISyllabic() {
 export class Elision {
     mixin IElision;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -22306,7 +19712,6 @@ export class Elision {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22321,7 +19726,6 @@ export class Elision {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22332,17 +19736,11 @@ export class Elision {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22351,6 +19749,12 @@ export class Elision {
 }
 
 /**
+ * Multiple syllables on a single note are separated by elision
+ * elements. A hyphen in the text element should only be used
+ * for an actual hyphenated word. Two text elements that are
+ * not separated by an elision element are part of the same
+ * syllable, but may have different text formatting.
+ * 
  * The elision element text specifies the symbol used to
  * display the elision. Common values are a no-break space
  * (Unicode 00A0), an underscore (Unicode 005F), or an undertie
@@ -22363,6 +19767,8 @@ mixin template IElision() {
 }
 
 /**
+ * Word extensions are represented using the extend element. 
+ * 
  * The extend element represents lyric word extension /
  * melisma lines as well as figured bass extensions. The
  * optional type and position attributes are added in
@@ -22371,14 +19777,8 @@ mixin template IElision() {
 export class Extend {
     mixin IExtend;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundType = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -22387,27 +19787,22 @@ export class Extend {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22422,7 +19817,6 @@ export class Extend {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22435,29 +19829,11 @@ export class Extend {
                 foundType = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22469,6 +19845,8 @@ export class Extend {
 }
 
 /**
+ * Word extensions are represented using the extend element. 
+ * 
  * The extend element represents lyric word extension /
  * melisma lines as well as figured bass extensions. The
  * optional type and position attributes are added in
@@ -22500,14 +19878,8 @@ mixin template IExtend() {
 export class FiguredBass {
     mixin IFiguredBass;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPrintObject = false;
         bool foundPrintSpacing = false;
@@ -22534,27 +19906,22 @@ export class FiguredBass {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22569,7 +19936,6 @@ export class FiguredBass {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22600,29 +19966,11 @@ export class FiguredBass {
                 foundParentheses = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22669,14 +20017,8 @@ mixin template IFiguredBass() {
 export class Figure {
     mixin IFigure;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "prefix") {
@@ -22700,27 +20042,22 @@ export class Figure {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22735,7 +20072,6 @@ export class Figure {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22743,29 +20079,11 @@ export class Figure {
                 foundColor = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22784,14 +20102,8 @@ mixin template IFigure() {
 export class Prefix {
     mixin IPrefix;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -22799,27 +20111,22 @@ export class Prefix {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22834,7 +20141,6 @@ export class Prefix {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22845,29 +20151,11 @@ export class Prefix {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22883,14 +20171,8 @@ mixin template IPrefix() {
 export class FigureNumber {
     mixin IFigureNumber;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -22898,27 +20180,22 @@ export class FigureNumber {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -22933,7 +20210,6 @@ export class FigureNumber {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -22944,29 +20220,11 @@ export class FigureNumber {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -22982,14 +20240,8 @@ mixin template IFigureNumber() {
 export class Suffix {
     mixin ISuffix;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -22997,27 +20249,22 @@ export class Suffix {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -23032,7 +20279,6 @@ export class Suffix {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -23043,29 +20289,11 @@ export class Suffix {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -23481,14 +20709,8 @@ export class Ending {
     mixin IEnding;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -23517,27 +20739,22 @@ export class Ending {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -23552,7 +20769,6 @@ export class Ending {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -23570,29 +20786,11 @@ export class Ending {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -23792,14 +20990,8 @@ export class Direction {
     mixin IDirection;
     this(xmlNodePtr node) {
         bool foundPlacement = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "voice") {
@@ -23840,27 +21032,22 @@ export class Direction {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -23875,7 +21062,6 @@ export class Direction {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -23889,29 +21075,11 @@ export class Direction {
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -24085,14 +21253,8 @@ export class Rehearsal {
     mixin IRehearsal;
     this(xmlNodePtr node) {
         bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -24115,27 +21277,22 @@ export class Rehearsal {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -24150,7 +21307,6 @@ export class Rehearsal {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -24214,29 +21370,11 @@ export class Rehearsal {
         if (!foundJustify) {
             justify = LeftCenterRight.Left;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -24293,14 +21431,8 @@ export class Words {
     mixin IWords;
     this(xmlNodePtr node) {
         bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -24323,27 +21455,22 @@ export class Words {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -24358,7 +21485,6 @@ export class Words {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -24422,29 +21548,11 @@ export class Words {
         if (!foundJustify) {
             justify = LeftCenterRight.Left;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -24539,10 +21647,6 @@ export class Wedge {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -24575,22 +21679,18 @@ export class Wedge {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -24620,18 +21720,6 @@ export class Wedge {
         }
         if (!foundSpaceLength) {
             spaceLength = 1;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundColor) {
             color = "#000000";
@@ -24676,10 +21764,6 @@ export class Dashes {
         bool foundNumber_ = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -24702,22 +21786,18 @@ export class Dashes {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -24737,18 +21817,6 @@ export class Dashes {
         }
         if (!foundSpaceLength) {
             spaceLength = 1;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundColor) {
             color = "#000000";
@@ -24811,10 +21879,6 @@ export class Bracket {
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -24846,22 +21910,18 @@ export class Bracket {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -24888,18 +21948,6 @@ export class Bracket {
         }
         if (!foundSpaceLength) {
             spaceLength = 1;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundColor) {
             color = "#000000";
@@ -24966,14 +22014,8 @@ PedalType getPedalType(T)(T p) {
 export class Pedal {
     mixin IPedal;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -24991,27 +22033,22 @@ export class Pedal {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -25026,7 +22063,6 @@ export class Pedal {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -25048,29 +22084,11 @@ export class Pedal {
                 this.type = data;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -25139,14 +22157,8 @@ mixin template IPedal() {
 export class Metronome {
     mixin IMetronome;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -25177,27 +22189,22 @@ export class Metronome {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -25212,7 +22219,6 @@ export class Metronome {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -25239,29 +22245,11 @@ export class Metronome {
                 this.parentheses = data;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -25337,17 +22325,14 @@ mixin template IBeatUnitDot() {
 export class PerMinute {
     mixin IPerMinute;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -25362,23 +22347,16 @@ export class PerMinute {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
         }
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
     }
 }
@@ -25556,14 +22534,8 @@ export class OctaveShift {
         bool foundSize = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -25590,27 +22562,22 @@ export class OctaveShift {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -25625,7 +22592,6 @@ export class OctaveShift {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -25646,29 +22612,11 @@ export class OctaveShift {
         if (!foundSpaceLength) {
             spaceLength = 1;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -25703,14 +22651,8 @@ mixin template IOctaveShift() {
 export class HarpPedals {
     mixin IHarpPedals;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -25724,27 +22666,22 @@ export class HarpPedals {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -25759,7 +22696,6 @@ export class HarpPedals {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -25777,29 +22713,11 @@ export class HarpPedals {
                 foundValign = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -25855,14 +22773,8 @@ mixin template IPedalTuning() {
 export class Damp {
     mixin IDamp;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -25872,27 +22784,22 @@ export class Damp {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -25907,7 +22814,6 @@ export class Damp {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -25925,29 +22831,11 @@ export class Damp {
                 foundValign = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -25971,14 +22859,8 @@ mixin template IDamp() {
 export class DampAll {
     mixin IDampAll;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -25988,27 +22870,22 @@ export class DampAll {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -26023,7 +22900,6 @@ export class DampAll {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -26041,29 +22917,11 @@ export class DampAll {
                 foundValign = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -26084,14 +22942,8 @@ mixin template IDampAll() {
 export class Eyeglasses {
     mixin IEyeglasses;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -26101,27 +22953,22 @@ export class Eyeglasses {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -26136,7 +22983,6 @@ export class Eyeglasses {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -26154,29 +23000,11 @@ export class Eyeglasses {
                 foundValign = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -26197,14 +23025,8 @@ mixin template IEyeglasses() {
 export class StringMute {
     mixin IStringMute;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -26214,27 +23036,22 @@ export class StringMute {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -26249,7 +23066,6 @@ export class StringMute {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -26271,29 +23087,11 @@ export class StringMute {
                 this.type = data;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -26402,10 +23200,6 @@ mixin template IAccord() {
 export class Image {
     mixin IImage;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundHalign = false;
         bool foundValignImage = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -26414,22 +23208,18 @@ export class Image {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "halign") {
                 auto data = getLeftCenterRight(ch);
@@ -26449,18 +23239,6 @@ export class Image {
                 auto data = getString(ch, true);
                 this.source = data;
             }
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundHalign) {
             halign = delegate () { static if (__traits(compiles, justify)) return justify; else return LeftCenterRight.Left; }();
@@ -26525,14 +23303,8 @@ VoiceSymbol getVoiceSymbol(T)(T p) {
 export class PrincipalVoice {
     mixin IPrincipalVoice;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -26546,27 +23318,22 @@ export class PrincipalVoice {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -26581,7 +23348,6 @@ export class PrincipalVoice {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -26606,29 +23372,11 @@ export class PrincipalVoice {
         auto ch = node;
         auto data = getString(ch, false);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -26676,14 +23424,8 @@ mixin template IPrincipalVoice() {
 export class AccordionRegistration {
     mixin IAccordionRegistration;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -26705,27 +23447,22 @@ export class AccordionRegistration {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -26740,7 +23477,6 @@ export class AccordionRegistration {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -26758,29 +23494,11 @@ export class AccordionRegistration {
                 foundValign = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -26824,14 +23542,8 @@ mixin template IAccordionRegistration() {
 export class Percussion {
     mixin IPercussion;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -26886,27 +23598,22 @@ export class Percussion {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -26921,7 +23628,6 @@ export class Percussion {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -26944,29 +23650,11 @@ export class Percussion {
                 foundEnclosure = true;
             }
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -27299,14 +23987,8 @@ export class Harmony {
     mixin IHarmony;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPlacement = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -27368,27 +24050,22 @@ export class Harmony {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -27403,7 +24080,6 @@ export class Harmony {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -27423,29 +24099,11 @@ export class Harmony {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -27535,14 +24193,8 @@ mixin template IRoot() {
 export class RootStep {
     mixin IRootStep;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -27554,27 +24206,22 @@ export class RootStep {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -27589,7 +24236,6 @@ export class RootStep {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -27600,29 +24246,11 @@ export class RootStep {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -27640,14 +24268,8 @@ export class RootAlter {
     mixin IRootAlter;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -27664,27 +24286,22 @@ export class RootAlter {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -27699,7 +24316,6 @@ export class RootAlter {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -27713,29 +24329,11 @@ export class RootAlter {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -27753,14 +24351,8 @@ mixin template IRootAlter() {
 export class Function {
     mixin IFunction;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -27768,27 +24360,22 @@ export class Function {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -27803,7 +24390,6 @@ export class Function {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -27814,29 +24400,11 @@ export class Function {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -27938,14 +24506,8 @@ mixin template IFunction() {
 export class Kind {
     mixin IKind;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -27967,27 +24529,22 @@ export class Kind {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -28002,7 +24559,6 @@ export class Kind {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -28031,29 +24587,11 @@ export class Kind {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -28172,14 +24710,8 @@ mixin template IKind() {
 export class Inversion {
     mixin IInversion;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -28187,27 +24719,22 @@ export class Inversion {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -28222,7 +24749,6 @@ export class Inversion {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -28233,29 +24759,11 @@ export class Inversion {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -28325,14 +24833,8 @@ mixin template IBass() {
 export class BassStep {
     mixin IBassStep;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -28344,27 +24846,22 @@ export class BassStep {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -28379,7 +24876,6 @@ export class BassStep {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -28390,29 +24886,11 @@ export class BassStep {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -28439,14 +24917,8 @@ export class BassAlter {
     mixin IBassAlter;
     this(xmlNodePtr node) {
         bool foundPrintObject = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -28463,27 +24935,22 @@ export class BassAlter {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -28498,7 +24965,6 @@ export class BassAlter {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -28512,29 +24978,11 @@ export class BassAlter {
         if (!foundPrintObject) {
             printObject = true;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -28677,14 +25125,8 @@ ChordType getChordType(T)(T p) {
 export class DegreeValue {
     mixin IDegreeValue;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -28700,27 +25142,22 @@ export class DegreeValue {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -28735,7 +25172,6 @@ export class DegreeValue {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -28746,29 +25182,11 @@ export class DegreeValue {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -28786,14 +25204,8 @@ mixin template IDegreeValue() {
 export class DegreeAlter {
     mixin IDegreeAlter;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -28805,27 +25217,22 @@ export class DegreeAlter {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -28840,7 +25247,6 @@ export class DegreeAlter {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -28851,29 +25257,11 @@ export class DegreeAlter {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -28890,14 +25278,8 @@ mixin template IDegreeAlter() {
 export class DegreeType {
     mixin IDegreeType;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -28909,27 +25291,22 @@ export class DegreeType {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -28944,7 +25321,6 @@ export class DegreeType {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -28955,29 +25331,11 @@ export class DegreeType {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -29008,10 +25366,6 @@ mixin template IDegreeType() {
 export class Frame {
     mixin IFrame;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValignImage = false;
@@ -29041,22 +25395,18 @@ export class Frame {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -29081,18 +25431,6 @@ export class Frame {
                 auto data = getNumber(ch, true);
                 this.height = data;
             }
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundColor) {
             color = "#000000";
@@ -29510,14 +25848,8 @@ mixin template IPrint() {
 export class MeasureNumbering {
     mixin IMeasureNumbering;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -29527,27 +25859,22 @@ export class MeasureNumbering {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -29562,7 +25889,6 @@ export class MeasureNumbering {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -29583,29 +25909,11 @@ export class MeasureNumbering {
         auto ch = node;
         auto data = getString(ch, true);
         this.data = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -30058,17 +26366,14 @@ mixin template IDefaults() {
 export class MusicFont {
     mixin IMusicFont;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -30083,20 +26388,13 @@ export class MusicFont {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
         }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
     }
 }
@@ -30108,17 +26406,14 @@ mixin template IMusicFont() {
 export class WordFont {
     mixin IWordFont;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -30133,20 +26428,13 @@ export class WordFont {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
         }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
     }
 }
@@ -30158,10 +26446,8 @@ mixin template IWordFont() {
 export class LyricFont {
     mixin ILyricFont;
     this(xmlNodePtr node) {
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
@@ -30172,7 +26458,6 @@ export class LyricFont {
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -30187,24 +26472,17 @@ export class LyricFont {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "name") {
                 auto data = getString(ch, true);
                 this.name = data;
             }
         }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
     }
 }
@@ -30323,14 +26601,8 @@ export class CreditWords {
     mixin ICreditWords;
     this(xmlNodePtr node) {
         bool foundJustify = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundHalign = false;
         bool foundValign = false;
@@ -30353,27 +26625,22 @@ export class CreditWords {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -30388,7 +26655,6 @@ export class CreditWords {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -30452,29 +26718,11 @@ export class CreditWords {
         if (!foundJustify) {
             justify = LeftCenterRight.Left;
         }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -30520,10 +26768,6 @@ mixin template ICreditWords() {
 export class CreditImage {
     mixin ICreditImage;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundHalign = false;
         bool foundValignImage = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -30532,22 +26776,18 @@ export class CreditImage {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "halign") {
                 auto data = getLeftCenterRight(ch);
@@ -30567,18 +26807,6 @@ export class CreditImage {
                 auto data = getString(ch, true);
                 this.source = data;
             }
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundHalign) {
             halign = delegate () { static if (__traits(compiles, justify)) return justify; else return LeftCenterRight.Left; }();
@@ -30739,14 +26967,8 @@ mixin template IScorePart() {
 export class PartName {
     mixin IPartName;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPrintObject = false;
         bool foundJustify = false;
@@ -30756,27 +26978,22 @@ export class PartName {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -30791,7 +27008,6 @@ export class PartName {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -30812,29 +27028,11 @@ export class PartName {
         auto ch = node;
         auto data = getString(ch, true);
         this.partName = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -30884,14 +27082,8 @@ mixin template IPartName() {
 export class PartAbbreviation {
     mixin IPartAbbreviation;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundPrintObject = false;
         bool foundJustify = false;
@@ -30901,27 +27093,22 @@ export class PartAbbreviation {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -30936,7 +27123,6 @@ export class PartAbbreviation {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -30957,29 +27143,11 @@ export class PartAbbreviation {
         auto ch = node;
         auto data = getString(ch, true);
         this.abbreviation = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -31118,14 +27286,8 @@ mixin template IPartGroup() {
 export class GroupName {
     mixin IGroupName;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundJustify = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -31134,27 +27296,22 @@ export class GroupName {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -31169,7 +27326,6 @@ export class GroupName {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -31185,29 +27341,11 @@ export class GroupName {
         auto ch = node;
         auto data = getString(ch, true);
         this.name = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -31284,14 +27422,8 @@ mixin template IGroupNameDisplay() {
 export class GroupAbbreviation {
     mixin IGroupAbbreviation;
     this(xmlNodePtr node) {
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
-        bool foundFontFamily = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
-        bool foundFontSize = false;
         bool foundColor = false;
         bool foundJustify = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
@@ -31300,27 +27432,22 @@ export class GroupAbbreviation {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "font-family") {
                 auto data = getString(ch, true);
                 this.fontFamily = data;
-                foundFontFamily = true;
             }
             if (ch.name.toString == "font-weight") {
                 auto data = getNormalBold(ch);
@@ -31335,7 +27462,6 @@ export class GroupAbbreviation {
             if (ch.name.toString == "font-size") {
                 auto data = getString(ch, true);
                 this.fontSize = data;
-                foundFontSize = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -31351,29 +27477,11 @@ export class GroupAbbreviation {
         auto ch = node;
         auto data = getString(ch, true);
         this.text = data;
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
-        }
-        if (!foundFontFamily) {
-            fontFamily = "Alegreya, serif";
-        }
         if (!foundFontWeight) {
             fontWeight = NormalBold.Normal;
         }
         if (!foundFontStyle) {
             fontStyle = NormalItalic.Normal;
-        }
-        if (!foundFontSize) {
-            fontSize = "small";
         }
         if (!foundColor) {
             color = "#000000";
@@ -31450,10 +27558,6 @@ export class GroupSymbol {
     mixin IGroupSymbol;
     this(xmlNodePtr node) {
         bool foundData = false;
-        bool foundDefaultX = false;
-        bool foundRelativeY = false;
-        bool foundDefaultY = false;
-        bool foundRelativeX = false;
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
@@ -31461,22 +27565,18 @@ export class GroupSymbol {
             if (ch.name.toString == "default-x") {
                 auto data = getNumber(ch, true);
                 this.defaultX = data;
-                foundDefaultX = true;
             }
             if (ch.name.toString == "relative-y") {
                 auto data = getNumber(ch, true);
                 this.relativeY = data;
-                foundRelativeY = true;
             }
             if (ch.name.toString == "default-y") {
                 auto data = getNumber(ch, true);
                 this.defaultY = data;
-                foundDefaultY = true;
             }
             if (ch.name.toString == "relative-x") {
                 auto data = getNumber(ch, true);
                 this.relativeX = data;
-                foundRelativeX = true;
             }
             if (ch.name.toString == "color") {
                 auto data = getString(ch, true);
@@ -31489,18 +27589,6 @@ export class GroupSymbol {
         this.data = data;
         if (!foundData) {
             data = PartSymbolType.None;
-        }
-        if (!foundDefaultX) {
-            defaultX = float.nan;
-        }
-        if (!foundRelativeY) {
-            relativeY = 0;
-        }
-        if (!foundDefaultY) {
-            defaultY = float.nan;
-        }
-        if (!foundRelativeX) {
-            relativeX = 0;
         }
         if (!foundColor) {
             color = "#000000";

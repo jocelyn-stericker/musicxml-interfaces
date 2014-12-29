@@ -1350,10 +1350,6 @@ exports.xmlToBeamLevel = xmlToBeamLevel;
 function xmlToPosition(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -1362,35 +1358,19 @@ function xmlToPosition(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     return ret;
 }
@@ -1440,7 +1420,6 @@ exports.xmlToOrientation = xmlToOrientation;
 function xmlToDirectiveEntity(node) {
     "use strict";
     var ret = {};
-    var foundDirectiveEntity = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -1449,11 +1428,7 @@ function xmlToDirectiveEntity(node) {
         if (ch2.name === "directive-entity") {
             var dataDirectiveEntity = xmlToYesNo(ch2);
             ret.directiveEntity = dataDirectiveEntity;
-            foundDirectiveEntity = true;
         }
-    }
-    if (!foundDirectiveEntity) {
-        ret.directiveEntity = false;
     }
     return ret;
 }
@@ -1461,12 +1436,6 @@ exports.xmlToDirectiveEntity = xmlToDirectiveEntity;
 function xmlToBezier(node) {
     "use strict";
     var ret = {};
-    var foundBezierX2 = false;
-    var foundBezierOffset = false;
-    var foundBezierOffset2 = false;
-    var foundBezierX = false;
-    var foundBezierY = false;
-    var foundBezierY2 = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -1475,51 +1444,27 @@ function xmlToBezier(node) {
         if (ch2.name === "bezier-x2") {
             var dataBezierX2 = getNumber(ch2, true);
             ret.bezierX2 = dataBezierX2;
-            foundBezierX2 = true;
         }
         if (ch2.name === "bezier-offset") {
             var dataBezierOffset = getNumber(ch2, true);
             ret.bezierOffset = dataBezierOffset;
-            foundBezierOffset = true;
         }
         if (ch2.name === "bezier-offset2") {
             var dataBezierOffset2 = getNumber(ch2, true);
             ret.bezierOffset2 = dataBezierOffset2;
-            foundBezierOffset2 = true;
         }
         if (ch2.name === "bezier-x") {
             var dataBezierX = getNumber(ch2, true);
             ret.bezierX = dataBezierX;
-            foundBezierX = true;
         }
         if (ch2.name === "bezier-y") {
             var dataBezierY = getNumber(ch2, true);
             ret.bezierY = dataBezierY;
-            foundBezierY = true;
         }
         if (ch2.name === "bezier-y2") {
             var dataBezierY2 = getNumber(ch2, true);
             ret.bezierY2 = dataBezierY2;
-            foundBezierY2 = true;
         }
-    }
-    if (!foundBezierX2) {
-        ret.bezierX2 = NaN;
-    }
-    if (!foundBezierOffset) {
-        ret.bezierOffset = NaN;
-    }
-    if (!foundBezierOffset2) {
-        ret.bezierOffset2 = NaN;
-    }
-    if (!foundBezierX) {
-        ret.bezierX = NaN;
-    }
-    if (!foundBezierY) {
-        ret.bezierY = NaN;
-    }
-    if (!foundBezierY2) {
-        ret.bezierY2 = NaN;
     }
     return ret;
 }
@@ -1527,10 +1472,8 @@ exports.xmlToBezier = xmlToBezier;
 function xmlToFont(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -1539,7 +1482,6 @@ function xmlToFont(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -1554,20 +1496,13 @@ function xmlToFont(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
     }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -2068,14 +2003,8 @@ exports.xmlToEnclosure = xmlToEnclosure;
 function xmlToPrintStyle(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -2085,27 +2014,22 @@ function xmlToPrintStyle(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -2120,7 +2044,6 @@ function xmlToPrintStyle(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -2128,29 +2051,11 @@ function xmlToPrintStyle(node) {
             foundColor = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -2161,14 +2066,8 @@ exports.xmlToPrintStyle = xmlToPrintStyle;
 function xmlToPrintStyleAlign(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -2180,27 +2079,22 @@ function xmlToPrintStyleAlign(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -2215,7 +2109,6 @@ function xmlToPrintStyleAlign(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -2233,29 +2126,11 @@ function xmlToPrintStyleAlign(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -2366,14 +2241,8 @@ function xmlToTextFormatting(node) {
     "use strict";
     var ret = {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -2398,27 +2267,22 @@ function xmlToTextFormatting(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -2433,7 +2297,6 @@ function xmlToTextFormatting(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -2494,29 +2357,11 @@ function xmlToTextFormatting(node) {
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -2801,14 +2646,8 @@ function xmlToFootnote(node) {
     "use strict";
     var ret = {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -2833,27 +2672,22 @@ function xmlToFootnote(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -2868,7 +2702,6 @@ function xmlToFootnote(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -2932,29 +2765,11 @@ function xmlToFootnote(node) {
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -3047,14 +2862,8 @@ function xmlToFermata(node) {
     "use strict";
     var ret = {};
     var foundShape = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundType = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -3065,27 +2874,22 @@ function xmlToFermata(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -3100,7 +2904,6 @@ function xmlToFermata(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -3119,29 +2922,11 @@ function xmlToFermata(node) {
     if (!foundShape) {
         ret.shape = 0 /* Normal */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -3156,10 +2941,6 @@ function xmlToWavyLine(node) {
     "use strict";
     var ret = {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundColor = false;
     var foundStartNote = false;
@@ -3182,22 +2963,18 @@ function xmlToWavyLine(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
@@ -3252,18 +3029,6 @@ function xmlToWavyLine(node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
     }
@@ -3312,14 +3077,8 @@ exports.xmlToStaff = xmlToStaff;
 function xmlToSegno(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -3331,27 +3090,22 @@ function xmlToSegno(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -3366,7 +3120,6 @@ function xmlToSegno(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -3384,29 +3137,11 @@ function xmlToSegno(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -3423,14 +3158,8 @@ exports.xmlToSegno = xmlToSegno;
 function xmlToCoda(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -3442,27 +3171,22 @@ function xmlToCoda(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -3477,7 +3201,6 @@ function xmlToCoda(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -3495,29 +3218,11 @@ function xmlToCoda(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -3576,14 +3281,8 @@ exports.xmlToNormalDot = xmlToNormalDot;
 function xmlToDynamics(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -3696,27 +3395,22 @@ function xmlToDynamics(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -3731,7 +3425,6 @@ function xmlToDynamics(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -3774,29 +3467,11 @@ function xmlToDynamics(node) {
             foundEnclosure = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -3829,14 +3504,8 @@ function xmlToFingering(node) {
     "use strict";
     var ret = {};
     var foundSubstitution = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundAlternate = false;
@@ -3853,27 +3522,22 @@ function xmlToFingering(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -3888,7 +3552,6 @@ function xmlToFingering(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -3912,29 +3575,11 @@ function xmlToFingering(node) {
     if (!foundSubstitution) {
         ret.substitution = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -3951,10 +3596,8 @@ exports.xmlToFingering = xmlToFingering;
 function xmlToFret(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -3964,7 +3607,6 @@ function xmlToFret(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -3979,7 +3621,6 @@ function xmlToFret(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -3990,17 +3631,11 @@ function xmlToFret(node) {
     var ch3 = node;
     var dataFret = getNumber(ch3, true);
     ret.fret = dataFret;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -4011,14 +3646,8 @@ exports.xmlToFret = xmlToFret;
 function xmlToString(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -4029,27 +3658,22 @@ function xmlToString(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -4064,7 +3688,6 @@ function xmlToString(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -4080,29 +3703,11 @@ function xmlToString(node) {
     var ch3 = node;
     var dataStringNum = getNumber(ch3, true);
     ret.stringNum = dataStringNum;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -4147,14 +3752,8 @@ function xmlToDisplayText(node) {
     "use strict";
     var ret = {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -4179,27 +3778,22 @@ function xmlToDisplayText(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -4214,7 +3808,6 @@ function xmlToDisplayText(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -4278,29 +3871,11 @@ function xmlToDisplayText(node) {
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -4342,14 +3917,8 @@ function xmlToAccidentalText(node) {
     "use strict";
     var ret = {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -4374,27 +3943,22 @@ function xmlToAccidentalText(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -4409,7 +3973,6 @@ function xmlToAccidentalText(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -4473,29 +4036,11 @@ function xmlToAccidentalText(node) {
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5001,14 +4546,8 @@ function xmlToLeftDivider(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -5025,27 +4564,22 @@ function xmlToLeftDivider(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -5060,7 +4594,6 @@ function xmlToLeftDivider(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -5081,29 +4614,11 @@ function xmlToLeftDivider(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5121,14 +4636,8 @@ function xmlToRightDivider(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -5145,27 +4654,22 @@ function xmlToRightDivider(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -5180,7 +4684,6 @@ function xmlToRightDivider(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -5201,29 +4704,11 @@ function xmlToRightDivider(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5846,14 +5331,8 @@ exports.xmlToDivisions = xmlToDivisions;
 function xmlToKey(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -5896,27 +5375,22 @@ function xmlToKey(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -5931,7 +5405,6 @@ function xmlToKey(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -5944,29 +5417,11 @@ function xmlToKey(node) {
             foundPrintObject = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5982,14 +5437,8 @@ function xmlToTime(node) {
     var ret = {};
     var foundSymbol = false;
     var foundSeparator = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -6028,27 +5477,22 @@ function xmlToTime(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -6063,7 +5507,6 @@ function xmlToTime(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6092,29 +5535,11 @@ function xmlToTime(node) {
     if (!foundSeparator) {
         ret.separator = 0 /* None */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6221,10 +5646,6 @@ function xmlToPartSymbol(node) {
     "use strict";
     var ret = {};
     var foundTopStaff = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     var foundBottomStaff = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -6240,22 +5661,18 @@ function xmlToPartSymbol(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6273,18 +5690,6 @@ function xmlToPartSymbol(node) {
     ret.type = dataType;
     if (!foundTopStaff) {
         ret.topStaff = -1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6312,14 +5717,8 @@ function xmlToClef(node) {
     var ret = {};
     var foundNumber_ = false;
     var foundSize = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundAfterBarline = false;
@@ -6354,27 +5753,22 @@ function xmlToClef(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -6389,7 +5783,6 @@ function xmlToClef(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6418,29 +5811,11 @@ function xmlToClef(node) {
     if (!foundSize) {
         ret.size = 1 /* Full */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6649,14 +6024,8 @@ exports.xmlToTranspose = xmlToTranspose;
 function xmlToDirective(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -6666,27 +6035,22 @@ function xmlToDirective(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -6701,7 +6065,6 @@ function xmlToDirective(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6712,29 +6075,11 @@ function xmlToDirective(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6757,23 +6102,23 @@ exports.xmlToSlashDot = xmlToSlashDot;
 function xmlToMultipleRest(node) {
     "use strict";
     var ret = {};
-    var foundMultipleRest = false;
+    var foundUseSymbols = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "multiple-rest") {
-            var dataMultipleRest = xmlToYesNo(ch2);
-            ret.multipleRest = dataMultipleRest;
-            foundMultipleRest = true;
+        if (ch2.name === "use-symbols") {
+            var dataUseSymbols = xmlToYesNo(ch2);
+            ret.useSymbols = dataUseSymbols;
+            foundUseSymbols = true;
         }
     }
     var ch3 = node;
-    var dataData = getString(ch3, true);
-    ret.data = dataData;
-    if (!foundMultipleRest) {
-        ret.multipleRest = false;
+    var dataCount = getNumber(ch3, true);
+    ret.count = dataCount;
+    if (!foundUseSymbols) {
+        ret.useSymbols = false;
     }
     return ret;
 }
@@ -6894,10 +6239,8 @@ function xmlToMeasureStyle(node) {
     "use strict";
     var ret = {};
     var foundNumber_ = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -6928,7 +6271,6 @@ function xmlToMeasureStyle(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -6943,7 +6285,6 @@ function xmlToMeasureStyle(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6954,17 +6295,11 @@ function xmlToMeasureStyle(node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6986,8 +6321,8 @@ function xmlToAttributes(node) {
             ret.partSymbol = dataPartSymbol;
         }
         if (ch.nodeName === "clef") {
-            var dataClef = xmlToClef(ch);
-            ret.clef = dataClef;
+            var dataClefs = xmlToClef(ch);
+            ret.clefs = (ret.clefs || []).concat(dataClefs);
         }
         if (ch.nodeName === "measure-style") {
             var dataMeasureStyle = xmlToMeasureStyle(ch);
@@ -7274,14 +6609,8 @@ function xmlToNote(node) {
     var foundPizzicato = false;
     var foundDynamics = false;
     var foundRelease = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundPrintSpacing = false;
@@ -7414,27 +6743,22 @@ function xmlToNote(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -7449,7 +6773,6 @@ function xmlToNote(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -7494,29 +6817,11 @@ function xmlToNote(node) {
     if (!foundRelease) {
         ret.release = NaN;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -7625,14 +6930,8 @@ exports.xmlToType = xmlToType;
 function xmlToDot(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -7643,27 +6942,22 @@ function xmlToDot(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -7678,7 +6972,6 @@ function xmlToDot(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -7691,29 +6984,11 @@ function xmlToDot(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -7891,14 +7166,8 @@ function xmlToAccidental(node) {
     var foundBracket = false;
     var foundSize = false;
     var foundParentheses = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundEditorial = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -7929,27 +7198,22 @@ function xmlToAccidental(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -7964,7 +7228,6 @@ function xmlToAccidental(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -7992,29 +7255,11 @@ function xmlToAccidental(node) {
     if (!foundParentheses) {
         ret.parentheses = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -8084,10 +7329,6 @@ exports.getStemType = getStemType;
 function xmlToStem(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -8097,22 +7338,18 @@ function xmlToStem(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -8123,18 +7360,6 @@ function xmlToStem(node) {
     var ch3 = node;
     var dataType = getStemType(ch3, null);
     ret.type = dataType;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundColor) {
         ret.color = "#000000";
     }
@@ -8260,10 +7485,8 @@ exports.getNoteheadType = getNoteheadType;
 function xmlToNotehead(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -8273,7 +7496,6 @@ function xmlToNotehead(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -8288,7 +7510,6 @@ function xmlToNotehead(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -8307,17 +7528,11 @@ function xmlToNotehead(node) {
     var ch3 = node;
     var dataType = getNoteheadType(ch3, null);
     ret.type = dataType;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -8515,18 +7730,8 @@ function xmlToTied(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundOrientation = false;
-    var foundBezierX2 = false;
-    var foundBezierOffset = false;
-    var foundBezierOffset2 = false;
-    var foundBezierX = false;
-    var foundBezierY = false;
-    var foundBezierY2 = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -8556,22 +7761,18 @@ function xmlToTied(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
@@ -8586,32 +7787,26 @@ function xmlToTied(node) {
         if (ch2.name === "bezier-x2") {
             var dataBezierX2 = getNumber(ch2, true);
             ret.bezierX2 = dataBezierX2;
-            foundBezierX2 = true;
         }
         if (ch2.name === "bezier-offset") {
             var dataBezierOffset = getNumber(ch2, true);
             ret.bezierOffset = dataBezierOffset;
-            foundBezierOffset = true;
         }
         if (ch2.name === "bezier-offset2") {
             var dataBezierOffset2 = getNumber(ch2, true);
             ret.bezierOffset2 = dataBezierOffset2;
-            foundBezierOffset2 = true;
         }
         if (ch2.name === "bezier-x") {
             var dataBezierX = getNumber(ch2, true);
             ret.bezierX = dataBezierX;
-            foundBezierX = true;
         }
         if (ch2.name === "bezier-y") {
             var dataBezierY = getNumber(ch2, true);
             ret.bezierY = dataBezierY;
-            foundBezierY = true;
         }
         if (ch2.name === "bezier-y2") {
             var dataBezierY2 = getNumber(ch2, true);
             ret.bezierY2 = dataBezierY2;
-            foundBezierY2 = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -8635,41 +7830,11 @@ function xmlToTied(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
     }
     if (!foundOrientation) {
         ret.orientation = 0 /* Unspecified */;
-    }
-    if (!foundBezierX2) {
-        ret.bezierX2 = NaN;
-    }
-    if (!foundBezierOffset) {
-        ret.bezierOffset = NaN;
-    }
-    if (!foundBezierOffset2) {
-        ret.bezierOffset2 = NaN;
-    }
-    if (!foundBezierX) {
-        ret.bezierX = NaN;
-    }
-    if (!foundBezierY) {
-        ret.bezierY = NaN;
-    }
-    if (!foundBezierY2) {
-        ret.bezierY2 = NaN;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -8684,18 +7849,8 @@ function xmlToSlur(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundOrientation = false;
-    var foundBezierX2 = false;
-    var foundBezierOffset = false;
-    var foundBezierOffset2 = false;
-    var foundBezierX = false;
-    var foundBezierY = false;
-    var foundBezierY2 = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -8725,22 +7880,18 @@ function xmlToSlur(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
@@ -8755,32 +7906,26 @@ function xmlToSlur(node) {
         if (ch2.name === "bezier-x2") {
             var dataBezierX2 = getNumber(ch2, true);
             ret.bezierX2 = dataBezierX2;
-            foundBezierX2 = true;
         }
         if (ch2.name === "bezier-offset") {
             var dataBezierOffset = getNumber(ch2, true);
             ret.bezierOffset = dataBezierOffset;
-            foundBezierOffset = true;
         }
         if (ch2.name === "bezier-offset2") {
             var dataBezierOffset2 = getNumber(ch2, true);
             ret.bezierOffset2 = dataBezierOffset2;
-            foundBezierOffset2 = true;
         }
         if (ch2.name === "bezier-x") {
             var dataBezierX = getNumber(ch2, true);
             ret.bezierX = dataBezierX;
-            foundBezierX = true;
         }
         if (ch2.name === "bezier-y") {
             var dataBezierY = getNumber(ch2, true);
             ret.bezierY = dataBezierY;
-            foundBezierY = true;
         }
         if (ch2.name === "bezier-y2") {
             var dataBezierY2 = getNumber(ch2, true);
             ret.bezierY2 = dataBezierY2;
-            foundBezierY2 = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -8804,41 +7949,11 @@ function xmlToSlur(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
     }
     if (!foundOrientation) {
         ret.orientation = 0 /* Unspecified */;
-    }
-    if (!foundBezierX2) {
-        ret.bezierX2 = NaN;
-    }
-    if (!foundBezierOffset) {
-        ret.bezierOffset = NaN;
-    }
-    if (!foundBezierOffset2) {
-        ret.bezierOffset2 = NaN;
-    }
-    if (!foundBezierX) {
-        ret.bezierX = NaN;
-    }
-    if (!foundBezierY) {
-        ret.bezierY = NaN;
-    }
-    if (!foundBezierY2) {
-        ret.bezierY2 = NaN;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -8876,10 +7991,6 @@ function xmlToTuplet(node) {
     var foundBracket = false;
     var foundShowNumber = false;
     var foundLineShape = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundShowType = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -8917,22 +8028,18 @@ function xmlToTuplet(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
@@ -8957,18 +8064,6 @@ function xmlToTuplet(node) {
     }
     if (!foundLineShape) {
         ret.lineShape = 0 /* Straight */;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
@@ -9030,10 +8125,8 @@ exports.xmlToTupletNormal = xmlToTupletNormal;
 function xmlToTupletNumber(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -9043,7 +8136,6 @@ function xmlToTupletNumber(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9058,7 +8150,6 @@ function xmlToTupletNumber(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9069,17 +8160,11 @@ function xmlToTupletNumber(node) {
     var ch3 = node;
     var dataText = getString(ch3, true);
     ret.text = dataText;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9090,10 +8175,8 @@ exports.xmlToTupletNumber = xmlToTupletNumber;
 function xmlToTupletType(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -9103,7 +8186,6 @@ function xmlToTupletType(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9118,7 +8200,6 @@ function xmlToTupletType(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9129,17 +8210,11 @@ function xmlToTupletType(node) {
     var ch3 = node;
     var dataText = getString(ch3, true);
     ret.text = dataText;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9150,10 +8225,8 @@ exports.xmlToTupletType = xmlToTupletType;
 function xmlToTupletDot(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -9163,7 +8236,6 @@ function xmlToTupletDot(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9178,7 +8250,6 @@ function xmlToTupletDot(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9186,17 +8257,11 @@ function xmlToTupletDot(node) {
             foundColor = true;
         }
     }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9210,14 +8275,8 @@ function xmlToGlissando(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundNormal = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -9243,27 +8302,22 @@ function xmlToGlissando(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9278,7 +8332,6 @@ function xmlToGlissando(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9307,29 +8360,11 @@ function xmlToGlissando(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9346,14 +8381,8 @@ function xmlToSlide(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundAccelerate = false;
     var foundBeats = false;
@@ -9383,27 +8412,22 @@ function xmlToSlide(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9418,7 +8442,6 @@ function xmlToSlide(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9467,29 +8490,11 @@ function xmlToSlide(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9516,14 +8521,8 @@ function xmlToOtherNotation(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -9539,27 +8538,22 @@ function xmlToOtherNotation(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9574,7 +8568,6 @@ function xmlToOtherNotation(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9597,29 +8590,11 @@ function xmlToOtherNotation(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9634,14 +8609,8 @@ function xmlToOtherDirection(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -9658,27 +8627,22 @@ function xmlToOtherDirection(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9693,7 +8657,6 @@ function xmlToOtherDirection(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9717,29 +8680,11 @@ function xmlToOtherDirection(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9756,14 +8701,8 @@ exports.xmlToOtherDirection = xmlToOtherDirection;
 function xmlToOrnaments(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -9837,27 +8776,22 @@ function xmlToOrnaments(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -9872,7 +8806,6 @@ function xmlToOrnaments(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -9920,29 +8853,11 @@ function xmlToOrnaments(node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -9977,14 +8892,8 @@ exports.xmlToOrnaments = xmlToOrnaments;
 function xmlToTrillMark(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -10002,27 +8911,22 @@ function xmlToTrillMark(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -10037,7 +8941,6 @@ function xmlToTrillMark(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10085,29 +8988,11 @@ function xmlToTrillMark(node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10143,14 +9028,8 @@ function xmlToTurn(node) {
     "use strict";
     var ret = {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -10173,27 +9052,22 @@ function xmlToTurn(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -10208,7 +9082,6 @@ function xmlToTurn(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10259,29 +9132,11 @@ function xmlToTurn(node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10317,14 +9172,8 @@ function xmlToDelayedTurn(node) {
     "use strict";
     var ret = {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -10347,27 +9196,22 @@ function xmlToDelayedTurn(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -10382,7 +9226,6 @@ function xmlToDelayedTurn(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10433,29 +9276,11 @@ function xmlToDelayedTurn(node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10491,14 +9316,8 @@ function xmlToInvertedTurn(node) {
     "use strict";
     var ret = {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -10521,27 +9340,22 @@ function xmlToInvertedTurn(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -10556,7 +9370,6 @@ function xmlToInvertedTurn(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10607,29 +9420,11 @@ function xmlToInvertedTurn(node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10665,14 +9460,8 @@ function xmlToDelayedInvertedTurn(node) {
     "use strict";
     var ret = {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -10695,27 +9484,22 @@ function xmlToDelayedInvertedTurn(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -10730,7 +9514,6 @@ function xmlToDelayedInvertedTurn(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10781,29 +9564,11 @@ function xmlToDelayedInvertedTurn(node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10838,14 +9603,8 @@ exports.xmlToDelayedInvertedTurn = xmlToDelayedInvertedTurn;
 function xmlToVerticalTurn(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -10863,27 +9622,22 @@ function xmlToVerticalTurn(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -10898,7 +9652,6 @@ function xmlToVerticalTurn(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10946,29 +9699,11 @@ function xmlToVerticalTurn(node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11003,14 +9738,8 @@ exports.xmlToVerticalTurn = xmlToVerticalTurn;
 function xmlToShake(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -11028,27 +9757,22 @@ function xmlToShake(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -11063,7 +9787,6 @@ function xmlToShake(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11111,29 +9834,11 @@ function xmlToShake(node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11168,14 +9873,8 @@ exports.xmlToShake = xmlToShake;
 function xmlToMordent(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -11205,27 +9904,22 @@ function xmlToMordent(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -11240,7 +9934,6 @@ function xmlToMordent(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11288,29 +9981,11 @@ function xmlToMordent(node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11345,14 +10020,8 @@ exports.xmlToMordent = xmlToMordent;
 function xmlToInvertedMordent(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -11382,27 +10051,22 @@ function xmlToInvertedMordent(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -11417,7 +10081,6 @@ function xmlToInvertedMordent(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11465,29 +10128,11 @@ function xmlToInvertedMordent(node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11522,14 +10167,8 @@ exports.xmlToInvertedMordent = xmlToInvertedMordent;
 function xmlToSchleifer(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -11540,27 +10179,22 @@ function xmlToSchleifer(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -11575,7 +10209,6 @@ function xmlToSchleifer(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11588,29 +10221,11 @@ function xmlToSchleifer(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11624,14 +10239,8 @@ exports.xmlToSchleifer = xmlToSchleifer;
 function xmlToTremolo(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundType = false;
@@ -11643,27 +10252,22 @@ function xmlToTremolo(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -11678,7 +10282,6 @@ function xmlToTremolo(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11699,29 +10302,11 @@ function xmlToTremolo(node) {
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11738,14 +10323,8 @@ exports.xmlToTremolo = xmlToTremolo;
 function xmlToOtherOrnament(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -11756,27 +10335,22 @@ function xmlToOtherOrnament(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -11791,7 +10365,6 @@ function xmlToOtherOrnament(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11811,29 +10384,11 @@ function xmlToOtherOrnament(node) {
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11847,14 +10402,8 @@ exports.xmlToOtherOrnament = xmlToOtherOrnament;
 function xmlToAccidentalMark(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -11865,27 +10414,22 @@ function xmlToAccidentalMark(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -11900,7 +10444,6 @@ function xmlToAccidentalMark(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11916,29 +10459,11 @@ function xmlToAccidentalMark(node) {
     var ch3 = node;
     var dataMark = getString(ch3, true);
     ret.mark = dataMark;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12060,14 +10585,8 @@ exports.xmlToTechnical = xmlToTechnical;
 function xmlToUpBow(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12078,27 +10597,22 @@ function xmlToUpBow(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12113,7 +10627,6 @@ function xmlToUpBow(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12126,29 +10639,11 @@ function xmlToUpBow(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12162,14 +10657,8 @@ exports.xmlToUpBow = xmlToUpBow;
 function xmlToDownBow(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12180,27 +10669,22 @@ function xmlToDownBow(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12215,7 +10699,6 @@ function xmlToDownBow(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12228,29 +10711,11 @@ function xmlToDownBow(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12265,14 +10730,8 @@ function xmlToHarmonic(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12308,27 +10767,22 @@ function xmlToHarmonic(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12343,7 +10797,6 @@ function xmlToHarmonic(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12359,29 +10812,11 @@ function xmlToHarmonic(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12395,14 +10830,8 @@ exports.xmlToHarmonic = xmlToHarmonic;
 function xmlToOpenString(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12413,27 +10842,22 @@ function xmlToOpenString(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12448,7 +10872,6 @@ function xmlToOpenString(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12461,29 +10884,11 @@ function xmlToOpenString(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12497,14 +10902,8 @@ exports.xmlToOpenString = xmlToOpenString;
 function xmlToThumbPosition(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12515,27 +10914,22 @@ function xmlToThumbPosition(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12550,7 +10944,6 @@ function xmlToThumbPosition(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12563,29 +10956,11 @@ function xmlToThumbPosition(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12599,14 +10974,8 @@ exports.xmlToThumbPosition = xmlToThumbPosition;
 function xmlToPluck(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12617,27 +10986,22 @@ function xmlToPluck(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12652,7 +11016,6 @@ function xmlToPluck(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12668,29 +11031,11 @@ function xmlToPluck(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12704,14 +11049,8 @@ exports.xmlToPluck = xmlToPluck;
 function xmlToDoubleTongue(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12722,27 +11061,22 @@ function xmlToDoubleTongue(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12757,7 +11091,6 @@ function xmlToDoubleTongue(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12770,29 +11103,11 @@ function xmlToDoubleTongue(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12806,14 +11121,8 @@ exports.xmlToDoubleTongue = xmlToDoubleTongue;
 function xmlToTripleTongue(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12824,27 +11133,22 @@ function xmlToTripleTongue(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12859,7 +11163,6 @@ function xmlToTripleTongue(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12872,29 +11175,11 @@ function xmlToTripleTongue(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12908,14 +11193,8 @@ exports.xmlToTripleTongue = xmlToTripleTongue;
 function xmlToStopped(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -12926,27 +11205,22 @@ function xmlToStopped(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -12961,7 +11235,6 @@ function xmlToStopped(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12974,29 +11247,11 @@ function xmlToStopped(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13010,14 +11265,8 @@ exports.xmlToStopped = xmlToStopped;
 function xmlToSnapPizzicato(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13028,27 +11277,22 @@ function xmlToSnapPizzicato(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13063,7 +11307,6 @@ function xmlToSnapPizzicato(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13076,29 +11319,11 @@ function xmlToSnapPizzicato(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13113,14 +11338,8 @@ function xmlToHammerOn(node) {
     "use strict";
     var ret = {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13136,27 +11355,22 @@ function xmlToHammerOn(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13171,7 +11385,6 @@ function xmlToHammerOn(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13194,29 +11407,11 @@ function xmlToHammerOn(node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13231,14 +11426,8 @@ function xmlToPullOff(node) {
     "use strict";
     var ret = {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13254,27 +11443,22 @@ function xmlToPullOff(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13289,7 +11473,6 @@ function xmlToPullOff(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13312,29 +11495,11 @@ function xmlToPullOff(node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13348,14 +11513,8 @@ exports.xmlToPullOff = xmlToPullOff;
 function xmlToBend(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundAccelerate = false;
     var foundBeats = false;
@@ -13385,27 +11544,22 @@ function xmlToBend(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13420,7 +11574,6 @@ function xmlToBend(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13448,29 +11601,11 @@ function xmlToBend(node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13493,14 +11628,8 @@ exports.xmlToBend = xmlToBend;
 function xmlToWithBar(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13511,27 +11640,22 @@ function xmlToWithBar(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13546,7 +11670,6 @@ function xmlToWithBar(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13562,29 +11685,11 @@ function xmlToWithBar(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13598,14 +11703,8 @@ exports.xmlToWithBar = xmlToWithBar;
 function xmlToTap(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13616,27 +11715,22 @@ function xmlToTap(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13651,7 +11745,6 @@ function xmlToTap(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13667,29 +11760,11 @@ function xmlToTap(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13704,14 +11779,8 @@ function xmlToHeel(node) {
     "use strict";
     var ret = {};
     var foundSubstitution = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13727,27 +11796,22 @@ function xmlToHeel(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13762,7 +11826,6 @@ function xmlToHeel(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13778,29 +11841,11 @@ function xmlToHeel(node) {
     if (!foundSubstitution) {
         ret.substitution = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13815,14 +11860,8 @@ function xmlToToe(node) {
     "use strict";
     var ret = {};
     var foundSubstitution = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13838,27 +11877,22 @@ function xmlToToe(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13873,7 +11907,6 @@ function xmlToToe(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13889,29 +11922,11 @@ function xmlToToe(node) {
     if (!foundSubstitution) {
         ret.substitution = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13925,14 +11940,8 @@ exports.xmlToToe = xmlToToe;
 function xmlToFingernails(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13943,27 +11952,22 @@ function xmlToFingernails(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -13978,7 +11982,6 @@ function xmlToFingernails(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13991,29 +11994,11 @@ function xmlToFingernails(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14027,14 +12012,8 @@ exports.xmlToFingernails = xmlToFingernails;
 function xmlToHole(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14057,27 +12036,22 @@ function xmlToHole(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14092,7 +12066,6 @@ function xmlToHole(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14105,29 +12078,11 @@ function xmlToHole(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14212,14 +12167,8 @@ exports.xmlToHoleClosed = xmlToHoleClosed;
 function xmlToArrow(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14242,27 +12191,22 @@ function xmlToArrow(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14277,7 +12221,6 @@ function xmlToArrow(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14290,29 +12233,11 @@ function xmlToArrow(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14326,14 +12251,8 @@ exports.xmlToArrow = xmlToArrow;
 function xmlToHandbell(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14344,27 +12263,22 @@ function xmlToHandbell(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14379,7 +12293,6 @@ function xmlToHandbell(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14395,29 +12308,11 @@ function xmlToHandbell(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14431,14 +12326,8 @@ exports.xmlToHandbell = xmlToHandbell;
 function xmlToOtherTechnical(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14449,27 +12338,22 @@ function xmlToOtherTechnical(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14484,7 +12368,6 @@ function xmlToOtherTechnical(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14500,29 +12383,11 @@ function xmlToOtherTechnical(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14612,14 +12477,8 @@ exports.xmlToArticulations = xmlToArticulations;
 function xmlToAccent(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14630,27 +12489,22 @@ function xmlToAccent(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14665,7 +12519,6 @@ function xmlToAccent(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14678,29 +12531,11 @@ function xmlToAccent(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14714,14 +12549,8 @@ exports.xmlToAccent = xmlToAccent;
 function xmlToStrongAccent(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundType = false;
@@ -14733,27 +12562,22 @@ function xmlToStrongAccent(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14768,7 +12592,6 @@ function xmlToStrongAccent(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14786,29 +12609,11 @@ function xmlToStrongAccent(node) {
             foundType = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14825,14 +12630,8 @@ exports.xmlToStrongAccent = xmlToStrongAccent;
 function xmlToStaccato(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14843,27 +12642,22 @@ function xmlToStaccato(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14878,7 +12672,6 @@ function xmlToStaccato(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14891,29 +12684,11 @@ function xmlToStaccato(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14927,14 +12702,8 @@ exports.xmlToStaccato = xmlToStaccato;
 function xmlToTenuto(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14945,27 +12714,22 @@ function xmlToTenuto(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -14980,7 +12744,6 @@ function xmlToTenuto(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14993,29 +12756,11 @@ function xmlToTenuto(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15029,14 +12774,8 @@ exports.xmlToTenuto = xmlToTenuto;
 function xmlToDetachedLegato(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15047,27 +12786,22 @@ function xmlToDetachedLegato(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15082,7 +12816,6 @@ function xmlToDetachedLegato(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15095,29 +12828,11 @@ function xmlToDetachedLegato(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15131,14 +12846,8 @@ exports.xmlToDetachedLegato = xmlToDetachedLegato;
 function xmlToStaccatissimo(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15149,27 +12858,22 @@ function xmlToStaccatissimo(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15184,7 +12888,6 @@ function xmlToStaccatissimo(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15197,29 +12900,11 @@ function xmlToStaccatissimo(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15233,14 +12918,8 @@ exports.xmlToStaccatissimo = xmlToStaccatissimo;
 function xmlToSpiccato(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15251,27 +12930,22 @@ function xmlToSpiccato(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15286,7 +12960,6 @@ function xmlToSpiccato(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15299,29 +12972,11 @@ function xmlToSpiccato(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15339,14 +12994,8 @@ function xmlToScoop(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15377,27 +13026,22 @@ function xmlToScoop(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15412,7 +13056,6 @@ function xmlToScoop(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15437,29 +13080,11 @@ function xmlToScoop(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15477,14 +13102,8 @@ function xmlToPlop(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15515,27 +13134,22 @@ function xmlToPlop(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15550,7 +13164,6 @@ function xmlToPlop(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15575,29 +13188,11 @@ function xmlToPlop(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15615,14 +13210,8 @@ function xmlToDoit(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15653,27 +13242,22 @@ function xmlToDoit(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15688,7 +13272,6 @@ function xmlToDoit(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15713,29 +13296,11 @@ function xmlToDoit(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15753,14 +13318,8 @@ function xmlToFalloff(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15791,27 +13350,22 @@ function xmlToFalloff(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15826,7 +13380,6 @@ function xmlToFalloff(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15851,29 +13404,11 @@ function xmlToFalloff(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15915,14 +13450,8 @@ function xmlToBreathMark(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15953,27 +13482,22 @@ function xmlToBreathMark(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -15988,7 +13512,6 @@ function xmlToBreathMark(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16016,29 +13539,11 @@ function xmlToBreathMark(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16052,14 +13557,8 @@ exports.xmlToBreathMark = xmlToBreathMark;
 function xmlToCaesura(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -16070,27 +13569,22 @@ function xmlToCaesura(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -16105,7 +13599,6 @@ function xmlToCaesura(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16118,29 +13611,11 @@ function xmlToCaesura(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16154,14 +13629,8 @@ exports.xmlToCaesura = xmlToCaesura;
 function xmlToStress(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -16172,27 +13641,22 @@ function xmlToStress(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -16207,7 +13671,6 @@ function xmlToStress(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16220,29 +13683,11 @@ function xmlToStress(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16256,14 +13701,8 @@ exports.xmlToStress = xmlToStress;
 function xmlToUnstress(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -16274,27 +13713,22 @@ function xmlToUnstress(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -16309,7 +13743,6 @@ function xmlToUnstress(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16322,29 +13755,11 @@ function xmlToUnstress(node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16358,14 +13773,8 @@ exports.xmlToUnstress = xmlToUnstress;
 function xmlToOtherArticulation(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -16376,27 +13785,22 @@ function xmlToOtherArticulation(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -16411,7 +13815,6 @@ function xmlToOtherArticulation(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16427,29 +13830,11 @@ function xmlToOtherArticulation(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16464,10 +13849,6 @@ function xmlToArpeggiate(node) {
     "use strict";
     var ret = {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundColor = false;
     var foundDirection = false;
@@ -16484,22 +13865,18 @@ function xmlToArpeggiate(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
@@ -16520,18 +13897,6 @@ function xmlToArpeggiate(node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
     }
@@ -16548,10 +13913,6 @@ function xmlToNonArpeggiate(node) {
     "use strict";
     var ret = {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -16567,22 +13928,18 @@ function xmlToNonArpeggiate(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
@@ -16601,18 +13958,6 @@ function xmlToNonArpeggiate(node) {
     }
     if (!foundNumber_) {
         ret.number_ = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
@@ -16726,10 +14071,8 @@ exports.xmlToLyricParts = xmlToLyricParts;
 function xmlToText(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundUnderline = false;
     var foundOverline = false;
@@ -16745,7 +14088,6 @@ function xmlToText(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -16760,7 +14102,6 @@ function xmlToText(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16801,17 +14142,11 @@ function xmlToText(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16868,10 +14203,8 @@ exports.getSyllabicType = getSyllabicType;
 function xmlToSyllabic(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -16881,7 +14214,6 @@ function xmlToSyllabic(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -16896,7 +14228,6 @@ function xmlToSyllabic(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16907,17 +14238,11 @@ function xmlToSyllabic(node) {
     var ch3 = node;
     var dataData = getSyllabicType(ch3, null);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16928,10 +14253,8 @@ exports.xmlToSyllabic = xmlToSyllabic;
 function xmlToElision(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -16941,7 +14264,6 @@ function xmlToElision(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -16956,7 +14278,6 @@ function xmlToElision(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16967,17 +14288,11 @@ function xmlToElision(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16988,14 +14303,8 @@ exports.xmlToElision = xmlToElision;
 function xmlToExtend(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundType = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -17006,27 +14315,22 @@ function xmlToExtend(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -17041,7 +14345,6 @@ function xmlToExtend(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17054,29 +14357,11 @@ function xmlToExtend(node) {
             foundType = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17090,14 +14375,8 @@ exports.xmlToExtend = xmlToExtend;
 function xmlToFiguredBass(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundPrintSpacing = false;
@@ -17126,27 +14405,22 @@ function xmlToFiguredBass(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -17161,7 +14435,6 @@ function xmlToFiguredBass(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17192,29 +14465,11 @@ function xmlToFiguredBass(node) {
             foundParentheses = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17234,14 +14489,8 @@ exports.xmlToFiguredBass = xmlToFiguredBass;
 function xmlToFigure(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -17267,27 +14516,22 @@ function xmlToFigure(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -17302,7 +14546,6 @@ function xmlToFigure(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17310,29 +14553,11 @@ function xmlToFigure(node) {
             foundColor = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17343,14 +14568,8 @@ exports.xmlToFigure = xmlToFigure;
 function xmlToPrefix(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -17360,27 +14579,22 @@ function xmlToPrefix(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -17395,7 +14609,6 @@ function xmlToPrefix(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17406,29 +14619,11 @@ function xmlToPrefix(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17439,14 +14634,8 @@ exports.xmlToPrefix = xmlToPrefix;
 function xmlToFigureNumber(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -17456,27 +14645,22 @@ function xmlToFigureNumber(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -17491,7 +14675,6 @@ function xmlToFigureNumber(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17502,29 +14685,11 @@ function xmlToFigureNumber(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17535,14 +14700,8 @@ exports.xmlToFigureNumber = xmlToFigureNumber;
 function xmlToSuffix(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -17552,27 +14711,22 @@ function xmlToSuffix(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -17587,7 +14741,6 @@ function xmlToSuffix(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17598,29 +14751,11 @@ function xmlToSuffix(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17880,14 +15015,8 @@ function xmlToEnding(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -17918,27 +15047,22 @@ function xmlToEnding(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -17953,7 +15077,6 @@ function xmlToEnding(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17971,29 +15094,11 @@ function xmlToEnding(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18130,14 +15235,8 @@ function xmlToDirection(node) {
     "use strict";
     var ret = {};
     var foundPlacement = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -18180,27 +15279,22 @@ function xmlToDirection(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -18215,7 +15309,6 @@ function xmlToDirection(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18229,29 +15322,11 @@ function xmlToDirection(node) {
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18363,14 +15438,8 @@ function xmlToRehearsal(node) {
     "use strict";
     var ret = {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -18395,27 +15464,22 @@ function xmlToRehearsal(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -18430,7 +15494,6 @@ function xmlToRehearsal(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18494,29 +15557,11 @@ function xmlToRehearsal(node) {
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18558,14 +15603,8 @@ function xmlToWords(node) {
     "use strict";
     var ret = {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -18590,27 +15629,22 @@ function xmlToWords(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -18625,7 +15659,6 @@ function xmlToWords(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18689,29 +15722,11 @@ function xmlToWords(node) {
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18785,10 +15800,6 @@ function xmlToWedge(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -18823,22 +15834,18 @@ function xmlToWedge(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18869,18 +15876,6 @@ function xmlToWedge(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundColor) {
         ret.color = "#000000";
     }
@@ -18893,10 +15888,6 @@ function xmlToDashes(node) {
     var foundNumber_ = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -18921,22 +15912,18 @@ function xmlToDashes(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18956,18 +15943,6 @@ function xmlToDashes(node) {
     }
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19014,10 +15989,6 @@ function xmlToBracket(node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -19051,22 +16022,18 @@ function xmlToBracket(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19093,18 +16060,6 @@ function xmlToBracket(node) {
     }
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19143,14 +16098,8 @@ exports.getPedalType = getPedalType;
 function xmlToPedal(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -19170,27 +16119,22 @@ function xmlToPedal(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -19205,7 +16149,6 @@ function xmlToPedal(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19227,29 +16170,11 @@ function xmlToPedal(node) {
             ret.type = dataType;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19266,14 +16191,8 @@ exports.xmlToPedal = xmlToPedal;
 function xmlToMetronome(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -19306,27 +16225,22 @@ function xmlToMetronome(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -19341,7 +16255,6 @@ function xmlToMetronome(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19368,29 +16281,11 @@ function xmlToMetronome(node) {
             ret.parentheses = dataParentheses;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19422,10 +16317,8 @@ exports.xmlToBeatUnitDot = xmlToBeatUnitDot;
 function xmlToPerMinute(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -19434,7 +16327,6 @@ function xmlToPerMinute(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -19449,23 +16341,16 @@ function xmlToPerMinute(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
     }
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -19618,14 +16503,8 @@ function xmlToOctaveShift(node) {
     var foundSize = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -19654,27 +16533,22 @@ function xmlToOctaveShift(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -19689,7 +16563,6 @@ function xmlToOctaveShift(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19710,29 +16583,11 @@ function xmlToOctaveShift(node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19743,14 +16598,8 @@ exports.xmlToOctaveShift = xmlToOctaveShift;
 function xmlToHarpPedals(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -19766,27 +16615,22 @@ function xmlToHarpPedals(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -19801,7 +16645,6 @@ function xmlToHarpPedals(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19819,29 +16662,11 @@ function xmlToHarpPedals(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19878,14 +16703,8 @@ exports.xmlToPedalTuning = xmlToPedalTuning;
 function xmlToDamp(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -19897,27 +16716,22 @@ function xmlToDamp(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -19932,7 +16746,6 @@ function xmlToDamp(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19950,29 +16763,11 @@ function xmlToDamp(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19989,14 +16784,8 @@ exports.xmlToDamp = xmlToDamp;
 function xmlToDampAll(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -20008,27 +16797,22 @@ function xmlToDampAll(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -20043,7 +16827,6 @@ function xmlToDampAll(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20061,29 +16844,11 @@ function xmlToDampAll(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20100,14 +16865,8 @@ exports.xmlToDampAll = xmlToDampAll;
 function xmlToEyeglasses(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -20119,27 +16878,22 @@ function xmlToEyeglasses(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -20154,7 +16908,6 @@ function xmlToEyeglasses(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20172,29 +16925,11 @@ function xmlToEyeglasses(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20211,14 +16946,8 @@ exports.xmlToEyeglasses = xmlToEyeglasses;
 function xmlToStringMute(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -20230,27 +16959,22 @@ function xmlToStringMute(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -20265,7 +16989,6 @@ function xmlToStringMute(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20287,29 +17010,11 @@ function xmlToStringMute(node) {
             ret.type = dataType;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20370,10 +17075,6 @@ exports.xmlToAccord = xmlToAccord;
 function xmlToImage(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundHalign = false;
     var foundValignImage = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20384,22 +17085,18 @@ function xmlToImage(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "halign") {
             var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
@@ -20419,18 +17116,6 @@ function xmlToImage(node) {
             var dataSource = getString(ch2, true);
             ret.source = dataSource;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundHalign) {
         ret.halign = (ret.justify || 0 /* Left */);
@@ -20472,14 +17157,8 @@ exports.getVoiceSymbol = getVoiceSymbol;
 function xmlToPrincipalVoice(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -20495,27 +17174,22 @@ function xmlToPrincipalVoice(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -20530,7 +17204,6 @@ function xmlToPrincipalVoice(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20555,29 +17228,11 @@ function xmlToPrincipalVoice(node) {
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20594,14 +17249,8 @@ exports.xmlToPrincipalVoice = xmlToPrincipalVoice;
 function xmlToAccordionRegistration(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -20625,27 +17274,22 @@ function xmlToAccordionRegistration(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -20660,7 +17304,6 @@ function xmlToAccordionRegistration(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20678,29 +17321,11 @@ function xmlToAccordionRegistration(node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20717,14 +17342,8 @@ exports.xmlToAccordionRegistration = xmlToAccordionRegistration;
 function xmlToPercussion(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -20781,27 +17400,22 @@ function xmlToPercussion(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -20816,7 +17430,6 @@ function xmlToPercussion(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20839,29 +17452,11 @@ function xmlToPercussion(node) {
             foundEnclosure = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21021,14 +17616,8 @@ function xmlToHarmony(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -21092,27 +17681,22 @@ function xmlToHarmony(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21127,7 +17711,6 @@ function xmlToHarmony(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21147,29 +17730,11 @@ function xmlToHarmony(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21203,14 +17768,8 @@ exports.xmlToRoot = xmlToRoot;
 function xmlToRootStep(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -21224,27 +17783,22 @@ function xmlToRootStep(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21259,7 +17813,6 @@ function xmlToRootStep(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21270,29 +17823,11 @@ function xmlToRootStep(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21304,14 +17839,8 @@ function xmlToRootAlter(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -21330,27 +17859,22 @@ function xmlToRootAlter(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21365,7 +17889,6 @@ function xmlToRootAlter(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21379,29 +17902,11 @@ function xmlToRootAlter(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21412,14 +17917,8 @@ exports.xmlToRootAlter = xmlToRootAlter;
 function xmlToFunction(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -21429,27 +17928,22 @@ function xmlToFunction(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21464,7 +17958,6 @@ function xmlToFunction(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21475,29 +17968,11 @@ function xmlToFunction(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21508,14 +17983,8 @@ exports.xmlToFunction = xmlToFunction;
 function xmlToKind(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -21539,27 +18008,22 @@ function xmlToKind(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21574,7 +18038,6 @@ function xmlToKind(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21603,29 +18066,11 @@ function xmlToKind(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21642,14 +18087,8 @@ exports.xmlToKind = xmlToKind;
 function xmlToInversion(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -21659,27 +18098,22 @@ function xmlToInversion(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21694,7 +18128,6 @@ function xmlToInversion(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21705,29 +18138,11 @@ function xmlToInversion(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21758,14 +18173,8 @@ exports.xmlToBass = xmlToBass;
 function xmlToBassStep(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -21779,27 +18188,22 @@ function xmlToBassStep(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21814,7 +18218,6 @@ function xmlToBassStep(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21825,29 +18228,11 @@ function xmlToBassStep(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21859,14 +18244,8 @@ function xmlToBassAlter(node) {
     "use strict";
     var ret = {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -21885,27 +18264,22 @@ function xmlToBassAlter(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -21920,7 +18294,6 @@ function xmlToBassAlter(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21934,29 +18307,11 @@ function xmlToBassAlter(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22032,14 +18387,8 @@ exports.getChordType = getChordType;
 function xmlToDegreeValue(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -22057,27 +18406,22 @@ function xmlToDegreeValue(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -22092,7 +18436,6 @@ function xmlToDegreeValue(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22103,29 +18446,11 @@ function xmlToDegreeValue(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22136,14 +18461,8 @@ exports.xmlToDegreeValue = xmlToDegreeValue;
 function xmlToDegreeAlter(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -22157,27 +18476,22 @@ function xmlToDegreeAlter(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -22192,7 +18506,6 @@ function xmlToDegreeAlter(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22203,29 +18516,11 @@ function xmlToDegreeAlter(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22236,14 +18531,8 @@ exports.xmlToDegreeAlter = xmlToDegreeAlter;
 function xmlToDegreeType(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -22257,27 +18546,22 @@ function xmlToDegreeType(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -22292,7 +18576,6 @@ function xmlToDegreeType(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22303,29 +18586,11 @@ function xmlToDegreeType(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22336,10 +18601,6 @@ exports.xmlToDegreeType = xmlToDegreeType;
 function xmlToFrame(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValignImage = false;
@@ -22371,22 +18632,18 @@ function xmlToFrame(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22411,18 +18668,6 @@ function xmlToFrame(node) {
             var dataHeight = getNumber(ch2, true);
             ret.height = dataHeight;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22627,14 +18872,8 @@ exports.xmlToPrint = xmlToPrint;
 function xmlToMeasureNumbering(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -22646,27 +18885,22 @@ function xmlToMeasureNumbering(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -22681,7 +18915,6 @@ function xmlToMeasureNumbering(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22702,29 +18935,11 @@ function xmlToMeasureNumbering(node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22921,10 +19136,8 @@ exports.xmlToDefaults = xmlToDefaults;
 function xmlToMusicFont(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -22933,7 +19146,6 @@ function xmlToMusicFont(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -22948,20 +19160,13 @@ function xmlToMusicFont(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
     }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -22969,10 +19174,8 @@ exports.xmlToMusicFont = xmlToMusicFont;
 function xmlToWordFont(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -22981,7 +19184,6 @@ function xmlToWordFont(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -22996,11 +19198,7 @@ function xmlToWordFont(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
     }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
@@ -23008,19 +19206,14 @@ function xmlToWordFont(node) {
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
     }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
-    }
     return ret;
 }
 exports.xmlToWordFont = xmlToWordFont;
 function xmlToLyricFont(node) {
     "use strict";
     var ret = {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -23033,7 +19226,6 @@ function xmlToLyricFont(node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -23048,24 +19240,17 @@ function xmlToLyricFont(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "name") {
             var dataName = getString(ch2, true);
             ret.name = dataName;
         }
     }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -23122,14 +19307,8 @@ function xmlToCreditWords(node) {
     "use strict";
     var ret = {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -23154,27 +19333,22 @@ function xmlToCreditWords(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -23189,7 +19363,6 @@ function xmlToCreditWords(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23253,29 +19426,11 @@ function xmlToCreditWords(node) {
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23316,10 +19471,6 @@ exports.xmlToCreditWords = xmlToCreditWords;
 function xmlToCreditImage(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundHalign = false;
     var foundValignImage = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23330,22 +19481,18 @@ function xmlToCreditImage(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "halign") {
             var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
@@ -23365,18 +19512,6 @@ function xmlToCreditImage(node) {
             var dataSource = getString(ch2, true);
             ret.source = dataSource;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundHalign) {
         ret.halign = (ret.justify || 0 /* Left */);
@@ -23462,14 +19597,8 @@ exports.xmlToScorePart = xmlToScorePart;
 function xmlToPartName(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundJustify = false;
@@ -23481,27 +19610,22 @@ function xmlToPartName(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -23516,7 +19640,6 @@ function xmlToPartName(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23537,29 +19660,11 @@ function xmlToPartName(node) {
     var ch3 = node;
     var dataPartName = getString(ch3, true);
     ret.partName = dataPartName;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23576,14 +19681,8 @@ exports.xmlToPartName = xmlToPartName;
 function xmlToPartAbbreviation(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundJustify = false;
@@ -23595,27 +19694,22 @@ function xmlToPartAbbreviation(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -23630,7 +19724,6 @@ function xmlToPartAbbreviation(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23651,29 +19744,11 @@ function xmlToPartAbbreviation(node) {
     var ch3 = node;
     var dataAbbreviation = getString(ch3, true);
     ret.abbreviation = dataAbbreviation;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23751,14 +19826,8 @@ exports.xmlToPartGroup = xmlToPartGroup;
 function xmlToGroupName(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundJustify = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23769,27 +19838,22 @@ function xmlToGroupName(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -23804,7 +19868,6 @@ function xmlToGroupName(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23820,29 +19883,11 @@ function xmlToGroupName(node) {
     var ch3 = node;
     var dataName = getString(ch3, true);
     ret.name = dataName;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23885,14 +19930,8 @@ exports.xmlToGroupNameDisplay = xmlToGroupNameDisplay;
 function xmlToGroupAbbreviation(node) {
     "use strict";
     var ret = {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundJustify = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23903,27 +19942,22 @@ function xmlToGroupAbbreviation(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
@@ -23938,7 +19972,6 @@ function xmlToGroupAbbreviation(node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23954,29 +19987,11 @@ function xmlToGroupAbbreviation(node) {
     var ch3 = node;
     var dataText = getString(ch3, true);
     ret.text = dataText;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
     }
     if (!foundFontStyle) {
         ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24020,10 +20035,6 @@ function xmlToGroupSymbol(node) {
     "use strict";
     var ret = {};
     var foundData = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -24033,22 +20044,18 @@ function xmlToGroupSymbol(node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -24061,18 +20068,6 @@ function xmlToGroupSymbol(node) {
     ret.data = dataData;
     if (!foundData) {
         ret.data = 0 /* None */;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";

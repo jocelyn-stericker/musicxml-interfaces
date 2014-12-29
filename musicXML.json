@@ -500,23 +500,19 @@
       "interface": {
         "default-x": {
           "type": "tenths",
-          "required": false,
-          "std": null
+          "required": false
         },
         "default-y": {
           "type": "tenths",
-          "required": false,
-          "std": null
+          "required": false
         },
         "relative-x": {
           "type": "tenths",
-          "required": false,
-          "std": 0
+          "required": false
         },
         "relative-y": {
           "type": "tenths",
-          "required": false,
-          "std": 0
+          "required": false
         }
       },
       "auto": true
@@ -551,8 +547,7 @@
       "interface": {
         "directive-entity": {
           "type": "yes-no",
-          "required": false,
-          "std": false
+          "required": false
         }
       },
       "auto": true
@@ -563,33 +558,27 @@
       "interface": {
         "bezier-offset": {
           "type": "number",
-          "required": false,
-          "std": null
+          "required": false
         },
         "bezier-offset2": {
           "type": "number",
-          "required": false,
-          "std": null
+          "required": false
         },
         "bezier-x": {
           "type": "tenths",
-          "required": false,
-          "std": null
+          "required": false
         },
         "bezier-y": {
           "type": "tenths",
-          "required": false,
-          "std": null
+          "required": false
         },
         "bezier-x2": {
           "type": "tenths",
-          "required": false,
-          "std": null
+          "required": false
         },
         "bezier-y2": {
           "type": "tenths",
-          "required": false,
-          "std": null
+          "required": false
         }
       },
       "auto": true
@@ -600,8 +589,7 @@
       "interface": {
         "font-family": {
           "type": "string",
-          "required": false,
-          "std": "Alegreya, serif"
+          "required": false
         },
         "font-style": {
           "type": "normal-italic",
@@ -610,8 +598,7 @@
         },
         "font-size": {
           "type": "string",
-          "required": false,
-          "std": "small"
+          "required": false
         },
         "font-weight": {
           "type": "normal-bold",
@@ -2570,12 +2557,12 @@
       "//": "The text of the multiple-rest element indicates the number\nof measures in the multiple rest. Multiple rests may use\nthe 1-bar / 2-bar / 4-bar rest symbols, or a single shape.\nThe use-symbols attribute indicates which to use; it is no\nif not specified.",
       "element": "multiple-rest",
       "interface": {
-        "data": {
+        "count": {
           "child": true,
-          "type": "string",
+          "type": "number",
           "required": true
         },
-        "multiple-rest": {
+        "use-symbols": {
           "type": "yes-no",
           "required": false,
           "std": false
@@ -2716,6 +2703,7 @@
         },
         "<clef>": {
           "required": false,
+          "array": true,
           "idx": 6
         },
         "<staff-details>": {

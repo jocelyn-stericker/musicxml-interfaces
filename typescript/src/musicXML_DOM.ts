@@ -2709,10 +2709,6 @@ export interface PositionComplete {
 export function xmlToPosition(node: Node) {
     "use strict";
     var ret: Position = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -2721,35 +2717,19 @@ export function xmlToPosition(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     return ret;
 }
@@ -2866,7 +2846,6 @@ export interface DirectiveEntityComplete {
 export function xmlToDirectiveEntity(node: Node) {
     "use strict";
     var ret: DirectiveEntity = <any> {};
-    var foundDirectiveEntity = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -2875,11 +2854,7 @@ export function xmlToDirectiveEntity(node: Node) {
         if (ch2.name === "directive-entity") {
             var dataDirectiveEntity = xmlToYesNo(ch2) ;
             ret.directiveEntity = dataDirectiveEntity;
-            foundDirectiveEntity = true;
         }
-    }
-    if (!foundDirectiveEntity) {
-        ret.directiveEntity = false;
     }
     return ret;
 }
@@ -2958,12 +2933,6 @@ export interface BezierComplete {
 export function xmlToBezier(node: Node) {
     "use strict";
     var ret: Bezier = <any> {};
-    var foundBezierX2 = false;
-    var foundBezierOffset = false;
-    var foundBezierOffset2 = false;
-    var foundBezierX = false;
-    var foundBezierY = false;
-    var foundBezierY2 = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -2972,51 +2941,27 @@ export function xmlToBezier(node: Node) {
         if (ch2.name === "bezier-x2") {
             var dataBezierX2 = getNumber(ch2, true);
             ret.bezierX2 = dataBezierX2;
-            foundBezierX2 = true;
         }
         if (ch2.name === "bezier-offset") {
             var dataBezierOffset = getNumber(ch2, true);
             ret.bezierOffset = dataBezierOffset;
-            foundBezierOffset = true;
         }
         if (ch2.name === "bezier-offset2") {
             var dataBezierOffset2 = getNumber(ch2, true);
             ret.bezierOffset2 = dataBezierOffset2;
-            foundBezierOffset2 = true;
         }
         if (ch2.name === "bezier-x") {
             var dataBezierX = getNumber(ch2, true);
             ret.bezierX = dataBezierX;
-            foundBezierX = true;
         }
         if (ch2.name === "bezier-y") {
             var dataBezierY = getNumber(ch2, true);
             ret.bezierY = dataBezierY;
-            foundBezierY = true;
         }
         if (ch2.name === "bezier-y2") {
             var dataBezierY2 = getNumber(ch2, true);
             ret.bezierY2 = dataBezierY2;
-            foundBezierY2 = true;
         }
-    }
-    if (!foundBezierX2) {
-        ret.bezierX2 = NaN;
-    }
-    if (!foundBezierOffset) {
-        ret.bezierOffset = NaN;
-    }
-    if (!foundBezierOffset2) {
-        ret.bezierOffset2 = NaN;
-    }
-    if (!foundBezierX) {
-        ret.bezierX = NaN;
-    }
-    if (!foundBezierY) {
-        ret.bezierY = NaN;
-    }
-    if (!foundBezierY2) {
-        ret.bezierY2 = NaN;
     }
     return ret;
 }
@@ -3077,10 +3022,8 @@ export interface FontComplete {
 export function xmlToFont(node: Node) {
     "use strict";
     var ret: Font = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -3089,7 +3032,6 @@ export function xmlToFont(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -3104,20 +3046,13 @@ export function xmlToFont(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
     }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -3942,14 +3877,8 @@ export interface PrintStyleComplete extends PositionComplete, FontComplete, Colo
 export function xmlToPrintStyle(node: Node) {
     "use strict";
     var ret: PrintStyle = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -3959,27 +3888,22 @@ export function xmlToPrintStyle(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -3994,7 +3918,6 @@ export function xmlToPrintStyle(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -4002,29 +3925,11 @@ export function xmlToPrintStyle(node: Node) {
             foundColor = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -4050,14 +3955,8 @@ export interface PrintStyleAlignComplete extends PrintStyleComplete, HalignCompl
 export function xmlToPrintStyleAlign(node: Node) {
     "use strict";
     var ret: PrintStyleAlign = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -4069,27 +3968,22 @@ export function xmlToPrintStyleAlign(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -4104,7 +3998,6 @@ export function xmlToPrintStyleAlign(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -4122,29 +4015,11 @@ export function xmlToPrintStyleAlign(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -4460,14 +4335,8 @@ export function xmlToTextFormatting(node: Node) {
     "use strict";
     var ret: TextFormatting = <any> {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -4492,27 +4361,22 @@ export function xmlToTextFormatting(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -4527,7 +4391,6 @@ export function xmlToTextFormatting(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -4588,29 +4451,11 @@ export function xmlToTextFormatting(node: Node) {
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5153,14 +4998,8 @@ export function xmlToFootnote(node: Node) {
     "use strict";
     var ret: Footnote = <any> {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -5185,27 +5024,22 @@ export function xmlToFootnote(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -5220,7 +5054,6 @@ export function xmlToFootnote(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -5284,29 +5117,11 @@ export function xmlToFootnote(node: Node) {
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5467,14 +5282,8 @@ export function xmlToFermata(node: Node) {
     "use strict";
     var ret: Fermata = <any> {};
     var foundShape = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundType = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -5485,27 +5294,22 @@ export function xmlToFermata(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -5520,7 +5324,6 @@ export function xmlToFermata(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -5539,29 +5342,11 @@ export function xmlToFermata(node: Node) {
     if (!foundShape) {
         ret.shape = NormalAngledSquare.Normal;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5609,10 +5394,6 @@ export function xmlToWavyLine(node: Node) {
     "use strict";
     var ret: WavyLine = <any> {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundColor = false;
     var foundStartNote = false;
@@ -5635,22 +5416,18 @@ export function xmlToWavyLine(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
@@ -5704,18 +5481,6 @@ export function xmlToWavyLine(node: Node) {
     }
     if (!foundNumber_) {
         ret.number_ = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
@@ -5801,14 +5566,8 @@ export interface SegnoComplete extends PrintStyleAlignComplete {
 export function xmlToSegno(node: Node) {
     "use strict";
     var ret: Segno = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -5820,27 +5579,22 @@ export function xmlToSegno(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -5855,7 +5609,6 @@ export function xmlToSegno(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -5873,29 +5626,11 @@ export function xmlToSegno(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5931,14 +5666,8 @@ export interface CodaComplete extends PrintStyleAlignComplete {
 export function xmlToCoda(node: Node) {
     "use strict";
     var ret: Coda = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -5950,27 +5679,22 @@ export function xmlToCoda(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -5985,7 +5709,6 @@ export function xmlToCoda(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6003,29 +5726,11 @@ export function xmlToCoda(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6280,14 +5985,8 @@ export interface DynamicsComplete extends PrintStyleAlignComplete, PlacementComp
 export function xmlToDynamics(node: Node) {
     "use strict";
     var ret: Dynamics = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -6400,27 +6099,22 @@ export function xmlToDynamics(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -6435,7 +6129,6 @@ export function xmlToDynamics(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6478,29 +6171,11 @@ export function xmlToDynamics(node: Node) {
             foundEnclosure = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6564,14 +6239,8 @@ export function xmlToFingering(node: Node) {
     "use strict";
     var ret: Fingering = <any> {};
     var foundSubstitution = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundAlternate = false;
@@ -6588,27 +6257,22 @@ export function xmlToFingering(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -6623,7 +6287,6 @@ export function xmlToFingering(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6647,29 +6310,11 @@ export function xmlToFingering(node: Node) {
     if (!foundSubstitution) {
         ret.substitution = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6709,10 +6354,8 @@ export interface FretComplete extends FontComplete, ColorComplete {
 export function xmlToFret(node: Node) {
     "use strict";
     var ret: Fret = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -6722,7 +6365,6 @@ export function xmlToFret(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -6737,7 +6379,6 @@ export function xmlToFret(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6748,17 +6389,11 @@ export function xmlToFret(node: Node) {
     var ch3 = node;
     var dataFret = getNumber(ch3, true);
     ret.fret = dataFret;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6792,14 +6427,8 @@ export interface StringComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToString(node: Node) {
     "use strict";
     var ret: String = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -6810,27 +6439,22 @@ export function xmlToString(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -6845,7 +6469,6 @@ export function xmlToString(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -6861,29 +6484,11 @@ export function xmlToString(node: Node) {
     var ch3 = node;
     var dataStringNum = getNumber(ch3, true);
     ret.stringNum = dataStringNum;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6991,14 +6596,8 @@ export function xmlToDisplayText(node: Node) {
     "use strict";
     var ret: DisplayText = <any> {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -7023,27 +6622,22 @@ export function xmlToDisplayText(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -7058,7 +6652,6 @@ export function xmlToDisplayText(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -7122,29 +6715,11 @@ export function xmlToDisplayText(node: Node) {
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -7207,14 +6782,8 @@ export function xmlToAccidentalText(node: Node) {
     "use strict";
     var ret: AccidentalText = <any> {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -7239,27 +6808,22 @@ export function xmlToAccidentalText(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -7274,7 +6838,6 @@ export function xmlToAccidentalText(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -7338,29 +6901,11 @@ export function xmlToAccidentalText(node: Node) {
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -8529,14 +8074,8 @@ export function xmlToLeftDivider(node: Node) {
     "use strict";
     var ret: LeftDivider = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -8553,27 +8092,22 @@ export function xmlToLeftDivider(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -8588,7 +8122,6 @@ export function xmlToLeftDivider(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -8609,29 +8142,11 @@ export function xmlToLeftDivider(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -8686,14 +8201,8 @@ export function xmlToRightDivider(node: Node) {
     "use strict";
     var ret: RightDivider = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -8710,27 +8219,22 @@ export function xmlToRightDivider(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -8745,7 +8249,6 @@ export function xmlToRightDivider(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -8766,29 +8269,11 @@ export function xmlToRightDivider(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10550,14 +10035,8 @@ export interface KeyComplete extends PrintStyleComplete, PrintObjectComplete {
 export function xmlToKey(node: Node) {
     "use strict";
     var ret: Key = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -10600,27 +10079,22 @@ export function xmlToKey(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -10635,7 +10109,6 @@ export function xmlToKey(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10648,29 +10121,11 @@ export function xmlToKey(node: Node) {
             foundPrintObject = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10773,14 +10228,8 @@ export function xmlToTime(node: Node) {
     var ret: Time = <any> {};
     var foundSymbol = false;
     var foundSeparator = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -10819,27 +10268,22 @@ export function xmlToTime(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -10854,7 +10298,6 @@ export function xmlToTime(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -10883,29 +10326,11 @@ export function xmlToTime(node: Node) {
     if (!foundSeparator) {
         ret.separator = SeparatorType.None;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11146,10 +10571,6 @@ export function xmlToPartSymbol(node: Node) {
     "use strict";
     var ret: PartSymbol = <any> {};
     var foundTopStaff = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     var foundBottomStaff = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -11165,22 +10586,18 @@ export function xmlToPartSymbol(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11198,18 +10615,6 @@ export function xmlToPartSymbol(node: Node) {
     ret.type = dataType;
     if (!foundTopStaff) {
         ret.topStaff = -1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11374,14 +10779,8 @@ export function xmlToClef(node: Node) {
     var ret: Clef = <any> {};
     var foundNumber_ = false;
     var foundSize = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundAfterBarline = false;
@@ -11416,27 +10815,22 @@ export function xmlToClef(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -11451,7 +10845,6 @@ export function xmlToClef(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -11480,29 +10873,11 @@ export function xmlToClef(node: Node) {
     if (!foundSize) {
         ret.size = SymbolSize.Full;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -11972,14 +11347,8 @@ export interface DirectiveComplete extends PrintStyleComplete {
 export function xmlToDirective(node: Node) {
     "use strict";
     var ret: Directive = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -11989,27 +11358,22 @@ export function xmlToDirective(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -12024,7 +11388,6 @@ export function xmlToDirective(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12035,29 +11398,11 @@ export function xmlToDirective(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12106,8 +11451,8 @@ export function xmlToSlashDot(node: Node) {
  * if not specified.
  */
 export interface MultipleRest {
-    multipleRest?: boolean;
-    data: string;
+    useSymbols?: boolean;
+    count: number;
 }
 
 /**
@@ -12118,31 +11463,31 @@ export interface MultipleRest {
  * if not specified.
  */
 export interface MultipleRestComplete {
-    multipleRest: boolean;
-    data: string;
+    useSymbols: boolean;
+    count: number;
 }
 
 
 export function xmlToMultipleRest(node: Node) {
     "use strict";
     var ret: MultipleRest = <any> {};
-    var foundMultipleRest = false;
+    var foundUseSymbols = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "multiple-rest") {
-            var dataMultipleRest = xmlToYesNo(ch2) ;
-            ret.multipleRest = dataMultipleRest;
-            foundMultipleRest = true;
+        if (ch2.name === "use-symbols") {
+            var dataUseSymbols = xmlToYesNo(ch2) ;
+            ret.useSymbols = dataUseSymbols;
+            foundUseSymbols = true;
         }
     }
     var ch3 = node;
-    var dataData = getString(ch3, true);
-    ret.data = dataData;
-    if (!foundMultipleRest) {
-        ret.multipleRest = false;
+    var dataCount = getNumber(ch3, true);
+    ret.count = dataCount;
+    if (!foundUseSymbols) {
+        ret.useSymbols = false;
     }
     return ret;
 }
@@ -12433,10 +11778,8 @@ export function xmlToMeasureStyle(node: Node) {
     "use strict";
     var ret: MeasureStyle = <any> {};
     var foundNumber_ = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -12467,7 +11810,6 @@ export function xmlToMeasureStyle(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -12482,7 +11824,6 @@ export function xmlToMeasureStyle(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -12493,17 +11834,11 @@ export function xmlToMeasureStyle(node: Node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12521,7 +11856,7 @@ export function xmlToMeasureStyle(node: Node) {
 export interface Attributes extends Editorial {
     divisions?: number;
     partSymbol?: PartSymbol;
-    clef?: Clef;
+    clefs?: Clef[];
     measureStyle?: MeasureStyle;
     time?: Time;
     staffDetails?: StaffDetails;
@@ -12542,7 +11877,7 @@ export interface Attributes extends Editorial {
 export interface AttributesComplete extends EditorialComplete {
     divisions: number;
     partSymbol: PartSymbol;
-    clef: Clef;
+    clefs: Clef[];
     measureStyle: MeasureStyle;
     time: Time;
     staffDetails: StaffDetails;
@@ -12568,8 +11903,8 @@ export function xmlToAttributes(node: Node) {
             ret.partSymbol = dataPartSymbol;
         }
         if (ch.nodeName === "clef") {
-            var dataClef = xmlToClef(ch) ;
-            ret.clef = dataClef;
+            var dataClefs = xmlToClef(ch) ;
+            ret.clefs = (ret.clefs|| []).concat(dataClefs);
         }
         if (ch.nodeName === "measure-style") {
             var dataMeasureStyle = xmlToMeasureStyle(ch) ;
@@ -13231,14 +12566,8 @@ export function xmlToNote(node: Node) {
     var foundPizzicato = false;
     var foundDynamics = false;
     var foundRelease = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundPrintSpacing = false;
@@ -13371,27 +12700,22 @@ export function xmlToNote(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -13406,7 +12730,6 @@ export function xmlToNote(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13451,29 +12774,11 @@ export function xmlToNote(node: Node) {
     if (!foundRelease) {
         ret.release = NaN;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13629,14 +12934,8 @@ export interface DotComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToDot(node: Node) {
     "use strict";
     var ret: Dot = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -13647,27 +12946,22 @@ export function xmlToDot(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -13682,7 +12976,6 @@ export function xmlToDot(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -13695,29 +12988,11 @@ export function xmlToDot(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13963,14 +13238,8 @@ export function xmlToAccidental(node: Node) {
     var foundBracket = false;
     var foundSize = false;
     var foundParentheses = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundEditorial = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -14001,27 +13270,22 @@ export function xmlToAccidental(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -14036,7 +13300,6 @@ export function xmlToAccidental(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14064,29 +13327,11 @@ export function xmlToAccidental(node: Node) {
     if (!foundParentheses) {
         ret.parentheses = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14223,10 +13468,6 @@ export interface StemComplete extends PositionComplete, ColorComplete {
 export function xmlToStem(node: Node) {
     "use strict";
     var ret: Stem = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -14236,22 +13477,18 @@ export function xmlToStem(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14262,18 +13499,6 @@ export function xmlToStem(node: Node) {
     var ch3 = node;
     var dataType = getStemType(ch3, null);
     ret.type = dataType;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundColor) {
         ret.color = "#000000";
     }
@@ -14483,10 +13708,8 @@ export interface NoteheadComplete extends FontComplete, ColorComplete {
 export function xmlToNotehead(node: Node) {
     "use strict";
     var ret: Notehead = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -14496,7 +13719,6 @@ export function xmlToNotehead(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -14511,7 +13733,6 @@ export function xmlToNotehead(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -14530,17 +13751,11 @@ export function xmlToNotehead(node: Node) {
     var ch3 = node;
     var dataType = getNoteheadType(ch3, null);
     ret.type = dataType;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14961,18 +14176,8 @@ export function xmlToTied(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundOrientation = false;
-    var foundBezierX2 = false;
-    var foundBezierOffset = false;
-    var foundBezierOffset2 = false;
-    var foundBezierX = false;
-    var foundBezierY = false;
-    var foundBezierY2 = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -15002,22 +14207,18 @@ export function xmlToTied(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
@@ -15032,32 +14233,26 @@ export function xmlToTied(node: Node) {
         if (ch2.name === "bezier-x2") {
             var dataBezierX2 = getNumber(ch2, true);
             ret.bezierX2 = dataBezierX2;
-            foundBezierX2 = true;
         }
         if (ch2.name === "bezier-offset") {
             var dataBezierOffset = getNumber(ch2, true);
             ret.bezierOffset = dataBezierOffset;
-            foundBezierOffset = true;
         }
         if (ch2.name === "bezier-offset2") {
             var dataBezierOffset2 = getNumber(ch2, true);
             ret.bezierOffset2 = dataBezierOffset2;
-            foundBezierOffset2 = true;
         }
         if (ch2.name === "bezier-x") {
             var dataBezierX = getNumber(ch2, true);
             ret.bezierX = dataBezierX;
-            foundBezierX = true;
         }
         if (ch2.name === "bezier-y") {
             var dataBezierY = getNumber(ch2, true);
             ret.bezierY = dataBezierY;
-            foundBezierY = true;
         }
         if (ch2.name === "bezier-y2") {
             var dataBezierY2 = getNumber(ch2, true);
             ret.bezierY2 = dataBezierY2;
-            foundBezierY2 = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15081,41 +14276,11 @@ export function xmlToTied(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
     }
     if (!foundOrientation) {
         ret.orientation = OverUnder.Unspecified;
-    }
-    if (!foundBezierX2) {
-        ret.bezierX2 = NaN;
-    }
-    if (!foundBezierOffset) {
-        ret.bezierOffset = NaN;
-    }
-    if (!foundBezierOffset2) {
-        ret.bezierOffset2 = NaN;
-    }
-    if (!foundBezierX) {
-        ret.bezierX = NaN;
-    }
-    if (!foundBezierY) {
-        ret.bezierY = NaN;
-    }
-    if (!foundBezierY2) {
-        ret.bezierY2 = NaN;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15155,18 +14320,8 @@ export function xmlToSlur(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundOrientation = false;
-    var foundBezierX2 = false;
-    var foundBezierOffset = false;
-    var foundBezierOffset2 = false;
-    var foundBezierX = false;
-    var foundBezierY = false;
-    var foundBezierY2 = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -15196,22 +14351,18 @@ export function xmlToSlur(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
@@ -15226,32 +14377,26 @@ export function xmlToSlur(node: Node) {
         if (ch2.name === "bezier-x2") {
             var dataBezierX2 = getNumber(ch2, true);
             ret.bezierX2 = dataBezierX2;
-            foundBezierX2 = true;
         }
         if (ch2.name === "bezier-offset") {
             var dataBezierOffset = getNumber(ch2, true);
             ret.bezierOffset = dataBezierOffset;
-            foundBezierOffset = true;
         }
         if (ch2.name === "bezier-offset2") {
             var dataBezierOffset2 = getNumber(ch2, true);
             ret.bezierOffset2 = dataBezierOffset2;
-            foundBezierOffset2 = true;
         }
         if (ch2.name === "bezier-x") {
             var dataBezierX = getNumber(ch2, true);
             ret.bezierX = dataBezierX;
-            foundBezierX = true;
         }
         if (ch2.name === "bezier-y") {
             var dataBezierY = getNumber(ch2, true);
             ret.bezierY = dataBezierY;
-            foundBezierY = true;
         }
         if (ch2.name === "bezier-y2") {
             var dataBezierY2 = getNumber(ch2, true);
             ret.bezierY2 = dataBezierY2;
-            foundBezierY2 = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15275,41 +14420,11 @@ export function xmlToSlur(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
     }
     if (!foundOrientation) {
         ret.orientation = OverUnder.Unspecified;
-    }
-    if (!foundBezierX2) {
-        ret.bezierX2 = NaN;
-    }
-    if (!foundBezierOffset) {
-        ret.bezierOffset = NaN;
-    }
-    if (!foundBezierOffset2) {
-        ret.bezierOffset2 = NaN;
-    }
-    if (!foundBezierX) {
-        ret.bezierX = NaN;
-    }
-    if (!foundBezierY) {
-        ret.bezierY = NaN;
-    }
-    if (!foundBezierY2) {
-        ret.bezierY2 = NaN;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15431,10 +14546,6 @@ export function xmlToTuplet(node: Node) {
     var foundBracket = false;
     var foundShowNumber = false;
     var foundLineShape = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundShowType = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -15472,22 +14583,18 @@ export function xmlToTuplet(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
@@ -15512,18 +14619,6 @@ export function xmlToTuplet(node: Node) {
     }
     if (!foundLineShape) {
         ret.lineShape = StraightCurved.Straight;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
@@ -15806,10 +14901,8 @@ export interface TupletNumberComplete extends FontComplete, ColorComplete {
 export function xmlToTupletNumber(node: Node) {
     "use strict";
     var ret: TupletNumber = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -15819,7 +14912,6 @@ export function xmlToTupletNumber(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -15834,7 +14926,6 @@ export function xmlToTupletNumber(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15845,17 +14936,11 @@ export function xmlToTupletNumber(node: Node) {
     var ch3 = node;
     var dataText = getString(ch3, true);
     ret.text = dataText;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -15937,10 +15022,8 @@ export interface TupletTypeComplete extends FontComplete, ColorComplete {
 export function xmlToTupletType(node: Node) {
     "use strict";
     var ret: TupletType = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -15950,7 +15033,6 @@ export function xmlToTupletType(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -15965,7 +15047,6 @@ export function xmlToTupletType(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -15976,17 +15057,11 @@ export function xmlToTupletType(node: Node) {
     var ch3 = node;
     var dataText = getString(ch3, true);
     ret.text = dataText;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16066,10 +15141,8 @@ export interface TupletDotComplete extends FontComplete, ColorComplete {
 export function xmlToTupletDot(node: Node) {
     "use strict";
     var ret: TupletDot = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -16079,7 +15152,6 @@ export function xmlToTupletDot(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -16094,7 +15166,6 @@ export function xmlToTupletDot(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16102,17 +15173,11 @@ export function xmlToTupletDot(node: Node) {
             foundColor = true;
         }
     }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16159,14 +15224,8 @@ export function xmlToGlissando(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundNormal = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -16192,27 +15251,22 @@ export function xmlToGlissando(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -16227,7 +15281,6 @@ export function xmlToGlissando(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16256,29 +15309,11 @@ export function xmlToGlissando(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16328,14 +15363,8 @@ export function xmlToSlide(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundAccelerate = false;
     var foundBeats = false;
@@ -16365,27 +15394,22 @@ export function xmlToSlide(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -16400,7 +15424,6 @@ export function xmlToSlide(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16449,29 +15472,11 @@ export function xmlToSlide(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16525,14 +15530,8 @@ export function xmlToOtherNotation(node: Node) {
     "use strict";
     var ret: OtherNotation = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -16548,27 +15547,22 @@ export function xmlToOtherNotation(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -16583,7 +15577,6 @@ export function xmlToOtherNotation(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16606,29 +15599,11 @@ export function xmlToOtherNotation(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16664,14 +15639,8 @@ export function xmlToOtherDirection(node: Node) {
     "use strict";
     var ret: OtherDirection = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -16688,27 +15657,22 @@ export function xmlToOtherDirection(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -16723,7 +15687,6 @@ export function xmlToOtherDirection(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16747,29 +15710,11 @@ export function xmlToOtherDirection(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16833,14 +15778,8 @@ export interface OrnamentsComplete extends PrintStyleComplete, PlacementComplete
 export function xmlToOrnaments(node: Node) {
     "use strict";
     var ret: Ornaments = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -16914,27 +15853,22 @@ export function xmlToOrnaments(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -16949,7 +15883,6 @@ export function xmlToOrnaments(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -16997,29 +15930,11 @@ export function xmlToOrnaments(node: Node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17061,14 +15976,8 @@ export interface TrillMarkComplete extends PrintStyleComplete, PlacementComplete
 export function xmlToTrillMark(node: Node) {
     "use strict";
     var ret: TrillMark = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -17086,27 +15995,22 @@ export function xmlToTrillMark(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -17121,7 +16025,6 @@ export function xmlToTrillMark(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17169,29 +16072,11 @@ export function xmlToTrillMark(node: Node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17258,14 +16143,8 @@ export function xmlToTurn(node: Node) {
     "use strict";
     var ret: Turn = <any> {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -17288,27 +16167,22 @@ export function xmlToTurn(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -17323,7 +16197,6 @@ export function xmlToTurn(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17374,29 +16247,11 @@ export function xmlToTurn(node: Node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17463,14 +16318,8 @@ export function xmlToDelayedTurn(node: Node) {
     "use strict";
     var ret: DelayedTurn = <any> {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -17493,27 +16342,22 @@ export function xmlToDelayedTurn(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -17528,7 +16372,6 @@ export function xmlToDelayedTurn(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17579,29 +16422,11 @@ export function xmlToDelayedTurn(node: Node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17668,14 +16493,8 @@ export function xmlToInvertedTurn(node: Node) {
     "use strict";
     var ret: InvertedTurn = <any> {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -17698,27 +16517,22 @@ export function xmlToInvertedTurn(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -17733,7 +16547,6 @@ export function xmlToInvertedTurn(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17784,29 +16597,11 @@ export function xmlToInvertedTurn(node: Node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17873,14 +16668,8 @@ export function xmlToDelayedInvertedTurn(node: Node) {
     "use strict";
     var ret: DelayedInvertedTurn = <any> {};
     var foundSlash = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -17903,27 +16692,22 @@ export function xmlToDelayedInvertedTurn(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -17938,7 +16722,6 @@ export function xmlToDelayedInvertedTurn(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -17989,29 +16772,11 @@ export function xmlToDelayedInvertedTurn(node: Node) {
     if (!foundSlash) {
         ret.slash = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18075,14 +16840,8 @@ export interface VerticalTurnComplete extends PrintStyleComplete, PlacementCompl
 export function xmlToVerticalTurn(node: Node) {
     "use strict";
     var ret: VerticalTurn = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -18100,27 +16859,22 @@ export function xmlToVerticalTurn(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -18135,7 +16889,6 @@ export function xmlToVerticalTurn(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18183,29 +16936,11 @@ export function xmlToVerticalTurn(node: Node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18269,14 +17004,8 @@ export interface ShakeComplete extends PrintStyleComplete, PlacementComplete, Tr
 export function xmlToShake(node: Node) {
     "use strict";
     var ret: Shake = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -18294,27 +17023,22 @@ export function xmlToShake(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -18329,7 +17053,6 @@ export function xmlToShake(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18377,29 +17100,11 @@ export function xmlToShake(node: Node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18465,14 +17170,8 @@ export interface MordentComplete extends PrintStyleComplete, PlacementComplete, 
 export function xmlToMordent(node: Node) {
     "use strict";
     var ret: Mordent = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -18502,27 +17201,22 @@ export function xmlToMordent(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -18537,7 +17231,6 @@ export function xmlToMordent(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18585,29 +17278,11 @@ export function xmlToMordent(node: Node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18673,14 +17348,8 @@ export interface InvertedMordentComplete extends PrintStyleComplete, PlacementCo
 export function xmlToInvertedMordent(node: Node) {
     "use strict";
     var ret: InvertedMordent = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundStartNote = false;
@@ -18710,27 +17379,22 @@ export function xmlToInvertedMordent(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -18745,7 +17409,6 @@ export function xmlToInvertedMordent(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18793,29 +17456,11 @@ export function xmlToInvertedMordent(node: Node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18867,14 +17512,8 @@ export interface SchleiferComplete extends PrintStyleComplete, PlacementComplete
 export function xmlToSchleifer(node: Node) {
     "use strict";
     var ret: Schleifer = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -18885,27 +17524,22 @@ export function xmlToSchleifer(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -18920,7 +17554,6 @@ export function xmlToSchleifer(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -18933,29 +17566,11 @@ export function xmlToSchleifer(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19022,14 +17637,8 @@ export interface TremoloComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToTremolo(node: Node) {
     "use strict";
     var ret: Tremolo = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundType = false;
@@ -19041,27 +17650,22 @@ export function xmlToTremolo(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -19076,7 +17680,6 @@ export function xmlToTremolo(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19097,29 +17700,11 @@ export function xmlToTremolo(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19157,14 +17742,8 @@ export interface OtherOrnamentComplete extends PrintStyleComplete, PlacementComp
 export function xmlToOtherOrnament(node: Node) {
     "use strict";
     var ret: OtherOrnament = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -19175,27 +17754,22 @@ export function xmlToOtherOrnament(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -19210,7 +17784,6 @@ export function xmlToOtherOrnament(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19230,29 +17803,11 @@ export function xmlToOtherOrnament(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19287,14 +17842,8 @@ export interface AccidentalMarkComplete extends PrintStyleComplete, PlacementCom
 export function xmlToAccidentalMark(node: Node) {
     "use strict";
     var ret: AccidentalMark = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -19305,27 +17854,22 @@ export function xmlToAccidentalMark(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -19340,7 +17884,6 @@ export function xmlToAccidentalMark(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19356,29 +17899,11 @@ export function xmlToAccidentalMark(node: Node) {
     var ch3 = node;
     var dataMark = getString(ch3, true);
     ret.mark = dataMark;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19580,14 +18105,8 @@ export interface UpBowComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToUpBow(node: Node) {
     "use strict";
     var ret: UpBow = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -19598,27 +18117,22 @@ export function xmlToUpBow(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -19633,7 +18147,6 @@ export function xmlToUpBow(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19646,29 +18159,11 @@ export function xmlToUpBow(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19699,14 +18194,8 @@ export interface DownBowComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToDownBow(node: Node) {
     "use strict";
     var ret: DownBow = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -19717,27 +18206,22 @@ export function xmlToDownBow(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -19752,7 +18236,6 @@ export function xmlToDownBow(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19765,29 +18248,11 @@ export function xmlToDownBow(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19847,14 +18312,8 @@ export function xmlToHarmonic(node: Node) {
     "use strict";
     var ret: Harmonic = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -19890,27 +18349,22 @@ export function xmlToHarmonic(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -19925,7 +18379,6 @@ export function xmlToHarmonic(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -19941,29 +18394,11 @@ export function xmlToHarmonic(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19992,14 +18427,8 @@ export interface OpenStringComplete extends PrintStyleComplete, PlacementComplet
 export function xmlToOpenString(node: Node) {
     "use strict";
     var ret: OpenString = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20010,27 +18439,22 @@ export function xmlToOpenString(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20045,7 +18469,6 @@ export function xmlToOpenString(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20058,29 +18481,11 @@ export function xmlToOpenString(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20113,14 +18518,8 @@ export interface ThumbPositionComplete extends PrintStyleComplete, PlacementComp
 export function xmlToThumbPosition(node: Node) {
     "use strict";
     var ret: ThumbPosition = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20131,27 +18530,22 @@ export function xmlToThumbPosition(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20166,7 +18560,6 @@ export function xmlToThumbPosition(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20179,29 +18572,11 @@ export function xmlToThumbPosition(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20238,14 +18613,8 @@ export interface PluckComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToPluck(node: Node) {
     "use strict";
     var ret: Pluck = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20256,27 +18625,22 @@ export function xmlToPluck(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20291,7 +18655,6 @@ export function xmlToPluck(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20307,29 +18670,11 @@ export function xmlToPluck(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20358,14 +18703,8 @@ export interface DoubleTongueComplete extends PrintStyleComplete, PlacementCompl
 export function xmlToDoubleTongue(node: Node) {
     "use strict";
     var ret: DoubleTongue = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20376,27 +18715,22 @@ export function xmlToDoubleTongue(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20411,7 +18745,6 @@ export function xmlToDoubleTongue(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20424,29 +18757,11 @@ export function xmlToDoubleTongue(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20475,14 +18790,8 @@ export interface TripleTongueComplete extends PrintStyleComplete, PlacementCompl
 export function xmlToTripleTongue(node: Node) {
     "use strict";
     var ret: TripleTongue = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20493,27 +18802,22 @@ export function xmlToTripleTongue(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20528,7 +18832,6 @@ export function xmlToTripleTongue(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20541,29 +18844,11 @@ export function xmlToTripleTongue(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20592,14 +18877,8 @@ export interface StoppedComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToStopped(node: Node) {
     "use strict";
     var ret: Stopped = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20610,27 +18889,22 @@ export function xmlToStopped(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20645,7 +18919,6 @@ export function xmlToStopped(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20658,29 +18931,11 @@ export function xmlToStopped(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20713,14 +18968,8 @@ export interface SnapPizzicatoComplete extends PrintStyleComplete, PlacementComp
 export function xmlToSnapPizzicato(node: Node) {
     "use strict";
     var ret: SnapPizzicato = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20731,27 +18980,22 @@ export function xmlToSnapPizzicato(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20766,7 +19010,6 @@ export function xmlToSnapPizzicato(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20779,29 +19022,11 @@ export function xmlToSnapPizzicato(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20847,14 +19072,8 @@ export function xmlToHammerOn(node: Node) {
     "use strict";
     var ret: HammerOn = <any> {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -20870,27 +19089,22 @@ export function xmlToHammerOn(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -20905,7 +19119,6 @@ export function xmlToHammerOn(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -20928,29 +19141,11 @@ export function xmlToHammerOn(node: Node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -20996,14 +19191,8 @@ export function xmlToPullOff(node: Node) {
     "use strict";
     var ret: PullOff = <any> {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -21019,27 +19208,22 @@ export function xmlToPullOff(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -21054,7 +19238,6 @@ export function xmlToPullOff(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21077,29 +19260,11 @@ export function xmlToPullOff(node: Node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21152,14 +19317,8 @@ export interface BendComplete extends PrintStyleComplete, BendSoundComplete {
 export function xmlToBend(node: Node) {
     "use strict";
     var ret: Bend = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundAccelerate = false;
     var foundBeats = false;
@@ -21189,27 +19348,22 @@ export function xmlToBend(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -21224,7 +19378,6 @@ export function xmlToBend(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21252,29 +19405,11 @@ export function xmlToBend(node: Node) {
             foundSecondBeat = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21330,14 +19465,8 @@ export interface WithBarComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToWithBar(node: Node) {
     "use strict";
     var ret: WithBar = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -21348,27 +19477,22 @@ export function xmlToWithBar(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -21383,7 +19507,6 @@ export function xmlToWithBar(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21399,29 +19522,11 @@ export function xmlToWithBar(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21456,14 +19561,8 @@ export interface TapComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToTap(node: Node) {
     "use strict";
     var ret: Tap = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -21474,27 +19573,22 @@ export function xmlToTap(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -21509,7 +19603,6 @@ export function xmlToTap(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21525,29 +19618,11 @@ export function xmlToTap(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21579,14 +19654,8 @@ export function xmlToHeel(node: Node) {
     "use strict";
     var ret: Heel = <any> {};
     var foundSubstitution = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -21602,27 +19671,22 @@ export function xmlToHeel(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -21637,7 +19701,6 @@ export function xmlToHeel(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21653,29 +19716,11 @@ export function xmlToHeel(node: Node) {
     if (!foundSubstitution) {
         ret.substitution = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21707,14 +19752,8 @@ export function xmlToToe(node: Node) {
     "use strict";
     var ret: Toe = <any> {};
     var foundSubstitution = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -21730,27 +19769,22 @@ export function xmlToToe(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -21765,7 +19799,6 @@ export function xmlToToe(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21781,29 +19814,11 @@ export function xmlToToe(node: Node) {
     if (!foundSubstitution) {
         ret.substitution = false;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21832,14 +19847,8 @@ export interface FingernailsComplete extends PrintStyleComplete, PlacementComple
 export function xmlToFingernails(node: Node) {
     "use strict";
     var ret: Fingernails = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -21850,27 +19859,22 @@ export function xmlToFingernails(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -21885,7 +19889,6 @@ export function xmlToFingernails(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -21898,29 +19901,11 @@ export function xmlToFingernails(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -21971,14 +19956,8 @@ export interface HoleComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToHole(node: Node) {
     "use strict";
     var ret: Hole = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -22001,27 +19980,22 @@ export function xmlToHole(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -22036,7 +20010,6 @@ export function xmlToHole(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22049,29 +20022,11 @@ export function xmlToHole(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22252,14 +20207,8 @@ export interface ArrowComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToArrow(node: Node) {
     "use strict";
     var ret: Arrow = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -22282,27 +20231,22 @@ export function xmlToArrow(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -22317,7 +20261,6 @@ export function xmlToArrow(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22330,29 +20273,11 @@ export function xmlToArrow(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22389,14 +20314,8 @@ export interface HandbellComplete extends PrintStyleComplete, PlacementComplete 
 export function xmlToHandbell(node: Node) {
     "use strict";
     var ret: Handbell = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -22407,27 +20326,22 @@ export function xmlToHandbell(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -22442,7 +20356,6 @@ export function xmlToHandbell(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22458,29 +20371,11 @@ export function xmlToHandbell(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22515,14 +20410,8 @@ export interface OtherTechnicalComplete extends PrintStyleComplete, PlacementCom
 export function xmlToOtherTechnical(node: Node) {
     "use strict";
     var ret: OtherTechnical = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -22533,27 +20422,22 @@ export function xmlToOtherTechnical(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -22568,7 +20452,6 @@ export function xmlToOtherTechnical(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22584,29 +20467,11 @@ export function xmlToOtherTechnical(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22748,14 +20613,8 @@ export interface AccentComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToAccent(node: Node) {
     "use strict";
     var ret: Accent = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -22766,27 +20625,22 @@ export function xmlToAccent(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -22801,7 +20655,6 @@ export function xmlToAccent(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22814,29 +20667,11 @@ export function xmlToAccent(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22859,14 +20694,8 @@ export interface StrongAccentComplete extends PrintStyleComplete, PlacementCompl
 export function xmlToStrongAccent(node: Node) {
     "use strict";
     var ret: StrongAccent = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     var foundType = false;
@@ -22878,27 +20707,22 @@ export function xmlToStrongAccent(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -22913,7 +20737,6 @@ export function xmlToStrongAccent(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -22931,29 +20754,11 @@ export function xmlToStrongAccent(node: Node) {
             foundType = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -22985,14 +20790,8 @@ export interface StaccatoComplete extends PrintStyleComplete, PlacementComplete 
 export function xmlToStaccato(node: Node) {
     "use strict";
     var ret: Staccato = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23003,27 +20802,22 @@ export function xmlToStaccato(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23038,7 +20832,6 @@ export function xmlToStaccato(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23051,29 +20844,11 @@ export function xmlToStaccato(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23094,14 +20869,8 @@ export interface TenutoComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToTenuto(node: Node) {
     "use strict";
     var ret: Tenuto = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23112,27 +20881,22 @@ export function xmlToTenuto(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23147,7 +20911,6 @@ export function xmlToTenuto(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23160,29 +20923,11 @@ export function xmlToTenuto(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23203,14 +20948,8 @@ export interface DetachedLegatoComplete extends PrintStyleComplete, PlacementCom
 export function xmlToDetachedLegato(node: Node) {
     "use strict";
     var ret: DetachedLegato = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23221,27 +20960,22 @@ export function xmlToDetachedLegato(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23256,7 +20990,6 @@ export function xmlToDetachedLegato(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23269,29 +21002,11 @@ export function xmlToDetachedLegato(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23320,14 +21035,8 @@ export interface StaccatissimoComplete extends PrintStyleComplete, PlacementComp
 export function xmlToStaccatissimo(node: Node) {
     "use strict";
     var ret: Staccatissimo = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23338,27 +21047,22 @@ export function xmlToStaccatissimo(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23373,7 +21077,6 @@ export function xmlToStaccatissimo(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23386,29 +21089,11 @@ export function xmlToStaccatissimo(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23437,14 +21122,8 @@ export interface SpiccatoComplete extends PrintStyleComplete, PlacementComplete 
 export function xmlToSpiccato(node: Node) {
     "use strict";
     var ret: Spiccato = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23455,27 +21134,22 @@ export function xmlToSpiccato(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23490,7 +21164,6 @@ export function xmlToSpiccato(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23503,29 +21176,11 @@ export function xmlToSpiccato(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23566,14 +21221,8 @@ export function xmlToScoop(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23604,27 +21253,22 @@ export function xmlToScoop(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23639,7 +21283,6 @@ export function xmlToScoop(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23664,29 +21307,11 @@ export function xmlToScoop(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23727,14 +21352,8 @@ export function xmlToPlop(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23765,27 +21384,22 @@ export function xmlToPlop(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23800,7 +21414,6 @@ export function xmlToPlop(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23825,29 +21438,11 @@ export function xmlToPlop(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -23888,14 +21483,8 @@ export function xmlToDoit(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -23926,27 +21515,22 @@ export function xmlToDoit(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -23961,7 +21545,6 @@ export function xmlToDoit(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -23986,29 +21569,11 @@ export function xmlToDoit(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24049,14 +21614,8 @@ export function xmlToFalloff(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -24087,27 +21646,22 @@ export function xmlToFalloff(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -24122,7 +21676,6 @@ export function xmlToFalloff(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -24147,29 +21700,11 @@ export function xmlToFalloff(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24231,14 +21766,8 @@ export function xmlToBreathMark(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -24269,27 +21798,22 @@ export function xmlToBreathMark(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -24304,7 +21828,6 @@ export function xmlToBreathMark(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -24332,29 +21855,11 @@ export function xmlToBreathMark(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24375,14 +21880,8 @@ export interface CaesuraComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToCaesura(node: Node) {
     "use strict";
     var ret: Caesura = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -24393,27 +21892,22 @@ export function xmlToCaesura(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -24428,7 +21922,6 @@ export function xmlToCaesura(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -24441,29 +21934,11 @@ export function xmlToCaesura(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24484,14 +21959,8 @@ export interface StressComplete extends PrintStyleComplete, PlacementComplete {
 export function xmlToStress(node: Node) {
     "use strict";
     var ret: Stress = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -24502,27 +21971,22 @@ export function xmlToStress(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -24537,7 +22001,6 @@ export function xmlToStress(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -24550,29 +22013,11 @@ export function xmlToStress(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24593,14 +22038,8 @@ export interface UnstressComplete extends PrintStyleComplete, PlacementComplete 
 export function xmlToUnstress(node: Node) {
     "use strict";
     var ret: Unstress = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -24611,27 +22050,22 @@ export function xmlToUnstress(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -24646,7 +22080,6 @@ export function xmlToUnstress(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -24659,29 +22092,11 @@ export function xmlToUnstress(node: Node) {
             foundPlacement = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24716,14 +22131,8 @@ export interface OtherArticulationComplete extends PrintStyleComplete, Placement
 export function xmlToOtherArticulation(node: Node) {
     "use strict";
     var ret: OtherArticulation = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -24734,27 +22143,22 @@ export function xmlToOtherArticulation(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -24769,7 +22173,6 @@ export function xmlToOtherArticulation(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -24785,29 +22188,11 @@ export function xmlToOtherArticulation(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -24851,10 +22236,6 @@ export function xmlToArpeggiate(node: Node) {
     "use strict";
     var ret: Arpeggiate = <any> {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundColor = false;
     var foundDirection = false;
@@ -24871,22 +22252,18 @@ export function xmlToArpeggiate(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
@@ -24906,18 +22283,6 @@ export function xmlToArpeggiate(node: Node) {
     }
     if (!foundNumber_) {
         ret.number_ = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
@@ -24960,10 +22325,6 @@ export function xmlToNonArpeggiate(node: Node) {
     "use strict";
     var ret: NonArpeggiate = <any> {};
     var foundNumber_ = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundPlacement = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -24979,22 +22340,18 @@ export function xmlToNonArpeggiate(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
@@ -25014,18 +22371,6 @@ export function xmlToNonArpeggiate(node: Node) {
     if (!foundNumber_) {
         ret.number_ = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
     }
@@ -25035,9 +22380,17 @@ export function xmlToNonArpeggiate(node: Node) {
     return ret;
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface Laughing {
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface LaughingComplete {
 }
 
@@ -25054,9 +22407,17 @@ export function xmlToLaughing(node: Node) {
     return ret;
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface Humming {
 }
 
+/**
+ * Humming and laughing representations are taken from
+ * Humdrum.
+ */
 export interface HummingComplete {
 }
 
@@ -25073,9 +22434,21 @@ export function xmlToHumming(node: Node) {
     return ret;
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndLine {
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndLineComplete {
 }
 
@@ -25092,9 +22465,21 @@ export function xmlToEndLine(node: Node) {
     return ret;
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndParagraph {
 }
 
+/**
+ * The end-line and end-paragraph elements come
+ * from RP-017 for Standard MIDI File Lyric meta-events;
+ * they help facilitate lyric display for Karaoke and
+ * similar applications.
+ */
 export interface EndParagraphComplete {
 }
 
@@ -25111,9 +22496,15 @@ export function xmlToEndParagraph(node: Node) {
     return ret;
 }
 
+/**
+ * Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.
+ */
 export interface LyricParts {
 }
 
+/**
+ * Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.
+ */
 export interface LyricPartsComplete {
 }
 
@@ -25172,31 +22563,23 @@ export function xmlToLyricParts(node: Node) {
 
 /**
  * Text underlays for lyrics, based on Humdrum with support
- * for other formats. The lyric number indicates multiple
- * lines, though a name can be used as well (as in Finale's
- * verse/chorus/section specification). Word extensions are
- * represented using the extend element. Hyphenation is
- * indicated by the syllabic element, which can be single,
- * begin, end, or middle. These represent single-syllable
- * words, word-beginning syllables, word-ending syllables,
- * and mid-word syllables. Multiple syllables on a single
- * note are separated by elision elements. A hyphen in the
- * text element should only be used for an actual hyphenated
- * word. Two text elements that are not separated by an
- * elision element are part of the same syllable, but may have
- * different text formatting.
+ * for other formats.
  * 
- * Humming and laughing representations are taken from
- * Humdrum. The end-line and end-paragraph elements come
- * from RP-017 for Standard MIDI File Lyric meta-events;
- * they help facilitate lyric display for Karaoke and
- * similar applications. Language names for text elements
- * come from ISO 639, with optional country subcodes from
- * ISO 3166. Justification is center by default; placement is
+ * IMPORTANT: <lyric-parts> is fake. All children of lyric-parts
+ * are actually children of lyric. This is a construct invented by
+ * musicxml-interfaces for separating ordered and unordered
+ * content.
+ * 
+ * Language names for text elements come from ISO 639,
+ * with optional country subcodes from ISO 3166. muiscxml-interfaces
+ * currently ignores this field. 
+ * 
+ * Justification is center by default; placement is
  * below by default. The print-object attribute can override
  * a note's print-lyric attribute in cases where only some
  * lyrics on a note are printed, as when lyrics for later verses
  * are printed in a block of text rather than with each note.
+ * 
  */
 export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
     lyricParts: any[];
@@ -25206,31 +22589,23 @@ export interface Lyric extends Justify, Position, Placement, Color, PrintObject,
 
 /**
  * Text underlays for lyrics, based on Humdrum with support
- * for other formats. The lyric number indicates multiple
- * lines, though a name can be used as well (as in Finale's
- * verse/chorus/section specification). Word extensions are
- * represented using the extend element. Hyphenation is
- * indicated by the syllabic element, which can be single,
- * begin, end, or middle. These represent single-syllable
- * words, word-beginning syllables, word-ending syllables,
- * and mid-word syllables. Multiple syllables on a single
- * note are separated by elision elements. A hyphen in the
- * text element should only be used for an actual hyphenated
- * word. Two text elements that are not separated by an
- * elision element are part of the same syllable, but may have
- * different text formatting.
+ * for other formats.
  * 
- * Humming and laughing representations are taken from
- * Humdrum. The end-line and end-paragraph elements come
- * from RP-017 for Standard MIDI File Lyric meta-events;
- * they help facilitate lyric display for Karaoke and
- * similar applications. Language names for text elements
- * come from ISO 639, with optional country subcodes from
- * ISO 3166. Justification is center by default; placement is
+ * IMPORTANT: <lyric-parts> is fake. All children of lyric-parts
+ * are actually children of lyric. This is a construct invented by
+ * musicxml-interfaces for separating ordered and unordered
+ * content.
+ * 
+ * Language names for text elements come from ISO 639,
+ * with optional country subcodes from ISO 3166. muiscxml-interfaces
+ * currently ignores this field. 
+ * 
+ * Justification is center by default; placement is
  * below by default. The print-object attribute can override
  * a note's print-lyric attribute in cases where only some
  * lyrics on a note are printed, as when lyrics for later verses
  * are printed in a block of text rather than with each note.
+ * 
  */
 export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
     lyricParts: any[];
@@ -25252,10 +22627,8 @@ export interface TextComplete extends FontComplete, ColorComplete, TextDecoratio
 export function xmlToText(node: Node) {
     "use strict";
     var ret: Text = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundUnderline = false;
     var foundOverline = false;
@@ -25271,7 +22644,6 @@ export function xmlToText(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -25286,7 +22658,6 @@ export function xmlToText(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -25327,17 +22698,11 @@ export function xmlToText(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -25392,10 +22757,22 @@ export function getSyllabicType(node: Node, fallbackVal?: SyllabicType) {
 
 }
 
+/**
+ * Hyphenation is indicated by the syllabic element, which can be single,
+ * begin, end, or middle. These represent single-syllable
+ * words, word-beginning syllables, word-ending syllables,
+ * and mid-word syllables.
+ */
 export interface Syllabic extends Font, Color {
     data: SyllabicType;
 }
 
+/**
+ * Hyphenation is indicated by the syllabic element, which can be single,
+ * begin, end, or middle. These represent single-syllable
+ * words, word-beginning syllables, word-ending syllables,
+ * and mid-word syllables.
+ */
 export interface SyllabicComplete extends FontComplete, ColorComplete {
     data: SyllabicType;
 }
@@ -25404,10 +22781,8 @@ export interface SyllabicComplete extends FontComplete, ColorComplete {
 export function xmlToSyllabic(node: Node) {
     "use strict";
     var ret: Syllabic = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -25417,7 +22792,6 @@ export function xmlToSyllabic(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -25432,7 +22806,6 @@ export function xmlToSyllabic(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -25443,17 +22816,11 @@ export function xmlToSyllabic(node: Node) {
     var ch3 = node;
     var dataData = getSyllabicType(ch3, null);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -25462,6 +22829,12 @@ export function xmlToSyllabic(node: Node) {
 }
 
 /**
+ * Multiple syllables on a single note are separated by elision
+ * elements. A hyphen in the text element should only be used
+ * for an actual hyphenated word. Two text elements that are
+ * not separated by an elision element are part of the same
+ * syllable, but may have different text formatting.
+ * 
  * The elision element text specifies the symbol used to
  * display the elision. Common values are a no-break space
  * (Unicode 00A0), an underscore (Unicode 005F), or an undertie
@@ -25472,6 +22845,12 @@ export interface Elision extends Font, Color {
 }
 
 /**
+ * Multiple syllables on a single note are separated by elision
+ * elements. A hyphen in the text element should only be used
+ * for an actual hyphenated word. Two text elements that are
+ * not separated by an elision element are part of the same
+ * syllable, but may have different text formatting.
+ * 
  * The elision element text specifies the symbol used to
  * display the elision. Common values are a no-break space
  * (Unicode 00A0), an underscore (Unicode 005F), or an undertie
@@ -25485,10 +22864,8 @@ export interface ElisionComplete extends FontComplete, ColorComplete {
 export function xmlToElision(node: Node) {
     "use strict";
     var ret: Elision = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -25498,7 +22875,6 @@ export function xmlToElision(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -25513,7 +22889,6 @@ export function xmlToElision(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -25524,17 +22899,11 @@ export function xmlToElision(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -25543,6 +22912,8 @@ export function xmlToElision(node: Node) {
 }
 
 /**
+ * Word extensions are represented using the extend element. 
+ * 
  * The extend element represents lyric word extension /
  * melisma lines as well as figured bass extensions. The
  * optional type and position attributes are added in
@@ -25553,6 +22924,8 @@ export interface Extend extends PrintStyle {
 }
 
 /**
+ * Word extensions are represented using the extend element. 
+ * 
  * The extend element represents lyric word extension /
  * melisma lines as well as figured bass extensions. The
  * optional type and position attributes are added in
@@ -25566,14 +22939,8 @@ export interface ExtendComplete extends PrintStyleComplete {
 export function xmlToExtend(node: Node) {
     "use strict";
     var ret: Extend = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundType = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -25584,27 +22951,22 @@ export function xmlToExtend(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -25619,7 +22981,6 @@ export function xmlToExtend(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -25632,29 +22993,11 @@ export function xmlToExtend(node: Node) {
             foundType = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -25717,14 +23060,8 @@ export interface FiguredBassComplete extends EditorialComplete, PrintStyleComple
 export function xmlToFiguredBass(node: Node) {
     "use strict";
     var ret: FiguredBass = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundPrintSpacing = false;
@@ -25753,27 +23090,22 @@ export function xmlToFiguredBass(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -25788,7 +23120,6 @@ export function xmlToFiguredBass(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -25819,29 +23150,11 @@ export function xmlToFiguredBass(node: Node) {
             foundParentheses = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -25876,14 +23189,8 @@ export interface FigureComplete extends PrintStyleComplete {
 export function xmlToFigure(node: Node) {
     "use strict";
     var ret: Figure = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -25909,27 +23216,22 @@ export function xmlToFigure(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -25944,7 +23246,6 @@ export function xmlToFigure(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -25952,29 +23253,11 @@ export function xmlToFigure(node: Node) {
             foundColor = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -25994,14 +23277,8 @@ export interface PrefixComplete extends PrintStyleComplete {
 export function xmlToPrefix(node: Node) {
     "use strict";
     var ret: Prefix = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -26011,27 +23288,22 @@ export function xmlToPrefix(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -26046,7 +23318,6 @@ export function xmlToPrefix(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -26057,29 +23328,11 @@ export function xmlToPrefix(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -26099,14 +23352,8 @@ export interface FigureNumberComplete extends PrintStyleComplete {
 export function xmlToFigureNumber(node: Node) {
     "use strict";
     var ret: FigureNumber = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -26116,27 +23363,22 @@ export function xmlToFigureNumber(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -26151,7 +23393,6 @@ export function xmlToFigureNumber(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -26162,29 +23403,11 @@ export function xmlToFigureNumber(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -26204,14 +23427,8 @@ export interface SuffixComplete extends PrintStyleComplete {
 export function xmlToSuffix(node: Node) {
     "use strict";
     var ret: Suffix = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -26221,27 +23438,22 @@ export function xmlToSuffix(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -26256,7 +23468,6 @@ export function xmlToSuffix(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -26267,29 +23478,11 @@ export function xmlToSuffix(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -26796,14 +23989,8 @@ export function xmlToEnding(node: Node) {
     "use strict";
     var ret: Ending = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -26834,27 +24021,22 @@ export function xmlToEnding(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -26869,7 +24051,6 @@ export function xmlToEnding(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -26887,29 +24068,11 @@ export function xmlToEnding(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -27128,14 +24291,8 @@ export function xmlToDirection(node: Node) {
     "use strict";
     var ret: Direction = <any> {};
     var foundPlacement = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -27178,27 +24335,22 @@ export function xmlToDirection(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -27213,7 +24365,6 @@ export function xmlToDirection(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -27227,29 +24378,11 @@ export function xmlToDirection(node: Node) {
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -27443,14 +24576,8 @@ export function xmlToRehearsal(node: Node) {
     "use strict";
     var ret: Rehearsal = <any> {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -27475,27 +24602,22 @@ export function xmlToRehearsal(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -27510,7 +24632,6 @@ export function xmlToRehearsal(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -27574,29 +24695,11 @@ export function xmlToRehearsal(node: Node) {
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -27657,14 +24760,8 @@ export function xmlToWords(node: Node) {
     "use strict";
     var ret: Words = <any> {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -27689,27 +24786,22 @@ export function xmlToWords(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -27724,7 +24816,6 @@ export function xmlToWords(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -27788,29 +24879,11 @@ export function xmlToWords(node: Node) {
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -27932,10 +25005,6 @@ export function xmlToWedge(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -27970,22 +25039,18 @@ export function xmlToWedge(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -28015,18 +25080,6 @@ export function xmlToWedge(node: Node) {
     }
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -28059,10 +25112,6 @@ export function xmlToDashes(node: Node) {
     var foundNumber_ = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -28087,22 +25136,18 @@ export function xmlToDashes(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -28122,18 +25167,6 @@ export function xmlToDashes(node: Node) {
     }
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -28214,10 +25247,6 @@ export function xmlToBracket(node: Node) {
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -28251,22 +25280,18 @@ export function xmlToBracket(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -28293,18 +25318,6 @@ export function xmlToBracket(node: Node) {
     }
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -28383,14 +25396,8 @@ export interface PedalComplete extends PrintStyleAlignComplete {
 export function xmlToPedal(node: Node) {
     "use strict";
     var ret: Pedal = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -28410,27 +25417,22 @@ export function xmlToPedal(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -28445,7 +25447,6 @@ export function xmlToPedal(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -28467,29 +25468,11 @@ export function xmlToPedal(node: Node) {
             ret.type = dataType;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -28589,14 +25572,8 @@ export interface MetronomeComplete extends PrintStyleAlignComplete, JustifyCompl
 export function xmlToMetronome(node: Node) {
     "use strict";
     var ret: Metronome = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -28629,27 +25606,22 @@ export function xmlToMetronome(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -28664,7 +25636,6 @@ export function xmlToMetronome(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -28691,29 +25662,11 @@ export function xmlToMetronome(node: Node) {
             ret.parentheses = dataParentheses;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -28761,10 +25714,8 @@ export interface PerMinuteComplete extends FontComplete {
 export function xmlToPerMinute(node: Node) {
     "use strict";
     var ret: PerMinute = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -28773,7 +25724,6 @@ export function xmlToPerMinute(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -28788,23 +25738,16 @@ export function xmlToPerMinute(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
     }
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -29041,14 +25984,8 @@ export function xmlToOctaveShift(node: Node) {
     var foundSize = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -29077,27 +26014,22 @@ export function xmlToOctaveShift(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -29112,7 +26044,6 @@ export function xmlToOctaveShift(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -29133,29 +26064,11 @@ export function xmlToOctaveShift(node: Node) {
     if (!foundSpaceLength) {
         ret.spaceLength = 1;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -29191,14 +26104,8 @@ export interface HarpPedalsComplete extends PrintStyleAlignComplete {
 export function xmlToHarpPedals(node: Node) {
     "use strict";
     var ret: HarpPedals = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -29214,27 +26121,22 @@ export function xmlToHarpPedals(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -29249,7 +26151,6 @@ export function xmlToHarpPedals(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -29267,29 +26168,11 @@ export function xmlToHarpPedals(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -29350,14 +26233,8 @@ export interface DampComplete extends PrintStyleAlignComplete {
 export function xmlToDamp(node: Node) {
     "use strict";
     var ret: Damp = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -29369,27 +26246,22 @@ export function xmlToDamp(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -29404,7 +26276,6 @@ export function xmlToDamp(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -29422,29 +26293,11 @@ export function xmlToDamp(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -29468,14 +26321,8 @@ export interface DampAllComplete extends PrintStyleAlignComplete {
 export function xmlToDampAll(node: Node) {
     "use strict";
     var ret: DampAll = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -29487,27 +26334,22 @@ export function xmlToDampAll(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -29522,7 +26364,6 @@ export function xmlToDampAll(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -29540,29 +26381,11 @@ export function xmlToDampAll(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -29586,14 +26409,8 @@ export interface EyeglassesComplete extends PrintStyleAlignComplete {
 export function xmlToEyeglasses(node: Node) {
     "use strict";
     var ret: Eyeglasses = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -29605,27 +26422,22 @@ export function xmlToEyeglasses(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -29640,7 +26452,6 @@ export function xmlToEyeglasses(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -29658,29 +26469,11 @@ export function xmlToEyeglasses(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -29706,14 +26499,8 @@ export interface StringMuteComplete extends PrintStyleAlignComplete {
 export function xmlToStringMute(node: Node) {
     "use strict";
     var ret: StringMute = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -29725,27 +26512,22 @@ export function xmlToStringMute(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -29760,7 +26542,6 @@ export function xmlToStringMute(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -29782,29 +26563,11 @@ export function xmlToStringMute(node: Node) {
             ret.type = dataType;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -29944,10 +26707,6 @@ export interface ImageComplete extends PositionComplete, HalignComplete, ValignI
 export function xmlToImage(node: Node) {
     "use strict";
     var ret: Image = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundHalign = false;
     var foundValignImage = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -29958,22 +26717,18 @@ export function xmlToImage(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "halign") {
             var dataHalign = getLeftCenterRight(ch2, ((<any>ret).justify || LeftCenterRight.Left));
@@ -29993,18 +26748,6 @@ export function xmlToImage(node: Node) {
             var dataSource = getString(ch2, true);
             ret.source = dataSource;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundHalign) {
         ret.halign = ((<any>ret).justify || LeftCenterRight.Left);
@@ -30084,14 +26827,8 @@ export interface PrincipalVoiceComplete extends PrintStyleAlignComplete {
 export function xmlToPrincipalVoice(node: Node) {
     "use strict";
     var ret: PrincipalVoice = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -30107,27 +26844,22 @@ export function xmlToPrincipalVoice(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -30142,7 +26874,6 @@ export function xmlToPrincipalVoice(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -30167,29 +26898,11 @@ export function xmlToPrincipalVoice(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -30243,14 +26956,8 @@ export interface AccordionRegistrationComplete extends PrintStyleAlignComplete {
 export function xmlToAccordionRegistration(node: Node) {
     "use strict";
     var ret: AccordionRegistration = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -30274,27 +26981,22 @@ export function xmlToAccordionRegistration(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -30309,7 +27011,6 @@ export function xmlToAccordionRegistration(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -30327,29 +27028,11 @@ export function xmlToAccordionRegistration(node: Node) {
             foundValign = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -30411,14 +27094,8 @@ export interface PercussionComplete extends PrintStyleAlignComplete, EnclosureCo
 export function xmlToPercussion(node: Node) {
     "use strict";
     var ret: Percussion = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -30475,27 +27152,22 @@ export function xmlToPercussion(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -30510,7 +27182,6 @@ export function xmlToPercussion(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -30533,29 +27204,11 @@ export function xmlToPercussion(node: Node) {
             foundEnclosure = true;
         }
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -30930,14 +27583,8 @@ export function xmlToHarmony(node: Node) {
     "use strict";
     var ret: Harmony = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPlacement = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -31001,27 +27648,22 @@ export function xmlToHarmony(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -31036,7 +27678,6 @@ export function xmlToHarmony(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -31056,29 +27697,11 @@ export function xmlToHarmony(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -31174,14 +27797,8 @@ export interface RootStepComplete extends PrintStyleComplete {
 export function xmlToRootStep(node: Node) {
     "use strict";
     var ret: RootStep = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -31195,27 +27812,22 @@ export function xmlToRootStep(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -31230,7 +27842,6 @@ export function xmlToRootStep(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -31241,29 +27852,11 @@ export function xmlToRootStep(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -31286,14 +27879,8 @@ export function xmlToRootAlter(node: Node) {
     "use strict";
     var ret: RootAlter = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -31312,27 +27899,22 @@ export function xmlToRootAlter(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -31347,7 +27929,6 @@ export function xmlToRootAlter(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -31361,29 +27942,11 @@ export function xmlToRootAlter(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -31403,14 +27966,8 @@ export interface FunctionComplete extends PrintStyleComplete {
 export function xmlToFunction(node: Node) {
     "use strict";
     var ret: Function = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -31420,27 +27977,22 @@ export function xmlToFunction(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -31455,7 +28007,6 @@ export function xmlToFunction(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -31466,29 +28017,11 @@ export function xmlToFunction(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -31690,14 +28223,8 @@ export interface KindComplete extends PrintStyleComplete, HalignComplete, Valign
 export function xmlToKind(node: Node) {
     "use strict";
     var ret: Kind = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -31721,27 +28248,22 @@ export function xmlToKind(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -31756,7 +28278,6 @@ export function xmlToKind(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -31785,29 +28306,11 @@ export function xmlToKind(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -31841,14 +28344,8 @@ export interface InversionComplete extends PrintStyleComplete {
 export function xmlToInversion(node: Node) {
     "use strict";
     var ret: Inversion = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -31858,27 +28355,22 @@ export function xmlToInversion(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -31893,7 +28385,6 @@ export function xmlToInversion(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -31904,29 +28395,11 @@ export function xmlToInversion(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -32015,14 +28488,8 @@ export interface BassStepComplete extends PrintStyleComplete {
 export function xmlToBassStep(node: Node) {
     "use strict";
     var ret: BassStep = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -32036,27 +28503,22 @@ export function xmlToBassStep(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -32071,7 +28533,6 @@ export function xmlToBassStep(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -32082,29 +28543,11 @@ export function xmlToBassStep(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -32127,14 +28570,8 @@ export function xmlToBassAlter(node: Node) {
     "use strict";
     var ret: BassAlter = <any> {};
     var foundPrintObject = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -32153,27 +28590,22 @@ export function xmlToBassAlter(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -32188,7 +28620,6 @@ export function xmlToBassAlter(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -32202,29 +28633,11 @@ export function xmlToBassAlter(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -32387,14 +28800,8 @@ export interface DegreeValueComplete extends PrintStyleComplete {
 export function xmlToDegreeValue(node: Node) {
     "use strict";
     var ret: DegreeValue = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -32412,27 +28819,22 @@ export function xmlToDegreeValue(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -32447,7 +28849,6 @@ export function xmlToDegreeValue(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -32458,29 +28859,11 @@ export function xmlToDegreeValue(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -32502,14 +28885,8 @@ export interface DegreeAlterComplete extends PrintStyleComplete {
 export function xmlToDegreeAlter(node: Node) {
     "use strict";
     var ret: DegreeAlter = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -32523,27 +28900,22 @@ export function xmlToDegreeAlter(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -32558,7 +28930,6 @@ export function xmlToDegreeAlter(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -32569,29 +28940,11 @@ export function xmlToDegreeAlter(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -32613,14 +28966,8 @@ export interface DegreeTypeComplete extends PrintStyleComplete {
 export function xmlToDegreeType(node: Node) {
     "use strict";
     var ret: DegreeType = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -32634,27 +28981,22 @@ export function xmlToDegreeType(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -32669,7 +29011,6 @@ export function xmlToDegreeType(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -32680,29 +29021,11 @@ export function xmlToDegreeType(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -32762,10 +29085,6 @@ export interface FrameComplete extends PositionComplete, ColorComplete, HalignCo
 export function xmlToFrame(node: Node) {
     "use strict";
     var ret: Frame = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValignImage = false;
@@ -32797,22 +29116,18 @@ export function xmlToFrame(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -32837,18 +29152,6 @@ export function xmlToFrame(node: Node) {
             var dataHeight = getNumber(ch2, true);
             ret.height = dataHeight;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -33316,14 +29619,8 @@ export interface MeasureNumberingComplete extends PrintStyleAlignComplete {
 export function xmlToMeasureNumbering(node: Node) {
     "use strict";
     var ret: MeasureNumbering = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -33335,27 +29632,22 @@ export function xmlToMeasureNumbering(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -33370,7 +29662,6 @@ export function xmlToMeasureNumbering(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -33391,29 +29682,11 @@ export function xmlToMeasureNumbering(node: Node) {
     var ch3 = node;
     var dataData = getString(ch3, true);
     ret.data = dataData;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -33915,10 +30188,8 @@ export interface MusicFontComplete extends FontComplete {
 export function xmlToMusicFont(node: Node) {
     "use strict";
     var ret: MusicFont = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -33927,7 +30198,6 @@ export function xmlToMusicFont(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -33942,20 +30212,13 @@ export function xmlToMusicFont(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
     }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -33970,10 +30233,8 @@ export interface WordFontComplete extends FontComplete {
 export function xmlToWordFont(node: Node) {
     "use strict";
     var ret: WordFont = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -33982,7 +30243,6 @@ export function xmlToWordFont(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -33997,20 +30257,13 @@ export function xmlToWordFont(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
     }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -34029,10 +30282,8 @@ export interface LyricFontComplete extends FontComplete {
 export function xmlToLyricFont(node: Node) {
     "use strict";
     var ret: LyricFont = <any> {};
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
@@ -34045,7 +30296,6 @@ export function xmlToLyricFont(node: Node) {
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -34060,24 +30310,17 @@ export function xmlToLyricFont(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "name") {
             var dataName = getString(ch2, true);
             ret.name = dataName;
         }
     }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     return ret;
 }
@@ -34217,14 +30460,8 @@ export function xmlToCreditWords(node: Node) {
     "use strict";
     var ret: CreditWords = <any> {};
     var foundJustify = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundHalign = false;
     var foundValign = false;
@@ -34249,27 +30486,22 @@ export function xmlToCreditWords(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -34284,7 +30516,6 @@ export function xmlToCreditWords(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -34348,29 +30579,11 @@ export function xmlToCreditWords(node: Node) {
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
     }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -34422,10 +30635,6 @@ export interface CreditImageComplete extends PositionComplete, HalignComplete, V
 export function xmlToCreditImage(node: Node) {
     "use strict";
     var ret: CreditImage = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundHalign = false;
     var foundValignImage = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -34436,22 +30645,18 @@ export function xmlToCreditImage(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "halign") {
             var dataHalign = getLeftCenterRight(ch2, ((<any>ret).justify || LeftCenterRight.Left));
@@ -34471,18 +30676,6 @@ export function xmlToCreditImage(node: Node) {
             var dataSource = getString(ch2, true);
             ret.source = dataSource;
         }
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundHalign) {
         ret.halign = ((<any>ret).justify || LeftCenterRight.Left);
@@ -34681,14 +30874,8 @@ export interface PartNameComplete extends PrintStyleComplete, PrintObjectComplet
 export function xmlToPartName(node: Node) {
     "use strict";
     var ret: PartName = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundJustify = false;
@@ -34700,27 +30887,22 @@ export function xmlToPartName(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -34735,7 +30917,6 @@ export function xmlToPartName(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -34756,29 +30937,11 @@ export function xmlToPartName(node: Node) {
     var ch3 = node;
     var dataPartName = getString(ch3, true);
     ret.partName = dataPartName;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -34830,14 +30993,8 @@ export interface PartAbbreviationComplete extends PrintStyleComplete, PrintObjec
 export function xmlToPartAbbreviation(node: Node) {
     "use strict";
     var ret: PartAbbreviation = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundPrintObject = false;
     var foundJustify = false;
@@ -34849,27 +31006,22 @@ export function xmlToPartAbbreviation(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -34884,7 +31036,6 @@ export function xmlToPartAbbreviation(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -34905,29 +31056,11 @@ export function xmlToPartAbbreviation(node: Node) {
     var ch3 = node;
     var dataAbbreviation = getString(ch3, true);
     ret.abbreviation = dataAbbreviation;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -35075,14 +31208,8 @@ export interface GroupNameComplete extends PrintStyleComplete, JustifyComplete {
 export function xmlToGroupName(node: Node) {
     "use strict";
     var ret: GroupName = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundJustify = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -35093,27 +31220,22 @@ export function xmlToGroupName(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -35128,7 +31250,6 @@ export function xmlToGroupName(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -35144,29 +31265,11 @@ export function xmlToGroupName(node: Node) {
     var ch3 = node;
     var dataName = getString(ch3, true);
     ret.name = dataName;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -35253,14 +31356,8 @@ export interface GroupAbbreviationComplete extends PrintStyleComplete, JustifyCo
 export function xmlToGroupAbbreviation(node: Node) {
     "use strict";
     var ret: GroupAbbreviation = <any> {};
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
-    var foundFontFamily = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
-    var foundFontSize = false;
     var foundColor = false;
     var foundJustify = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -35271,27 +31368,22 @@ export function xmlToGroupAbbreviation(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
-            foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
             var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
@@ -35306,7 +31398,6 @@ export function xmlToGroupAbbreviation(node: Node) {
         if (ch2.name === "font-size") {
             var dataFontSize = getString(ch2, true);
             ret.fontSize = dataFontSize;
-            foundFontSize = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -35322,29 +31413,11 @@ export function xmlToGroupAbbreviation(node: Node) {
     var ch3 = node;
     var dataText = getString(ch3, true);
     ret.text = dataText;
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
-    }
-    if (!foundFontFamily) {
-        ret.fontFamily = "Alegreya, serif";
-    }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
         ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundFontSize) {
-        ret.fontSize = "small";
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -35430,10 +31503,6 @@ export function xmlToGroupSymbol(node: Node) {
     "use strict";
     var ret: GroupSymbol = <any> {};
     var foundData = false;
-    var foundDefaultX = false;
-    var foundRelativeY = false;
-    var foundDefaultY = false;
-    var foundRelativeX = false;
     var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -35443,22 +31512,18 @@ export function xmlToGroupSymbol(node: Node) {
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
-            foundDefaultX = true;
         }
         if (ch2.name === "relative-y") {
             var dataRelativeY = getNumber(ch2, true);
             ret.relativeY = dataRelativeY;
-            foundRelativeY = true;
         }
         if (ch2.name === "default-y") {
             var dataDefaultY = getNumber(ch2, true);
             ret.defaultY = dataDefaultY;
-            foundDefaultY = true;
         }
         if (ch2.name === "relative-x") {
             var dataRelativeX = getNumber(ch2, true);
             ret.relativeX = dataRelativeX;
-            foundRelativeX = true;
         }
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
@@ -35471,18 +31536,6 @@ export function xmlToGroupSymbol(node: Node) {
     ret.data = dataData;
     if (!foundData) {
         ret.data = PartSymbolType.None;
-    }
-    if (!foundDefaultX) {
-        ret.defaultX = NaN;
-    }
-    if (!foundRelativeY) {
-        ret.relativeY = 0;
-    }
-    if (!foundDefaultY) {
-        ret.defaultY = NaN;
-    }
-    if (!foundRelativeX) {
-        ret.relativeX = 0;
     }
     if (!foundColor) {
         ret.color = "#000000";

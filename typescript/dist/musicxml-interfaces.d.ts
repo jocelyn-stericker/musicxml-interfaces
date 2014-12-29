@@ -1429,12 +1429,12 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToSlashDot(node: Node): SlashDot;
     export interface MultipleRest {
-        multipleRest?: boolean;
-        data: string;
+        useSymbols?: boolean;
+        count: number;
     }
     export interface MultipleRestComplete {
-        multipleRest: boolean;
-        data: string;
+        useSymbols: boolean;
+        count: number;
     }
     export function xmlToMultipleRest(node: Node): MultipleRest;
     export interface MeasureRepeat {
@@ -1496,7 +1496,7 @@ declare module 'musicxml-interfaces' {
     export interface Attributes extends Editorial {
         divisions?: number;
         partSymbol?: PartSymbol;
-        clef?: Clef;
+        clefs?: Clef[];
         measureStyle?: MeasureStyle;
         time?: Time;
         staffDetails?: StaffDetails;
@@ -1509,7 +1509,7 @@ declare module 'musicxml-interfaces' {
     export interface AttributesComplete extends EditorialComplete {
         divisions: number;
         partSymbol: PartSymbol;
-        clef: Clef;
+        clefs: Clef[];
         measureStyle: MeasureStyle;
         time: Time;
         staffDetails: StaffDetails;
