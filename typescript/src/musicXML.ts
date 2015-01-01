@@ -2394,7 +2394,7 @@ export interface EditorialComplete {
  * across all the different component DTD modules.
  */
 export interface EditorialVoice {
-    voice?: string;
+    voice?: number;
     footnote?: Footnote;
     level?: Level;
 }
@@ -2405,7 +2405,7 @@ export interface EditorialVoice {
  * across all the different component DTD modules.
  */
 export interface EditorialVoiceComplete {
-    voice: string;
+    voice: number;
     footnote: Footnote;
     level: Level;
 }
@@ -2549,18 +2549,7 @@ export interface WavyLineComplete extends PositionComplete, PlacementComplete, C
  * Staff assignment is only needed for music notated on
  * multiple staves. Used by both notes and directions.
  */
-export interface Staff {
-    idx: number;
-}
-
-/**
- * Staff assignment is only needed for music notated on
- * multiple staves. Used by both notes and directions.
- */
-export interface StaffComplete {
-    idx: number;
-}
-
+export interface Staff extends String {}
 
 /**
  * Segno and coda signs can be associated with a measure
@@ -6064,7 +6053,7 @@ export interface Note extends EditorialVoice, PrintStyle, Printout, TimeOnly, Fu
     ties?: Tie[];
     dynamics?: number;
     play?: Play;
-    staff?: Staff;
+    staff?: number;
     grace?: Grace;
     notehead?: Notehead;
     release?: number;
@@ -6101,7 +6090,7 @@ export interface NoteComplete extends EditorialVoiceComplete, PrintStyleComplete
     ties: Tie[];
     dynamics: number;
     play: Play;
-    staff: Staff;
+    staff: number;
     grace: Grace;
     notehead: Notehead;
     release: number;
@@ -9048,7 +9037,7 @@ export interface BackupComplete extends EditorialComplete {
  */
 export interface Forward extends EditorialVoice {
     duration: number;
-    staff?: Staff;
+    staff?: number;
 }
 
 /**
@@ -9063,7 +9052,7 @@ export interface Forward extends EditorialVoice {
  */
 export interface ForwardComplete extends EditorialVoiceComplete {
     duration: number;
-    staff: Staff;
+    staff: number;
 }
 
 
@@ -9353,7 +9342,7 @@ export enum TipDirection {
  */
 export interface Direction extends EditorialVoice, Placement, Directive {
     directionTypes: DirectionType[];
-    staff?: Staff;
+    staff?: number;
     offset?: Offset;
     sound?: Sound;
 }
@@ -9372,7 +9361,7 @@ export interface Direction extends EditorialVoice, Placement, Directive {
  */
 export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveComplete {
     directionTypes: DirectionType[];
-    staff: Staff;
+    staff: number;
     offset: Offset;
     sound: Sound;
 }
@@ -10311,7 +10300,7 @@ export enum ExplicitImpliedAlternate {
 export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyle, Placement {
     frame: Frame;
     printFrame: boolean;
-    staff: Staff;
+    staff: number;
     harmonyType: ExplicitImpliedAlternate;
     offset: Offset;
 }
@@ -10319,7 +10308,7 @@ export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyl
 export interface HarmonyComplete extends HarmonyChordComplete, EditorialComplete, PrintObjectComplete, PrintStyleComplete, PlacementComplete {
     frame: Frame;
     printFrame: boolean;
-    staff: Staff;
+    staff: number;
     harmonyType: ExplicitImpliedAlternate;
     offset: Offset;
 }

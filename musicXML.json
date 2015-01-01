@@ -34,7 +34,7 @@
     },
     {
       "element": "voice",
-      "interface": "string"
+      "interface": "number"
     },
     {
       "//": "These elements are used both in the time-modification and\nmetronome-tuplet elements. The actual-notes element\ndescribes how many notes are played in the time usually\noccupied by the number of normal-notes. If the normal-notes\ntype is different than the current note type (e.g., a\nquarter note within an eighth note triplet), then the\nnormal-notes type (e.g. eighth) is specified in the\nnormal-type and normal-dot elements. The content of the\nactual-notes and normal-notes elements ia a non-negative\ninteger.",
@@ -1196,13 +1196,7 @@
     {
       "//": "Staff assignment is only needed for music notated on\nmultiple staves. Used by both notes and directions.",
       "element": "staff",
-      "interface": {
-        "idx": {
-          "child": true,
-          "type": "number",
-          "//": "Staff values are numbers, with 1 referring to the top-most staff\nin a part."
-        }
-      },
+      "interface": "number",
       "auto": true
     },
     {
@@ -2913,6 +2907,7 @@
           "required": false
         },
         "<staff>": {
+          "type": "number",
           "required": false
         },
         "<beam>": {
@@ -3308,8 +3303,7 @@
         },
         "number": {
           "type": "number-level",
-          "required": false,
-          "std": 1
+          "required": false
         }
       }
     },

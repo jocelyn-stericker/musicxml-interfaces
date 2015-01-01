@@ -645,12 +645,12 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToEditorial(node: Node): Editorial;
     export interface EditorialVoice {
-        voice?: string;
+        voice?: number;
         footnote?: Footnote;
         level?: Level;
     }
     export interface EditorialVoiceComplete {
-        voice: string;
+        voice: number;
         footnote: Footnote;
         level: Level;
     }
@@ -689,11 +689,7 @@ declare module 'musicxml-interfaces' {
         type: StartStopContinue;
     }
     export function xmlToWavyLine(node: Node): WavyLine;
-    export interface Staff {
-        idx: number;
-    }
-    export interface StaffComplete {
-        idx: number;
+    export interface Staff extends String {
     }
     export function xmlToStaff(node: Node): Staff;
     export interface Segno extends PrintStyleAlign {
@@ -1628,7 +1624,7 @@ declare module 'musicxml-interfaces' {
         ties?: Tie[];
         dynamics?: number;
         play?: Play;
-        staff?: Staff;
+        staff?: number;
         grace?: Grace;
         notehead?: Notehead;
         release?: number;
@@ -1652,7 +1648,7 @@ declare module 'musicxml-interfaces' {
         ties: Tie[];
         dynamics: number;
         play: Play;
-        staff: Staff;
+        staff: number;
         grace: Grace;
         notehead: Notehead;
         release: number;
@@ -2636,11 +2632,11 @@ declare module 'musicxml-interfaces' {
     export function xmlToBackup(node: Node): Backup;
     export interface Forward extends EditorialVoice {
         duration: number;
-        staff?: Staff;
+        staff?: number;
     }
     export interface ForwardComplete extends EditorialVoiceComplete {
         duration: number;
-        staff: Staff;
+        staff: number;
     }
     export function xmlToForward(node: Node): Forward;
     export enum BarlineLocation {
@@ -2757,13 +2753,13 @@ declare module 'musicxml-interfaces' {
     export function getTipDirection(node: Node, fallbackVal?: TipDirection): TipDirection;
     export interface Direction extends EditorialVoice, Placement, Directive {
         directionTypes: DirectionType[];
-        staff?: Staff;
+        staff?: number;
         offset?: Offset;
         sound?: Sound;
     }
     export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveComplete {
         directionTypes: DirectionType[];
-        staff: Staff;
+        staff: number;
         offset: Offset;
         sound: Sound;
     }
@@ -3175,14 +3171,14 @@ declare module 'musicxml-interfaces' {
     export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyle, Placement {
         frame: Frame;
         printFrame: boolean;
-        staff: Staff;
+        staff: number;
         harmonyType: ExplicitImpliedAlternate;
         offset: Offset;
     }
     export interface HarmonyComplete extends HarmonyChordComplete, EditorialComplete, PrintObjectComplete, PrintStyleComplete, PlacementComplete {
         frame: Frame;
         printFrame: boolean;
-        staff: Staff;
+        staff: number;
         harmonyType: ExplicitImpliedAlternate;
         offset: Offset;
     }

@@ -274,6 +274,7 @@ bool getYesNo(T)(T p, bool required) {
  */
 
 
+alias Voice = float;
 
 /**
  * These elements are used both in the time-modification and
@@ -3413,7 +3414,7 @@ export class EditorialVoice {
     this(xmlNodePtr node) {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "voice") {
-                auto data = getString(ch, true);
+                auto data = getNumber(ch, true);
                 this.voice = data;
             }
             if (ch.name.toString == "footnote") {
@@ -3436,7 +3437,7 @@ export class EditorialVoice {
  * across all the different component DTD modules.
  */
 mixin template IEditorialVoice() {
-    string voice;
+    float voice;
     Footnote footnote;
     Level level;
 }
@@ -3972,26 +3973,7 @@ mixin template IWavyLine() {
  * Staff assignment is only needed for music notated on
  * multiple staves. Used by both notes and directions.
  */
-export class Staff {
-    mixin IStaff;
-    this(xmlNodePtr node) {
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-        }
-        auto ch = node;
-        auto data = getNumber(ch, true);
-        this.idx = data;
-    }
-}
-
-/**
- * Staff assignment is only needed for music notated on
- * multiple staves. Used by both notes and directions.
- */
-mixin template IStaff() {
-    float idx;
-}
+alias Staff = float;
 
 /**
  * Segno and coda signs can be associated with a measure
@@ -10070,7 +10052,7 @@ export class Note {
                 this.play = data;
             }
             if (ch.name.toString == "staff") {
-                auto data = new Staff(ch) ;
+                auto data = getNumber(ch, true);
                 this.staff = data;
             }
             if (ch.name.toString == "grace") {
@@ -10082,7 +10064,7 @@ export class Note {
                 this.notehead = data;
             }
             if (ch.name.toString == "voice") {
-                auto data = getString(ch, true);
+                auto data = getNumber(ch, true);
                 this.voice = data;
             }
             if (ch.name.toString == "footnote") {
@@ -10270,7 +10252,7 @@ mixin template INote() {
     Tie[] ties;
     float dynamics;
     Play play;
-    Staff staff;
+    float staff;
     Grace grace;
     Notehead notehead;
     float release;
@@ -11490,7 +11472,6 @@ mixin template INotations() {
 export class Tied {
     mixin ITied;
     this(xmlNodePtr node) {
-        bool foundNumber_ = false;
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
@@ -11503,7 +11484,6 @@ export class Tied {
             if (ch.name.toString == "number") {
                 auto data = getNumber(ch, true);
                 this.number_ = data;
-                foundNumber_ = true;
             }
             if (ch.name.toString == "line-type") {
                 auto data = getSolidDashedDottedWavy(ch);
@@ -11579,9 +11559,6 @@ export class Tied {
                 auto data = getStartStopContinue(ch);
                 this.type = data;
             }
-        }
-        if (!foundNumber_) {
-            number_ = 1;
         }
         if (!foundLineType) {
             lineType = SolidDashedDottedWavy.Solid;
@@ -20370,7 +20347,7 @@ export class Forward {
     this(xmlNodePtr node) {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "voice") {
-                auto data = getString(ch, true);
+                auto data = getNumber(ch, true);
                 this.voice = data;
             }
             if (ch.name.toString == "footnote") {
@@ -20386,7 +20363,7 @@ export class Forward {
                 this.duration = data;
             }
             if (ch.name.toString == "staff") {
-                auto data = new Staff(ch) ;
+                auto data = getNumber(ch, true);
                 this.staff = data;
             }
         }
@@ -20408,7 +20385,7 @@ export class Forward {
 mixin template IForward() {
     mixin IEditorialVoice;
     float duration;
-    Staff staff;
+    float staff;
 }
 
 export enum BarlineLocation {
@@ -20995,7 +20972,7 @@ export class Direction {
         bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "voice") {
-                auto data = getString(ch, true);
+                auto data = getNumber(ch, true);
                 this.voice = data;
             }
             if (ch.name.toString == "footnote") {
@@ -21011,7 +20988,7 @@ export class Direction {
                 this.directionTypes ~= data;
             }
             if (ch.name.toString == "staff") {
-                auto data = new Staff(ch) ;
+                auto data = getNumber(ch, true);
                 this.staff = data;
             }
             if (ch.name.toString == "offset") {
@@ -21104,7 +21081,7 @@ mixin template IDirection() {
     mixin IPlacement;
     mixin IDirective;
     DirectionType[] directionTypes;
-    Staff staff;
+    float staff;
     Offset offset;
     Sound sound;
 }
@@ -24029,7 +24006,7 @@ export class Harmony {
                 this.level = data;
             }
             if (ch.name.toString == "staff") {
-                auto data = new Staff(ch) ;
+                auto data = getNumber(ch, true);
                 this.staff = data;
             }
             if (ch.name.toString == "offset") {
@@ -24122,7 +24099,7 @@ mixin template IHarmony() {
     mixin IPlacement;
     Frame frame;
     bool printFrame;
-    Staff staff;
+    float staff;
     ExplicitImpliedAlternate harmonyType;
     Offset offset;
 }

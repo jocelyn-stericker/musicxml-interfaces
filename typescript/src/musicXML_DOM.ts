@@ -4920,7 +4920,7 @@ export function xmlToEditorial(node: Node) {
  * across all the different component DTD modules.
  */
 export interface EditorialVoice {
-    voice?: string;
+    voice?: number;
     footnote?: Footnote;
     level?: Level;
 }
@@ -4931,7 +4931,7 @@ export interface EditorialVoice {
  * across all the different component DTD modules.
  */
 export interface EditorialVoiceComplete {
-    voice: string;
+    voice: number;
     footnote: Footnote;
     level: Level;
 }
@@ -4943,7 +4943,7 @@ export function xmlToEditorialVoice(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -5516,18 +5516,7 @@ export function xmlToWavyLine(node: Node) {
  * Staff assignment is only needed for music notated on
  * multiple staves. Used by both notes and directions.
  */
-export interface Staff {
-    idx: number;
-}
-
-/**
- * Staff assignment is only needed for music notated on
- * multiple staves. Used by both notes and directions.
- */
-export interface StaffComplete {
-    idx: number;
-}
-
+export interface Staff extends String {}
 
 export function xmlToStaff(node: Node) {
     "use strict";
@@ -5538,9 +5527,6 @@ export function xmlToStaff(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataIdx = getNumber(ch3, true);
-    ret.idx = dataIdx;
     return ret;
 }
 
@@ -12513,7 +12499,7 @@ export interface Note extends EditorialVoice, PrintStyle, Printout, TimeOnly, Fu
     ties?: Tie[];
     dynamics?: number;
     play?: Play;
-    staff?: Staff;
+    staff?: number;
     grace?: Grace;
     notehead?: Notehead;
     release?: number;
@@ -12550,7 +12536,7 @@ export interface NoteComplete extends EditorialVoiceComplete, PrintStyleComplete
     ties: Tie[];
     dynamics: number;
     play: Play;
-    staff: Staff;
+    staff: number;
     grace: Grace;
     notehead: Notehead;
     release: number;
@@ -12626,7 +12612,7 @@ export function xmlToNote(node: Node) {
             ret.play = dataPlay;
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch) ;
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
         if (ch.nodeName === "grace") {
@@ -12638,7 +12624,7 @@ export function xmlToNote(node: Node) {
             ret.notehead = dataNotehead;
         }
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -14172,7 +14158,6 @@ export interface TiedComplete extends LineTypeComplete, DashedFormattingComplete
 export function xmlToTied(node: Node) {
     "use strict";
     var ret: Tied = <any> {};
-    var foundNumber_ = false;
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
@@ -14187,7 +14172,6 @@ export function xmlToTied(node: Node) {
         if (ch2.name === "number") {
             var dataNumber_ = getNumber(ch2, true);
             ret.number_ = dataNumber_;
-            foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
@@ -14263,9 +14247,6 @@ export function xmlToTied(node: Node) {
             var dataType = getStartStopContinue(ch2, null);
             ret.type = dataType;
         }
-    }
-    if (!foundNumber_) {
-        ret.number_ = 1;
     }
     if (!foundLineType) {
         ret.lineType = SolidDashedDottedWavy.Solid;
@@ -23557,7 +23538,7 @@ export function xmlToBackup(node: Node) {
  */
 export interface Forward extends EditorialVoice {
     duration: number;
-    staff?: Staff;
+    staff?: number;
 }
 
 /**
@@ -23572,7 +23553,7 @@ export interface Forward extends EditorialVoice {
  */
 export interface ForwardComplete extends EditorialVoiceComplete {
     duration: number;
-    staff: Staff;
+    staff: number;
 }
 
 
@@ -23582,7 +23563,7 @@ export function xmlToForward(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -23598,7 +23579,7 @@ export function xmlToForward(node: Node) {
             ret.duration = dataDuration;
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch) ;
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
     }
@@ -24262,7 +24243,7 @@ export function getTipDirection(node: Node, fallbackVal?: TipDirection) {
  */
 export interface Direction extends EditorialVoice, Placement, Directive {
     directionTypes: DirectionType[];
-    staff?: Staff;
+    staff?: number;
     offset?: Offset;
     sound?: Sound;
 }
@@ -24281,7 +24262,7 @@ export interface Direction extends EditorialVoice, Placement, Directive {
  */
 export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveComplete {
     directionTypes: DirectionType[];
-    staff: Staff;
+    staff: number;
     offset: Offset;
     sound: Sound;
 }
@@ -24297,7 +24278,7 @@ export function xmlToDirection(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -24313,7 +24294,7 @@ export function xmlToDirection(node: Node) {
             ret.directionTypes = (ret.directionTypes|| []).concat(dataDirectionTypes);
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch) ;
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
         if (ch.nodeName === "offset") {
@@ -27565,7 +27546,7 @@ export function getExplicitImpliedAlternate(node: Node, fallbackVal?: ExplicitIm
 export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyle, Placement {
     frame: Frame;
     printFrame: boolean;
-    staff: Staff;
+    staff: number;
     harmonyType: ExplicitImpliedAlternate;
     offset: Offset;
 }
@@ -27573,7 +27554,7 @@ export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyl
 export interface HarmonyComplete extends HarmonyChordComplete, EditorialComplete, PrintObjectComplete, PrintStyleComplete, PlacementComplete {
     frame: Frame;
     printFrame: boolean;
-    staff: Staff;
+    staff: number;
     harmonyType: ExplicitImpliedAlternate;
     offset: Offset;
 }
@@ -27626,7 +27607,7 @@ export function xmlToHarmony(node: Node) {
             ret.level = dataLevel;
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch) ;
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
         if (ch.nodeName === "offset") {

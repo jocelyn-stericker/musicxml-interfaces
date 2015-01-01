@@ -2624,7 +2624,7 @@ function xmlToEditorialVoice(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -3068,9 +3068,6 @@ function xmlToStaff(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataIdx = getNumber(ch3, true);
-    ret.idx = dataIdx;
     return ret;
 }
 exports.xmlToStaff = xmlToStaff;
@@ -6669,7 +6666,7 @@ function xmlToNote(node) {
             ret.play = dataPlay;
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch);
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
         if (ch.nodeName === "grace") {
@@ -6681,7 +6678,7 @@ function xmlToNote(node) {
             ret.notehead = dataNotehead;
         }
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -7726,7 +7723,6 @@ exports.xmlToNotations = xmlToNotations;
 function xmlToTied(node) {
     "use strict";
     var ret = {};
-    var foundNumber_ = false;
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
@@ -7741,7 +7737,6 @@ function xmlToTied(node) {
         if (ch2.name === "number") {
             var dataNumber_ = getNumber(ch2, true);
             ret.number_ = dataNumber_;
-            foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
@@ -7817,9 +7812,6 @@ function xmlToTied(node) {
             var dataType = getStartStopContinue(ch2, null);
             ret.type = dataType;
         }
-    }
-    if (!foundNumber_) {
-        ret.number_ = 1;
     }
     if (!foundLineType) {
         ret.lineType = 0 /* Solid */;
@@ -14793,7 +14785,7 @@ function xmlToForward(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -14809,7 +14801,7 @@ function xmlToForward(node) {
             ret.duration = dataDuration;
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch);
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
     }
@@ -15241,7 +15233,7 @@ function xmlToDirection(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
-            var dataVoice = getString(ch, true);
+            var dataVoice = getNumber(ch, true);
             ret.voice = dataVoice;
         }
         if (ch.nodeName === "footnote") {
@@ -15257,7 +15249,7 @@ function xmlToDirection(node) {
             ret.directionTypes = (ret.directionTypes || []).concat(dataDirectionTypes);
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch);
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
         if (ch.nodeName === "offset") {
@@ -17659,7 +17651,7 @@ function xmlToHarmony(node) {
             ret.level = dataLevel;
         }
         if (ch.nodeName === "staff") {
-            var dataStaff = xmlToStaff(ch);
+            var dataStaff = getNumber(ch, true);
             ret.staff = dataStaff;
         }
         if (ch.nodeName === "offset") {
