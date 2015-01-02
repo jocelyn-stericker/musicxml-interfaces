@@ -333,7 +333,7 @@ export interface KeyAlter extends String {}
 export interface KeyAccidental extends String {}
 
 /**
- * BUG: Is number but must support compound time. Time signatures are represented by two elements. The
+ * Time signatures are represented by two elements. The
  * beats element indicates the number of beats, as found in
  * the numerator of a time signature. The beat-type element
  * indicates the beat unit, as found in the denominator of
@@ -4872,7 +4872,7 @@ export interface KeyComplete extends PrintStyleComplete, PrintObjectComplete {
  */
 export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintObject {
     interchangeables?: Interchangeable[];
-    beats: number[];
+    beats: string[];
     beatTypes: number[];
     senzaMisura: boolean;
 }
@@ -4915,7 +4915,7 @@ export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintO
  */
 export interface TimeComplete extends TimeSymbolComplete, TimeSeparatorComplete, PrintStyleAlignComplete, PrintObjectComplete {
     interchangeables: Interchangeable[];
-    beats: number[];
+    beats: string[];
     beatTypes: number[];
     senzaMisura: boolean;
 }
@@ -4958,7 +4958,7 @@ export interface TimeComplete extends TimeSymbolComplete, TimeSeparatorComplete,
  * part.
  */
 export interface Interchangeable extends TimeSymbol, TimeSeparator {
-    beats: number[];
+    beats: string[];
     beatTypes: number[];
     timeRelation?: string;
 }
@@ -5000,7 +5000,7 @@ export interface Interchangeable extends TimeSymbol, TimeSeparator {
  * part.
  */
 export interface InterchangeableComplete extends TimeSymbolComplete, TimeSeparatorComplete {
-    beats: number[];
+    beats: string[];
     beatTypes: number[];
     timeRelation: string;
 }

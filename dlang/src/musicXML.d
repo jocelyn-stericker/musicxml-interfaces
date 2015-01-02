@@ -465,7 +465,7 @@ alias Voice = float;
  */
 
 /**
- * BUG: Is number but must support compound time. Time signatures are represented by two elements. The
+ * Time signatures are represented by two elements. The
  * beats element indicates the number of beats, as found in
  * the numerator of a time signature. The beat-type element
  * indicates the beat unit, as found in the denominator of
@@ -500,7 +500,6 @@ alias Voice = float;
  * If absent, the time signature applies to all staves in the
  * part.
  */
-alias Beats = float;
 
 /**
  * Time signatures are represented by two elements. The
@@ -7991,7 +7990,7 @@ export class Time {
                 this.interchangeables ~= data;
             }
             if (ch.name.toString == "beats") {
-                auto data = getNumber(ch, true);
+                auto data = getString(ch, true);
                 this.beats ~= data;
             }
             if (ch.name.toString == "beat-type") {
@@ -8138,7 +8137,7 @@ mixin template ITime() {
     mixin IPrintStyleAlign;
     mixin IPrintObject;
     Interchangeable[] interchangeables;
-    float[] beats;
+    string[] beats;
     float[] beatTypes;
     bool senzaMisura;
 }
@@ -8186,7 +8185,7 @@ export class Interchangeable {
         bool foundSeparator = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "beats") {
-                auto data = getNumber(ch, true);
+                auto data = getString(ch, true);
                 this.beats ~= data;
             }
             if (ch.name.toString == "beat-type") {
@@ -8258,7 +8257,7 @@ export class Interchangeable {
 mixin template IInterchangeable() {
     mixin ITimeSymbol;
     mixin ITimeSeparator;
-    float[] beats;
+    string[] beats;
     float[] beatTypes;
     string timeRelation;
 }

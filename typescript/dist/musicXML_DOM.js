@@ -5447,7 +5447,7 @@ function xmlToTime(node) {
             ret.interchangeables = (ret.interchangeables || []).concat(dataInterchangeables);
         }
         if (ch.nodeName === "beats") {
-            var dataBeats = getNumber(ch, true);
+            var dataBeats = getString(ch, true);
             ret.beats = (ret.beats || []).concat(dataBeats);
         }
         if (ch.nodeName === "beat-type") {
@@ -5561,7 +5561,7 @@ function xmlToInterchangeable(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "beats") {
-            var dataBeats = getNumber(ch, true);
+            var dataBeats = getString(ch, true);
             ret.beats = (ret.beats || []).concat(dataBeats);
         }
         if (ch.nodeName === "beat-type") {

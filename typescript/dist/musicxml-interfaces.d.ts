@@ -1283,24 +1283,24 @@ declare module 'musicxml-interfaces' {
     export function xmlToKey(node: Node): Key;
     export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintObject {
         interchangeables?: Interchangeable[];
-        beats: number[];
+        beats: string[];
         beatTypes: number[];
         senzaMisura: boolean;
     }
     export interface TimeComplete extends TimeSymbolComplete, TimeSeparatorComplete, PrintStyleAlignComplete, PrintObjectComplete {
         interchangeables: Interchangeable[];
-        beats: number[];
+        beats: string[];
         beatTypes: number[];
         senzaMisura: boolean;
     }
     export function xmlToTime(node: Node): Time;
     export interface Interchangeable extends TimeSymbol, TimeSeparator {
-        beats: number[];
+        beats: string[];
         beatTypes: number[];
         timeRelation?: string;
     }
     export interface InterchangeableComplete extends TimeSymbolComplete, TimeSeparatorComplete {
-        beats: number[];
+        beats: string[];
         beatTypes: number[];
         timeRelation: string;
     }

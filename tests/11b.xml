@@ -29,7 +29,7 @@
 				<type>whole</type>
 				<staff>1</staff>
 			</note>
-			<backup><duration>384</duration></backup>
+			<backup><duration>4</duration></backup>
 			<note>
 				<pitch><step>B</step><octave>2</octave></pitch>
 				<duration>4</duration>
