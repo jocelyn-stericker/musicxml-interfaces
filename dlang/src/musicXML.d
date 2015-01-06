@@ -27986,10 +27986,6 @@ Variant[] Part(xmlNodePtr node) {
             }
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
-            if (ch.name.toString == "id") {
-                auto data = Variant(getString(ch, true));
-                rarr ~= data;
-            }
         }
     return rarr;
 }

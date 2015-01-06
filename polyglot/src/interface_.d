@@ -192,6 +192,7 @@ class PInterface : PEmittable {
 
                     string defaultVal;
                     string defaultValTS;
+                    bool inList = value.type != Json.Type.object || "inList" !in value || value["inList"];
                     if (!this.isOrdered) {
                         if (value.type == Json.Type.object) {
                             if ("std" in value) {
@@ -221,6 +222,7 @@ class PInterface : PEmittable {
                         isVA: !!(tsType in scope_.isVA),
                         operation: op,
                         required: required,
+                        inList: inList,
                         tsType: emitTypeScript ? tsType : null,
                         dType: dType,
                         dTypeSingular: dSubtype.replace("boolean", "YesNo"),
@@ -329,6 +331,9 @@ class PInterface : PEmittable {
     }
 
     string emitFieldAssignmentFor(PField val, bool isChild) {
+        if (!val.inList) {
+            return "";
+        }
         string toEmit;
 
         string va1 = this.isOrdered ? "Variant(" : "";
@@ -380,6 +385,9 @@ class PInterface : PEmittable {
     }
 
     string emitTSFieldAssignmentFor(PField val, bool isChild, string ch, string name) {
+        if (!val.inList) {
+            return "";
+        }
         string toEmit;
 
         string indent = isChild ? "    " : "            ";

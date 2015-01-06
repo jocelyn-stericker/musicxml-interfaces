@@ -20331,10 +20331,6 @@ function xmlToPart(node) {
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "id") {
-            var data = getString(ch2, true);
-            rarr = (rarr || []).concat(data);
-        }
     }
     return rarr;
 }

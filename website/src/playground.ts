@@ -105,7 +105,7 @@ class Playground extends TypedReact.Component<Playground.IProps, IState> {
                 <!option value="14a">Lily 14a: StaffDetails/LineChanges</option>
                 <!option value="21a">Lily 21a: Chords/Basic</option>
                 <!option value="21b">Lily 21b: Chords/TwoNotes</option>
-                <!option value="21b">Lily 21c: Chords/ThreeNotesDuration</option>
+                <!option value="21c">Lily 21c: Chords/ThreeNotesDuration</option>
                 <!option value="21d">Lily 21d: Chords/Schubert</option>
                 <!option value="21e">Lily 21e: Chords/PickupMeasures</option>
                 <!option value="21f">Lily 21f: Chords/ElementInBetween</option>

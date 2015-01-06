@@ -24,6 +24,7 @@ export struct PField {
     bool isVA;
     string operation;
     bool required;
+    bool inList;
     string tsType;
     string dType;
     string dTypeSingular;

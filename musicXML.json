@@ -6322,6 +6322,7 @@
         "<grouping>": {},
         "id": {
           "type": "string",
+          "inList": false,
           "//": "ID of part in the header's part-list."
         }
       }
