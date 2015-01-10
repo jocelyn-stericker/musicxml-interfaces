@@ -31,7 +31,7 @@ cp `find /usr/include | grep "libxml/SAX2" | head -1` ./libxml2
 cp -r `find /usr/include | grep "libxslt" | head -1` ./
 
 echo Making sure dstep is installed...
-~/.dub/packages/dstep*/bin/dstep 2>&1 > /dev/null || dub run dstep 2>&1 > /dev/null || (echo "Could not 'dub run dstep'"; exit 1)
+~/.dub/packages/dstep*/bin/dstep 2>&1 > /dev/null || dub fetch dstep && dub run dstep 2>&1 > /dev/null || (echo "Could not 'dub run dstep'"; exit 1)
 
 echo Creating bindings...
 RUN_DSTEP=`ls ~/.dub/packages/dstep*/bin/dstep`
