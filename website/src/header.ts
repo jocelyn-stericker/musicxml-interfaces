@@ -54,7 +54,7 @@ class Header extends TypedReact.Component<Header.IProps, IState> {
                         style={{fontFamily: "Alegreya SC, Alegreya", marginTop: 15.5, float: "left"}}
                     eventKey={1}>
                 <!a href="https://ripieno.io">
-                    A Ripieno.io Project
+                    A Ripieno.io Project »
                 </a>
             </ul>
         </Bootstrap.Navbar>;

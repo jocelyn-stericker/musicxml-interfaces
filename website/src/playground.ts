@@ -140,7 +140,7 @@ class Playground extends TypedReact.Component<Playground.IProps, IState> {
                 <!option value="33g">Lily 33g: Slur/ChordedNotes</option>
                 <!option value="33h">Lily 33h: Spanners/Glissando</option>
                 <!option value="33i">Lily 33i: Ties/NotEnded</option>
-                <!option value="4ia">Lily 41a: MultiParts/PartOrder</option>
+                <!option value="41a">Lily 41a: MultiParts/PartOrder</option>
                 <!option value="41b">Lily 41b: MultiParts/MoreThan10</option>
                 <!option value="41c">Lily 41c: StaffGroups</option>
                 <!option value="41d">Lily 41d: StaffGroups/Nested</option>
