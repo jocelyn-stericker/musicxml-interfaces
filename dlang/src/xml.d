@@ -183,6 +183,7 @@ export bool isMusicXML(xmlDocPtr doc) {
 export xmlDocPtr toTimewise(xmlDocPtr musicxmlDoc) {
     scope(exit) { xmlFreeDoc(musicxmlDoc); }
 
+    enforce(musicxmlDoc, new NotMusicXml("Not XML."));
     if (musicxmlDoc.isTimewise) { return musicxmlDoc; }
     enforce(musicxmlDoc.isPartwise, new NotMusicXml("Failed DTD validation"));
     auto newDoc = xsltApplyStylesheet(g_parttimeStylesheet, musicxmlDoc, null);
@@ -312,6 +313,10 @@ private extern(C) xmlParserInputPtr musicDtdExternalEntityLoader(
     if (id == "-//MIDI Manufacturers Association//DTD MIDIEvents 1.0//EN" ) {
         return xmlNewStringInputStream(ctxt, midievents_dtd);
     }
+
+    id = id.replace("1.0", "3.0"); // FIXME
+    id = id.replace("1.1", "3.0"); // FIXME
+    id = id.replace("2.0", "3.0"); // FIXME
 
     if (id == "-//Recordare//ELEMENTS MusicXML 3.0 MIDI//EN" ) {
         return xmlNewStringInputStream(ctxt, midixml_dtd);

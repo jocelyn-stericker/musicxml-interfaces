@@ -178,6 +178,110 @@ bool getYesNo(T)(T p, bool required) {
     return false;
 }
 
+export class Lyric {
+    mixin ILyric;
+    this(xmlNodePtr node) {
+        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
+            if (ch.name.toString == "footnote") {
+                footnote = new Footnote(ch);
+            }
+            if (ch.name.toString == "level") {
+                level = new Level(ch);
+            }
+        }
+        lyricParts = LyricParts(node);
+        bool foundNumber_ = false;
+        bool foundJustify = false;
+        bool foundDefaultX = false;
+        bool foundRelativeY = false;
+        bool foundDefaultY = false;
+        bool foundRelativeX = false;
+        bool foundPlacement = false;
+        bool foundColor = false;
+        bool foundPrintObject = false;
+        bool foundName = false;
+        for (auto ch = node.properties; ch; ch = ch.next) {
+            if (ch.name.toString == "number") {
+                number_ = getNumber(ch, true);
+                foundNumber_ = true;
+            }
+            if (ch.name.toString == "justify") {
+                justify = getLeftCenterRight(ch);
+                foundJustify = true;
+            }
+            if (ch.name.toString == "default-x") {
+                defaultX = getNumber(ch, true);
+                foundDefaultX = true;
+            }
+            if (ch.name.toString == "relative-y") {
+                relativeY = getNumber(ch, true);
+                foundRelativeY = true;
+            }
+            if (ch.name.toString == "default-y") {
+                defaultY = getNumber(ch, true);
+                foundDefaultY = true;
+            }
+            if (ch.name.toString == "relative-x") {
+                relativeX = getNumber(ch, true);
+                foundRelativeX = true;
+            }
+            if (ch.name.toString == "placement") {
+                placement = getAboveBelow(ch);
+                foundPlacement = true;
+            }
+            if (ch.name.toString == "color") {
+                color = getString(ch, true);
+                foundColor = true;
+            }
+            if (ch.name.toString == "print-object") {
+                printObject = getYesNo(ch, true) ;
+                foundPrintObject = true;
+            }
+            if (ch.name.toString == "name") {
+                name = getString(ch, true);
+                foundName = true;
+            }
+        }
+        if (!foundNumber_) {
+            number_ = 1;
+        }
+        if (!foundJustify) {
+            justify = LeftCenterRight.Left;
+        }
+        if (!foundDefaultX) {
+            defaultX = real.nan;
+        }
+        if (!foundRelativeY) {
+            relativeY = 0;
+        }
+        if (!foundDefaultY) {
+            defaultY = real.nan;
+        }
+        if (!foundRelativeX) {
+            relativeX = 0;
+        }
+        if (!foundPlacement) {
+            placement = AboveBelow.Unspecified;
+        }
+        if (!foundColor) {
+            color = "#000000";
+        }
+        if (!foundPrintObject) {
+            printObject = true;
+        }
+        if (!foundName) {
+            name = "";
+        }
+    }
+    Json toJson() {
+        import measureToJson : lyricToJson;
+        return lyricToJson(this);
+    }
+    static Lyric fromJson(Json t) {
+        assert(false, "Not implemented");
+    }
+}
+
 /**
  * Traditional key signatures are represented by the number
  * of flats and sharps, plus an optional mode for major/

@@ -11,6 +11,7 @@ dlang/**/*.h
 *.suo
 *.a
 *.visualdproj
+.env
 __test__librar*
 node_modules
 typescript/partial/*

@@ -23,6 +23,7 @@
             "path": "./jsonify"
         }
     },
+    "//": "Relocation model not specified because it is already in dependency.",
     "copyFiles-windows": [
         "util/xml-2.0.lib",
         "util/xslt.lib",

@@ -1,13 +1,16 @@
-.PHONY: polyglot typescript dlang
+.PHONY: polyglot typescript dlang node
 
-all: dlang typescript
+all: dlang typescript node
 
 polyglot:
-	cd polyglot; dub -- --input ../musicXML.json
+	cd dlang; ./check_config.bash
+	cd polyglot; PATH=$(shell pwd)/dlang/.env/bin:$(PATH) dub -- --input ../musicXML.json
 
 typescript: polyglot
 	npm install && npm start
 
 dlang: polyglot
-	cd dlang; ./bind_libxml2.bash && dub test
+	cd dlang; ./build.bash
 
+node: typescript dlang
+	cd node; node-gyp rebuild && node ./smoketest.js
