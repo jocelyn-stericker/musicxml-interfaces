@@ -1,16 +1,30 @@
 .PHONY: polyglot typescript dlang node
 
-all: dlang typescript node
+all:
+	@echo
+	@echo Usage
+	@echo ==================================================================
+	@echo make generate:	Regenerate TypeScript and D code.
+	@echo make dlang: 	Build D project, installing D and dub if needed.
+	@echo make typescript: 	Recompile TypeScript code.
+	@echo make node: 	Recompile Node addon \(uses D library\)
+	@echo 			Does NOT regenerate TypeScript code.
+	@echo
+	@echo Note
+	@echo ==================================================================
+	@echo From the version off of npm, only 'make node' will work. 
+	@echo For full source, 'git clone git@github.com:ripieno/musicxml-interfaces.git'
 
-polyglot:
+generate:
 	cd dlang; ./check_config.bash
 	cd polyglot; PATH=$(shell pwd)/dlang/.env/bin:$(PATH) dub -- --input ../musicXML.json
 
-typescript: polyglot
+typescript:
 	npm install && npm start
 
-dlang: polyglot
+dlang:
 	cd dlang; ./build.bash
 
-node: typescript dlang
+node: dlang
+	npm install
 	cd node; ../node_modules/.bin/node-gyp rebuild && node ./smoketest.js

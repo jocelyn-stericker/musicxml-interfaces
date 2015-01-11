@@ -26,6 +26,14 @@
     "typescript": {
         "definition": "typescript/dist/musicxml-interfaces.d.ts"
     },
+    "files": [
+        "Makefile",
+        "dlang",
+        "index.js",
+        "node",
+        "tests",
+        "typescript/dist"
+    ],
     "scripts": {
         "start": "gulp build"
     }
