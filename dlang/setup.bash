@@ -9,13 +9,12 @@ command_exists () {
 }
 
 if [ "$(uname)" == "Darwin" ]; then
-    wget https://github.com/ldc-developers/ldc/releases/download/v0.15.1/ldc2-0.15.1-osx-x86_64.tar.gz
     wget http://code.dlang.org/files/dub-0.9.22-osx-x86_64.tar.gz
-    tar -xf ./ldc*.tar.gz
+    wget http://downloads.dlang.org/releases/2014/dmd.2.066.1.osx.zip
+    unzip ./dmd*
     tar -xf ./dub*.tar.gz
-    rm *.tar.gz
-    mv ./ldc*/* .
-    rm -rf ./ldc*
+    rm *.tar.gz *.zip
+    ln -s ./dmd2/osx/bin/ .
     mv ./dub ./bin
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     wget http://code.dlang.org/files/dub-0.9.22-linux-x86_64.tar.gz

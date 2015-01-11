@@ -16,3 +16,4 @@ __test__librar*
 node_modules
 typescript/partial/*
 polyglot/musicxml-interfaces-polyglot
+node/build/

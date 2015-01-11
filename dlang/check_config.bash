@@ -13,7 +13,7 @@ if ! command_exists dub; then
 fi
 
 if [ "$(uname)" == "Darwin" ]; then
-    COMPILER=ldc2
+    COMPILER=dmd
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     COMPILER=dmd
 else

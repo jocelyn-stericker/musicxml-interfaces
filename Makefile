@@ -13,4 +13,4 @@ dlang: polyglot
 	cd dlang; ./build.bash
 
 node: typescript dlang
-	cd node; node-gyp rebuild && node ./smoketest.js
+	cd node; ../node_modules/.bin/node-gyp rebuild && node ./smoketest.js
