@@ -13,6 +13,9 @@
                 "-lz",
                 "-lpthread",
                 "-lm"
+            ],
+            "include_dirs" : [
+                "<!(node -e \"require('nan')\")"
             ]
         }
     ]

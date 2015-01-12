@@ -16,6 +16,7 @@
     "devDependencies": {
         "dts-bundle": "0.2.0",
         "event-stream": "3.1.7",
+        "nan": "1.4.1",
         "node-gyp": "1.0.2",
         "gulp": "3.8.10",
         "gulp-typescript": "git://github.com/jnetterf/gulp-typescript-react-jsx#fe6ced"

@@ -1,4 +1,5 @@
 #include <node.h>
+#include <nan.h>
 #include <v8.h>
 #include <cstring>
 
@@ -6,19 +7,20 @@
 
 using namespace v8;
 
-Handle<Value> Method(const Arguments& args) {
-    HandleScope scope;
-    String::Utf8Value source(args[0]->ToString());
+NAN_METHOD(ParseXML) {
+    NanScope();
+
+    NanUtf8String source(args[0]->ToString());
     const char* buffer = musicxml_xmlToJson(*source, strlen(*source));
-    Local<v8::String> local = scope.Close(String::New(buffer));
+    Local<String> local = NanNew<String>(buffer);
     musicxml_freeString(buffer);
-    return local;
+    NanReturnValue(local);
 }
 
 void init(Handle<Object> exports) {
     musicxml_init();
-    exports->Set(String::NewSymbol("parseXML"),
-        FunctionTemplate::New(Method)->GetFunction());
+    exports->Set(NanNew<String>("xmlToJSON"),
+        NanNew<FunctionTemplate>(ParseXML)->GetFunction());
 }
 
 NODE_MODULE(mxmltojson, init)

@@ -5,7 +5,7 @@ fs.readFile( __dirname + '/../tests/01a.xml', function (err, data) {
     if (err) {
         throw err; 
     }
-    var score = JSON.parse(mxmltojson.parseXML(data.toString()));
+    var score = JSON.parse(mxmltojson.xmlToJSON(data.toString()));
     if (score && score.error) {
         throw score.error;
     } else if (score && score.movementTitle === "Pitches and accidentals") {

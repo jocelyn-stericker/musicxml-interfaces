@@ -2,13 +2,10 @@
 
 all:
 	@echo
-	@echo Usage
-	@echo ==================================================================
 	@echo make generate:	Regenerate TypeScript and D code.
 	@echo make dlang: 	Build D project, installing D and dub if needed.
 	@echo make typescript: 	Recompile TypeScript code.
-	@echo make node: 	Recompile Node addon \(uses D library\)
-	@echo 			Does NOT regenerate TypeScript code.
+	@echo make node: 	Recompile Node addon \(uses D library, does not compile TS\)
 	@echo
 	@echo Note
 	@echo ==================================================================

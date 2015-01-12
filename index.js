@@ -1,9 +1,15 @@
 // Selects the correct backend (DOM or dlang)
 var isNode = typeof window === "undefined" || typeof process !== "undefined" && !process.browser;
 if (isNode) {
-    var implicit = "./node/build/Release/mxmltojson";
     try {
-        module.exports = require(implicit);
+        // This trick avoids browerserify/webpack loading.
+        var implicit = "./node/build/Release/mxmltojson";
+        var toJSON = require(implicit).xmlToJSON;
+        module.exports = {
+            parseXML: function(score) {
+                return JSON.parse(toJSON(score));
+            }
+        }
     } catch(err) {
         console.log();
         console.log("=========== FAILED TO LOAD MUSICXML-INTERFACES NODE ADDON ===========");
