@@ -314,55 +314,57 @@ private extern(C) xmlParserInputPtr musicDtdExternalEntityLoader(
         return xmlNewStringInputStream(ctxt, midievents_dtd);
     }
 
-    id = id.replace("1.0", "3.0"); // FIXME
-    id = id.replace("1.1", "3.0"); // FIXME
-    id = id.replace("2.0", "3.0"); // FIXME
+    bool ofMXMLType(T)(T id, string type) {
+        return (id.indexOf("-//Recordare//ELEMENTS MusicXML") == 0 ||
+                id.indexOf("-//Recordare//DTD MusicXML") == 0) &&
+            id.indexOf(type) != -1;
+    }
 
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 MIDI//EN" ) {
+    if (ofMXMLType(id, "MIDI")) {
         return xmlNewStringInputStream(ctxt, midixml_dtd);
     }
 
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Opus//EN" ) {
+    if (ofMXMLType(id, "Opus")) {
         return xmlNewStringInputStream(ctxt, opus_dtd);
     }
 
-    if (id == "-//Recordare//DTD MusicXML 3.0 Partwise//EN" ) {
+    if (ofMXMLType(id, "Partwise")) {
         return xmlNewStringInputStream(ctxt, partwise_dtd);
     }
 
-    if (id == "-//Recordare//DTD MusicXML 3.0 Sounds//EN" ) {
+    if (ofMXMLType(id, "Sounds")) {
         return xmlNewStringInputStream(ctxt, sounds_dtd);
     }
 
-    if (id == "-//Recordare//DTD MusicXML 3.0 Timewise//EN" ) {
+    if (ofMXMLType(id, "Timewise")) {
         return xmlNewStringInputStream(ctxt, timewise_dtd);
     }
 
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Attributes//EN" ) {
+    if (ofMXMLType(id, "Attributes")) {
         return xmlNewStringInputStream(ctxt, attributes_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Barline//EN" ) {
+    if (ofMXMLType(id, "Barline")) {
         return xmlNewStringInputStream(ctxt, barline_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Common//EN" ) {
+    if (ofMXMLType(id, "Common")) {
         return xmlNewStringInputStream(ctxt, common_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Direction//EN" ) {
+    if (ofMXMLType(id, "Direction")) {
         return xmlNewStringInputStream(ctxt, direction_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Identity//EN" ) {
+    if (ofMXMLType(id, "Identity")) {
         return xmlNewStringInputStream(ctxt, identity_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Layout//EN" ) {
+    if (ofMXMLType(id, "Layout")) {
         return xmlNewStringInputStream(ctxt, layout_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Link//EN" ) {
+    if (ofMXMLType(id, "Link")) {
         return xmlNewStringInputStream(ctxt, link_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Note//EN" ) {
+    if (ofMXMLType(id, "Note")) {
         return xmlNewStringInputStream(ctxt, note_mod); 
     }
-    if (id == "-//Recordare//ELEMENTS MusicXML 3.0 Score//EN" ) {
+    if (ofMXMLType(id, "Score")) {
         return xmlNewStringInputStream(ctxt, score_mod); 
     }
 
