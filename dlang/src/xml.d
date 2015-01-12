@@ -221,11 +221,12 @@ export xmlDocPtr toTimewise(xmlDocPtr musicxmlDoc) {
 export xmlDocPtr toPartwise(xmlDocPtr musicxmlDoc) {
     scope(exit) { xmlFreeDoc(musicxmlDoc); }
 
-    if (musicxmlDoc.isPartwise) { return musicxmlDoc; }
-    enforce(musicxmlDoc.isTimewise, new NotMusicXml("Failed DTD validation"));
+    // TODO: Have a strict mode in which we actually check
+    //if (musicxmlDoc.isPartwise) { return musicxmlDoc; }
+    //enforce(musicxmlDoc.isTimewise, new NotMusicXml("Failed DTD validation"));
     auto newDoc = xsltApplyStylesheet(g_timepartStylesheet, musicxmlDoc, null);
-    enforce(!!newDoc, new NotMusicXml("Could not transform to timewise MusicXML"));
-    return newDoc;
+    //enforce(!!newDoc, new NotMusicXml("Could not transform to timewise MusicXML"));
+    return newDoc ? newDoc : musicxmlDoc;
 } unittest {
     // Test conversion from timewise to partwise.
     string simplePartwise = import("helloWorldTimewise.xml");

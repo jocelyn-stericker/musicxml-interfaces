@@ -16,7 +16,7 @@ export string getString(T)(T p, bool required) {
 
         return child.content.toString.idup;
     } catch(NoElementFound nef) {
-        enforce(!required, nef);
+        // enforce(!required, nef); FIXME
         return "";
     }
 }

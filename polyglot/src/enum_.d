@@ -93,7 +93,8 @@ class PEnum : PEmittable {
                             "        return " ~ this.name ~ "." ~ pair.key ~ ";\n" ~
                             "    }\n")
                         .join("") ~
-                "    assert(false, \"Not reached\");\n" ~
+                "    return 0.to!" ~ this.name ~ ";\n" ~
+                //"    assert(false, \"Not reached\");\n" ~ FIXME Strict
             "}";
     }
 };

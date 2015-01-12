@@ -42,7 +42,7 @@ export string getString(T)(T p, bool required) {
 
         return child.content.toString.idup;
     } catch(NoElementFound nef) {
-        enforce(!required, nef);
+        // enforce(!required, nef); FIXME
         return "";
     }
 }
@@ -1233,7 +1233,7 @@ StartStop getStartStop(T)(T p) {
     if (s == "stop") {
         return StartStop.Stop;
     }
-    assert(false, "Not reached");
+    return 0.to!StartStop;
 }
 /**
  * The start-stop and start-stop-continue entities are used
@@ -1271,7 +1271,7 @@ StartStopContinue getStartStopContinue(T)(T p) {
     if (s == "continue") {
         return StartStopContinue.Continue;
     }
-    assert(false, "Not reached");
+    return 0.to!StartStopContinue;
 }
 /**
  * The start-stop and start-stop-continue entities are used
@@ -1309,7 +1309,7 @@ StartStopSingle getStartStopSingle(T)(T p) {
     if (s == "stop") {
         return StartStopSingle.Stop;
     }
-    assert(false, "Not reached");
+    return 0.to!StartStopSingle;
 }
 /**
  * The yes-no entity is used for boolean-like attributes.
@@ -1352,7 +1352,7 @@ SymbolSize getSymbolSize(T)(T p) {
     if (s == "large") {
         return SymbolSize.Large;
     }
-    assert(false, "Not reached");
+    return 0.to!SymbolSize;
 }
 /**
  * The above-below type is used to indicate whether one
@@ -1375,7 +1375,7 @@ AboveBelow getAboveBelow(T)(T p) {
     if (s == "unspecified") {
         return AboveBelow.Unspecified;
     }
-    assert(false, "Not reached");
+    return 0.to!AboveBelow;
 }
 export enum OverUnder {
     Over = 1,
@@ -1394,7 +1394,7 @@ OverUnder getOverUnder(T)(T p) {
     if (s == "unspecified") {
         return OverUnder.Unspecified;
     }
-    assert(false, "Not reached");
+    return 0.to!OverUnder;
 }
 /**
  * The up-down entity is used for arrow direction,
@@ -1413,7 +1413,7 @@ UpDown getUpDown(T)(T p) {
     if (s == "up") {
         return UpDown.Up;
     }
-    assert(false, "Not reached");
+    return 0.to!UpDown;
 }
 /**
  * The top-bottom entity is used to indicate the top or
@@ -1432,7 +1432,7 @@ TopBottom getTopBottom(T)(T p) {
     if (s == "bottom") {
         return TopBottom.Bottom;
     }
-    assert(false, "Not reached");
+    return 0.to!TopBottom;
 }
 /**
  * The left-right entity is used to indicate whether one
@@ -1452,7 +1452,7 @@ LeftRight getLeftRight(T)(T p) {
     if (s == "left") {
         return LeftRight.Left;
     }
-    assert(false, "Not reached");
+    return 0.to!LeftRight;
 }
 /**
  * The number-of-lines entity is used to specify the
@@ -1513,7 +1513,7 @@ EnclosureShape getEnclosureShape(T)(T p) {
     if (s == "rectangle") {
         return EnclosureShape.Rectangle;
     }
-    assert(false, "Not reached");
+    return 0.to!EnclosureShape;
 }
 export enum NormalItalic {
     Italic = 1,
@@ -1528,7 +1528,7 @@ NormalItalic getNormalItalic(T)(T p) {
     if (s == "normal") {
         return NormalItalic.Normal;
     }
-    assert(false, "Not reached");
+    return 0.to!NormalItalic;
 }
 export enum NormalBold {
     Bold = 2,
@@ -1543,7 +1543,7 @@ NormalBold getNormalBold(T)(T p) {
     if (s == "normal") {
         return NormalBold.Normal;
     }
-    assert(false, "Not reached");
+    return 0.to!NormalBold;
 }
 /**
  * Slurs, tuplets, and many other features can be
@@ -2044,7 +2044,7 @@ LeftCenterRight getLeftCenterRight(T)(T p) {
     if (s == "left") {
         return LeftCenterRight.Left;
     }
-    assert(false, "Not reached");
+    return 0.to!LeftCenterRight;
 }
 export enum TopMiddleBottomBaseline {
     Top = 0,
@@ -2067,7 +2067,7 @@ TopMiddleBottomBaseline getTopMiddleBottomBaseline(T)(T p) {
     if (s == "bottom") {
         return TopMiddleBottomBaseline.Bottom;
     }
-    assert(false, "Not reached");
+    return 0.to!TopMiddleBottomBaseline;
 }
 export enum DirectionMode {
     Lro = 2,
@@ -2090,7 +2090,7 @@ DirectionMode getDirectionMode(T)(T p) {
     if (s == "rtl") {
         return DirectionMode.Rtl;
     }
-    assert(false, "Not reached");
+    return 0.to!DirectionMode;
 }
 export enum StraightCurved {
     Curved = 1,
@@ -2105,7 +2105,7 @@ StraightCurved getStraightCurved(T)(T p) {
     if (s == "straight") {
         return StraightCurved.Straight;
     }
-    assert(false, "Not reached");
+    return 0.to!StraightCurved;
 }
 export enum SolidDashedDottedWavy {
     Dashed = 1,
@@ -2128,7 +2128,7 @@ SolidDashedDottedWavy getSolidDashedDottedWavy(T)(T p) {
     if (s == "solid") {
         return SolidDashedDottedWavy.Solid;
     }
-    assert(false, "Not reached");
+    return 0.to!SolidDashedDottedWavy;
 }
 export enum NormalAngledSquare {
     Angled = 1,
@@ -2147,7 +2147,7 @@ NormalAngledSquare getNormalAngledSquare(T)(T p) {
     if (s == "normal") {
         return NormalAngledSquare.Normal;
     }
-    assert(false, "Not reached");
+    return 0.to!NormalAngledSquare;
 }
 export enum UprightInverted {
     Upright = 0,
@@ -2162,7 +2162,7 @@ UprightInverted getUprightInverted(T)(T p) {
     if (s == "inverted") {
         return UprightInverted.Inverted;
     }
-    assert(false, "Not reached");
+    return 0.to!UprightInverted;
 }
 export enum UpperMainBelow {
     Main = 1,
@@ -2181,7 +2181,7 @@ UpperMainBelow getUpperMainBelow(T)(T p) {
     if (s == "upper") {
         return UpperMainBelow.Upper;
     }
-    assert(false, "Not reached");
+    return 0.to!UpperMainBelow;
 }
 export enum WholeHalfUnison {
     Unison = 2,
@@ -2200,7 +2200,7 @@ WholeHalfUnison getWholeHalfUnison(T)(T p) {
     if (s == "half") {
         return WholeHalfUnison.Half;
     }
-    assert(false, "Not reached");
+    return 0.to!WholeHalfUnison;
 }
 export enum WholeHalfNone {
     None = 3,
@@ -2219,7 +2219,7 @@ WholeHalfNone getWholeHalfNone(T)(T p) {
     if (s == "half") {
         return WholeHalfNone.Half;
     }
-    assert(false, "Not reached");
+    return 0.to!WholeHalfNone;
 }
 /**
  * The color entity indicates the color of an element.
@@ -5791,7 +5791,7 @@ OddEvenBoth getOddEvenBoth(T)(T p) {
     if (s == "odd") {
         return OddEvenBoth.Odd;
     }
-    assert(false, "Not reached");
+    return 0.to!OddEvenBoth;
 }
 /**
  * Page layout can be defined both in score-wide defaults
@@ -6657,7 +6657,7 @@ CueGraceLarge getCueGraceLarge(T)(T p) {
     if (s == "large") {
         return CueGraceLarge.Large;
     }
-    assert(false, "Not reached");
+    return 0.to!CueGraceLarge;
 }
 /**
  * The appearance element controls general graphical
@@ -7358,7 +7358,7 @@ SeparatorType getSeparatorType(T)(T p) {
     if (s == "adjacent") {
         return SeparatorType.Adjacent;
     }
-    assert(false, "Not reached");
+    return 0.to!SeparatorType;
 }
 /**
  * The time-separator entity indicates how to display the
@@ -7436,7 +7436,7 @@ TimeSymbolType getTimeSymbolType(T)(T p) {
     if (s == "normal") {
         return TimeSymbolType.Normal;
     }
-    assert(false, "Not reached");
+    return 0.to!TimeSymbolType;
 }
 /**
  * The time-symbol entity indicates how to display a time
@@ -7504,7 +7504,7 @@ CancelLocation getCancelLocation(T)(T p) {
     if (s == "left") {
         return CancelLocation.Left;
     }
-    assert(false, "Not reached");
+    return 0.to!CancelLocation;
 }
 /**
  * Traditional key signatures are represented by the number
@@ -8400,7 +8400,7 @@ PartSymbolType getPartSymbolType(T)(T p) {
     if (s == "brace") {
         return PartSymbolType.Brace;
     }
-    assert(false, "Not reached");
+    return 0.to!PartSymbolType;
 }
 /**
  * The part-symbol element indicates how a symbol for a
@@ -8831,7 +8831,7 @@ ShowFretsType getShowFretsType(T)(T p) {
     if (s == "numbers") {
         return ShowFretsType.Numbers;
     }
-    assert(false, "Not reached");
+    return 0.to!ShowFretsType;
 }
 /**
  * The staff-details element is used to indicate different
@@ -10423,7 +10423,7 @@ Count getCount(T)(T p) {
     if (s == "whole") {
         return Count.Whole;
     }
-    assert(false, "Not reached");
+    return 0.to!Count;
 }
 /**
  * Type indicates the graphic note type, Valid values (from
@@ -10708,7 +10708,7 @@ MxmlAccidental getMxmlAccidental(T)(T p) {
     if (s == "double-flat") {
         return MxmlAccidental.DoubleFlat;
     }
-    assert(false, "Not reached");
+    return 0.to!MxmlAccidental;
 }
 /**
  * Actual notated accidentals. Valid values include: sharp,
@@ -10957,7 +10957,7 @@ StemType getStemType(T)(T p) {
     if (s == "up") {
         return StemType.Up;
     }
-    assert(false, "Not reached");
+    return 0.to!StemType;
 }
 /**
  * Stems can be down, up, none, or double. For down and up
@@ -11132,7 +11132,7 @@ NoteheadType getNoteheadType(T)(T p) {
     if (s == "circle-x") {
         return NoteheadType.CircleX;
     }
-    assert(false, "Not reached");
+    return 0.to!NoteheadType;
 }
 /**
  * The notehead element indicates shapes other than the open
@@ -11332,7 +11332,7 @@ BeamType getBeamType(T)(T p) {
     if (s == "end") {
         return BeamType.End;
     }
-    assert(false, "Not reached");
+    return 0.to!BeamType;
 }
 export enum AccelRitNone {
     Accel = 0,
@@ -11351,7 +11351,7 @@ AccelRitNone getAccelRitNone(T)(T p) {
     if (s == "rit") {
         return AccelRitNone.Rit;
     }
-    assert(false, "Not reached");
+    return 0.to!AccelRitNone;
 }
 /**
  * Beam types include begin, continue, end, forward hook, and
@@ -11866,7 +11866,7 @@ ActualBothNone getActualBothNone(T)(T p) {
     if (s == "actual") {
         return ActualBothNone.Actual;
     }
-    assert(false, "Not reached");
+    return 0.to!ActualBothNone;
 }
 /**
  * A tuplet element is present when a tuplet is to be displayed
@@ -17203,7 +17203,7 @@ HoleLocation getHoleLocation(T)(T p) {
     if (s == "left") {
         return HoleLocation.Left;
     }
-    assert(false, "Not reached");
+    return 0.to!HoleLocation;
 }
 export enum HoleClosedType {
     No = 1,
@@ -17222,7 +17222,7 @@ HoleClosedType getHoleClosedType(T)(T p) {
     if (s == "half") {
         return HoleClosedType.Half;
     }
-    assert(false, "Not reached");
+    return 0.to!HoleClosedType;
 }
 /**
  * The hole element represents the symbols used for woodwind
@@ -18785,7 +18785,7 @@ BreathMarkType getBreathMarkType(T)(T p) {
     if (s == "tick") {
         return BreathMarkType.Tick;
     }
-    assert(false, "Not reached");
+    return 0.to!BreathMarkType;
 }
 /**
  * The breath-mark element may have a text value to
@@ -19700,7 +19700,7 @@ SyllabicType getSyllabicType(T)(T p) {
     if (s == "end") {
         return SyllabicType.End;
     }
-    assert(false, "Not reached");
+    return 0.to!SyllabicType;
 }
 /**
  * Hyphenation is indicated by the syllabic element, which can be single,
@@ -20508,7 +20508,7 @@ BarlineLocation getBarlineLocation(T)(T p) {
     if (s == "left") {
         return BarlineLocation.Left;
     }
-    assert(false, "Not reached");
+    return 0.to!BarlineLocation;
 }
 /**
  * If a barline is other than a normal single barline, it
@@ -20699,7 +20699,7 @@ BarStyleType getBarStyleType(T)(T p) {
     if (s == "light-light") {
         return BarStyleType.LightLight;
     }
-    assert(false, "Not reached");
+    return 0.to!BarStyleType;
 }
 /**
  * Bar-style contains style information. Choices are
@@ -20759,7 +20759,7 @@ StartStopDiscontinue getStartStopDiscontinue(T)(T p) {
     if (s == "stop") {
         return StartStopDiscontinue.Stop;
     }
-    assert(false, "Not reached");
+    return 0.to!StartStopDiscontinue;
 }
 /**
  * Endings refers to multiple (e.g. first and second) endings.
@@ -20938,7 +20938,7 @@ WingedType getWingedType(T)(T p) {
     if (s == "double-straight") {
         return WingedType.DoubleStraight;
     }
-    assert(false, "Not reached");
+    return 0.to!WingedType;
 }
 export enum DirectionTypeBg {
     Forward = 1,
@@ -20953,7 +20953,7 @@ DirectionTypeBg getDirectionTypeBg(T)(T p) {
     if (s == "backward") {
         return DirectionTypeBg.Backward;
     }
-    assert(false, "Not reached");
+    return 0.to!DirectionTypeBg;
 }
 /**
  * Repeat marks. The start of the repeat has a forward direction
@@ -21052,7 +21052,7 @@ TipDirection getTipDirection(T)(T p) {
     if (s == "left") {
         return TipDirection.Left;
     }
-    assert(false, "Not reached");
+    return 0.to!TipDirection;
 }
 /**
  * A direction is a musical indication that is not attached
@@ -21701,7 +21701,7 @@ WedgeType getWedgeType(T)(T p) {
     if (s == "continue") {
         return WedgeType.Continue;
     }
-    assert(false, "Not reached");
+    return 0.to!WedgeType;
 }
 /**
  * Wedge spread is measured in tenths of staff line space.
@@ -21941,7 +21941,7 @@ LineEndType getLineEndType(T)(T p) {
     if (s == "up") {
         return LineEndType.Up;
     }
-    assert(false, "Not reached");
+    return 0.to!LineEndType;
 }
 /**
  * Brackets are combined with words in a variety of
@@ -22076,7 +22076,7 @@ PedalType getPedalType(T)(T p) {
     if (s == "continue") {
         return PedalType.Continue;
     }
-    assert(false, "Not reached");
+    return 0.to!PedalType;
 }
 /**
  * Piano pedal marks. The line attribute is yes if pedal
@@ -22598,7 +22598,7 @@ OctaveShiftType getOctaveShiftType(T)(T p) {
     if (s == "continue") {
         return OctaveShiftType.Continue;
     }
-    assert(false, "Not reached");
+    return 0.to!OctaveShiftType;
 }
 /**
  * Octave shifts indicate where notes are shifted up or down
@@ -23366,7 +23366,7 @@ VoiceSymbol getVoiceSymbol(T)(T p) {
     if (s == "plain") {
         return VoiceSymbol.Plain;
     }
-    assert(false, "Not reached");
+    return 0.to!VoiceSymbol;
 }
 /**
  * The principal-voice element represents principal and
@@ -24061,7 +24061,7 @@ ExplicitImpliedAlternate getExplicitImpliedAlternate(T)(T p) {
     if (s == "alternate") {
         return ExplicitImpliedAlternate.Alternate;
     }
-    assert(false, "Not reached");
+    return 0.to!ExplicitImpliedAlternate;
 }
 export class Harmony {
     mixin IHarmony;
@@ -25200,7 +25200,7 @@ ChordType getChordType(T)(T p) {
     if (s == "half-diminished") {
         return ChordType.HalfDiminished;
     }
-    assert(false, "Not reached");
+    return 0.to!ChordType;
 }
 export class DegreeValue {
     mixin IDegreeValue;
