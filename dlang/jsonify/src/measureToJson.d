@@ -6,7 +6,7 @@ import std.string;
 
 export Json measureToJson(Measure measure) {
     auto ret = Json.emptyObject;
-    ret["number"] = measure.number_;
+    ret["number_"] = measure.number_;
     ret["implicit"] = measure.implicit;
     ret["width"] = measure.width;
     ret["nonControlling"] = measure.nonControlling;
