@@ -2354,7 +2354,7 @@ export interface TimeOnlyComplete {
  * this is used for the version attribute.
  */
 export interface DocumentAttributes {
-    version_: string;
+    version: string;
 }
 
 /**
@@ -2363,7 +2363,7 @@ export interface DocumentAttributes {
  * this is used for the version attribute.
  */
 export interface DocumentAttributesComplete {
-    version_: string;
+    version: string;
 }
 
 
@@ -2524,7 +2524,7 @@ export interface FermataComplete extends PrintStyleComplete {
  * The fermata type is upright if not specified.
  */
 export interface WavyLine extends Position, Placement, Color, TrillSound {
-    number_?: number;
+    number?: number;
     type: StartStopContinue;
 }
 
@@ -2540,7 +2540,7 @@ export interface WavyLine extends Position, Placement, Color, TrillSound {
  * The fermata type is upright if not specified.
  */
 export interface WavyLineComplete extends PositionComplete, PlacementComplete, ColorComplete, TrillSoundComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -4637,7 +4637,7 @@ export interface Fifths extends String {}
  */
 export interface KeyOctave {
     octave: number;
-    number_: number;
+    number: number;
     cancel?: boolean;
 }
 
@@ -4692,7 +4692,7 @@ export interface KeyOctave {
  */
 export interface KeyOctaveComplete {
     octave: number;
-    number_: number;
+    number: number;
     cancel: boolean;
 }
 
@@ -4766,7 +4766,7 @@ export interface Key extends PrintStyle, PrintObject {
     cancel?: Cancel;
     keySteps: string[];
     keyOctaves?: KeyOctave[];
-    number_?: number;
+    number?: number;
     fifths: number;
     keyAlters: string[];
     keyAccidentals: string[];
@@ -4826,7 +4826,7 @@ export interface KeyComplete extends PrintStyleComplete, PrintObjectComplete {
     cancel: Cancel;
     keySteps: string[];
     keyOctaves: KeyOctave[];
-    number_: number;
+    number: number;
     fifths: number;
     keyAlters: string[];
     keyAccidentals: string[];
@@ -5143,7 +5143,7 @@ export interface Line extends String {}
 export interface Clef extends PrintStyle, PrintObject {
     clefOctaveChange: string;
     sign: string;
-    number_?: number;
+    number?: number;
     size?: SymbolSize;
     line: number;
     afterBarline?: boolean;
@@ -5191,7 +5191,7 @@ export interface Clef extends PrintStyle, PrintObject {
 export interface ClefComplete extends PrintStyleComplete, PrintObjectComplete {
     clefOctaveChange: string;
     sign: string;
-    number_: number;
+    number: number;
     size: SymbolSize;
     line: number;
     afterBarline: boolean;
@@ -5292,7 +5292,7 @@ export interface StaffDetails extends PrintObject, PrintSpacing {
     staffTunings?: StaffTuning[];
     staffSize?: number;
     capo?: string;
-    number_?: number;
+    number?: number;
     showFets?: ShowFretsType;
     staffType?: string;
 }
@@ -5323,7 +5323,7 @@ export interface StaffDetailsComplete extends PrintObjectComplete, PrintSpacingC
     staffTunings: StaffTuning[];
     staffSize: number;
     capo: string;
-    number_: number;
+    number: number;
     showFets: ShowFretsType;
     staffType: string;
 }
@@ -5400,10 +5400,10 @@ export interface DoubleComplete {
  * multiple instruments.
  */
 export interface Transpose {
-    number_?: number;
+    number?: number;
     diatonic?: string;
     octaveChange?: string;
-    double_?: Double;
+    double?: Double;
     chromatic: string;
 }
 
@@ -5429,10 +5429,10 @@ export interface Transpose {
  * multiple instruments.
  */
 export interface TransposeComplete {
-    number_: number;
+    number: number;
     diatonic: string;
     octaveChange: string;
-    double_: Double;
+    double: Double;
     chromatic: string;
 }
 
@@ -5654,7 +5654,7 @@ export interface MeasureStyle extends Font, Color {
     beatRepeat?: BeatRepeat;
     multipleRest?: MultipleRest;
     slash?: Slash;
-    number_?: number;
+    number?: number;
 }
 
 /**
@@ -5676,7 +5676,7 @@ export interface MeasureStyleComplete extends FontComplete, ColorComplete {
     beatRepeat: BeatRepeat;
     multipleRest: MultipleRest;
     slash: Slash;
-    number_: number;
+    number: number;
 }
 
 
@@ -6571,7 +6571,7 @@ export enum AccelRitNone {
  */
 export interface Beam {
     repeater?: boolean;
-    number_: number;
+    number: number;
     type: BeamType;
     fan?: AccelRitNone;
 }
@@ -6601,7 +6601,7 @@ export interface Beam {
  */
 export interface BeamComplete {
     repeater: boolean;
-    number_: number;
+    number: number;
     type: BeamType;
     fan: AccelRitNone;
 }
@@ -6667,7 +6667,7 @@ export interface NotationsComplete extends EditorialComplete, PrintObjectComplet
  * situations.
  */
 export interface Tied extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
-    number_?: number;
+    number?: number;
     type: StartStopContinue;
 }
 
@@ -6682,7 +6682,7 @@ export interface Tied extends LineType, DashedFormatting, Position, Placement, O
  * situations.
  */
 export interface TiedComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, PlacementComplete, OrientationComplete, BezierComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -6695,7 +6695,7 @@ export interface TiedComplete extends LineTypeComplete, DashedFormattingComplete
  * system slurs, or to specify the shape of very complex slurs.
  */
 export interface Slur extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
-    number_?: number;
+    number?: number;
     type: StartStopContinue;
 }
 
@@ -6707,7 +6707,7 @@ export interface Slur extends LineType, DashedFormatting, Position, Placement, O
  * system slurs, or to specify the shape of very complex slurs.
  */
 export interface SlurComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, PlacementComplete, OrientationComplete, BezierComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -6751,7 +6751,7 @@ export enum ActualBothNone {
  */
 export interface Tuplet extends LineShape, Position, Placement {
     bracket?: boolean;
-    number_: number;
+    number: number;
     showNumber?: ActualBothNone;
     tupletNormal?: TupletNormal;
     type: StartStop;
@@ -6792,7 +6792,7 @@ export interface Tuplet extends LineShape, Position, Placement {
  */
 export interface TupletComplete extends LineShapeComplete, PositionComplete, PlacementComplete {
     bracket: boolean;
-    number_: number;
+    number: number;
     showNumber: ActualBothNone;
     tupletNormal: TupletNormal;
     type: StartStop;
@@ -7522,7 +7522,7 @@ export interface ShakeComplete extends PrintStyleComplete, PlacementComplete, Tr
  * ornament look relative to the main part of the mordent.
  */
 export interface Mordent extends PrintStyle, Placement, TrillSound {
-    long_?: boolean;
+    long?: boolean;
     approach?: AboveBelow;
     departure?: AboveBelow;
 }
@@ -7537,7 +7537,7 @@ export interface Mordent extends PrintStyle, Placement, TrillSound {
  * ornament look relative to the main part of the mordent.
  */
 export interface MordentComplete extends PrintStyleComplete, PlacementComplete, TrillSoundComplete {
-    long_: boolean;
+    long: boolean;
     approach: AboveBelow;
     departure: AboveBelow;
 }
@@ -7553,7 +7553,7 @@ export interface MordentComplete extends PrintStyleComplete, PlacementComplete, 
  * ornament look relative to the main part of the mordent.
  */
 export interface InvertedMordent extends PrintStyle, Placement, TrillSound {
-    long_?: boolean;
+    long?: boolean;
     approach?: AboveBelow;
     departure?: AboveBelow;
 }
@@ -7568,7 +7568,7 @@ export interface InvertedMordent extends PrintStyle, Placement, TrillSound {
  * ornament look relative to the main part of the mordent.
  */
 export interface InvertedMordentComplete extends PrintStyleComplete, PlacementComplete, TrillSoundComplete {
-    long_: boolean;
+    long: boolean;
     approach: AboveBelow;
     departure: AboveBelow;
 }
@@ -7706,7 +7706,7 @@ export interface Technical {
     stopped?: Stopped;
     pluck?: Pluck;
     doubleTongue?: DoubleTongue;
-    string_?: String;
+    string?: String;
     openString?: OpenString;
     fingernails?: Fingernails;
     arrow?: Arrow;
@@ -7737,7 +7737,7 @@ export interface TechnicalComplete {
     stopped: Stopped;
     pluck: Pluck;
     doubleTongue: DoubleTongue;
-    string_: String;
+    string: String;
     openString: OpenString;
     fingernails: Fingernails;
     arrow: Arrow;
@@ -7959,7 +7959,7 @@ export interface SnapPizzicatoComplete extends PrintStyleComplete, PlacementComp
  * element leaves this choice up to the application.
  */
 export interface HammerOn extends PrintStyle, Placement {
-    number_?: number;
+    number?: number;
     type: StartStop;
     data?: string;
 }
@@ -7974,7 +7974,7 @@ export interface HammerOn extends PrintStyle, Placement {
  * element leaves this choice up to the application.
  */
 export interface HammerOnComplete extends PrintStyleComplete, PlacementComplete {
-    number_: number;
+    number: number;
     type: StartStop;
     data: string;
 }
@@ -7990,7 +7990,7 @@ export interface HammerOnComplete extends PrintStyleComplete, PlacementComplete 
  * element leaves this choice up to the application.
  */
 export interface PullOff extends PrintStyle, Placement {
-    number_?: number;
+    number?: number;
     type: StartStop;
     data?: string;
 }
@@ -8005,7 +8005,7 @@ export interface PullOff extends PrintStyle, Placement {
  * element leaves this choice up to the application.
  */
 export interface PullOffComplete extends PrintStyleComplete, PlacementComplete {
-    number_: number;
+    number: number;
     type: StartStop;
     data: string;
 }
@@ -8630,7 +8630,7 @@ export interface OtherArticulationComplete extends PrintStyleComplete, Placement
  * highest note.
  */
 export interface Arpeggiate extends Position, Placement, Color {
-    number_?: number;
+    number?: number;
     direction?: UpDown;
 }
 
@@ -8644,7 +8644,7 @@ export interface Arpeggiate extends Position, Placement, Color {
  * highest note.
  */
 export interface ArpeggiateComplete extends PositionComplete, PlacementComplete, ColorComplete {
-    number_: number;
+    number: number;
     direction: UpDown;
 }
 
@@ -8657,7 +8657,7 @@ export interface ArpeggiateComplete extends PositionComplete, PlacementComplete,
  * as for the arpeggiate element.
  */
 export interface NonArpeggiate extends Position, Placement, Color {
-    number_?: number;
+    number?: number;
     type: TopBottom;
 }
 
@@ -8669,7 +8669,7 @@ export interface NonArpeggiate extends Position, Placement, Color {
  * as for the arpeggiate element.
  */
 export interface NonArpeggiateComplete extends PositionComplete, PlacementComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: TopBottom;
 }
 
@@ -8777,7 +8777,7 @@ export interface LyricPartsComplete {
  */
 export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
     lyricParts: any[];
-    number_?: number;
+    number?: number;
     name?: string;
 }
 
@@ -8803,7 +8803,7 @@ export interface Lyric extends Justify, Position, Placement, Color, PrintObject,
  */
 export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
     lyricParts: any[];
-    number_: number;
+    number: number;
     name: string;
 }
 
@@ -9224,7 +9224,7 @@ export enum StartStopDiscontinue {
 export interface Ending extends PrintObject, PrintStyle {
     endLength: number;
     textX: number;
-    number_: number;
+    number: number;
     textY: number;
     type: StartStopDiscontinue;
     ending?: string;
@@ -9257,7 +9257,7 @@ export interface Ending extends PrintObject, PrintStyle {
 export interface EndingComplete extends PrintObjectComplete, PrintStyleComplete {
     endLength: number;
     textX: number;
-    number_: number;
+    number: number;
     textY: number;
     type: StartStopDiscontinue;
     ending: string;
@@ -9492,7 +9492,7 @@ export enum WedgeType {
  * multiple segments.
  */
 export interface Wedge extends LineType, DashedFormatting, Position, Color {
-    number_: number;
+    number: number;
     neinte: boolean;
     type: WedgeType;
     spread: number;
@@ -9515,7 +9515,7 @@ export interface Wedge extends LineType, DashedFormatting, Position, Color {
  * multiple segments.
  */
 export interface WedgeComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
-    number_: number;
+    number: number;
     neinte: boolean;
     type: WedgeType;
     spread: number;
@@ -9527,7 +9527,7 @@ export interface WedgeComplete extends LineTypeComplete, DashedFormattingComplet
  * 
  */
 export interface Dashes extends DashedFormatting, Position, Color {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -9536,7 +9536,7 @@ export interface Dashes extends DashedFormatting, Position, Color {
  * 
  */
 export interface DashesComplete extends DashedFormattingComplete, PositionComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -9560,7 +9560,7 @@ export enum LineEndType {
  */
 export interface Bracket extends LineType, DashedFormatting, Position, Color {
     endLength: number;
-    number_: number;
+    number: number;
     type: StartStopContinue;
     lineEnd: LineEndType;
 }
@@ -9576,7 +9576,7 @@ export interface Bracket extends LineType, DashedFormatting, Position, Color {
  */
 export interface BracketComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
     endLength: number;
-    number_: number;
+    number: number;
     type: StartStopContinue;
     lineEnd: LineEndType;
 }
@@ -9750,12 +9750,12 @@ export interface MetronomeDotComplete {
 
 
 export interface MetronomeBeam {
-    number_: number;
+    number: number;
     data: string;
 }
 
 export interface MetronomeBeamComplete {
-    number_: number;
+    number: number;
     data: string;
 }
 
@@ -9797,7 +9797,7 @@ export enum OctaveShiftType {
  * octave; a size of 15 indicates two octaves.
  */
 export interface OctaveShift extends DashedFormatting, PrintStyle {
-    number_: number;
+    number: number;
     size: number;
     type: OctaveShiftType;
 }
@@ -9811,7 +9811,7 @@ export interface OctaveShift extends DashedFormatting, PrintStyle {
  * octave; a size of 15 indicates two octaves.
  */
 export interface OctaveShiftComplete extends DashedFormattingComplete, PrintStyleComplete {
-    number_: number;
+    number: number;
     size: number;
     type: OctaveShiftType;
 }
@@ -9921,7 +9921,7 @@ export interface ScordaturaComplete {
  */
 export interface Accord {
     tuningAlter: TuningAlter;
-    string_: string;
+    string: string;
     tuningStep: string;
     tuningOctave: TuningOctave;
 }
@@ -9935,7 +9935,7 @@ export interface Accord {
  */
 export interface AccordComplete {
     tuningAlter: TuningAlter;
-    string_: string;
+    string: string;
     tuningStep: string;
     tuningOctave: TuningOctave;
 }
@@ -10248,7 +10248,7 @@ export interface OffsetComplete {
  */
 export interface HarmonyChord {
     root: Root;
-    function_: Function;
+    function: Function;
     kind: Kind;
     degree: Degree;
     inversion: Inversion;
@@ -10283,7 +10283,7 @@ export interface HarmonyChord {
  */
 export interface HarmonyChordComplete {
     root: Root;
-    function_: Function;
+    function: Function;
     kind: Kind;
     degree: Degree;
     inversion: Inversion;
@@ -10876,7 +10876,7 @@ export interface FirstFretComplete {
  */
 export interface FrameNote {
     barre: Barre;
-    string_: String;
+    string: String;
     fingering: Fingering;
     fret: Fret;
 }
@@ -10890,7 +10890,7 @@ export interface FrameNote {
  */
 export interface FrameNoteComplete {
     barre: Barre;
-    string_: String;
+    string: String;
     fingering: Fingering;
     fret: Fret;
 }
@@ -10935,7 +10935,7 @@ export interface BarreComplete extends ColorComplete {
  */
 export interface Grouping {
     features: Feature[];
-    number_: number;
+    number: number;
     groupingType: StartStopSingle;
     memberOf: string;
 }
@@ -10956,7 +10956,7 @@ export interface Grouping {
  */
 export interface GroupingComplete {
     features: Feature[];
-    number_: number;
+    number: number;
     groupingType: StartStopSingle;
     memberOf: string;
 }
@@ -11414,23 +11414,23 @@ export interface WordFontComplete extends FontComplete {
 
 
 export interface LyricFont extends Font {
-    number_: number;
+    number: number;
     name: string;
 }
 
 export interface LyricFontComplete extends FontComplete {
-    number_: number;
+    number: number;
     name: string;
 }
 
 
 export interface LyricLanguage {
-    number_: number;
+    number: number;
     name: string;
 }
 
 export interface LyricLanguageComplete {
-    number_: number;
+    number: number;
     name: string;
 }
 
@@ -11684,7 +11684,7 @@ export interface PartGroup extends Editorial {
     groupName: GroupName;
     groupAbbreviationDisplay: GroupAbbreviationDisplay;
     groupBarline: GroupBarline;
-    number_: number;
+    number: number;
     groupAbbreviation: GroupAbbreviation;
     type: StartStop;
     groupTime: GroupTime;
@@ -11708,7 +11708,7 @@ export interface PartGroupComplete extends EditorialComplete {
     groupName: GroupName;
     groupAbbreviationDisplay: GroupAbbreviationDisplay;
     groupBarline: GroupBarline;
-    number_: number;
+    number: number;
     groupAbbreviation: GroupAbbreviation;
     type: StartStop;
     groupTime: GroupTime;
@@ -12046,7 +12046,7 @@ export interface PartComplete {
  * Represents a measure.
  */
 export interface Measure {
-    number_: string;
+    number: string;
     implicit: boolean;
     width: number;
     parts: {[key: string]: any[]};
@@ -12057,7 +12057,7 @@ export interface Measure {
  * Represents a measure.
  */
 export interface MeasureComplete {
-    number_: string;
+    number: string;
     implicit: boolean;
     width: number;
     parts: {[key: string]: any[]};

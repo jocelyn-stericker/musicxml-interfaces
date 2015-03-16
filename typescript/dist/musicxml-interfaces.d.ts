@@ -629,10 +629,10 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToTimeOnly(node: Node): TimeOnly;
     export interface DocumentAttributes {
-        version_: string;
+        version: string;
     }
     export interface DocumentAttributesComplete {
-        version_: string;
+        version: string;
     }
     export function xmlToDocumentAttributes(node: Node): DocumentAttributes;
     export interface Editorial {
@@ -681,11 +681,11 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToFermata(node: Node): Fermata;
     export interface WavyLine extends Position, Placement, Color, TrillSound {
-        number_?: number;
+        number?: number;
         type: StartStopContinue;
     }
     export interface WavyLineComplete extends PositionComplete, PlacementComplete, ColorComplete, TrillSoundComplete {
-        number_: number;
+        number: number;
         type: StartStopContinue;
     }
     export function xmlToWavyLine(node: Node): WavyLine;
@@ -1248,12 +1248,12 @@ declare module 'musicxml-interfaces' {
     export function xmlToFifths(node: Node): Fifths;
     export interface KeyOctave {
         octave: number;
-        number_: number;
+        number: number;
         cancel?: boolean;
     }
     export interface KeyOctaveComplete {
         octave: number;
-        number_: number;
+        number: number;
         cancel: boolean;
     }
     export function xmlToKeyOctave(node: Node): KeyOctave;
@@ -1264,7 +1264,7 @@ declare module 'musicxml-interfaces' {
         cancel?: Cancel;
         keySteps: string[];
         keyOctaves?: KeyOctave[];
-        number_?: number;
+        number?: number;
         fifths: number;
         keyAlters: string[];
         keyAccidentals: string[];
@@ -1274,7 +1274,7 @@ declare module 'musicxml-interfaces' {
         cancel: Cancel;
         keySteps: string[];
         keyOctaves: KeyOctave[];
-        number_: number;
+        number: number;
         fifths: number;
         keyAlters: string[];
         keyAccidentals: string[];
@@ -1333,7 +1333,7 @@ declare module 'musicxml-interfaces' {
     export interface Clef extends PrintStyle, PrintObject {
         clefOctaveChange: string;
         sign: string;
-        number_?: number;
+        number?: number;
         size?: SymbolSize;
         line: number;
         afterBarline?: boolean;
@@ -1342,7 +1342,7 @@ declare module 'musicxml-interfaces' {
     export interface ClefComplete extends PrintStyleComplete, PrintObjectComplete {
         clefOctaveChange: string;
         sign: string;
-        number_: number;
+        number: number;
         size: SymbolSize;
         line: number;
         afterBarline: boolean;
@@ -1378,7 +1378,7 @@ declare module 'musicxml-interfaces' {
         staffTunings?: StaffTuning[];
         staffSize?: number;
         capo?: string;
-        number_?: number;
+        number?: number;
         showFets?: ShowFretsType;
         staffType?: string;
     }
@@ -1387,7 +1387,7 @@ declare module 'musicxml-interfaces' {
         staffTunings: StaffTuning[];
         staffSize: number;
         capo: string;
-        number_: number;
+        number: number;
         showFets: ShowFretsType;
         staffType: string;
     }
@@ -1398,17 +1398,17 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToDouble(node: Node): Double;
     export interface Transpose {
-        number_?: number;
+        number?: number;
         diatonic?: string;
         octaveChange?: string;
-        double_?: Double;
+        double?: Double;
         chromatic: string;
     }
     export interface TransposeComplete {
-        number_: number;
+        number: number;
         diatonic: string;
         octaveChange: string;
-        double_: Double;
+        double: Double;
         chromatic: string;
     }
     export function xmlToTranspose(node: Node): Transpose;
@@ -1479,14 +1479,14 @@ declare module 'musicxml-interfaces' {
         beatRepeat?: BeatRepeat;
         multipleRest?: MultipleRest;
         slash?: Slash;
-        number_?: number;
+        number?: number;
     }
     export interface MeasureStyleComplete extends FontComplete, ColorComplete {
         measureRepeat: MeasureRepeat;
         beatRepeat: BeatRepeat;
         multipleRest: MultipleRest;
         slash: Slash;
-        number_: number;
+        number: number;
     }
     export function xmlToMeasureStyle(node: Node): MeasureStyle;
     export interface Attributes extends Editorial {
@@ -1826,13 +1826,13 @@ declare module 'musicxml-interfaces' {
     export function getAccelRitNone(node: Node, fallbackVal?: AccelRitNone): AccelRitNone;
     export interface Beam {
         repeater?: boolean;
-        number_: number;
+        number: number;
         type: BeamType;
         fan?: AccelRitNone;
     }
     export interface BeamComplete {
         repeater: boolean;
-        number_: number;
+        number: number;
         type: BeamType;
         fan: AccelRitNone;
     }
@@ -1871,20 +1871,20 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToNotations(node: Node): Notations;
     export interface Tied extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
-        number_?: number;
+        number?: number;
         type: StartStopContinue;
     }
     export interface TiedComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, PlacementComplete, OrientationComplete, BezierComplete, ColorComplete {
-        number_: number;
+        number: number;
         type: StartStopContinue;
     }
     export function xmlToTied(node: Node): Tied;
     export interface Slur extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
-        number_?: number;
+        number?: number;
         type: StartStopContinue;
     }
     export interface SlurComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, PlacementComplete, OrientationComplete, BezierComplete, ColorComplete {
-        number_: number;
+        number: number;
         type: StartStopContinue;
     }
     export function xmlToSlur(node: Node): Slur;
@@ -1896,7 +1896,7 @@ declare module 'musicxml-interfaces' {
     export function getActualBothNone(node: Node, fallbackVal?: ActualBothNone): ActualBothNone;
     export interface Tuplet extends LineShape, Position, Placement {
         bracket?: boolean;
-        number_: number;
+        number: number;
         showNumber?: ActualBothNone;
         tupletNormal?: TupletNormal;
         type: StartStop;
@@ -1905,7 +1905,7 @@ declare module 'musicxml-interfaces' {
     }
     export interface TupletComplete extends LineShapeComplete, PositionComplete, PlacementComplete {
         bracket: boolean;
-        number_: number;
+        number: number;
         showNumber: ActualBothNone;
         tupletNormal: TupletNormal;
         type: StartStop;
@@ -2069,23 +2069,23 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToShake(node: Node): Shake;
     export interface Mordent extends PrintStyle, Placement, TrillSound {
-        long_?: boolean;
+        long?: boolean;
         approach?: AboveBelow;
         departure?: AboveBelow;
     }
     export interface MordentComplete extends PrintStyleComplete, PlacementComplete, TrillSoundComplete {
-        long_: boolean;
+        long: boolean;
         approach: AboveBelow;
         departure: AboveBelow;
     }
     export function xmlToMordent(node: Node): Mordent;
     export interface InvertedMordent extends PrintStyle, Placement, TrillSound {
-        long_?: boolean;
+        long?: boolean;
         approach?: AboveBelow;
         departure?: AboveBelow;
     }
     export interface InvertedMordentComplete extends PrintStyleComplete, PlacementComplete, TrillSoundComplete {
-        long_: boolean;
+        long: boolean;
         approach: AboveBelow;
         departure: AboveBelow;
     }
@@ -2136,7 +2136,7 @@ declare module 'musicxml-interfaces' {
         stopped?: Stopped;
         pluck?: Pluck;
         doubleTongue?: DoubleTongue;
-        string_?: String;
+        string?: String;
         openString?: OpenString;
         fingernails?: Fingernails;
         arrow?: Arrow;
@@ -2162,7 +2162,7 @@ declare module 'musicxml-interfaces' {
         stopped: Stopped;
         pluck: Pluck;
         doubleTongue: DoubleTongue;
-        string_: String;
+        string: String;
         openString: OpenString;
         fingernails: Fingernails;
         arrow: Arrow;
@@ -2236,23 +2236,23 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToSnapPizzicato(node: Node): SnapPizzicato;
     export interface HammerOn extends PrintStyle, Placement {
-        number_?: number;
+        number?: number;
         type: StartStop;
         data?: string;
     }
     export interface HammerOnComplete extends PrintStyleComplete, PlacementComplete {
-        number_: number;
+        number: number;
         type: StartStop;
         data: string;
     }
     export function xmlToHammerOn(node: Node): HammerOn;
     export interface PullOff extends PrintStyle, Placement {
-        number_?: number;
+        number?: number;
         type: StartStop;
         data?: string;
     }
     export interface PullOffComplete extends PrintStyleComplete, PlacementComplete {
-        number_: number;
+        number: number;
         type: StartStop;
         data: string;
     }
@@ -2491,20 +2491,20 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToOtherArticulation(node: Node): OtherArticulation;
     export interface Arpeggiate extends Position, Placement, Color {
-        number_?: number;
+        number?: number;
         direction?: UpDown;
     }
     export interface ArpeggiateComplete extends PositionComplete, PlacementComplete, ColorComplete {
-        number_: number;
+        number: number;
         direction: UpDown;
     }
     export function xmlToArpeggiate(node: Node): Arpeggiate;
     export interface NonArpeggiate extends Position, Placement, Color {
-        number_?: number;
+        number?: number;
         type: TopBottom;
     }
     export interface NonArpeggiateComplete extends PositionComplete, PlacementComplete, ColorComplete {
-        number_: number;
+        number: number;
         type: TopBottom;
     }
     export function xmlToNonArpeggiate(node: Node): NonArpeggiate;
@@ -2535,12 +2535,12 @@ declare module 'musicxml-interfaces' {
     export function xmlToLyricParts(node: Node): any[];
     export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
         lyricParts: any[];
-        number_?: number;
+        number?: number;
         name?: string;
     }
     export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
         lyricParts: any[];
-        number_: number;
+        number: number;
         name: string;
     }
     export interface Text extends Font, Color, TextDecoration, TextRotation, LetterSpacing, TextDirection {
@@ -2702,7 +2702,7 @@ declare module 'musicxml-interfaces' {
     export interface Ending extends PrintObject, PrintStyle {
         endLength: number;
         textX: number;
-        number_: number;
+        number: number;
         textY: number;
         type: StartStopDiscontinue;
         ending?: string;
@@ -2710,7 +2710,7 @@ declare module 'musicxml-interfaces' {
     export interface EndingComplete extends PrintObjectComplete, PrintStyleComplete {
         endLength: number;
         textX: number;
-        number_: number;
+        number: number;
         textY: number;
         type: StartStopDiscontinue;
         ending: string;
@@ -2835,24 +2835,24 @@ declare module 'musicxml-interfaces' {
     }
     export function getWedgeType(node: Node, fallbackVal?: WedgeType): WedgeType;
     export interface Wedge extends LineType, DashedFormatting, Position, Color {
-        number_: number;
+        number: number;
         neinte: boolean;
         type: WedgeType;
         spread: number;
     }
     export interface WedgeComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
-        number_: number;
+        number: number;
         neinte: boolean;
         type: WedgeType;
         spread: number;
     }
     export function xmlToWedge(node: Node): Wedge;
     export interface Dashes extends DashedFormatting, Position, Color {
-        number_: number;
+        number: number;
         type: StartStopContinue;
     }
     export interface DashesComplete extends DashedFormattingComplete, PositionComplete, ColorComplete {
-        number_: number;
+        number: number;
         type: StartStopContinue;
     }
     export function xmlToDashes(node: Node): Dashes;
@@ -2866,13 +2866,13 @@ declare module 'musicxml-interfaces' {
     export function getLineEndType(node: Node, fallbackVal?: LineEndType): LineEndType;
     export interface Bracket extends LineType, DashedFormatting, Position, Color {
         endLength: number;
-        number_: number;
+        number: number;
         type: StartStopContinue;
         lineEnd: LineEndType;
     }
     export interface BracketComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
         endLength: number;
-        number_: number;
+        number: number;
         type: StartStopContinue;
         lineEnd: LineEndType;
     }
@@ -2943,11 +2943,11 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToMetronomeDot(node: Node): MetronomeDot;
     export interface MetronomeBeam {
-        number_: number;
+        number: number;
         data: string;
     }
     export interface MetronomeBeamComplete {
-        number_: number;
+        number: number;
         data: string;
     }
     export function xmlToMetronomeBeam(node: Node): MetronomeBeam;
@@ -2978,12 +2978,12 @@ declare module 'musicxml-interfaces' {
     }
     export function getOctaveShiftType(node: Node, fallbackVal?: OctaveShiftType): OctaveShiftType;
     export interface OctaveShift extends DashedFormatting, PrintStyle {
-        number_: number;
+        number: number;
         size: number;
         type: OctaveShiftType;
     }
     export interface OctaveShiftComplete extends DashedFormattingComplete, PrintStyleComplete {
-        number_: number;
+        number: number;
         size: number;
         type: OctaveShiftType;
     }
@@ -3035,13 +3035,13 @@ declare module 'musicxml-interfaces' {
     export function xmlToScordatura(node: Node): Scordatura;
     export interface Accord {
         tuningAlter: TuningAlter;
-        string_: string;
+        string: string;
         tuningStep: string;
         tuningOctave: TuningOctave;
     }
     export interface AccordComplete {
         tuningAlter: TuningAlter;
-        string_: string;
+        string: string;
         tuningStep: string;
         tuningOctave: TuningOctave;
     }
@@ -3147,7 +3147,7 @@ declare module 'musicxml-interfaces' {
     export function xmlToOffset(node: Node): Offset;
     export interface HarmonyChord {
         root: Root;
-        function_: Function;
+        function: Function;
         kind: Kind;
         degree: Degree;
         inversion: Inversion;
@@ -3155,7 +3155,7 @@ declare module 'musicxml-interfaces' {
     }
     export interface HarmonyChordComplete {
         root: Root;
-        function_: Function;
+        function: Function;
         kind: Kind;
         degree: Degree;
         inversion: Inversion;
@@ -3348,13 +3348,13 @@ declare module 'musicxml-interfaces' {
     export function xmlToFirstFret(node: Node): FirstFret;
     export interface FrameNote {
         barre: Barre;
-        string_: String;
+        string: String;
         fingering: Fingering;
         fret: Fret;
     }
     export interface FrameNoteComplete {
         barre: Barre;
-        string_: String;
+        string: String;
         fingering: Fingering;
         fret: Fret;
     }
@@ -3368,13 +3368,13 @@ declare module 'musicxml-interfaces' {
     export function xmlToBarre(node: Node): Barre;
     export interface Grouping {
         features: Feature[];
-        number_: number;
+        number: number;
         groupingType: StartStopSingle;
         memberOf: string;
     }
     export interface GroupingComplete {
         features: Feature[];
-        number_: number;
+        number: number;
         groupingType: StartStopSingle;
         memberOf: string;
     }
@@ -3519,20 +3519,20 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToWordFont(node: Node): WordFont;
     export interface LyricFont extends Font {
-        number_: number;
+        number: number;
         name: string;
     }
     export interface LyricFontComplete extends FontComplete {
-        number_: number;
+        number: number;
         name: string;
     }
     export function xmlToLyricFont(node: Node): LyricFont;
     export interface LyricLanguage {
-        number_: number;
+        number: number;
         name: string;
     }
     export interface LyricLanguageComplete {
-        number_: number;
+        number: number;
         name: string;
     }
     export function xmlToLyricLanguage(node: Node): LyricLanguage;
@@ -3619,7 +3619,7 @@ declare module 'musicxml-interfaces' {
         groupName: GroupName;
         groupAbbreviationDisplay: GroupAbbreviationDisplay;
         groupBarline: GroupBarline;
-        number_: number;
+        number: number;
         groupAbbreviation: GroupAbbreviation;
         type: StartStop;
         groupTime: GroupTime;
@@ -3630,7 +3630,7 @@ declare module 'musicxml-interfaces' {
         groupName: GroupName;
         groupAbbreviationDisplay: GroupAbbreviationDisplay;
         groupBarline: GroupBarline;
-        number_: number;
+        number: number;
         groupAbbreviation: GroupAbbreviation;
         type: StartStop;
         groupTime: GroupTime;
@@ -3752,7 +3752,7 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToPart(node: Node): any[];
     export interface Measure {
-        number_: string;
+        number: string;
         implicit: boolean;
         width: number;
         parts: {
@@ -3761,7 +3761,7 @@ declare module 'musicxml-interfaces' {
         nonControlling: boolean;
     }
     export interface MeasureComplete {
-        number_: string;
+        number: string;
         implicit: boolean;
         width: number;
         parts: {

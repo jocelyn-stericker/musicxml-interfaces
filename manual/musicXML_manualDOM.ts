@@ -107,7 +107,7 @@ export function xmlToMeasure(node: Node) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getString(ch2, true);
-            ret.number_ = dataNumber;
+            ret.number = dataNumber;
         }
         if (ch2.name === "implicit") {
             var dataImplicit = xmlToYesNo(ch2, true);
@@ -188,7 +188,7 @@ export function xmlToLyric(node: Node) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            ret.number = dataNumber_;
             foundNumber_ = true;
         }
         if (ch2.name === "justify") {
@@ -239,7 +239,7 @@ export function xmlToLyric(node: Node) {
     }
     ret.lyricParts = xmlToLyricParts(node);
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;

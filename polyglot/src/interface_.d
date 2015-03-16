@@ -147,13 +147,17 @@ class PInterface : PEmittable {
                     if (tsType in scope_.isString) {
                         tsType = "string";
                     }
+                    string tsname = sname;
+
                     if (sname == "double" || sname == "number" || sname == "float" || sname == "long" || sname == "function" || sname == "string" || sname == "version") {
                         sname ~= "_";
                     } else if (sname == "key") {
                         sname ~= "Signature";
+                        tsname ~= "Signature";
                     }
                     if (isArray && !sname.endsWith("s")) {
                         sname ~= "s";
+                        tsname ~= "s";
                     }
 
                     bool emitTypeScript = true;
@@ -174,6 +178,7 @@ class PInterface : PEmittable {
                     if (this.isOrdered) {
                         emitTypeScript = false;
                         sname = "rarr";
+                        tsname = "rarr";
                         op = " ~= ";
                     }
                     // If it's not a child data, but there's a tag, we expect the tag to have data.
@@ -216,6 +221,7 @@ class PInterface : PEmittable {
                     string dType = (dSubtype ~ brD).replace("number", "float").replace("boolean", "bool");
                     PField field = {
                         name: sname,
+                        tsname: tsname,
                         xmlName: xname,
                         isFlag: isFlag,
                         isEnum: !!(tsType in scope_.isEnum),
@@ -289,7 +295,7 @@ class PInterface : PEmittable {
         string toEmit;
         foreach(val; this.ownFields) {
             if (val.tsType) {
-                toEmit ~= "    " ~ val.name;
+                toEmit ~= "    " ~ val.tsname;
 
                 if (!val.required && !complete) {
                     toEmit ~= "?";
@@ -323,7 +329,7 @@ class PInterface : PEmittable {
         foreach(val; this.children ~ this.attributes) {
             if (val.defaultVal) {
                 toEmit ~= indent ~ "if (!found" ~ val.name.toPascalCase ~ ") {\n";
-                toEmit ~= indent ~ "    " ~ (ts ? "ret." : "") ~ val.name ~ " = " ~ (ts ? val.defaultValTS : val.defaultVal) ~ ";\n";
+                toEmit ~= indent ~ "    " ~ (ts ? "ret." : "") ~ (ts ? val.tsname : val.name) ~ " = " ~ (ts ? val.defaultValTS : val.defaultVal) ~ ";\n";
                 toEmit ~= indent ~ "}\n";
             }
         }
@@ -398,16 +404,16 @@ class PInterface : PEmittable {
         }
 
         string dataName;
-        if (val.name == "rarr") {
+        if (val.tsname == "rarr") {
             dataName = "data";
             toEmit ~= indent ~ "var " ~ dataName ~ ": any = ";
         } else {
-            dataName = "data" ~ val.name.toPascalCase;
+            dataName = "data" ~ val.tsname.toPascalCase;
             toEmit ~= indent ~ "var " ~ dataName ~ " = ";
         }
 
         auto operation = val.operation;
-        auto target = "ret." ~ val.name;
+        auto target = "ret." ~ val.tsname;
         auto close = ";\n";
         if (operation == " ~= ") {
             if (this.isOrdered) {

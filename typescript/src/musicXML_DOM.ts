@@ -146,7 +146,7 @@ export function xmlToMeasure(node: Node) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getString(ch2, true);
-            ret.number_ = dataNumber;
+            ret.number = dataNumber;
         }
         if (ch2.name === "implicit") {
             var dataImplicit = xmlToYesNo(ch2, true);
@@ -227,7 +227,7 @@ export function xmlToLyric(node: Node) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            ret.number = dataNumber_;
             foundNumber_ = true;
         }
         if (ch2.name === "justify") {
@@ -278,7 +278,7 @@ export function xmlToLyric(node: Node) {
     }
     ret.lyricParts = xmlToLyricParts(node);
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundJustify) {
         ret.justify = LeftCenterRight.Left;
@@ -4839,7 +4839,7 @@ export function xmlToTimeOnly(node: Node) {
  * this is used for the version attribute.
  */
 export interface DocumentAttributes {
-    version_: string;
+    version: string;
 }
 
 /**
@@ -4848,7 +4848,7 @@ export interface DocumentAttributes {
  * this is used for the version attribute.
  */
 export interface DocumentAttributesComplete {
-    version_: string;
+    version: string;
 }
 
 
@@ -4862,13 +4862,13 @@ export function xmlToDocumentAttributes(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "version") {
-            var dataVersion_ = getString(ch2, true);
-            ret.version_ = dataVersion_;
+            var dataVersion = getString(ch2, true);
+            ret.version = dataVersion;
             foundVersion_ = true;
         }
     }
     if (!foundVersion_) {
-        ret.version_ = "1.0";
+        ret.version = "1.0";
     }
     return ret;
 }
@@ -5369,7 +5369,7 @@ export function xmlToFermata(node: Node) {
  * The fermata type is upright if not specified.
  */
 export interface WavyLine extends Position, Placement, Color, TrillSound {
-    number_?: number;
+    number?: number;
     type: StartStopContinue;
 }
 
@@ -5385,7 +5385,7 @@ export interface WavyLine extends Position, Placement, Color, TrillSound {
  * The fermata type is upright if not specified.
  */
 export interface WavyLineComplete extends PositionComplete, PlacementComplete, ColorComplete, TrillSoundComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -5409,8 +5409,8 @@ export function xmlToWavyLine(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -5480,7 +5480,7 @@ export function xmlToWavyLine(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
@@ -9781,7 +9781,7 @@ export function xmlToFifths(node: Node) {
  */
 export interface KeyOctave {
     octave: number;
-    number_: number;
+    number: number;
     cancel?: boolean;
 }
 
@@ -9836,7 +9836,7 @@ export interface KeyOctave {
  */
 export interface KeyOctaveComplete {
     octave: number;
-    number_: number;
+    number: number;
     cancel: boolean;
 }
 
@@ -9851,8 +9851,8 @@ export function xmlToKeyOctave(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "cancel") {
             var dataCancel = xmlToYesNo(ch2) ;
@@ -9950,7 +9950,7 @@ export interface Key extends PrintStyle, PrintObject {
     cancel?: Cancel;
     keySteps: string[];
     keyOctaves?: KeyOctave[];
-    number_?: number;
+    number?: number;
     fifths: number;
     keyAlters: string[];
     keyAccidentals: string[];
@@ -10010,7 +10010,7 @@ export interface KeyComplete extends PrintStyleComplete, PrintObjectComplete {
     cancel: Cancel;
     keySteps: string[];
     keyOctaves: KeyOctave[];
-    number_: number;
+    number: number;
     fifths: number;
     keyAlters: string[];
     keyAccidentals: string[];
@@ -10059,8 +10059,8 @@ export function xmlToKey(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
@@ -10704,7 +10704,7 @@ export function xmlToLine(node: Node) {
 export interface Clef extends PrintStyle, PrintObject {
     clefOctaveChange: string;
     sign: string;
-    number_?: number;
+    number?: number;
     size?: SymbolSize;
     line: number;
     afterBarline?: boolean;
@@ -10752,7 +10752,7 @@ export interface Clef extends PrintStyle, PrintObject {
 export interface ClefComplete extends PrintStyleComplete, PrintObjectComplete {
     clefOctaveChange: string;
     sign: string;
-    number_: number;
+    number: number;
     size: SymbolSize;
     line: number;
     afterBarline: boolean;
@@ -10789,8 +10789,8 @@ export function xmlToClef(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "size") {
@@ -10854,7 +10854,7 @@ export function xmlToClef(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundSize) {
         ret.size = SymbolSize.Full;
@@ -11041,7 +11041,7 @@ export interface StaffDetails extends PrintObject, PrintSpacing {
     staffTunings?: StaffTuning[];
     staffSize?: number;
     capo?: string;
-    number_?: number;
+    number?: number;
     showFets?: ShowFretsType;
     staffType?: string;
 }
@@ -11072,7 +11072,7 @@ export interface StaffDetailsComplete extends PrintObjectComplete, PrintSpacingC
     staffTunings: StaffTuning[];
     staffSize: number;
     capo: string;
-    number_: number;
+    number: number;
     showFets: ShowFretsType;
     staffType: string;
 }
@@ -11111,8 +11111,8 @@ export function xmlToStaffDetails(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "print-object") {
@@ -11132,7 +11132,7 @@ export function xmlToStaffDetails(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPrintObject) {
         ret.printObject = true;
@@ -11229,10 +11229,10 @@ export function xmlToDouble(node: Node) {
  * multiple instruments.
  */
 export interface Transpose {
-    number_?: number;
+    number?: number;
     diatonic?: string;
     octaveChange?: string;
-    double_?: Double;
+    double?: Double;
     chromatic: string;
 }
 
@@ -11258,10 +11258,10 @@ export interface Transpose {
  * multiple instruments.
  */
 export interface TransposeComplete {
-    number_: number;
+    number: number;
     diatonic: string;
     octaveChange: string;
-    double_: Double;
+    double: Double;
     chromatic: string;
 }
 
@@ -11281,8 +11281,8 @@ export function xmlToTranspose(node: Node) {
             ret.octaveChange = dataOctaveChange;
         }
         if (ch.nodeName === "double") {
-            var dataDouble_ = xmlToDouble(ch) ;
-            ret.double_ = dataDouble_;
+            var dataDouble = xmlToDouble(ch) ;
+            ret.double = dataDouble;
         }
         if (ch.nodeName === "chromatic") {
             var dataChromatic = getString(ch, true);
@@ -11292,13 +11292,13 @@ export function xmlToTranspose(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
     }
     if (!foundNumber_) {
-        ret.number_ = NaN;
+        ret.number = NaN;
     }
     return ret;
 }
@@ -11734,7 +11734,7 @@ export interface MeasureStyle extends Font, Color {
     beatRepeat?: BeatRepeat;
     multipleRest?: MultipleRest;
     slash?: Slash;
-    number_?: number;
+    number?: number;
 }
 
 /**
@@ -11756,7 +11756,7 @@ export interface MeasureStyleComplete extends FontComplete, ColorComplete {
     beatRepeat: BeatRepeat;
     multipleRest: MultipleRest;
     slash: Slash;
-    number_: number;
+    number: number;
 }
 
 
@@ -11789,8 +11789,8 @@ export function xmlToMeasureStyle(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "font-family") {
@@ -11818,7 +11818,7 @@ export function xmlToMeasureStyle(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
@@ -13912,7 +13912,7 @@ export function getAccelRitNone(node: Node, fallbackVal?: AccelRitNone) {
  */
 export interface Beam {
     repeater?: boolean;
-    number_: number;
+    number: number;
     type: BeamType;
     fan?: AccelRitNone;
 }
@@ -13942,7 +13942,7 @@ export interface Beam {
  */
 export interface BeamComplete {
     repeater: boolean;
-    number_: number;
+    number: number;
     type: BeamType;
     fan: AccelRitNone;
 }
@@ -13965,8 +13965,8 @@ export function xmlToBeam(node: Node) {
             foundRepeater = true;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "fan") {
@@ -13982,7 +13982,7 @@ export function xmlToBeam(node: Node) {
         ret.repeater = false;
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFan) {
         ret.fan = AccelRitNone.None;
@@ -14135,7 +14135,7 @@ export function xmlToNotations(node: Node) {
  * situations.
  */
 export interface Tied extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
-    number_?: number;
+    number?: number;
     type: StartStopContinue;
 }
 
@@ -14150,7 +14150,7 @@ export interface Tied extends LineType, DashedFormatting, Position, Placement, O
  * situations.
  */
 export interface TiedComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, PlacementComplete, OrientationComplete, BezierComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -14170,8 +14170,8 @@ export function xmlToTied(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
@@ -14277,7 +14277,7 @@ export function xmlToTied(node: Node) {
  * system slurs, or to specify the shape of very complex slurs.
  */
 export interface Slur extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
-    number_?: number;
+    number?: number;
     type: StartStopContinue;
 }
 
@@ -14289,7 +14289,7 @@ export interface Slur extends LineType, DashedFormatting, Position, Placement, O
  * system slurs, or to specify the shape of very complex slurs.
  */
 export interface SlurComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, PlacementComplete, OrientationComplete, BezierComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -14310,8 +14310,8 @@ export function xmlToSlur(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
@@ -14390,7 +14390,7 @@ export function xmlToSlur(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundLineType) {
         ret.lineType = SolidDashedDottedWavy.Solid;
@@ -14471,7 +14471,7 @@ export function getActualBothNone(node: Node, fallbackVal?: ActualBothNone) {
  */
 export interface Tuplet extends LineShape, Position, Placement {
     bracket?: boolean;
-    number_: number;
+    number: number;
     showNumber?: ActualBothNone;
     tupletNormal?: TupletNormal;
     type: StartStop;
@@ -14512,7 +14512,7 @@ export interface Tuplet extends LineShape, Position, Placement {
  */
 export interface TupletComplete extends LineShapeComplete, PositionComplete, PlacementComplete {
     bracket: boolean;
-    number_: number;
+    number: number;
     showNumber: ActualBothNone;
     tupletNormal: TupletNormal;
     type: StartStop;
@@ -14548,8 +14548,8 @@ export function xmlToTuplet(node: Node) {
             foundBracket = true;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "show-number") {
             var dataShowNumber = getActualBothNone(ch2, ActualBothNone.Actual);
@@ -17127,7 +17127,7 @@ export function xmlToShake(node: Node) {
  * ornament look relative to the main part of the mordent.
  */
 export interface Mordent extends PrintStyle, Placement, TrillSound {
-    long_?: boolean;
+    long?: boolean;
     approach?: AboveBelow;
     departure?: AboveBelow;
 }
@@ -17142,7 +17142,7 @@ export interface Mordent extends PrintStyle, Placement, TrillSound {
  * ornament look relative to the main part of the mordent.
  */
 export interface MordentComplete extends PrintStyleComplete, PlacementComplete, TrillSoundComplete {
-    long_: boolean;
+    long: boolean;
     approach: AboveBelow;
     departure: AboveBelow;
 }
@@ -17168,8 +17168,8 @@ export function xmlToMordent(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "long") {
-            var dataLong_ = xmlToYesNo(ch2) ;
-            ret.long_ = dataLong_;
+            var dataLong = xmlToYesNo(ch2) ;
+            ret.long = dataLong;
         }
         if (ch2.name === "approach") {
             var dataApproach = getAboveBelow(ch2, null);
@@ -17305,7 +17305,7 @@ export function xmlToMordent(node: Node) {
  * ornament look relative to the main part of the mordent.
  */
 export interface InvertedMordent extends PrintStyle, Placement, TrillSound {
-    long_?: boolean;
+    long?: boolean;
     approach?: AboveBelow;
     departure?: AboveBelow;
 }
@@ -17320,7 +17320,7 @@ export interface InvertedMordent extends PrintStyle, Placement, TrillSound {
  * ornament look relative to the main part of the mordent.
  */
 export interface InvertedMordentComplete extends PrintStyleComplete, PlacementComplete, TrillSoundComplete {
-    long_: boolean;
+    long: boolean;
     approach: AboveBelow;
     departure: AboveBelow;
 }
@@ -17346,8 +17346,8 @@ export function xmlToInvertedMordent(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "long") {
-            var dataLong_ = xmlToYesNo(ch2) ;
-            ret.long_ = dataLong_;
+            var dataLong = xmlToYesNo(ch2) ;
+            ret.long = dataLong;
         }
         if (ch2.name === "approach") {
             var dataApproach = getAboveBelow(ch2, null);
@@ -17915,7 +17915,7 @@ export interface Technical {
     stopped?: Stopped;
     pluck?: Pluck;
     doubleTongue?: DoubleTongue;
-    string_?: String;
+    string?: String;
     openString?: OpenString;
     fingernails?: Fingernails;
     arrow?: Arrow;
@@ -17946,7 +17946,7 @@ export interface TechnicalComplete {
     stopped: Stopped;
     pluck: Pluck;
     doubleTongue: DoubleTongue;
-    string_: String;
+    string: String;
     openString: OpenString;
     fingernails: Fingernails;
     arrow: Arrow;
@@ -18024,8 +18024,8 @@ export function xmlToTechnical(node: Node) {
             ret.doubleTongue = dataDoubleTongue;
         }
         if (ch.nodeName === "string") {
-            var dataString_ = xmlToString(ch) ;
-            ret.string_ = dataString_;
+            var dataString = xmlToString(ch) ;
+            ret.string = dataString;
         }
         if (ch.nodeName === "open-string") {
             var dataOpenString = xmlToOpenString(ch) ;
@@ -19028,7 +19028,7 @@ export function xmlToSnapPizzicato(node: Node) {
  * element leaves this choice up to the application.
  */
 export interface HammerOn extends PrintStyle, Placement {
-    number_?: number;
+    number?: number;
     type: StartStop;
     data?: string;
 }
@@ -19043,7 +19043,7 @@ export interface HammerOn extends PrintStyle, Placement {
  * element leaves this choice up to the application.
  */
 export interface HammerOnComplete extends PrintStyleComplete, PlacementComplete {
-    number_: number;
+    number: number;
     type: StartStop;
     data: string;
 }
@@ -19063,8 +19063,8 @@ export function xmlToHammerOn(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -19120,7 +19120,7 @@ export function xmlToHammerOn(node: Node) {
     var dataData = getString(ch3, false);
     ret.data = dataData;
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
@@ -19147,7 +19147,7 @@ export function xmlToHammerOn(node: Node) {
  * element leaves this choice up to the application.
  */
 export interface PullOff extends PrintStyle, Placement {
-    number_?: number;
+    number?: number;
     type: StartStop;
     data?: string;
 }
@@ -19162,7 +19162,7 @@ export interface PullOff extends PrintStyle, Placement {
  * element leaves this choice up to the application.
  */
 export interface PullOffComplete extends PrintStyleComplete, PlacementComplete {
-    number_: number;
+    number: number;
     type: StartStop;
     data: string;
 }
@@ -19182,8 +19182,8 @@ export function xmlToPullOff(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -19239,7 +19239,7 @@ export function xmlToPullOff(node: Node) {
     var dataData = getString(ch3, false);
     ret.data = dataData;
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFontWeight) {
         ret.fontWeight = NormalBold.Normal;
@@ -22194,7 +22194,7 @@ export function xmlToOtherArticulation(node: Node) {
  * highest note.
  */
 export interface Arpeggiate extends Position, Placement, Color {
-    number_?: number;
+    number?: number;
     direction?: UpDown;
 }
 
@@ -22208,7 +22208,7 @@ export interface Arpeggiate extends Position, Placement, Color {
  * highest note.
  */
 export interface ArpeggiateComplete extends PositionComplete, PlacementComplete, ColorComplete {
-    number_: number;
+    number: number;
     direction: UpDown;
 }
 
@@ -22226,8 +22226,8 @@ export function xmlToArpeggiate(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -22263,7 +22263,7 @@ export function xmlToArpeggiate(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
@@ -22285,7 +22285,7 @@ export function xmlToArpeggiate(node: Node) {
  * as for the arpeggiate element.
  */
 export interface NonArpeggiate extends Position, Placement, Color {
-    number_?: number;
+    number?: number;
     type: TopBottom;
 }
 
@@ -22297,7 +22297,7 @@ export interface NonArpeggiate extends Position, Placement, Color {
  * as for the arpeggiate element.
  */
 export interface NonArpeggiateComplete extends PositionComplete, PlacementComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: TopBottom;
 }
 
@@ -22314,8 +22314,8 @@ export function xmlToNonArpeggiate(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -22350,7 +22350,7 @@ export function xmlToNonArpeggiate(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
@@ -22564,7 +22564,7 @@ export function xmlToLyricParts(node: Node) {
  */
 export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
     lyricParts: any[];
-    number_?: number;
+    number?: number;
     name?: string;
 }
 
@@ -22590,7 +22590,7 @@ export interface Lyric extends Justify, Position, Placement, Color, PrintObject,
  */
 export interface LyricComplete extends JustifyComplete, PositionComplete, PlacementComplete, ColorComplete, PrintObjectComplete, EditorialComplete {
     lyricParts: any[];
-    number_: number;
+    number: number;
     name: string;
 }
 
@@ -23926,7 +23926,7 @@ export function getStartStopDiscontinue(node: Node, fallbackVal?: StartStopDisco
 export interface Ending extends PrintObject, PrintStyle {
     endLength: number;
     textX: number;
-    number_: number;
+    number: number;
     textY: number;
     type: StartStopDiscontinue;
     ending?: string;
@@ -23959,7 +23959,7 @@ export interface Ending extends PrintObject, PrintStyle {
 export interface EndingComplete extends PrintObjectComplete, PrintStyleComplete {
     endLength: number;
     textX: number;
-    number_: number;
+    number: number;
     textY: number;
     type: StartStopDiscontinue;
     ending: string;
@@ -23987,8 +23987,8 @@ export function xmlToEnding(node: Node) {
             ret.textX = dataTextX;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "text-y") {
             var dataTextY = getNumber(ch2, true);
@@ -24948,7 +24948,7 @@ export function getWedgeType(node: Node, fallbackVal?: WedgeType) {
  * multiple segments.
  */
 export interface Wedge extends LineType, DashedFormatting, Position, Color {
-    number_: number;
+    number: number;
     neinte: boolean;
     type: WedgeType;
     spread: number;
@@ -24971,7 +24971,7 @@ export interface Wedge extends LineType, DashedFormatting, Position, Color {
  * multiple segments.
  */
 export interface WedgeComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
-    number_: number;
+    number: number;
     neinte: boolean;
     type: WedgeType;
     spread: number;
@@ -24993,8 +24993,8 @@ export function xmlToWedge(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "neinte") {
@@ -25048,7 +25048,7 @@ export function xmlToWedge(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundNeinte) {
         ret.neinte = false;
@@ -25073,7 +25073,7 @@ export function xmlToWedge(node: Node) {
  * 
  */
 export interface Dashes extends DashedFormatting, Position, Color {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -25082,7 +25082,7 @@ export interface Dashes extends DashedFormatting, Position, Color {
  * 
  */
 export interface DashesComplete extends DashedFormattingComplete, PositionComplete, ColorComplete {
-    number_: number;
+    number: number;
     type: StartStopContinue;
 }
 
@@ -25100,8 +25100,8 @@ export function xmlToDashes(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "dash-length") {
@@ -25141,7 +25141,7 @@ export function xmlToDashes(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -25199,7 +25199,7 @@ export function getLineEndType(node: Node, fallbackVal?: LineEndType) {
  */
 export interface Bracket extends LineType, DashedFormatting, Position, Color {
     endLength: number;
-    number_: number;
+    number: number;
     type: StartStopContinue;
     lineEnd: LineEndType;
 }
@@ -25215,7 +25215,7 @@ export interface Bracket extends LineType, DashedFormatting, Position, Color {
  */
 export interface BracketComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
     endLength: number;
-    number_: number;
+    number: number;
     type: StartStopContinue;
     lineEnd: LineEndType;
 }
@@ -25239,8 +25239,8 @@ export function xmlToBracket(node: Node) {
             ret.endLength = dataEndLength;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
@@ -25289,7 +25289,7 @@ export function xmlToBracket(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundLineType) {
         ret.lineType = SolidDashedDottedWavy.Solid;
@@ -25796,12 +25796,12 @@ export function xmlToMetronomeDot(node: Node) {
 }
 
 export interface MetronomeBeam {
-    number_: number;
+    number: number;
     data: string;
 }
 
 export interface MetronomeBeamComplete {
-    number_: number;
+    number: number;
     data: string;
 }
 
@@ -25816,8 +25816,8 @@ export function xmlToMetronomeBeam(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
     }
@@ -25825,7 +25825,7 @@ export function xmlToMetronomeBeam(node: Node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     return ret;
 }
@@ -25939,7 +25939,7 @@ export function getOctaveShiftType(node: Node, fallbackVal?: OctaveShiftType) {
  * octave; a size of 15 indicates two octaves.
  */
 export interface OctaveShift extends DashedFormatting, PrintStyle {
-    number_: number;
+    number: number;
     size: number;
     type: OctaveShiftType;
 }
@@ -25953,7 +25953,7 @@ export interface OctaveShift extends DashedFormatting, PrintStyle {
  * octave; a size of 15 indicates two octaves.
  */
 export interface OctaveShiftComplete extends DashedFormattingComplete, PrintStyleComplete {
-    number_: number;
+    number: number;
     size: number;
     type: OctaveShiftType;
 }
@@ -25974,8 +25974,8 @@ export function xmlToOctaveShift(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "size") {
             var dataSize = getNumber(ch2, true);
@@ -26610,7 +26610,7 @@ export function xmlToScordatura(node: Node) {
  */
 export interface Accord {
     tuningAlter: TuningAlter;
-    string_: string;
+    string: string;
     tuningStep: string;
     tuningOctave: TuningOctave;
 }
@@ -26624,7 +26624,7 @@ export interface Accord {
  */
 export interface AccordComplete {
     tuningAlter: TuningAlter;
-    string_: string;
+    string: string;
     tuningStep: string;
     tuningOctave: TuningOctave;
 }
@@ -26651,8 +26651,8 @@ export function xmlToAccord(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "string") {
-            var dataString_ = getString(ch2, true);
-            ret.string_ = dataString_;
+            var dataString = getString(ch2, true);
+            ret.string = dataString;
         }
     }
     return ret;
@@ -27439,7 +27439,7 @@ export function xmlToOffset(node: Node) {
  */
 export interface HarmonyChord {
     root: Root;
-    function_: Function;
+    function: Function;
     kind: Kind;
     degree: Degree;
     inversion: Inversion;
@@ -27474,7 +27474,7 @@ export interface HarmonyChord {
  */
 export interface HarmonyChordComplete {
     root: Root;
-    function_: Function;
+    function: Function;
     kind: Kind;
     degree: Degree;
     inversion: Inversion;
@@ -27492,8 +27492,8 @@ export function xmlToHarmonyChord(node: Node) {
             ret.root = dataRoot;
         }
         if (ch.nodeName === "function") {
-            var dataFunction_ = xmlToFunction(ch) ;
-            ret.function_ = dataFunction_;
+            var dataFunction = xmlToFunction(ch) ;
+            ret.function = dataFunction;
         }
         if (ch.nodeName === "kind") {
             var dataKind = xmlToKind(ch) ;
@@ -27579,8 +27579,8 @@ export function xmlToHarmony(node: Node) {
             ret.root = dataRoot;
         }
         if (ch.nodeName === "function") {
-            var dataFunction_ = xmlToFunction(ch) ;
-            ret.function_ = dataFunction_;
+            var dataFunction = xmlToFunction(ch) ;
+            ret.function = dataFunction;
         }
         if (ch.nodeName === "kind") {
             var dataKind = xmlToKind(ch) ;
@@ -29207,7 +29207,7 @@ export function xmlToFirstFret(node: Node) {
  */
 export interface FrameNote {
     barre: Barre;
-    string_: String;
+    string: String;
     fingering: Fingering;
     fret: Fret;
 }
@@ -29221,7 +29221,7 @@ export interface FrameNote {
  */
 export interface FrameNoteComplete {
     barre: Barre;
-    string_: String;
+    string: String;
     fingering: Fingering;
     fret: Fret;
 }
@@ -29237,8 +29237,8 @@ export function xmlToFrameNote(node: Node) {
             ret.barre = dataBarre;
         }
         if (ch.nodeName === "string") {
-            var dataString_ = xmlToString(ch) ;
-            ret.string_ = dataString_;
+            var dataString = xmlToString(ch) ;
+            ret.string = dataString;
         }
         if (ch.nodeName === "fingering") {
             var dataFingering = xmlToFingering(ch) ;
@@ -29319,7 +29319,7 @@ export function xmlToBarre(node: Node) {
  */
 export interface Grouping {
     features: Feature[];
-    number_: number;
+    number: number;
     groupingType: StartStopSingle;
     memberOf: string;
 }
@@ -29340,7 +29340,7 @@ export interface Grouping {
  */
 export interface GroupingComplete {
     features: Feature[];
-    number_: number;
+    number: number;
     groupingType: StartStopSingle;
     memberOf: string;
 }
@@ -29360,8 +29360,8 @@ export function xmlToGrouping(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "type") {
@@ -29374,7 +29374,7 @@ export function xmlToGrouping(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     return ret;
 }
@@ -30250,12 +30250,12 @@ export function xmlToWordFont(node: Node) {
 }
 
 export interface LyricFont extends Font {
-    number_: number;
+    number: number;
     name: string;
 }
 
 export interface LyricFontComplete extends FontComplete {
-    number_: number;
+    number: number;
     name: string;
 }
 
@@ -30271,8 +30271,8 @@ export function xmlToLyricFont(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
@@ -30307,12 +30307,12 @@ export function xmlToLyricFont(node: Node) {
 }
 
 export interface LyricLanguage {
-    number_: number;
+    number: number;
     name: string;
 }
 
 export interface LyricLanguageComplete {
-    number_: number;
+    number: number;
     name: string;
 }
 
@@ -30326,8 +30326,8 @@ export function xmlToLyricLanguage(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "name") {
             var dataName = getString(ch2, true);
@@ -31073,7 +31073,7 @@ export interface PartGroup extends Editorial {
     groupName: GroupName;
     groupAbbreviationDisplay: GroupAbbreviationDisplay;
     groupBarline: GroupBarline;
-    number_: number;
+    number: number;
     groupAbbreviation: GroupAbbreviation;
     type: StartStop;
     groupTime: GroupTime;
@@ -31097,7 +31097,7 @@ export interface PartGroupComplete extends EditorialComplete {
     groupName: GroupName;
     groupAbbreviationDisplay: GroupAbbreviationDisplay;
     groupBarline: GroupBarline;
-    number_: number;
+    number: number;
     groupAbbreviation: GroupAbbreviation;
     type: StartStop;
     groupTime: GroupTime;
@@ -31150,8 +31150,8 @@ export function xmlToPartGroup(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "type") {
@@ -31160,7 +31160,7 @@ export function xmlToPartGroup(node: Node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     return ret;
 }
@@ -31921,13 +31921,13 @@ export function xmlToScoreTimewise(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "version") {
-            var dataVersion_ = getString(ch2, true);
-            ret.version_ = dataVersion_;
+            var dataVersion = getString(ch2, true);
+            ret.version = dataVersion;
             foundVersion_ = true;
         }
     }
     if (!foundVersion_) {
-        ret.version_ = "1.0";
+        ret.version = "1.0";
     }
     return ret;
 }
@@ -32016,7 +32016,7 @@ export function xmlToPart(node: Node) {
  * Represents a measure.
  */
 export interface Measure {
-    number_: string;
+    number: string;
     implicit: boolean;
     width: number;
     parts: {[key: string]: any[]};
@@ -32027,7 +32027,7 @@ export interface Measure {
  * Represents a measure.
  */
 export interface MeasureComplete {
-    number_: string;
+    number: string;
     implicit: boolean;
     width: number;
     parts: {[key: string]: any[]};

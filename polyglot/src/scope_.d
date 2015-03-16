@@ -18,6 +18,7 @@
 
 export struct PField {
     string name;
+    string tsname;
     string xmlName;
     bool isFlag;
     bool isEnum;

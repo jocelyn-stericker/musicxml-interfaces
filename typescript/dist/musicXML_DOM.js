@@ -90,7 +90,7 @@ function xmlToMeasure(node) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getString(ch2, true);
-            ret.number_ = dataNumber;
+            ret.number = dataNumber;
         }
         if (ch2.name === "implicit") {
             var dataImplicit = xmlToYesNo(ch2, true);
@@ -168,7 +168,7 @@ function xmlToLyric(node) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            ret.number = dataNumber_;
             foundNumber_ = true;
         }
         if (ch2.name === "justify") {
@@ -219,7 +219,7 @@ function xmlToLyric(node) {
     }
     ret.lyricParts = xmlToLyricParts(node);
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundJustify) {
         ret.justify = 0 /* Left */;
@@ -2587,13 +2587,13 @@ function xmlToDocumentAttributes(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "version") {
-            var dataVersion_ = getString(ch2, true);
-            ret.version_ = dataVersion_;
+            var dataVersion = getString(ch2, true);
+            ret.version = dataVersion;
             foundVersion_ = true;
         }
     }
     if (!foundVersion_) {
-        ret.version_ = "1.0";
+        ret.version = "1.0";
     }
     return ret;
 }
@@ -2956,8 +2956,8 @@ function xmlToWavyLine(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -3027,7 +3027,7 @@ function xmlToWavyLine(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
@@ -5295,8 +5295,8 @@ function xmlToKeyOctave(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "cancel") {
             var dataCancel = xmlToYesNo(ch2);
@@ -5366,8 +5366,8 @@ function xmlToKey(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
@@ -5738,8 +5738,8 @@ function xmlToClef(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "size") {
@@ -5803,7 +5803,7 @@ function xmlToClef(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundSize) {
         ret.size = 1 /* Full */;
@@ -5934,8 +5934,8 @@ function xmlToStaffDetails(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "print-object") {
@@ -5955,7 +5955,7 @@ function xmlToStaffDetails(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPrintObject) {
         ret.printObject = true;
@@ -5996,8 +5996,8 @@ function xmlToTranspose(node) {
             ret.octaveChange = dataOctaveChange;
         }
         if (ch.nodeName === "double") {
-            var dataDouble_ = xmlToDouble(ch);
-            ret.double_ = dataDouble_;
+            var dataDouble = xmlToDouble(ch);
+            ret.double = dataDouble;
         }
         if (ch.nodeName === "chromatic") {
             var dataChromatic = getString(ch, true);
@@ -6007,13 +6007,13 @@ function xmlToTranspose(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
     }
     if (!foundNumber_) {
-        ret.number_ = NaN;
+        ret.number = NaN;
     }
     return ret;
 }
@@ -6261,8 +6261,8 @@ function xmlToMeasureStyle(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "font-family") {
@@ -6290,7 +6290,7 @@ function xmlToMeasureStyle(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
@@ -7610,8 +7610,8 @@ function xmlToBeam(node) {
             foundRepeater = true;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "fan") {
@@ -7627,7 +7627,7 @@ function xmlToBeam(node) {
         ret.repeater = false;
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFan) {
         ret.fan = 2 /* None */;
@@ -7735,8 +7735,8 @@ function xmlToTied(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
@@ -7850,8 +7850,8 @@ function xmlToSlur(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
@@ -7930,7 +7930,7 @@ function xmlToSlur(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundLineType) {
         ret.lineType = 0 /* Solid */;
@@ -8004,8 +8004,8 @@ function xmlToTuplet(node) {
             foundBracket = true;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "show-number") {
             var dataShowNumber = getActualBothNone(ch2, 0 /* Actual */);
@@ -9882,8 +9882,8 @@ function xmlToMordent(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "long") {
-            var dataLong_ = xmlToYesNo(ch2);
-            ret.long_ = dataLong_;
+            var dataLong = xmlToYesNo(ch2);
+            ret.long = dataLong;
         }
         if (ch2.name === "approach") {
             var dataApproach = getAboveBelow(ch2, null);
@@ -10029,8 +10029,8 @@ function xmlToInvertedMordent(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "long") {
-            var dataLong_ = xmlToYesNo(ch2);
-            ret.long_ = dataLong_;
+            var dataLong = xmlToYesNo(ch2);
+            ret.long = dataLong;
         }
         if (ch2.name === "approach") {
             var dataApproach = getAboveBelow(ch2, null);
@@ -10532,8 +10532,8 @@ function xmlToTechnical(node) {
             ret.doubleTongue = dataDoubleTongue;
         }
         if (ch.nodeName === "string") {
-            var dataString_ = xmlToString(ch);
-            ret.string_ = dataString_;
+            var dataString = xmlToString(ch);
+            ret.string = dataString;
         }
         if (ch.nodeName === "open-string") {
             var dataOpenString = xmlToOpenString(ch);
@@ -11340,8 +11340,8 @@ function xmlToHammerOn(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -11397,7 +11397,7 @@ function xmlToHammerOn(node) {
     var dataData = getString(ch3, false);
     ret.data = dataData;
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
@@ -11428,8 +11428,8 @@ function xmlToPullOff(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -11485,7 +11485,7 @@ function xmlToPullOff(node) {
     var dataData = getString(ch3, false);
     ret.data = dataData;
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundFontWeight) {
         ret.fontWeight = 0 /* Normal */;
@@ -13850,8 +13850,8 @@ function xmlToArpeggiate(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -13887,7 +13887,7 @@ function xmlToArpeggiate(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
@@ -13913,8 +13913,8 @@ function xmlToNonArpeggiate(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "default-x") {
@@ -13949,7 +13949,7 @@ function xmlToNonArpeggiate(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
@@ -15024,8 +15024,8 @@ function xmlToEnding(node) {
             ret.textX = dataTextX;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "text-y") {
             var dataTextY = getNumber(ch2, true);
@@ -15799,8 +15799,8 @@ function xmlToWedge(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "neinte") {
@@ -15854,7 +15854,7 @@ function xmlToWedge(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundNeinte) {
         ret.neinte = false;
@@ -15887,8 +15887,8 @@ function xmlToDashes(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "dash-length") {
@@ -15928,7 +15928,7 @@ function xmlToDashes(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -15992,8 +15992,8 @@ function xmlToBracket(node) {
             ret.endLength = dataEndLength;
         }
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
@@ -16042,7 +16042,7 @@ function xmlToBracket(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     if (!foundLineType) {
         ret.lineType = 0 /* Solid */;
@@ -16397,8 +16397,8 @@ function xmlToMetronomeBeam(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
     }
@@ -16406,7 +16406,7 @@ function xmlToMetronomeBeam(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     return ret;
 }
@@ -16504,8 +16504,8 @@ function xmlToOctaveShift(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "size") {
             var dataSize = getNumber(ch2, true);
@@ -17057,8 +17057,8 @@ function xmlToAccord(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "string") {
-            var dataString_ = getString(ch2, true);
-            ret.string_ = dataString_;
+            var dataString = getString(ch2, true);
+            ret.string = dataString;
         }
     }
     return ret;
@@ -17554,8 +17554,8 @@ function xmlToHarmonyChord(node) {
             ret.root = dataRoot;
         }
         if (ch.nodeName === "function") {
-            var dataFunction_ = xmlToFunction(ch);
-            ret.function_ = dataFunction_;
+            var dataFunction = xmlToFunction(ch);
+            ret.function = dataFunction;
         }
         if (ch.nodeName === "kind") {
             var dataKind = xmlToKind(ch);
@@ -17623,8 +17623,8 @@ function xmlToHarmony(node) {
             ret.root = dataRoot;
         }
         if (ch.nodeName === "function") {
-            var dataFunction_ = xmlToFunction(ch);
-            ret.function_ = dataFunction_;
+            var dataFunction = xmlToFunction(ch);
+            ret.function = dataFunction;
         }
         if (ch.nodeName === "kind") {
             var dataKind = xmlToKind(ch);
@@ -18706,8 +18706,8 @@ function xmlToFrameNote(node) {
             ret.barre = dataBarre;
         }
         if (ch.nodeName === "string") {
-            var dataString_ = xmlToString(ch);
-            ret.string_ = dataString_;
+            var dataString = xmlToString(ch);
+            ret.string = dataString;
         }
         if (ch.nodeName === "fingering") {
             var dataFingering = xmlToFingering(ch);
@@ -18763,8 +18763,8 @@ function xmlToGrouping(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "type") {
@@ -18777,7 +18777,7 @@ function xmlToGrouping(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     return ret;
 }
@@ -19212,8 +19212,8 @@ function xmlToLyricFont(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
@@ -19256,8 +19256,8 @@ function xmlToLyricLanguage(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
         }
         if (ch2.name === "name") {
             var dataName = getString(ch2, true);
@@ -19800,8 +19800,8 @@ function xmlToPartGroup(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "number") {
-            var dataNumber_ = getNumber(ch2, true);
-            ret.number_ = dataNumber_;
+            var dataNumber = getNumber(ch2, true);
+            ret.number = dataNumber;
             foundNumber_ = true;
         }
         if (ch2.name === "type") {
@@ -19810,7 +19810,7 @@ function xmlToPartGroup(node) {
         }
     }
     if (!foundNumber_) {
-        ret.number_ = 1;
+        ret.number = 1;
     }
     return ret;
 }
@@ -20257,13 +20257,13 @@ function xmlToScoreTimewise(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "version") {
-            var dataVersion_ = getString(ch2, true);
-            ret.version_ = dataVersion_;
+            var dataVersion = getString(ch2, true);
+            ret.version = dataVersion;
             foundVersion_ = true;
         }
     }
     if (!foundVersion_) {
-        ret.version_ = "1.0";
+        ret.version = "1.0";
     }
     return ret;
 }
