@@ -118,6 +118,24 @@ export class PartAbbreviationDisplay {
     }
 }
 
+export class GroupNameDisplay {
+    mixin INoteheadText;
+    this(xmlNodePtr node) {
+        auto ch = node;
+        // TODO
+        // text = TextArray(ch);   
+    }
+}
+
+export class GroupAbbreviationDisplay {
+    mixin INoteheadText;
+    this(xmlNodePtr node) {
+        auto ch = node;
+        // TODO
+        // text = TextArray(ch);   
+    }
+}
+
 export class Measure {
     mixin IMeasure;
     this(xmlNodePtr node) {
@@ -1830,9 +1848,9 @@ export class DirectiveEntity {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
-            if (ch.name.toString == "directive-entity") {
+            if (ch.name.toString == "directive") {
                 auto data = getYesNo(ch, true);
-                this.directiveEntity = data;
+                this.directive = data;
             }
         }
     }
@@ -1848,7 +1866,7 @@ export class DirectiveEntity {
  * attribute is present, it overrides the directive entity.
  */
 mixin template IDirectiveEntity() {
-    bool directiveEntity;
+    bool directive;
 }
 
 /**
@@ -4280,18 +4298,7 @@ mixin template ICoda() {
  * actual-notes and normal-notes elements ia a non-negative
  * integer.
  */
-export class ActualNotes {
-    mixin IActualNotes;
-    this(xmlNodePtr node) {
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-        }
-        auto ch = node;
-        auto data = getNumber(ch, true);
-        this.count = data;
-    }
-}
+alias ActualNotes = float;
 
 /**
  * These elements are used both in the time-modification and
@@ -4305,50 +4312,7 @@ export class ActualNotes {
  * actual-notes and normal-notes elements ia a non-negative
  * integer.
  */
-mixin template IActualNotes() {
-    float count;
-}
-
-/**
- * These elements are used both in the time-modification and
- * metronome-tuplet elements. The actual-notes element
- * describes how many notes are played in the time usually
- * occupied by the number of normal-notes. If the normal-notes
- * type is different than the current note type (e.g., a
- * quarter note within an eighth note triplet), then the
- * normal-notes type (e.g. eighth) is specified in the
- * normal-type and normal-dot elements. The content of the
- * actual-notes and normal-notes elements ia a non-negative
- * integer.
- */
-export class NormalNotes {
-    mixin INormalNotes;
-    this(xmlNodePtr node) {
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-        }
-        auto ch = node;
-        auto data = getNumber(ch, true);
-        this.count = data;
-    }
-}
-
-/**
- * These elements are used both in the time-modification and
- * metronome-tuplet elements. The actual-notes element
- * describes how many notes are played in the time usually
- * occupied by the number of normal-notes. If the normal-notes
- * type is different than the current note type (e.g., a
- * quarter note within an eighth note triplet), then the
- * normal-notes type (e.g. eighth) is specified in the
- * normal-type and normal-dot elements. The content of the
- * actual-notes and normal-notes elements ia a non-negative
- * integer.
- */
-mixin template INormalNotes() {
-    float count;
-}
+alias NormalNotes = float;
 
 /**
  * These elements are used both in the time-modification and
@@ -4966,18 +4930,6 @@ mixin template IString() {
  * with different names to reflect their different function.
  * They are used in the staff-tuning and accord elements.
  */
-export class TuningAlter {
-    mixin ITuningAlter;
-    this(xmlNodePtr node) {
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-        }
-        auto ch = node;
-        auto data = getString(ch, true);
-        this.step = data;
-    }
-}
 
 /**
  * The tuning-step, tuning-alter, and tuning-octave elements
@@ -4985,38 +4937,6 @@ export class TuningAlter {
  * with different names to reflect their different function.
  * They are used in the staff-tuning and accord elements.
  */
-mixin template ITuningAlter() {
-    string step;
-}
-
-/**
- * The tuning-step, tuning-alter, and tuning-octave elements
- * are represented like the step, alter, and octave elements,
- * with different names to reflect their different function.
- * They are used in the staff-tuning and accord elements.
- */
-export class TuningOctave {
-    mixin ITuningOctave;
-    this(xmlNodePtr node) {
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-        }
-        auto ch = node;
-        auto data = getString(ch, true);
-        this.step = data;
-    }
-}
-
-/**
- * The tuning-step, tuning-alter, and tuning-octave elements
- * are represented like the step, alter, and octave elements,
- * with different names to reflect their different function.
- * They are used in the staff-tuning and accord elements.
- */
-mixin template ITuningOctave() {
-    string step;
-}
 
 /**
  * The display-text element is used for exact formatting of
@@ -5651,7 +5571,7 @@ export class Play {
                 this.mute = data;
             }
             if (ch.name.toString == "other-play") {
-                auto data = getString(ch, true);
+                auto data = new OtherPlay(ch) ;
                 this.otherPlay = data;
             }
             if (ch.name.toString == "semi-pitched") {
@@ -5660,6 +5580,10 @@ export class Play {
             }
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
+            if (ch.name.toString == "id") {
+                auto data = getString(ch, true);
+                this.id = data;
+            }
         }
     }
 }
@@ -5676,8 +5600,31 @@ export class Play {
 mixin template IPlay() {
     string ipa;
     string mute;
-    string otherPlay;
+    OtherPlay otherPlay;
     string semiPitched;
+    string id;
+}
+
+export class OtherPlay {
+    mixin IOtherPlay;
+    this(xmlNodePtr node) {
+        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
+        }
+        for (auto ch = node.properties; ch; ch = ch.next) {
+            if (ch.name.toString == "type") {
+                auto data = getString(ch, true);
+                this.type = data;
+            }
+        }
+        auto ch = node;
+        auto data = getString(ch, true);
+        this.data = data;
+    }
+}
+
+mixin template IOtherPlay() {
+    string data;
+    string type;
 }
 
 /**
@@ -7061,27 +7008,6 @@ mixin template IEncoder() {
  * The source for the music that is encoded. This is similar
  * to the Dublin Core source element.
  */
-export class Source {
-    mixin ISource;
-    this(xmlNodePtr node) {
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-        }
-        auto ch = node;
-        auto data = getString(ch, true);
-        this.source = data;
-    }
-}
-
-/**
- * 
- * The source for the music that is encoded. This is similar
- * to the Dublin Core source element.
- */
-mixin template ISource() {
-    string source;
-}
 
 /**
  * A related resource for the music that is encoded. This is
@@ -7204,7 +7130,7 @@ export class Identification {
                 this.encoding = data;
             }
             if (ch.name.toString == "source") {
-                auto data = new Source(ch) ;
+                auto data = getString(ch, true);
                 this.source = data;
             }
         }
@@ -7227,7 +7153,7 @@ mixin template IIdentification() {
     Relation[] relations;
     Rights[] rights;
     Encoding encoding;
-    Source source;
+    string source;
 }
 
 /**
@@ -8091,7 +8017,7 @@ export class Time {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "interchangeable") {
                 auto data = new Interchangeable(ch) ;
-                this.interchangeables ~= data;
+                this.interchangeable = data;
             }
             if (ch.name.toString == "beats") {
                 auto data = getString(ch, true);
@@ -8102,7 +8028,7 @@ export class Time {
                 this.beatTypes ~= data;
             }
             if (ch.name.toString == "senza-misura") {
-                auto data = true;
+                auto data = getString(ch, true);
                 this.senzaMisura = data;
             }
         }
@@ -8240,10 +8166,10 @@ mixin template ITime() {
     mixin ITimeSeparator;
     mixin IPrintStyleAlign;
     mixin IPrintObject;
-    Interchangeable[] interchangeables;
+    Interchangeable interchangeable;
     string[] beats;
     float[] beatTypes;
-    bool senzaMisura;
+    string senzaMisura;
 }
 
 /**
@@ -8771,7 +8697,7 @@ export class StaffTuning {
     this(xmlNodePtr node) {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "tuning-alter") {
-                auto data = new TuningAlter(ch) ;
+                auto data = getString(ch, true);
                 this.tuningAlter = data;
             }
             if (ch.name.toString == "tuning-step") {
@@ -8779,7 +8705,7 @@ export class StaffTuning {
                 this.tuningStep = data;
             }
             if (ch.name.toString == "tuning-octave") {
-                auto data = new TuningOctave(ch) ;
+                auto data = getString(ch, true);
                 this.tuningOctave = data;
             }
         }
@@ -8798,10 +8724,10 @@ export class StaffTuning {
  * lines are numbered from bottom to top.
  */
 mixin template IStaffTuning() {
-    TuningAlter tuningAlter;
+    string tuningAlter;
     string line;
     string tuningStep;
-    TuningOctave tuningOctave;
+    string tuningOctave;
 }
 
 /**
@@ -8857,10 +8783,10 @@ ShowFretsType getShowFretsType(T)(T p) {
 export class StaffDetails {
     mixin IStaffDetails;
     this(xmlNodePtr node) {
+        bool foundShowFrets = false;
         bool foundNumber_ = false;
         bool foundPrintObject = false;
         bool foundPrintSpacing = false;
-        bool foundShowFets = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "staff-lines") {
                 auto data = getNumber(ch, true);
@@ -8884,6 +8810,11 @@ export class StaffDetails {
             }
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
+            if (ch.name.toString == "show-frets") {
+                auto data = getShowFretsType(ch);
+                this.showFrets = data;
+                foundShowFrets = true;
+            }
             if (ch.name.toString == "number") {
                 auto data = getNumber(ch, true);
                 this.number_ = data;
@@ -8899,11 +8830,9 @@ export class StaffDetails {
                 this.printSpacing = data;
                 foundPrintSpacing = true;
             }
-            if (ch.name.toString == "show-fets") {
-                auto data = getShowFretsType(ch);
-                this.showFets = data;
-                foundShowFets = true;
-            }
+        }
+        if (!foundShowFrets) {
+            showFrets = ShowFretsType.Numbers;
         }
         if (!foundNumber_) {
             number_ = 1;
@@ -8913,9 +8842,6 @@ export class StaffDetails {
         }
         if (!foundPrintSpacing) {
             printSpacing = true;
-        }
-        if (!foundShowFets) {
-            showFets = ShowFretsType.Numbers;
         }
     }
 }
@@ -8947,9 +8873,9 @@ mixin template IStaffDetails() {
     float staffLines;
     StaffTuning[] staffTunings;
     float staffSize;
+    ShowFretsType showFrets;
     string capo;
     float number_;
-    ShowFretsType showFets;
     string staffType;
 }
 
@@ -9265,25 +9191,25 @@ mixin template IMultipleRest() {
 export class MeasureRepeat {
     mixin IMeasureRepeat;
     this(xmlNodePtr node) {
-        bool foundSlashed = false;
+        bool foundSlashes = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
-            if (ch.name.toString == "slashed") {
-                auto data = getNumber(ch, true);
-                this.slashed = data;
-                foundSlashed = true;
-            }
             if (ch.name.toString == "type") {
                 auto data = getStartStop(ch);
                 this.type = data;
+            }
+            if (ch.name.toString == "slashes") {
+                auto data = getNumber(ch, true);
+                this.slashes = data;
+                foundSlashes = true;
             }
         }
         auto ch = node;
         auto data = getString(ch, false);
         this.data = data;
-        if (!foundSlashed) {
-            slashed = 1;
+        if (!foundSlashes) {
+            slashes = 1;
         }
     }
 }
@@ -9303,9 +9229,9 @@ export class MeasureRepeat {
  * start and the stop of the measure-repeat must be specified.
  */
 mixin template IMeasureRepeat() {
-    float slashed;
     string data;
     StartStop type;
+    float slashes;
 }
 
 /**
@@ -9591,15 +9517,15 @@ export class Attributes {
             }
             if (ch.name.toString == "time") {
                 auto data = new Time(ch) ;
-                this.time = data;
+                this.times ~= data;
             }
             if (ch.name.toString == "staff-details") {
                 auto data = new StaffDetails(ch) ;
-                this.staffDetails = data;
+                this.staffDetails ~= data;
             }
             if (ch.name.toString == "transpose") {
                 auto data = new Transpose(ch) ;
-                this.transpose = data;
+                this.transposes ~= data;
             }
             if (ch.name.toString == "footnote") {
                 auto data = new Footnote(ch) ;
@@ -9619,11 +9545,11 @@ export class Attributes {
             }
             if (ch.name.toString == "key") {
                 auto data = new Key(ch) ;
-                this.keySignature = data;
+                this.keySignatures ~= data;
             }
             if (ch.name.toString == "directive") {
                 auto data = new Directive(ch) ;
-                this.directive = data;
+                this.directives ~= data;
             }
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
@@ -9644,13 +9570,13 @@ mixin template IAttributes() {
     PartSymbol partSymbol;
     Clef[] clefs;
     MeasureStyle measureStyle;
-    Time time;
-    StaffDetails staffDetails;
-    Transpose transpose;
+    Time[] times;
+    StaffDetails[] staffDetails;
+    Transpose[] transposes;
     float staves;
     string instruments;
-    Key keySignature;
-    Directive directive;
+    Key[] keySignatures;
+    Directive[] directives;
 }
 
 /**
@@ -10897,7 +10823,7 @@ export class TimeModification {
     this(xmlNodePtr node) {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "actual-notes") {
-                auto data = new ActualNotes(ch) ;
+                auto data = getNumber(ch, true);
                 this.actualNotes = data;
             }
             if (ch.name.toString == "normal-type") {
@@ -10905,7 +10831,7 @@ export class TimeModification {
                 this.normalType = data;
             }
             if (ch.name.toString == "normal-notes") {
-                auto data = new NormalNotes(ch) ;
+                auto data = getNumber(ch, true);
                 this.normalNotes = data;
             }
             if (ch.name.toString == "normal-dot") {
@@ -10930,9 +10856,9 @@ export class TimeModification {
  * accurately.
  */
 mixin template ITimeModification() {
-    ActualNotes actualNotes;
+    float actualNotes;
     string normalType;
-    NormalNotes normalNotes;
+    float normalNotes;
     NormalDot[] normalDots;
 }
 
@@ -21070,9 +20996,6 @@ export class Direction {
     mixin IDirection;
     this(xmlNodePtr node) {
         bool foundPlacement = false;
-        bool foundFontWeight = false;
-        bool foundFontStyle = false;
-        bool foundColor = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "voice") {
                 auto data = getNumber(ch, true);
@@ -21109,60 +21032,13 @@ export class Direction {
                 this.placement = data;
                 foundPlacement = true;
             }
-            if (ch.name.toString == "default-x") {
-                auto data = getNumber(ch, true);
-                this.defaultX = data;
-            }
-            if (ch.name.toString == "relative-y") {
-                auto data = getNumber(ch, true);
-                this.relativeY = data;
-            }
-            if (ch.name.toString == "default-y") {
-                auto data = getNumber(ch, true);
-                this.defaultY = data;
-            }
-            if (ch.name.toString == "relative-x") {
-                auto data = getNumber(ch, true);
-                this.relativeX = data;
-            }
-            if (ch.name.toString == "font-family") {
-                auto data = getString(ch, true);
-                this.fontFamily = data;
-            }
-            if (ch.name.toString == "font-weight") {
-                auto data = getNormalBold(ch);
-                this.fontWeight = data;
-                foundFontWeight = true;
-            }
-            if (ch.name.toString == "font-style") {
-                auto data = getNormalItalic(ch);
-                this.fontStyle = data;
-                foundFontStyle = true;
-            }
-            if (ch.name.toString == "font-size") {
-                auto data = getString(ch, true);
-                this.fontSize = data;
-            }
-            if (ch.name.toString == "color") {
-                auto data = getString(ch, true);
-                this.color = data;
-                foundColor = true;
+            if (ch.name.toString == "directive") {
+                auto data = getYesNo(ch, true);
+                this.directive = data;
             }
         }
-        auto ch = node;
-        auto data = getString(ch, true);
-        this.data = data;
         if (!foundPlacement) {
             placement = AboveBelow.Unspecified;
-        }
-        if (!foundFontWeight) {
-            fontWeight = NormalBold.Normal;
-        }
-        if (!foundFontStyle) {
-            fontStyle = NormalItalic.Normal;
-        }
-        if (!foundColor) {
-            color = "#000000";
         }
     }
 }
@@ -21182,7 +21058,7 @@ export class Direction {
 mixin template IDirection() {
     mixin IEditorialVoice;
     mixin IPlacement;
-    mixin IDirective;
+    mixin IDirectiveEntity;
     DirectionType[] directionTypes;
     float staff;
     Offset offset;
@@ -21723,7 +21599,7 @@ export class Wedge {
     mixin IWedge;
     this(xmlNodePtr node) {
         bool foundNumber_ = false;
-        bool foundNeinte = false;
+        bool foundNiente = false;
         bool foundLineType = false;
         bool foundDashLength = false;
         bool foundSpaceLength = false;
@@ -21736,10 +21612,10 @@ export class Wedge {
                 this.number_ = data;
                 foundNumber_ = true;
             }
-            if (ch.name.toString == "neinte") {
+            if (ch.name.toString == "niente") {
                 auto data = getYesNo(ch, true);
-                this.neinte = data;
-                foundNeinte = true;
+                this.niente = data;
+                foundNiente = true;
             }
             if (ch.name.toString == "line-type") {
                 auto data = getSolidDashedDottedWavy(ch);
@@ -21789,8 +21665,8 @@ export class Wedge {
         if (!foundNumber_) {
             number_ = 1;
         }
-        if (!foundNeinte) {
-            neinte = false;
+        if (!foundNiente) {
+            niente = false;
         }
         if (!foundLineType) {
             lineType = SolidDashedDottedWavy.Solid;
@@ -21829,7 +21705,7 @@ mixin template IWedge() {
     mixin IPosition;
     mixin IColor;
     float number_;
-    bool neinte;
+    bool niente;
     WedgeType type;
     float spread;
 }
@@ -22526,7 +22402,7 @@ export class MetronomeTuplet {
         bool foundShowNumber = false;
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "actual-notes") {
-                auto data = new ActualNotes(ch) ;
+                auto data = getNumber(ch, true);
                 this.actualNotes = data;
             }
             if (ch.name.toString == "normal-type") {
@@ -22534,7 +22410,7 @@ export class MetronomeTuplet {
                 this.normalType = data;
             }
             if (ch.name.toString == "normal-notes") {
-                auto data = new NormalNotes(ch) ;
+                auto data = getNumber(ch, true);
                 this.normalNotes = data;
             }
             if (ch.name.toString == "normal-dot") {
@@ -22568,12 +22444,12 @@ export class MetronomeTuplet {
 }
 
 mixin template IMetronomeTuplet() {
-    ActualNotes actualNotes;
+    float actualNotes;
     bool bracket;
     ActualBothNone showNumber;
     string normalType;
     StartStop type;
-    NormalNotes normalNotes;
+    float normalNotes;
     NormalDot[] normalDots;
 }
 
@@ -23234,7 +23110,7 @@ export class Accord {
     this(xmlNodePtr node) {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "tuning-alter") {
-                auto data = new TuningAlter(ch) ;
+                auto data = getString(ch, true);
                 this.tuningAlter = data;
             }
             if (ch.name.toString == "tuning-step") {
@@ -23242,7 +23118,7 @@ export class Accord {
                 this.tuningStep = data;
             }
             if (ch.name.toString == "tuning-octave") {
-                auto data = new TuningOctave(ch) ;
+                auto data = getString(ch, true);
                 this.tuningOctave = data;
             }
         }
@@ -23263,10 +23139,10 @@ export class Accord {
  * file. Strings are numbered from high to low.
  */
 mixin template IAccord() {
-    TuningAlter tuningAlter;
+    string tuningAlter;
     string string_;
     string tuningStep;
-    TuningOctave tuningOctave;
+    string tuningOctave;
 }
 
 /**
@@ -26109,7 +25985,7 @@ export class Sound {
         for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
             if (ch.name.toString == "midi-instrument") {
                 auto data = new MidiInstrument(ch) ;
-                this.midiInstrument = data;
+                this.midiInstruments ~= data;
             }
             if (ch.name.toString == "play") {
                 auto data = new Play(ch) ;
@@ -26121,12 +25997,12 @@ export class Sound {
             }
             if (ch.name.toString == "midi-device") {
                 auto data = new MidiDevice(ch) ;
-                this.midiDevice = data;
+                this.midiDevices ~= data;
             }
         }
         for (auto ch = node.properties; ch; ch = ch.next) {
             if (ch.name.toString == "soft-pedal") {
-                auto data = getYesNo(ch, true);
+                auto data = getString(ch, true);
                 this.softPedal = data;
             }
             if (ch.name.toString == "pan") {
@@ -26166,7 +26042,7 @@ export class Sound {
                 this.fine = data;
             }
             if (ch.name.toString == "damper-pedal") {
-                auto data = getYesNo(ch, true);
+                auto data = getString(ch, true);
                 this.damperPedal = data;
             }
             if (ch.name.toString == "dynamics") {
@@ -26178,7 +26054,7 @@ export class Sound {
                 this.timeOnly = data;
             }
             if (ch.name.toString == "sostenuto-pedal") {
-                auto data = getYesNo(ch, true);
+                auto data = getString(ch, true);
                 this.sostenutoPedal = data;
             }
             if (ch.name.toString == "dalsegno") {
@@ -26282,8 +26158,8 @@ export class Sound {
  */
 mixin template ISound() {
     mixin ITimeOnly;
-    bool softPedal;
-    MidiInstrument midiInstrument;
+    string softPedal;
+    MidiInstrument[] midiInstruments;
     string pan;
     string tocoda;
     bool decapo;
@@ -26293,13 +26169,13 @@ mixin template ISound() {
     string segno;
     string elevation;
     string fine;
-    bool damperPedal;
+    string damperPedal;
     string dynamics;
     Play[] plays;
     Offset offset;
-    bool sostenutoPedal;
+    string sostenutoPedal;
     string dalsegno;
-    MidiDevice midiDevice;
+    MidiDevice[] midiDevices;
     string tempo;
     bool forwardRepeat;
 }
@@ -26630,7 +26506,7 @@ export class Credit {
             }
             if (ch.name.toString == "credit-words") {
                 auto data = new CreditWords(ch) ;
-                this.creditWords ~= data;
+                this.creditWords = data;
             }
             if (ch.name.toString == "credit-image") {
                 auto data = new CreditImage(ch) ;
@@ -26672,7 +26548,7 @@ export class Credit {
  */
 mixin template ICredit() {
     string[] creditTypes;
-    CreditWords[] creditWords;
+    CreditWords creditWords;
     CreditImage creditImage;
     float page;
 }
@@ -27454,43 +27330,9 @@ mixin template IGroupName() {
  * specified in the group-name and group-abbreviation
  * elements, respectively.
  */
-export class GroupNameDisplay {
-    mixin IGroupNameDisplay;
-    this(xmlNodePtr node) {
-        bool foundPrintObject = false;
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-            if (ch.name.toString == "display-text") {
-                auto data = new DisplayText(ch) ;
-                this.displayTexts ~= data;
-            }
-            if (ch.name.toString == "accidental-text") {
-                auto data = new AccidentalText(ch) ;
-                this.accidentalTexts ~= data;
-            }
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-            if (ch.name.toString == "print-object") {
-                auto data = getYesNo(ch, true);
-                this.printObject = data;
-                foundPrintObject = true;
-            }
-        }
-        if (!foundPrintObject) {
-            printObject = true;
-        }
-    }
-}
-
-/**
- * Formatting specified in the group-name-display and
- * group-abbreviation-display elements overrides formatting
- * specified in the group-name and group-abbreviation
- * elements, respectively.
- */
 mixin template IGroupNameDisplay() {
     mixin IPrintObject;
-    DisplayText[] displayTexts;
-    AccidentalText[] accidentalTexts;
+    TextArray name;
 }
 
 /**
@@ -27590,43 +27432,9 @@ mixin template IGroupAbbreviation() {
  * specified in the group-name and group-abbreviation
  * elements, respectively.
  */
-export class GroupAbbreviationDisplay {
-    mixin IGroupAbbreviationDisplay;
-    this(xmlNodePtr node) {
-        bool foundPrintObject = false;
-        for (auto ch = node.children.firstElement; ch; ch = ch.nextElement) {
-            if (ch.name.toString == "display-text") {
-                auto data = new DisplayText(ch) ;
-                this.displayTexts ~= data;
-            }
-            if (ch.name.toString == "accidental-text") {
-                auto data = new AccidentalText(ch) ;
-                this.accidentalTexts ~= data;
-            }
-        }
-        for (auto ch = node.properties; ch; ch = ch.next) {
-            if (ch.name.toString == "print-object") {
-                auto data = getYesNo(ch, true);
-                this.printObject = data;
-                foundPrintObject = true;
-            }
-        }
-        if (!foundPrintObject) {
-            printObject = true;
-        }
-    }
-}
-
-/**
- * Formatting specified in the group-name-display and
- * group-abbreviation-display elements overrides formatting
- * specified in the group-name and group-abbreviation
- * elements, respectively.
- */
 mixin template IGroupAbbreviationDisplay() {
     mixin IPrintObject;
-    DisplayText[] displayTexts;
-    AccidentalText[] accidentalTexts;
+    TextArray name;
 }
 
 /**

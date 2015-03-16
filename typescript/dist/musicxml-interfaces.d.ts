@@ -20,6 +20,8 @@ declare module 'musicxml-interfaces' {
     export function xmlToNoteheadText(p: Node): NoteheadText;
     export function xmlToPartNameDisplay(p: Node): PartNameDisplay;
     export function xmlToPartAbbreviationDisplay(p: Node): PartAbbreviationDisplay;
+    export function xmlToGroupNameDisplay(p: Node): GroupNameDisplay;
+    export function xmlToGroupAbbreviationDisplay(p: Node): GroupAbbreviationDisplay;
     export function xmlToLyric(node: Node): Lyric;
     export interface Mode extends String {
     }
@@ -341,10 +343,10 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToOrientation(node: Node): Orientation;
     export interface DirectiveEntity {
-        directiveEntity?: boolean;
+        directive?: boolean;
     }
     export interface DirectiveEntityComplete {
-        directiveEntity: boolean;
+        directive: boolean;
     }
     export function xmlToDirectiveEntity(node: Node): DirectiveEntity;
     export interface Bezier {
@@ -702,18 +704,10 @@ declare module 'musicxml-interfaces' {
     export interface CodaComplete extends PrintStyleAlignComplete {
     }
     export function xmlToCoda(node: Node): Coda;
-    export interface ActualNotes {
-        count: number;
-    }
-    export interface ActualNotesComplete {
-        count: number;
+    export interface ActualNotes extends String {
     }
     export function xmlToActualNotes(node: Node): ActualNotes;
-    export interface NormalNotes {
-        count: number;
-    }
-    export interface NormalNotesComplete {
-        count: number;
+    export interface NormalNotes extends String {
     }
     export function xmlToNormalNotes(node: Node): NormalNotes;
     export interface NormalDot {
@@ -799,18 +793,10 @@ declare module 'musicxml-interfaces' {
         stringNum: number;
     }
     export function xmlToString(node: Node): String;
-    export interface TuningAlter {
-        step: string;
-    }
-    export interface TuningAlterComplete {
-        step: string;
+    export interface TuningAlter extends String {
     }
     export function xmlToTuningAlter(node: Node): TuningAlter;
-    export interface TuningOctave {
-        step: string;
-    }
-    export interface TuningOctaveComplete {
-        step: string;
+    export interface TuningOctave extends String {
     }
     export function xmlToTuningOctave(node: Node): TuningOctave;
     export interface DisplayText extends TextFormatting {
@@ -890,16 +876,27 @@ declare module 'musicxml-interfaces' {
     export interface Play {
         ipa?: string;
         mute?: string;
-        otherPlay?: string;
+        otherPlay?: OtherPlay;
         semiPitched?: string;
+        id: string;
     }
     export interface PlayComplete {
         ipa: string;
         mute: string;
-        otherPlay: string;
+        otherPlay: OtherPlay;
         semiPitched: string;
+        id: string;
     }
     export function xmlToPlay(node: Node): Play;
+    export interface OtherPlay {
+        data: string;
+        type: string;
+    }
+    export interface OtherPlayComplete {
+        data: string;
+        type: string;
+    }
+    export function xmlToOtherPlay(node: Node): OtherPlay;
     export interface Millimeters extends String {
     }
     export function xmlToMillimeters(node: Node): Millimeters;
@@ -1116,11 +1113,7 @@ declare module 'musicxml-interfaces' {
         type: string;
     }
     export function xmlToEncoder(node: Node): Encoder;
-    export interface Source {
-        source: string;
-    }
-    export interface SourceComplete {
-        source: string;
+    export interface Source extends String {
     }
     export function xmlToSource(node: Node): Source;
     export interface Relation {
@@ -1154,7 +1147,7 @@ declare module 'musicxml-interfaces' {
         relations?: Relation[];
         rights?: Rights[];
         encoding: Encoding;
-        source: Source;
+        source: string;
     }
     export interface IdentificationComplete {
         miscellaneous: Miscellaneous;
@@ -1162,7 +1155,7 @@ declare module 'musicxml-interfaces' {
         relations: Relation[];
         rights: Rights[];
         encoding: Encoding;
-        source: Source;
+        source: string;
     }
     export function xmlToIdentification(node: Node): Identification;
     export interface Supports {
@@ -1282,16 +1275,16 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToKey(node: Node): Key;
     export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintObject {
-        interchangeables?: Interchangeable[];
+        interchangeable?: Interchangeable;
         beats: string[];
         beatTypes: number[];
-        senzaMisura: boolean;
+        senzaMisura?: string;
     }
     export interface TimeComplete extends TimeSymbolComplete, TimeSeparatorComplete, PrintStyleAlignComplete, PrintObjectComplete {
-        interchangeables: Interchangeable[];
+        interchangeable: Interchangeable;
         beats: string[];
         beatTypes: number[];
-        senzaMisura: boolean;
+        senzaMisura: string;
     }
     export function xmlToTime(node: Node): Time;
     export interface Interchangeable extends TimeSymbol, TimeSeparator {
@@ -1353,16 +1346,16 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToStaffLines(node: Node): StaffLines;
     export interface StaffTuning {
-        tuningAlter?: TuningAlter;
+        tuningAlter?: string;
         line: string;
         tuningStep: string;
-        tuningOctave: TuningOctave;
+        tuningOctave: string;
     }
     export interface StaffTuningComplete {
-        tuningAlter: TuningAlter;
+        tuningAlter: string;
         line: string;
         tuningStep: string;
-        tuningOctave: TuningOctave;
+        tuningOctave: string;
     }
     export function xmlToStaffTuning(node: Node): StaffTuning;
     export interface StaffSize extends String {
@@ -1377,18 +1370,18 @@ declare module 'musicxml-interfaces' {
         staffLines?: number;
         staffTunings?: StaffTuning[];
         staffSize?: number;
+        showFrets?: ShowFretsType;
         capo?: string;
         number?: number;
-        showFets?: ShowFretsType;
         staffType?: string;
     }
     export interface StaffDetailsComplete extends PrintObjectComplete, PrintSpacingComplete {
         staffLines: number;
         staffTunings: StaffTuning[];
         staffSize: number;
+        showFrets: ShowFretsType;
         capo: string;
         number: number;
-        showFets: ShowFretsType;
         staffType: string;
     }
     export function xmlToStaffDetails(node: Node): StaffDetails;
@@ -1434,14 +1427,14 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToMultipleRest(node: Node): MultipleRest;
     export interface MeasureRepeat {
-        slashed?: number;
         data?: string;
         type: StartStop;
+        slashes?: number;
     }
     export interface MeasureRepeatComplete {
-        slashed: number;
         data: string;
         type: StartStop;
+        slashes: number;
     }
     export function xmlToMeasureRepeat(node: Node): MeasureRepeat;
     export interface BeatRepeat {
@@ -1494,26 +1487,26 @@ declare module 'musicxml-interfaces' {
         partSymbol?: PartSymbol;
         clefs?: Clef[];
         measureStyle?: MeasureStyle;
-        time?: Time;
-        staffDetails?: StaffDetails;
-        transpose?: Transpose;
+        times?: Time[];
+        staffDetails?: StaffDetails[];
+        transposes?: Transpose[];
         staves?: number;
         instruments?: string;
-        keySignature?: Key;
-        directive?: Directive;
+        keySignatures?: Key[];
+        directives?: Directive[];
     }
     export interface AttributesComplete extends EditorialComplete {
         divisions: number;
         partSymbol: PartSymbol;
         clefs: Clef[];
         measureStyle: MeasureStyle;
-        time: Time;
-        staffDetails: StaffDetails;
-        transpose: Transpose;
+        times: Time[];
+        staffDetails: StaffDetails[];
+        transposes: Transpose[];
         staves: number;
         instruments: string;
-        keySignature: Key;
-        directive: Directive;
+        keySignatures: Key[];
+        directives: Directive[];
     }
     export function xmlToAttributes(node: Node): Attributes;
     export interface Cue {
@@ -1738,15 +1731,15 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToAccidental(node: Node): Accidental;
     export interface TimeModification {
-        actualNotes: ActualNotes;
+        actualNotes: number;
         normalType?: string;
-        normalNotes: NormalNotes;
+        normalNotes: number;
         normalDots?: NormalDot[];
     }
     export interface TimeModificationComplete {
-        actualNotes: ActualNotes;
+        actualNotes: number;
         normalType: string;
-        normalNotes: NormalNotes;
+        normalNotes: number;
         normalDots: NormalDot[];
     }
     export function xmlToTimeModification(node: Node): TimeModification;
@@ -2751,13 +2744,13 @@ declare module 'musicxml-interfaces' {
         Left = 2,
     }
     export function getTipDirection(node: Node, fallbackVal?: TipDirection): TipDirection;
-    export interface Direction extends EditorialVoice, Placement, Directive {
+    export interface Direction extends EditorialVoice, Placement, DirectiveEntity {
         directionTypes: DirectionType[];
         staff?: number;
         offset?: Offset;
         sound?: Sound;
     }
-    export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveComplete {
+    export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveEntityComplete {
         directionTypes: DirectionType[];
         staff: number;
         offset: Offset;
@@ -2836,13 +2829,13 @@ declare module 'musicxml-interfaces' {
     export function getWedgeType(node: Node, fallbackVal?: WedgeType): WedgeType;
     export interface Wedge extends LineType, DashedFormatting, Position, Color {
         number: number;
-        neinte: boolean;
+        niente: boolean;
         type: WedgeType;
         spread: number;
     }
     export interface WedgeComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
         number: number;
-        neinte: boolean;
+        niente: boolean;
         type: WedgeType;
         spread: number;
     }
@@ -2952,21 +2945,21 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToMetronomeBeam(node: Node): MetronomeBeam;
     export interface MetronomeTuplet {
-        actualNotes: ActualNotes;
+        actualNotes: number;
         bracket: boolean;
         showNumber: ActualBothNone;
         normalType: string;
         type: StartStop;
-        normalNotes: NormalNotes;
+        normalNotes: number;
         normalDots: NormalDot[];
     }
     export interface MetronomeTupletComplete {
-        actualNotes: ActualNotes;
+        actualNotes: number;
         bracket: boolean;
         showNumber: ActualBothNone;
         normalType: string;
         type: StartStop;
-        normalNotes: NormalNotes;
+        normalNotes: number;
         normalDots: NormalDot[];
     }
     export function xmlToMetronomeTuplet(node: Node): MetronomeTuplet;
@@ -3034,16 +3027,16 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToScordatura(node: Node): Scordatura;
     export interface Accord {
-        tuningAlter: TuningAlter;
+        tuningAlter: string;
         string: string;
         tuningStep: string;
-        tuningOctave: TuningOctave;
+        tuningOctave: string;
     }
     export interface AccordComplete {
-        tuningAlter: TuningAlter;
+        tuningAlter: string;
         string: string;
         tuningStep: string;
-        tuningOctave: TuningOctave;
+        tuningOctave: string;
     }
     export function xmlToAccord(node: Node): Accord;
     export interface Image extends Position, Halign, ValignImage {
@@ -3425,8 +3418,8 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToMeasureNumbering(node: Node): MeasureNumbering;
     export interface Sound extends TimeOnly {
-        softPedal: boolean;
-        midiInstrument: MidiInstrument;
+        softPedal: string;
+        midiInstruments: MidiInstrument[];
         pan: string;
         tocoda: string;
         decapo: boolean;
@@ -3436,19 +3429,19 @@ declare module 'musicxml-interfaces' {
         segno: string;
         elevation: string;
         fine: string;
-        damperPedal: boolean;
+        damperPedal: string;
         dynamics: string;
         plays: Play[];
         offset: Offset;
-        sostenutoPedal: boolean;
+        sostenutoPedal: string;
         dalsegno: string;
-        midiDevice: MidiDevice;
+        midiDevices: MidiDevice[];
         tempo: string;
         forwardRepeat: boolean;
     }
     export interface SoundComplete extends TimeOnlyComplete {
-        softPedal: boolean;
-        midiInstrument: MidiInstrument;
+        softPedal: string;
+        midiInstruments: MidiInstrument[];
         pan: string;
         tocoda: string;
         decapo: boolean;
@@ -3458,13 +3451,13 @@ declare module 'musicxml-interfaces' {
         segno: string;
         elevation: string;
         fine: string;
-        damperPedal: boolean;
+        damperPedal: string;
         dynamics: string;
         plays: Play[];
         offset: Offset;
-        sostenutoPedal: boolean;
+        sostenutoPedal: string;
         dalsegno: string;
-        midiDevice: MidiDevice;
+        midiDevices: MidiDevice[];
         tempo: string;
         forwardRepeat: boolean;
     }
@@ -3538,13 +3531,13 @@ declare module 'musicxml-interfaces' {
     export function xmlToLyricLanguage(node: Node): LyricLanguage;
     export interface Credit {
         creditTypes: string[];
-        creditWords: CreditWords[];
+        creditWords: CreditWords;
         creditImage: CreditImage;
         page: number;
     }
     export interface CreditComplete {
         creditTypes: string[];
-        creditWords: CreditWords[];
+        creditWords: CreditWords;
         creditImage: CreditImage;
         page: number;
     }
@@ -3644,14 +3637,11 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToGroupName(node: Node): GroupName;
     export interface GroupNameDisplay extends PrintObject {
-        displayTexts: DisplayText[];
-        accidentalTexts: AccidentalText[];
+        name: TextArray;
     }
     export interface GroupNameDisplayComplete extends PrintObjectComplete {
-        displayTexts: DisplayText[];
-        accidentalTexts: AccidentalText[];
+        name: TextArray;
     }
-    export function xmlToGroupNameDisplay(node: Node): GroupNameDisplay;
     export interface GroupAbbreviation extends PrintStyle, Justify {
         text: string;
     }
@@ -3660,14 +3650,11 @@ declare module 'musicxml-interfaces' {
     }
     export function xmlToGroupAbbreviation(node: Node): GroupAbbreviation;
     export interface GroupAbbreviationDisplay extends PrintObject {
-        displayTexts: DisplayText[];
-        accidentalTexts: AccidentalText[];
+        name: TextArray;
     }
     export interface GroupAbbreviationDisplayComplete extends PrintObjectComplete {
-        displayTexts: DisplayText[];
-        accidentalTexts: AccidentalText[];
+        name: TextArray;
     }
-    export function xmlToGroupAbbreviationDisplay(node: Node): GroupAbbreviationDisplay;
     export interface GroupSymbol extends Position, Color {
         data: PartSymbolType;
     }

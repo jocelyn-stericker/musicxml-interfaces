@@ -199,6 +199,16 @@ export function xmlToPartAbbreviationDisplay(p: Node): PartAbbreviationDisplay {
     return null;
 }
 
+export function xmlToGroupNameDisplay(p: Node): GroupNameDisplay {
+    // TODO
+    return null;
+}
+
+export function xmlToGroupAbbreviationDisplay(p: Node): GroupAbbreviationDisplay {
+    // TODO
+    return null;
+}
+
 export function xmlToLyric(node: Node) {
     "use strict";
     var ret: Lyric = <any> {};
@@ -2826,7 +2836,7 @@ export function xmlToOrientation(node: Node) {
  * attribute is present, it overrides the directive entity.
  */
 export interface DirectiveEntity {
-    directiveEntity?: boolean;
+    directive?: boolean;
 }
 
 /**
@@ -2839,7 +2849,7 @@ export interface DirectiveEntity {
  * attribute is present, it overrides the directive entity.
  */
 export interface DirectiveEntityComplete {
-    directiveEntity: boolean;
+    directive: boolean;
 }
 
 
@@ -2851,9 +2861,9 @@ export function xmlToDirectiveEntity(node: Node) {
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "directive-entity") {
-            var dataDirectiveEntity = xmlToYesNo(ch2) ;
-            ret.directiveEntity = dataDirectiveEntity;
+        if (ch2.name === "directive") {
+            var dataDirective = xmlToYesNo(ch2) ;
+            ret.directive = dataDirective;
         }
     }
     return ret;
@@ -5742,26 +5752,7 @@ export function xmlToCoda(node: Node) {
  * actual-notes and normal-notes elements ia a non-negative
  * integer.
  */
-export interface ActualNotes {
-    count: number;
-}
-
-/**
- * These elements are used both in the time-modification and
- * metronome-tuplet elements. The actual-notes element
- * describes how many notes are played in the time usually
- * occupied by the number of normal-notes. If the normal-notes
- * type is different than the current note type (e.g., a
- * quarter note within an eighth note triplet), then the
- * normal-notes type (e.g. eighth) is specified in the
- * normal-type and normal-dot elements. The content of the
- * actual-notes and normal-notes elements ia a non-negative
- * integer.
- */
-export interface ActualNotesComplete {
-    count: number;
-}
-
+export interface ActualNotes extends String {}
 
 export function xmlToActualNotes(node: Node) {
     "use strict";
@@ -5772,9 +5763,6 @@ export function xmlToActualNotes(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataCount = getNumber(ch3, true);
-    ret.count = dataCount;
     return ret;
 }
 
@@ -5790,26 +5778,7 @@ export function xmlToActualNotes(node: Node) {
  * actual-notes and normal-notes elements ia a non-negative
  * integer.
  */
-export interface NormalNotes {
-    count: number;
-}
-
-/**
- * These elements are used both in the time-modification and
- * metronome-tuplet elements. The actual-notes element
- * describes how many notes are played in the time usually
- * occupied by the number of normal-notes. If the normal-notes
- * type is different than the current note type (e.g., a
- * quarter note within an eighth note triplet), then the
- * normal-notes type (e.g. eighth) is specified in the
- * normal-type and normal-dot elements. The content of the
- * actual-notes and normal-notes elements ia a non-negative
- * integer.
- */
-export interface NormalNotesComplete {
-    count: number;
-}
-
+export interface NormalNotes extends String {}
 
 export function xmlToNormalNotes(node: Node) {
     "use strict";
@@ -5820,9 +5789,6 @@ export function xmlToNormalNotes(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataCount = getNumber(ch3, true);
-    ret.count = dataCount;
     return ret;
 }
 
@@ -6491,20 +6457,7 @@ export function xmlToString(node: Node) {
  * with different names to reflect their different function.
  * They are used in the staff-tuning and accord elements.
  */
-export interface TuningAlter {
-    step: string;
-}
-
-/**
- * The tuning-step, tuning-alter, and tuning-octave elements
- * are represented like the step, alter, and octave elements,
- * with different names to reflect their different function.
- * They are used in the staff-tuning and accord elements.
- */
-export interface TuningAlterComplete {
-    step: string;
-}
-
+export interface TuningAlter extends String {}
 
 export function xmlToTuningAlter(node: Node) {
     "use strict";
@@ -6515,9 +6468,6 @@ export function xmlToTuningAlter(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataStep = getString(ch3, true);
-    ret.step = dataStep;
     return ret;
 }
 
@@ -6527,20 +6477,7 @@ export function xmlToTuningAlter(node: Node) {
  * with different names to reflect their different function.
  * They are used in the staff-tuning and accord elements.
  */
-export interface TuningOctave {
-    step: string;
-}
-
-/**
- * The tuning-step, tuning-alter, and tuning-octave elements
- * are represented like the step, alter, and octave elements,
- * with different names to reflect their different function.
- * They are used in the staff-tuning and accord elements.
- */
-export interface TuningOctaveComplete {
-    step: string;
-}
-
+export interface TuningOctave extends String {}
 
 export function xmlToTuningOctave(node: Node) {
     "use strict";
@@ -6551,9 +6488,6 @@ export function xmlToTuningOctave(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataStep = getString(ch3, true);
-    ret.step = dataStep;
     return ret;
 }
 
@@ -7285,8 +7219,9 @@ export function xmlToMidiInstrument(node: Node) {
 export interface Play {
     ipa?: string;
     mute?: string;
-    otherPlay?: string;
+    otherPlay?: OtherPlay;
     semiPitched?: string;
+    id: string;
 }
 
 /**
@@ -7301,8 +7236,9 @@ export interface Play {
 export interface PlayComplete {
     ipa: string;
     mute: string;
-    otherPlay: string;
+    otherPlay: OtherPlay;
     semiPitched: string;
+    id: string;
 }
 
 
@@ -7320,7 +7256,7 @@ export function xmlToPlay(node: Node) {
             ret.mute = dataMute;
         }
         if (ch.nodeName === "other-play") {
-            var dataOtherPlay = getString(ch, true);
+            var dataOtherPlay = xmlToOtherPlay(ch) ;
             ret.otherPlay = dataOtherPlay;
         }
         if (ch.nodeName === "semi-pitched") {
@@ -7330,7 +7266,41 @@ export function xmlToPlay(node: Node) {
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
+        if (ch2.name === "id") {
+            var dataId = getString(ch2, true);
+            ret.id = dataId;
+        }
     }
+    return ret;
+}
+
+export interface OtherPlay {
+    data: string;
+    type: string;
+}
+
+export interface OtherPlayComplete {
+    data: string;
+    type: string;
+}
+
+
+export function xmlToOtherPlay(node: Node) {
+    "use strict";
+    var ret: OtherPlay = <any> {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+        if (ch2.name === "type") {
+            var dataType = getString(ch2, true);
+            ret.type = dataType;
+        }
+    }
+    var ch3 = node;
+    var dataData = getString(ch3, true);
+    ret.data = dataData;
     return ret;
 }
 
@@ -8994,19 +8964,7 @@ export function xmlToEncoder(node: Node) {
  * The source for the music that is encoded. This is similar
  * to the Dublin Core source element.
  */
-export interface Source {
-    source: string;
-}
-
-/**
- * 
- * The source for the music that is encoded. This is similar
- * to the Dublin Core source element.
- */
-export interface SourceComplete {
-    source: string;
-}
-
+export interface Source extends String {}
 
 export function xmlToSource(node: Node) {
     "use strict";
@@ -9017,9 +8975,6 @@ export function xmlToSource(node: Node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataSource = getString(ch3, true);
-    ret.source = dataSource;
     return ret;
 }
 
@@ -9148,7 +9103,7 @@ export interface Identification {
     relations?: Relation[];
     rights?: Rights[];
     encoding: Encoding;
-    source: Source;
+    source: string;
 }
 
 /**
@@ -9165,7 +9120,7 @@ export interface IdentificationComplete {
     relations: Relation[];
     rights: Rights[];
     encoding: Encoding;
-    source: Source;
+    source: string;
 }
 
 
@@ -9195,7 +9150,7 @@ export function xmlToIdentification(node: Node) {
             ret.encoding = dataEncoding;
         }
         if (ch.nodeName === "source") {
-            var dataSource = xmlToSource(ch) ;
+            var dataSource = getString(ch, true);
             ret.source = dataSource;
         }
     }
@@ -10159,10 +10114,10 @@ export function xmlToKey(node: Node) {
  * part.
  */
 export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintObject {
-    interchangeables?: Interchangeable[];
+    interchangeable?: Interchangeable;
     beats: string[];
     beatTypes: number[];
-    senzaMisura: boolean;
+    senzaMisura?: string;
 }
 
 /**
@@ -10202,10 +10157,10 @@ export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintO
  * part.
  */
 export interface TimeComplete extends TimeSymbolComplete, TimeSeparatorComplete, PrintStyleAlignComplete, PrintObjectComplete {
-    interchangeables: Interchangeable[];
+    interchangeable: Interchangeable;
     beats: string[];
     beatTypes: number[];
-    senzaMisura: boolean;
+    senzaMisura: string;
 }
 
 
@@ -10223,8 +10178,8 @@ export function xmlToTime(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "interchangeable") {
-            var dataInterchangeables = xmlToInterchangeable(ch) ;
-            ret.interchangeables = (ret.interchangeables|| []).concat(dataInterchangeables);
+            var dataInterchangeable = xmlToInterchangeable(ch) ;
+            ret.interchangeable = dataInterchangeable;
         }
         if (ch.nodeName === "beats") {
             var dataBeats = getString(ch, true);
@@ -10235,7 +10190,7 @@ export function xmlToTime(node: Node) {
             ret.beatTypes = (ret.beatTypes|| []).concat(dataBeatTypes);
         }
         if (ch.nodeName === "senza-misura") {
-            var dataSenzaMisura = true;
+            var dataSenzaMisura = getString(ch, true);
             ret.senzaMisura = dataSenzaMisura;
         }
     }
@@ -10921,10 +10876,10 @@ export function xmlToStaffLines(node: Node) {
  * lines are numbered from bottom to top.
  */
 export interface StaffTuning {
-    tuningAlter?: TuningAlter;
+    tuningAlter?: string;
     line: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 /**
@@ -10933,10 +10888,10 @@ export interface StaffTuning {
  * lines are numbered from bottom to top.
  */
 export interface StaffTuningComplete {
-    tuningAlter: TuningAlter;
+    tuningAlter: string;
     line: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 
@@ -10946,7 +10901,7 @@ export function xmlToStaffTuning(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "tuning-alter") {
-            var dataTuningAlter = xmlToTuningAlter(ch) ;
+            var dataTuningAlter = getString(ch, true);
             ret.tuningAlter = dataTuningAlter;
         }
         if (ch.nodeName === "tuning-step") {
@@ -10954,7 +10909,7 @@ export function xmlToStaffTuning(node: Node) {
             ret.tuningStep = dataTuningStep;
         }
         if (ch.nodeName === "tuning-octave") {
-            var dataTuningOctave = xmlToTuningOctave(ch) ;
+            var dataTuningOctave = getString(ch, true);
             ret.tuningOctave = dataTuningOctave;
         }
     }
@@ -11040,9 +10995,9 @@ export interface StaffDetails extends PrintObject, PrintSpacing {
     staffLines?: number;
     staffTunings?: StaffTuning[];
     staffSize?: number;
+    showFrets?: ShowFretsType;
     capo?: string;
     number?: number;
-    showFets?: ShowFretsType;
     staffType?: string;
 }
 
@@ -11071,9 +11026,9 @@ export interface StaffDetailsComplete extends PrintObjectComplete, PrintSpacingC
     staffLines: number;
     staffTunings: StaffTuning[];
     staffSize: number;
+    showFrets: ShowFretsType;
     capo: string;
     number: number;
-    showFets: ShowFretsType;
     staffType: string;
 }
 
@@ -11081,10 +11036,10 @@ export interface StaffDetailsComplete extends PrintObjectComplete, PrintSpacingC
 export function xmlToStaffDetails(node: Node) {
     "use strict";
     var ret: StaffDetails = <any> {};
+    var foundShowFrets = false;
     var foundNumber_ = false;
     var foundPrintObject = false;
     var foundPrintSpacing = false;
-    var foundShowFets = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "staff-lines") {
@@ -11110,6 +11065,11 @@ export function xmlToStaffDetails(node: Node) {
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
+        if (ch2.name === "show-frets") {
+            var dataShowFrets = getShowFretsType(ch2, ShowFretsType.Numbers);
+            ret.showFrets = dataShowFrets;
+            foundShowFrets = true;
+        }
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -11125,11 +11085,9 @@ export function xmlToStaffDetails(node: Node) {
             ret.printSpacing = dataPrintSpacing;
             foundPrintSpacing = true;
         }
-        if (ch2.name === "show-fets") {
-            var dataShowFets = getShowFretsType(ch2, ShowFretsType.Numbers);
-            ret.showFets = dataShowFets;
-            foundShowFets = true;
-        }
+    }
+    if (!foundShowFrets) {
+        ret.showFrets = ShowFretsType.Numbers;
     }
     if (!foundNumber_) {
         ret.number = 1;
@@ -11139,9 +11097,6 @@ export function xmlToStaffDetails(node: Node) {
     }
     if (!foundPrintSpacing) {
         ret.printSpacing = true;
-    }
-    if (!foundShowFets) {
-        ret.showFets = ShowFretsType.Numbers;
     }
     return ret;
 }
@@ -11493,9 +11448,9 @@ export function xmlToMultipleRest(node: Node) {
  * start and the stop of the measure-repeat must be specified.
  */
 export interface MeasureRepeat {
-    slashed?: number;
     data?: string;
     type: StartStop;
+    slashes?: number;
 }
 
 /**
@@ -11513,36 +11468,36 @@ export interface MeasureRepeat {
  * start and the stop of the measure-repeat must be specified.
  */
 export interface MeasureRepeatComplete {
-    slashed: number;
     data: string;
     type: StartStop;
+    slashes: number;
 }
 
 
 export function xmlToMeasureRepeat(node: Node) {
     "use strict";
     var ret: MeasureRepeat = <any> {};
-    var foundSlashed = false;
+    var foundSlashes = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "slashed") {
-            var dataSlashed = getNumber(ch2, true);
-            ret.slashed = dataSlashed;
-            foundSlashed = true;
-        }
         if (ch2.name === "type") {
             var dataType = getStartStop(ch2, null);
             ret.type = dataType;
+        }
+        if (ch2.name === "slashes") {
+            var dataSlashes = getNumber(ch2, true);
+            ret.slashes = dataSlashes;
+            foundSlashes = true;
         }
     }
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundSlashed) {
-        ret.slashed = 1;
+    if (!foundSlashes) {
+        ret.slashes = 1;
     }
     return ret;
 }
@@ -11844,13 +11799,13 @@ export interface Attributes extends Editorial {
     partSymbol?: PartSymbol;
     clefs?: Clef[];
     measureStyle?: MeasureStyle;
-    time?: Time;
-    staffDetails?: StaffDetails;
-    transpose?: Transpose;
+    times?: Time[];
+    staffDetails?: StaffDetails[];
+    transposes?: Transpose[];
     staves?: number;
     instruments?: string;
-    keySignature?: Key;
-    directive?: Directive;
+    keySignatures?: Key[];
+    directives?: Directive[];
 }
 
 /**
@@ -11865,13 +11820,13 @@ export interface AttributesComplete extends EditorialComplete {
     partSymbol: PartSymbol;
     clefs: Clef[];
     measureStyle: MeasureStyle;
-    time: Time;
-    staffDetails: StaffDetails;
-    transpose: Transpose;
+    times: Time[];
+    staffDetails: StaffDetails[];
+    transposes: Transpose[];
     staves: number;
     instruments: string;
-    keySignature: Key;
-    directive: Directive;
+    keySignatures: Key[];
+    directives: Directive[];
 }
 
 
@@ -11897,16 +11852,16 @@ export function xmlToAttributes(node: Node) {
             ret.measureStyle = dataMeasureStyle;
         }
         if (ch.nodeName === "time") {
-            var dataTime = xmlToTime(ch) ;
-            ret.time = dataTime;
+            var dataTimes = xmlToTime(ch) ;
+            ret.times = (ret.times|| []).concat(dataTimes);
         }
         if (ch.nodeName === "staff-details") {
             var dataStaffDetails = xmlToStaffDetails(ch) ;
-            ret.staffDetails = dataStaffDetails;
+            ret.staffDetails = (ret.staffDetails|| []).concat(dataStaffDetails);
         }
         if (ch.nodeName === "transpose") {
-            var dataTranspose = xmlToTranspose(ch) ;
-            ret.transpose = dataTranspose;
+            var dataTransposes = xmlToTranspose(ch) ;
+            ret.transposes = (ret.transposes|| []).concat(dataTransposes);
         }
         if (ch.nodeName === "footnote") {
             var dataFootnote = xmlToFootnote(ch) ;
@@ -11925,12 +11880,12 @@ export function xmlToAttributes(node: Node) {
             ret.instruments = dataInstruments;
         }
         if (ch.nodeName === "key") {
-            var dataKeySignature = xmlToKey(ch) ;
-            ret.keySignature = dataKeySignature;
+            var dataKeySignatures = xmlToKey(ch) ;
+            ret.keySignatures = (ret.keySignatures|| []).concat(dataKeySignatures);
         }
         if (ch.nodeName === "directive") {
-            var dataDirective = xmlToDirective(ch) ;
-            ret.directive = dataDirective;
+            var dataDirectives = xmlToDirective(ch) ;
+            ret.directives = (ret.directives|| []).concat(dataDirectives);
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {
@@ -13340,9 +13295,9 @@ export function xmlToAccidental(node: Node) {
  * accurately.
  */
 export interface TimeModification {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     normalType?: string;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots?: NormalDot[];
 }
 
@@ -13358,9 +13313,9 @@ export interface TimeModification {
  * accurately.
  */
 export interface TimeModificationComplete {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     normalType: string;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots: NormalDot[];
 }
 
@@ -13371,7 +13326,7 @@ export function xmlToTimeModification(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "actual-notes") {
-            var dataActualNotes = xmlToActualNotes(ch) ;
+            var dataActualNotes = getNumber(ch, true);
             ret.actualNotes = dataActualNotes;
         }
         if (ch.nodeName === "normal-type") {
@@ -13379,7 +13334,7 @@ export function xmlToTimeModification(node: Node) {
             ret.normalType = dataNormalType;
         }
         if (ch.nodeName === "normal-notes") {
-            var dataNormalNotes = xmlToNormalNotes(ch) ;
+            var dataNormalNotes = getNumber(ch, true);
             ret.normalNotes = dataNormalNotes;
         }
         if (ch.nodeName === "normal-dot") {
@@ -24241,7 +24196,7 @@ export function getTipDirection(node: Node, fallbackVal?: TipDirection) {
  * positional formatting attributes are carried over from
  * the previous element by default.
  */
-export interface Direction extends EditorialVoice, Placement, Directive {
+export interface Direction extends EditorialVoice, Placement, DirectiveEntity {
     directionTypes: DirectionType[];
     staff?: number;
     offset?: Offset;
@@ -24260,7 +24215,7 @@ export interface Direction extends EditorialVoice, Placement, Directive {
  * positional formatting attributes are carried over from
  * the previous element by default.
  */
-export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveComplete {
+export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveEntityComplete {
     directionTypes: DirectionType[];
     staff: number;
     offset: Offset;
@@ -24272,9 +24227,6 @@ export function xmlToDirection(node: Node) {
     "use strict";
     var ret: Direction = <any> {};
     var foundPlacement = false;
-    var foundFontWeight = false;
-    var foundFontStyle = false;
-    var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
@@ -24313,60 +24265,13 @@ export function xmlToDirection(node: Node) {
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
-        if (ch2.name === "default-x") {
-            var dataDefaultX = getNumber(ch2, true);
-            ret.defaultX = dataDefaultX;
-        }
-        if (ch2.name === "relative-y") {
-            var dataRelativeY = getNumber(ch2, true);
-            ret.relativeY = dataRelativeY;
-        }
-        if (ch2.name === "default-y") {
-            var dataDefaultY = getNumber(ch2, true);
-            ret.defaultY = dataDefaultY;
-        }
-        if (ch2.name === "relative-x") {
-            var dataRelativeX = getNumber(ch2, true);
-            ret.relativeX = dataRelativeX;
-        }
-        if (ch2.name === "font-family") {
-            var dataFontFamily = getString(ch2, true);
-            ret.fontFamily = dataFontFamily;
-        }
-        if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
-            ret.fontWeight = dataFontWeight;
-            foundFontWeight = true;
-        }
-        if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
-            ret.fontStyle = dataFontStyle;
-            foundFontStyle = true;
-        }
-        if (ch2.name === "font-size") {
-            var dataFontSize = getString(ch2, true);
-            ret.fontSize = dataFontSize;
-        }
-        if (ch2.name === "color") {
-            var dataColor = getString(ch2, true);
-            ret.color = dataColor;
-            foundColor = true;
+        if (ch2.name === "directive") {
+            var dataDirective = xmlToYesNo(ch2) ;
+            ret.directive = dataDirective;
         }
     }
-    var ch3 = node;
-    var dataData = getString(ch3, true);
-    ret.data = dataData;
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
-    }
-    if (!foundFontWeight) {
-        ret.fontWeight = NormalBold.Normal;
-    }
-    if (!foundFontStyle) {
-        ret.fontStyle = NormalItalic.Normal;
-    }
-    if (!foundColor) {
-        ret.color = "#000000";
     }
     return ret;
 }
@@ -24949,7 +24854,7 @@ export function getWedgeType(node: Node, fallbackVal?: WedgeType) {
  */
 export interface Wedge extends LineType, DashedFormatting, Position, Color {
     number: number;
-    neinte: boolean;
+    niente: boolean;
     type: WedgeType;
     spread: number;
 }
@@ -24972,7 +24877,7 @@ export interface Wedge extends LineType, DashedFormatting, Position, Color {
  */
 export interface WedgeComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
     number: number;
-    neinte: boolean;
+    niente: boolean;
     type: WedgeType;
     spread: number;
 }
@@ -24982,7 +24887,7 @@ export function xmlToWedge(node: Node) {
     "use strict";
     var ret: Wedge = <any> {};
     var foundNumber_ = false;
-    var foundNeinte = false;
+    var foundNiente = false;
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
@@ -24997,10 +24902,10 @@ export function xmlToWedge(node: Node) {
             ret.number = dataNumber;
             foundNumber_ = true;
         }
-        if (ch2.name === "neinte") {
-            var dataNeinte = xmlToYesNo(ch2) ;
-            ret.neinte = dataNeinte;
-            foundNeinte = true;
+        if (ch2.name === "niente") {
+            var dataNiente = xmlToYesNo(ch2) ;
+            ret.niente = dataNiente;
+            foundNiente = true;
         }
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
@@ -25050,8 +24955,8 @@ export function xmlToWedge(node: Node) {
     if (!foundNumber_) {
         ret.number = 1;
     }
-    if (!foundNeinte) {
-        ret.neinte = false;
+    if (!foundNiente) {
+        ret.niente = false;
     }
     if (!foundLineType) {
         ret.lineType = SolidDashedDottedWavy.Solid;
@@ -25831,22 +25736,22 @@ export function xmlToMetronomeBeam(node: Node) {
 }
 
 export interface MetronomeTuplet {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     bracket: boolean;
     showNumber: ActualBothNone;
     normalType: string;
     type: StartStop;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots: NormalDot[];
 }
 
 export interface MetronomeTupletComplete {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     bracket: boolean;
     showNumber: ActualBothNone;
     normalType: string;
     type: StartStop;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots: NormalDot[];
 }
 
@@ -25859,7 +25764,7 @@ export function xmlToMetronomeTuplet(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "actual-notes") {
-            var dataActualNotes = xmlToActualNotes(ch) ;
+            var dataActualNotes = getNumber(ch, true);
             ret.actualNotes = dataActualNotes;
         }
         if (ch.nodeName === "normal-type") {
@@ -25867,7 +25772,7 @@ export function xmlToMetronomeTuplet(node: Node) {
             ret.normalType = dataNormalType;
         }
         if (ch.nodeName === "normal-notes") {
-            var dataNormalNotes = xmlToNormalNotes(ch) ;
+            var dataNormalNotes = getNumber(ch, true);
             ret.normalNotes = dataNormalNotes;
         }
         if (ch.nodeName === "normal-dot") {
@@ -26609,10 +26514,10 @@ export function xmlToScordatura(node: Node) {
  * file. Strings are numbered from high to low.
  */
 export interface Accord {
-    tuningAlter: TuningAlter;
+    tuningAlter: string;
     string: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 /**
@@ -26623,10 +26528,10 @@ export interface Accord {
  * file. Strings are numbered from high to low.
  */
 export interface AccordComplete {
-    tuningAlter: TuningAlter;
+    tuningAlter: string;
     string: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 
@@ -26636,7 +26541,7 @@ export function xmlToAccord(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "tuning-alter") {
-            var dataTuningAlter = xmlToTuningAlter(ch) ;
+            var dataTuningAlter = getString(ch, true);
             ret.tuningAlter = dataTuningAlter;
         }
         if (ch.nodeName === "tuning-step") {
@@ -26644,7 +26549,7 @@ export function xmlToAccord(node: Node) {
             ret.tuningStep = dataTuningStep;
         }
         if (ch.nodeName === "tuning-octave") {
-            var dataTuningOctave = xmlToTuningOctave(ch) ;
+            var dataTuningOctave = getString(ch, true);
             ret.tuningOctave = dataTuningOctave;
         }
     }
@@ -29765,8 +29670,8 @@ export function xmlToMeasureNumbering(node: Node) {
  * particular hardware configurations.
  */
 export interface Sound extends TimeOnly {
-    softPedal: boolean;
-    midiInstrument: MidiInstrument;
+    softPedal: string;
+    midiInstruments: MidiInstrument[];
     pan: string;
     tocoda: string;
     decapo: boolean;
@@ -29776,13 +29681,13 @@ export interface Sound extends TimeOnly {
     segno: string;
     elevation: string;
     fine: string;
-    damperPedal: boolean;
+    damperPedal: string;
     dynamics: string;
     plays: Play[];
     offset: Offset;
-    sostenutoPedal: boolean;
+    sostenutoPedal: string;
     dalsegno: string;
-    midiDevice: MidiDevice;
+    midiDevices: MidiDevice[];
     tempo: string;
     forwardRepeat: boolean;
 }
@@ -29871,8 +29776,8 @@ export interface Sound extends TimeOnly {
  * particular hardware configurations.
  */
 export interface SoundComplete extends TimeOnlyComplete {
-    softPedal: boolean;
-    midiInstrument: MidiInstrument;
+    softPedal: string;
+    midiInstruments: MidiInstrument[];
     pan: string;
     tocoda: string;
     decapo: boolean;
@@ -29882,13 +29787,13 @@ export interface SoundComplete extends TimeOnlyComplete {
     segno: string;
     elevation: string;
     fine: string;
-    damperPedal: boolean;
+    damperPedal: string;
     dynamics: string;
     plays: Play[];
     offset: Offset;
-    sostenutoPedal: boolean;
+    sostenutoPedal: string;
     dalsegno: string;
-    midiDevice: MidiDevice;
+    midiDevices: MidiDevice[];
     tempo: string;
     forwardRepeat: boolean;
 }
@@ -29900,8 +29805,8 @@ export function xmlToSound(node: Node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "midi-instrument") {
-            var dataMidiInstrument = xmlToMidiInstrument(ch) ;
-            ret.midiInstrument = dataMidiInstrument;
+            var dataMidiInstruments = xmlToMidiInstrument(ch) ;
+            ret.midiInstruments = (ret.midiInstruments|| []).concat(dataMidiInstruments);
         }
         if (ch.nodeName === "play") {
             var dataPlays = xmlToPlay(ch) ;
@@ -29912,14 +29817,14 @@ export function xmlToSound(node: Node) {
             ret.offset = dataOffset;
         }
         if (ch.nodeName === "midi-device") {
-            var dataMidiDevice = xmlToMidiDevice(ch) ;
-            ret.midiDevice = dataMidiDevice;
+            var dataMidiDevices = xmlToMidiDevice(ch) ;
+            ret.midiDevices = (ret.midiDevices|| []).concat(dataMidiDevices);
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "soft-pedal") {
-            var dataSoftPedal = xmlToYesNo(ch2) ;
+            var dataSoftPedal = getString(ch2, true);
             ret.softPedal = dataSoftPedal;
         }
         if (ch2.name === "pan") {
@@ -29959,7 +29864,7 @@ export function xmlToSound(node: Node) {
             ret.fine = dataFine;
         }
         if (ch2.name === "damper-pedal") {
-            var dataDamperPedal = xmlToYesNo(ch2) ;
+            var dataDamperPedal = getString(ch2, true);
             ret.damperPedal = dataDamperPedal;
         }
         if (ch2.name === "dynamics") {
@@ -29971,7 +29876,7 @@ export function xmlToSound(node: Node) {
             ret.timeOnly = dataTimeOnly;
         }
         if (ch2.name === "sostenuto-pedal") {
-            var dataSostenutoPedal = xmlToYesNo(ch2) ;
+            var dataSostenutoPedal = getString(ch2, true);
             ret.sostenutoPedal = dataSostenutoPedal;
         }
         if (ch2.name === "dalsegno") {
@@ -30363,7 +30268,7 @@ export function xmlToLyricLanguage(node: Node) {
  */
 export interface Credit {
     creditTypes: string[];
-    creditWords: CreditWords[];
+    creditWords: CreditWords;
     creditImage: CreditImage;
     page: number;
 }
@@ -30394,7 +30299,7 @@ export interface Credit {
  */
 export interface CreditComplete {
     creditTypes: string[];
-    creditWords: CreditWords[];
+    creditWords: CreditWords;
     creditImage: CreditImage;
     page: number;
 }
@@ -30411,7 +30316,7 @@ export function xmlToCredit(node: Node) {
         }
         if (ch.nodeName === "credit-words") {
             var dataCreditWords = xmlToCreditWords(ch) ;
-            ret.creditWords = (ret.creditWords|| []).concat(dataCreditWords);
+            ret.creditWords = dataCreditWords;
         }
         if (ch.nodeName === "credit-image") {
             var dataCreditImage = xmlToCreditImage(ch) ;
@@ -31268,8 +31173,7 @@ export function xmlToGroupName(node: Node) {
  * elements, respectively.
  */
 export interface GroupNameDisplay extends PrintObject {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 /**
@@ -31279,39 +31183,10 @@ export interface GroupNameDisplay extends PrintObject {
  * elements, respectively.
  */
 export interface GroupNameDisplayComplete extends PrintObjectComplete {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 
-export function xmlToGroupNameDisplay(node: Node) {
-    "use strict";
-    var ret: GroupNameDisplay = <any> {};
-    var foundPrintObject = false;
-    for (var i = 0; i < node.childNodes.length; ++i) {
-        var ch = node.childNodes[i];
-        if (ch.nodeName === "display-text") {
-            var dataDisplayTexts = xmlToDisplayText(ch) ;
-            ret.displayTexts = (ret.displayTexts|| []).concat(dataDisplayTexts);
-        }
-        if (ch.nodeName === "accidental-text") {
-            var dataAccidentalTexts = xmlToAccidentalText(ch) ;
-            ret.accidentalTexts = (ret.accidentalTexts|| []).concat(dataAccidentalTexts);
-        }
-    }
-    for (var i = 0; i < node.attributes.length; ++i) {
-        var ch2 = node.attributes[i];
-        if (ch2.name === "print-object") {
-            var dataPrintObject = xmlToYesNo(ch2) ;
-            ret.printObject = dataPrintObject;
-            foundPrintObject = true;
-        }
-    }
-    if (!foundPrintObject) {
-        ret.printObject = true;
-    }
-    return ret;
-}
 
 /**
  * As with parts, groups can have a name and abbreviation.
@@ -31416,8 +31291,7 @@ export function xmlToGroupAbbreviation(node: Node) {
  * elements, respectively.
  */
 export interface GroupAbbreviationDisplay extends PrintObject {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 /**
@@ -31427,39 +31301,10 @@ export interface GroupAbbreviationDisplay extends PrintObject {
  * elements, respectively.
  */
 export interface GroupAbbreviationDisplayComplete extends PrintObjectComplete {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 
-export function xmlToGroupAbbreviationDisplay(node: Node) {
-    "use strict";
-    var ret: GroupAbbreviationDisplay = <any> {};
-    var foundPrintObject = false;
-    for (var i = 0; i < node.childNodes.length; ++i) {
-        var ch = node.childNodes[i];
-        if (ch.nodeName === "display-text") {
-            var dataDisplayTexts = xmlToDisplayText(ch) ;
-            ret.displayTexts = (ret.displayTexts|| []).concat(dataDisplayTexts);
-        }
-        if (ch.nodeName === "accidental-text") {
-            var dataAccidentalTexts = xmlToAccidentalText(ch) ;
-            ret.accidentalTexts = (ret.accidentalTexts|| []).concat(dataAccidentalTexts);
-        }
-    }
-    for (var i = 0; i < node.attributes.length; ++i) {
-        var ch2 = node.attributes[i];
-        if (ch2.name === "print-object") {
-            var dataPrintObject = xmlToYesNo(ch2) ;
-            ret.printObject = dataPrintObject;
-            foundPrintObject = true;
-        }
-    }
-    if (!foundPrintObject) {
-        ret.printObject = true;
-    }
-    return ret;
-}
 
 /**
  * The group-symbol element indicates how the symbol for

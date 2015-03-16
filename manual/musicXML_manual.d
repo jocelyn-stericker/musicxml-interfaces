@@ -92,6 +92,24 @@ export class PartAbbreviationDisplay {
     }
 }
 
+export class GroupNameDisplay {
+    mixin INoteheadText;
+    this(xmlNodePtr node) {
+        auto ch = node;
+        // TODO
+        // text = TextArray(ch);   
+    }
+}
+
+export class GroupAbbreviationDisplay {
+    mixin INoteheadText;
+    this(xmlNodePtr node) {
+        auto ch = node;
+        // TODO
+        // text = TextArray(ch);   
+    }
+}
+
 export class Measure {
     mixin IMeasure;
     this(xmlNodePtr node) {

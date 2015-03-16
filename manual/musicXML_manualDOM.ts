@@ -160,6 +160,16 @@ export function xmlToPartAbbreviationDisplay(p: Node): PartAbbreviationDisplay {
     return null;
 }
 
+export function xmlToGroupNameDisplay(p: Node): GroupNameDisplay {
+    // TODO
+    return null;
+}
+
+export function xmlToGroupAbbreviationDisplay(p: Node): GroupAbbreviationDisplay {
+    // TODO
+    return null;
+}
+
 export function xmlToLyric(node: Node) {
     "use strict";
     var ret: Lyric = <any> {};

@@ -1452,7 +1452,7 @@ export interface OrientationComplete {
  * attribute is present, it overrides the directive entity.
  */
 export interface DirectiveEntity {
-    directiveEntity?: boolean;
+    directive?: boolean;
 }
 
 /**
@@ -1465,7 +1465,7 @@ export interface DirectiveEntity {
  * attribute is present, it overrides the directive entity.
  */
 export interface DirectiveEntityComplete {
-    directiveEntity: boolean;
+    directive: boolean;
 }
 
 
@@ -2601,9 +2601,7 @@ export interface CodaComplete extends PrintStyleAlignComplete {
  * actual-notes and normal-notes elements ia a non-negative
  * integer.
  */
-export interface ActualNotes {
-    count: number;
-}
+export interface ActualNotes extends String {}
 
 /**
  * These elements are used both in the time-modification and
@@ -2617,43 +2615,7 @@ export interface ActualNotes {
  * actual-notes and normal-notes elements ia a non-negative
  * integer.
  */
-export interface ActualNotesComplete {
-    count: number;
-}
-
-
-/**
- * These elements are used both in the time-modification and
- * metronome-tuplet elements. The actual-notes element
- * describes how many notes are played in the time usually
- * occupied by the number of normal-notes. If the normal-notes
- * type is different than the current note type (e.g., a
- * quarter note within an eighth note triplet), then the
- * normal-notes type (e.g. eighth) is specified in the
- * normal-type and normal-dot elements. The content of the
- * actual-notes and normal-notes elements ia a non-negative
- * integer.
- */
-export interface NormalNotes {
-    count: number;
-}
-
-/**
- * These elements are used both in the time-modification and
- * metronome-tuplet elements. The actual-notes element
- * describes how many notes are played in the time usually
- * occupied by the number of normal-notes. If the normal-notes
- * type is different than the current note type (e.g., a
- * quarter note within an eighth note triplet), then the
- * normal-notes type (e.g. eighth) is specified in the
- * normal-type and normal-dot elements. The content of the
- * actual-notes and normal-notes elements ia a non-negative
- * integer.
- */
-export interface NormalNotesComplete {
-    count: number;
-}
-
+export interface NormalNotes extends String {}
 
 /**
  * These elements are used both in the time-modification and
@@ -2868,9 +2830,7 @@ export interface StringComplete extends PrintStyleComplete, PlacementComplete {
  * with different names to reflect their different function.
  * They are used in the staff-tuning and accord elements.
  */
-export interface TuningAlter {
-    step: string;
-}
+export interface TuningAlter extends String {}
 
 /**
  * The tuning-step, tuning-alter, and tuning-octave elements
@@ -2878,31 +2838,7 @@ export interface TuningAlter {
  * with different names to reflect their different function.
  * They are used in the staff-tuning and accord elements.
  */
-export interface TuningAlterComplete {
-    step: string;
-}
-
-
-/**
- * The tuning-step, tuning-alter, and tuning-octave elements
- * are represented like the step, alter, and octave elements,
- * with different names to reflect their different function.
- * They are used in the staff-tuning and accord elements.
- */
-export interface TuningOctave {
-    step: string;
-}
-
-/**
- * The tuning-step, tuning-alter, and tuning-octave elements
- * are represented like the step, alter, and octave elements,
- * with different names to reflect their different function.
- * They are used in the staff-tuning and accord elements.
- */
-export interface TuningOctaveComplete {
-    step: string;
-}
-
+export interface TuningOctave extends String {}
 
 /**
  * The display-text element is used for exact formatting of
@@ -3166,8 +3102,9 @@ export interface MidiInstrumentComplete {
 export interface Play {
     ipa?: string;
     mute?: string;
-    otherPlay?: string;
+    otherPlay?: OtherPlay;
     semiPitched?: string;
+    id: string;
 }
 
 /**
@@ -3182,8 +3119,20 @@ export interface Play {
 export interface PlayComplete {
     ipa: string;
     mute: string;
-    otherPlay: string;
+    otherPlay: OtherPlay;
     semiPitched: string;
+    id: string;
+}
+
+
+export interface OtherPlay {
+    data: string;
+    type: string;
+}
+
+export interface OtherPlayComplete {
+    data: string;
+    type: string;
 }
 
 
@@ -4165,19 +4114,7 @@ export interface EncoderComplete {
  * The source for the music that is encoded. This is similar
  * to the Dublin Core source element.
  */
-export interface Source {
-    source: string;
-}
-
-/**
- * 
- * The source for the music that is encoded. This is similar
- * to the Dublin Core source element.
- */
-export interface SourceComplete {
-    source: string;
-}
-
+export interface Source extends String {}
 
 /**
  * A related resource for the music that is encoded. This is
@@ -4250,7 +4187,7 @@ export interface Identification {
     relations?: Relation[];
     rights?: Rights[];
     encoding: Encoding;
-    source: Source;
+    source: string;
 }
 
 /**
@@ -4267,7 +4204,7 @@ export interface IdentificationComplete {
     relations: Relation[];
     rights: Rights[];
     encoding: Encoding;
-    source: Source;
+    source: string;
 }
 
 
@@ -4871,10 +4808,10 @@ export interface KeyComplete extends PrintStyleComplete, PrintObjectComplete {
  * part.
  */
 export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintObject {
-    interchangeables?: Interchangeable[];
+    interchangeable?: Interchangeable;
     beats: string[];
     beatTypes: number[];
-    senzaMisura: boolean;
+    senzaMisura?: string;
 }
 
 /**
@@ -4914,10 +4851,10 @@ export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintO
  * part.
  */
 export interface TimeComplete extends TimeSymbolComplete, TimeSeparatorComplete, PrintStyleAlignComplete, PrintObjectComplete {
-    interchangeables: Interchangeable[];
+    interchangeable: Interchangeable;
     beats: string[];
     beatTypes: number[];
-    senzaMisura: boolean;
+    senzaMisura: string;
 }
 
 
@@ -5228,10 +5165,10 @@ export interface StaffLines extends String {}
  * lines are numbered from bottom to top.
  */
 export interface StaffTuning {
-    tuningAlter?: TuningAlter;
+    tuningAlter?: string;
     line: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 /**
@@ -5240,10 +5177,10 @@ export interface StaffTuning {
  * lines are numbered from bottom to top.
  */
 export interface StaffTuningComplete {
-    tuningAlter: TuningAlter;
+    tuningAlter: string;
     line: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 
@@ -5291,9 +5228,9 @@ export interface StaffDetails extends PrintObject, PrintSpacing {
     staffLines?: number;
     staffTunings?: StaffTuning[];
     staffSize?: number;
+    showFrets?: ShowFretsType;
     capo?: string;
     number?: number;
-    showFets?: ShowFretsType;
     staffType?: string;
 }
 
@@ -5322,9 +5259,9 @@ export interface StaffDetailsComplete extends PrintObjectComplete, PrintSpacingC
     staffLines: number;
     staffTunings: StaffTuning[];
     staffSize: number;
+    showFrets: ShowFretsType;
     capo: string;
     number: number;
-    showFets: ShowFretsType;
     staffType: string;
 }
 
@@ -5525,9 +5462,9 @@ export interface MultipleRestComplete {
  * start and the stop of the measure-repeat must be specified.
  */
 export interface MeasureRepeat {
-    slashed?: number;
     data?: string;
     type: StartStop;
+    slashes?: number;
 }
 
 /**
@@ -5545,9 +5482,9 @@ export interface MeasureRepeat {
  * start and the stop of the measure-repeat must be specified.
  */
 export interface MeasureRepeatComplete {
-    slashed: number;
     data: string;
     type: StartStop;
+    slashes: number;
 }
 
 
@@ -5692,13 +5629,13 @@ export interface Attributes extends Editorial {
     partSymbol?: PartSymbol;
     clefs?: Clef[];
     measureStyle?: MeasureStyle;
-    time?: Time;
-    staffDetails?: StaffDetails;
-    transpose?: Transpose;
+    times?: Time[];
+    staffDetails?: StaffDetails[];
+    transposes?: Transpose[];
     staves?: number;
     instruments?: string;
-    keySignature?: Key;
-    directive?: Directive;
+    keySignatures?: Key[];
+    directives?: Directive[];
 }
 
 /**
@@ -5713,13 +5650,13 @@ export interface AttributesComplete extends EditorialComplete {
     partSymbol: PartSymbol;
     clefs: Clef[];
     measureStyle: MeasureStyle;
-    time: Time;
-    staffDetails: StaffDetails;
-    transpose: Transpose;
+    times: Time[];
+    staffDetails: StaffDetails[];
+    transposes: Transpose[];
     staves: number;
     instruments: string;
-    keySignature: Key;
-    directive: Directive;
+    keySignatures: Key[];
+    directives: Directive[];
 }
 
 
@@ -6280,9 +6217,9 @@ export interface AccidentalComplete extends LevelDisplayComplete, PrintStyleComp
  * accurately.
  */
 export interface TimeModification {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     normalType?: string;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots?: NormalDot[];
 }
 
@@ -6298,9 +6235,9 @@ export interface TimeModification {
  * accurately.
  */
 export interface TimeModificationComplete {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     normalType: string;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots: NormalDot[];
 }
 
@@ -9340,7 +9277,7 @@ export enum TipDirection {
  * positional formatting attributes are carried over from
  * the previous element by default.
  */
-export interface Direction extends EditorialVoice, Placement, Directive {
+export interface Direction extends EditorialVoice, Placement, DirectiveEntity {
     directionTypes: DirectionType[];
     staff?: number;
     offset?: Offset;
@@ -9359,7 +9296,7 @@ export interface Direction extends EditorialVoice, Placement, Directive {
  * positional formatting attributes are carried over from
  * the previous element by default.
  */
-export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveComplete {
+export interface DirectionComplete extends EditorialVoiceComplete, PlacementComplete, DirectiveEntityComplete {
     directionTypes: DirectionType[];
     staff: number;
     offset: Offset;
@@ -9493,7 +9430,7 @@ export enum WedgeType {
  */
 export interface Wedge extends LineType, DashedFormatting, Position, Color {
     number: number;
-    neinte: boolean;
+    niente: boolean;
     type: WedgeType;
     spread: number;
 }
@@ -9516,7 +9453,7 @@ export interface Wedge extends LineType, DashedFormatting, Position, Color {
  */
 export interface WedgeComplete extends LineTypeComplete, DashedFormattingComplete, PositionComplete, ColorComplete {
     number: number;
-    neinte: boolean;
+    niente: boolean;
     type: WedgeType;
     spread: number;
 }
@@ -9761,22 +9698,22 @@ export interface MetronomeBeamComplete {
 
 
 export interface MetronomeTuplet {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     bracket: boolean;
     showNumber: ActualBothNone;
     normalType: string;
     type: StartStop;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots: NormalDot[];
 }
 
 export interface MetronomeTupletComplete {
-    actualNotes: ActualNotes;
+    actualNotes: number;
     bracket: boolean;
     showNumber: ActualBothNone;
     normalType: string;
     type: StartStop;
-    normalNotes: NormalNotes;
+    normalNotes: number;
     normalDots: NormalDot[];
 }
 
@@ -9920,10 +9857,10 @@ export interface ScordaturaComplete {
  * file. Strings are numbered from high to low.
  */
 export interface Accord {
-    tuningAlter: TuningAlter;
+    tuningAlter: string;
     string: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 /**
@@ -9934,10 +9871,10 @@ export interface Accord {
  * file. Strings are numbered from high to low.
  */
 export interface AccordComplete {
-    tuningAlter: TuningAlter;
+    tuningAlter: string;
     string: string;
     tuningStep: string;
-    tuningOctave: TuningOctave;
+    tuningOctave: string;
 }
 
 
@@ -11185,8 +11122,8 @@ export interface MeasureNumberingComplete extends PrintStyleAlignComplete {
  * particular hardware configurations.
  */
 export interface Sound extends TimeOnly {
-    softPedal: boolean;
-    midiInstrument: MidiInstrument;
+    softPedal: string;
+    midiInstruments: MidiInstrument[];
     pan: string;
     tocoda: string;
     decapo: boolean;
@@ -11196,13 +11133,13 @@ export interface Sound extends TimeOnly {
     segno: string;
     elevation: string;
     fine: string;
-    damperPedal: boolean;
+    damperPedal: string;
     dynamics: string;
     plays: Play[];
     offset: Offset;
-    sostenutoPedal: boolean;
+    sostenutoPedal: string;
     dalsegno: string;
-    midiDevice: MidiDevice;
+    midiDevices: MidiDevice[];
     tempo: string;
     forwardRepeat: boolean;
 }
@@ -11291,8 +11228,8 @@ export interface Sound extends TimeOnly {
  * particular hardware configurations.
  */
 export interface SoundComplete extends TimeOnlyComplete {
-    softPedal: boolean;
-    midiInstrument: MidiInstrument;
+    softPedal: string;
+    midiInstruments: MidiInstrument[];
     pan: string;
     tocoda: string;
     decapo: boolean;
@@ -11302,13 +11239,13 @@ export interface SoundComplete extends TimeOnlyComplete {
     segno: string;
     elevation: string;
     fine: string;
-    damperPedal: boolean;
+    damperPedal: string;
     dynamics: string;
     plays: Play[];
     offset: Offset;
-    sostenutoPedal: boolean;
+    sostenutoPedal: string;
     dalsegno: string;
-    midiDevice: MidiDevice;
+    midiDevices: MidiDevice[];
     tempo: string;
     forwardRepeat: boolean;
 }
@@ -11461,7 +11398,7 @@ export interface LyricLanguageComplete {
  */
 export interface Credit {
     creditTypes: string[];
-    creditWords: CreditWords[];
+    creditWords: CreditWords;
     creditImage: CreditImage;
     page: number;
 }
@@ -11492,7 +11429,7 @@ export interface Credit {
  */
 export interface CreditComplete {
     creditTypes: string[];
-    creditWords: CreditWords[];
+    creditWords: CreditWords;
     creditImage: CreditImage;
     page: number;
 }
@@ -11743,8 +11680,7 @@ export interface GroupNameComplete extends PrintStyleComplete, JustifyComplete {
  * elements, respectively.
  */
 export interface GroupNameDisplay extends PrintObject {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 /**
@@ -11754,8 +11690,7 @@ export interface GroupNameDisplay extends PrintObject {
  * elements, respectively.
  */
 export interface GroupNameDisplayComplete extends PrintObjectComplete {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 
@@ -11787,8 +11722,7 @@ export interface GroupAbbreviationComplete extends PrintStyleComplete, JustifyCo
  * elements, respectively.
  */
 export interface GroupAbbreviationDisplay extends PrintObject {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 /**
@@ -11798,8 +11732,7 @@ export interface GroupAbbreviationDisplay extends PrintObject {
  * elements, respectively.
  */
 export interface GroupAbbreviationDisplayComplete extends PrintObjectComplete {
-    displayTexts: DisplayText[];
-    accidentalTexts: AccidentalText[];
+    name: TextArray;
 }
 
 

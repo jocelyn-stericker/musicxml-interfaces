@@ -140,6 +140,14 @@ function xmlToPartAbbreviationDisplay(p) {
     return null;
 }
 exports.xmlToPartAbbreviationDisplay = xmlToPartAbbreviationDisplay;
+function xmlToGroupNameDisplay(p) {
+    return null;
+}
+exports.xmlToGroupNameDisplay = xmlToGroupNameDisplay;
+function xmlToGroupAbbreviationDisplay(p) {
+    return null;
+}
+exports.xmlToGroupAbbreviationDisplay = xmlToGroupAbbreviationDisplay;
 function xmlToLyric(node) {
     "use strict";
     var ret = {};
@@ -1425,9 +1433,9 @@ function xmlToDirectiveEntity(node) {
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "directive-entity") {
-            var dataDirectiveEntity = xmlToYesNo(ch2);
-            ret.directiveEntity = dataDirectiveEntity;
+        if (ch2.name === "directive") {
+            var dataDirective = xmlToYesNo(ch2);
+            ret.directive = dataDirective;
         }
     }
     return ret;
@@ -3242,9 +3250,6 @@ function xmlToActualNotes(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataCount = getNumber(ch3, true);
-    ret.count = dataCount;
     return ret;
 }
 exports.xmlToActualNotes = xmlToActualNotes;
@@ -3257,9 +3262,6 @@ function xmlToNormalNotes(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataCount = getNumber(ch3, true);
-    ret.count = dataCount;
     return ret;
 }
 exports.xmlToNormalNotes = xmlToNormalNotes;
@@ -3724,9 +3726,6 @@ function xmlToTuningAlter(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataStep = getString(ch3, true);
-    ret.step = dataStep;
     return ret;
 }
 exports.xmlToTuningAlter = xmlToTuningAlter;
@@ -3739,9 +3738,6 @@ function xmlToTuningOctave(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataStep = getString(ch3, true);
-    ret.step = dataStep;
     return ret;
 }
 exports.xmlToTuningOctave = xmlToTuningOctave;
@@ -4244,7 +4240,7 @@ function xmlToPlay(node) {
             ret.mute = dataMute;
         }
         if (ch.nodeName === "other-play") {
-            var dataOtherPlay = getString(ch, true);
+            var dataOtherPlay = xmlToOtherPlay(ch);
             ret.otherPlay = dataOtherPlay;
         }
         if (ch.nodeName === "semi-pitched") {
@@ -4254,10 +4250,33 @@ function xmlToPlay(node) {
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
+        if (ch2.name === "id") {
+            var dataId = getString(ch2, true);
+            ret.id = dataId;
+        }
     }
     return ret;
 }
 exports.xmlToPlay = xmlToPlay;
+function xmlToOtherPlay(node) {
+    "use strict";
+    var ret = {};
+    for (var i = 0; i < node.childNodes.length; ++i) {
+        var ch = node.childNodes[i];
+    }
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
+        if (ch2.name === "type") {
+            var dataType = getString(ch2, true);
+            ret.type = dataType;
+        }
+    }
+    var ch3 = node;
+    var dataData = getString(ch3, true);
+    ret.data = dataData;
+    return ret;
+}
+exports.xmlToOtherPlay = xmlToOtherPlay;
 function xmlToMillimeters(node) {
     "use strict";
     var ret = {};
@@ -4959,9 +4978,6 @@ function xmlToSource(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
-    var ch3 = node;
-    var dataSource = getString(ch3, true);
-    ret.source = dataSource;
     return ret;
 }
 exports.xmlToSource = xmlToSource;
@@ -5045,7 +5061,7 @@ function xmlToIdentification(node) {
             ret.encoding = dataEncoding;
         }
         if (ch.nodeName === "source") {
-            var dataSource = xmlToSource(ch);
+            var dataSource = getString(ch, true);
             ret.source = dataSource;
         }
     }
@@ -5443,8 +5459,8 @@ function xmlToTime(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "interchangeable") {
-            var dataInterchangeables = xmlToInterchangeable(ch);
-            ret.interchangeables = (ret.interchangeables || []).concat(dataInterchangeables);
+            var dataInterchangeable = xmlToInterchangeable(ch);
+            ret.interchangeable = dataInterchangeable;
         }
         if (ch.nodeName === "beats") {
             var dataBeats = getString(ch, true);
@@ -5455,7 +5471,7 @@ function xmlToTime(node) {
             ret.beatTypes = (ret.beatTypes || []).concat(dataBeatTypes);
         }
         if (ch.nodeName === "senza-misura") {
-            var dataSenzaMisura = true;
+            var dataSenzaMisura = getString(ch, true);
             ret.senzaMisura = dataSenzaMisura;
         }
     }
@@ -5847,7 +5863,7 @@ function xmlToStaffTuning(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "tuning-alter") {
-            var dataTuningAlter = xmlToTuningAlter(ch);
+            var dataTuningAlter = getString(ch, true);
             ret.tuningAlter = dataTuningAlter;
         }
         if (ch.nodeName === "tuning-step") {
@@ -5855,7 +5871,7 @@ function xmlToStaffTuning(node) {
             ret.tuningStep = dataTuningStep;
         }
         if (ch.nodeName === "tuning-octave") {
-            var dataTuningOctave = xmlToTuningOctave(ch);
+            var dataTuningOctave = getString(ch, true);
             ret.tuningOctave = dataTuningOctave;
         }
     }
@@ -5904,10 +5920,10 @@ exports.getShowFretsType = getShowFretsType;
 function xmlToStaffDetails(node) {
     "use strict";
     var ret = {};
+    var foundShowFrets = false;
     var foundNumber_ = false;
     var foundPrintObject = false;
     var foundPrintSpacing = false;
-    var foundShowFets = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "staff-lines") {
@@ -5933,6 +5949,11 @@ function xmlToStaffDetails(node) {
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
+        if (ch2.name === "show-frets") {
+            var dataShowFrets = getShowFretsType(ch2, 0 /* Numbers */);
+            ret.showFrets = dataShowFrets;
+            foundShowFrets = true;
+        }
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -5948,11 +5969,9 @@ function xmlToStaffDetails(node) {
             ret.printSpacing = dataPrintSpacing;
             foundPrintSpacing = true;
         }
-        if (ch2.name === "show-fets") {
-            var dataShowFets = getShowFretsType(ch2, 0 /* Numbers */);
-            ret.showFets = dataShowFets;
-            foundShowFets = true;
-        }
+    }
+    if (!foundShowFrets) {
+        ret.showFrets = 0 /* Numbers */;
     }
     if (!foundNumber_) {
         ret.number = 1;
@@ -5962,9 +5981,6 @@ function xmlToStaffDetails(node) {
     }
     if (!foundPrintSpacing) {
         ret.printSpacing = true;
-    }
-    if (!foundShowFets) {
-        ret.showFets = 0 /* Numbers */;
     }
     return ret;
 }
@@ -6123,27 +6139,27 @@ exports.xmlToMultipleRest = xmlToMultipleRest;
 function xmlToMeasureRepeat(node) {
     "use strict";
     var ret = {};
-    var foundSlashed = false;
+    var foundSlashes = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
-        if (ch2.name === "slashed") {
-            var dataSlashed = getNumber(ch2, true);
-            ret.slashed = dataSlashed;
-            foundSlashed = true;
-        }
         if (ch2.name === "type") {
             var dataType = getStartStop(ch2, null);
             ret.type = dataType;
+        }
+        if (ch2.name === "slashes") {
+            var dataSlashes = getNumber(ch2, true);
+            ret.slashes = dataSlashes;
+            foundSlashes = true;
         }
     }
     var ch3 = node;
     var dataData = getString(ch3, false);
     ret.data = dataData;
-    if (!foundSlashed) {
-        ret.slashed = 1;
+    if (!foundSlashes) {
+        ret.slashes = 1;
     }
     return ret;
 }
@@ -6326,16 +6342,16 @@ function xmlToAttributes(node) {
             ret.measureStyle = dataMeasureStyle;
         }
         if (ch.nodeName === "time") {
-            var dataTime = xmlToTime(ch);
-            ret.time = dataTime;
+            var dataTimes = xmlToTime(ch);
+            ret.times = (ret.times || []).concat(dataTimes);
         }
         if (ch.nodeName === "staff-details") {
             var dataStaffDetails = xmlToStaffDetails(ch);
-            ret.staffDetails = dataStaffDetails;
+            ret.staffDetails = (ret.staffDetails || []).concat(dataStaffDetails);
         }
         if (ch.nodeName === "transpose") {
-            var dataTranspose = xmlToTranspose(ch);
-            ret.transpose = dataTranspose;
+            var dataTransposes = xmlToTranspose(ch);
+            ret.transposes = (ret.transposes || []).concat(dataTransposes);
         }
         if (ch.nodeName === "footnote") {
             var dataFootnote = xmlToFootnote(ch);
@@ -6354,12 +6370,12 @@ function xmlToAttributes(node) {
             ret.instruments = dataInstruments;
         }
         if (ch.nodeName === "key") {
-            var dataKeySignature = xmlToKey(ch);
-            ret.keySignature = dataKeySignature;
+            var dataKeySignatures = xmlToKey(ch);
+            ret.keySignatures = (ret.keySignatures || []).concat(dataKeySignatures);
         }
         if (ch.nodeName === "directive") {
-            var dataDirective = xmlToDirective(ch);
-            ret.directive = dataDirective;
+            var dataDirectives = xmlToDirective(ch);
+            ret.directives = (ret.directives || []).concat(dataDirectives);
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {
@@ -7273,7 +7289,7 @@ function xmlToTimeModification(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "actual-notes") {
-            var dataActualNotes = xmlToActualNotes(ch);
+            var dataActualNotes = getNumber(ch, true);
             ret.actualNotes = dataActualNotes;
         }
         if (ch.nodeName === "normal-type") {
@@ -7281,7 +7297,7 @@ function xmlToTimeModification(node) {
             ret.normalType = dataNormalType;
         }
         if (ch.nodeName === "normal-notes") {
-            var dataNormalNotes = xmlToNormalNotes(ch);
+            var dataNormalNotes = getNumber(ch, true);
             ret.normalNotes = dataNormalNotes;
         }
         if (ch.nodeName === "normal-dot") {
@@ -15227,9 +15243,6 @@ function xmlToDirection(node) {
     "use strict";
     var ret = {};
     var foundPlacement = false;
-    var foundFontWeight = false;
-    var foundFontStyle = false;
-    var foundColor = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "voice") {
@@ -15268,60 +15281,13 @@ function xmlToDirection(node) {
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
-        if (ch2.name === "default-x") {
-            var dataDefaultX = getNumber(ch2, true);
-            ret.defaultX = dataDefaultX;
-        }
-        if (ch2.name === "relative-y") {
-            var dataRelativeY = getNumber(ch2, true);
-            ret.relativeY = dataRelativeY;
-        }
-        if (ch2.name === "default-y") {
-            var dataDefaultY = getNumber(ch2, true);
-            ret.defaultY = dataDefaultY;
-        }
-        if (ch2.name === "relative-x") {
-            var dataRelativeX = getNumber(ch2, true);
-            ret.relativeX = dataRelativeX;
-        }
-        if (ch2.name === "font-family") {
-            var dataFontFamily = getString(ch2, true);
-            ret.fontFamily = dataFontFamily;
-        }
-        if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
-            ret.fontWeight = dataFontWeight;
-            foundFontWeight = true;
-        }
-        if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
-            ret.fontStyle = dataFontStyle;
-            foundFontStyle = true;
-        }
-        if (ch2.name === "font-size") {
-            var dataFontSize = getString(ch2, true);
-            ret.fontSize = dataFontSize;
-        }
-        if (ch2.name === "color") {
-            var dataColor = getString(ch2, true);
-            ret.color = dataColor;
-            foundColor = true;
+        if (ch2.name === "directive") {
+            var dataDirective = xmlToYesNo(ch2);
+            ret.directive = dataDirective;
         }
     }
-    var ch3 = node;
-    var dataData = getString(ch3, true);
-    ret.data = dataData;
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
-    }
-    if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
-    }
-    if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
-    }
-    if (!foundColor) {
-        ret.color = "#000000";
     }
     return ret;
 }
@@ -15788,7 +15754,7 @@ function xmlToWedge(node) {
     "use strict";
     var ret = {};
     var foundNumber_ = false;
-    var foundNeinte = false;
+    var foundNiente = false;
     var foundLineType = false;
     var foundDashLength = false;
     var foundSpaceLength = false;
@@ -15803,10 +15769,10 @@ function xmlToWedge(node) {
             ret.number = dataNumber;
             foundNumber_ = true;
         }
-        if (ch2.name === "neinte") {
-            var dataNeinte = xmlToYesNo(ch2);
-            ret.neinte = dataNeinte;
-            foundNeinte = true;
+        if (ch2.name === "niente") {
+            var dataNiente = xmlToYesNo(ch2);
+            ret.niente = dataNiente;
+            foundNiente = true;
         }
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
@@ -15856,8 +15822,8 @@ function xmlToWedge(node) {
     if (!foundNumber_) {
         ret.number = 1;
     }
-    if (!foundNeinte) {
-        ret.neinte = false;
+    if (!foundNiente) {
+        ret.niente = false;
     }
     if (!foundLineType) {
         ret.lineType = 0 /* Solid */;
@@ -16419,7 +16385,7 @@ function xmlToMetronomeTuplet(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "actual-notes") {
-            var dataActualNotes = xmlToActualNotes(ch);
+            var dataActualNotes = getNumber(ch, true);
             ret.actualNotes = dataActualNotes;
         }
         if (ch.nodeName === "normal-type") {
@@ -16427,7 +16393,7 @@ function xmlToMetronomeTuplet(node) {
             ret.normalType = dataNormalType;
         }
         if (ch.nodeName === "normal-notes") {
-            var dataNormalNotes = xmlToNormalNotes(ch);
+            var dataNormalNotes = getNumber(ch, true);
             ret.normalNotes = dataNormalNotes;
         }
         if (ch.nodeName === "normal-dot") {
@@ -17042,7 +17008,7 @@ function xmlToAccord(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "tuning-alter") {
-            var dataTuningAlter = xmlToTuningAlter(ch);
+            var dataTuningAlter = getString(ch, true);
             ret.tuningAlter = dataTuningAlter;
         }
         if (ch.nodeName === "tuning-step") {
@@ -17050,7 +17016,7 @@ function xmlToAccord(node) {
             ret.tuningStep = dataTuningStep;
         }
         if (ch.nodeName === "tuning-octave") {
-            var dataTuningOctave = xmlToTuningOctave(ch);
+            var dataTuningOctave = getString(ch, true);
             ret.tuningOctave = dataTuningOctave;
         }
     }
@@ -18951,8 +18917,8 @@ function xmlToSound(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "midi-instrument") {
-            var dataMidiInstrument = xmlToMidiInstrument(ch);
-            ret.midiInstrument = dataMidiInstrument;
+            var dataMidiInstruments = xmlToMidiInstrument(ch);
+            ret.midiInstruments = (ret.midiInstruments || []).concat(dataMidiInstruments);
         }
         if (ch.nodeName === "play") {
             var dataPlays = xmlToPlay(ch);
@@ -18963,14 +18929,14 @@ function xmlToSound(node) {
             ret.offset = dataOffset;
         }
         if (ch.nodeName === "midi-device") {
-            var dataMidiDevice = xmlToMidiDevice(ch);
-            ret.midiDevice = dataMidiDevice;
+            var dataMidiDevices = xmlToMidiDevice(ch);
+            ret.midiDevices = (ret.midiDevices || []).concat(dataMidiDevices);
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "soft-pedal") {
-            var dataSoftPedal = xmlToYesNo(ch2);
+            var dataSoftPedal = getString(ch2, true);
             ret.softPedal = dataSoftPedal;
         }
         if (ch2.name === "pan") {
@@ -19010,7 +18976,7 @@ function xmlToSound(node) {
             ret.fine = dataFine;
         }
         if (ch2.name === "damper-pedal") {
-            var dataDamperPedal = xmlToYesNo(ch2);
+            var dataDamperPedal = getString(ch2, true);
             ret.damperPedal = dataDamperPedal;
         }
         if (ch2.name === "dynamics") {
@@ -19022,7 +18988,7 @@ function xmlToSound(node) {
             ret.timeOnly = dataTimeOnly;
         }
         if (ch2.name === "sostenuto-pedal") {
-            var dataSostenutoPedal = xmlToYesNo(ch2);
+            var dataSostenutoPedal = getString(ch2, true);
             ret.sostenutoPedal = dataSostenutoPedal;
         }
         if (ch2.name === "dalsegno") {
@@ -19278,7 +19244,7 @@ function xmlToCredit(node) {
         }
         if (ch.nodeName === "credit-words") {
             var dataCreditWords = xmlToCreditWords(ch);
-            ret.creditWords = (ret.creditWords || []).concat(dataCreditWords);
+            ret.creditWords = dataCreditWords;
         }
         if (ch.nodeName === "credit-image") {
             var dataCreditImage = xmlToCreditImage(ch);
@@ -19890,35 +19856,6 @@ function xmlToGroupName(node) {
     return ret;
 }
 exports.xmlToGroupName = xmlToGroupName;
-function xmlToGroupNameDisplay(node) {
-    "use strict";
-    var ret = {};
-    var foundPrintObject = false;
-    for (var i = 0; i < node.childNodes.length; ++i) {
-        var ch = node.childNodes[i];
-        if (ch.nodeName === "display-text") {
-            var dataDisplayTexts = xmlToDisplayText(ch);
-            ret.displayTexts = (ret.displayTexts || []).concat(dataDisplayTexts);
-        }
-        if (ch.nodeName === "accidental-text") {
-            var dataAccidentalTexts = xmlToAccidentalText(ch);
-            ret.accidentalTexts = (ret.accidentalTexts || []).concat(dataAccidentalTexts);
-        }
-    }
-    for (var i = 0; i < node.attributes.length; ++i) {
-        var ch2 = node.attributes[i];
-        if (ch2.name === "print-object") {
-            var dataPrintObject = xmlToYesNo(ch2);
-            ret.printObject = dataPrintObject;
-            foundPrintObject = true;
-        }
-    }
-    if (!foundPrintObject) {
-        ret.printObject = true;
-    }
-    return ret;
-}
-exports.xmlToGroupNameDisplay = xmlToGroupNameDisplay;
 function xmlToGroupAbbreviation(node) {
     "use strict";
     var ret = {};
@@ -19994,35 +19931,6 @@ function xmlToGroupAbbreviation(node) {
     return ret;
 }
 exports.xmlToGroupAbbreviation = xmlToGroupAbbreviation;
-function xmlToGroupAbbreviationDisplay(node) {
-    "use strict";
-    var ret = {};
-    var foundPrintObject = false;
-    for (var i = 0; i < node.childNodes.length; ++i) {
-        var ch = node.childNodes[i];
-        if (ch.nodeName === "display-text") {
-            var dataDisplayTexts = xmlToDisplayText(ch);
-            ret.displayTexts = (ret.displayTexts || []).concat(dataDisplayTexts);
-        }
-        if (ch.nodeName === "accidental-text") {
-            var dataAccidentalTexts = xmlToAccidentalText(ch);
-            ret.accidentalTexts = (ret.accidentalTexts || []).concat(dataAccidentalTexts);
-        }
-    }
-    for (var i = 0; i < node.attributes.length; ++i) {
-        var ch2 = node.attributes[i];
-        if (ch2.name === "print-object") {
-            var dataPrintObject = xmlToYesNo(ch2);
-            ret.printObject = dataPrintObject;
-            foundPrintObject = true;
-        }
-    }
-    if (!foundPrintObject) {
-        ret.printObject = true;
-    }
-    return ret;
-}
-exports.xmlToGroupAbbreviationDisplay = xmlToGroupAbbreviationDisplay;
 function xmlToGroupSymbol(node) {
     "use strict";
     var ret = {};
