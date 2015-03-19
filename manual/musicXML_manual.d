@@ -22,7 +22,11 @@ export string getString(T)(T p, bool required) {
 }
 
 export float getNumber(T)(T p, bool required) {
-    return getString(p, required).to!float;
+    auto str = getString(p, required);
+    if (str == "" || !str) {
+        return -1.0;
+    }
+    return str.to!float;
 }
 
 auto ctr = ctRegex!(r"[- ](.)", "g");

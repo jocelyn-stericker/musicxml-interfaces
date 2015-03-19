@@ -2758,7 +2758,7 @@ export interface DynamicsComplete extends PrintStyleAlignComplete, PlacementComp
  */
 export interface Fingering extends PrintStyle, Placement {
     substitution?: boolean;
-    finger: number;
+    finger?: number;
     alternate?: boolean;
 }
 

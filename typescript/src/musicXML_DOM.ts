@@ -6167,7 +6167,7 @@ export function xmlToDynamics(node: Node) {
  */
 export interface Fingering extends PrintStyle, Placement {
     substitution?: boolean;
-    finger: number;
+    finger?: number;
     alternate?: boolean;
 }
 
@@ -6190,6 +6190,7 @@ export interface FingeringComplete extends PrintStyleComplete, PlacementComplete
 export function xmlToFingering(node: Node) {
     "use strict";
     var ret: Fingering = <any> {};
+    var foundFinger = false;
     var foundSubstitution = false;
     var foundFontWeight = false;
     var foundFontStyle = false;
@@ -6257,8 +6258,11 @@ export function xmlToFingering(node: Node) {
         }
     }
     var ch3 = node;
-    var dataFinger = getNumber(ch3, true);
+    var dataFinger = getNumber(ch3, false);
     ret.finger = dataFinger;
+    if (!foundFinger) {
+        ret.finger = -1;
+    }
     if (!foundSubstitution) {
         ret.substitution = false;
     }

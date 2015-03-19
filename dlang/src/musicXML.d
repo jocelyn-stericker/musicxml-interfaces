@@ -48,7 +48,11 @@ export string getString(T)(T p, bool required) {
 }
 
 export float getNumber(T)(T p, bool required) {
-    return getString(p, required).to!float;
+    auto str = getString(p, required);
+    if (str == "" || !str) {
+        return -1.0;
+    }
+    return str.to!float;
 }
 
 auto ctr = ctRegex!(r"[- ](.)", "g");
@@ -4658,6 +4662,7 @@ mixin template IDynamics() {
 export class Fingering {
     mixin IFingering;
     this(xmlNodePtr node) {
+        bool foundFinger = false;
         bool foundSubstitution = false;
         bool foundFontWeight = false;
         bool foundFontStyle = false;
@@ -4723,8 +4728,11 @@ export class Fingering {
             }
         }
         auto ch = node;
-        auto data = getNumber(ch, true);
+        auto data = getNumber(ch, false);
         this.finger = data;
+        if (!foundFinger) {
+            finger = -1;
+        }
         if (!foundSubstitution) {
             substitution = false;
         }

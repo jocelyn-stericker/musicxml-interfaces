@@ -1299,7 +1299,9 @@
         },
         "finger": {
           "child": true,
-          "type": "number"
+          "type": "number",
+          "required": false,
+          "std": -1
         }
       },
       "auto": true

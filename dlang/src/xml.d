@@ -158,7 +158,7 @@ export alias nextElement = next!(xmlElementType.XML_ELEMENT_NODE);
  **************************/
 
 export class NotMusicXml : Throwable {
-    this(string reason = "") { super("Expected a valid MusicXML document." ~ reason); }
+    this(string reason = "") { super("Expected a valid MusicXML document. " ~ reason); }
 }
 
 export bool isPartwise(xmlDocPtr doc) {
