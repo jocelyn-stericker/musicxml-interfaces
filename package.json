@@ -1,7 +1,7 @@
 {
     "name": "musicxml-interfaces",
-    "version": "0.0.3-alpha1",
-    "description": "MusicXML parser and types for TypeScript and D.",
+    "version": "0.0.3-alpha2",
+    "description": "MusicXML parser and serializer for JavaScript and TypeScript",
 
     "author": "Josh Netterfield",
     "license": "AGPLv3",
@@ -12,30 +12,20 @@
     },
 
     "dependencies": {
+        "xmldom": "^0.1.19"
     },
     "devDependencies": {
-        "dts-bundle": "0.2.0",
-        "event-stream": "3.1.7",
-        "nan": "1.4.1",
-        "node-gyp": "1.0.2",
-        "gulp": "3.8.10",
-        "gulp-typescript": "git://github.com/jnetterf/gulp-typescript-react-jsx#fe6ced"
+        "typescript": "git://github.com/Microsoft/TypeScript.git"
     },
 
-    "main": "./index.js",
+    "main": "./musicxml-interfaces.js",
     "files": ["./typescript"],
     "typescript": {
-        "definition": "typescript/dist/musicxml-interfaces.d.ts"
+        "definition": "musicxml-interfaces.d.ts"
     },
     "files": [
-        "Makefile",
-        "dlang",
-        "index.js",
-        "node",
-        "tests",
-        "typescript/dist"
-    ],
-    "scripts": {
-        "start": "gulp build"
-    }
+        "musicxml-interfaces.d.ts",
+        "musicxml-interfaces.js",
+        "vendor"
+    ]
 }
