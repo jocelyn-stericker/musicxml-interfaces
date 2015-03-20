@@ -23809,7 +23809,7 @@ function xmlToGroupTime(node: Node) {
 }
 
 /**
- *     The score-instrument element allows for multiple
+ * The score-instrument element allows for multiple
  * instruments per score-part. As with the score-part
  * element, each score-instrument has a required ID
  * attribute, a name, and an optional abbreviation. The
@@ -24817,12 +24817,18 @@ function scorePartToXML(scorePart: ScorePart): string {
     (scorePart.groups||[]).forEach(group => {
         children.push(xml `<group>${group}</group>`);
     });
+    (scorePart.scoreInstruments||[]).forEach(scoreInstrument => {
+        children.push(scoreInstrumentToXML(scoreInstrument));
+    });
     // Is it okay if there are different numbers of devices and instruments?
     (scorePart.midiDevices||[]).forEach((device, idx) => {
         children.push(midiDeviceToXML(device));
         if (scorePart.midiInstruments[idx]) {
             children.push(midiInstrumentToXML(scorePart.midiInstruments[idx]));
         }
+    });
+    (scorePart.midiInstruments||[]).forEach(midiInstrument => {
+        children.push(midiInstrumentToXML(midiInstrument));
     });
     if (defined(scorePart.id)) {
         attribs += xml ` id="${scorePart.id}"`;
@@ -24961,6 +24967,59 @@ function midiInstrumentToXML(midiInstrument: MidiInstrument): string {
     }
     return dangerous `<midi-instrument${attribs}>\n${children.join("\n").split("\n")
         .map(n => "  " + n).join("\n")}\n</midi-instrument>`;
+}
+
+function scoreInstrumentToXML(scoreInstrument: ScoreInstrument): string {
+    // <!ELEMENT score-instrument
+    //     (instrument-name, instrument-abbreviation?,
+    //      instrument-sound?, (solo | ensemble)?,
+    //      virtual-instrument?)>
+    // <!ATTLIST score-instrument
+    //     id ID #REQUIRED
+    // >
+    let children: string[] = [];
+    let attribs = xml ` id="${scoreInstrument.id}"`;
+    if (defined(scoreInstrument.instrumentName)) {
+        // <!ELEMENT instrument-name (#PCDATA)>
+        children.push(xml `<instrument-name>${scoreInstrument.instrumentName}</instrument-name>`);
+    }
+    if (defined(scoreInstrument.instrumentAbbreviation)) {
+        // <!ELEMENT instrument-abbreviation (#PCDATA)>
+        children.push(xml `<instrument-abbreviation>${
+            scoreInstrument.instrumentAbbreviation}</instrument-abbreviation>`);
+    }
+    if (defined(scoreInstrument.instrumentSound)) {
+        // <!ELEMENT instrument-sound (#PCDATA)>
+        children.push(xml `<instrument-sound>${
+            scoreInstrument.instrumentSound}</instrument-sound>`);
+    }
+    if (scoreInstrument.solo) {
+        // <!ELEMENT solo EMPTY>
+        children.push(xml `<solo />`);
+    }
+    if (defined(scoreInstrument.ensemble)) {
+        // <!ELEMENT ensemble (#PCDATA)>
+        children.push(xml `<ensemble>${scoreInstrument.ensemble}</ensemble>`);
+    }
+    if (defined(scoreInstrument.virtualInstrument)) {
+        // <!ELEMENT virtual-instrument
+        //     (virtual-library?, virtual-name?)>
+        let vChildren: string[] = [];
+        let v = scoreInstrument.virtualInstrument;
+        if (defined(v.virtualLibrary)) {
+            // <!ELEMENT virtual-library (#PCDATA)>
+            vChildren.push(xml `<virtual-library>${v.virtualLibrary}</virtual-library>`);
+        }
+        if (defined(v.virtualName)) {
+            // <!ELEMENT virtual-name (#PCDATA)>
+            vChildren.push(xml `<virtual-name>${v.virtualName}</virtual-name>`);
+        }
+        children.push(dangerous `<virtual-instrument>\n${vChildren.join("\n").split("\n")
+            .map(n => "  " + n).join("\n")}\n</virtual-instrument>`);
+    }
+
+    return dangerous `<score-instrument${attribs}>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</score-instrument>`;
 }
 
 function partGroupToXML(partGroup: PartGroup): string {
@@ -26024,7 +26083,7 @@ export function noteToXML(note: Note) {
     // ...
 
     if (note.instrument) {
-        elements.push(xml `<instrument>${note.instrument.id}</instrument>`);
+        elements.push(xml `<instrument id="${note.instrument.id}" />`);
     }
 
     elements = elements.concat(editorialVoiceToXML(note));

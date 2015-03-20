@@ -19024,12 +19024,18 @@ function scorePartToXML(scorePart) {
         children.push((_a = ["<group>", "</group>"], _a.raw = ["<group>", "</group>"], xml(_a, group)));
         var _a;
     });
+    (scorePart.scoreInstruments || []).forEach(function (scoreInstrument) {
+        children.push(scoreInstrumentToXML(scoreInstrument));
+    });
     // Is it okay if there are different numbers of devices and instruments?
     (scorePart.midiDevices || []).forEach(function (device, idx) {
         children.push(midiDeviceToXML(device));
         if (scorePart.midiInstruments[idx]) {
             children.push(midiInstrumentToXML(scorePart.midiInstruments[idx]));
         }
+    });
+    (scorePart.midiInstruments || []).forEach(function (midiInstrument) {
+        children.push(midiInstrumentToXML(midiInstrument));
     });
     if (defined(scorePart.id)) {
         attribs += (_a = [" id=\"", "\""], _a.raw = [" id=\"", "\""], xml(_a, scorePart.id));
@@ -19159,6 +19165,58 @@ function midiInstrumentToXML(midiInstrument) {
         attribs += (_j = [" id=\"", "\""], _j.raw = [" id=\"", "\""], xml(_j, midiInstrument.id));
     }
     return (_k = ["<midi-instrument", ">\n", "\n</midi-instrument>"], _k.raw = ["<midi-instrument", ">\\n", "\\n</midi-instrument>"], dangerous(_k, attribs, children.join("\n").split("\n").map(function (n) {
+        return "  " + n;
+    }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
+}
+function scoreInstrumentToXML(scoreInstrument) {
+    // <!ELEMENT score-instrument
+    //     (instrument-name, instrument-abbreviation?,
+    //      instrument-sound?, (solo | ensemble)?,
+    //      virtual-instrument?)>
+    // <!ATTLIST score-instrument
+    //     id ID #REQUIRED
+    // >
+    var children = [];
+    var attribs = (_a = [" id=\"", "\""], _a.raw = [" id=\"", "\""], xml(_a, scoreInstrument.id));
+    if (defined(scoreInstrument.instrumentName)) {
+        // <!ELEMENT instrument-name (#PCDATA)>
+        children.push((_b = ["<instrument-name>", "</instrument-name>"], _b.raw = ["<instrument-name>", "</instrument-name>"], xml(_b, scoreInstrument.instrumentName)));
+    }
+    if (defined(scoreInstrument.instrumentAbbreviation)) {
+        // <!ELEMENT instrument-abbreviation (#PCDATA)>
+        children.push((_c = ["<instrument-abbreviation>", "</instrument-abbreviation>"], _c.raw = ["<instrument-abbreviation>", "</instrument-abbreviation>"], xml(_c, scoreInstrument.instrumentAbbreviation)));
+    }
+    if (defined(scoreInstrument.instrumentSound)) {
+        // <!ELEMENT instrument-sound (#PCDATA)>
+        children.push((_d = ["<instrument-sound>", "</instrument-sound>"], _d.raw = ["<instrument-sound>", "</instrument-sound>"], xml(_d, scoreInstrument.instrumentSound)));
+    }
+    if (scoreInstrument.solo) {
+        // <!ELEMENT solo EMPTY>
+        children.push((_e = ["<solo />"], _e.raw = ["<solo />"], xml(_e)));
+    }
+    if (defined(scoreInstrument.ensemble)) {
+        // <!ELEMENT ensemble (#PCDATA)>
+        children.push((_f = ["<ensemble>", "</ensemble>"], _f.raw = ["<ensemble>", "</ensemble>"], xml(_f, scoreInstrument.ensemble)));
+    }
+    if (defined(scoreInstrument.virtualInstrument)) {
+        // <!ELEMENT virtual-instrument
+        //     (virtual-library?, virtual-name?)>
+        var vChildren = [];
+        var v = scoreInstrument.virtualInstrument;
+        if (defined(v.virtualLibrary)) {
+            // <!ELEMENT virtual-library (#PCDATA)>
+            vChildren.push((_g = ["<virtual-library>", "</virtual-library>"], _g.raw = ["<virtual-library>", "</virtual-library>"], xml(_g, v.virtualLibrary)));
+        }
+        if (defined(v.virtualName)) {
+            // <!ELEMENT virtual-name (#PCDATA)>
+            vChildren.push((_h = ["<virtual-name>", "</virtual-name>"], _h.raw = ["<virtual-name>", "</virtual-name>"], xml(_h, v.virtualName)));
+        }
+        children.push((_j = ["<virtual-instrument>\n", "\n</virtual-instrument>"], _j.raw = ["<virtual-instrument>\\n", "\\n</virtual-instrument>"], dangerous(_j, vChildren.join("\n").split("\n").map(function (n) {
+            return "  " + n;
+        }).join("\n"))));
+    }
+    return (_k = ["<score-instrument", ">\n", "\n</score-instrument>"], _k.raw = ["<score-instrument", ">\\n", "\\n</score-instrument>"], dangerous(_k, attribs, children.join("\n").split("\n").map(function (n) {
         return "  " + n;
     }).join("\n")));
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
@@ -20171,7 +20229,7 @@ function noteToXML(note) {
     // instrument?, %editorial-voice;, type?, dot*,
     // ...
     if (note.instrument) {
-        elements.push((_3 = ["<instrument>", "</instrument>"], _3.raw = ["<instrument>", "</instrument>"], xml(_3, note.instrument.id)));
+        elements.push((_3 = ["<instrument id=\"", "\" />"], _3.raw = ["<instrument id=\"", "\" />"], xml(_3, note.instrument.id)));
     }
     elements = elements.concat(editorialVoiceToXML(note));
     if (note.noteType && defined(note.noteType.duration)) {
