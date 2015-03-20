@@ -1,4 +1,5 @@
-declare module 'musicxml-interfaces' {
+declare module "musicxml-interfaces" {
+    export function parse(documentString: string): ScoreTimewise;
     export interface TextArray {
         acc?: AccidentalText;
         text?: DisplayText;
@@ -6,954 +7,6 @@ declare module 'musicxml-interfaces' {
     export interface TextArray extends Array<TextArray> {
     }
     export interface EncodingDate extends CalendarDate {
-    }
-    export function parse(documentString: string): ScoreTimewise;
-    /**
-    * Traditional key signatures are represented by the number
-    * of flats and sharps, plus an optional mode for major/
-    * minor/mode distinctions. Negative numbers are used for
-    * flats and positive numbers for sharps, reflecting the
-    * key's placement within the circle of fifths (hence the
-    * element name). A cancel element indicates that the old
-    * key signature should be cancelled before the new one
-    * appears. This will always happen when changing to C major
-    * or A minor and need not be specified then. The cancel
-    * value matches the fifths value of the cancelled key
-    * signature (e.g., a cancel of -2 will provide an explicit
-    * cancellation for changing from B flat major to F major).
-    * The optional location attribute indicates where a key
-    * signature cancellation appears relative to a new key
-    * signature: to the left, to the right, or before the barline
-    * and to the left. It is left by default. For mid-measure key
-    * elements, a cancel location of before-barline should be
-    * treated like a cancel location of left.
-    *
-    * Non-traditional key signatures can be represented using
-    * the Humdrum/Scot concept of a list of altered tones.
-    * The key-step and key-alter elements are represented the
-    * same way as the step and alter elements are in the pitch
-    * element in the note.mod file. The optional key-accidental
-    * element is represented the same way as the accidental
-    * element in the note.mod file. It is used for disambiguating
-    * microtonal accidentals. The different element names
-    * indicate the different meaning of altering notes in a scale
-    * versus altering a sounding pitch.
-    *
-    * Valid mode values include major, minor, dorian, phrygian,
-    * lydian, mixolydian, aeolian, ionian, locrian, and none.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the key
-    * signature applies to all staves in the part.
-    * The optional list of key-octave elements is used to specify
-    * in which octave each element of the key signature appears.
-    * The content specifies the octave value using the same
-    * values as the display-octave element. The number attribute
-    * is a positive integer that refers to the key signature
-    * element in left-to-right order. If the cancel attribute is
-    * set to yes, then this number refers to an element specified
-    * by the cancel element. It is no by default.
-    *
-    * Key signatures appear at the start of each system unless
-    * the print-object attribute has been set to "no".
-    */
-    export interface Mode extends String {
-    }
-    /**
-    * The appearance element controls general graphical
-    * settings for the music's final form appearance on a
-    * printed page of display. This includes support
-    * for line widths, definitions for note sizes, and standard
-    * distances between notation elements, plus an extension
-    * element for other aspects of appearance.
-    *
-    * The line-width element indicates the width of a line type
-    * in tenths. The type attribute defines what type of line is
-    * being defined. Values include beam, bracket, dashes,
-    * enclosure, ending, extend, heavy barline, leger,
-    * light barline, octave shift, pedal, slur middle, slur tip,
-    * staff, stem, tie middle, tie tip, tuplet bracket, and
-    * wedge. The text content is expressed in tenths.
-    *
-    * The note-size element indicates the percentage of the
-    * regular note size to use for notes with a cue and large
-    * size as defined in the type element. The grace type is
-    * used for notes of cue size that that include a grace
-    * element. The cue type is used for all other notes with
-    * cue size, whether defined explicitly or implicitly via a
-    * cue element. The large type is used for notes of large
-    * size. The text content represent the numeric percentage.
-    * A value of 100 would be identical to the size of a regular
-    * note as defined by the music font.
-    *
-    * The distance element represents standard distances between
-    * notation elements in tenths. The type attribute defines what
-    * type of distance is being defined. Values include hyphen
-    * (for hyphens in lyrics) and beam.
-    *
-    * The other-appearance element is used to define any
-    * graphical settings not yet in the current version of the
-    * MusicXML format. This allows extended representation,
-    * though without application interoperability.
-    */
-    export interface OtherAppearance extends String {
-    }
-    /**
-    * The tuning-step, tuning-alter, and tuning-octave elements
-    * are represented like the step, alter, and octave elements,
-    * with different names to reflect their different function.
-    * They are used in the staff-tuning and accord elements.
-    */
-    export interface TuningStep extends String {
-    }
-    export interface OtherDynamics extends String {
-    }
-    export interface Voice extends String {
-    }
-    /**
-    * These elements are used both in the time-modification and
-    * metronome-tuplet elements. The actual-notes element
-    * describes how many notes are played in the time usually
-    * occupied by the number of normal-notes. If the normal-notes
-    * type is different than the current note type (e.g., a
-    * quarter note within an eighth note triplet), then the
-    * normal-notes type (e.g. eighth) is specified in the
-    * normal-type and normal-dot elements. The content of the
-    * actual-notes and normal-notes elements ia a non-negative
-    * integer.
-    */
-    export interface NormalType extends String {
-    }
-    /**
-    * A string describing a software.
-    */
-    export interface Software extends String {
-    }
-    /**
-    *
-    * Encoding contains information about who did the digital
-    * encoding, when, with what software, and in what aspects.
-    * Standard type values for the encoder element are music,
-    * words, and arrangement, but other types may be used. The
-    * type attribute is only needed when there are multiple
-    * encoder elements.
-    *
-    * The supports element indicates if the encoding supports
-    * a particular MusicXML element. This is recommended for
-    * elements like beam, stem, and accidental, where the
-    * absence of an element is ambiguous if you do not know
-    * if the encoding supports that element. For Version 2.0,
-    * the supports element is expanded to allow programs to
-    * indicate support for particular attributes or particular
-    * values. This lets applications communicate, for example,
-    * that all system and/or page breaks are contained in the
-    * MusicXML file.
-    */
-    export interface EncodingDescription extends String {
-    }
-    /**
-    * Traditional key signatures are represented by the number
-    * of flats and sharps, plus an optional mode for major/
-    * minor/mode distinctions. Negative numbers are used for
-    * flats and positive numbers for sharps, reflecting the
-    * key's placement within the circle of fifths (hence the
-    * element name). A cancel element indicates that the old
-    * key signature should be cancelled before the new one
-    * appears. This will always happen when changing to C major
-    * or A minor and need not be specified then. The cancel
-    * value matches the fifths value of the cancelled key
-    * signature (e.g., a cancel of -2 will provide an explicit
-    * cancellation for changing from B flat major to F major).
-    * The optional location attribute indicates where a key
-    * signature cancellation appears relative to a new key
-    * signature: to the left, to the right, or before the barline
-    * and to the left. It is left by default. For mid-measure key
-    * elements, a cancel location of before-barline should be
-    * treated like a cancel location of left.
-    *
-    * Non-traditional key signatures can be represented using
-    * the Humdrum/Scot concept of a list of altered tones.
-    * The key-step and key-alter elements are represented the
-    * same way as the step and alter elements are in the pitch
-    * element in the note.mod file. The optional key-accidental
-    * element is represented the same way as the accidental
-    * element in the note.mod file. It is used for disambiguating
-    * microtonal accidentals. The different element names
-    * indicate the different meaning of altering notes in a scale
-    * versus altering a sounding pitch.
-    *
-    * Valid mode values include major, minor, dorian, phrygian,
-    * lydian, mixolydian, aeolian, ionian, locrian, and none.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the key
-    * signature applies to all staves in the part.
-    * The optional list of key-octave elements is used to specify
-    * in which octave each element of the key signature appears.
-    * The content specifies the octave value using the same
-    * values as the display-octave element. The number attribute
-    * is a positive integer that refers to the key signature
-    * element in left-to-right order. If the cancel attribute is
-    * set to yes, then this number refers to an element specified
-    * by the cancel element. It is no by default.
-    *
-    * Key signatures appear at the start of each system unless
-    * the print-object attribute has been set to "no".
-    */
-    export interface KeyStep extends String {
-    }
-    /**
-    * Traditional key signatures are represented by the number
-    * of flats and sharps, plus an optional mode for major/
-    * minor/mode distinctions. Negative numbers are used for
-    * flats and positive numbers for sharps, reflecting the
-    * key's placement within the circle of fifths (hence the
-    * element name). A cancel element indicates that the old
-    * key signature should be cancelled before the new one
-    * appears. This will always happen when changing to C major
-    * or A minor and need not be specified then. The cancel
-    * value matches the fifths value of the cancelled key
-    * signature (e.g., a cancel of -2 will provide an explicit
-    * cancellation for changing from B flat major to F major).
-    * The optional location attribute indicates where a key
-    * signature cancellation appears relative to a new key
-    * signature: to the left, to the right, or before the barline
-    * and to the left. It is left by default. For mid-measure key
-    * elements, a cancel location of before-barline should be
-    * treated like a cancel location of left.
-    *
-    * Non-traditional key signatures can be represented using
-    * the Humdrum/Scot concept of a list of altered tones.
-    * The key-step and key-alter elements are represented the
-    * same way as the step and alter elements are in the pitch
-    * element in the note.mod file. The optional key-accidental
-    * element is represented the same way as the accidental
-    * element in the note.mod file. It is used for disambiguating
-    * microtonal accidentals. The different element names
-    * indicate the different meaning of altering notes in a scale
-    * versus altering a sounding pitch.
-    *
-    * Valid mode values include major, minor, dorian, phrygian,
-    * lydian, mixolydian, aeolian, ionian, locrian, and none.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the key
-    * signature applies to all staves in the part.
-    * The optional list of key-octave elements is used to specify
-    * in which octave each element of the key signature appears.
-    * The content specifies the octave value using the same
-    * values as the display-octave element. The number attribute
-    * is a positive integer that refers to the key signature
-    * element in left-to-right order. If the cancel attribute is
-    * set to yes, then this number refers to an element specified
-    * by the cancel element. It is no by default.
-    *
-    * Key signatures appear at the start of each system unless
-    * the print-object attribute has been set to "no".
-    */
-    export interface KeyAlter extends String {
-    }
-    /**
-    * Traditional key signatures are represented by the number
-    * of flats and sharps, plus an optional mode for major/
-    * minor/mode distinctions. Negative numbers are used for
-    * flats and positive numbers for sharps, reflecting the
-    * key's placement within the circle of fifths (hence the
-    * element name). A cancel element indicates that the old
-    * key signature should be cancelled before the new one
-    * appears. This will always happen when changing to C major
-    * or A minor and need not be specified then. The cancel
-    * value matches the fifths value of the cancelled key
-    * signature (e.g., a cancel of -2 will provide an explicit
-    * cancellation for changing from B flat major to F major).
-    * The optional location attribute indicates where a key
-    * signature cancellation appears relative to a new key
-    * signature: to the left, to the right, or before the barline
-    * and to the left. It is left by default. For mid-measure key
-    * elements, a cancel location of before-barline should be
-    * treated like a cancel location of left.
-    *
-    * Non-traditional key signatures can be represented using
-    * the Humdrum/Scot concept of a list of altered tones.
-    * The key-step and key-alter elements are represented the
-    * same way as the step and alter elements are in the pitch
-    * element in the note.mod file. The optional key-accidental
-    * element is represented the same way as the accidental
-    * element in the note.mod file. It is used for disambiguating
-    * microtonal accidentals. The different element names
-    * indicate the different meaning of altering notes in a scale
-    * versus altering a sounding pitch.
-    *
-    * Valid mode values include major, minor, dorian, phrygian,
-    * lydian, mixolydian, aeolian, ionian, locrian, and none.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the key
-    * signature applies to all staves in the part.
-    * The optional list of key-octave elements is used to specify
-    * in which octave each element of the key signature appears.
-    * The content specifies the octave value using the same
-    * values as the display-octave element. The number attribute
-    * is a positive integer that refers to the key signature
-    * element in left-to-right order. If the cancel attribute is
-    * set to yes, then this number refers to an element specified
-    * by the cancel element. It is no by default.
-    *
-    * Key signatures appear at the start of each system unless
-    * the print-object attribute has been set to "no".
-    */
-    export interface KeyAccidental extends String {
-    }
-    /**
-    * Time signatures are represented by two elements. The
-    * beats element indicates the number of beats, as found in
-    * the numerator of a time signature. The beat-type element
-    * indicates the beat unit, as found in the denominator of
-    * a time signature.
-    *
-    * Multiple pairs of beats and beat-type elements are used for
-    * composite time signatures with multiple denominators, such
-    * as 2/4 + 3/8. A composite such as 3+2/8 requires only one
-    * beats/beat-type pair.
-    *
-    * The interchangeable element is used to represent the second
-    * in a pair of interchangeable dual time signatures, such as
-    * the 6/8 in 3/4 (6/8). A separate symbol attribute value is
-    * available compared to the time element's symbol attribute,
-    * which applies to the first of the dual time signatures.
-    * The time-relation element indicates the symbol used to
-    * represent the interchangeable aspect of the time signature.
-    * Valid values are parentheses, bracket, equals, slash, space,
-    * and hyphen.
-    *
-    * A senza-misura element explicitly indicates that no time
-    * signature is present. The optional element content
-    * indicates the symbol to be used, if any, such as an X.
-    * The time element's symbol attribute is not used when a
-    * senza-misura element is present.
-    *
-    * The print-object attribute allows a time signature to be
-    * specified but not printed, as is the case for excerpts
-    * from the middle of a score. The value is "yes" if
-    * not present. The optional number attribute refers to staff
-    * numbers within the part, from top to bottom on the system.
-    * If absent, the time signature applies to all staves in the
-    * part.
-    */
-    export interface Beats extends String {
-    }
-    /**
-    * Time signatures are represented by two elements. The
-    * beats element indicates the number of beats, as found in
-    * the numerator of a time signature. The beat-type element
-    * indicates the beat unit, as found in the denominator of
-    * a time signature.
-    *
-    * Multiple pairs of beats and beat-type elements are used for
-    * composite time signatures with multiple denominators, such
-    * as 2/4 + 3/8. A composite such as 3+2/8 requires only one
-    * beats/beat-type pair.
-    *
-    * The interchangeable element is used to represent the second
-    * in a pair of interchangeable dual time signatures, such as
-    * the 6/8 in 3/4 (6/8). A separate symbol attribute value is
-    * available compared to the time element's symbol attribute,
-    * which applies to the first of the dual time signatures.
-    * The time-relation element indicates the symbol used to
-    * represent the interchangeable aspect of the time signature.
-    * Valid values are parentheses, bracket, equals, slash, space,
-    * and hyphen.
-    *
-    * A senza-misura element explicitly indicates that no time
-    * signature is present. The optional element content
-    * indicates the symbol to be used, if any, such as an X.
-    * The time element's symbol attribute is not used when a
-    * senza-misura element is present.
-    *
-    * The print-object attribute allows a time signature to be
-    * specified but not printed, as is the case for excerpts
-    * from the middle of a score. The value is "yes" if
-    * not present. The optional number attribute refers to staff
-    * numbers within the part, from top to bottom on the system.
-    * If absent, the time signature applies to all staves in the
-    * part.
-    */
-    export interface BeatType extends String {
-    }
-    /**
-    * Time signatures are represented by two elements. The
-    * beats element indicates the number of beats, as found in
-    * the numerator of a time signature. The beat-type element
-    * indicates the beat unit, as found in the denominator of
-    * a time signature.
-    *
-    * Multiple pairs of beats and beat-type elements are used for
-    * composite time signatures with multiple denominators, such
-    * as 2/4 + 3/8. A composite such as 3+2/8 requires only one
-    * beats/beat-type pair.
-    *
-    * The interchangeable element is used to represent the second
-    * in a pair of interchangeable dual time signatures, such as
-    * the 6/8 in 3/4 (6/8). A separate symbol attribute value is
-    * available compared to the time element's symbol attribute,
-    * which applies to the first of the dual time signatures.
-    * The time-relation element indicates the symbol used to
-    * represent the interchangeable aspect of the time signature.
-    * Valid values are parentheses, bracket, equals, slash, space,
-    * and hyphen.
-    *
-    * A senza-misura element explicitly indicates that no time
-    * signature is present. The optional element content
-    * indicates the symbol to be used, if any, such as an X.
-    * The time element's symbol attribute is not used when a
-    * senza-misura element is present.
-    *
-    * The print-object attribute allows a time signature to be
-    * specified but not printed, as is the case for excerpts
-    * from the middle of a score. The value is "yes" if
-    * not present. The optional number attribute refers to staff
-    * numbers within the part, from top to bottom on the system.
-    * If absent, the time signature applies to all staves in the
-    * part.
-    */
-    export interface TimeRelation extends String {
-    }
-    /**
-    * Time signatures are represented by two elements. The
-    * beats element indicates the number of beats, as found in
-    * the numerator of a time signature. The beat-type element
-    * indicates the beat unit, as found in the denominator of
-    * a time signature.
-    *
-    * Multiple pairs of beats and beat-type elements are used for
-    * composite time signatures with multiple denominators, such
-    * as 2/4 + 3/8. A composite such as 3+2/8 requires only one
-    * beats/beat-type pair.
-    *
-    * The interchangeable element is used to represent the second
-    * in a pair of interchangeable dual time signatures, such as
-    * the 6/8 in 3/4 (6/8). A separate symbol attribute value is
-    * available compared to the time element's symbol attribute,
-    * which applies to the first of the dual time signatures.
-    * The time-relation element indicates the symbol used to
-    * represent the interchangeable aspect of the time signature.
-    * Valid values are parentheses, bracket, equals, slash, space,
-    * and hyphen.
-    *
-    * A senza-misura element explicitly indicates that no time
-    * signature is present. The optional element content
-    * indicates the symbol to be used, if any, such as an X.
-    * The time element's symbol attribute is not used when a
-    * senza-misura element is present.
-    *
-    * The print-object attribute allows a time signature to be
-    * specified but not printed, as is the case for excerpts
-    * from the middle of a score. The value is "yes" if
-    * not present. The optional number attribute refers to staff
-    * numbers within the part, from top to bottom on the system.
-    * If absent, the time signature applies to all staves in the
-    * part.
-    */
-    export interface SenzaMisura extends String {
-    }
-    /**
-    * Instruments are only used if more than one instrument is
-    * represented in the part (e.g., oboe I and II where they
-    * play together most of the time). If absent, a value of 1
-    * is assumed.
-    */
-    export interface Instruments extends String {
-    }
-    /**
-    * Clefs are represented by the sign, line, and
-    * clef-octave-change elements. Sign values include G, F, C,
-    * percussion, TAB, jianpu, and none. Line numbers are
-    * counted from the bottom of the staff. Standard values are
-    * 2 for the G sign (treble clef), 4 for the F sign (bass clef),
-    * 3 for the C sign (alto clef) and 5 for TAB (on a 6-line
-    * staff). The clef-octave-change element is used for
-    * transposing clefs (e.g., a treble clef for tenors would
-    * have a clef-octave-change value of -1). The optional
-    * number attribute refers to staff numbers within the part,
-    * from top to bottom on the system. A value of 1 is
-    * assumed if not present.
-    *
-    * The jianpu sign indicates that the music that follows
-    * should be in jianpu numbered notation, just as the TAB
-    * sign indicates that the music that follows should be in
-    * tablature notation. Unlike TAB, a jianpu sign does not
-    * correspond to a visual clef notation.
-    *
-    * Sometimes clefs are added to the staff in non-standard
-    * line positions, either to indicate cue passages, or when
-    * there are multiple clefs present simultaneously on one
-    * staff. In this situation, the additional attribute is set to
-    * "yes" and the line value is ignored. The size attribute
-    * is used for clefs where the additional attribute is "yes".
-    * It is typically used to indicate cue clefs.
-    *
-    * Sometimes clefs at the start of a measure need to appear
-    * after the barline rather than before, as for cues or for
-    * use after a repeated section. The after-barline attribute
-    * is set to "yes" in this situation. The attribute is ignored
-    * for mid-measure clefs.
-    *
-    * Clefs appear at the start of each system unless the
-    * print-object attribute has been set to "no" or the
-    * additional attribute has been set to "yes".
-    */
-    export interface Sign extends String {
-    }
-    /**
-    * Clefs are represented by the sign, line, and
-    * clef-octave-change elements. Sign values include G, F, C,
-    * percussion, TAB, jianpu, and none. Line numbers are
-    * counted from the bottom of the staff. Standard values are
-    * 2 for the G sign (treble clef), 4 for the F sign (bass clef),
-    * 3 for the C sign (alto clef) and 5 for TAB (on a 6-line
-    * staff). The clef-octave-change element is used for
-    * transposing clefs (e.g., a treble clef for tenors would
-    * have a clef-octave-change value of -1). The optional
-    * number attribute refers to staff numbers within the part,
-    * from top to bottom on the system. A value of 1 is
-    * assumed if not present.
-    *
-    * The jianpu sign indicates that the music that follows
-    * should be in jianpu numbered notation, just as the TAB
-    * sign indicates that the music that follows should be in
-    * tablature notation. Unlike TAB, a jianpu sign does not
-    * correspond to a visual clef notation.
-    *
-    * Sometimes clefs are added to the staff in non-standard
-    * line positions, either to indicate cue passages, or when
-    * there are multiple clefs present simultaneously on one
-    * staff. In this situation, the additional attribute is set to
-    * "yes" and the line value is ignored. The size attribute
-    * is used for clefs where the additional attribute is "yes".
-    * It is typically used to indicate cue clefs.
-    *
-    * Sometimes clefs at the start of a measure need to appear
-    * after the barline rather than before, as for cues or for
-    * use after a repeated section. The after-barline attribute
-    * is set to "yes" in this situation. The attribute is ignored
-    * for mid-measure clefs.
-    *
-    * Clefs appear at the start of each system unless the
-    * print-object attribute has been set to "no" or the
-    * additional attribute has been set to "yes".
-    */
-    export interface ClefOctaveChange extends String {
-    }
-    /**
-    * The staff-details element is used to indicate different
-    * types of staves. The staff-type element can be ossia,
-    * cue, editorial, regular, or alternate. An alternate staff
-    * indicates one that shares the same musical data as the
-    * prior staff, but displayed differently (e.g., treble and
-    * bass clef, standard notation and tab). The staff-lines
-    * element specifies the number of lines for a non 5-line
-    * staff. The staff-tuning and capo elements are used to
-    * specify tuning when using tablature notation. The optional
-    * number attribute specifies the staff number from top to
-    * bottom on the system, as with clef. The optional show-frets
-    * attribute indicates whether to show tablature frets as
-    * numbers (0, 1, 2) or letters (a, b, c). The default choice
-    * is numbers. The print-object attribute is used to indicate
-    * when a staff is not printed in a part, usually in large
-    * scores where empty parts are omitted. It is yes by default.
-    * If print-spacing is yes while print-object is no, the score
-    * is printed in cutaway format where vertical space is left
-    * for the empty part.
-    */
-    export interface StaffType extends String {
-    }
-    /**
-    * The capo element indicates at which fret a capo should
-    * be placed on a fretted instrument. This changes the
-    * open tuning of the strings specified by staff-tuning
-    * by the specified number of half-steps.
-    */
-    export interface Capo extends String {
-    }
-    /**
-    * If the part is being encoded for a transposing instrument
-    * in written vs. concert pitch, the transposition must be
-    * encoded in the transpose element. The transpose element
-    * represents what must be added to the written pitch to get
-    * the correct sounding pitch.
-    *
-    * The transposition is represented by chromatic steps
-    * (required) and three optional elements: diatonic pitch
-    * steps, octave changes, and doubling an octave down. The
-    * chromatic and octave-change elements are numeric values
-    * added to the encoded pitch data to create the sounding
-    * pitch. The diatonic element is also numeric and allows
-    * for correct spelling of enharmonic transpositions.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the
-    * transposition applies to all staves in the part. Per-staff
-    * transposition is most often used in parts that represent
-    * multiple instruments.
-    */
-    export interface Diatonic extends String {
-    }
-    /**
-    * If the part is being encoded for a transposing instrument
-    * in written vs. concert pitch, the transposition must be
-    * encoded in the transpose element. The transpose element
-    * represents what must be added to the written pitch to get
-    * the correct sounding pitch.
-    *
-    * The transposition is represented by chromatic steps
-    * (required) and three optional elements: diatonic pitch
-    * steps, octave changes, and doubling an octave down. The
-    * chromatic and octave-change elements are numeric values
-    * added to the encoded pitch data to create the sounding
-    * pitch. The diatonic element is also numeric and allows
-    * for correct spelling of enharmonic transpositions.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the
-    * transposition applies to all staves in the part. Per-staff
-    * transposition is most often used in parts that represent
-    * multiple instruments.
-    */
-    export interface Chromatic extends String {
-    }
-    /**
-    * If the part is being encoded for a transposing instrument
-    * in written vs. concert pitch, the transposition must be
-    * encoded in the transpose element. The transpose element
-    * represents what must be added to the written pitch to get
-    * the correct sounding pitch.
-    *
-    * The transposition is represented by chromatic steps
-    * (required) and three optional elements: diatonic pitch
-    * steps, octave changes, and doubling an octave down. The
-    * chromatic and octave-change elements are numeric values
-    * added to the encoded pitch data to create the sounding
-    * pitch. The diatonic element is also numeric and allows
-    * for correct spelling of enharmonic transpositions.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the
-    * transposition applies to all staves in the part. Per-staff
-    * transposition is most often used in parts that represent
-    * multiple instruments.
-    */
-    export interface OctaveChange extends String {
-    }
-    /**
-    * The slash-type and slash-dot elements are optional children
-    * of the beat-repeat and slash elements. They have the same
-    * values as the type and dot elements, and define what the
-    * beat is for the display of repetition marks. If not present,
-    * the beat is based on the current time signature.
-    */
-    export interface SlashType extends String {
-    }
-    /**
-    * The unpitched element indicates musical elements that are
-    * notated on the staff but lack definite pitch, such as
-    * unpitched percussion and speaking voice. Like notes, it
-    * uses step and octave elements to indicate placement on the
-    * staff, following the current clef. If percussion clef is
-    * used, the display-step and display-octave elements are
-    * interpreted as if in treble clef, with a G in octave 4 on
-    * line 2. If not present, the note is placed on the middle
-    * line of the staff, generally used for a one-line staff.
-    */
-    export interface DisplayStep extends String {
-    }
-    /**
-    * The unpitched element indicates musical elements that are
-    * notated on the staff but lack definite pitch, such as
-    * unpitched percussion and speaking voice. Like notes, it
-    * uses step and octave elements to indicate placement on the
-    * staff, following the current clef. If percussion clef is
-    * used, the display-step and display-octave elements are
-    * interpreted as if in treble clef, with a G in octave 4 on
-    * line 2. If not present, the note is placed on the middle
-    * line of the staff, generally used for a one-line staff.
-    */
-    export interface DisplayOctave extends String {
-    }
-    /**
-    * The bend element is used in guitar and tablature. The
-    * bend-alter element indicates the number of steps in the
-    * bend, similar to the alter element. As with the alter
-    * element, numbers like 0.5 can be used to indicate
-    * microtones. Negative numbers indicate pre-bends or
-    * releases; the pre-bend and release elements are used
-    * to distinguish what is intended. A with-bar element
-    * indicates that the bend is to be done at the bridge
-    * with a whammy or vibrato bar. The content of the
-    * element indicates how this should be notated.
-    */
-    export interface BendAlter extends String {
-    }
-    /**
-    * The hole element represents the symbols used for woodwind
-    * and brass fingerings as well as other notations. The content
-    * of the optional hole-type element indicates what the hole
-    * symbol represents in terms of instrument fingering or other
-    * techniques. The hole-closed element represents whether the
-    * hole is closed, open, or half-open. Valid element values are
-    * yes, no, and half. The optional location attribute indicates
-    * which portion of the hole is filled in when the element value
-    * is half. The optional hole-shape element indicates the shape
-    * of the hole symbol; the default is a circle.
-    */
-    export interface HoleType extends String {
-    }
-    /**
-    * The hole element represents the symbols used for woodwind
-    * and brass fingerings as well as other notations. The content
-    * of the optional hole-type element indicates what the hole
-    * symbol represents in terms of instrument fingering or other
-    * techniques. The hole-closed element represents whether the
-    * hole is closed, open, or half-open. Valid element values are
-    * yes, no, and half. The optional location attribute indicates
-    * which portion of the hole is filled in when the element value
-    * is half. The optional hole-shape element indicates the shape
-    * of the hole symbol; the default is a circle.
-    */
-    export interface HoleShape extends String {
-    }
-    /**
-    * The arrow element represents an arrow used for a musical
-    * technical indication. Straight arrows are represented with
-    * an arrow-direction element and an optional arrow-style
-    * element. Circular arrows are represented with a
-    * circular-arrow element. Descriptive values use Unicode
-    * arrow terminology.
-    *
-    * Values for the arrow-direction element are left, up, right,
-    * down, northwest, northeast, southeast, southwest, left right,
-    * up down, northwest southeast, northeast southwest, and other.
-    *
-    * Values for the arrow-style element are single, double,
-    * filled, hollow, paired, combined, and other. Filled and
-    * hollow arrows indicate polygonal single arrows. Paired
-    * arrows are duplicate single arrows in the same direction.
-    * Combined arrows apply to double direction arrows like
-    * left right, indicating that an arrow in one direction
-    * should be combined with an arrow in the other direction.
-    *
-    * Values for the circular-arrow element are clockwise and
-    * anticlockwise.
-    */
-    export interface ArrowDirection extends String {
-    }
-    /**
-    * The arrow element represents an arrow used for a musical
-    * technical indication. Straight arrows are represented with
-    * an arrow-direction element and an optional arrow-style
-    * element. Circular arrows are represented with a
-    * circular-arrow element. Descriptive values use Unicode
-    * arrow terminology.
-    *
-    * Values for the arrow-direction element are left, up, right,
-    * down, northwest, northeast, southeast, southwest, left right,
-    * up down, northwest southeast, northeast southwest, and other.
-    *
-    * Values for the arrow-style element are single, double,
-    * filled, hollow, paired, combined, and other. Filled and
-    * hollow arrows indicate polygonal single arrows. Paired
-    * arrows are duplicate single arrows in the same direction.
-    * Combined arrows apply to double direction arrows like
-    * left right, indicating that an arrow in one direction
-    * should be combined with an arrow in the other direction.
-    *
-    * Values for the circular-arrow element are clockwise and
-    * anticlockwise.
-    */
-    export interface ArrowStyle extends String {
-    }
-    /**
-    * The arrow element represents an arrow used for a musical
-    * technical indication. Straight arrows are represented with
-    * an arrow-direction element and an optional arrow-style
-    * element. Circular arrows are represented with a
-    * circular-arrow element. Descriptive values use Unicode
-    * arrow terminology.
-    *
-    * Values for the arrow-direction element are left, up, right,
-    * down, northwest, northeast, southeast, southwest, left right,
-    * up down, northwest southeast, northeast southwest, and other.
-    *
-    * Values for the arrow-style element are single, double,
-    * filled, hollow, paired, combined, and other. Filled and
-    * hollow arrows indicate polygonal single arrows. Paired
-    * arrows are duplicate single arrows in the same direction.
-    * Combined arrows apply to double direction arrows like
-    * left right, indicating that an arrow in one direction
-    * should be combined with an arrow in the other direction.
-    *
-    * Values for the circular-arrow element are clockwise and
-    * anticlockwise.
-    */
-    export interface CircularArrow extends String {
-    }
-    export interface BeatUnit extends String {
-    }
-    export interface MetronomeRelation extends String {
-    }
-    export interface MetronomeType extends String {
-    }
-    export interface PedalStep extends String {
-    }
-    export interface PedalAlter extends String {
-    }
-    export interface AccordionMiddle extends String {
-    }
-    /**
-    * The glass element represents pictograms for glass
-    * percussion instruments. The one valid value is
-    * wind chimes.
-    */
-    export interface Glass extends String {
-    }
-    /**
-    * The metal element represents pictograms for metal
-    * percussion instruments. Valid values are almglocken, bell,
-    * bell plate, brake drum, Chinese cymbal, cowbell,
-    * crash cymbals, crotale, cymbal tongs, domed gong,
-    * finger cymbals, flexatone, gong, hi-hat, high-hat cymbals,
-    * handbell, sistrum, sizzle cymbal, sleigh bells,
-    * suspended cymbal, tam tam, triangle, and Vietnamese hat.
-    * The hi-hat value refers to a pictogram like Stone's
-    * high-hat cymbals, but without the long vertical line
-    * at the bottom.
-    */
-    export interface Metal extends String {
-    }
-    /**
-    * The wood element represents pictograms for wood
-    * percussion instruments. Valid values are board clapper,
-    * cabasa, castanets, claves, guiro, log drum, maraca,
-    * maracas, ratchet, sandpaper blocks, slit drum,
-    * temple block, vibraslap, and wood block. The maraca
-    * and maracas values distinguish the one- and two-maraca
-    * versions of the pictogram. The castanets and vibraslap
-    * values are in addition to Stone's list.
-    */
-    export interface Wood extends String {
-    }
-    /**
-    * The pitched element represents pictograms for pitched
-    * percussion instruments. Valid values are chimes,
-    * glockenspiel, mallet, marimba, tubular chimes, vibraphone,
-    * and xylophone. The chimes and tubular chimes values
-    * distinguish the single-line and double-line versions of the
-    * pictogram. The mallet value is in addition to Stone's list.
-    */
-    export interface Pitched extends String {
-    }
-    /**
-    * The membrane element represents pictograms for membrane
-    * percussion instruments. Valid values are bass drum,
-    * bass drum on side, bongos, conga drum, goblet drum,
-    * military drum, snare drum, snare drum snares off,
-    * tambourine, tenor drum, timbales, and tomtom. The
-    * goblet drum value is in addition to Stone's list.
-    */
-    export interface Membrane extends String {
-    }
-    /**
-    * The effect element represents pictograms for sound effect
-    * percussion instruments. Valid values are anvil, auto horn,
-    * bird whistle, cannon, duck call, gun shot, klaxon horn,
-    * lions roar, police whistle, siren, slide whistle,
-    * thunder sheet, wind machine, and wind whistle. The cannon
-    * value is in addition to Stone's list.
-    */
-    export interface Effect extends String {
-    }
-    export interface StickType extends String {
-    }
-    export interface StickMaterial extends String {
-    }
-    /**
-    * The stick-location element represents pictograms for the
-    * location of sticks, beaters, or mallets on cymbals, gongs,
-    * drums, and other instruments. Valid values are center,
-    * rim, cymbal bell, and cymbal edge.
-    */
-    export interface StickLocation extends String {
-    }
-    /**
-    * The other-percussion element represents percussion
-    * pictograms not defined elsewhere.
-    */
-    export interface OtherPercussion extends String {
-    }
-    export interface FrameStrings extends String {
-    }
-    export interface FrameFrets extends String {
-    }
-    /**
-    * Works and movements are optionally identified by number
-    * and title. The work element also may indicate a link
-    * to the opus document that composes multiple movements
-    * into a collection.
-    */
-    export interface WorkNumber extends String {
-    }
-    /**
-    * Works and movements are optionally identified by number
-    * and title. The work element also may indicate a link
-    * to the opus document that composes multiple movements
-    * into a collection.
-    */
-    export interface WorkTitle extends String {
-    }
-    /**
-    *     Works and movements are optionally identified by number
-    * and title. The work element also may indicate a link
-    * to the opus document that composes multiple movements
-    * into a collection.
-    */
-    export interface MovementNumber extends String {
-    }
-    /**
-    *     Works and movements are optionally identified by number
-    * and title. The work element also may indicate a link
-    * to the opus document that composes multiple movements
-    * into a collection.
-    */
-    export interface MovementTitle extends String {
-    }
-    /**
-    * The credit-type element, new in Version 3.0, indicates the
-    * purpose behind a credit. Multiple types of data may be
-    * combined in a single credit, so multiple elements may be
-    * used. Standard values include page number, title, subtitle,
-    * composer, arranger, lyricist, and rights.
-    */
-    export interface CreditType extends String {
-    }
-    /**
-    *     The group element allows the use of different versions of
-    * the part for different purposes. Typical values include
-    * score, parts, sound, and data. Ordering information that is
-    * directly encoded in MuseData can be derived from the
-    * ordering within a MusicXML score or opus.
-    */
-    export interface Group extends String {
-    }
-    export interface InstrumentName extends String {
-    }
-    export interface InstrumentAbbreviation extends String {
-    }
-    export interface InstrumentSound extends String {
-    }
-    export interface Ensemble extends String {
-    }
-    export interface VirtualLibrary extends String {
-    }
-    export interface VirtualName extends String {
     }
     /**
     * Calendar dates are represented yyyy-mm-dd format, following
@@ -963,28 +16,6 @@ declare module 'musicxml-interfaces' {
         month: number;
         day: number;
         year: number;
-    }
-    /**
-    * The tenths entity is a number representing tenths of
-    * interline space (positive or negative) for use in
-    * attributes. The layout-tenths entity is the same for
-    * use in elements. Both integer and decimal values are
-    * allowed, such as 5 for a half space and 2.5 for a
-    * quarter space. Interline space is measured from the
-    * middle of a staff line.
-    */
-    export interface Tenths extends String {
-    }
-    /**
-    * The tenths entity is a number representing tenths of
-    * interline space (positive or negative) for use in
-    * attributes. The layout-tenths entity is the same for
-    * use in elements. Both integer and decimal values are
-    * allowed, such as 5 for a half space and 2.5 for a
-    * quarter space. Interline space is measured from the
-    * middle of a staff line.
-    */
-    export interface LayoutTenths extends String {
     }
     /**
     * The start-stop and start-stop-continue entities are used
@@ -1005,7 +36,7 @@ declare module 'musicxml-interfaces' {
     * a slur may appear in staff 1 before the starting point for
     * the slur appears in staff 2 later in the document.
     */
-    export enum StartStop {
+    export const enum StartStop {
         Start = 0,
         Stop = 1,
     }
@@ -1028,7 +59,7 @@ declare module 'musicxml-interfaces' {
     * a slur may appear in staff 1 before the starting point for
     * the slur appears in staff 2 later in the document.
     */
-    export enum StartStopContinue {
+    export const enum StartStopContinue {
         Start = 0,
         Stop = 1,
         Continue = 2,
@@ -1052,17 +83,11 @@ declare module 'musicxml-interfaces' {
     * a slur may appear in staff 1 before the starting point for
     * the slur appears in staff 2 later in the document.
     */
-    export enum StartStopSingle {
+    export const enum StartStopSingle {
         Single = 3,
         Start = 0,
         Stop = 1,
     }
-    /**
-    * The yes-no entity is used for boolean-like attributes.
-    */
-    /**
-    * The yes-no entity is used for boolean-like attributes.
-    */
     /**
     * The yes-no-number entity is used for attributes that can
     * be either boolean or numeric values. Values can be "yes",
@@ -1078,7 +103,7 @@ declare module 'musicxml-interfaces' {
     * cue-sized vs. oversized symbols. The large value
     * for oversized symbols was added in version 1.1.
     */
-    export enum SymbolSize {
+    export const enum SymbolSize {
         Unspecified = 0,
         Full = 1,
         Cue = 2,
@@ -1088,12 +113,12 @@ declare module 'musicxml-interfaces' {
     * The above-below type is used to indicate whether one
     * element appears above or below another element.
     */
-    export enum AboveBelow {
+    export const enum AboveBelow {
         Above = 1,
         Below = 2,
         Unspecified = 0,
     }
-    export enum OverUnder {
+    export const enum OverUnder {
         Over = 1,
         Under = 2,
         Unspecified = 0,
@@ -1102,7 +127,7 @@ declare module 'musicxml-interfaces' {
     * The up-down entity is used for arrow direction,
     * indicating which way the tip is pointing.
     */
-    export enum UpDown {
+    export const enum UpDown {
         Down = 1,
         Up = 0,
     }
@@ -1110,7 +135,7 @@ declare module 'musicxml-interfaces' {
     * The top-bottom entity is used to indicate the top or
     * bottom part of a vertical shape like non-arpeggiate.
     */
-    export enum TopBottom {
+    export const enum TopBottom {
         Top = 0,
         Bottom = 1,
     }
@@ -1119,7 +144,7 @@ declare module 'musicxml-interfaces' {
     * element appears to the left or the right of another
     * element.
     */
-    export enum LeftRight {
+    export const enum LeftRight {
         Right = 1,
         Left = 0,
     }
@@ -1129,7 +154,7 @@ declare module 'musicxml-interfaces' {
     * enclosure is similar to a rectangle with the bottom line
     * missing, as is common in jazz notation.
     */
-    export enum EnclosureShape {
+    export const enum EnclosureShape {
         Circle = 3,
         Bracket = 4,
         Triangle = 5,
@@ -1139,11 +164,11 @@ declare module 'musicxml-interfaces' {
         Oval = 2,
         Rectangle = 0,
     }
-    export enum NormalItalic {
+    export const enum NormalItalic {
         Italic = 1,
         Normal = 0,
     }
-    export enum NormalBold {
+    export const enum NormalBold {
         Bold = 2,
         Normal = 0,
     }
@@ -1310,53 +335,53 @@ declare module 'musicxml-interfaces' {
         fontStyle?: NormalItalic;
         fontSize?: string;
     }
-    export enum LeftCenterRight {
+    export const enum LeftCenterRight {
         Right = 1,
         Center = 2,
         Left = 0,
     }
-    export enum TopMiddleBottomBaseline {
+    export const enum TopMiddleBottomBaseline {
         Top = 0,
         Middle = 1,
         Baseline = 3,
         Bottom = 2,
     }
-    export enum DirectionMode {
+    export const enum DirectionMode {
         Lro = 2,
         Rlo = 3,
         Ltr = 0,
         Rtl = 1,
     }
-    export enum StraightCurved {
+    export const enum StraightCurved {
         Curved = 1,
         Straight = 0,
     }
-    export enum SolidDashedDottedWavy {
+    export const enum SolidDashedDottedWavy {
         Dashed = 1,
         Wavy = 3,
         Dotted = 2,
         Solid = 0,
     }
-    export enum NormalAngledSquare {
+    export const enum NormalAngledSquare {
         Angled = 1,
         Square = 2,
         Normal = 0,
     }
-    export enum UprightInverted {
+    export const enum UprightInverted {
         Upright = 0,
         Inverted = 1,
     }
-    export enum UpperMainBelow {
+    export const enum UpperMainBelow {
         Main = 1,
         Below = 2,
         Upper = 0,
     }
-    export enum WholeHalfUnison {
+    export const enum WholeHalfUnison {
         Unison = 2,
         Whole = 0,
         Half = 1,
     }
-    export enum WholeHalfNone {
+    export const enum WholeHalfNone {
         None = 3,
         Whole = 0,
         Half = 1,
@@ -1393,7 +418,7 @@ declare module 'musicxml-interfaces' {
     }
     /**
     * The justify entity is used to indicate left, center, or
-    * right justification. The default value varies for different
+    * right justification. The default value leties for different
     * elements. For elements where the justify attribute is present
     * but the halign attribute is not, the justify attribute
     * indicates horizontal alignment as well as justification.
@@ -1761,12 +786,6 @@ declare module 'musicxml-interfaces' {
         type: StartStopContinue;
     }
     /**
-    * Staff assignment is only needed for music notated on
-    * multiple staves. Used by both notes and directions.
-    */
-    export interface Staff extends String {
-    }
-    /**
     * Segno and coda signs can be associated with a measure
     * or a general musical direction. These are visual
     * indicators only; a sound element is needed to guide
@@ -1781,34 +800,6 @@ declare module 'musicxml-interfaces' {
     * playback applications reliably.
     */
     export interface Coda extends PrintStyleAlign {
-    }
-    /**
-    * These elements are used both in the time-modification and
-    * metronome-tuplet elements. The actual-notes element
-    * describes how many notes are played in the time usually
-    * occupied by the number of normal-notes. If the normal-notes
-    * type is different than the current note type (e.g., a
-    * quarter note within an eighth note triplet), then the
-    * normal-notes type (e.g. eighth) is specified in the
-    * normal-type and normal-dot elements. The content of the
-    * actual-notes and normal-notes elements ia a non-negative
-    * integer.
-    */
-    export interface ActualNotes extends String {
-    }
-    /**
-    * These elements are used both in the time-modification and
-    * metronome-tuplet elements. The actual-notes element
-    * describes how many notes are played in the time usually
-    * occupied by the number of normal-notes. If the normal-notes
-    * type is different than the current note type (e.g., a
-    * quarter note within an eighth note triplet), then the
-    * normal-notes type (e.g. eighth) is specified in the
-    * normal-type and normal-dot elements. The content of the
-    * actual-notes and normal-notes elements ia a non-negative
-    * integer.
-    */
-    export interface NormalNotes extends String {
     }
     /**
     * These elements are used both in the time-modification and
@@ -1905,22 +896,6 @@ declare module 'musicxml-interfaces' {
     */
     export interface String extends PrintStyle, Placement {
         stringNum: number;
-    }
-    /**
-    * The tuning-step, tuning-alter, and tuning-octave elements
-    * are represented like the step, alter, and octave elements,
-    * with different names to reflect their different function.
-    * They are used in the staff-tuning and accord elements.
-    */
-    export interface TuningAlter extends String {
-    }
-    /**
-    * The tuning-step, tuning-alter, and tuning-octave elements
-    * are represented like the step, alter, and octave elements,
-    * with different names to reflect their different function.
-    * They are used in the staff-tuning and accord elements.
-    */
-    export interface TuningOctave extends String {
     }
     /**
     * The display-text element is used for exact formatting of
@@ -2025,11 +1000,6 @@ declare module 'musicxml-interfaces' {
         type: string;
     }
     /**
-    * A width, in mm. Most widths are in terms of "tenths" rather than millimeters.
-    */
-    export interface Millimeters extends String {
-    }
-    /**
     * Margins, page sizes, and distances are all measured in
     * tenths to keep MusicXML data in a consistent coordinate
     * system as much as possible. The translation to absolute
@@ -2044,51 +1014,7 @@ declare module 'musicxml-interfaces' {
         tenths?: number;
         millimeters?: number;
     }
-    /**
-    * Margin elements are included within many of the larger
-    * layout elements.
-    */
-    export interface LeftMargin extends String {
-    }
-    /**
-    * Margin elements are included within many of the larger
-    * layout elements.
-    */
-    export interface RightMargin extends String {
-    }
-    /**
-    * Margin elements are included within many of the larger
-    * layout elements.
-    */
-    export interface TopMargin extends String {
-    }
-    /**
-    * Margin elements are included within many of the larger
-    * layout elements.
-    */
-    export interface BottomMargin extends String {
-    }
-    /**
-    * Page layout can be defined both in score-wide defaults
-    * and in the print element. Page margins are specified either
-    * for both even and odd pages, or via separate odd and even
-    * page number values. The type is not needed when used as
-    * part of a print element. If omitted when used in the
-    * defaults element, "both" is the default.
-    */
-    export interface PageHeight extends String {
-    }
-    /**
-    * Page layout can be defined both in score-wide defaults
-    * and in the print element. Page margins are specified either
-    * for both even and odd pages, or via separate odd and even
-    * page number values. The type is not needed when used as
-    * part of a print element. If omitted when used in the
-    * defaults element, "both" is the default.
-    */
-    export interface PageWidth extends String {
-    }
-    export enum OddEvenBoth {
+    export const enum OddEvenBoth {
         Both = 2,
         Even = 1,
         Odd = 0,
@@ -2118,74 +1044,6 @@ declare module 'musicxml-interfaces' {
         pageHeight?: number;
         pageWidth?: number;
         pageMargins?: PageMargins[];
-    }
-    /**
-    * A system is a group of staves that are read and played
-    * simultaneously. System layout includes left and right
-    * margins, the vertical distance from the previous system,
-    * and the presence or absence of system dividers.
-    *
-    * Margins are relative to the page margins. Positive values
-    * indent and negative values reduce the margin size. The
-    * system distance is measured from the bottom line of the
-    * previous system to the top line of the current system.
-    * It is ignored for the first system on a page. The top
-    * system distance is measured from the page's top margin to
-    * the top line of the first system. It is ignored for all
-    * but the first system on a page.
-    *
-    * Sometimes the sum of measure widths in a system may not
-    * equal the system width specified by the layout elements due
-    * to roundoff or other errors. The behavior when reading
-    * MusicXML files in these cases is application-dependent.
-    * For instance, applications may find that the system layout
-    * data is more reliable than the sum of the measure widths,
-    * and adjust the measure widths accordingly.
-    *
-    * When used in the layout element, the system-layout element
-    * defines a default appearance for all systems in the score.
-    * When used in the print element, the system layout element
-    * affects the appearance of the current system only. All
-    * other systems use the default values provided in the
-    * defaults element. If any child elements are missing from
-    * the system-layout element in a print element, the values
-    * from the defaults element are used there as well.
-    */
-    export interface SystemDistance extends String {
-    }
-    /**
-    * A system is a group of staves that are read and played
-    * simultaneously. System layout includes left and right
-    * margins, the vertical distance from the previous system,
-    * and the presence or absence of system dividers.
-    *
-    * Margins are relative to the page margins. Positive values
-    * indent and negative values reduce the margin size. The
-    * system distance is measured from the bottom line of the
-    * previous system to the top line of the current system.
-    * It is ignored for the first system on a page. The top
-    * system distance is measured from the page's top margin to
-    * the top line of the first system. It is ignored for all
-    * but the first system on a page.
-    *
-    * Sometimes the sum of measure widths in a system may not
-    * equal the system width specified by the layout elements due
-    * to roundoff or other errors. The behavior when reading
-    * MusicXML files in these cases is application-dependent.
-    * For instance, applications may find that the system layout
-    * data is more reliable than the sum of the measure widths,
-    * and adjust the measure widths accordingly.
-    *
-    * When used in the layout element, the system-layout element
-    * defines a default appearance for all systems in the score.
-    * When used in the print element, the system layout element
-    * affects the appearance of the current system only. All
-    * other systems use the default values provided in the
-    * defaults element. If any child elements are missing from
-    * the system-layout element in a print element, the values
-    * from the defaults element are used there as well.
-    */
-    export interface TopSystemDistance extends String {
     }
     /**
     * A system is a group of staves that are read and played
@@ -2324,30 +1182,9 @@ declare module 'musicxml-interfaces' {
     * element, the values apply to all parts. This value is
     * ignored for the first staff in a system.
     */
-    export interface StaffDistance extends String {
-    }
-    /**
-    * Staff layout includes the vertical distance from the bottom
-    * line of the previous staff in this system to the top line
-    * of the staff specified by the number attribute. The
-    * optional number attribute refers to staff numbers within
-    * the part, from top to bottom on the system. A value of 1
-    * is assumed if not present. When used in the defaults
-    * element, the values apply to all parts. This value is
-    * ignored for the first staff in a system.
-    */
     export interface StaffLayout {
         staffDistance?: number;
         num: number;
-    }
-    /**
-    * Measure layout includes the horizontal distance from the
-    * previous measure. This value is only used for systems
-    * where there is horizontal whitespace in the middle of a
-    * system, as in systems with codas. To specify the measure
-    * width, use the width attribute of the measure element.
-    */
-    export interface MeasureDistance extends String {
     }
     /**
     * Measure layout includes the horizontal distance from the
@@ -2400,7 +1237,7 @@ declare module 'musicxml-interfaces' {
         tenths: number;
         type: string;
     }
-    export enum CueGraceLarge {
+    export const enum CueGraceLarge {
         Grace = 1,
         Cue = 0,
         Large = 2,
@@ -2565,13 +1402,6 @@ declare module 'musicxml-interfaces' {
         type: string;
     }
     /**
-    *
-    * The source for the music that is encoded. This is similar
-    * to the Dublin Core source element.
-    */
-    export interface Source extends String {
-    }
-    /**
     * A related resource for the music that is encoded. This is
     * similar to the Dublin Core relation element.
     */
@@ -2642,7 +1472,7 @@ declare module 'musicxml-interfaces' {
         encoders?: Encoder[];
         softwares?: string[];
     }
-    export enum SeparatorType {
+    export const enum SeparatorType {
         None = 0,
         Horizontal = 1,
         Diagonal = 2,
@@ -2664,7 +1494,7 @@ declare module 'musicxml-interfaces' {
     export interface TimeSeparator {
         separator?: SeparatorType;
     }
-    export enum TimeSymbolType {
+    export const enum TimeSymbolType {
         DottedNote = 4,
         Cut = 1,
         SingleNumber = 2,
@@ -2688,7 +1518,7 @@ declare module 'musicxml-interfaces' {
     export interface TimeSymbol {
         symbol?: TimeSymbolType;
     }
-    export enum CancelLocation {
+    export const enum CancelLocation {
         Right = 1,
         BeforeBarline = 2,
         Left = 0,
@@ -2795,77 +1625,10 @@ declare module 'musicxml-interfaces' {
     * Key signatures appear at the start of each system unless
     * the print-object attribute has been set to "no".
     */
-    export interface Fifths extends String {
-    }
-    /**
-    * Traditional key signatures are represented by the number
-    * of flats and sharps, plus an optional mode for major/
-    * minor/mode distinctions. Negative numbers are used for
-    * flats and positive numbers for sharps, reflecting the
-    * key's placement within the circle of fifths (hence the
-    * element name). A cancel element indicates that the old
-    * key signature should be cancelled before the new one
-    * appears. This will always happen when changing to C major
-    * or A minor and need not be specified then. The cancel
-    * value matches the fifths value of the cancelled key
-    * signature (e.g., a cancel of -2 will provide an explicit
-    * cancellation for changing from B flat major to F major).
-    * The optional location attribute indicates where a key
-    * signature cancellation appears relative to a new key
-    * signature: to the left, to the right, or before the barline
-    * and to the left. It is left by default. For mid-measure key
-    * elements, a cancel location of before-barline should be
-    * treated like a cancel location of left.
-    *
-    * Non-traditional key signatures can be represented using
-    * the Humdrum/Scot concept of a list of altered tones.
-    * The key-step and key-alter elements are represented the
-    * same way as the step and alter elements are in the pitch
-    * element in the note.mod file. The optional key-accidental
-    * element is represented the same way as the accidental
-    * element in the note.mod file. It is used for disambiguating
-    * microtonal accidentals. The different element names
-    * indicate the different meaning of altering notes in a scale
-    * versus altering a sounding pitch.
-    *
-    * Valid mode values include major, minor, dorian, phrygian,
-    * lydian, mixolydian, aeolian, ionian, locrian, and none.
-    *
-    * The optional number attribute refers to staff numbers,
-    * from top to bottom on the system. If absent, the key
-    * signature applies to all staves in the part.
-    * The optional list of key-octave elements is used to specify
-    * in which octave each element of the key signature appears.
-    * The content specifies the octave value using the same
-    * values as the display-octave element. The number attribute
-    * is a positive integer that refers to the key signature
-    * element in left-to-right order. If the cancel attribute is
-    * set to yes, then this number refers to an element specified
-    * by the cancel element. It is no by default.
-    *
-    * Key signatures appear at the start of each system unless
-    * the print-object attribute has been set to "no".
-    */
     export interface KeyOctave {
         octave: number;
         number: number;
         cancel?: boolean;
-    }
-    /**
-    * Musical notation duration is commonly represented as
-    * fractions. The divisions element indicates how many
-    * divisions per quarter note are used to indicate a note's
-    * duration. For example, if duration = 1 and divisions = 2,
-    * this is an eighth note duration. Duration and divisions
-    * are used directly for generating sound output, so they
-    * must be chosen to take tuplets into account. Using a
-    * divisions element lets us use just one number to
-    * represent a duration for each note in the score, while
-    * retaining the full power of a fractional representation.
-    * For maximum compatibility with Standard MIDI Files, the
-    * divisions value should not exceed 16383.
-    */
-    export interface Divisions extends String {
     }
     /**
     * Traditional key signatures are represented by the number
@@ -3009,16 +1772,7 @@ declare module 'musicxml-interfaces' {
         beatTypes: number[];
         timeRelation?: string;
     }
-    /**
-    * Staves are used if there is more than one staff
-    * represented in the given part (e.g., 2 staves for
-    * typical piano parts). If absent, a value of 1 is assumed.
-    * Staves are ordered from top to bottom in a part in
-    * numerical order, with staff 1 above staff 2.
-    */
-    export interface Staves extends String {
-    }
-    export enum PartSymbolType {
+    export const enum PartSymbolType {
         None = 0,
         Line = 2,
         Bracket = 3,
@@ -3081,46 +1835,6 @@ declare module 'musicxml-interfaces' {
     * print-object attribute has been set to "no" or the
     * additional attribute has been set to "yes".
     */
-    export interface Line extends String {
-    }
-    /**
-    * Clefs are represented by the sign, line, and
-    * clef-octave-change elements. Sign values include G, F, C,
-    * percussion, TAB, jianpu, and none. Line numbers are
-    * counted from the bottom of the staff. Standard values are
-    * 2 for the G sign (treble clef), 4 for the F sign (bass clef),
-    * 3 for the C sign (alto clef) and 5 for TAB (on a 6-line
-    * staff). The clef-octave-change element is used for
-    * transposing clefs (e.g., a treble clef for tenors would
-    * have a clef-octave-change value of -1). The optional
-    * number attribute refers to staff numbers within the part,
-    * from top to bottom on the system. A value of 1 is
-    * assumed if not present.
-    *
-    * The jianpu sign indicates that the music that follows
-    * should be in jianpu numbered notation, just as the TAB
-    * sign indicates that the music that follows should be in
-    * tablature notation. Unlike TAB, a jianpu sign does not
-    * correspond to a visual clef notation.
-    *
-    * Sometimes clefs are added to the staff in non-standard
-    * line positions, either to indicate cue passages, or when
-    * there are multiple clefs present simultaneously on one
-    * staff. In this situation, the additional attribute is set to
-    * "yes" and the line value is ignored. The size attribute
-    * is used for clefs where the additional attribute is "yes".
-    * It is typically used to indicate cue clefs.
-    *
-    * Sometimes clefs at the start of a measure need to appear
-    * after the barline rather than before, as for cues or for
-    * use after a repeated section. The after-barline attribute
-    * is set to "yes" in this situation. The attribute is ignored
-    * for mid-measure clefs.
-    *
-    * Clefs appear at the start of each system unless the
-    * print-object attribute has been set to "no" or the
-    * additional attribute has been set to "yes".
-    */
     export interface Clef extends PrintStyle, PrintObject {
         clefOctaveChange: string;
         sign: string;
@@ -3129,29 +1843,6 @@ declare module 'musicxml-interfaces' {
         line: number;
         afterBarline?: boolean;
         additional?: boolean;
-    }
-    /**
-    * The staff-details element is used to indicate different
-    * types of staves. The staff-type element can be ossia,
-    * cue, editorial, regular, or alternate. An alternate staff
-    * indicates one that shares the same musical data as the
-    * prior staff, but displayed differently (e.g., treble and
-    * bass clef, standard notation and tab). The staff-lines
-    * element specifies the number of lines for a non 5-line
-    * staff. The staff-tuning and capo elements are used to
-    * specify tuning when using tablature notation. The optional
-    * number attribute specifies the staff number from top to
-    * bottom on the system, as with clef. The optional show-frets
-    * attribute indicates whether to show tablature frets as
-    * numbers (0, 1, 2) or letters (a, b, c). The default choice
-    * is numbers. The print-object attribute is used to indicate
-    * when a staff is not printed in a part, usually in large
-    * scores where empty parts are omitted. It is yes by default.
-    * If print-spacing is yes while print-object is no, the score
-    * is printed in cutaway format where vertical space is left
-    * for the empty part.
-    */
-    export interface StaffLines extends String {
     }
     /**
     * The tuning-step, tuning-alter, and tuning-octave
@@ -3164,21 +1855,7 @@ declare module 'musicxml-interfaces' {
         tuningStep: string;
         tuningOctave: string;
     }
-    /**
-    * The staff-size element indicates how large a staff
-    * space is on this staff, expressed as a percentage of
-    * the work's default scaling. Values less than 100 make
-    * the staff space smaller while values over 100 make the
-    * staff space larger. A staff-type of cue, ossia, or
-    * editorial implies a staff-size of less than 100, but
-    * the exact value is implementation-dependent unless
-    * specified here. Staff size affects staff height only,
-    * not the relationship of the staff to the left and
-    * right margins.
-    */
-    export interface StaffSize extends String {
-    }
-    export enum ShowFretsType {
+    export const enum ShowFretsType {
         Letters = 1,
         Numbers = 0,
     }
@@ -3451,10 +2128,6 @@ declare module 'musicxml-interfaces' {
         displayStep?: string;
         displayOctave?: string;
     }
-    export interface Alter extends String {
-    }
-    export interface Octave extends String {
-    }
     /**
     * Pitch is represented as a combination of the step of the
     * diatonic scale, the chromatic alteration, and the octave.
@@ -3496,23 +2169,6 @@ declare module 'musicxml-interfaces' {
         measure?: boolean;
         displayStep?: string;
         displayOctave?: string;
-    }
-    /**
-    * Duration is a positive number specified in division units.
-    * This is the intended duration vs. notated duration (for
-    * instance, swing eighths vs. even eighths, or differences
-    * in dotted notes in Baroque-era music). Differences in
-    * duration specific to an interpretation or performance
-    * should use the note element's attack and release
-    * attributes.
-    *
-    * The tie element indicates that a tie begins or ends with
-    * this note. If the tie element applies only particular times
-    * through a repeat, the time-only attribute indicates which
-    * times to apply it. The tie element indicates sound; the tied
-    * element indicates notation.
-    */
-    export interface Duration extends String {
     }
     /**
     * Duration is a positive number specified in division units.
@@ -3577,7 +2233,7 @@ declare module 'musicxml-interfaces' {
         release?: number;
         beams?: Beam[];
     }
-    export enum Count {
+    export const enum Count {
         Quarter = 4,
         Breve = 9990,
         Long = 9991,
@@ -3613,7 +2269,7 @@ declare module 'musicxml-interfaces' {
     */
     export interface Dot extends PrintStyle, Placement {
     }
-    export enum MxmlAccidental {
+    export const enum MxmlAccidental {
         NaturalFlat = 7,
         SharpUp = 13,
         ThreeQuartersFlat = 10,
@@ -3625,7 +2281,7 @@ declare module 'musicxml-interfaces' {
         Flat2 = 28,
         Flat3 = 29,
         Flat4 = 291,
-        TripleFlat = 19,
+        TripleFlat = 191,
         Flat5 = 30,
         Sharp = 0,
         QuarterSharp = 9,
@@ -3701,7 +2357,7 @@ declare module 'musicxml-interfaces' {
         normalNotes: number;
         normalDots?: NormalDot[];
     }
-    export enum StemType {
+    export const enum StemType {
         None = 2,
         Double = 3,
         Down = 0,
@@ -3720,7 +2376,7 @@ declare module 'musicxml-interfaces' {
     export interface Stem extends Position, Color {
         type: StemType;
     }
-    export enum NoteheadType {
+    export const enum NoteheadType {
         InvertedTriangle = 7,
         CircleDot = 14,
         ArrowUp = 9,
@@ -3826,14 +2482,14 @@ declare module 'musicxml-interfaces' {
     export interface NoteheadText {
         text: TextArray;
     }
-    export enum BeamType {
+    export const enum BeamType {
         BackwardHook = 4,
         Begin = 0,
         ForwardHook = 3,
         Continue = 1,
         End = 2,
     }
-    export enum AccelRitNone {
+    export const enum AccelRitNone {
         Accel = 0,
         None = 2,
         Rit = 1,
@@ -3915,7 +2571,7 @@ declare module 'musicxml-interfaces' {
         number?: number;
         type: StartStopContinue;
     }
-    export enum ActualBothNone {
+    export const enum ActualBothNone {
         None = 2,
         Both = 1,
         Actual = 0,
@@ -4590,13 +3246,13 @@ declare module 'musicxml-interfaces' {
         holeShape: string;
         holeType?: string;
     }
-    export enum HoleLocation {
+    export const enum HoleLocation {
         Right = 0,
         Top = 3,
         Bottom = 1,
         Left = 2,
     }
-    export enum HoleClosedType {
+    export const enum HoleClosedType {
         No = 1,
         Yes = 0,
         Half = 2,
@@ -4646,7 +3302,7 @@ declare module 'musicxml-interfaces' {
         circularArrow?: string;
     }
     /**
-    * The handbell element represents notation for various
+    * The handbell element represents notation for letious
     * techniques used in handbell and handchime music. Valid
     * values are damp, echo, gyro, hand martellato, mallet lift,
     * mallet table, martellato, martellato lift,
@@ -4752,7 +3408,7 @@ declare module 'musicxml-interfaces' {
     */
     export interface Falloff extends LineShape, LineType, DashedFormatting, PrintStyle, Placement {
     }
-    export enum BreathMarkType {
+    export const enum BreathMarkType {
         Empty = 2,
         Comma = 0,
         Tick = 1,
@@ -4865,7 +3521,7 @@ declare module 'musicxml-interfaces' {
     export interface Text extends Font, Color, TextDecoration, TextRotation, LetterSpacing, TextDirection {
         data: string;
     }
-    export enum SyllabicType {
+    export const enum SyllabicType {
         Single = 0,
         Begin = 1,
         Middle = 3,
@@ -4972,7 +3628,7 @@ declare module 'musicxml-interfaces' {
         duration: number;
         staff?: number;
     }
-    export enum BarlineLocation {
+    export const enum BarlineLocation {
         Right = 1,
         Middle = 2,
         Left = 0,
@@ -5025,7 +3681,7 @@ declare module 'musicxml-interfaces' {
     * short stroke through the top line), short (a partial
     * barline between the 2nd and 4th lines), and none.
     */
-    export enum BarStyleType {
+    export const enum BarStyleType {
         Regular = 0,
         LightHeavy = 5,
         HeavyLight = 6,
@@ -5048,7 +3704,7 @@ declare module 'musicxml-interfaces' {
     export interface BarStyle extends Color {
         data: BarStyleType;
     }
-    export enum StartStopDiscontinue {
+    export const enum StartStopDiscontinue {
         Discontinue = 2,
         Start = 0,
         Stop = 1,
@@ -5085,14 +3741,14 @@ declare module 'musicxml-interfaces' {
         type: StartStopDiscontinue;
         ending?: string;
     }
-    export enum WingedType {
+    export const enum WingedType {
         None = 0,
         Curved = 2,
         DoubleCurved = 4,
         Straight = 1,
         DoubleStraight = 3,
     }
-    export enum DirectionTypeBg {
+    export const enum DirectionTypeBg {
         Forward = 1,
         Backward = 0,
     }
@@ -5117,7 +3773,7 @@ declare module 'musicxml-interfaces' {
     * the tip of a stick or beater points, using Unicode arrow
     * terminology.
     */
-    export enum TipDirection {
+    export const enum TipDirection {
         Right = 3,
         Northwest = 4,
         Southwest = 7,
@@ -5191,7 +3847,7 @@ declare module 'musicxml-interfaces' {
     export interface Words extends TextFormatting {
         data: string;
     }
-    export enum WedgeType {
+    export const enum WedgeType {
         Diminuendo = 1,
         Crescendo = 0,
         Stop = 2,
@@ -5227,7 +3883,7 @@ declare module 'musicxml-interfaces' {
         number: number;
         type: StartStopContinue;
     }
-    export enum LineEndType {
+    export const enum LineEndType {
         None = 4,
         Both = 2,
         Arrow = 3,
@@ -5235,7 +3891,7 @@ declare module 'musicxml-interfaces' {
         Up = 0,
     }
     /**
-    * Brackets are combined with words in a variety of
+    * Brackets are combined with words in a letiety of
     * modern directions. The line-end attribute specifies
     * if there is a jog up or down (or both), an arrow,
     * or nothing at the start or end of the bracket. If
@@ -5249,7 +3905,7 @@ declare module 'musicxml-interfaces' {
         type: StartStopContinue;
         lineEnd: LineEndType;
     }
-    export enum PedalType {
+    export const enum PedalType {
         Change = 3,
         Start = 0,
         Stop = 1,
@@ -5339,7 +3995,7 @@ declare module 'musicxml-interfaces' {
         normalNotes: number;
         normalDots: NormalDot[];
     }
-    export enum OctaveShiftType {
+    export const enum OctaveShiftType {
         Down = 2,
         Stop = 3,
         Up = 1,
@@ -5420,7 +4076,7 @@ declare module 'musicxml-interfaces' {
         type: string;
         source: string;
     }
-    export enum VoiceSymbol {
+    export const enum VoiceSymbol {
         None = 4,
         Hauptstimme = 1,
         Nebenstimme = 2,
@@ -5568,11 +4224,11 @@ declare module 'musicxml-interfaces' {
         root: Root;
         function: Function;
         kind: Kind;
-        degree: Degree;
+        degrees: Degree[];
         inversion: Inversion;
         bass: Bass;
     }
-    export enum ExplicitImpliedAlternate {
+    export const enum ExplicitImpliedAlternate {
         Explicit = 1,
         Implied = 2,
         Alternate = 3,
@@ -5581,7 +4237,7 @@ declare module 'musicxml-interfaces' {
         frame: Frame;
         printFrame: boolean;
         staff: number;
-        harmonyType: ExplicitImpliedAlternate;
+        type: ExplicitImpliedAlternate;
         offset: Offset;
     }
     /**
@@ -5785,7 +4441,7 @@ declare module 'musicxml-interfaces' {
         degreeValue: DegreeValue;
         degreeType: DegreeType;
     }
-    export enum ChordType {
+    export const enum ChordType {
         Augmented = 3,
         Diminished = 4,
         Major = 1,
@@ -5871,17 +4527,18 @@ declare module 'musicxml-interfaces' {
     * for distinguishing between overlapping and hierarchical
     * groupings. The member-of attribute allows for easy
     * distinguishing of what grouping elements are in what
-    * hierarchy. Feature elements contained within a "stoptype of grouping may be ignored.
+    * hierarchy. Feature elements contained within a "stop"
+    * type of grouping may be ignored.
     *
     * This element is flexible to allow for non-standard analyses.
     * Future versions of the MusicXML format may add elements
-    * that can represent more standardized categories of analysis"
+    * that can represent more standardized categories of analysis
     * data, allowing for easier data sharing.
     */
     export interface Grouping {
         features: Feature[];
         number: number;
-        groupingType: StartStopSingle;
+        type: StartStopSingle;
         memberOf: string;
     }
     export interface Feature {
@@ -6391,6 +5048,8 @@ declare module 'musicxml-interfaces' {
     export function scoreHeaderToXML(header: ScoreHeader): string[];
     export function backupToXML(backup: Backup): string;
     export function forwardToXML(forward: Forward): string;
+    export function groupingToXML(grouping: Grouping): string;
+    export function harmonyToXML(harmony: Harmony): string;
     export function printToXML(print: Print): string;
     export function soundToXML(sound: Sound): string;
     export function staffDebugInfoToXMLComment(module: any): string[];
@@ -6401,5 +5060,6 @@ declare module 'musicxml-interfaces' {
         length: number;
     }): string;
     export function noteToXML(note: Note): string;
+    export function figuredBassToXML(figuredBass: FiguredBass): string;
     export function barlineToXML(barline: Barline): string;
 }

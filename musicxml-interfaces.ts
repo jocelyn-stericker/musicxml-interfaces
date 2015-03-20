@@ -20506,13 +20506,20 @@ export interface HarmonyChord {
     root: Root;
     function: Function;
     kind: Kind;
-    degree: Degree;
+    degrees: Degree[];
     inversion: Inversion;
     bass: Bass;
 }
 
 function xmlToHarmonyChord(node: Node) {
-    let ret: HarmonyChord = <any> {};
+    let ret: HarmonyChord = {
+        root: null,
+        "function": null,
+        kind: null,
+        degrees: [],
+        inversion: null,
+        bass: null
+    };
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "root") {
@@ -20529,7 +20536,7 @@ function xmlToHarmonyChord(node: Node) {
         }
         if (ch.nodeName === "degree") {
             let dataDegree = xmlToDegree(ch) ;
-            ret.degree = dataDegree;
+            ret.degrees.push(dataDegree);
         }
         if (ch.nodeName === "inversion") {
             let dataInversion = xmlToInversion(ch) ;
@@ -20574,12 +20581,24 @@ export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyl
     frame: Frame;
     printFrame: boolean;
     staff: number;
-    harmonyType: ExplicitImpliedAlternate;
+    type: ExplicitImpliedAlternate;
     offset: Offset;
 }
 
 function xmlToHarmony(node: Node) {
-    let ret: Harmony = <any> {};
+    let ret: Harmony = {
+        frame: null,
+        printFrame: null,
+        staff: null,
+        type: null,
+        offset: null,
+        root: null,
+        "function": null,
+        kind: null,
+        degrees: [],
+        inversion: null,
+        bass: null
+    };
     let foundPrintObject = false;
     let foundFontWeight = false;
     let foundFontStyle = false;
@@ -20605,7 +20624,7 @@ function xmlToHarmony(node: Node) {
         }
         if (ch.nodeName === "degree") {
             let dataDegree = xmlToDegree(ch) ;
-            ret.degree = dataDegree;
+            ret.degrees.push(dataDegree);
         }
         if (ch.nodeName === "inversion") {
             let dataInversion = xmlToInversion(ch) ;
@@ -20689,7 +20708,7 @@ function xmlToHarmony(node: Node) {
         }
         if (ch2.name === "type") {
             let dataHarmonyType = getExplicitImpliedAlternate(ch2, null);
-            ret.harmonyType = dataHarmonyType;
+            ret.type = dataHarmonyType;
         }
     }
     if (!foundPrintObject) {
@@ -22002,17 +22021,18 @@ function xmlToBarre(node: Node) {
  * for distinguishing between overlapping and hierarchical
  * groupings. The member-of attribute allows for easy
  * distinguishing of what grouping elements are in what
- * hierarchy. Feature elements contained within a "stoptype of grouping may be ignored.
+ * hierarchy. Feature elements contained within a "stop"
+ * type of grouping may be ignored.
  * 
  * This element is flexible to allow for non-standard analyses.
  * Future versions of the MusicXML format may add elements
- * that can represent more standardized categories of analysis"
+ * that can represent more standardized categories of analysis
  * data, allowing for easier data sharing.
  */
 export interface Grouping {
     features: Feature[];
     number: number;
-    groupingType: StartStopSingle;
+    type: StartStopSingle;
     memberOf: string;
 }
 
@@ -22035,7 +22055,7 @@ function xmlToGrouping(node: Node) {
         }
         if (ch2.name === "type") {
             let dataGroupingType = getStartStopSingle(ch2, null);
-            ret.groupingType = dataGroupingType;
+            ret.type = dataGroupingType;
         }
         if (ch2.name === "member-of") {
             let dataMemberOf = getString(ch2, true);
@@ -25094,6 +25114,364 @@ export function forwardToXML(forward: Forward): string {
         .map(n => "  " + n).join("\n")}\n</forward>`;
 }
 
+export function groupingToXML(grouping: Grouping): string {
+    // <!ELEMENT grouping ((feature)*)>
+    // <!ATTLIST grouping
+    //     type %start-stop-single; #REQUIRED
+    //     number CDATA "1"
+    //     member-of CDATA #IMPLIED
+    // >
+    let children: string[] = [];
+    (grouping.features||[]).forEach(feature => {
+        // <!ELEMENT feature (#PCDATA)>
+        // <!ATTLIST feature
+        //     type CDATA #IMPLIED
+        // >
+        let pcdata = xml `${feature.data}`;
+        let attribs = "";
+        if (defined(feature.type)) {
+            attribs += xml ` type="${feature.type}"`;
+        }
+        children.push(dangerous `<grouping${attribs}>${pcdata}</grouping>`);
+    });
+    let attribs = "" +
+            startStopSingleToXML(grouping) +
+            numberLevelToXML(grouping);
+
+    if (defined(grouping.memberOf)) {
+        attribs += xml ` member-of="${grouping.memberOf}"`;
+    }
+    return dangerous `<grouping${attribs}>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</grouping>`;
+}
+
+export function harmonyToXML(harmony: Harmony): string {
+    // <!ENTITY % harmony-chord "((root | function), kind,
+    //     inversion?, bass?, degree*)">
+    // 
+    // <!ELEMENT harmony ((%harmony-chord;)+, frame?,
+    //     offset?, %editorial;, staff?)>
+    // <!ATTLIST harmony
+    //     type (explicit | implied | alternate) #IMPLIED
+    //     %print-object;
+    //     print-frame  %yes-no; #IMPLIED
+    //     %print-style;
+    //     %placement;
+    // >
+    let attribs = "" +
+            explicitImpliedAlternateToXML(harmony) +
+            printObjectToXML(harmony);
+
+    if (defined(harmony.printFrame)) {
+        attribs += yesNo ` print-frame="${harmony.printFrame}"`;
+    }
+    attribs +=
+            printStyleToXML(harmony) +
+            placementToXML(harmony);
+
+    let children: string[] = [];
+    
+    // TODO: multiple of everything in harmony-chord!
+    if (defined(harmony.root)) {
+        children.push(rootToXML(harmony.root));
+    } else if (defined(harmony.function)) {
+        children.push(functionToXML(harmony.function));
+    }
+
+    children.push(kindToXML(harmony.kind));
+    if (defined(harmony.inversion)) {
+        children.push(inversionToXML(harmony.inversion));
+    }
+    if (defined(harmony.bass)) {
+        children.push(bassToXML(harmony.bass));
+    }
+    (harmony.degrees||[]).forEach(degree => {
+        children.push(degreeToXML(degree));
+    });
+
+    if (defined(harmony.frame)) {
+        children.push(frameToXML(harmony.frame));
+    }
+    if (defined(harmony.offset)) {
+        children.push(offsetToXML(harmony.offset));
+    }
+    children = children.concat(editorialToXML(harmony));
+
+    if (!isNaN(harmony.staff)) {
+        children.push(xml `<staff>${harmony.staff}</staff>`);
+    }
+
+    return dangerous `<harmony${attribs}>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</harmony>`;
+}
+
+let eiaTypeToXML: {[key: number]: string} = {
+    [ExplicitImpliedAlternate.Explicit]: "explicit",
+    [ExplicitImpliedAlternate.Implied]: "implied",
+    [ExplicitImpliedAlternate.Alternate]: "alternate"
+};
+function explicitImpliedAlternateToXML(eia: {type: ExplicitImpliedAlternate}): string {
+    if (defined(eia.type)) {
+        return xml ` type="${eiaTypeToXML[eia.type]}"`;
+    }
+    return "";
+}
+
+function rootToXML(root: Root): string {
+    // <!ELEMENT root (root-step, root-alter?)>
+    let children: string[] = [];
+    if (defined(root.rootStep)) {
+        // <!ELEMENT root-step (#PCDATA)>
+        // <!ATTLIST root-step
+        //     text CDATA #IMPLIED
+        //     %print-style;
+        // >
+        let attribs = "";
+        if (defined(root.rootStep.text)) {
+            attribs += xml ` text="${root.rootStep.text}"`;
+        }
+        attribs += printStyleToXML(root.rootStep);
+        let pcdata = xml `${root.rootStep.data}`;
+        children.push(dangerous `<root-step${attribs}>${pcdata}</root-step>`);
+    }
+    if (defined(root.rootAlter)) {
+        // <!ELEMENT root-alter (#PCDATA)>
+        // <!ATTLIST root-alter
+        //     %print-object;
+        //     %print-style;
+        //     location %left-right; #IMPLIED
+        // >
+        let attribs =
+                printObjectToXML(root.rootAlter) +
+                printStyleToXML(root.rootAlter);
+        if (defined(root.rootAlter.location)) {
+            attribs += xml ` location="${
+                root.rootAlter.location === LeftRight.Left ? "left" : "right"}"`;
+        }
+        let pcdata = root.rootAlter.data;
+        children.push(dangerous `<root-alter${attribs}>${pcdata}</root-alter>`);
+    }
+    return dangerous `<root>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</root>`;
+}
+
+function functionToXML(func: Function): string {
+    // <!ELEMENT function (#PCDATA)>
+    // <!ATTLIST function
+    //     %print-style;
+    // >
+    let pcdata = xml `${func.data}`;
+    let attribs = printStyleToXML(func);
+    return `<function${attribs}>${pcdata}</function>`;
+}
+
+function kindToXML(kind: Kind): string {
+    // <!ELEMENT kind (#PCDATA)>
+    // <!ATTLIST kind
+    //     use-symbols          %yes-no;   #IMPLIED
+    //     text                 CDATA      #IMPLIED
+    //     stack-degrees        %yes-no;   #IMPLIED
+    //     parentheses-degrees  %yes-no;   #IMPLIED
+    //     bracket-degrees      %yes-no;   #IMPLIED
+    //     %print-style;
+    //     %halign;
+    //     %valign;
+    // >
+    let attribs = "";
+    if (defined(kind.useSymbols)) {
+        attribs += yesNo ` kind="${kind.useSymbols}"`;
+    }
+    if (defined(kind.text)) {
+        attribs += xml ` text="${kind.text}"`;
+    }
+    if (defined(kind.stackDegrees)) {
+        attribs += yesNo ` stack-degrees="${kind.stackDegrees}"`;
+    }
+    if (defined(kind.parenthesesDegrees)) {
+        attribs += yesNo ` parentheses-degrees="${kind.parenthesesDegrees}"`;
+    }
+    attribs +=
+        printStyleToXML(kind) +
+        halignToXML(kind) +
+        valignToXML(kind);
+
+    let pcdata = xml `${kind.data}`;
+    return dangerous `<kind${attribs}>\n${pcdata}</kind>`;
+}
+
+function inversionToXML(inversion: Inversion): string {
+    // <!ELEMENT inversion (#PCDATA)>
+    // <!ATTLIST inversion
+    //     %print-style;
+    //     >
+    let pcdata = xml `${inversion.data}`;
+    let attribs = printStyleToXML(inversion);
+    return `<inversion${attribs}>${pcdata}</inversion>`;
+}
+
+function bassToXML(bass: Bass): string {
+    // <!ELEMENT bass (bass-step, bass-alter?)>
+    let children: string[] = [];
+    if (defined(bass.bassStep)) {
+        // <!ELEMENT bass-step (#PCDATA)>
+        // <!ATTLIST bass-step
+        //     text CDATA #IMPLIED
+        //     %print-style;
+        // >
+        let attribs = "";
+        if (defined(bass.bassStep.text)) {
+            attribs += xml ` text="${bass.bassStep.text}"`;
+        }
+        attribs += printStyleToXML(bass.bassStep);
+        let pcdata = xml `${bass.bassStep.data}`;
+        children.push(dangerous `<bass-step${attribs}>${pcdata}</bass-step>`);
+    }
+    if (defined(bass.bassAlter)) {
+        // <!ELEMENT bass-alter (#PCDATA)>
+        // <!ATTLIST bass-alter
+        //     %print-object;
+        //     %print-style;
+        //     location (left | right) #IMPLIED
+        // >
+        let attribs =
+                printObjectToXML(bass.bassAlter) +
+                printStyleToXML(bass.bassAlter);
+        if (defined(bass.bassAlter.location)) {
+            attribs += xml ` location="${
+                bass.bassAlter.location === LeftRight.Left ? "left" : "right"}"`;
+        }
+        let pcdata = bass.bassAlter.data;
+        children.push(dangerous `<bass-alter${attribs}>${pcdata}</bass-alter>`);
+    }
+    return dangerous `<bass>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</bass>`;
+}
+
+let chordTypeToXML: {[key: number]: string} = {
+    [ChordType.Augmented]: "augmented",
+    [ChordType.Diminished]: "diminished",
+    [ChordType.Major]: "major",
+    [ChordType.Minor]: "minor",
+    [ChordType.HalfDiminished]: "half-diminished"
+}
+
+function degreeToXML(degree: Degree): string {
+    // <!ELEMENT degree (degree-value, degree-alter, degree-type)>
+    // <!ATTLIST degree
+    //     %print-object;
+    // >
+    let children: string[] = [];
+    if (defined(degree.degreeValue)) {
+        // <!ELEMENT degree-value (#PCDATA)>
+        // <!ATTLIST degree-value
+        //     symbol (major | minor | augmented |
+        //         diminished | half-diminished) #IMPLIED
+        //     text CDATA #IMPLIED
+        //     %print-style;
+        // >
+        let lattribs = "";
+        if (defined(degree.degreeValue.symbol)) {
+            lattribs += xml ` symbol="${chordTypeToXML[degree.degreeValue.symbol]}"`;
+        }
+        if (defined(degree.degreeValue.text)) {
+            lattribs += xml ` text="${degree.degreeValue.text}"`;
+        }
+        lattribs += printStyleToXML(degree.degreeValue);
+        let pcdata = xml `${degree.degreeValue.data}`;
+        children.push(xml `<degree-value${lattribs}>${pcdata}</degree-value>`);
+    }
+    if (defined(degree.degreeAlter)) {
+        // <!ELEMENT degree-alter (#PCDATA)>
+        // <!ATTLIST degree-alter
+        //     %print-style;
+        //     plus-minus %yes-no; #IMPLIED
+        // >
+        let lattribs = printStyleToXML(degree.degreeAlter);
+        if (defined(degree.degreeAlter.plusMinus)) {
+            lattribs += yesNo ` plus-minus="${degree.degreeAlter.plusMinus}"`;
+        }
+        let pcdata = xml `${degree.degreeAlter.data}`;
+        children.push(xml `<degree-alter${lattribs}>${pcdata}</degree-alter>`);
+    }
+    if (defined(degree.degreeType)) {
+        // <!ELEMENT degree-type (#PCDATA)>
+        // <!ATTLIST degree-type
+        //     text CDATA #IMPLIED
+        //     %print-style;
+        // >
+        let lattribs = printStyleToXML(degree.degreeType);
+        if (defined(degree.degreeType.text)) {
+            lattribs += xml ` text="${degree.degreeType.text}"`;
+        }
+        let pcdata = xml `${degree.degreeType.data}`;
+        children.push(xml `<degree-type${lattribs}>${pcdata}</degree-type>`);
+    }
+    let attribs = printObjectToXML(degree);
+    return dangerous `<degree${attribs}>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</degree>`;
+}
+
+function frameToXML(frame: Frame): string {
+    // <!ELEMENT frame
+    //     (frame-strings, frame-frets, first-fret?, frame-note+)>
+    // <!ATTLIST frame
+    //     %position;
+    //     %color;
+    //     %halign;
+    //     %valign-image;
+    //     height  %tenths;  #IMPLIED
+    //     width   %tenths;  #IMPLIED
+    //     unplayed CDATA    #IMPLIED
+    // >
+    let attribs =
+        positionToXML(frame) +
+        colorToXML(frame) +
+        halignToXML(frame) +
+        valignImageToXML(frame);
+
+    if (defined(frame.height)) {
+        attribs += xml ` height="${frame.height}"`;
+    }
+    if (defined(frame.width)) {
+        attribs += xml ` width="${frame.width}"`;
+    }
+    if (defined(frame.unplayed)) {
+        attribs += xml ` unplayed="${frame.unplayed}"`;
+    }
+    let children: string[] = [];
+    if (defined(frame.frameStrings)) {
+        // <!ELEMENT frame-strings (#PCDATA)>
+        children.push(xml `<frame-strings>${frame.frameStrings}</frame-strings>`);
+    }
+    if (defined(frame.frameFrets)) {
+        // <!ELEMENT frame-frets (#PCDATA)>
+        children.push(xml `<frame-frets>${frame.frameFrets}</frame-frets>`);
+    }
+    if (defined(frame.firstFret)) {
+        // <!ELEMENT first-fret (#PCDATA)>
+        // <!ATTLIST first-fret
+        //     text CDATA #IMPLIED
+        //     location %left-right; #IMPLIED
+        // >
+        let pcdata = xml `${frame.firstFret.data}`;
+        let attribs = "";
+        if (defined(frame.firstFret.text)) {
+            attribs += xml ` text="${frame.firstFret.text}"`;
+        }
+        if (defined(frame.firstFret.location)) {
+            attribs += xml ` location="${frame.firstFret.location === LeftRight.Left ?
+                "left" : "right"}"`;
+        }
+    }
+    (frame.frameNotes||[]).forEach(frameNote => {
+        // <!ELEMENT frame-note (string, fret, fingering?, barre?)>
+        // TODO: not implemented
+    });
+
+    return dangerous `<frame${attribs}>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</frame>`;
+}
+
 export function printToXML(print: Print): string {
     // <!ELEMENT print (page-layout?, system-layout?, staff-layout*,
     //     measure-layout?, measure-numbering?, part-name-display?,
@@ -26916,6 +27294,45 @@ export function noteToXML(note: Note) {
 
     return dangerous `<note${attribs}>\n${elements.join("\n").split("\n")
         .map(n => "  " + n).join("\n")}\n</note>`;
+}
+
+export function figuredBassToXML(figuredBass: FiguredBass): string {
+    // <!ELEMENT figured-bass (figure+, duration?, %editorial;)>
+    // <!ATTLIST figured-bass
+    //     %print-style;
+    //     %printout;
+    //     parentheses %yes-no; #IMPLIED
+    // >
+    let attribs = "" +
+            printStyleToXML(figuredBass) +
+            printoutToXML(figuredBass);
+    if (defined(figuredBass.parentheses)) {
+        attribs += yesNo ` parentheses="${figuredBass.parentheses}"`;
+    }
+    let children: string[] = [];
+    (figuredBass.figures || []).forEach(figuredBass => {
+        // <!ELEMENT figure (prefix?, figure-number?, suffix?, extend?)>
+        // <!ELEMENT prefix (#PCDATA)>
+        // <!ATTLIST prefix
+        //     %print-style;
+        // >
+        // <!ELEMENT figure-number (#PCDATA)>
+        // <!ATTLIST figure-number
+        //     %print-style;
+        // >
+        // <!ELEMENT suffix (#PCDATA)>
+        // <!ATTLIST suffix
+        //     %print-style;
+        // >
+        // TODO: not implemented
+    });
+    if (defined(figuredBass.duration)) {
+        children.push(xml `<duration>${figuredBass.duration}</duration>`);
+    }
+    children = children.concat(editorialToXML(figuredBass));
+
+    return dangerous `<figured-bass${attribs}>\n${children.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</figured-bass>`;
 }
 
 let barlineLocationToXML: {[key: number]: string} = {
