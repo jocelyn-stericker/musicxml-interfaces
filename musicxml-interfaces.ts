@@ -25983,14 +25983,16 @@ export function noteToXML(note: Note) {
         elements.push(dangerous `<pitch>\n${pitchElements.join("\n").split("\n")
             .map(n => "  " + n).join("\n")}\n</pitch>`);
     } else if (note.unpitched) {
-        let upAttribs = "";
+        // <!ELEMENT unpitched ((display-step, display-octave)?)>
+        let upChildren: string[] = [];
         if (note.unpitched.displayStep) {
-            upAttribs += xml ` display-step="${note.unpitched.displayStep}"`;
+            upChildren.push(xml `<display-step>${note.unpitched.displayStep}</display-step>`);
         }
         if (note.unpitched.displayOctave) {
-            upAttribs += xml ` display-octave="${note.unpitched.displayOctave}"`;
+            upChildren.push(xml `<display-octave>${note.unpitched.displayOctave}</display-octave>`);
         }
-        elements.push(dangerous `<unpitched${upAttribs} />`);
+        elements.push(dangerous `<unpitched>\n${upChildren.join("\n").split("\n")
+            .map(n => "  " + n).join("\n")}\n</unpitched>`);
     } else if (note.rest) {
         let restAttribs = "";
         let restChildren: string[] = [];

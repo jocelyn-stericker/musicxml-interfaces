@@ -20132,14 +20132,17 @@ function noteToXML(note) {
         }).join("\n"))));
     }
     else if (note.unpitched) {
-        var upAttribs = "";
+        // <!ELEMENT unpitched ((display-step, display-octave)?)>
+        var upChildren = [];
         if (note.unpitched.displayStep) {
-            upAttribs += (_v = [" display-step=\"", "\""], _v.raw = [" display-step=\"", "\""], xml(_v, note.unpitched.displayStep));
+            upChildren.push((_v = ["<display-step>", "</display-step>"], _v.raw = ["<display-step>", "</display-step>"], xml(_v, note.unpitched.displayStep)));
         }
         if (note.unpitched.displayOctave) {
-            upAttribs += (_w = [" display-octave=\"", "\""], _w.raw = [" display-octave=\"", "\""], xml(_w, note.unpitched.displayOctave));
+            upChildren.push((_w = ["<display-octave>", "</display-octave>"], _w.raw = ["<display-octave>", "</display-octave>"], xml(_w, note.unpitched.displayOctave)));
         }
-        elements.push((_x = ["<unpitched", " />"], _x.raw = ["<unpitched", " />"], dangerous(_x, upAttribs)));
+        elements.push((_x = ["<unpitched>\n", "\n</unpitched>"], _x.raw = ["<unpitched>\\n", "\\n</unpitched>"], dangerous(_x, upChildren.join("\n").split("\n").map(function (n) {
+            return "  " + n;
+        }).join("\n"))));
     }
     else if (note.rest) {
         var restAttribs = "";
