@@ -18897,6 +18897,8 @@ export interface Metronome extends PrintStyleAlign, Justify {
     parentheses: boolean;
     beatUnit: string;
     beatUnitDots: BeatUnitDot[];
+    beatUnitChange: string;
+    beatUnitDotsChange: BeatUnitDot[];
     metronomeRelation: string;
 }
 
@@ -18908,6 +18910,8 @@ function xmlToMetronome(node: Node) {
     let foundHalign = false;
     let foundValign = false;
     let foundJustify = false;
+    let gotFirstPair = false;
+    let gotSecondPair = false;
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "metronome-note") {
@@ -18920,11 +18924,23 @@ function xmlToMetronome(node: Node) {
         }
         if (ch.nodeName === "beat-unit") {
             let dataBeatUnit = getString(ch, true);
-            ret.beatUnit = dataBeatUnit;
+            if (!gotFirstPair) {
+                ret.beatUnit = dataBeatUnit;
+                gotFirstPair = true;
+            } else if (!gotSecondPair) {
+                ret.beatUnitChange = dataBeatUnit;
+                gotSecondPair = true;
+            } else {
+                throw "Too many beat-units in metronome"
+            }
         }
         if (ch.nodeName === "beat-unit-dot") {
             let dataBeatUnitDots = xmlToBeatUnitDot(ch) ;
-            ret.beatUnitDots = (ret.beatUnitDots|| []).concat(dataBeatUnitDots);
+            if (!gotSecondPair) {
+                ret.beatUnitDots = (ret.beatUnitDots|| []).concat(dataBeatUnitDots);
+            } else {
+                ret.beatUnitDotsChange = (ret.beatUnitDotsChange|| []).concat(dataBeatUnitDots);
+            }
         }
         if (ch.nodeName === "metronome-relation") {
             let dataMetronomeRelation = getString(ch, true);
@@ -25122,6 +25138,7 @@ export function groupingToXML(grouping: Grouping): string {
     //     member-of CDATA #IMPLIED
     // >
     let children: string[] = [];
+    children = children.concat(staffDebugInfoToXMLComment(grouping));
     (grouping.features||[]).forEach(feature => {
         // <!ELEMENT feature (#PCDATA)>
         // <!ATTLIST feature
@@ -25170,6 +25187,7 @@ export function harmonyToXML(harmony: Harmony): string {
             placementToXML(harmony);
 
     let children: string[] = [];
+    children = children.concat(staffDebugInfoToXMLComment(harmony));
     
     // TODO: multiple of everything in harmony-chord!
     if (defined(harmony.root)) {
@@ -27310,6 +27328,7 @@ export function figuredBassToXML(figuredBass: FiguredBass): string {
         attribs += yesNo ` parentheses="${figuredBass.parentheses}"`;
     }
     let children: string[] = [];
+    children = children.concat(staffDebugInfoToXMLComment(figuredBass));
     (figuredBass.figures || []).forEach(figuredBass => {
         // <!ELEMENT figure (prefix?, figure-number?, suffix?, extend?)>
         // <!ELEMENT prefix (#PCDATA)>
@@ -27692,6 +27711,15 @@ function metronomeToXML(metronome: Metronome): string {
         let pcdata = xml `${metronome.perMinute.data}`;
         children.push(dangerous `<per-minute${
                 fontToXML(metronome.perMinute)}>${pcdata}</per-minute>`);
+    } else {
+        if (defined(metronome.beatUnitChange)) {
+            // <!ELEMENT beat-unit (#PCDATA)>
+            children.push(xml `<beat-unit>${metronome.beatUnitChange}</beat-unit>`);
+        }
+        (metronome.beatUnitDotsChange||[]).forEach(() => {
+            // <!ELEMENT beat-unit-dot EMPTY>
+            children.push(xml `<beat-unit-dot />`);
+        });
     }
 
     // TODO musicxml-interfaces second beat-unit!!

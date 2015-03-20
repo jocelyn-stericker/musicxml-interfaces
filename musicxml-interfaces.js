@@ -14361,6 +14361,8 @@ function xmlToMetronome(node) {
     var foundHalign = false;
     var foundValign = false;
     var foundJustify = false;
+    var gotFirstPair = false;
+    var gotSecondPair = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "metronome-note") {
@@ -14373,11 +14375,26 @@ function xmlToMetronome(node) {
         }
         if (ch.nodeName === "beat-unit") {
             var dataBeatUnit = getString(ch, true);
-            ret.beatUnit = dataBeatUnit;
+            if (!gotFirstPair) {
+                ret.beatUnit = dataBeatUnit;
+                gotFirstPair = true;
+            }
+            else if (!gotSecondPair) {
+                ret.beatUnitChange = dataBeatUnit;
+                gotSecondPair = true;
+            }
+            else {
+                throw "Too many beat-units in metronome";
+            }
         }
         if (ch.nodeName === "beat-unit-dot") {
             var dataBeatUnitDots = xmlToBeatUnitDot(ch);
-            ret.beatUnitDots = (ret.beatUnitDots || []).concat(dataBeatUnitDots);
+            if (!gotSecondPair) {
+                ret.beatUnitDots = (ret.beatUnitDots || []).concat(dataBeatUnitDots);
+            }
+            else {
+                ret.beatUnitDotsChange = (ret.beatUnitDotsChange || []).concat(dataBeatUnitDots);
+            }
         }
         if (ch.nodeName === "metronome-relation") {
             var dataMetronomeRelation = getString(ch, true);
@@ -19309,6 +19326,7 @@ function groupingToXML(grouping) {
     //     member-of CDATA #IMPLIED
     // >
     var children = [];
+    children = children.concat(staffDebugInfoToXMLComment(grouping));
     (grouping.features || []).forEach(function (feature) {
         // <!ELEMENT feature (#PCDATA)>
         // <!ATTLIST feature
@@ -19351,6 +19369,7 @@ function harmonyToXML(harmony) {
     }
     attribs += printStyleToXML(harmony) + placementToXML(harmony);
     var children = [];
+    children = children.concat(staffDebugInfoToXMLComment(harmony));
     // TODO: multiple of everything in harmony-chord!
     if (defined(harmony.root)) {
         children.push(rootToXML(harmony.root));
@@ -21173,6 +21192,7 @@ function figuredBassToXML(figuredBass) {
         attribs += (_d = [" parentheses=\"", "\""], _d.raw = [" parentheses=\"", "\""], yesNo(_d, figuredBass.parentheses));
     }
     var children = [];
+    children = children.concat(staffDebugInfoToXMLComment(figuredBass));
     (figuredBass.figures || []).forEach(function (figuredBass) {
         // <!ELEMENT figure (prefix?, figure-number?, suffix?, extend?)>
         // <!ELEMENT prefix (#PCDATA)>
@@ -21545,6 +21565,17 @@ function metronomeToXML(metronome) {
         var pcdata = (_j = ["", ""], _j.raw = ["", ""], xml(_j, metronome.perMinute.data));
         children.push((_k = ["<per-minute", ">", "</per-minute>"], _k.raw = ["<per-minute", ">", "</per-minute>"], dangerous(_k, fontToXML(metronome.perMinute), pcdata)));
     }
+    else {
+        if (defined(metronome.beatUnitChange)) {
+            // <!ELEMENT beat-unit (#PCDATA)>
+            children.push((_l = ["<beat-unit>", "</beat-unit>"], _l.raw = ["<beat-unit>", "</beat-unit>"], xml(_l, metronome.beatUnitChange)));
+        }
+        (metronome.beatUnitDotsChange || []).forEach(function () {
+            // <!ELEMENT beat-unit-dot EMPTY>
+            children.push((_m = ["<beat-unit-dot />"], _m.raw = ["<beat-unit-dot />"], xml(_m)));
+            var _m;
+        });
+    }
     // TODO musicxml-interfaces second beat-unit!!
     (metronome.metronomeNotes || []).forEach(function (note) {
         // <!ELEMENT metronome-note
@@ -21553,38 +21584,38 @@ function metronomeToXML(metronome) {
         var oChildren = [];
         if (defined(note.metronomeType)) {
             // <!ELEMENT metronome-type (#PCDATA)>
-            oChildren.push((_l = ["<metronome-type>", "</metronome-type>"], _l.raw = ["<metronome-type>", "</metronome-type>"], xml(_l, note.metronomeType)));
+            oChildren.push((_m = ["<metronome-type>", "</metronome-type>"], _m.raw = ["<metronome-type>", "</metronome-type>"], xml(_m, note.metronomeType)));
         }
         (note.metronomeDots || []).forEach(function () {
             // <!ELEMENT metronome-dot EMPTY>
-            oChildren.push((_m = ["<metronome-dot />"], _m.raw = ["<metronome-dot />"], xml(_m)));
-            var _m;
+            oChildren.push((_o = ["<metronome-dot />"], _o.raw = ["<metronome-dot />"], xml(_o)));
+            var _o;
         });
         (note.metronomeBeams || []).forEach(function (beam) {
             // <!ELEMENT metronome-beam (#PCDATA)>
             // <!ATTLIST metronome-beam
             //     number %beam-level; "1"
             // >
-            var _pcdata = (_m = ["", ""], _m.raw = ["", ""], xml(_m, beam.data));
-            oChildren.push((_o = ["<metronome-beam", ">", "</metronome-beam>"], _o.raw = ["<metronome-beam", ">", "</metronome-beam>"], dangerous(_o, numberLevelToXML(beam), _pcdata)));
-            var _m, _o;
+            var _pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, beam.data));
+            oChildren.push((_p = ["<metronome-beam", ">", "</metronome-beam>"], _p.raw = ["<metronome-beam", ">", "</metronome-beam>"], dangerous(_p, numberLevelToXML(beam), _pcdata)));
+            var _o, _p;
         });
         if (defined(note.metronomeTuplet)) {
             oChildren.push(metronomeTupletToXML(note.metronomeTuplet));
         }
-        children.push((_m = ["<metronome-note>\n", "\n</metronome-note>"], _m.raw = ["<metronome-note>\\n", "\\n</metronome-note>"], dangerous(_m, oChildren.join("\n").split("\n").map(function (n) {
+        children.push((_o = ["<metronome-note>\n", "\n</metronome-note>"], _o.raw = ["<metronome-note>\\n", "\\n</metronome-note>"], dangerous(_o, oChildren.join("\n").split("\n").map(function (n) {
             return "  " + n;
         }).join("\n"))));
-        var _l, _m;
+        var _m, _o;
     });
     if (defined(metronome.metronomeRelation)) {
         // <!ELEMENT metronome-relation (#PCDATA)>
-        children.push((_l = ["<metronome-relation>", "</metronome-relation>"], _l.raw = ["<metronome-relation>", "</metronome-relation>"], xml(_l, metronome.metronomeRelation)));
+        children.push((_m = ["<metronome-relation>", "</metronome-relation>"], _m.raw = ["<metronome-relation>", "</metronome-relation>"], xml(_m, metronome.metronomeRelation)));
     }
-    return (_m = ["<metronome", ">\n", "\n</metronome>"], _m.raw = ["<metronome", ">\\n", "\\n</metronome>"], dangerous(_m, attribs, children.join("\n").split("\n").map(function (n) {
+    return (_o = ["<metronome", ">\n", "\n</metronome>"], _o.raw = ["<metronome", ">\\n", "\\n</metronome>"], dangerous(_o, attribs, children.join("\n").split("\n").map(function (n) {
         return "  " + n;
     }).join("\n")));
-    var _g, _h, _j, _k, _l, _m;
+    var _g, _h, _j, _k, _l, _m, _o;
 }
 function metronomeTupletToXML(metronomeTuplet) {
     // <!ELEMENT metronome-tuplet
