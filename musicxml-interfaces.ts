@@ -24743,7 +24743,7 @@ function creditImageToXML(creditImage: CreditImage): string {
     // >
     let attribs = "";
     if (defined(creditImage.source)) {
-        attribs += xml ` creditImage="${creditImage.source}"`;
+        attribs += xml ` credit-image="${creditImage.source}"`;
     }
     if (defined(creditImage.type)) {
         attribs += xml ` type="${creditImage.type}"`;
@@ -26339,7 +26339,7 @@ export function noteToXML(note: Note) {
             //     %trill-sound;
             // >
             if (ornaments.trillMark) {
-                oChildren.push(xml `<trill-mark${
+                oChildren.push(dangerous `<trill-mark${
                     printStyleToXML(ornaments.trillMark) +
                     placementToXML(ornaments.trillMark) +
                     trillSoundToXML(ornaments.trillMark)} />`);
@@ -26352,7 +26352,7 @@ export function noteToXML(note: Note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.turn) {
-                oChildren.push(xml `<turn${
+                oChildren.push(dangerous `<turn${
                     printStyleToXML(ornaments.turn) +
                     placementToXML(ornaments.turn) +
                     trillSoundToXML(ornaments.turn) +
@@ -26366,7 +26366,7 @@ export function noteToXML(note: Note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.delayedTurn) {
-                oChildren.push(xml `<delayed-turn${
+                oChildren.push(dangerous `<delayed-turn${
                     printStyleToXML(ornaments.delayedTurn) +
                     placementToXML(ornaments.delayedTurn) +
                     trillSoundToXML(ornaments.delayedTurn) +
@@ -26380,7 +26380,7 @@ export function noteToXML(note: Note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.invertedTurn) {
-                oChildren.push(xml `<inverted-turn${
+                oChildren.push(dangerous `<inverted-turn${
                     printStyleToXML(ornaments.invertedTurn) +
                     placementToXML(ornaments.invertedTurn) +
                     trillSoundToXML(ornaments.invertedTurn) +
@@ -26394,7 +26394,7 @@ export function noteToXML(note: Note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.delayedInvertedTurn) {
-                oChildren.push(xml `<delayed-inverted-turn${
+                oChildren.push(dangerous `<delayed-inverted-turn${
                     printStyleToXML(ornaments.delayedInvertedTurn) +
                     placementToXML(ornaments.delayedInvertedTurn) +
                     trillSoundToXML(ornaments.delayedInvertedTurn) +
@@ -26407,7 +26407,7 @@ export function noteToXML(note: Note) {
             //     %trill-sound;
             // >
             if (ornaments.verticalTurn) {
-                oChildren.push(xml `<vertical-turn${
+                oChildren.push(dangerous `<vertical-turn${
                     printStyleToXML(ornaments.verticalTurn) +
                     placementToXML(ornaments.verticalTurn) +
                     trillSoundToXML(ornaments.verticalTurn)} />`);
@@ -26419,7 +26419,7 @@ export function noteToXML(note: Note) {
             //     %trill-sound;
             // >
             if (ornaments.shake) {
-                oChildren.push(xml `<shake${
+                oChildren.push(dangerous `<shake${
                     printStyleToXML(ornaments.shake) +
                     placementToXML(ornaments.shake) +
                     trillSoundToXML(ornaments.shake)} />`);
@@ -26434,7 +26434,7 @@ export function noteToXML(note: Note) {
             //     %trill-sound;
             // >
             if (ornaments.mordent) {
-                oChildren.push(xml `<mordent${
+                oChildren.push(dangerous `<mordent${
                     mordentSubsetToXML(ornaments.mordent) +
                     printStyleToXML(ornaments.mordent) +
                     placementToXML(ornaments.mordent) +
@@ -26449,7 +26449,7 @@ export function noteToXML(note: Note) {
             //     %trill-sound;
             // >
             if (ornaments.invertedMordent) {
-                oChildren.push(xml `<inverted-mordent${
+                oChildren.push(dangerous `<inverted-mordent${
                     mordentSubsetToXML(ornaments.invertedMordent) +
                     printStyleToXML(ornaments.invertedMordent) +
                     placementToXML(ornaments.invertedMordent) +
@@ -26461,7 +26461,7 @@ export function noteToXML(note: Note) {
             //     %placement;
             // >
             if (ornaments.schleifer) {
-                oChildren.push(xml `<schleifer${
+                oChildren.push(dangerous `<schleifer${
                     printStyleToXML(ornaments.schleifer) +
                     placementToXML(ornaments.schleifer)} />`);
             }
@@ -26488,10 +26488,11 @@ export function noteToXML(note: Note) {
             //     %placement;
             // >
             if (ornaments.otherOrnament) {
-                oChildren.push(xml `<other-ornament${
+                let pcdata = xml `${ornaments.otherOrnament.data || ""}`
+                oChildren.push(dangerous `<other-ornament${
                     printStyleToXML(ornaments.otherOrnament) +
                     placementToXML(ornaments.otherOrnament)}>${
-                        ornaments.otherOrnament.data || ""
+                        pcdata
                     }</other-ornament>`);
             }
             // 
@@ -26501,10 +26502,11 @@ export function noteToXML(note: Note) {
             //     %placement;
             // >
             (ornaments.accidentalMarks||[]).forEach(accidentalMark => {
-                oChildren.push(xml `<accidental-mark${
+                let pcdata = xml `${accidentalMark.mark || ""}`;
+                oChildren.push(dangerous `<accidental-mark${
                     printStyleToXML(accidentalMark) +
                     placementToXML(accidentalMark)}>${
-                        accidentalMark.mark || ""
+                        pcdata
                     }</accidental-mark>`);
             });
 
@@ -26936,7 +26938,7 @@ export function noteToXML(note: Note) {
             //     %placement;
             // >
             if (articulation.detachedLegato) {
-                oChildren.push(dangerous `<detachedLegato${
+                oChildren.push(dangerous `<detached-legato${
                     printStyleToXML(articulation.detachedLegato) +
                     placementToXML(articulation.detachedLegato)
                 } />`);
@@ -29273,10 +29275,10 @@ function bendSoundToXML(bendSound: BendSound): string {
         attribs += xml ` beats="${bendSound.beats}"`;
     }
     if (defined(bendSound.lastBeat)) {
-        attribs += xml ` lastBeat="${bendSound.lastBeat}"`;
+        attribs += xml ` last-beat="${bendSound.lastBeat}"`;
     }
     if (defined(bendSound.secondBeat)) {
-        attribs += xml ` secondBeat="${bendSound.secondBeat}"`;
+        attribs += xml ` second-beat="${bendSound.secondBeat}"`;
     }
     return attribs;
 }
@@ -29325,10 +29327,10 @@ function trillSoundToXML(trillSound: TrillSound): string {
         attribs += xml ` beats="${trillSound.beats}"`;
     }
     if (defined(trillSound.secondBeat)) {
-        attribs += xml ` secondBeat="${trillSound.secondBeat}"`;
+        attribs += xml ` second-beat="${trillSound.secondBeat}"`;
     }
     if (defined(trillSound.lastBeat)) {
-        attribs += xml ` lastBeat="${trillSound.lastBeat}"`;
+        attribs += xml ` last-beat="${trillSound.lastBeat}"`;
     }
     return attribs;
 }

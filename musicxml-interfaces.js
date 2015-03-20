@@ -18954,7 +18954,7 @@ function creditImageToXML(creditImage) {
     // >
     var attribs = "";
     if (defined(creditImage.source)) {
-        attribs += (_a = [" creditImage=\"", "\""], _a.raw = [" creditImage=\"", "\""], xml(_a, creditImage.source));
+        attribs += (_a = [" credit-image=\"", "\""], _a.raw = [" credit-image=\"", "\""], xml(_a, creditImage.source));
     }
     if (defined(creditImage.type)) {
         attribs += (_b = [" type=\"", "\""], _b.raw = [" type=\"", "\""], xml(_b, creditImage.type));
@@ -20430,7 +20430,7 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.trillMark) {
-                oChildren.push((_18 = ["<trill-mark", " />"], _18.raw = ["<trill-mark", " />"], xml(_18, printStyleToXML(ornaments.trillMark) + placementToXML(ornaments.trillMark) + trillSoundToXML(ornaments.trillMark))));
+                oChildren.push((_18 = ["<trill-mark", " />"], _18.raw = ["<trill-mark", " />"], dangerous(_18, printStyleToXML(ornaments.trillMark) + placementToXML(ornaments.trillMark) + trillSoundToXML(ornaments.trillMark))));
             }
             // <!ATTLIST turn
             //     %print-style;
@@ -20439,7 +20439,7 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.turn) {
-                oChildren.push((_19 = ["<turn", " />"], _19.raw = ["<turn", " />"], xml(_19, printStyleToXML(ornaments.turn) + placementToXML(ornaments.turn) + trillSoundToXML(ornaments.turn) + slashToXML(ornaments.turn))));
+                oChildren.push((_19 = ["<turn", " />"], _19.raw = ["<turn", " />"], dangerous(_19, printStyleToXML(ornaments.turn) + placementToXML(ornaments.turn) + trillSoundToXML(ornaments.turn) + slashToXML(ornaments.turn))));
             }
             // <!ATTLIST delayed-turn
             //     %print-style;
@@ -20448,7 +20448,7 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.delayedTurn) {
-                oChildren.push((_20 = ["<delayed-turn", " />"], _20.raw = ["<delayed-turn", " />"], xml(_20, printStyleToXML(ornaments.delayedTurn) + placementToXML(ornaments.delayedTurn) + trillSoundToXML(ornaments.delayedTurn) + slashToXML(ornaments.delayedTurn))));
+                oChildren.push((_20 = ["<delayed-turn", " />"], _20.raw = ["<delayed-turn", " />"], dangerous(_20, printStyleToXML(ornaments.delayedTurn) + placementToXML(ornaments.delayedTurn) + trillSoundToXML(ornaments.delayedTurn) + slashToXML(ornaments.delayedTurn))));
             }
             // <!ATTLIST inverted-turn
             //     %print-style;
@@ -20457,7 +20457,7 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.invertedTurn) {
-                oChildren.push((_21 = ["<inverted-turn", " />"], _21.raw = ["<inverted-turn", " />"], xml(_21, printStyleToXML(ornaments.invertedTurn) + placementToXML(ornaments.invertedTurn) + trillSoundToXML(ornaments.invertedTurn) + slashToXML(ornaments.invertedTurn))));
+                oChildren.push((_21 = ["<inverted-turn", " />"], _21.raw = ["<inverted-turn", " />"], dangerous(_21, printStyleToXML(ornaments.invertedTurn) + placementToXML(ornaments.invertedTurn) + trillSoundToXML(ornaments.invertedTurn) + slashToXML(ornaments.invertedTurn))));
             }
             // <!ATTLIST delayed-inverted-turn
             //     %print-style;
@@ -20466,7 +20466,7 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.delayedInvertedTurn) {
-                oChildren.push((_22 = ["<delayed-inverted-turn", " />"], _22.raw = ["<delayed-inverted-turn", " />"], xml(_22, printStyleToXML(ornaments.delayedInvertedTurn) + placementToXML(ornaments.delayedInvertedTurn) + trillSoundToXML(ornaments.delayedInvertedTurn) + slashToXML(ornaments.delayedInvertedTurn))));
+                oChildren.push((_22 = ["<delayed-inverted-turn", " />"], _22.raw = ["<delayed-inverted-turn", " />"], dangerous(_22, printStyleToXML(ornaments.delayedInvertedTurn) + placementToXML(ornaments.delayedInvertedTurn) + trillSoundToXML(ornaments.delayedInvertedTurn) + slashToXML(ornaments.delayedInvertedTurn))));
             }
             // <!ATTLIST vertical-turn
             //     %print-style;
@@ -20474,7 +20474,7 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.verticalTurn) {
-                oChildren.push((_23 = ["<vertical-turn", " />"], _23.raw = ["<vertical-turn", " />"], xml(_23, printStyleToXML(ornaments.verticalTurn) + placementToXML(ornaments.verticalTurn) + trillSoundToXML(ornaments.verticalTurn))));
+                oChildren.push((_23 = ["<vertical-turn", " />"], _23.raw = ["<vertical-turn", " />"], dangerous(_23, printStyleToXML(ornaments.verticalTurn) + placementToXML(ornaments.verticalTurn) + trillSoundToXML(ornaments.verticalTurn))));
             }
             // 
             // <!ATTLIST shake
@@ -20483,7 +20483,7 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.shake) {
-                oChildren.push((_24 = ["<shake", " />"], _24.raw = ["<shake", " />"], xml(_24, printStyleToXML(ornaments.shake) + placementToXML(ornaments.shake) + trillSoundToXML(ornaments.shake))));
+                oChildren.push((_24 = ["<shake", " />"], _24.raw = ["<shake", " />"], dangerous(_24, printStyleToXML(ornaments.shake) + placementToXML(ornaments.shake) + trillSoundToXML(ornaments.shake))));
             }
             // 
             // <!ATTLIST mordent
@@ -20495,7 +20495,7 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.mordent) {
-                oChildren.push((_25 = ["<mordent", " />"], _25.raw = ["<mordent", " />"], xml(_25, mordentSubsetToXML(ornaments.mordent) + printStyleToXML(ornaments.mordent) + placementToXML(ornaments.mordent) + trillSoundToXML(ornaments.mordent))));
+                oChildren.push((_25 = ["<mordent", " />"], _25.raw = ["<mordent", " />"], dangerous(_25, mordentSubsetToXML(ornaments.mordent) + printStyleToXML(ornaments.mordent) + placementToXML(ornaments.mordent) + trillSoundToXML(ornaments.mordent))));
             }
             // <!ATTLIST inverted-mordent
             //     long %yes-no; #IMPLIED
@@ -20506,7 +20506,7 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.invertedMordent) {
-                oChildren.push((_26 = ["<inverted-mordent", " />"], _26.raw = ["<inverted-mordent", " />"], xml(_26, mordentSubsetToXML(ornaments.invertedMordent) + printStyleToXML(ornaments.invertedMordent) + placementToXML(ornaments.invertedMordent) + trillSoundToXML(ornaments.invertedMordent))));
+                oChildren.push((_26 = ["<inverted-mordent", " />"], _26.raw = ["<inverted-mordent", " />"], dangerous(_26, mordentSubsetToXML(ornaments.invertedMordent) + printStyleToXML(ornaments.invertedMordent) + placementToXML(ornaments.invertedMordent) + trillSoundToXML(ornaments.invertedMordent))));
             }
             // 
             // <!ATTLIST schleifer
@@ -20514,7 +20514,7 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (ornaments.schleifer) {
-                oChildren.push((_27 = ["<schleifer", " />"], _27.raw = ["<schleifer", " />"], xml(_27, printStyleToXML(ornaments.schleifer) + placementToXML(ornaments.schleifer))));
+                oChildren.push((_27 = ["<schleifer", " />"], _27.raw = ["<schleifer", " />"], dangerous(_27, printStyleToXML(ornaments.schleifer) + placementToXML(ornaments.schleifer))));
             }
             // 
             // <!ELEMENT tremolo (#PCDATA)>
@@ -20534,7 +20534,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (ornaments.otherOrnament) {
-                oChildren.push((_30 = ["<other-ornament", ">", "</other-ornament>"], _30.raw = ["<other-ornament", ">", "</other-ornament>"], xml(_30, printStyleToXML(ornaments.otherOrnament) + placementToXML(ornaments.otherOrnament), ornaments.otherOrnament.data || "")));
+                var _pcdata = (_30 = ["", ""], _30.raw = ["", ""], xml(_30, ornaments.otherOrnament.data || ""));
+                oChildren.push((_31 = ["<other-ornament", ">", "</other-ornament>"], _31.raw = ["<other-ornament", ">", "</other-ornament>"], dangerous(_31, printStyleToXML(ornaments.otherOrnament) + placementToXML(ornaments.otherOrnament), _pcdata)));
             }
             // 
             // <!ELEMENT accidental-mark (#PCDATA)>
@@ -20543,13 +20544,14 @@ function noteToXML(note) {
             //     %placement;
             // >
             (ornaments.accidentalMarks || []).forEach(function (accidentalMark) {
-                oChildren.push((_31 = ["<accidental-mark", ">", "</accidental-mark>"], _31.raw = ["<accidental-mark", ">", "</accidental-mark>"], xml(_31, printStyleToXML(accidentalMark) + placementToXML(accidentalMark), accidentalMark.mark || "")));
-                var _31;
+                var _pcdata_1 = (_32 = ["", ""], _32.raw = ["", ""], xml(_32, accidentalMark.mark || ""));
+                oChildren.push((_33 = ["<accidental-mark", ">", "</accidental-mark>"], _33.raw = ["<accidental-mark", ">", "</accidental-mark>"], dangerous(_33, printStyleToXML(accidentalMark) + placementToXML(accidentalMark), _pcdata_1)));
+                var _32, _33;
             });
-            nChildren.push((_31 = ["<ornaments>", "\n</ornaments>"], _31.raw = ["<ornaments>", "\\n</ornaments>"], dangerous(_31, oChildren.join("\n").split("\n").map(function (n) {
+            nChildren.push((_32 = ["<ornaments>", "\n</ornaments>"], _32.raw = ["<ornaments>", "\\n</ornaments>"], dangerous(_32, oChildren.join("\n").split("\n").map(function (n) {
                 return "  " + n;
             }).join("\n"))));
-            var _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31;
+            var _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32;
         });
         (notation.technicals || []).forEach(function (technical) {
             var oChildren = [];
@@ -20889,7 +20891,7 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.detachedLegato) {
-                oChildren.push((_22 = ["<detachedLegato", " />"], _22.raw = ["<detachedLegato", " />"], dangerous(_22, printStyleToXML(articulation.detachedLegato) + placementToXML(articulation.detachedLegato))));
+                oChildren.push((_22 = ["<detached-legato", " />"], _22.raw = ["<detached-legato", " />"], dangerous(_22, printStyleToXML(articulation.detachedLegato) + placementToXML(articulation.detachedLegato))));
             }
             // 
             // <!ATTLIST staccatissimo
@@ -23005,10 +23007,10 @@ function bendSoundToXML(bendSound) {
         attribs += (_p = [" beats=\"", "\""], _p.raw = [" beats=\"", "\""], xml(_p, bendSound.beats));
     }
     if (defined(bendSound.lastBeat)) {
-        attribs += (_q = [" lastBeat=\"", "\""], _q.raw = [" lastBeat=\"", "\""], xml(_q, bendSound.lastBeat));
+        attribs += (_q = [" last-beat=\"", "\""], _q.raw = [" last-beat=\"", "\""], xml(_q, bendSound.lastBeat));
     }
     if (defined(bendSound.secondBeat)) {
-        attribs += (_r = [" secondBeat=\"", "\""], _r.raw = [" secondBeat=\"", "\""], xml(_r, bendSound.secondBeat));
+        attribs += (_r = [" second-beat=\"", "\""], _r.raw = [" second-beat=\"", "\""], xml(_r, bendSound.secondBeat));
     }
     return attribs;
     var _o, _p, _q, _r;
@@ -23054,10 +23056,10 @@ function trillSoundToXML(trillSound) {
         attribs += (_s = [" beats=\"", "\""], _s.raw = [" beats=\"", "\""], xml(_s, trillSound.beats));
     }
     if (defined(trillSound.secondBeat)) {
-        attribs += (_t = [" secondBeat=\"", "\""], _t.raw = [" secondBeat=\"", "\""], xml(_t, trillSound.secondBeat));
+        attribs += (_t = [" second-beat=\"", "\""], _t.raw = [" second-beat=\"", "\""], xml(_t, trillSound.secondBeat));
     }
     if (defined(trillSound.lastBeat)) {
-        attribs += (_u = [" lastBeat=\"", "\""], _u.raw = [" lastBeat=\"", "\""], xml(_u, trillSound.lastBeat));
+        attribs += (_u = [" last-beat=\"", "\""], _u.raw = [" last-beat=\"", "\""], xml(_u, trillSound.lastBeat));
     }
     return attribs;
     var _o, _p, _q, _r, _s, _t, _u;
