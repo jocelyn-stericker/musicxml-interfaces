@@ -2424,7 +2424,7 @@ function xmlToTrillSound(node: Node) {
         ret.beats = 4;
     }
     if (!foundLastBeat) {
-        ret.lastBeat = 75;
+        ret.lastBeat = 24;
     }
     if (!foundTrillStep) {
         ret.trillStep = WholeHalfUnison.Whole;
@@ -2433,7 +2433,7 @@ function xmlToTrillSound(node: Node) {
         ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
-        ret.secondBeat = 25;
+        ret.secondBeat = 12;
     }
     return ret;
 }
@@ -2457,8 +2457,8 @@ function xmlToTrillSound(node: Node) {
 export interface BendSound {
     accelerate?: boolean;
     beats?: number;
+    firstBeat?: number;
     lastBeat?: number;
-    secondBeat?: number;
 }
 
 function xmlToBendSound(node: Node) {
@@ -2487,9 +2487,9 @@ function xmlToBendSound(node: Node) {
             ret.lastBeat = dataLastBeat;
             foundLastBeat = true;
         }
-        if (ch2.name === "second-beat") {
+        if (ch2.name === "first-beat") {
             let dataSecondBeat = getNumber(ch2, true);
-            ret.secondBeat = dataSecondBeat;
+            ret.firstBeat = dataSecondBeat;
             foundSecondBeat = true;
         }
     }
@@ -2503,7 +2503,7 @@ function xmlToBendSound(node: Node) {
         ret.lastBeat = 75;
     }
     if (!foundSecondBeat) {
-        ret.secondBeat = 25;
+        ret.firstBeat = 25;
     }
     return ret;
 }
@@ -10082,7 +10082,7 @@ function xmlToSlide(node: Node) {
     let foundAccelerate = false;
     let foundBeats = false;
     let foundLastBeat = false;
-    let foundSecondBeat = false;
+    let foundFirstBeat = false;
     let foundNormal = false;
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
@@ -10158,10 +10158,10 @@ function xmlToSlide(node: Node) {
             ret.lastBeat = dataLastBeat;
             foundLastBeat = true;
         }
-        if (ch2.name === "second-beat") {
-            let dataSecondBeat = getNumber(ch2, true);
-            ret.secondBeat = dataSecondBeat;
-            foundSecondBeat = true;
+        if (ch2.name === "first-beat") {
+            let dataFirstBeat = getNumber(ch2, true);
+            ret.firstBeat = dataFirstBeat;
+            foundFirstBeat = true;
         }
         if (ch2.name === "type") {
             let dataType = getStartStop(ch2, null);
@@ -10203,8 +10203,8 @@ function xmlToSlide(node: Node) {
     if (!foundLastBeat) {
         ret.lastBeat = 75;
     }
-    if (!foundSecondBeat) {
-        ret.secondBeat = 25;
+    if (!foundFirstBeat) {
+        ret.firstBeat = 25;
     }
     if (!foundNormal) {
         ret.normal = 1;
@@ -13580,7 +13580,7 @@ function xmlToBend(node: Node) {
     let foundAccelerate = false;
     let foundBeats = false;
     let foundLastBeat = false;
-    let foundSecondBeat = false;
+    let foundFirstBeat = false;
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "bend-alter") {
@@ -13656,10 +13656,10 @@ function xmlToBend(node: Node) {
             ret.lastBeat = dataLastBeat;
             foundLastBeat = true;
         }
-        if (ch2.name === "second-beat") {
-            let dataSecondBeat = getNumber(ch2, true);
-            ret.secondBeat = dataSecondBeat;
-            foundSecondBeat = true;
+        if (ch2.name === "first-beat") {
+            let dataFirstBeat = getNumber(ch2, true);
+            ret.firstBeat = dataFirstBeat;
+            foundFirstBeat = true;
         }
     }
     if (!foundFontWeight) {
@@ -13680,8 +13680,8 @@ function xmlToBend(node: Node) {
     if (!foundLastBeat) {
         ret.lastBeat = 75;
     }
-    if (!foundSecondBeat) {
-        ret.secondBeat = 25;
+    if (!foundFirstBeat) {
+        ret.firstBeat = 25;
     }
     return ret;
 }
@@ -26277,10 +26277,10 @@ export function noteToXML(note: Note) {
                         fontToXML(dot) + colorToXML(dot)} />`);
                 });
 
-                tChildren.push(dangerous `<${tup[0]}>${dataChildren.join("\n").split("\n")
+                tChildren.push(dangerous `<${tup[0]}>\n${dataChildren.join("\n").split("\n")
                     .map(n => "  " + n).join("\n")}\n</${tup[0]}>`);
             });
-            nChildren.push(dangerous `<tuplet${tattribs}>${tChildren.join("\n").split("\n")
+            nChildren.push(dangerous `<tuplet${tattribs}>\n${tChildren.join("\n").split("\n")
                 .map(n => "  " + n).join("\n")}\n</tuplet>`);
         });
 
@@ -26510,7 +26510,7 @@ export function noteToXML(note: Note) {
                     }</accidental-mark>`);
             });
 
-            nChildren.push(dangerous `<ornaments>${oChildren.join("\n").split("\n")
+            nChildren.push(dangerous `<ornaments>\n${oChildren.join("\n").split("\n")
                 .map(n => "  " + n).join("\n")}\n</ornaments>`);
         });
 
@@ -26713,8 +26713,7 @@ export function noteToXML(note: Note) {
                 }
                 if (defined(technical.bend.preBend)) {
                     bendChildren.push(xml `<pre-bend />`);
-                }
-                if (defined(technical.bend.release)) {
+                } else if (defined(technical.bend.release)) {
                     bendChildren.push(xml `<release />`);
                 }
                 if (defined(technical.bend.withBar)) {
@@ -26726,7 +26725,7 @@ export function noteToXML(note: Note) {
                 oChildren.push(dangerous `<bend${
                             printStyleToXML(technical.bend) +
                             bendSoundToXML(technical.bend)
-                        }>${bendChildren.join("\n").split("\n")
+                        }>\n${bendChildren.join("\n").split("\n")
                     .map(n => "  " + n).join("\n")}\n</bend>`);
             }
             // 
@@ -26878,7 +26877,7 @@ export function noteToXML(note: Note) {
                 }>${pcdata}</other-technical>`);
             }
 
-            nChildren.push(dangerous `<technical>${oChildren.join("\n").split("\n")
+            nChildren.push(dangerous `<technical>\n${oChildren.join("\n").split("\n")
                 .map(n => "  " + n).join("\n")}\n</technical>`);
         });
 
@@ -27087,7 +27086,7 @@ export function noteToXML(note: Note) {
                 }>${pcdata}</other-articulation>`);
             });
 
-            nChildren.push(dangerous `<articulations>${oChildren.join("\n").split("\n")
+            nChildren.push(dangerous `<articulations>\n${oChildren.join("\n").split("\n")
                 .map(n => "  " + n).join("\n")}\n</articulations>`);
         });
 
@@ -27268,7 +27267,7 @@ export function noteToXML(note: Note) {
             }
         });
 
-        elements.push(dangerous `<lyric${lyricAttribs}>${lyricChildren.join("\n").split("\n")
+        elements.push(dangerous `<lyric${lyricAttribs}>\n${lyricChildren.join("\n").split("\n")
             .map(n => "  " + n).join("\n")}\n</lyric>`);
     });
 
@@ -27308,7 +27307,7 @@ export function noteToXML(note: Note) {
             }
             playChildren.push(dangerous `<other-play${oAttribs}>${oPcdata}</other-play>`);
         }
-        elements.push(dangerous `<play${playAttribs}>${playChildren.join("\n").split("\n")
+        elements.push(dangerous `<play${playAttribs}>\n${playChildren.join("\n").split("\n")
             .map(n => "  " + n).join("\n")}\n</play>`);
     }
 
@@ -29274,11 +29273,11 @@ function bendSoundToXML(bendSound: BendSound): string {
     if (defined(bendSound.beats)) {
         attribs += xml ` beats="${bendSound.beats}"`;
     }
+    if (defined(bendSound.firstBeat)) {
+        attribs += xml ` first-beat="${bendSound.firstBeat}"`;
+    }
     if (defined(bendSound.lastBeat)) {
         attribs += xml ` last-beat="${bendSound.lastBeat}"`;
-    }
-    if (defined(bendSound.secondBeat)) {
-        attribs += xml ` second-beat="${bendSound.secondBeat}"`;
     }
     return attribs;
 }
