@@ -19625,7 +19625,7 @@ function degreeToXML(degree) {
         }
         lattribs += printStyleToXML(degree.degreeValue);
         var pcdata = (_e = ["", ""], _e.raw = ["", ""], xml(_e, degree.degreeValue.data));
-        children.push((_f = ["<degree-value", ">", "</degree-value>"], _f.raw = ["<degree-value", ">", "</degree-value>"], xml(_f, lattribs, pcdata)));
+        children.push((_f = ["<degree-value", ">", "</degree-value>"], _f.raw = ["<degree-value", ">", "</degree-value>"], dangerous(_f, lattribs, pcdata)));
     }
     if (defined(degree.degreeAlter)) {
         // <!ELEMENT degree-alter (#PCDATA)>
@@ -19638,7 +19638,7 @@ function degreeToXML(degree) {
             _lattribs += (_g = [" plus-minus=\"", "\""], _g.raw = [" plus-minus=\"", "\""], yesNo(_g, degree.degreeAlter.plusMinus));
         }
         var _pcdata = (_h = ["", ""], _h.raw = ["", ""], xml(_h, degree.degreeAlter.data));
-        children.push((_j = ["<degree-alter", ">", "</degree-alter>"], _j.raw = ["<degree-alter", ">", "</degree-alter>"], xml(_j, _lattribs, _pcdata)));
+        children.push((_j = ["<degree-alter", ">", "</degree-alter>"], _j.raw = ["<degree-alter", ">", "</degree-alter>"], dangerous(_j, _lattribs, _pcdata)));
     }
     if (defined(degree.degreeType)) {
         // <!ELEMENT degree-type (#PCDATA)>
@@ -19651,7 +19651,7 @@ function degreeToXML(degree) {
             _lattribs_1 += (_k = [" text=\"", "\""], _k.raw = [" text=\"", "\""], xml(_k, degree.degreeType.text));
         }
         var _pcdata_1 = (_l = ["", ""], _l.raw = ["", ""], xml(_l, degree.degreeType.data));
-        children.push((_m = ["<degree-type", ">", "</degree-type>"], _m.raw = ["<degree-type", ">", "</degree-type>"], xml(_m, _lattribs_1, _pcdata_1)));
+        children.push((_m = ["<degree-type", ">", "</degree-type>"], _m.raw = ["<degree-type", ">", "</degree-type>"], dangerous(_m, _lattribs_1, _pcdata_1)));
     }
     var attribs = printObjectToXML(degree);
     return (_o = ["<degree", ">\n", "\n</degree>"], _o.raw = ["<degree", ">\\n", "\\n</degree>"], dangerous(_o, attribs, children.join("\n").split("\n").map(function (n) {

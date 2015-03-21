@@ -25455,7 +25455,7 @@ function degreeToXML(degree: Degree): string {
         }
         lattribs += printStyleToXML(degree.degreeValue);
         let pcdata = xml `${degree.degreeValue.data}`;
-        children.push(xml `<degree-value${lattribs}>${pcdata}</degree-value>`);
+        children.push(dangerous `<degree-value${lattribs}>${pcdata}</degree-value>`);
     }
     if (defined(degree.degreeAlter)) {
         // <!ELEMENT degree-alter (#PCDATA)>
@@ -25468,7 +25468,7 @@ function degreeToXML(degree: Degree): string {
             lattribs += yesNo ` plus-minus="${degree.degreeAlter.plusMinus}"`;
         }
         let pcdata = xml `${degree.degreeAlter.data}`;
-        children.push(xml `<degree-alter${lattribs}>${pcdata}</degree-alter>`);
+        children.push(dangerous `<degree-alter${lattribs}>${pcdata}</degree-alter>`);
     }
     if (defined(degree.degreeType)) {
         // <!ELEMENT degree-type (#PCDATA)>
@@ -25481,7 +25481,7 @@ function degreeToXML(degree: Degree): string {
             lattribs += xml ` text="${degree.degreeType.text}"`;
         }
         let pcdata = xml `${degree.degreeType.data}`;
-        children.push(xml `<degree-type${lattribs}>${pcdata}</degree-type>`);
+        children.push(dangerous `<degree-type${lattribs}>${pcdata}</degree-type>`);
     }
     let attribs = printObjectToXML(degree);
     return dangerous `<degree${attribs}>\n${children.join("\n").split("\n")
