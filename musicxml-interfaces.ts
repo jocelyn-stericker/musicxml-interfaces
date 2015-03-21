@@ -27391,21 +27391,37 @@ export function figuredBassToXML(figuredBass: FiguredBass): string {
     }
     let children: string[] = [];
     children = children.concat(staffDebugInfoToXMLComment(figuredBass));
-    (figuredBass.figures || []).forEach(figuredBass => {
+    (figuredBass.figures || []).forEach(figure => {
         // <!ELEMENT figure (prefix?, figure-number?, suffix?, extend?)>
+        let fChildren: string[] = [];
+
         // <!ELEMENT prefix (#PCDATA)>
         // <!ATTLIST prefix
         //     %print-style;
         // >
+        if (defined(figure.prefix)) {
+            let pcdata = xml `${figure.prefix.data}`;
+            fChildren.push(dangerous `<prefix${printStyleToXML(figure.prefix)}>${pcdata}</prefix>`);
+        }
         // <!ELEMENT figure-number (#PCDATA)>
         // <!ATTLIST figure-number
         //     %print-style;
         // >
+        if (defined(figure.figureNumber)) {
+            let pcdata = xml `${figure.figureNumber.data}`;
+            fChildren.push(dangerous `<figure-number${printStyleToXML(figure.figureNumber)}>${
+                pcdata}</figure-number>`);
+        }
         // <!ELEMENT suffix (#PCDATA)>
         // <!ATTLIST suffix
         //     %print-style;
         // >
-        // TODO: not implemented
+        if (defined(figure.suffix)) {
+            let pcdata = xml `${figure.suffix.data}`;
+            fChildren.push(dangerous `<suffix${printStyleToXML(figure.suffix)}>${pcdata}</suffix>`);
+        }
+        children.push(dangerous `<figure>\n${fChildren.join("\n").split("\n")
+            .map(n => "  " + n).join("\n")}\n</figure>`);
     });
     if (defined(figuredBass.duration)) {
         children.push(xml `<duration>${figuredBass.duration}</duration>`);

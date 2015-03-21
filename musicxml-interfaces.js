@@ -21256,21 +21256,37 @@ function figuredBassToXML(figuredBass) {
     }
     var children = [];
     children = children.concat(staffDebugInfoToXMLComment(figuredBass));
-    (figuredBass.figures || []).forEach(function (figuredBass) {
+    (figuredBass.figures || []).forEach(function (figure) {
         // <!ELEMENT figure (prefix?, figure-number?, suffix?, extend?)>
+        var fChildren = [];
         // <!ELEMENT prefix (#PCDATA)>
         // <!ATTLIST prefix
         //     %print-style;
         // >
+        if (defined(figure.prefix)) {
+            var pcdata = (_e = ["", ""], _e.raw = ["", ""], xml(_e, figure.prefix.data));
+            fChildren.push((_f = ["<prefix", ">", "</prefix>"], _f.raw = ["<prefix", ">", "</prefix>"], dangerous(_f, printStyleToXML(figure.prefix), pcdata)));
+        }
         // <!ELEMENT figure-number (#PCDATA)>
         // <!ATTLIST figure-number
         //     %print-style;
         // >
+        if (defined(figure.figureNumber)) {
+            var _pcdata = (_g = ["", ""], _g.raw = ["", ""], xml(_g, figure.figureNumber.data));
+            fChildren.push((_h = ["<figure-number", ">", "</figure-number>"], _h.raw = ["<figure-number", ">", "</figure-number>"], dangerous(_h, printStyleToXML(figure.figureNumber), _pcdata)));
+        }
         // <!ELEMENT suffix (#PCDATA)>
         // <!ATTLIST suffix
         //     %print-style;
         // >
-        // TODO: not implemented
+        if (defined(figure.suffix)) {
+            var _pcdata_1 = (_j = ["", ""], _j.raw = ["", ""], xml(_j, figure.suffix.data));
+            fChildren.push((_k = ["<suffix", ">", "</suffix>"], _k.raw = ["<suffix", ">", "</suffix>"], dangerous(_k, printStyleToXML(figure.suffix), _pcdata_1)));
+        }
+        children.push((_l = ["<figure>\n", "\n</figure>"], _l.raw = ["<figure>\\n", "\\n</figure>"], dangerous(_l, fChildren.join("\n").split("\n").map(function (n) {
+            return "  " + n;
+        }).join("\n"))));
+        var _e, _f, _g, _h, _j, _k, _l;
     });
     if (defined(figuredBass.duration)) {
         children.push((_e = ["<duration>", "</duration>"], _e.raw = ["<duration>", "</duration>"], xml(_e, figuredBass.duration)));
