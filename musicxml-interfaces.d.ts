@@ -183,7 +183,6 @@ declare module "musicxml-interfaces" {
     * the note or the musical position within the bar (x) and
     * the top line of the staff (y).
     *
-    *
     * For the following elements, the default-x value changes
     * the origin relative to the start of the current measure:
     *
@@ -4762,7 +4761,7 @@ declare module "musicxml-interfaces" {
         name: string;
     }
     /**
-    *     Credit elements refer to the title, composer, arranger,
+    * Credit elements refer to the title, composer, arranger,
     * lyricist, copyright, dedication, and other text that usually
     * appears on the first page of a score. The credit-words
     * and credit-image elements are similar to the words and
@@ -4835,7 +4834,7 @@ declare module "musicxml-interfaces" {
         id: string;
     }
     /**
-    *     The part-name indicates the full name of the musical part.
+    * The part-name indicates the full name of the musical part.
     * The part-abbreviation indicates the abbreviated version of
     * the name of the musical part. The part-name will often
     * precede the first system, while the part-abbreviation will
@@ -4851,7 +4850,7 @@ declare module "musicxml-interfaces" {
         partName: string;
     }
     /**
-    *     The part-name indicates the full name of the musical part.
+    * The part-name indicates the full name of the musical part.
     * The part-abbreviation indicates the abbreviated version of
     * the name of the musical part. The part-name will often
     * precede the first system, while the part-abbreviation will
@@ -4949,7 +4948,7 @@ declare module "musicxml-interfaces" {
     export interface GroupTime {
     }
     /**
-    *     The score-instrument element allows for multiple
+    * The score-instrument element allows for multiple
     * instruments per score-part. As with the score-part
     * element, each score-instrument has a required ID
     * attribute, a name, and an optional abbreviation. The
