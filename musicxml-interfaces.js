@@ -18940,8 +18940,9 @@ function creditWordsToXML(creditWords) {
     // <!ATTLIST credit-words
     //     %text-formatting;
     // >
-    return (_a = ["<credit-words", ">", "</credit-words>"], _a.raw = ["<credit-words", ">", "</credit-words>"], dangerous(_a, textFormattingToXML(creditWords), creditWords.words));
-    var _a;
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, creditWords.words));
+    return (_b = ["<credit-words", ">", "</credit-words>"], _b.raw = ["<credit-words", ">", "</credit-words>"], dangerous(_b, textFormattingToXML(creditWords), pcdata));
+    var _a, _b;
 }
 function creditImageToXML(creditImage) {
     // <!ELEMENT credit-image EMPTY>

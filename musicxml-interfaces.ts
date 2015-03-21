@@ -24728,8 +24728,9 @@ function creditWordsToXML(creditWords: CreditWords): string {
     // <!ATTLIST credit-words
     //     %text-formatting;
     // >
+    let pcdata = xml `${creditWords.words}`;
     return dangerous `<credit-words${textFormattingToXML(creditWords)}>${
-        creditWords.words}</credit-words>`;
+        pcdata}</credit-words>`;
 }
 
 function creditImageToXML(creditImage: CreditImage): string {
