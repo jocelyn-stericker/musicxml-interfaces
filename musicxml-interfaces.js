@@ -19742,7 +19742,7 @@ function frameToXML(frame) {
             if (defined(frameNote.fingering.alternate)) {
                 coreAttribs += (_s = [" alternate=\"", "\""], _s.raw = [" alternate=\"", "\""], yesNo(_s, frameNote.fingering.alternate));
             }
-            fChildren.push((_t = ["<frame-note", ">", "</frame-note>"], _t.raw = ["<frame-note", ">", "</frame-note>"], dangerous(_t, coreAttribs + printStyleToXML(frameNote.fingering) + placementToXML(frameNote.fingering), _pcdata_2)));
+            fChildren.push((_t = ["<fingering", ">", "</fingering>"], _t.raw = ["<fingering", ">", "</fingering>"], dangerous(_t, coreAttribs + printStyleToXML(frameNote.fingering) + placementToXML(frameNote.fingering), _pcdata_2)));
         }
         // <!ELEMENT barre EMPTY>
         // <!ATTLIST barre

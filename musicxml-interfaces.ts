@@ -25582,10 +25582,10 @@ function frameToXML(frame: Frame): string {
             if (defined(frameNote.fingering.alternate)) {
                 coreAttribs += yesNo ` alternate="${frameNote.fingering.alternate}"`;
             }
-            fChildren.push(dangerous `<frame-note${
+            fChildren.push(dangerous `<fingering${
                     coreAttribs +
                     printStyleToXML(frameNote.fingering) +
-                    placementToXML(frameNote.fingering)}>${pcdata}</frame-note>`);
+                    placementToXML(frameNote.fingering)}>${pcdata}</fingering>`);
         }
         // <!ELEMENT barre EMPTY>
         // <!ATTLIST barre
