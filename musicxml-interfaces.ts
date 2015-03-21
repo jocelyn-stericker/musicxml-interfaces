@@ -24932,35 +24932,35 @@ function midiInstrumentToXML(midiInstrument: MidiInstrument): string {
     let attribs = "";
     if (defined(midiInstrument.midiChannel)) {
         // <!ELEMENT midi-channel (#PCDATA)>
-        children.push(xml `midi-channel="${midiInstrument.midiChannel}"`);
+        children.push(xml `<midi-channel>${midiInstrument.midiChannel}</midi-channel>`);
     }
     if (defined(midiInstrument.midiName)) {
         // <!ELEMENT midi-name (#PCDATA)>
-        children.push(xml `midi-name="${midiInstrument.midiName}"`);
+        children.push(xml `<midi-name>${midiInstrument.midiName}</midi-name>`);
     }
     if (defined(midiInstrument.midiBank)) {
         // <!ELEMENT midi-bank (#PCDATA)>
-        children.push(xml `midi-bank="${midiInstrument.midiBank}"`);
+        children.push(xml `<midi-bank>${midiInstrument.midiBank}</midi-bank>`);
     }
     if (defined(midiInstrument.midiProgram)) {
         // <!ELEMENT midi-program (#PCDATA)>
-        children.push(xml `midi-program="${midiInstrument.midiProgram}"`);
+        children.push(xml `<midi-program>${midiInstrument.midiProgram}</midi-program>`);
     }
     if (defined(midiInstrument.midiUnpitched)) {
         // <!ELEMENT midi-unpitched (#PCDATA)>
-        children.push(xml `midi-unpitched="${midiInstrument.midiUnpitched}"`);
+        children.push(xml `<midi-unpitched>${midiInstrument.midiUnpitched}</midi-unpitche>`);
     }
     if (defined(midiInstrument.volume)) {
         // <!ELEMENT volume (#PCDATA)>
-        children.push(xml `volume="${midiInstrument.volume}"`);
+        children.push(xml `<volume>${midiInstrument.volume}</volume>`);
     }
     if (defined(midiInstrument.pan)) {
         // <!ELEMENT pan (#PCDATA)>
-        children.push(xml `pan="${midiInstrument.pan}"`);
+        children.push(xml `<pan>${midiInstrument.pan}</pan>`);
     }
     if (defined(midiInstrument.elevation)) {
         // <!ELEMENT elevation (#PCDATA)>
-        children.push(xml `elevation="${midiInstrument.elevation}"`);
+        children.push(xml `<elevation>${midiInstrument.elevation}</elevation>`);
     }
     if (defined(midiInstrument.id)) {
         attribs += xml ` id="${midiInstrument.id}"`;

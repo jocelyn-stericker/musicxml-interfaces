@@ -19131,35 +19131,35 @@ function midiInstrumentToXML(midiInstrument) {
     var attribs = "";
     if (defined(midiInstrument.midiChannel)) {
         // <!ELEMENT midi-channel (#PCDATA)>
-        children.push((_a = ["midi-channel=\"", "\""], _a.raw = ["midi-channel=\"", "\""], xml(_a, midiInstrument.midiChannel)));
+        children.push((_a = ["<midi-channel>", "</midi-channel>"], _a.raw = ["<midi-channel>", "</midi-channel>"], xml(_a, midiInstrument.midiChannel)));
     }
     if (defined(midiInstrument.midiName)) {
         // <!ELEMENT midi-name (#PCDATA)>
-        children.push((_b = ["midi-name=\"", "\""], _b.raw = ["midi-name=\"", "\""], xml(_b, midiInstrument.midiName)));
+        children.push((_b = ["<midi-name>", "</midi-name>"], _b.raw = ["<midi-name>", "</midi-name>"], xml(_b, midiInstrument.midiName)));
     }
     if (defined(midiInstrument.midiBank)) {
         // <!ELEMENT midi-bank (#PCDATA)>
-        children.push((_c = ["midi-bank=\"", "\""], _c.raw = ["midi-bank=\"", "\""], xml(_c, midiInstrument.midiBank)));
+        children.push((_c = ["<midi-bank>", "</midi-bank>"], _c.raw = ["<midi-bank>", "</midi-bank>"], xml(_c, midiInstrument.midiBank)));
     }
     if (defined(midiInstrument.midiProgram)) {
         // <!ELEMENT midi-program (#PCDATA)>
-        children.push((_d = ["midi-program=\"", "\""], _d.raw = ["midi-program=\"", "\""], xml(_d, midiInstrument.midiProgram)));
+        children.push((_d = ["<midi-program>", "</midi-program>"], _d.raw = ["<midi-program>", "</midi-program>"], xml(_d, midiInstrument.midiProgram)));
     }
     if (defined(midiInstrument.midiUnpitched)) {
         // <!ELEMENT midi-unpitched (#PCDATA)>
-        children.push((_e = ["midi-unpitched=\"", "\""], _e.raw = ["midi-unpitched=\"", "\""], xml(_e, midiInstrument.midiUnpitched)));
+        children.push((_e = ["<midi-unpitched>", "</midi-unpitche>"], _e.raw = ["<midi-unpitched>", "</midi-unpitche>"], xml(_e, midiInstrument.midiUnpitched)));
     }
     if (defined(midiInstrument.volume)) {
         // <!ELEMENT volume (#PCDATA)>
-        children.push((_f = ["volume=\"", "\""], _f.raw = ["volume=\"", "\""], xml(_f, midiInstrument.volume)));
+        children.push((_f = ["<volume>", "</volume>"], _f.raw = ["<volume>", "</volume>"], xml(_f, midiInstrument.volume)));
     }
     if (defined(midiInstrument.pan)) {
         // <!ELEMENT pan (#PCDATA)>
-        children.push((_g = ["pan=\"", "\""], _g.raw = ["pan=\"", "\""], xml(_g, midiInstrument.pan)));
+        children.push((_g = ["<pan>", "</pan>"], _g.raw = ["<pan>", "</pan>"], xml(_g, midiInstrument.pan)));
     }
     if (defined(midiInstrument.elevation)) {
         // <!ELEMENT elevation (#PCDATA)>
-        children.push((_h = ["elevation=\"", "\""], _h.raw = ["elevation=\"", "\""], xml(_h, midiInstrument.elevation)));
+        children.push((_h = ["<elevation>", "</elevation>"], _h.raw = ["<elevation>", "</elevation>"], xml(_h, midiInstrument.elevation)));
     }
     if (defined(midiInstrument.id)) {
         attribs += (_j = [" id=\"", "\""], _j.raw = [" id=\"", "\""], xml(_j, midiInstrument.id));
