@@ -1,0 +1,527 @@
+﻿<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Kind | musicxml-interfaces</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">musicxml-interfaces</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="kind.html">Kind</a>
+				</li>
+			</ul>
+			<h1>Interface Kind</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Kind indicates the type of chord. Degree elements
+							can then add, subtract, or alter from these
+						starting points. Values include:</p>
+					</div>
+					<p>Triads:
+						major (major third, perfect fifth)
+						minor (minor third, perfect fifth)
+						augmented (major third, augmented fifth)
+						diminished (minor third, diminished fifth)
+						Sevenths:
+						dominant (major triad, minor seventh)
+						major-seventh (major triad, major seventh)
+						minor-seventh (minor triad, minor seventh)
+						diminished-seventh
+						(diminished triad, diminished seventh)
+						augmented-seventh
+						(augmented triad, minor seventh)
+						half-diminished
+						(diminished triad, minor seventh)
+						major-minor
+						(minor triad, major seventh)
+						Sixths:
+						major-sixth (major triad, added sixth)
+						minor-sixth (minor triad, added sixth)
+						Ninths:
+						dominant-ninth (dominant-seventh, major ninth)
+						major-ninth (major-seventh, major ninth)
+						minor-ninth (minor-seventh, major ninth)
+						11ths (usually as the basis for alteration):
+						dominant-11th (dominant-ninth, perfect 11th)
+						major-11th (major-ninth, perfect 11th)
+						minor-11th (minor-ninth, perfect 11th)
+						13ths (usually as the basis for alteration):
+						dominant-13th (dominant-11th, major 13th)
+						major-13th (major-11th, major 13th)
+						minor-13th (minor-11th, major 13th)
+						Suspended:
+						suspended-second (major second, perfect fifth)
+						suspended-fourth (perfect fourth, perfect fifth)
+						Functional sixths:
+						Neapolitan
+						Italian
+						French
+						German
+						Other:
+						pedal (pedal-point bass)
+						power (perfect fifth)
+					Tristan</p>
+					<p>The &quot;other&quot; kind is used when the harmony is entirely
+						composed of add elements. The &quot;none&quot; kind is used to
+						explicitly encode absence of chords or functional
+					harmony.</p>
+					<p>The attributes are used to indicate the formatting
+						of the symbol. Since the kind element is the constant
+						in all the harmony-chord entities that can make up
+					a polychord, many formatting attributes are here.</p>
+					<p>The use-symbols attribute is yes if the kind should be
+						represented when possible with harmony symbols rather
+					than letters and numbers. These symbols include:</p>
+					<p>major: a triangle, like Unicode 25B3
+						minor: -, like Unicode 002D
+						augmented: +, like Unicode 002B
+						diminished: °, like Unicode 00B0
+					half-diminished: ø, like Unicode 00F8</p>
+					<p>For the major-minor kind, only the minor symbol is used when
+						use-symbols is yes. The major symbol is set using the symbol
+						attribute in the degree-value element. The corresponding
+					degree-alter value will usually be 0 in this case.</p>
+					<p>The text attribute describes how the kind should be spelled
+						in a score. If use-symbols is yes, the value of the text
+						attribute follows the symbol. The stack-degrees attribute
+						is yes if the degree elements should be stacked above each
+						other. The parentheses-degrees attribute is yes if all the
+						degrees should be in parentheses. The bracket-degrees
+						attribute is yes if all the degrees should be in a bracket.
+						If not specified, these values are implementation-specific.
+						The alignment attributes are for the entire harmony-chord
+					entity of which this kind element is a part.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="printstyle.html" class="tsd-signature-type">PrintStyle</a>
+					</li>
+					<li>
+						<a href="halign.html" class="tsd-signature-type">Halign</a>
+					</li>
+					<li>
+						<a href="valign.html" class="tsd-signature-type">Valign</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">Kind</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="kind.html#bracketdegrees" class="tsd-kind-icon">bracket<wbr>Degrees</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#color" class="tsd-kind-icon">color</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="kind.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#defaultx" class="tsd-kind-icon">defaultX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#defaulty" class="tsd-kind-icon">defaultY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#fontfamily" class="tsd-kind-icon">font<wbr>Family</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#fontsize" class="tsd-kind-icon">font<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#fontstyle" class="tsd-kind-icon">font<wbr>Style</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#fontweight" class="tsd-kind-icon">font<wbr>Weight</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#halign" class="tsd-kind-icon">halign</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="kind.html#parenthesesdegrees" class="tsd-kind-icon">parentheses<wbr>Degrees</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#relativex" class="tsd-kind-icon">relativeX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#relativey" class="tsd-kind-icon">relativeY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="kind.html#stackdegrees" class="tsd-kind-icon">stack<wbr>Degrees</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="kind.html#text" class="tsd-kind-icon">text</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="kind.html#usesymbols" class="tsd-kind-icon">use<wbr>Symbols</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="kind.html#valign" class="tsd-kind-icon">valign</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="bracketdegrees" class="tsd-anchor"></a>
+					<h3>bracket<wbr>Degrees</h3>
+					<div class="tsd-signature tsd-kind-icon">bracket<wbr>Degrees<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L21110">musicxml-interfaces.ts:21110</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="color" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> color</h3>
+					<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="color.html">Color</a>.<a href="color.html#color-1">color</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L587">musicxml-interfaces.ts:587</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L21108">musicxml-interfaces.ts:21108</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="defaultx" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> defaultX</h3>
+					<div class="tsd-signature tsd-kind-icon">defaultX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#defaultx">defaultX</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L412">musicxml-interfaces.ts:412</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="defaulty" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> defaultY</h3>
+					<div class="tsd-signature tsd-kind-icon">defaultY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#defaulty">defaultY</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L414">musicxml-interfaces.ts:414</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontfamily" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Family</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Family<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontfamily">fontFamily</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L504">musicxml-interfaces.ts:504</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontsize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontsize">fontSize</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L507">musicxml-interfaces.ts:507</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontstyle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Style</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Style<span class="tsd-signature-symbol">:</span> <a href="../enums/normalitalic.html" class="tsd-signature-type">NormalItalic</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontstyle">fontStyle</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L506">musicxml-interfaces.ts:506</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontweight" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Weight</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Weight<span class="tsd-signature-symbol">:</span> <a href="../enums/normalbold.html" class="tsd-signature-type">NormalBold</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontweight">fontWeight</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L505">musicxml-interfaces.ts:505</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="halign" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> halign</h3>
+					<div class="tsd-signature tsd-kind-icon">halign<span class="tsd-signature-symbol">:</span> <a href="../enums/leftcenterright.html" class="tsd-signature-type">LeftCenterRight</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="halign.html">Halign</a>.<a href="halign.html#halign-1">halign</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L631">musicxml-interfaces.ts:631</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="parenthesesdegrees" class="tsd-anchor"></a>
+					<h3>parentheses<wbr>Degrees</h3>
+					<div class="tsd-signature tsd-kind-icon">parentheses<wbr>Degrees<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L21105">musicxml-interfaces.ts:21105</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="relativex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> relativeX</h3>
+					<div class="tsd-signature tsd-kind-icon">relativeX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#relativex">relativeX</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L415">musicxml-interfaces.ts:415</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="relativey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> relativeY</h3>
+					<div class="tsd-signature tsd-kind-icon">relativeY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#relativey">relativeY</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L413">musicxml-interfaces.ts:413</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="stackdegrees" class="tsd-anchor"></a>
+					<h3>stack<wbr>Degrees</h3>
+					<div class="tsd-signature tsd-kind-icon">stack<wbr>Degrees<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L21109">musicxml-interfaces.ts:21109</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="text" class="tsd-anchor"></a>
+					<h3>text</h3>
+					<div class="tsd-signature tsd-kind-icon">text<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L21107">musicxml-interfaces.ts:21107</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="usesymbols" class="tsd-anchor"></a>
+					<h3>use<wbr>Symbols</h3>
+					<div class="tsd-signature tsd-kind-icon">use<wbr>Symbols<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L21106">musicxml-interfaces.ts:21106</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="valign" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> valign</h3>
+					<div class="tsd-signature tsd-kind-icon">valign<span class="tsd-signature-symbol">:</span> <a href="../enums/topmiddlebottombaseline.html" class="tsd-signature-type">TopMiddleBottomBaseline</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="valign.html">Valign</a>.<a href="valign.html#valign-1">valign</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L640">musicxml-interfaces.ts:640</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="kind.html" class="tsd-kind-icon">Kind</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="kind.html#bracketdegrees" class="tsd-kind-icon">bracket<wbr>Degrees</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#color" class="tsd-kind-icon">color</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="kind.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#defaultx" class="tsd-kind-icon">defaultX</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#defaulty" class="tsd-kind-icon">defaultY</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#fontfamily" class="tsd-kind-icon">font<wbr>Family</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#fontsize" class="tsd-kind-icon">font<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#fontstyle" class="tsd-kind-icon">font<wbr>Style</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#fontweight" class="tsd-kind-icon">font<wbr>Weight</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#halign" class="tsd-kind-icon">halign</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="kind.html#parenthesesdegrees" class="tsd-kind-icon">parentheses<wbr>Degrees</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#relativex" class="tsd-kind-icon">relativeX</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#relativey" class="tsd-kind-icon">relativeY</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="kind.html#stackdegrees" class="tsd-kind-icon">stack<wbr>Degrees</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="kind.html#text" class="tsd-kind-icon">text</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="kind.html#usesymbols" class="tsd-kind-icon">use<wbr>Symbols</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="kind.html#valign" class="tsd-kind-icon">valign</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

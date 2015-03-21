@@ -1,20 +1,3041 @@
-<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html class="default no-js">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>MusicXML Interfaces</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="res/logo.png">
-    <link rel="stylesheet" href="res/font-awesome.css">
-    <link rel="stylesheet" href="res/bootstrap.min.css">
-    <link rel="stylesheet" href="res/webapp.css">
-    <link href='//fonts.googleapis.com/css?family=Alegreya:400italic,400,700|Alegreya+SC:400,700' rel='stylesheet' type='text/css'>
-    <link rel="livePage" href="build/browser-bundle.js">
-    <script></script>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>musicxml-interfaces</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script src="assets/js/modernizr.js"></script>
 </head>
 <body>
-    <script src="build/browser-bundle.js"></script>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">musicxml-interfaces</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> musicxml-interfaces</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="musicxml-interfaces-for-javascript">MusicXML Interfaces for JavaScript</h1>
+				<p>MusicXML is the standard open format for exchanging digital sheet music. This library is a <strong>work in progress</strong> that provides:</p>
+				<ul>
+					<li>methods for parsing, manipulating, and serializing MusicXML files</li>
+					<li>full <strong>TypeScript</strong> type definitions</li>
+					<li>support for IE 8+ and other browsers, Node.js, and io.js</li>
+				</ul>
+				<h2 id="getting-musicxml-interfaces">Getting MusicXML Interfaces</h2>
+				<ul>
+					<li>To install, use npm: <code>npm install --save musicxml-interfaces</code></li>
+					<li>You need <code>xsltproc</code>. If you&#39;re on OS X or Linux, you probably already have it installed.</li>
+					<li>If you want to take advantage of TypeScript definitions, either<ul>
+							<li>Install tsd 0.6 (that&#39;s a prerelease as of March 2015) and run <code>npm install</code> and<code>tsd link</code>,</li>
+							<li>Or download <code>musicxml-interfaces.d.ts</code> and add a reference to it.</li>
+						</ul>
+					</li>
+				</ul>
+				<h2 id="parsing">Parsing</h2>
+				<p>To convert a song to a JavaScript object that implements MusicXML.ScoreTimewise:</p>
+				<pre><code><span class="hljs-keyword">var</span> MusicXML = require(<span class="hljs-string">"musicxml-interfaces"</span>);
+<span class="hljs-keyword">var</span> <span class="hljs-keyword">score</span> = MusicXML.<span class="hljs-keyword">parse</span>(documentString); <span class="hljs-comment">// =&gt; MusicXML.ScoreTimewise;</span>
+</code></pre><h2 id="manipulating">Manipulating</h2>
+				<p>Documentation coming soon.</p>
+				<h2 id="serializing">Serializing</h2>
+				<p>Not yet stable enough for use.</p>
+				<h2 id="copyright">Copyright</h2>
+				<pre><code>(C) Josh Netterfield &lt;joshua@nettek.ca&gt; <span class="hljs-number">2015.</span>
+Part <span class="hljs-operator">of</span> <span class="hljs-operator">the</span> musicxml-interfaces &lt;<span class="hljs-keyword">https</span>://github.com/ripieno/musicxml-interfaces&gt;.
+
+This program is free software: you can redistribute <span class="hljs-keyword">it</span> <span class="hljs-operator">and</span>/<span class="hljs-operator">or</span> modify
+<span class="hljs-keyword">it</span> under <span class="hljs-operator">the</span> terms <span class="hljs-operator">of</span> <span class="hljs-operator">the</span> GNU Affero General Public License <span class="hljs-keyword">as</span>
+published <span class="hljs-keyword">by</span> <span class="hljs-operator">the</span> Free Software Foundation, either <span class="hljs-built_in">version</span> <span class="hljs-number">3</span> <span class="hljs-operator">of</span> <span class="hljs-operator">the</span>
+License, <span class="hljs-operator">or</span> (<span class="hljs-keyword">at</span> your option) <span class="hljs-keyword">any</span> later <span class="hljs-built_in">version</span>.
+
+This program is distributed <span class="hljs-operator">in</span> <span class="hljs-operator">the</span> hope that <span class="hljs-keyword">it</span> will be useful,
+but WITHOUT ANY WARRANTY; <span class="hljs-keyword">without</span> even <span class="hljs-operator">the</span> implied warranty <span class="hljs-operator">of</span>
+MERCHANTABILITY <span class="hljs-operator">or</span> FITNESS FOR A PARTICULAR PURPOSE.  See <span class="hljs-operator">the</span>
+GNU Affero General Public License <span class="hljs-keyword">for</span> more details.
+
+You should have received <span class="hljs-operator">a</span> copy <span class="hljs-operator">of</span> <span class="hljs-operator">the</span> GNU Affero General Public License
+along <span class="hljs-operator">with</span> this program.  If <span class="hljs-operator">not</span>, see &lt;<span class="hljs-keyword">http</span>://www.gnu.org/licenses/&gt;.
+</code></pre><h2 id="musicxml-license">MusicXML License</h2>
+				<pre><code>MusicXML <span class="hljs-keyword">Version</span> 3.0
+
+<span class="hljs-keyword">Copyright</span> (C) 2004-2011 MakeMusic, Inc.
+
+http:<span class="hljs-comment">//www.makemusic.com/</span>
+
+This MusicXML work is being provided <span class="hljs-keyword">by</span> the <span class="hljs-keyword">copyright</span>
+holder under the MusicXML Public License <span class="hljs-keyword">Version</span> 3.0,
+available from:
+
+http:<span class="hljs-comment">//www.musicxml.org/dtds/license.html</span>
+</code></pre><h2 id="contributing">Contributing</h2>
+				<p>Please report issues!</p>
+				<ul>
+					<li>If there is a discrepency between a DTD in <code>vendor/musicxml-dtd</code> and the TypeScript interfaces in <code>musicxml-interfaces.d.ts</code>, just state the discrepency.</li>
+					<li>If the TypeScript interface definitions are correct, but there is an error in importing a file, provide a minimal MusicXML file that illustrates the issue.</li>
+					<li>If there is an error in exporting MusicXML interfaces back to MusicXML, provide a minimal valid JSON structure that is not exported correctly.</li>
+				</ul>
+				<p>Pull requests are currently not accepted.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-enum">
+						<a href="enums/abovebelow.html" class="tsd-kind-icon">Above<wbr>Below</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/accelritnone.html" class="tsd-kind-icon">Accel<wbr>Rit<wbr>None</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/actualbothnone.html" class="tsd-kind-icon">Actual<wbr>Both<wbr>None</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/barstyletype.html" class="tsd-kind-icon">Bar<wbr>Style<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/barlinelocation.html" class="tsd-kind-icon">Barline<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/beamtype.html" class="tsd-kind-icon">Beam<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/breathmarktype.html" class="tsd-kind-icon">Breath<wbr>Mark<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/cancellocation.html" class="tsd-kind-icon">Cancel<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/chordtype.html" class="tsd-kind-icon">Chord<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/count.html" class="tsd-kind-icon">Count</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/cuegracelarge.html" class="tsd-kind-icon">Cue<wbr>Grace<wbr>Large</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/directionmode.html" class="tsd-kind-icon">Direction<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/directiontypebg.html" class="tsd-kind-icon">Direction<wbr>Type<wbr>Bg</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/enclosureshape.html" class="tsd-kind-icon">Enclosure<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/explicitimpliedalternate.html" class="tsd-kind-icon">Explicit<wbr>Implied<wbr>Alternate</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/holeclosedtype.html" class="tsd-kind-icon">Hole<wbr>Closed<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/holelocation.html" class="tsd-kind-icon">Hole<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/leftcenterright.html" class="tsd-kind-icon">Left<wbr>Center<wbr>Right</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/leftright.html" class="tsd-kind-icon">Left<wbr>Right</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/lineendtype.html" class="tsd-kind-icon">Line<wbr>End<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/mxmlaccidental.html" class="tsd-kind-icon">Mxml<wbr>Accidental</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/normalangledsquare.html" class="tsd-kind-icon">Normal<wbr>Angled<wbr>Square</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/normalbold.html" class="tsd-kind-icon">Normal<wbr>Bold</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/normalitalic.html" class="tsd-kind-icon">Normal<wbr>Italic</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/noteheadtype.html" class="tsd-kind-icon">Notehead<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/octaveshifttype.html" class="tsd-kind-icon">Octave<wbr>Shift<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/oddevenboth.html" class="tsd-kind-icon">Odd<wbr>Even<wbr>Both</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/overunder.html" class="tsd-kind-icon">Over<wbr>Under</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/partsymboltype.html" class="tsd-kind-icon">Part<wbr>Symbol<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/pedaltype.html" class="tsd-kind-icon">Pedal<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/separatortype.html" class="tsd-kind-icon">Separator<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/showfretstype.html" class="tsd-kind-icon">Show<wbr>Frets<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/soliddasheddottedwavy.html" class="tsd-kind-icon">Solid<wbr>Dashed<wbr>Dotted<wbr>Wavy</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/startstop.html" class="tsd-kind-icon">Start<wbr>Stop</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/startstopcontinue.html" class="tsd-kind-icon">Start<wbr>Stop<wbr>Continue</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/startstopdiscontinue.html" class="tsd-kind-icon">Start<wbr>Stop<wbr>Discontinue</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/startstopsingle.html" class="tsd-kind-icon">Start<wbr>Stop<wbr>Single</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/stemtype.html" class="tsd-kind-icon">Stem<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/straightcurved.html" class="tsd-kind-icon">Straight<wbr>Curved</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/syllabictype.html" class="tsd-kind-icon">Syllabic<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/symbolsize.html" class="tsd-kind-icon">Symbol<wbr>Size</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/timesymboltype.html" class="tsd-kind-icon">Time<wbr>Symbol<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/tipdirection.html" class="tsd-kind-icon">Tip<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/topbottom.html" class="tsd-kind-icon">Top<wbr>Bottom</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/topmiddlebottombaseline.html" class="tsd-kind-icon">Top<wbr>Middle<wbr>Bottom<wbr>Baseline</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/updown.html" class="tsd-kind-icon">Up<wbr>Down</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/uppermainbelow.html" class="tsd-kind-icon">Upper<wbr>Main<wbr>Below</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/uprightinverted.html" class="tsd-kind-icon">Upright<wbr>Inverted</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/voicesymbol.html" class="tsd-kind-icon">Voice<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/wedgetype.html" class="tsd-kind-icon">Wedge<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/wholehalfnone.html" class="tsd-kind-icon">Whole<wbr>Half<wbr>None</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/wholehalfunison.html" class="tsd-kind-icon">Whole<wbr>Half<wbr>Unison</a>
+					</li>
+					<li class=" tsd-kind-enum">
+						<a href="enums/wingedtype.html" class="tsd-kind-icon">Winged<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-class tsd-is-not-exported">
+						<a href="classes/xsltprocessor.html" class="tsd-kind-icon">XSLTProcessor</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accent.html" class="tsd-kind-icon">Accent</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accidental.html" class="tsd-kind-icon">Accidental</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accidentalmark.html" class="tsd-kind-icon">Accidental<wbr>Mark</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accidentaltext.html" class="tsd-kind-icon">Accidental<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accord.html" class="tsd-kind-icon">Accord</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/accordionregistration.html" class="tsd-kind-icon">Accordion<wbr>Registration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/appearance.html" class="tsd-kind-icon">Appearance</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/arpeggiate.html" class="tsd-kind-icon">Arpeggiate</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/arrow.html" class="tsd-kind-icon">Arrow</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/articulations.html" class="tsd-kind-icon">Articulations</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/attributes.html" class="tsd-kind-icon">Attributes</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/backup.html" class="tsd-kind-icon">Backup</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/barstyle.html" class="tsd-kind-icon">Bar<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/barline.html" class="tsd-kind-icon">Barline</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/barre.html" class="tsd-kind-icon">Barre</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bass.html" class="tsd-kind-icon">Bass</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bassalter.html" class="tsd-kind-icon">Bass<wbr>Alter</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bassstep.html" class="tsd-kind-icon">Bass<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/beam.html" class="tsd-kind-icon">Beam</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/beatrepeat.html" class="tsd-kind-icon">Beat<wbr>Repeat</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/beatunitdot.html" class="tsd-kind-icon">Beat<wbr>Unit<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/beater.html" class="tsd-kind-icon">Beater</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bend.html" class="tsd-kind-icon">Bend</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bendsound.html" class="tsd-kind-icon">Bend<wbr>Sound</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bezier.html" class="tsd-kind-icon">Bezier</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/bracket.html" class="tsd-kind-icon">Bracket</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/breathmark.html" class="tsd-kind-icon">Breath<wbr>Mark</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/caesura.html" class="tsd-kind-icon">Caesura</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/calendardate.html" class="tsd-kind-icon">Calendar<wbr>Date</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cancel.html" class="tsd-kind-icon">Cancel</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/chord.html" class="tsd-kind-icon">Chord</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/clef.html" class="tsd-kind-icon">Clef</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/coda.html" class="tsd-kind-icon">Coda</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/color.html" class="tsd-kind-icon">Color</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/creator.html" class="tsd-kind-icon">Creator</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/credit.html" class="tsd-kind-icon">Credit</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/creditimage.html" class="tsd-kind-icon">Credit<wbr>Image</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/creditwords.html" class="tsd-kind-icon">Credit<wbr>Words</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/cue.html" class="tsd-kind-icon">Cue</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/damp.html" class="tsd-kind-icon">Damp</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/dampall.html" class="tsd-kind-icon">Damp<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/dashedformatting.html" class="tsd-kind-icon">Dashed<wbr>Formatting</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/dashes.html" class="tsd-kind-icon">Dashes</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/defaults.html" class="tsd-kind-icon">Defaults</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/degree.html" class="tsd-kind-icon">Degree</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/degreealter.html" class="tsd-kind-icon">Degree<wbr>Alter</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/degreetype.html" class="tsd-kind-icon">Degree<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/degreevalue.html" class="tsd-kind-icon">Degree<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/delayedinvertedturn.html" class="tsd-kind-icon">Delayed<wbr>Inverted<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/delayedturn.html" class="tsd-kind-icon">Delayed<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/detachedlegato.html" class="tsd-kind-icon">Detached<wbr>Legato</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/direction.html" class="tsd-kind-icon">Direction</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/directiontype.html" class="tsd-kind-icon">Direction<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/directive.html" class="tsd-kind-icon">Directive</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/directiveentity.html" class="tsd-kind-icon">Directive<wbr>Entity</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/displaytext.html" class="tsd-kind-icon">Display<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/distance.html" class="tsd-kind-icon">Distance</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/documentattributes.html" class="tsd-kind-icon">Document<wbr>Attributes</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/doit.html" class="tsd-kind-icon">Doit</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/dot.html" class="tsd-kind-icon">Dot</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/double.html" class="tsd-kind-icon">Double</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/doubletongue.html" class="tsd-kind-icon">Double<wbr>Tongue</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/downbow.html" class="tsd-kind-icon">Down<wbr>Bow</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/dynamics.html" class="tsd-kind-icon">Dynamics</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/editorial.html" class="tsd-kind-icon">Editorial</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/editorialvoice.html" class="tsd-kind-icon">Editorial<wbr>Voice</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/elision.html" class="tsd-kind-icon">Elision</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/enclosure.html" class="tsd-kind-icon">Enclosure</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/encoder.html" class="tsd-kind-icon">Encoder</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/encoding.html" class="tsd-kind-icon">Encoding</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/encodingdate.html" class="tsd-kind-icon">Encoding<wbr>Date</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/endline.html" class="tsd-kind-icon">End<wbr>Line</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/endparagraph.html" class="tsd-kind-icon">End<wbr>Paragraph</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ending.html" class="tsd-kind-icon">Ending</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/extend.html" class="tsd-kind-icon">Extend</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/eyeglasses.html" class="tsd-kind-icon">Eyeglasses</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/falloff.html" class="tsd-kind-icon">Falloff</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/feature.html" class="tsd-kind-icon">Feature</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/fermata.html" class="tsd-kind-icon">Fermata</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/figure.html" class="tsd-kind-icon">Figure</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/figurenumber.html" class="tsd-kind-icon">Figure<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/figuredbass.html" class="tsd-kind-icon">Figured<wbr>Bass</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/fingering.html" class="tsd-kind-icon">Fingering</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/fingernails.html" class="tsd-kind-icon">Fingernails</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/firstfret.html" class="tsd-kind-icon">First<wbr>Fret</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/font.html" class="tsd-kind-icon">Font</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/footnote.html" class="tsd-kind-icon">Footnote</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/forward.html" class="tsd-kind-icon">Forward</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/frame.html" class="tsd-kind-icon">Frame</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/framenote.html" class="tsd-kind-icon">Frame<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/fret.html" class="tsd-kind-icon">Fret</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/fullnote.html" class="tsd-kind-icon">Full<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/function.html" class="tsd-kind-icon">Function</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/glissando.html" class="tsd-kind-icon">Glissando</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/grace.html" class="tsd-kind-icon">Grace</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/groupabbreviation.html" class="tsd-kind-icon">Group<wbr>Abbreviation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/groupabbreviationdisplay.html" class="tsd-kind-icon">Group<wbr>Abbreviation<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/groupbarline.html" class="tsd-kind-icon">Group<wbr>Barline</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/groupname.html" class="tsd-kind-icon">Group<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/groupnamedisplay.html" class="tsd-kind-icon">Group<wbr>Name<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/groupsymbol.html" class="tsd-kind-icon">Group<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/grouptime.html" class="tsd-kind-icon">Group<wbr>Time</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/grouping.html" class="tsd-kind-icon">Grouping</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/halign.html" class="tsd-kind-icon">Halign</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/hammeron.html" class="tsd-kind-icon">Hammer<wbr>On</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/handbell.html" class="tsd-kind-icon">Handbell</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/harmonic.html" class="tsd-kind-icon">Harmonic</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/harmony.html" class="tsd-kind-icon">Harmony</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/harmonychord.html" class="tsd-kind-icon">Harmony<wbr>Chord</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/harppedals.html" class="tsd-kind-icon">Harp<wbr>Pedals</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/heel.html" class="tsd-kind-icon">Heel</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/hole.html" class="tsd-kind-icon">Hole</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/holeclosed.html" class="tsd-kind-icon">Hole<wbr>Closed</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/humming.html" class="tsd-kind-icon">Humming</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/identification.html" class="tsd-kind-icon">Identification</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/image.html" class="tsd-kind-icon">Image</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/instrument.html" class="tsd-kind-icon">Instrument</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/interchangeable.html" class="tsd-kind-icon">Interchangeable</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/inversion.html" class="tsd-kind-icon">Inversion</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invertedmordent.html" class="tsd-kind-icon">Inverted<wbr>Mordent</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/invertedturn.html" class="tsd-kind-icon">Inverted<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/justify.html" class="tsd-kind-icon">Justify</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/key.html" class="tsd-kind-icon">Key</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/keyoctave.html" class="tsd-kind-icon">Key<wbr>Octave</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/kind.html" class="tsd-kind-icon">Kind</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/laughing.html" class="tsd-kind-icon">Laughing</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/leftdivider.html" class="tsd-kind-icon">Left<wbr>Divider</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/letterspacing.html" class="tsd-kind-icon">Letter<wbr>Spacing</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/level.html" class="tsd-kind-icon">Level</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/leveldisplay.html" class="tsd-kind-icon">Level<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lineheight.html" class="tsd-kind-icon">Line<wbr>Height</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lineshape.html" class="tsd-kind-icon">Line<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/linetype.html" class="tsd-kind-icon">Line<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/linewidth.html" class="tsd-kind-icon">Line<wbr>Width</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lyric.html" class="tsd-kind-icon">Lyric</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lyricfont.html" class="tsd-kind-icon">Lyric<wbr>Font</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lyriclanguage.html" class="tsd-kind-icon">Lyric<wbr>Language</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/lyricparts.html" class="tsd-kind-icon">Lyric<wbr>Parts</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/measure.html" class="tsd-kind-icon">Measure</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/measurelayout.html" class="tsd-kind-icon">Measure<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/measurenumbering.html" class="tsd-kind-icon">Measure<wbr>Numbering</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/measurerepeat.html" class="tsd-kind-icon">Measure<wbr>Repeat</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/measurestyle.html" class="tsd-kind-icon">Measure<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/metronome.html" class="tsd-kind-icon">Metronome</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/metronomebeam.html" class="tsd-kind-icon">Metronome<wbr>Beam</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/metronomedot.html" class="tsd-kind-icon">Metronome<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/metronomenote.html" class="tsd-kind-icon">Metronome<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/metronometuplet.html" class="tsd-kind-icon">Metronome<wbr>Tuplet</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/mididevice.html" class="tsd-kind-icon">Midi<wbr>Device</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/midiinstrument.html" class="tsd-kind-icon">Midi<wbr>Instrument</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/miscellaneous.html" class="tsd-kind-icon">Miscellaneous</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/miscellaneousfield.html" class="tsd-kind-icon">Miscellaneous<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/mordent.html" class="tsd-kind-icon">Mordent</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/multiplerest.html" class="tsd-kind-icon">Multiple<wbr>Rest</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/musicfont.html" class="tsd-kind-icon">Music<wbr>Font</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/nonarpeggiate.html" class="tsd-kind-icon">Non<wbr>Arpeggiate</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/normaldot.html" class="tsd-kind-icon">Normal<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/notations.html" class="tsd-kind-icon">Notations</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/note.html" class="tsd-kind-icon">Note</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/notesize.html" class="tsd-kind-icon">Note<wbr>Size</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/notehead.html" class="tsd-kind-icon">Notehead</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/noteheadtext.html" class="tsd-kind-icon">Notehead<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/octaveshift.html" class="tsd-kind-icon">Octave<wbr>Shift</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/offset.html" class="tsd-kind-icon">Offset</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/openstring.html" class="tsd-kind-icon">Open<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/opus.html" class="tsd-kind-icon">Opus</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/orientation.html" class="tsd-kind-icon">Orientation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ornaments.html" class="tsd-kind-icon">Ornaments</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/otherarticulation.html" class="tsd-kind-icon">Other<wbr>Articulation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/otherdirection.html" class="tsd-kind-icon">Other<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/othernotation.html" class="tsd-kind-icon">Other<wbr>Notation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/otherornament.html" class="tsd-kind-icon">Other<wbr>Ornament</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/otherplay.html" class="tsd-kind-icon">Other<wbr>Play</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/othertechnical.html" class="tsd-kind-icon">Other<wbr>Technical</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pagelayout.html" class="tsd-kind-icon">Page<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pagemargins.html" class="tsd-kind-icon">Page<wbr>Margins</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/part.html" class="tsd-kind-icon">Part</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/partabbreviation.html" class="tsd-kind-icon">Part<wbr>Abbreviation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/partabbreviationdisplay.html" class="tsd-kind-icon">Part<wbr>Abbreviation<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/partgroup.html" class="tsd-kind-icon">Part<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/partlist.html" class="tsd-kind-icon">Part<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/partname.html" class="tsd-kind-icon">Part<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/partnamedisplay.html" class="tsd-kind-icon">Part<wbr>Name<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/partsymbol.html" class="tsd-kind-icon">Part<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pedal.html" class="tsd-kind-icon">Pedal</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pedaltuning.html" class="tsd-kind-icon">Pedal<wbr>Tuning</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/perminute.html" class="tsd-kind-icon">Per<wbr>Minute</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/percussion.html" class="tsd-kind-icon">Percussion</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pitch.html" class="tsd-kind-icon">Pitch</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/placement.html" class="tsd-kind-icon">Placement</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/play.html" class="tsd-kind-icon">Play</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/plop.html" class="tsd-kind-icon">Plop</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pluck.html" class="tsd-kind-icon">Pluck</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/position.html" class="tsd-kind-icon">Position</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/prefix.html" class="tsd-kind-icon">Prefix</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/principalvoice.html" class="tsd-kind-icon">Principal<wbr>Voice</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/print.html" class="tsd-kind-icon">Print</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/printobject.html" class="tsd-kind-icon">Print<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/printspacing.html" class="tsd-kind-icon">Print<wbr>Spacing</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/printstyle.html" class="tsd-kind-icon">Print<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/printstylealign.html" class="tsd-kind-icon">Print<wbr>Style<wbr>Align</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/printout.html" class="tsd-kind-icon">Printout</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/pulloff.html" class="tsd-kind-icon">Pull<wbr>Off</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rehearsal.html" class="tsd-kind-icon">Rehearsal</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/relation.html" class="tsd-kind-icon">Relation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/repeat.html" class="tsd-kind-icon">Repeat</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rest.html" class="tsd-kind-icon">Rest</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rightdivider.html" class="tsd-kind-icon">Right<wbr>Divider</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rights.html" class="tsd-kind-icon">Rights</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/root.html" class="tsd-kind-icon">Root</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rootalter.html" class="tsd-kind-icon">Root<wbr>Alter</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/rootstep.html" class="tsd-kind-icon">Root<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scaling.html" class="tsd-kind-icon">Scaling</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/schleifer.html" class="tsd-kind-icon">Schleifer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scoop.html" class="tsd-kind-icon">Scoop</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scordatura.html" class="tsd-kind-icon">Scordatura</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scoreheader.html" class="tsd-kind-icon">Score<wbr>Header</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scoreinstrument.html" class="tsd-kind-icon">Score<wbr>Instrument</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scorepart.html" class="tsd-kind-icon">Score<wbr>Part</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/scoretimewise.html" class="tsd-kind-icon">Score<wbr>Timewise</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/segno.html" class="tsd-kind-icon">Segno</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/shake.html" class="tsd-kind-icon">Shake</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/slash.html" class="tsd-kind-icon">Slash</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/slashdot.html" class="tsd-kind-icon">Slash<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/slide.html" class="tsd-kind-icon">Slide</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/slur.html" class="tsd-kind-icon">Slur</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/snappizzicato.html" class="tsd-kind-icon">Snap<wbr>Pizzicato</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/solo.html" class="tsd-kind-icon">Solo</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/sound.html" class="tsd-kind-icon">Sound</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/spiccato.html" class="tsd-kind-icon">Spiccato</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/staccatissimo.html" class="tsd-kind-icon">Staccatissimo</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/staccato.html" class="tsd-kind-icon">Staccato</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/staffdetails.html" class="tsd-kind-icon">Staff<wbr>Details</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stafflayout.html" class="tsd-kind-icon">Staff<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stafftuning.html" class="tsd-kind-icon">Staff<wbr>Tuning</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stem.html" class="tsd-kind-icon">Stem</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stick.html" class="tsd-kind-icon">Stick</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stopped.html" class="tsd-kind-icon">Stopped</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stress.html" class="tsd-kind-icon">Stress</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/string.html" class="tsd-kind-icon">String</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stringmute.html" class="tsd-kind-icon">String<wbr>Mute</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/strongaccent.html" class="tsd-kind-icon">Strong<wbr>Accent</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/suffix.html" class="tsd-kind-icon">Suffix</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/supports.html" class="tsd-kind-icon">Supports</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/syllabic.html" class="tsd-kind-icon">Syllabic</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/systemdividers.html" class="tsd-kind-icon">System<wbr>Dividers</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/systemlayout.html" class="tsd-kind-icon">System<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/systemmargins.html" class="tsd-kind-icon">System<wbr>Margins</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tap.html" class="tsd-kind-icon">Tap</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/technical.html" class="tsd-kind-icon">Technical</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tenuto.html" class="tsd-kind-icon">Tenuto</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/text.html" class="tsd-kind-icon">Text</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textarray.html" class="tsd-kind-icon">Text<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textdecoration.html" class="tsd-kind-icon">Text<wbr>Decoration</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textdirection.html" class="tsd-kind-icon">Text<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textformatting.html" class="tsd-kind-icon">Text<wbr>Formatting</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/textrotation.html" class="tsd-kind-icon">Text<wbr>Rotation</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/thumbposition.html" class="tsd-kind-icon">Thumb<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tie.html" class="tsd-kind-icon">Tie</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tied.html" class="tsd-kind-icon">Tied</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/time.html" class="tsd-kind-icon">Time</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/timemodification.html" class="tsd-kind-icon">Time<wbr>Modification</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/timeonly.html" class="tsd-kind-icon">Time<wbr>Only</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/timeseparator.html" class="tsd-kind-icon">Time<wbr>Separator</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/timesymbol.html" class="tsd-kind-icon">Time<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/timpani.html" class="tsd-kind-icon">Timpani</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/toe.html" class="tsd-kind-icon">Toe</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/transpose.html" class="tsd-kind-icon">Transpose</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tremolo.html" class="tsd-kind-icon">Tremolo</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trillmark.html" class="tsd-kind-icon">Trill<wbr>Mark</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/trillsound.html" class="tsd-kind-icon">Trill<wbr>Sound</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tripletongue.html" class="tsd-kind-icon">Triple<wbr>Tongue</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tuplet.html" class="tsd-kind-icon">Tuplet</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tupletactual.html" class="tsd-kind-icon">Tuplet<wbr>Actual</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tupletdot.html" class="tsd-kind-icon">Tuplet<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tupletnormal.html" class="tsd-kind-icon">Tuplet<wbr>Normal</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tupletnumber.html" class="tsd-kind-icon">Tuplet<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/tuplettype.html" class="tsd-kind-icon">Tuplet<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/turn.html" class="tsd-kind-icon">Turn</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/type.html" class="tsd-kind-icon">Type</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/unpitched.html" class="tsd-kind-icon">Unpitched</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/unstress.html" class="tsd-kind-icon">Unstress</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/upbow.html" class="tsd-kind-icon">Up<wbr>Bow</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/valign.html" class="tsd-kind-icon">Valign</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/valignimage.html" class="tsd-kind-icon">Valign<wbr>Image</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/verticalturn.html" class="tsd-kind-icon">Vertical<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/virtualinstrument.html" class="tsd-kind-icon">Virtual<wbr>Instrument</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/wavyline.html" class="tsd-kind-icon">Wavy<wbr>Line</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/wedge.html" class="tsd-kind-icon">Wedge</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/withbar.html" class="tsd-kind-icon">With<wbr>Bar</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/wordfont.html" class="tsd-kind-icon">Word<wbr>Font</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/words.html" class="tsd-kind-icon">Words</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/work.html" class="tsd-kind-icon">Work</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/yesnonumber.html" class="tsd-kind-icon">Yes<wbr>NoNumber</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#isie" class="tsd-kind-icon">isIE</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#isnode" class="tsd-kind-icon">is<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#process" class="tsd-kind-icon">process</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#require" class="tsd-kind-icon">require</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-is-not-exported">
+						<a href="globals.html#xmltoparttimedoc" class="tsd-kind-icon">xml<wbr>ToParttime<wbr>Doc</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#accordionregistrationtoxml" class="tsd-kind-icon">accordion<wbr>Registration<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#appearancetoxml" class="tsd-kind-icon">appearance<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#attributestoxml" class="tsd-kind-icon">attributes<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#backuptoxml" class="tsd-kind-icon">backup<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#barstyletoxml" class="tsd-kind-icon">bar<wbr>Style<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#barlinetoxml" class="tsd-kind-icon">barline<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#basstoxml" class="tsd-kind-icon">bass<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#beatrepeattoxml" class="tsd-kind-icon">beat<wbr>Repeat<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#bendsoundtoxml" class="tsd-kind-icon">bend<wbr>Sound<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#beziertoxml" class="tsd-kind-icon">bezier<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#brackettoxml" class="tsd-kind-icon">bracket<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#canceltoxml" class="tsd-kind-icon">cancel<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#chordtoxml" class="tsd-kind-icon">chord<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#cleftoxml" class="tsd-kind-icon">clef<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#codatoxml" class="tsd-kind-icon">coda<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#colortoxml" class="tsd-kind-icon">color<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#creatortoxml" class="tsd-kind-icon">creator<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#creditimagetoxml" class="tsd-kind-icon">credit<wbr>Image<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#credittoxml" class="tsd-kind-icon">credit<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#credittypetoxml" class="tsd-kind-icon">credit<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#creditwordstoxml" class="tsd-kind-icon">credit<wbr>Words<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#dampalltoxml" class="tsd-kind-icon">damp<wbr>All<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#damptoxml" class="tsd-kind-icon">damp<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#dangerous" class="tsd-kind-icon">dangerous</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#dashedformattingtoxml" class="tsd-kind-icon">dashed<wbr>Formatting<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#dashestoxml" class="tsd-kind-icon">dashes<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#defaultstoxml" class="tsd-kind-icon">defaults<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#defined" class="tsd-kind-icon">defined</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#degreetoxml" class="tsd-kind-icon">degree<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#directiontoxml" class="tsd-kind-icon">direction<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#directiontypetoxml" class="tsd-kind-icon">direction<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#directivetoxml" class="tsd-kind-icon">directive<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#distancetoxml" class="tsd-kind-icon">distance<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#dynamicstoxml" class="tsd-kind-icon">dynamics<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#editorialtoxml" class="tsd-kind-icon">editorial<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#editorialvoicetoxml" class="tsd-kind-icon">editorial<wbr>Voice<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#enclosuretoxml" class="tsd-kind-icon">enclosure<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#encodertoxml" class="tsd-kind-icon">encoder<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#encodingdatetoxml" class="tsd-kind-icon">encoding<wbr>Date<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#encodingdescriptiontoxml" class="tsd-kind-icon">encoding<wbr>Description<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#encodingtoxml" class="tsd-kind-icon">encoding<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#endingtoxml" class="tsd-kind-icon">ending<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#explicitimpliedalternatetoxml" class="tsd-kind-icon">explicit<wbr>Implied<wbr>Alternate<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#eyeglassestoxml" class="tsd-kind-icon">eyeglasses<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#fermatatoxml" class="tsd-kind-icon">fermata<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#figuredbasstoxml" class="tsd-kind-icon">figured<wbr>Bass<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#fonttoxml" class="tsd-kind-icon">font<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#forwardtoxml" class="tsd-kind-icon">forward<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#frametoxml" class="tsd-kind-icon">frame<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#functiontoxml" class="tsd-kind-icon">function<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getabovebelow" class="tsd-kind-icon">get<wbr>Above<wbr>Below</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getaccelritnone" class="tsd-kind-icon">get<wbr>Accel<wbr>Rit<wbr>None</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getactualbothnone" class="tsd-kind-icon">get<wbr>Actual<wbr>Both<wbr>None</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getbarstyletype" class="tsd-kind-icon">get<wbr>Bar<wbr>Style<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getbarlinelocation" class="tsd-kind-icon">get<wbr>Barline<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getbeamtype" class="tsd-kind-icon">get<wbr>Beam<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getbreathmarktype" class="tsd-kind-icon">get<wbr>Breath<wbr>Mark<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getcancellocation" class="tsd-kind-icon">get<wbr>Cancel<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getchordtype" class="tsd-kind-icon">get<wbr>Chord<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getcount" class="tsd-kind-icon">get<wbr>Count</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getcuegracelarge" class="tsd-kind-icon">get<wbr>Cue<wbr>Grace<wbr>Large</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getdirectionmode" class="tsd-kind-icon">get<wbr>Direction<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getdirectiontypebg" class="tsd-kind-icon">get<wbr>Direction<wbr>Type<wbr>Bg</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getenclosureshape" class="tsd-kind-icon">get<wbr>Enclosure<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getexplicitimpliedalternate" class="tsd-kind-icon">get<wbr>Explicit<wbr>Implied<wbr>Alternate</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getholeclosedtype" class="tsd-kind-icon">get<wbr>Hole<wbr>Closed<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getholelocation" class="tsd-kind-icon">get<wbr>Hole<wbr>Location</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getleftcenterright" class="tsd-kind-icon">get<wbr>Left<wbr>Center<wbr>Right</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getleftright" class="tsd-kind-icon">get<wbr>Left<wbr>Right</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getlineendtype" class="tsd-kind-icon">get<wbr>Line<wbr>End<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getmxmlaccidental" class="tsd-kind-icon">get<wbr>Mxml<wbr>Accidental</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getnormalangledsquare" class="tsd-kind-icon">get<wbr>Normal<wbr>Angled<wbr>Square</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getnormalbold" class="tsd-kind-icon">get<wbr>Normal<wbr>Bold</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getnormalitalic" class="tsd-kind-icon">get<wbr>Normal<wbr>Italic</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getnoteheadtype" class="tsd-kind-icon">get<wbr>Notehead<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getnumber" class="tsd-kind-icon">get<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getoctaveshifttype" class="tsd-kind-icon">get<wbr>Octave<wbr>Shift<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getoddevenboth" class="tsd-kind-icon">get<wbr>Odd<wbr>Even<wbr>Both</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getoverunder" class="tsd-kind-icon">get<wbr>Over<wbr>Under</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getpartsymboltype" class="tsd-kind-icon">get<wbr>Part<wbr>Symbol<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getpedaltype" class="tsd-kind-icon">get<wbr>Pedal<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getseparatortype" class="tsd-kind-icon">get<wbr>Separator<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getshowfretstype" class="tsd-kind-icon">get<wbr>Show<wbr>Frets<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getsoliddasheddottedwavy" class="tsd-kind-icon">get<wbr>Solid<wbr>Dashed<wbr>Dotted<wbr>Wavy</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getstartstop" class="tsd-kind-icon">get<wbr>Start<wbr>Stop</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getstartstopcontinue" class="tsd-kind-icon">get<wbr>Start<wbr>Stop<wbr>Continue</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getstartstopdiscontinue" class="tsd-kind-icon">get<wbr>Start<wbr>Stop<wbr>Discontinue</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getstartstopsingle" class="tsd-kind-icon">get<wbr>Start<wbr>Stop<wbr>Single</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getstemtype" class="tsd-kind-icon">get<wbr>Stem<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getstraightcurved" class="tsd-kind-icon">get<wbr>Straight<wbr>Curved</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getstring" class="tsd-kind-icon">get<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getsyllabictype" class="tsd-kind-icon">get<wbr>Syllabic<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getsymbolsize" class="tsd-kind-icon">get<wbr>Symbol<wbr>Size</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#gettimesymboltype" class="tsd-kind-icon">get<wbr>Time<wbr>Symbol<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#gettipdirection" class="tsd-kind-icon">get<wbr>Tip<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#gettopbottom" class="tsd-kind-icon">get<wbr>Top<wbr>Bottom</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#gettopmiddlebottombaseline" class="tsd-kind-icon">get<wbr>Top<wbr>Middle<wbr>Bottom<wbr>Baseline</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getupdown" class="tsd-kind-icon">get<wbr>UpDown</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getuppermainbelow" class="tsd-kind-icon">get<wbr>Upper<wbr>Main<wbr>Below</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getuprightinverted" class="tsd-kind-icon">get<wbr>Upright<wbr>Inverted</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getvoicesymbol" class="tsd-kind-icon">get<wbr>Voice<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getwedgetype" class="tsd-kind-icon">get<wbr>Wedge<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getwholehalfnone" class="tsd-kind-icon">get<wbr>Whole<wbr>Half<wbr>None</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getwholehalfunison" class="tsd-kind-icon">get<wbr>Whole<wbr>Half<wbr>Unison</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#getwingedtype" class="tsd-kind-icon">get<wbr>Winged<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#groupabbreviationdisplaytoxml" class="tsd-kind-icon">group<wbr>Abbreviation<wbr>Display<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#groupabbreviationtoxml" class="tsd-kind-icon">group<wbr>Abbreviation<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#groupbarlinetoxml" class="tsd-kind-icon">group<wbr>Barline<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#groupnamedisplaytoxml" class="tsd-kind-icon">group<wbr>Name<wbr>Display<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#groupnametoxml" class="tsd-kind-icon">group<wbr>Name<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#groupsymboltoxml" class="tsd-kind-icon">group<wbr>Symbol<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#groupingtoxml" class="tsd-kind-icon">grouping<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#haligntoxml" class="tsd-kind-icon">halign<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#harmonytoxml" class="tsd-kind-icon">harmony<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#harppedalstoxml" class="tsd-kind-icon">harp<wbr>Pedals<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#hmarginstoxml" class="tsd-kind-icon">hmargins<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#identificationtoxml" class="tsd-kind-icon">identification<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#imagetoxml" class="tsd-kind-icon">image<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#interchangeabletoxml" class="tsd-kind-icon">interchangeable<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#inversiontoxml" class="tsd-kind-icon">inversion<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#justifytoxml" class="tsd-kind-icon">justify<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#keyoctavetoxml" class="tsd-kind-icon">key<wbr>Octave<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#keytoxml" class="tsd-kind-icon">key<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#kindtoxml" class="tsd-kind-icon">kind<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#letterspacingtoxml" class="tsd-kind-icon">letter<wbr>Spacing<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#leveldisplaytoxml" class="tsd-kind-icon">level<wbr>Display<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#lineheighttoxml" class="tsd-kind-icon">line<wbr>Height<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#lineshapetoxml" class="tsd-kind-icon">line<wbr>Shape<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#linetypetoxml" class="tsd-kind-icon">line<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#linewidthtoxml" class="tsd-kind-icon">line<wbr>Width<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#lyricfonttoxml" class="tsd-kind-icon">lyric<wbr>Font<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#lyriclanguagetoxml" class="tsd-kind-icon">lyric<wbr>Language<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#measurelayouttoxml" class="tsd-kind-icon">measure<wbr>Layout<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#measurenumberingtoxml" class="tsd-kind-icon">measure<wbr>Numbering<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#measurerepeattoxml" class="tsd-kind-icon">measure<wbr>Repeat<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#measurestyletoxml" class="tsd-kind-icon">measure<wbr>Style<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#metronometoxml" class="tsd-kind-icon">metronome<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#metronometuplettoxml" class="tsd-kind-icon">metronome<wbr>Tuplet<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#mididevicetoxml" class="tsd-kind-icon">midi<wbr>Device<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#midiinstrumenttoxml" class="tsd-kind-icon">midi<wbr>Instrument<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#millimeterstoxml" class="tsd-kind-icon">millimeters<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#miscellaneousfieldtoxml" class="tsd-kind-icon">miscellaneous<wbr>Field<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#miscellaneoustoxml" class="tsd-kind-icon">miscellaneous<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#mordentsubsettoxml" class="tsd-kind-icon">mordent<wbr>Subset<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#movementnumbertoxml" class="tsd-kind-icon">movement<wbr>Number<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#movementtitletoxml" class="tsd-kind-icon">movement<wbr>Title<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#multipleresttoxml" class="tsd-kind-icon">multiple<wbr>Rest<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#musicfonttoxml" class="tsd-kind-icon">music<wbr>Font<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#nametoxml" class="tsd-kind-icon">name<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#notesizetoxml" class="tsd-kind-icon">note<wbr>Size<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#notetoxml" class="tsd-kind-icon">note<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#numberleveltoxml" class="tsd-kind-icon">number<wbr>Level<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#octaveshifttoxml" class="tsd-kind-icon">octave<wbr>Shift<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#offsettoxml" class="tsd-kind-icon">offset<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#orientationtoxml" class="tsd-kind-icon">orientation<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#otherdirectiontoxml" class="tsd-kind-icon">other<wbr>Direction<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#pagelayouttoxml" class="tsd-kind-icon">page<wbr>Layout<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#pagemarginstoxml" class="tsd-kind-icon">page<wbr>Margins<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#parse" class="tsd-kind-icon">parse</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#partabbreviationdisplaytoxml" class="tsd-kind-icon">part<wbr>Abbreviation<wbr>Display<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#partabbreviationtoxml" class="tsd-kind-icon">part<wbr>Abbreviation<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#partgrouptoxml" class="tsd-kind-icon">part<wbr>Group<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#partlisttoxml" class="tsd-kind-icon">part<wbr>List<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#partnamedisplaytoxml" class="tsd-kind-icon">part<wbr>Name<wbr>Display<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#partnametoxml" class="tsd-kind-icon">part<wbr>Name<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#partsymboltoxml" class="tsd-kind-icon">part<wbr>Symbol<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#pedaltoxml" class="tsd-kind-icon">pedal<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#percussiontoxml" class="tsd-kind-icon">percussion<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#placementtoxml" class="tsd-kind-icon">placement<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#playtoxml" class="tsd-kind-icon">play<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#popfront" class="tsd-kind-icon">pop<wbr>Front</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#positiontoxml" class="tsd-kind-icon">position<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#principalvoicetoxml" class="tsd-kind-icon">principal<wbr>Voice<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#printobjecttoxml" class="tsd-kind-icon">print<wbr>Object<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#printspacingtoxml" class="tsd-kind-icon">print<wbr>Spacing<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#printstylealigntoxml" class="tsd-kind-icon">print<wbr>Style<wbr>Align<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#printstyletoxml" class="tsd-kind-icon">print<wbr>Style<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#printtoxml" class="tsd-kind-icon">print<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#printouttoxml" class="tsd-kind-icon">printout<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#rehearsaltoxml" class="tsd-kind-icon">rehearsal<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#relationtoxml" class="tsd-kind-icon">relation<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#repeattoxml" class="tsd-kind-icon">repeat<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#rightstoxml" class="tsd-kind-icon">rights<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#roottoxml" class="tsd-kind-icon">root<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#scalingtoxml" class="tsd-kind-icon">scaling<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#scordaturatoxml" class="tsd-kind-icon">scordatura<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#scoreheadertoxml" class="tsd-kind-icon">score<wbr>Header<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#scoreinstrumenttoxml" class="tsd-kind-icon">score<wbr>Instrument<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#scoreparttoxml" class="tsd-kind-icon">score<wbr>Part<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#segnotoxml" class="tsd-kind-icon">segno<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#slasheltoxml" class="tsd-kind-icon">slash<wbr>ElToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#slashtoxml" class="tsd-kind-icon">slash<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#softwaretoxml" class="tsd-kind-icon">software<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#soundtoxml" class="tsd-kind-icon">sound<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#sourcetoxml" class="tsd-kind-icon">source<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#staffdebuginfotoxmlcomment" class="tsd-kind-icon">staff<wbr>Debug<wbr>Info<wbr>ToXMLComment</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#staffdetailstoxml" class="tsd-kind-icon">staff<wbr>Details<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#stafflayouttoxml" class="tsd-kind-icon">staff<wbr>Layout<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#stafftuningtoxml" class="tsd-kind-icon">staff<wbr>Tuning<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#startstopcontinuetoxml" class="tsd-kind-icon">start<wbr>Stop<wbr>Continue<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#startstopdiscontinuetoxml" class="tsd-kind-icon">start<wbr>Stop<wbr>Discontinue<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#startstopsingletoxml" class="tsd-kind-icon">start<wbr>Stop<wbr>Single<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#startstoptoxml" class="tsd-kind-icon">start<wbr>Stop<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#stringmutetoxml" class="tsd-kind-icon">string<wbr>Mute<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#supportstoxml" class="tsd-kind-icon">supports<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#systemdividerstoxml" class="tsd-kind-icon">system<wbr>Dividers<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#systemlayouttoxml" class="tsd-kind-icon">system<wbr>Layout<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#systemmarginstoxml" class="tsd-kind-icon">system<wbr>Margins<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#tenthstoxml" class="tsd-kind-icon">tenths<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#textarraytoxml" class="tsd-kind-icon">text<wbr>Array<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#textdecorationtoxml" class="tsd-kind-icon">text<wbr>Decoration<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#textdirectiontoxml" class="tsd-kind-icon">text<wbr>Direction<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#textformattingtoxml" class="tsd-kind-icon">text<wbr>Formatting<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#textrotationtoxml" class="tsd-kind-icon">text<wbr>Rotation<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#timeonlytoxml" class="tsd-kind-icon">time<wbr>Only<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#timeseparatortoxml" class="tsd-kind-icon">time<wbr>Separator<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#timesymboltoxml" class="tsd-kind-icon">time<wbr>Symbol<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#timetoxml" class="tsd-kind-icon">time<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#tocamelcase" class="tsd-kind-icon">to<wbr>Camel<wbr>Case</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#topbottomtoxml" class="tsd-kind-icon">top<wbr>Bottom<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#transposetoxml" class="tsd-kind-icon">transpose<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#trillsoundtoxml" class="tsd-kind-icon">trill<wbr>Sound<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#tuningstepalteroctavetoxml" class="tsd-kind-icon">tuning<wbr>Step<wbr>Alter<wbr>Octave<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#updowntoxml" class="tsd-kind-icon">up<wbr>Down<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#valignimagetoxml" class="tsd-kind-icon">valign<wbr>Image<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#valigntoxml" class="tsd-kind-icon">valign<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifybeamlevel" class="tsd-kind-icon">verify<wbr>Beam<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifyelevation" class="tsd-kind-icon">verify<wbr>Elevation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifymidibank" class="tsd-kind-icon">verify<wbr>Midi<wbr>Bank</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifymidichannel" class="tsd-kind-icon">verify<wbr>Midi<wbr>Channel</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifymidiprogram" class="tsd-kind-icon">verify<wbr>Midi<wbr>Program</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifymidiunpitched" class="tsd-kind-icon">verify<wbr>Midi<wbr>Unpitched</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifynumberlevel" class="tsd-kind-icon">verify<wbr>Number<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifynumberoflines" class="tsd-kind-icon">verify<wbr>Number<wbr>OfLines</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifypan" class="tsd-kind-icon">verify<wbr>Pan</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifyrotation" class="tsd-kind-icon">verify<wbr>Rotation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#verifyvolume" class="tsd-kind-icon">verify<wbr>Volume</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#vmarginstoxml" class="tsd-kind-icon">vmargins<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#wavylinetoxml" class="tsd-kind-icon">wavy<wbr>Line<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#wedgetoxml" class="tsd-kind-icon">wedge<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#wordfonttoxml" class="tsd-kind-icon">word<wbr>Font<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#wordstoxml" class="tsd-kind-icon">words<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#worktoxml" class="tsd-kind-icon">work<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xml" class="tsd-kind-icon">xml</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoaccent" class="tsd-kind-icon">xml<wbr>ToAccent</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoaccidental" class="tsd-kind-icon">xml<wbr>ToAccidental</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoaccidentalmark" class="tsd-kind-icon">xml<wbr>ToAccidental<wbr>Mark</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoaccidentaltext" class="tsd-kind-icon">xml<wbr>ToAccidental<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoaccord" class="tsd-kind-icon">xml<wbr>ToAccord</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoaccordionregistration" class="tsd-kind-icon">xml<wbr>ToAccordion<wbr>Registration</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoappearance" class="tsd-kind-icon">xml<wbr>ToAppearance</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoarpeggiate" class="tsd-kind-icon">xml<wbr>ToArpeggiate</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoarrow" class="tsd-kind-icon">xml<wbr>ToArrow</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoarticulations" class="tsd-kind-icon">xml<wbr>ToArticulations</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoattributes" class="tsd-kind-icon">xml<wbr>ToAttributes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobackup" class="tsd-kind-icon">xml<wbr>ToBackup</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobarstyle" class="tsd-kind-icon">xml<wbr>ToBar<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobarline" class="tsd-kind-icon">xml<wbr>ToBarline</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobarre" class="tsd-kind-icon">xml<wbr>ToBarre</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobass" class="tsd-kind-icon">xml<wbr>ToBass</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobassalter" class="tsd-kind-icon">xml<wbr>ToBass<wbr>Alter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobassstep" class="tsd-kind-icon">xml<wbr>ToBass<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobeam" class="tsd-kind-icon">xml<wbr>ToBeam</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobeamlevel" class="tsd-kind-icon">xml<wbr>ToBeam<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobeatrepeat" class="tsd-kind-icon">xml<wbr>ToBeat<wbr>Repeat</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobeatunitdot" class="tsd-kind-icon">xml<wbr>ToBeat<wbr>Unit<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobeater" class="tsd-kind-icon">xml<wbr>ToBeater</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobend" class="tsd-kind-icon">xml<wbr>ToBend</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobendsound" class="tsd-kind-icon">xml<wbr>ToBend<wbr>Sound</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobezier" class="tsd-kind-icon">xml<wbr>ToBezier</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobracket" class="tsd-kind-icon">xml<wbr>ToBracket</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltobreathmark" class="tsd-kind-icon">xml<wbr>ToBreath<wbr>Mark</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocaesura" class="tsd-kind-icon">xml<wbr>ToCaesura</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocancel" class="tsd-kind-icon">xml<wbr>ToCancel</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltochord" class="tsd-kind-icon">xml<wbr>ToChord</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoclef" class="tsd-kind-icon">xml<wbr>ToClef</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocoda" class="tsd-kind-icon">xml<wbr>ToCoda</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocolor" class="tsd-kind-icon">xml<wbr>ToColor</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocreator" class="tsd-kind-icon">xml<wbr>ToCreator</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocredit" class="tsd-kind-icon">xml<wbr>ToCredit</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocreditimage" class="tsd-kind-icon">xml<wbr>ToCredit<wbr>Image</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocreditwords" class="tsd-kind-icon">xml<wbr>ToCredit<wbr>Words</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltocue" class="tsd-kind-icon">xml<wbr>ToCue</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodamp" class="tsd-kind-icon">xml<wbr>ToDamp</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodampall" class="tsd-kind-icon">xml<wbr>ToDamp<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodashedformatting" class="tsd-kind-icon">xml<wbr>ToDashed<wbr>Formatting</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodashes" class="tsd-kind-icon">xml<wbr>ToDashes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodefaults" class="tsd-kind-icon">xml<wbr>ToDefaults</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodegree" class="tsd-kind-icon">xml<wbr>ToDegree</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodegreealter" class="tsd-kind-icon">xml<wbr>ToDegree<wbr>Alter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodegreetype" class="tsd-kind-icon">xml<wbr>ToDegree<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodegreevalue" class="tsd-kind-icon">xml<wbr>ToDegree<wbr>Value</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodelayedinvertedturn" class="tsd-kind-icon">xml<wbr>ToDelayed<wbr>Inverted<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodelayedturn" class="tsd-kind-icon">xml<wbr>ToDelayed<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodetachedlegato" class="tsd-kind-icon">xml<wbr>ToDetached<wbr>Legato</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodirection" class="tsd-kind-icon">xml<wbr>ToDirection</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodirectiontype" class="tsd-kind-icon">xml<wbr>ToDirection<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodirective" class="tsd-kind-icon">xml<wbr>ToDirective</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodirectiveentity" class="tsd-kind-icon">xml<wbr>ToDirective<wbr>Entity</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodisplaytext" class="tsd-kind-icon">xml<wbr>ToDisplay<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodistance" class="tsd-kind-icon">xml<wbr>ToDistance</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodocumentattributes" class="tsd-kind-icon">xml<wbr>ToDocument<wbr>Attributes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodoit" class="tsd-kind-icon">xml<wbr>ToDoit</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodot" class="tsd-kind-icon">xml<wbr>ToDot</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodouble" class="tsd-kind-icon">xml<wbr>ToDouble</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodoubletongue" class="tsd-kind-icon">xml<wbr>ToDouble<wbr>Tongue</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodownbow" class="tsd-kind-icon">xml<wbr>ToDown<wbr>Bow</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltodynamics" class="tsd-kind-icon">xml<wbr>ToDynamics</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoeditorial" class="tsd-kind-icon">xml<wbr>ToEditorial</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoeditorialvoice" class="tsd-kind-icon">xml<wbr>ToEditorial<wbr>Voice</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoelevation" class="tsd-kind-icon">xml<wbr>ToElevation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoelision" class="tsd-kind-icon">xml<wbr>ToElision</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoenclosure" class="tsd-kind-icon">xml<wbr>ToEnclosure</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoencoder" class="tsd-kind-icon">xml<wbr>ToEncoder</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoencoding" class="tsd-kind-icon">xml<wbr>ToEncoding</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoencodingdate" class="tsd-kind-icon">xml<wbr>ToEncoding<wbr>Date</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoendline" class="tsd-kind-icon">xml<wbr>ToEnd<wbr>Line</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoendparagraph" class="tsd-kind-icon">xml<wbr>ToEnd<wbr>Paragraph</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoending" class="tsd-kind-icon">xml<wbr>ToEnding</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoextend" class="tsd-kind-icon">xml<wbr>ToExtend</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoeyeglasses" class="tsd-kind-icon">xml<wbr>ToEyeglasses</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofalloff" class="tsd-kind-icon">xml<wbr>ToFalloff</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofeature" class="tsd-kind-icon">xml<wbr>ToFeature</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofermata" class="tsd-kind-icon">xml<wbr>ToFermata</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofigure" class="tsd-kind-icon">xml<wbr>ToFigure</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofigurenumber" class="tsd-kind-icon">xml<wbr>ToFigure<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofiguredbass" class="tsd-kind-icon">xml<wbr>ToFigured<wbr>Bass</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofingering" class="tsd-kind-icon">xml<wbr>ToFingering</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofingernails" class="tsd-kind-icon">xml<wbr>ToFingernails</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofirstfret" class="tsd-kind-icon">xml<wbr>ToFirst<wbr>Fret</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofont" class="tsd-kind-icon">xml<wbr>ToFont</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofootnote" class="tsd-kind-icon">xml<wbr>ToFootnote</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoforward" class="tsd-kind-icon">xml<wbr>ToForward</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoframe" class="tsd-kind-icon">xml<wbr>ToFrame</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoframenote" class="tsd-kind-icon">xml<wbr>ToFrame<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofret" class="tsd-kind-icon">xml<wbr>ToFret</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofullnote" class="tsd-kind-icon">xml<wbr>ToFull<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltofunction" class="tsd-kind-icon">xml<wbr>ToFunction</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoglissando" class="tsd-kind-icon">xml<wbr>ToGlissando</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltograce" class="tsd-kind-icon">xml<wbr>ToGrace</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogroupabbreviation" class="tsd-kind-icon">xml<wbr>ToGroup<wbr>Abbreviation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogroupabbreviationdisplay" class="tsd-kind-icon">xml<wbr>ToGroup<wbr>Abbreviation<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogroupbarline" class="tsd-kind-icon">xml<wbr>ToGroup<wbr>Barline</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogroupname" class="tsd-kind-icon">xml<wbr>ToGroup<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogroupnamedisplay" class="tsd-kind-icon">xml<wbr>ToGroup<wbr>Name<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogroupsymbol" class="tsd-kind-icon">xml<wbr>ToGroup<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogrouptime" class="tsd-kind-icon">xml<wbr>ToGroup<wbr>Time</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltogrouping" class="tsd-kind-icon">xml<wbr>ToGrouping</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltohalign" class="tsd-kind-icon">xml<wbr>ToHalign</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltohammeron" class="tsd-kind-icon">xml<wbr>ToHammer<wbr>On</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltohandbell" class="tsd-kind-icon">xml<wbr>ToHandbell</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoharmonic" class="tsd-kind-icon">xml<wbr>ToHarmonic</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoharmony" class="tsd-kind-icon">xml<wbr>ToHarmony</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoharmonychord" class="tsd-kind-icon">xml<wbr>ToHarmony<wbr>Chord</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoharppedals" class="tsd-kind-icon">xml<wbr>ToHarp<wbr>Pedals</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoheel" class="tsd-kind-icon">xml<wbr>ToHeel</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltohole" class="tsd-kind-icon">xml<wbr>ToHole</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoholeclosed" class="tsd-kind-icon">xml<wbr>ToHole<wbr>Closed</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltohumming" class="tsd-kind-icon">xml<wbr>ToHumming</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoidentification" class="tsd-kind-icon">xml<wbr>ToIdentification</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoimage" class="tsd-kind-icon">xml<wbr>ToImage</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoinstrument" class="tsd-kind-icon">xml<wbr>ToInstrument</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltointerchangeable" class="tsd-kind-icon">xml<wbr>ToInterchangeable</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoinversion" class="tsd-kind-icon">xml<wbr>ToInversion</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoinvertedmordent" class="tsd-kind-icon">xml<wbr>ToInverted<wbr>Mordent</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoinvertedturn" class="tsd-kind-icon">xml<wbr>ToInverted<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltojustify" class="tsd-kind-icon">xml<wbr>ToJustify</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltokey" class="tsd-kind-icon">xml<wbr>ToKey</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltokeyoctave" class="tsd-kind-icon">xml<wbr>ToKey<wbr>Octave</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltokind" class="tsd-kind-icon">xml<wbr>ToKind</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolaughing" class="tsd-kind-icon">xml<wbr>ToLaughing</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoleftdivider" class="tsd-kind-icon">xml<wbr>ToLeft<wbr>Divider</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoletterspacing" class="tsd-kind-icon">xml<wbr>ToLetter<wbr>Spacing</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolevel" class="tsd-kind-icon">xml<wbr>ToLevel</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoleveldisplay" class="tsd-kind-icon">xml<wbr>ToLevel<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolineheight" class="tsd-kind-icon">xml<wbr>ToLine<wbr>Height</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolineshape" class="tsd-kind-icon">xml<wbr>ToLine<wbr>Shape</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolinewidth" class="tsd-kind-icon">xml<wbr>ToLine<wbr>Width</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolyric" class="tsd-kind-icon">xml<wbr>ToLyric</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolyricfont" class="tsd-kind-icon">xml<wbr>ToLyric<wbr>Font</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolyriclanguage" class="tsd-kind-icon">xml<wbr>ToLyric<wbr>Language</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltolyricparts" class="tsd-kind-icon">xml<wbr>ToLyric<wbr>Parts</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomeasure" class="tsd-kind-icon">xml<wbr>ToMeasure</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomeasurelayout" class="tsd-kind-icon">xml<wbr>ToMeasure<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomeasurenumbering" class="tsd-kind-icon">xml<wbr>ToMeasure<wbr>Numbering</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomeasurerepeat" class="tsd-kind-icon">xml<wbr>ToMeasure<wbr>Repeat</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomeasurestyle" class="tsd-kind-icon">xml<wbr>ToMeasure<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltometronome" class="tsd-kind-icon">xml<wbr>ToMetronome</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltometronomebeam" class="tsd-kind-icon">xml<wbr>ToMetronome<wbr>Beam</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltometronomedot" class="tsd-kind-icon">xml<wbr>ToMetronome<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltometronomenote" class="tsd-kind-icon">xml<wbr>ToMetronome<wbr>Note</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltometronometuplet" class="tsd-kind-icon">xml<wbr>ToMetronome<wbr>Tuplet</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomidibank" class="tsd-kind-icon">xml<wbr>ToMidi<wbr>Bank</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomidichannel" class="tsd-kind-icon">xml<wbr>ToMidi<wbr>Channel</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomididevice" class="tsd-kind-icon">xml<wbr>ToMidi<wbr>Device</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomidiinstrument" class="tsd-kind-icon">xml<wbr>ToMidi<wbr>Instrument</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomidiprogram" class="tsd-kind-icon">xml<wbr>ToMidi<wbr>Program</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomidiunpitched" class="tsd-kind-icon">xml<wbr>ToMidi<wbr>Unpitched</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomiscellaneous" class="tsd-kind-icon">xml<wbr>ToMiscellaneous</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomiscellaneousfield" class="tsd-kind-icon">xml<wbr>ToMiscellaneous<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomordent" class="tsd-kind-icon">xml<wbr>ToMordent</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomultiplerest" class="tsd-kind-icon">xml<wbr>ToMultiple<wbr>Rest</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltomusicfont" class="tsd-kind-icon">xml<wbr>ToMusic<wbr>Font</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltononarpeggiate" class="tsd-kind-icon">xml<wbr>ToNon<wbr>Arpeggiate</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonormaldot" class="tsd-kind-icon">xml<wbr>ToNormal<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonotations" class="tsd-kind-icon">xml<wbr>ToNotations</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonote" class="tsd-kind-icon">xml<wbr>ToNote</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonotesize" class="tsd-kind-icon">xml<wbr>ToNote<wbr>Size</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonotehead" class="tsd-kind-icon">xml<wbr>ToNotehead</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonoteheadtext" class="tsd-kind-icon">xml<wbr>ToNotehead<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonumberlevel" class="tsd-kind-icon">xml<wbr>ToNumber<wbr>Level</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltonumberoflines" class="tsd-kind-icon">xml<wbr>ToNumber<wbr>OfLines</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltooctaveshift" class="tsd-kind-icon">xml<wbr>ToOctave<wbr>Shift</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltooffset" class="tsd-kind-icon">xml<wbr>ToOffset</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoopenstring" class="tsd-kind-icon">xml<wbr>ToOpen<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoopus" class="tsd-kind-icon">xml<wbr>ToOpus</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoorientation" class="tsd-kind-icon">xml<wbr>ToOrientation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoornaments" class="tsd-kind-icon">xml<wbr>ToOrnaments</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltootherarticulation" class="tsd-kind-icon">xml<wbr>ToOther<wbr>Articulation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltootherdirection" class="tsd-kind-icon">xml<wbr>ToOther<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoothernotation" class="tsd-kind-icon">xml<wbr>ToOther<wbr>Notation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltootherornament" class="tsd-kind-icon">xml<wbr>ToOther<wbr>Ornament</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltootherplay" class="tsd-kind-icon">xml<wbr>ToOther<wbr>Play</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoothertechnical" class="tsd-kind-icon">xml<wbr>ToOther<wbr>Technical</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopagelayout" class="tsd-kind-icon">xml<wbr>ToPage<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopagemargins" class="tsd-kind-icon">xml<wbr>ToPage<wbr>Margins</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopan" class="tsd-kind-icon">xml<wbr>ToPan</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#xmltopart" class="tsd-kind-icon">xml<wbr>ToPart</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopartabbreviation" class="tsd-kind-icon">xml<wbr>ToPart<wbr>Abbreviation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopartabbreviationdisplay" class="tsd-kind-icon">xml<wbr>ToPart<wbr>Abbreviation<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopartgroup" class="tsd-kind-icon">xml<wbr>ToPart<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopartlist" class="tsd-kind-icon">xml<wbr>ToPart<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopartname" class="tsd-kind-icon">xml<wbr>ToPart<wbr>Name</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopartnamedisplay" class="tsd-kind-icon">xml<wbr>ToPart<wbr>Name<wbr>Display</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopartsymbol" class="tsd-kind-icon">xml<wbr>ToPart<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopedal" class="tsd-kind-icon">xml<wbr>ToPedal</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopedaltuning" class="tsd-kind-icon">xml<wbr>ToPedal<wbr>Tuning</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoperminute" class="tsd-kind-icon">xml<wbr>ToPer<wbr>Minute</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopercussion" class="tsd-kind-icon">xml<wbr>ToPercussion</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopitch" class="tsd-kind-icon">xml<wbr>ToPitch</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoplacement" class="tsd-kind-icon">xml<wbr>ToPlacement</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoplay" class="tsd-kind-icon">xml<wbr>ToPlay</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoplop" class="tsd-kind-icon">xml<wbr>ToPlop</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopluck" class="tsd-kind-icon">xml<wbr>ToPluck</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoposition" class="tsd-kind-icon">xml<wbr>ToPosition</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoprefix" class="tsd-kind-icon">xml<wbr>ToPrefix</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoprincipalvoice" class="tsd-kind-icon">xml<wbr>ToPrincipal<wbr>Voice</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoprint" class="tsd-kind-icon">xml<wbr>ToPrint</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoprintobject" class="tsd-kind-icon">xml<wbr>ToPrint<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoprintspacing" class="tsd-kind-icon">xml<wbr>ToPrint<wbr>Spacing</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoprintstyle" class="tsd-kind-icon">xml<wbr>ToPrint<wbr>Style</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoprintstylealign" class="tsd-kind-icon">xml<wbr>ToPrint<wbr>Style<wbr>Align</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltopulloff" class="tsd-kind-icon">xml<wbr>ToPull<wbr>Off</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorehearsal" class="tsd-kind-icon">xml<wbr>ToRehearsal</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorelation" class="tsd-kind-icon">xml<wbr>ToRelation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorepeat" class="tsd-kind-icon">xml<wbr>ToRepeat</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorest" class="tsd-kind-icon">xml<wbr>ToRest</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorightdivider" class="tsd-kind-icon">xml<wbr>ToRight<wbr>Divider</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorights" class="tsd-kind-icon">xml<wbr>ToRights</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoroot" class="tsd-kind-icon">xml<wbr>ToRoot</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorootalter" class="tsd-kind-icon">xml<wbr>ToRoot<wbr>Alter</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorootstep" class="tsd-kind-icon">xml<wbr>ToRoot<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltorotation" class="tsd-kind-icon">xml<wbr>ToRotation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoscaling" class="tsd-kind-icon">xml<wbr>ToScaling</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoschleifer" class="tsd-kind-icon">xml<wbr>ToSchleifer</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoscoop" class="tsd-kind-icon">xml<wbr>ToScoop</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoscordatura" class="tsd-kind-icon">xml<wbr>ToScordatura</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoscoreheader" class="tsd-kind-icon">xml<wbr>ToScore<wbr>Header</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoscoreinstrument" class="tsd-kind-icon">xml<wbr>ToScore<wbr>Instrument</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoscorepart" class="tsd-kind-icon">xml<wbr>ToScore<wbr>Part</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#xmltoscoretimewise" class="tsd-kind-icon">xml<wbr>ToScore<wbr>Timewise</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosegno" class="tsd-kind-icon">xml<wbr>ToSegno</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoshake" class="tsd-kind-icon">xml<wbr>ToShake</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoslash" class="tsd-kind-icon">xml<wbr>ToSlash</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoslashdot" class="tsd-kind-icon">xml<wbr>ToSlash<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoslide" class="tsd-kind-icon">xml<wbr>ToSlide</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoslur" class="tsd-kind-icon">xml<wbr>ToSlur</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosnappizzicato" class="tsd-kind-icon">xml<wbr>ToSnap<wbr>Pizzicato</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosolo" class="tsd-kind-icon">xml<wbr>ToSolo</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosound" class="tsd-kind-icon">xml<wbr>ToSound</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltospiccato" class="tsd-kind-icon">xml<wbr>ToSpiccato</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostaccatissimo" class="tsd-kind-icon">xml<wbr>ToStaccatissimo</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostaccato" class="tsd-kind-icon">xml<wbr>ToStaccato</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostaffdetails" class="tsd-kind-icon">xml<wbr>ToStaff<wbr>Details</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostafflayout" class="tsd-kind-icon">xml<wbr>ToStaff<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostafftuning" class="tsd-kind-icon">xml<wbr>ToStaff<wbr>Tuning</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostem" class="tsd-kind-icon">xml<wbr>ToStem</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostick" class="tsd-kind-icon">xml<wbr>ToStick</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostopped" class="tsd-kind-icon">xml<wbr>ToStopped</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostress" class="tsd-kind-icon">xml<wbr>ToStress</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostring" class="tsd-kind-icon">xml<wbr>ToString</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostringmute" class="tsd-kind-icon">xml<wbr>ToString<wbr>Mute</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltostrongaccent" class="tsd-kind-icon">xml<wbr>ToStrong<wbr>Accent</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosuffix" class="tsd-kind-icon">xml<wbr>ToSuffix</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosupports" class="tsd-kind-icon">xml<wbr>ToSupports</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosyllabic" class="tsd-kind-icon">xml<wbr>ToSyllabic</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosystemdividers" class="tsd-kind-icon">xml<wbr>ToSystem<wbr>Dividers</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosystemlayout" class="tsd-kind-icon">xml<wbr>ToSystem<wbr>Layout</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltosystemmargins" class="tsd-kind-icon">xml<wbr>ToSystem<wbr>Margins</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotap" class="tsd-kind-icon">xml<wbr>ToTap</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotechnical" class="tsd-kind-icon">xml<wbr>ToTechnical</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotenuto" class="tsd-kind-icon">xml<wbr>ToTenuto</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotext" class="tsd-kind-icon">xml<wbr>ToText</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotextarray" class="tsd-kind-icon">xml<wbr>ToText<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotextdecoration" class="tsd-kind-icon">xml<wbr>ToText<wbr>Decoration</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotextdirection" class="tsd-kind-icon">xml<wbr>ToText<wbr>Direction</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotextformatting" class="tsd-kind-icon">xml<wbr>ToText<wbr>Formatting</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotextrotation" class="tsd-kind-icon">xml<wbr>ToText<wbr>Rotation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltothumbposition" class="tsd-kind-icon">xml<wbr>ToThumb<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotie" class="tsd-kind-icon">xml<wbr>ToTie</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotied" class="tsd-kind-icon">xml<wbr>ToTied</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotime" class="tsd-kind-icon">xml<wbr>ToTime</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotimemodification" class="tsd-kind-icon">xml<wbr>ToTime<wbr>Modification</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotimeonly" class="tsd-kind-icon">xml<wbr>ToTime<wbr>Only</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotimeseparator" class="tsd-kind-icon">xml<wbr>ToTime<wbr>Separator</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotimesymbol" class="tsd-kind-icon">xml<wbr>ToTime<wbr>Symbol</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotimpani" class="tsd-kind-icon">xml<wbr>ToTimpani</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotoe" class="tsd-kind-icon">xml<wbr>ToToe</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotranspose" class="tsd-kind-icon">xml<wbr>ToTranspose</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotremolo" class="tsd-kind-icon">xml<wbr>ToTremolo</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotrillmark" class="tsd-kind-icon">xml<wbr>ToTrill<wbr>Mark</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotrillsound" class="tsd-kind-icon">xml<wbr>ToTrill<wbr>Sound</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotripletongue" class="tsd-kind-icon">xml<wbr>ToTriple<wbr>Tongue</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotuplet" class="tsd-kind-icon">xml<wbr>ToTuplet</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotupletactual" class="tsd-kind-icon">xml<wbr>ToTuplet<wbr>Actual</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotupletdot" class="tsd-kind-icon">xml<wbr>ToTuplet<wbr>Dot</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotupletnormal" class="tsd-kind-icon">xml<wbr>ToTuplet<wbr>Normal</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotupletnumber" class="tsd-kind-icon">xml<wbr>ToTuplet<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotuplettype" class="tsd-kind-icon">xml<wbr>ToTuplet<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoturn" class="tsd-kind-icon">xml<wbr>ToTurn</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltotype" class="tsd-kind-icon">xml<wbr>ToType</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltounpitched" class="tsd-kind-icon">xml<wbr>ToUnpitched</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltounstress" class="tsd-kind-icon">xml<wbr>ToUnstress</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoupbow" class="tsd-kind-icon">xml<wbr>ToUp<wbr>Bow</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltovalign" class="tsd-kind-icon">xml<wbr>ToValign</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltovalignimage" class="tsd-kind-icon">xml<wbr>ToValign<wbr>Image</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoverticalturn" class="tsd-kind-icon">xml<wbr>ToVertical<wbr>Turn</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltovirtualinstrument" class="tsd-kind-icon">xml<wbr>ToVirtual<wbr>Instrument</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltovolume" class="tsd-kind-icon">xml<wbr>ToVolume</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltowavyline" class="tsd-kind-icon">xml<wbr>ToWavy<wbr>Line</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltowedge" class="tsd-kind-icon">xml<wbr>ToWedge</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltowithbar" class="tsd-kind-icon">xml<wbr>ToWith<wbr>Bar</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltowordfont" class="tsd-kind-icon">xml<wbr>ToWord<wbr>Font</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltowords" class="tsd-kind-icon">xml<wbr>ToWords</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltowork" class="tsd-kind-icon">xml<wbr>ToWork</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#xmltoyesno" class="tsd-kind-icon">xml<wbr>ToYes<wbr>No</a>
+					</li>
+					<li class=" tsd-kind-function tsd-is-not-exported">
+						<a href="globals.html#yesno" class="tsd-kind-icon">yes<wbr>No</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#accelritnonetoxml" class="tsd-kind-icon">accel<wbr>Rit<wbr>None<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#accidentaltoxml" class="tsd-kind-icon">accidental<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#actualbothnonetoxml" class="tsd-kind-icon">actual<wbr>Both<wbr>None<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#barstyletypetoxml" class="tsd-kind-icon">bar<wbr>Style<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#barlinelocationtoxml" class="tsd-kind-icon">barline<wbr>Location<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#beamtypetoxml" class="tsd-kind-icon">beam<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#breathmarktypetoxml" class="tsd-kind-icon">breath<wbr>Mark<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#cancellocationtoxml" class="tsd-kind-icon">cancel<wbr>Location<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#chordtypetoxml" class="tsd-kind-icon">chord<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#counttoxml" class="tsd-kind-icon">count<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#cuegracelargetoxml" class="tsd-kind-icon">cue<wbr>Grace<wbr>Large<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#directionmodetoxml" class="tsd-kind-icon">direction<wbr>Mode<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#directiontypebgtoxml" class="tsd-kind-icon">direction<wbr>Type<wbr>BgToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#eiatypetoxml" class="tsd-kind-icon">eia<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#enclosureshapetoxml" class="tsd-kind-icon">enclosure<wbr>Shape<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#holeclosedtypetoxml" class="tsd-kind-icon">hole<wbr>Closed<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#holelocationtoxml" class="tsd-kind-icon">hole<wbr>Location<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#leftcenterrighttoxml" class="tsd-kind-icon">left<wbr>Center<wbr>Right<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#lineendtypetoxml" class="tsd-kind-icon">line<wbr>End<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#normalangledsquaretoxml" class="tsd-kind-icon">normal<wbr>Angled<wbr>Square<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#noteheadtypetoxml" class="tsd-kind-icon">notehead<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#octaveshifttypetoxml" class="tsd-kind-icon">octave<wbr>Shift<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#oddevenbothtoxml" class="tsd-kind-icon">odd<wbr>Even<wbr>Both<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#partsymboltypetoxml" class="tsd-kind-icon">part<wbr>Symbol<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#pedaltypetoxml" class="tsd-kind-icon">pedal<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#separatortypetoxml" class="tsd-kind-icon">separator<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#soliddasheddottedwavytoxml" class="tsd-kind-icon">solid<wbr>Dashed<wbr>Dotted<wbr>Wavy<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#startstopcontinuesingletoxml" class="tsd-kind-icon">start<wbr>Stop<wbr>Continue<wbr>Single<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#startstopdiscontinuetypetoxml" class="tsd-kind-icon">start<wbr>Stop<wbr>Discontinue<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#stemtoxml" class="tsd-kind-icon">stem<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#straightcurvedtoxml" class="tsd-kind-icon">straight<wbr>Curved<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#syllabictypetoxml" class="tsd-kind-icon">syllabic<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#symbolsizetoxml" class="tsd-kind-icon">symbol<wbr>Size<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#timesymboltypetoxml" class="tsd-kind-icon">time<wbr>Symbol<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#tipdirectiontoxml" class="tsd-kind-icon">tip<wbr>Direction<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#topmiddlebottombaselinetoxml" class="tsd-kind-icon">top<wbr>Middle<wbr>Bottom<wbr>Baseline<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#uppermainbelowtoxml" class="tsd-kind-icon">upper<wbr>Main<wbr>Below<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#uprightinvertedtoxml" class="tsd-kind-icon">upright<wbr>Inverted<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#voicesymboltoxml" class="tsd-kind-icon">voice<wbr>Symbol<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#wedgetypetoxml" class="tsd-kind-icon">wedge<wbr>Type<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#wholehalfnonetoxml" class="tsd-kind-icon">whole<wbr>Half<wbr>None<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#wholehalfunisontoxml" class="tsd-kind-icon">whole<wbr>Half<wbr>Unison<wbr>ToXML</a>
+					</li>
+					<li class=" tsd-kind-object-literal tsd-is-not-exported">
+						<a href="globals.html#wingedtypetoxml" class="tsd-kind-icon">winged<wbr>Type<wbr>ToXML</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

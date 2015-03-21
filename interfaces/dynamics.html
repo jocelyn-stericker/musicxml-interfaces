@@ -1,0 +1,799 @@
+﻿<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Dynamics | musicxml-interfaces</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script src="../assets/js/modernizr.js"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">musicxml-interfaces</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="dynamics.html">Dynamics</a>
+				</li>
+			</ul>
+			<h1>Interface Dynamics</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Dynamics can be associated either with a note or a general
+							musical direction. To avoid inconsistencies between and
+							amongst the letter abbreviations for dynamics (what is sf
+							vs. sfz, standing alone or with a trailing dynamic that is
+							not always piano), we use the actual letters as the names
+							of these dynamic elements. The other-dynamics element
+							allows other dynamic marks that are not covered here, but
+							many of those should perhaps be included in a more general
+							musical direction element. Dynamics may also be combined as
+						in <sf/><mp/>.</p>
+					</div>
+					<p>These letter dynamic symbols are separated from crescendo,
+						decrescendo, and wedge indications. Dynamic representation
+						is inconsistent in scores. Many things are assumed by the
+						composer and left out, such as returns to original dynamics.
+						Systematic representations are quite complex: for example,
+						Humdrum has at least 3 representation formats related to
+						dynamics. The MusicXML format captures what is in the score,
+						but does not try to be optimal for analysis or synthesis of
+					dynamics.</p>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<a href="printstylealign.html" class="tsd-signature-type">PrintStyleAlign</a>
+					</li>
+					<li>
+						<a href="placement.html" class="tsd-signature-type">Placement</a>
+					</li>
+					<li>
+						<a href="textdecoration.html" class="tsd-signature-type">TextDecoration</a>
+					</li>
+					<li>
+						<a href="enclosure.html" class="tsd-signature-type">Enclosure</a>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">Dynamics</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#color" class="tsd-kind-icon">color</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#defaultx" class="tsd-kind-icon">defaultX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#defaulty" class="tsd-kind-icon">defaultY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#enclosure" class="tsd-kind-icon">enclosure</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#f" class="tsd-kind-icon">f</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#ff" class="tsd-kind-icon">ff</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#fff" class="tsd-kind-icon">fff</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#ffff" class="tsd-kind-icon">ffff</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#fffff" class="tsd-kind-icon">fffff</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#ffffff" class="tsd-kind-icon">ffffff</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#fontfamily" class="tsd-kind-icon">font<wbr>Family</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#fontsize" class="tsd-kind-icon">font<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#fontstyle" class="tsd-kind-icon">font<wbr>Style</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#fontweight" class="tsd-kind-icon">font<wbr>Weight</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#fp" class="tsd-kind-icon">fp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#fz" class="tsd-kind-icon">fz</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#halign" class="tsd-kind-icon">halign</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#linethrough" class="tsd-kind-icon">line<wbr>Through</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#mf" class="tsd-kind-icon">mf</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#mp" class="tsd-kind-icon">mp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#otherdynamics" class="tsd-kind-icon">other<wbr>Dynamics</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#overline" class="tsd-kind-icon">overline</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#p" class="tsd-kind-icon">p</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#placement" class="tsd-kind-icon">placement</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#pp" class="tsd-kind-icon">pp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#ppp" class="tsd-kind-icon">ppp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#pppp" class="tsd-kind-icon">pppp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#ppppp" class="tsd-kind-icon">ppppp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#pppppp" class="tsd-kind-icon">pppppp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#relativex" class="tsd-kind-icon">relativeX</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#relativey" class="tsd-kind-icon">relativeY</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#rf" class="tsd-kind-icon">rf</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#rfz" class="tsd-kind-icon">rfz</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#sf" class="tsd-kind-icon">sf</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#sffz" class="tsd-kind-icon">sffz</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#sfp" class="tsd-kind-icon">sfp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#sfpp" class="tsd-kind-icon">sfpp</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="dynamics.html#sfz" class="tsd-kind-icon">sfz</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#underline" class="tsd-kind-icon">underline</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="dynamics.html#valign" class="tsd-kind-icon">valign</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="color" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> color</h3>
+					<div class="tsd-signature tsd-kind-icon">color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="color.html">Color</a>.<a href="color.html#color-1">color</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L587">musicxml-interfaces.ts:587</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="defaultx" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> defaultX</h3>
+					<div class="tsd-signature tsd-kind-icon">defaultX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#defaultx">defaultX</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L412">musicxml-interfaces.ts:412</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="defaulty" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> defaultY</h3>
+					<div class="tsd-signature tsd-kind-icon">defaultY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#defaulty">defaultY</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L414">musicxml-interfaces.ts:414</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="enclosure" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> enclosure</h3>
+					<div class="tsd-signature tsd-kind-icon">enclosure<span class="tsd-signature-symbol">:</span> <a href="../enums/enclosureshape.html" class="tsd-signature-type">EnclosureShape</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="enclosure.html">Enclosure</a>.<a href="enclosure.html#enclosure-1">enclosure</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L1754">musicxml-interfaces.ts:1754</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="f" class="tsd-anchor"></a>
+					<h3>f</h3>
+					<div class="tsd-signature tsd-kind-icon">f<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3340">musicxml-interfaces.ts:3340</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ff" class="tsd-anchor"></a>
+					<h3>ff</h3>
+					<div class="tsd-signature tsd-kind-icon">ff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3343">musicxml-interfaces.ts:3343</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="fff" class="tsd-anchor"></a>
+					<h3>fff</h3>
+					<div class="tsd-signature tsd-kind-icon">fff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3335">musicxml-interfaces.ts:3335</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ffff" class="tsd-anchor"></a>
+					<h3>ffff</h3>
+					<div class="tsd-signature tsd-kind-icon">ffff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3355">musicxml-interfaces.ts:3355</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="fffff" class="tsd-anchor"></a>
+					<h3>fffff</h3>
+					<div class="tsd-signature tsd-kind-icon">fffff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3351">musicxml-interfaces.ts:3351</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ffffff" class="tsd-anchor"></a>
+					<h3>ffffff</h3>
+					<div class="tsd-signature tsd-kind-icon">ffffff<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3341">musicxml-interfaces.ts:3341</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontfamily" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Family</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Family<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontfamily">fontFamily</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L504">musicxml-interfaces.ts:504</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontsize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontsize">fontSize</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L507">musicxml-interfaces.ts:507</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontstyle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Style</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Style<span class="tsd-signature-symbol">:</span> <a href="../enums/normalitalic.html" class="tsd-signature-type">NormalItalic</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontstyle">fontStyle</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L506">musicxml-interfaces.ts:506</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="fontweight" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> font<wbr>Weight</h3>
+					<div class="tsd-signature tsd-kind-icon">font<wbr>Weight<span class="tsd-signature-symbol">:</span> <a href="../enums/normalbold.html" class="tsd-signature-type">NormalBold</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="font.html">Font</a>.<a href="font.html#fontweight">fontWeight</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L505">musicxml-interfaces.ts:505</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="fp" class="tsd-anchor"></a>
+					<h3>fp</h3>
+					<div class="tsd-signature tsd-kind-icon">fp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3332">musicxml-interfaces.ts:3332</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="fz" class="tsd-anchor"></a>
+					<h3>fz</h3>
+					<div class="tsd-signature tsd-kind-icon">fz<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3347">musicxml-interfaces.ts:3347</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="halign" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> halign</h3>
+					<div class="tsd-signature tsd-kind-icon">halign<span class="tsd-signature-symbol">:</span> <a href="../enums/leftcenterright.html" class="tsd-signature-type">LeftCenterRight</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="halign.html">Halign</a>.<a href="halign.html#halign-1">halign</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L631">musicxml-interfaces.ts:631</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="linethrough" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> line<wbr>Through</h3>
+					<div class="tsd-signature tsd-kind-icon">line<wbr>Through<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="textdecoration.html">TextDecoration</a>.<a href="textdecoration.html#linethrough">lineThrough</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L599">musicxml-interfaces.ts:599</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="mf" class="tsd-anchor"></a>
+					<h3>mf</h3>
+					<div class="tsd-signature tsd-kind-icon">mf<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3349">musicxml-interfaces.ts:3349</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="mp" class="tsd-anchor"></a>
+					<h3>mp</h3>
+					<div class="tsd-signature tsd-kind-icon">mp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3338">musicxml-interfaces.ts:3338</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="otherdynamics" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> other<wbr>Dynamics</h3>
+					<div class="tsd-signature tsd-kind-icon">other<wbr>Dynamics<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3346">musicxml-interfaces.ts:3346</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="overline" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> overline</h3>
+					<div class="tsd-signature tsd-kind-icon">overline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="textdecoration.html">TextDecoration</a>.<a href="textdecoration.html#overline">overline</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L598">musicxml-interfaces.ts:598</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="p" class="tsd-anchor"></a>
+					<h3>p</h3>
+					<div class="tsd-signature tsd-kind-icon">p<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3354">musicxml-interfaces.ts:3354</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="placement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> placement</h3>
+					<div class="tsd-signature tsd-kind-icon">placement<span class="tsd-signature-symbol">:</span> <a href="../enums/abovebelow.html" class="tsd-signature-type">AboveBelow</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="placement.html">Placement</a>.<a href="placement.html#placement-1">placement</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L423">musicxml-interfaces.ts:423</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="pp" class="tsd-anchor"></a>
+					<h3>pp</h3>
+					<div class="tsd-signature tsd-kind-icon">pp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3333">musicxml-interfaces.ts:3333</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ppp" class="tsd-anchor"></a>
+					<h3>ppp</h3>
+					<div class="tsd-signature tsd-kind-icon">ppp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3334">musicxml-interfaces.ts:3334</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="pppp" class="tsd-anchor"></a>
+					<h3>pppp</h3>
+					<div class="tsd-signature tsd-kind-icon">pppp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3350">musicxml-interfaces.ts:3350</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="ppppp" class="tsd-anchor"></a>
+					<h3>ppppp</h3>
+					<div class="tsd-signature tsd-kind-icon">ppppp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3348">musicxml-interfaces.ts:3348</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="pppppp" class="tsd-anchor"></a>
+					<h3>pppppp</h3>
+					<div class="tsd-signature tsd-kind-icon">pppppp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3344">musicxml-interfaces.ts:3344</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="relativex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> relativeX</h3>
+					<div class="tsd-signature tsd-kind-icon">relativeX<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#relativex">relativeX</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L415">musicxml-interfaces.ts:415</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="relativey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> relativeY</h3>
+					<div class="tsd-signature tsd-kind-icon">relativeY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="position.html">Position</a>.<a href="position.html#relativey">relativeY</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L413">musicxml-interfaces.ts:413</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="rf" class="tsd-anchor"></a>
+					<h3>rf</h3>
+					<div class="tsd-signature tsd-kind-icon">rf<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3337">musicxml-interfaces.ts:3337</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="rfz" class="tsd-anchor"></a>
+					<h3>rfz</h3>
+					<div class="tsd-signature tsd-kind-icon">rfz<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3345">musicxml-interfaces.ts:3345</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sf" class="tsd-anchor"></a>
+					<h3>sf</h3>
+					<div class="tsd-signature tsd-kind-icon">sf<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3336">musicxml-interfaces.ts:3336</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sffz" class="tsd-anchor"></a>
+					<h3>sffz</h3>
+					<div class="tsd-signature tsd-kind-icon">sffz<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3352">musicxml-interfaces.ts:3352</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sfp" class="tsd-anchor"></a>
+					<h3>sfp</h3>
+					<div class="tsd-signature tsd-kind-icon">sfp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3353">musicxml-interfaces.ts:3353</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sfpp" class="tsd-anchor"></a>
+					<h3>sfpp</h3>
+					<div class="tsd-signature tsd-kind-icon">sfpp<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3339">musicxml-interfaces.ts:3339</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="sfz" class="tsd-anchor"></a>
+					<h3>sfz</h3>
+					<div class="tsd-signature tsd-kind-icon">sfz<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L3342">musicxml-interfaces.ts:3342</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="underline" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> underline</h3>
+					<div class="tsd-signature tsd-kind-icon">underline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="textdecoration.html">TextDecoration</a>.<a href="textdecoration.html#underline">underline</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L597">musicxml-interfaces.ts:597</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="valign" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> valign</h3>
+					<div class="tsd-signature tsd-kind-icon">valign<span class="tsd-signature-symbol">:</span> <a href="../enums/topmiddlebottombaseline.html" class="tsd-signature-type">TopMiddleBottomBaseline</a></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="valign.html">Valign</a>.<a href="valign.html#valign-1">valign</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/ripieno/musicxml-interfaces/blob/master/musicxml-interfaces.ts#L640">musicxml-interfaces.ts:640</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="dynamics.html" class="tsd-kind-icon">Dynamics</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#color" class="tsd-kind-icon">color</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#defaultx" class="tsd-kind-icon">defaultX</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#defaulty" class="tsd-kind-icon">defaultY</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#enclosure" class="tsd-kind-icon">enclosure</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#f" class="tsd-kind-icon">f</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#ff" class="tsd-kind-icon">ff</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#fff" class="tsd-kind-icon">fff</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#ffff" class="tsd-kind-icon">ffff</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#fffff" class="tsd-kind-icon">fffff</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#ffffff" class="tsd-kind-icon">ffffff</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#fontfamily" class="tsd-kind-icon">font<wbr>Family</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#fontsize" class="tsd-kind-icon">font<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#fontstyle" class="tsd-kind-icon">font<wbr>Style</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#fontweight" class="tsd-kind-icon">font<wbr>Weight</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#fp" class="tsd-kind-icon">fp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#fz" class="tsd-kind-icon">fz</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#halign" class="tsd-kind-icon">halign</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#linethrough" class="tsd-kind-icon">line<wbr>Through</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#mf" class="tsd-kind-icon">mf</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#mp" class="tsd-kind-icon">mp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#otherdynamics" class="tsd-kind-icon">other<wbr>Dynamics</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#overline" class="tsd-kind-icon">overline</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#p" class="tsd-kind-icon">p</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#placement" class="tsd-kind-icon">placement</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#pp" class="tsd-kind-icon">pp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#ppp" class="tsd-kind-icon">ppp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#pppp" class="tsd-kind-icon">pppp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#ppppp" class="tsd-kind-icon">ppppp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#pppppp" class="tsd-kind-icon">pppppp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#relativex" class="tsd-kind-icon">relativeX</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#relativey" class="tsd-kind-icon">relativeY</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#rf" class="tsd-kind-icon">rf</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#rfz" class="tsd-kind-icon">rfz</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#sf" class="tsd-kind-icon">sf</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#sffz" class="tsd-kind-icon">sffz</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#sfp" class="tsd-kind-icon">sfp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#sfpp" class="tsd-kind-icon">sfpp</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="dynamics.html#sfz" class="tsd-kind-icon">sfz</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#underline" class="tsd-kind-icon">underline</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="dynamics.html#valign" class="tsd-kind-icon">valign</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.io" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
