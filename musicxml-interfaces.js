@@ -19707,7 +19707,55 @@ function frameToXML(frame) {
     }
     (frame.frameNotes || []).forEach(function (frameNote) {
         // <!ELEMENT frame-note (string, fret, fingering?, barre?)>
-        // TODO: not implemented
+        var fChildren = [];
+        // <!ELEMENT string (#PCDATA)>
+        // <!ATTLIST string
+        //     %print-style;
+        //     %placement;
+        // >
+        if (defined(frameNote.string)) {
+            var _pcdata = (_l = ["", ""], _l.raw = ["", ""], xml(_l, frameNote.string.stringNum));
+            fChildren.push((_m = ["<string", ">", "</string>"], _m.raw = ["<string", ">", "</string>"], dangerous(_m, printStyleToXML(frameNote.string) + placementToXML(frameNote.string), _pcdata)));
+        }
+        // <!ELEMENT fret (#PCDATA)>
+        // <!ATTLIST fret
+        //     %font;
+        //     %color;
+        // >
+        if (defined(frameNote.fret)) {
+            var _pcdata_1 = (_o = ["", ""], _o.raw = ["", ""], xml(_o, frameNote.fret.fret));
+            fChildren.push((_p = ["<fret", ">", "</fret>"], _p.raw = ["<fret", ">", "</fret>"], dangerous(_p, fontToXML(frameNote.fret) + colorToXML(frameNote.fret), _pcdata_1)));
+        }
+        // <!ELEMENT fingering (#PCDATA)>
+        // <!ATTLIST fingering
+        //     substitution %yes-no; #IMPLIED
+        //     alternate %yes-no; #IMPLIED
+        //     %print-style;
+        //     %placement;
+        // >
+        if (defined(frameNote.fingering)) {
+            var _pcdata_2 = (_q = ["", ""], _q.raw = ["", ""], xml(_q, frameNote.fingering.finger));
+            var coreAttribs = "";
+            if (defined(frameNote.fingering.substitution)) {
+                coreAttribs += (_r = [" substitution=\"", "\""], _r.raw = [" substitution=\"", "\""], yesNo(_r, frameNote.fingering.substitution));
+            }
+            if (defined(frameNote.fingering.alternate)) {
+                coreAttribs += (_s = [" alternate=\"", "\""], _s.raw = [" alternate=\"", "\""], yesNo(_s, frameNote.fingering.alternate));
+            }
+            fChildren.push((_t = ["<frame-note", ">", "</frame-note>"], _t.raw = ["<frame-note", ">", "</frame-note>"], dangerous(_t, coreAttribs + printStyleToXML(frameNote.fingering) + placementToXML(frameNote.fingering), _pcdata_2)));
+        }
+        // <!ELEMENT barre EMPTY>
+        // <!ATTLIST barre
+        //     type %start-stop; #REQUIRED
+        //     %color;
+        // >
+        if (defined(frameNote.barre)) {
+            fChildren.push((_u = ["<barre", " />"], _u.raw = ["<barre", " />"], dangerous(_u, startStopToXML(frameNote.barre) + colorToXML(frameNote.barre))));
+        }
+        children.push((_v = ["<frame-note>\n", "\n</frame-note>"], _v.raw = ["<frame-note>\\n", "\\n</frame-note>"], dangerous(_v, fChildren.join("\n").split("\n").map(function (n) {
+            return "  " + n;
+        }).join("\n"))));
+        var _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
     });
     return (_l = ["<frame", ">\n", "\n</frame>"], _l.raw = ["<frame", ">\\n", "\\n</frame>"], dangerous(_l, attribs, children.join("\n").split("\n").map(function (n) {
         return "  " + n;
