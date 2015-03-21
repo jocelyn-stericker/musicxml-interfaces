@@ -1613,7 +1613,7 @@ function xmlToValignImage(node: Node) {
     }
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             let dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -19931,7 +19931,7 @@ function xmlToImage(node: Node) {
             ret.halign = dataHalign;
             foundHalign = true;
         }
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             let dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -21892,7 +21892,7 @@ function xmlToFrame(node: Node) {
             ret.halign = dataHalign;
             foundHalign = true;
         }
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             let dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -23080,7 +23080,7 @@ function xmlToCreditImage(node: Node) {
             ret.halign = dataHalign;
             foundHalign = true;
         }
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             let dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -24766,7 +24766,7 @@ function valignImageToXML(valignImage: ValignImage) {
     // <!ENTITY % valign-image
     //     "valign (top | middle | bottom) #IMPLIED">
     if (defined(valignImage.valignImage)) {
-        return xml ` valign-image="${
+        return xml ` valign="${
             topMiddleBottomBaselineToXML[valignImage.valignImage]}"`;
     }
     return "";

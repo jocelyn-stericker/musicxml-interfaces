@@ -1019,7 +1019,7 @@ function xmlToValignImage(node) {
     }
     for (var _i = 0; _i < node.attributes.length; ++_i) {
         var ch2 = node.attributes[_i];
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -15244,7 +15244,7 @@ function xmlToImage(node) {
             ret.halign = dataHalign;
             foundHalign = true;
         }
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -16745,7 +16745,7 @@ function xmlToFrame(node) {
             ret.halign = dataHalign;
             foundHalign = true;
         }
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -17583,7 +17583,7 @@ function xmlToCreditImage(node) {
             ret.halign = dataHalign;
             foundHalign = true;
         }
-        if (ch2.name === "valign-image") {
+        if (ch2.name === "valign") {
             var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
@@ -18973,7 +18973,7 @@ function valignImageToXML(valignImage) {
     // <!ENTITY % valign-image
     //     "valign (top | middle | bottom) #IMPLIED">
     if (defined(valignImage.valignImage)) {
-        return (_a = [" valign-image=\"", "\""], _a.raw = [" valign-image=\"", "\""], xml(_a, topMiddleBottomBaselineToXML[valignImage.valignImage]));
+        return (_a = [" valign=\"", "\""], _a.raw = [" valign=\"", "\""], xml(_a, topMiddleBottomBaselineToXML[valignImage.valignImage]));
     }
     return "";
     var _a;
