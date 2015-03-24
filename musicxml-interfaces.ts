@@ -5388,6 +5388,7 @@ function xmlToAppearance(node: Node) {
         }
         if (ch.nodeName === "note-size") {
             let dataNoteSizes = xmlToNoteSize(ch) ;
+            ret.noteSizes = ret.noteSizes || {};
             ret.noteSizes[dataNoteSizes.type] = dataNoteSizes;
         }
     }
@@ -22790,7 +22791,7 @@ function xmlToLyricLanguage(node: Node) {
 }
 
 /**
- *     Credit elements refer to the title, composer, arranger,
+ * Credit elements refer to the title, composer, arranger,
  * lyricist, copyright, dedication, and other text that usually
  * appears on the first page of a score. The credit-words
  * and credit-image elements are similar to the words and

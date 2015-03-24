@@ -3779,6 +3779,7 @@ function xmlToAppearance(node) {
         }
         if (ch.nodeName === "note-size") {
             var dataNoteSizes = xmlToNoteSize(ch);
+            ret.noteSizes = ret.noteSizes || {};
             ret.noteSizes[dataNoteSizes.type] = dataNoteSizes;
         }
     }
