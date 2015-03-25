@@ -17337,6 +17337,7 @@ function xmlToLyricLanguage(node) {
 }
 function xmlToCredit(node) {
     var ret = {};
+    ret.creditWords = [];
     var foundCreditTypes = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -17347,7 +17348,7 @@ function xmlToCredit(node) {
         }
         if (ch.nodeName === "credit-words") {
             var dataCreditWords = xmlToCreditWords(ch);
-            ret.creditWords = dataCreditWords;
+            ret.creditWords.push(dataCreditWords);
         }
         if (ch.nodeName === "credit-image") {
             var dataCreditImage = xmlToCreditImage(ch);
@@ -18920,9 +18921,9 @@ function creditToXML(credit) {
     if (defined(credit.creditImage)) {
         children.push(creditImageToXML(credit.creditImage));
     }
-    if (defined(credit.creditWords)) {
-        children.push(creditWordsToXML(credit.creditWords));
-    }
+    (credit.creditWords || []).forEach(function (words) {
+        children.push(creditWordsToXML(words));
+    });
     if (defined(credit.page)) {
         attributes += (_a = [" page=\"", "\""], _a.raw = [" page=\"", "\""], xml(_a, credit.page));
     }

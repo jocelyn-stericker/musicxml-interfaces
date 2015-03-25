@@ -22816,13 +22816,14 @@ function xmlToLyricLanguage(node: Node) {
  */
 export interface Credit {
     creditTypes: string[];
-    creditWords: CreditWords;
+    creditWords: CreditWords[];
     creditImage: CreditImage;
     page: number;
 }
 
 function xmlToCredit(node: Node) {
     let ret: Credit = <any> {};
+    ret.creditWords = [];
     let foundCreditTypes = false;
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
@@ -22833,7 +22834,7 @@ function xmlToCredit(node: Node) {
         }
         if (ch.nodeName === "credit-words") {
             let dataCreditWords = xmlToCreditWords(ch) ;
-            ret.creditWords = dataCreditWords;
+            ret.creditWords.push(dataCreditWords);
         }
         if (ch.nodeName === "credit-image") {
             let dataCreditImage = xmlToCreditImage(ch) ;
@@ -24708,9 +24709,9 @@ function creditToXML(credit: Credit): string {
     if (defined(credit.creditImage)) {
         children.push(creditImageToXML(credit.creditImage));
     }
-    if (defined(credit.creditWords)) {
-        children.push(creditWordsToXML(credit.creditWords));
-    }
+    (credit.creditWords || []).forEach(words => {
+        children.push(creditWordsToXML(words));
+    });
 
     if (defined(credit.page)) {
         attributes += xml ` page="${credit.page}"`;
