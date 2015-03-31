@@ -1,5 +1,84 @@
 declare module "musicxml-interfaces" {
-    export function parse(documentString: string): ScoreTimewise;
+    /**
+     * Converts a MusicXML document into a MusicXML parttime-inspired JSON object.
+     * See ScoreTimewise for full return type specification.
+     *
+     * This function will accept timepart MusicXML files, but will still return a
+     * structure similar to parttime.
+     */
+    export function parse(score: string): ScoreTimewise;
+    export module parse {
+        /**
+         * Reads a document, and returns header information.
+         *
+         * ScoreHeader is a subset of ScoreTimewise, so you can always just call MusicXML.parse.score.
+         * This function is a bit faster though, if you only care about metadata.
+         */
+        function scoreHeader(score: string): ScoreHeader;
+        /**
+         * Converts a MusicXML <measure /> from a **parttime** document into JSON.
+         */
+        function measure(str: string): Measure;
+        /**
+         * Converts a MusicXML <note /> into JSON.
+         */
+        function note(str: string): Note;
+        /**
+         * Converts a MusicXML <backup /> into JSON.
+         */
+        function backup(str: string): Backup;
+        /**
+         * Converts a MusicXML <harmony /> into JSON.
+         */
+        function harmony(str: string): Harmony;
+        /**
+         * Converts a MusicXML <forward /> into JSON.
+         */
+        function forward(str: string): Forward;
+        /**
+         * Converts a MusicXML <print /> into JSON.
+         */
+        function print(str: string): Print;
+        /**
+         * Converts a MusicXML <figured-bass /> into JSON.
+         */
+        function figuredBass(str: string): FiguredBass;
+        /**
+         * Converts a MusicXML <direction /> into JSON.
+         */
+        function direction(str: string): Direction;
+        /**
+         * Converts a MusicXML <attributes /> object into JSON.
+         */
+        function attributes(str: string): Attributes;
+        /**
+         * Converts a MusicXML <sound /> into JSON.
+         */
+        function sound(str: string): Sound;
+        /**
+         * Converts a MusicXML <barline /> into JSON.
+         */
+        function barline(str: string): Barline;
+        /**
+         * Converts a MusicXML <grouping /> into JSON.
+         */
+        function grouping(str: string): Grouping;
+    }
+    export function serialize(score: ScoreTimewise): string;
+    export module serialize {
+        function scoreHeader(scoreHeader: ScoreHeader): string;
+        let note: (note: Note) => string;
+        let backup: (backup: Backup) => string;
+        let harmony: (harmony: Harmony) => string;
+        let forward: (forward: Forward) => string;
+        let print: (print: Print) => string;
+        let figuredBass: (figuredBass: FiguredBass) => string;
+        let direction: (direction: Direction) => string;
+        let attributes: (attributes: Attributes) => string;
+        let sound: (sound: Sound) => string;
+        let barline: (barline: Barline) => string;
+        let grouping: (grouping: Grouping) => string;
+    }
     export interface TextArray {
         acc?: AccidentalText;
         text?: DisplayText;
@@ -5053,13 +5132,11 @@ declare module "musicxml-interfaces" {
     export interface ScoreTimewise extends DocumentAttributes, ScoreHeader {
         measures: Measure[];
     }
-    export function xmlToScoreTimewise(node: Node): ScoreTimewise;
     /**
      * The basic musical data that is associated with a measure.
      */
     export interface Part {
     }
-    export function xmlToPart(node: Node): any[];
     /**
      * Represents a measure.
      */
@@ -5072,21 +5149,4 @@ declare module "musicxml-interfaces" {
         };
         nonControlling: boolean;
     }
-    export function scoreHeaderToXML(header: ScoreHeader): string[];
-    export function backupToXML(backup: Backup): string;
-    export function forwardToXML(forward: Forward): string;
-    export function groupingToXML(grouping: Grouping): string;
-    export function harmonyToXML(harmony: Harmony): string;
-    export function printToXML(print: Print): string;
-    export function soundToXML(sound: Sound): string;
-    export function staffDebugInfoToXMLComment(module: any): string[];
-    export function directionToXML(direction: Direction): string;
-    export function attributesToXML(attributes: Attributes): string;
-    export function chordToXML(chord: {
-        [key: number]: Note;
-        length: number;
-    }): string;
-    export function noteToXML(note: Note): string;
-    export function figuredBassToXML(figuredBass: FiguredBass): string;
-    export function barlineToXML(barline: Barline): string;
 }

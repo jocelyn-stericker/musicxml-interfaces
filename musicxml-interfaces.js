@@ -29,15 +29,154 @@
  * http://www.musicxml.org/dtds/license.html
  * This file contains multiple DTDs.
  */
-/*---- Initialization and Utility ---------------------------------------------------------------*/
 "use strict";
+/*---- Parsing API ------------------------------------------------------------------------------*/
+/**
+ * Converts a MusicXML document into a MusicXML parttime-inspired JSON object.
+ * See ScoreTimewise for full return type specification.
+ *
+ * This function will accept timepart MusicXML files, but will still return a
+ * structure similar to parttime.
+ */
+function parse(score) {
+    var dom = xmlToParttimeDoc(score);
+    return xmlToScoreTimewise(dom.documentElement);
+}
+exports.parse = parse;
+var parse;
+(function (parse) {
+    /**
+     * Reads a document, and returns header information.
+     *
+     * ScoreHeader is a subset of ScoreTimewise, so you can always just call MusicXML.parse.score.
+     * This function is a bit faster though, if you only care about metadata.
+     */
+    function scoreHeader(score) {
+        return xmlToScoreHeader(xmlToDoc(score));
+    }
+    parse.scoreHeader = scoreHeader;
+    /**
+     * Converts a MusicXML <measure /> from a **parttime** document into JSON.
+     */
+    function measure(str) {
+        return xmlToMeasure(xmlToDoc(str));
+    }
+    parse.measure = measure;
+    /**
+     * Converts a MusicXML <note /> into JSON.
+     */
+    function note(str) {
+        return xmlToNote(xmlToDoc(str));
+    }
+    parse.note = note;
+    /**
+     * Converts a MusicXML <backup /> into JSON.
+     */
+    function backup(str) {
+        return xmlToBackup(xmlToDoc(str));
+    }
+    parse.backup = backup;
+    /**
+     * Converts a MusicXML <harmony /> into JSON.
+     */
+    function harmony(str) {
+        return xmlToHarmony(xmlToDoc(str));
+    }
+    parse.harmony = harmony;
+    /**
+     * Converts a MusicXML <forward /> into JSON.
+     */
+    function forward(str) {
+        return xmlToForward(xmlToDoc(str));
+    }
+    parse.forward = forward;
+    /**
+     * Converts a MusicXML <print /> into JSON.
+     */
+    function print(str) {
+        return xmlToPrint(xmlToDoc(str));
+    }
+    parse.print = print;
+    /**
+     * Converts a MusicXML <figured-bass /> into JSON.
+     */
+    function figuredBass(str) {
+        return xmlToFiguredBass(xmlToDoc(str));
+    }
+    parse.figuredBass = figuredBass;
+    /**
+     * Converts a MusicXML <direction /> into JSON.
+     */
+    function direction(str) {
+        return xmlToDirection(xmlToDoc(str));
+    }
+    parse.direction = direction;
+    /**
+     * Converts a MusicXML <attributes /> object into JSON.
+     */
+    function attributes(str) {
+        return xmlToAttributes(xmlToDoc(str));
+    }
+    parse.attributes = attributes;
+    /**
+     * Converts a MusicXML <sound /> into JSON.
+     */
+    function sound(str) {
+        return xmlToSound(xmlToDoc(str));
+    }
+    parse.sound = sound;
+    /**
+     * Converts a MusicXML <barline /> into JSON.
+     */
+    function barline(str) {
+        return xmlToBarline(xmlToDoc(str));
+    }
+    parse.barline = barline;
+    /**
+     * Converts a MusicXML <grouping /> into JSON.
+     */
+    function grouping(str) {
+        return xmlToGrouping(xmlToDoc(str));
+    }
+    parse.grouping = grouping;
+})(parse = exports.parse || (exports.parse = {}));
+/*---- Serialization API ------------------------------------------------------------------------*/
+function serialize(score) {
+    return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE score-timewise\n  PUBLIC \"-//Recordare//DTD MusicXML 3.0 Timewise//EN\" \"http://www.musicxml.org/dtds/timewise.dtd\">\n<score-timewise version=\"3.0\">\n" + scoreHeaderToXML(score).join("\n").split("\n").map(function (line) {
+        return "  " + line;
+    }).join("\n") + "\n</score-timewise>";
+}
+exports.serialize = serialize;
+var serialize;
+(function (serialize) {
+    function scoreHeader(scoreHeader) {
+        return scoreHeaderToXML(scoreHeader).join("\n");
+    }
+    serialize.scoreHeader = scoreHeader;
+    // export let measure = measureToXML;
+    serialize.note = noteToXML;
+    serialize.backup = backupToXML;
+    serialize.harmony = harmonyToXML;
+    serialize.forward = forwardToXML;
+    serialize.print = printToXML;
+    serialize.figuredBass = figuredBassToXML;
+    serialize.direction = directionToXML;
+    serialize.attributes = attributesToXML;
+    serialize.sound = soundToXML;
+    serialize.barline = barlineToXML;
+    serialize.grouping = groupingToXML;
+})(serialize = exports.serialize || (exports.serialize = {}));
 var process;
 var isIE = typeof window !== "undefined" && "ActiveXObject" in window;
 var isNode = typeof window === "undefined" || typeof process !== "undefined" && !process.browser;
 var xmlToParttimeDoc;
+var xmlToDoc;
 (function init() {
     var parttimeXSLBuffer = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"> <xsl:output method=\"xml\" indent=\"yes\" encoding=\"UTF-8\" omit-xml-declaration=\"no\" standalone=\"no\" doctype-system=\"http://www.musicxml.org/dtds/timewise.dtd\" doctype-public=\"-//Recordare//DTD MusicXML 3.0 Timewise//EN\" /> <xsl:template match=\"/\"> <xsl:apply-templates select=\"./score-partwise\"/> <xsl:apply-templates select=\"./score-timewise\"/> </xsl:template> <xsl:template match=\"score-timewise\"> <xsl:copy-of select=\".\" /> </xsl:template> <xsl:template match=\"text()\"> <xsl:value-of select=\".\" /> </xsl:template> <xsl:template match=\"*|@*|comment()|processing-instruction()\"> <xsl:copy><xsl:apply-templates select=\"*|@*|comment()|processing-instruction()|text()\" /></xsl:copy> </xsl:template> <xsl:template match=\"score-partwise\"> <xsl:element name=\"score-timewise\"> <xsl:apply-templates select=\"@version[.!='1.0']\"/> <xsl:apply-templates select=\"work\"/> <xsl:apply-templates select=\"movement-number\"/> <xsl:apply-templates select=\"movement-title\"/> <xsl:apply-templates select=\"identification\"/> <xsl:apply-templates select=\"defaults\"/> <xsl:apply-templates select=\"credit\"/> <xsl:apply-templates select=\"part-list\"/> <xsl:for-each select=\"part[1]/measure\"> <xsl:letiable name=\"measure-number\"> <xsl:value-of select=\"@number\"/> </xsl:letiable> <xsl:element name=\"measure\"> <xsl:attribute name=\"number\"> <xsl:value-of select=\"$measure-number\"/> </xsl:attribute> <xsl:if test=\"@implicit[. = 'yes']\"> <xsl:attribute name=\"implicit\"> <xsl:value-of select=\"@implicit\"/> </xsl:attribute> </xsl:if> <xsl:if test=\"@non-controlling[. = 'yes']\"> <xsl:attribute name=\"non-controlling\"> <xsl:value-of select=\"@non-controlling\"/> </xsl:attribute> </xsl:if> <xsl:if test=\"@width\"> <xsl:attribute name=\"width\"> <xsl:value-of select=\"@width\"/> </xsl:attribute> </xsl:if> <xsl:for-each select=\"../../part/measure\"> <xsl:if test=\"@number=$measure-number\"> <xsl:element name=\"part\"> <xsl:attribute name=\"id\"> <xsl:value-of select=\"parent::part/@id\"/> </xsl:attribute> <xsl:apply-templates /> </xsl:element> </xsl:if> </xsl:for-each> </xsl:element> </xsl:for-each> </xsl:element> </xsl:template> </xsl:stylesheet>";
     if (isIE) {
+        xmlToDoc = function (str) {
+            return (new DOMParser).parseFromString(str, "text/xml");
+        };
         xmlToParttimeDoc = function (str) {
             var xslt = new ActiveXObject("Msxml2.XSLTemplate");
             var xmlDoc = new ActiveXObject("Msxml2.DOMDocument");
@@ -53,12 +192,15 @@ var xmlToParttimeDoc;
             var xslProc = xslt.createProcessor();
             xslProc.input = xmlDoc;
             xslProc.transform();
-            return (new DOMParser).parseFromString(xslProc.output, "text/xml");
+            return xmlToDoc(xslProc.output);
         };
     }
     else if (isNode) {
         var DOMParser = require("xmldom").DOMParser;
         var spawnSync = require("child_process").spawnSync;
+        xmlToDoc = function (str) {
+            return (new DOMParser).parseFromString(str, "text/xml");
+        };
         xmlToParttimeDoc = function (str) {
             var res = spawnSync("xsltproc", [
                 "--nonet",
@@ -73,13 +215,16 @@ var xmlToParttimeDoc;
             if (res.error) {
                 throw res.error;
             }
-            return (new DOMParser).parseFromString(res.stdout.toString(), "text/xml");
+            return xmlToDoc(res.stdout.toString());
         };
     }
     else {
         var parttimeXSLDoc = (new DOMParser).parseFromString(parttimeXSLBuffer, "text/xml");
         var parttimeXSLProcessor = new XSLTProcessor;
         parttimeXSLProcessor.importStylesheet(parttimeXSLDoc);
+        xmlToDoc = function (str) {
+            return (new DOMParser).parseFromString(str, "text/xml");
+        };
         xmlToParttimeDoc = function (str) {
             var dom = (new DOMParser).parseFromString(str, "text/xml");
             return parttimeXSLProcessor.transformToDocument(dom);
@@ -110,13 +255,6 @@ function toCamelCase(input) {
         return group1.toUpperCase();
     });
 }
-/*---- Parsing ----------------------------------------------------------------------------------*/
-function parse(documentString) {
-    var dom = xmlToParttimeDoc(documentString);
-    var json = xmlToScoreTimewise(dom.documentElement);
-    return json;
-}
-exports.parse = parse;
 function xmlToEncodingDate(node) {
     var text = getString(node, true);
     if (text.length < 10) {
@@ -18303,7 +18441,6 @@ function xmlToScoreTimewise(node) {
     }
     return ret;
 }
-exports.xmlToScoreTimewise = xmlToScoreTimewise;
 function xmlToPart(node) {
     var rarr = [];
     for (var i = 0; i < node.childNodes.length; ++i) {
@@ -18369,7 +18506,6 @@ function xmlToPart(node) {
     }
     return rarr;
 }
-exports.xmlToPart = xmlToPart;
 /*---- Serialization ----------------------------------------------------------------------------*/
 /**
  * Safe, escaped tagged template handler.
@@ -19354,7 +19490,6 @@ function scoreHeaderToXML(header) {
     }
     return children;
 }
-exports.scoreHeaderToXML = scoreHeaderToXML;
 function backupToXML(backup) {
     // <!ELEMENT backup (duration, %editorial;)>
     var children = [];
@@ -19365,7 +19500,6 @@ function backupToXML(backup) {
     }).join("\n")));
     var _a, _b;
 }
-exports.backupToXML = backupToXML;
 function forwardToXML(forward) {
     // <!ELEMENT forward
     //     (duration, %editorial-voice;, staff?)>
@@ -19378,7 +19512,6 @@ function forwardToXML(forward) {
     }).join("\n")));
     var _a, _b, _c;
 }
-exports.forwardToXML = forwardToXML;
 function groupingToXML(grouping) {
     // <!ELEMENT grouping ((feature)*)>
     // <!ATTLIST grouping
@@ -19410,7 +19543,6 @@ function groupingToXML(grouping) {
     }).join("\n")));
     var _a, _b;
 }
-exports.groupingToXML = groupingToXML;
 function harmonyToXML(harmony) {
     // <!ENTITY % harmony-chord "((root | function), kind,
     //     inversion?, bass?, degree*)">
@@ -19463,7 +19595,6 @@ function harmonyToXML(harmony) {
     }).join("\n")));
     var _a, _b, _c;
 }
-exports.harmonyToXML = harmonyToXML;
 var eiaTypeToXML = (_a = {},
     _a[1 /* Explicit */] = "explicit",
     _a[2 /* Implied */] = "implied",
@@ -19820,7 +19951,6 @@ function printToXML(print) {
     }).join("\n")));
     var _c, _d, _e, _f, _g, _h;
 }
-exports.printToXML = printToXML;
 function soundToXML(sound) {
     // <!ELEMENT sound ((midi-device?, midi-instrument?, play?)*,
     //     offset?)>
@@ -19910,7 +20040,6 @@ function soundToXML(sound) {
     }).join("\n")));
     var _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
 }
-exports.soundToXML = soundToXML;
 function staffDebugInfoToXMLComment(module) {
     var comments = [];
     if (defined(module.divCount)) {
@@ -19919,7 +20048,6 @@ function staffDebugInfoToXMLComment(module) {
     return comments;
     var _c;
 }
-exports.staffDebugInfoToXMLComment = staffDebugInfoToXMLComment;
 /*
 
       <direction placement="above">
@@ -19963,7 +20091,6 @@ function directionToXML(direction) {
     }).join("\n")));
     var _c, _d, _e;
 }
-exports.directionToXML = directionToXML;
 function attributesToXML(attributes) {
     // <!ELEMENT attributes (%editorial;, divisions?, key*, time*,
     //     staves?, part-symbol?, instruments?, clef*, staff-details*,
@@ -20012,15 +20139,6 @@ function attributesToXML(attributes) {
     }).join("\n")));
     var _c, _d, _e, _f;
 }
-exports.attributesToXML = attributesToXML;
-function chordToXML(chord) {
-    var _xml = "";
-    for (var i = 0; i < chord.length; ++i) {
-        _xml += noteToXML(chord[i]) + "\n";
-    }
-    return _xml;
-}
-exports.chordToXML = chordToXML;
 var countToXML = {
     4: "quarter",
     9990: "breve",
@@ -21293,7 +21411,6 @@ function noteToXML(note) {
     }).join("\n")));
     var _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24;
 }
-exports.noteToXML = noteToXML;
 function figuredBassToXML(figuredBass) {
     // <!ELEMENT figured-bass (figure+, duration?, %editorial;)>
     // <!ATTLIST figured-bass
@@ -21348,7 +21465,6 @@ function figuredBassToXML(figuredBass) {
     }).join("\n")));
     var _d, _e, _f;
 }
-exports.figuredBassToXML = figuredBassToXML;
 var barlineLocationToXML = {
     1: "right",
     2: "middle",
@@ -21405,7 +21521,6 @@ function barlineToXML(barline) {
     }).join("\n")));
     var _d, _e, _f, _g, _h;
 }
-exports.barlineToXML = barlineToXML;
 function directionTypeToXML(d) {
     // <!ELEMENT direction-type (rehearsal+ | segno+ | words+ |
     var children = [];

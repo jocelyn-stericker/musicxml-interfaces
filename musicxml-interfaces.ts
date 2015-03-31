@@ -30,9 +30,150 @@
  * This file contains multiple DTDs.
  */
 
-/*---- Initialization and Utility ---------------------------------------------------------------*/
-
 "use strict";
+
+/*---- Parsing API ------------------------------------------------------------------------------*/
+
+/**
+ * Converts a MusicXML document into a MusicXML parttime-inspired JSON object.
+ * See ScoreTimewise for full return type specification.
+ * 
+ * This function will accept timepart MusicXML files, but will still return a
+ * structure similar to parttime.
+ */
+export function parse(score: string): ScoreTimewise {
+    let dom: Document = xmlToParttimeDoc(score);
+    return xmlToScoreTimewise(dom.documentElement);
+}
+
+export module parse {
+    /**
+     * Reads a document, and returns header information.
+     * 
+     * ScoreHeader is a subset of ScoreTimewise, so you can always just call MusicXML.parse.score.
+     * This function is a bit faster though, if you only care about metadata.
+     */
+    export function scoreHeader(score: string): ScoreHeader {
+        return xmlToScoreHeader(xmlToDoc(score));
+    }
+
+    /**
+     * Converts a MusicXML <measure /> from a **parttime** document into JSON.
+     */
+    export function measure(str: string) {
+        return xmlToMeasure(xmlToDoc(str));
+    }
+
+    /**
+     * Converts a MusicXML <note /> into JSON.
+     */
+    export function note(str: string) {
+        return xmlToNote(xmlToDoc(str));
+    }
+
+    /**
+     * Converts a MusicXML <backup /> into JSON.
+     */
+    export function backup(str: string) {
+        return xmlToBackup(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <harmony /> into JSON.
+     */
+    export function harmony(str: string) {
+        return xmlToHarmony(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <forward /> into JSON.
+     */
+    export function forward(str: string) {
+        return xmlToForward(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <print /> into JSON.
+     */
+    export function print(str: string) {
+        return xmlToPrint(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <figured-bass /> into JSON.
+     */
+    export function figuredBass(str: string) {
+        return xmlToFiguredBass(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <direction /> into JSON.
+     */
+    export function direction(str: string) {
+        return xmlToDirection(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <attributes /> object into JSON.
+     */
+    export function attributes(str: string) {
+        return xmlToAttributes(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <sound /> into JSON.
+     */
+    export function sound(str: string) {
+        return xmlToSound(xmlToDoc(str));
+    }
+    
+    /**
+     * Converts a MusicXML <barline /> into JSON.
+     */
+    export function barline(str: string) {
+        return xmlToBarline(xmlToDoc(str));
+    }
+
+    /**
+     * Converts a MusicXML <grouping /> into JSON.
+     */
+    export function grouping(str: string) {
+        return xmlToGrouping(xmlToDoc(str));
+    }
+}
+
+
+/*---- Serialization API ------------------------------------------------------------------------*/
+
+export function serialize(score: ScoreTimewise): string {
+    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-timewise
+  PUBLIC "-//Recordare//DTD MusicXML 3.0 Timewise//EN" "http://www.musicxml.org/dtds/timewise.dtd">
+<score-timewise version="3.0">
+${scoreHeaderToXML(score).join("\n").split("\n").map(line => "  " + line).join("\n")}
+</score-timewise>`;
+}
+
+export module serialize {
+    export function scoreHeader(scoreHeader: ScoreHeader) {
+        return scoreHeaderToXML(scoreHeader).join("\n");
+    }
+    // export let measure = measureToXML;
+    export let note = <(note: Note) => string> noteToXML;
+    export let backup = <(backup: Backup) => string> backupToXML;
+    export let harmony = <(harmony: Harmony) => string> harmonyToXML;
+    export let forward = <(forward: Forward) => string> forwardToXML;
+    export let print = <(print: Print) => string> printToXML;
+    export let figuredBass = <(figuredBass: FiguredBass) => string> figuredBassToXML;
+    export let direction = <(direction: Direction) => string> directionToXML;
+    export let attributes = <(attributes: Attributes) => string> attributesToXML;
+    export let sound = <(sound: Sound) => string> soundToXML;
+    export let barline = <(barline: Barline) => string> barlineToXML;
+    export let grouping = <(grouping: Grouping) => string> groupingToXML;
+}
+
+
+/*---- Initialization and Utility ---------------------------------------------------------------*/
 
 declare let require: {
     (id: string): any;
@@ -61,12 +202,16 @@ let process: any;
 let isIE = typeof window !== "undefined" && "ActiveXObject" in window;
 let isNode = typeof window === "undefined" || typeof (<any>process) !== "undefined" && !(<any>process).browser;
 
-let xmlToParttimeDoc: (str: string) => Document;
+var xmlToParttimeDoc: (str: string) => Document;
+var xmlToDoc: (str: string) => Document;
 
 (function init() {
     let parttimeXSLBuffer = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\"> <xsl:output method=\"xml\" indent=\"yes\" encoding=\"UTF-8\" omit-xml-declaration=\"no\" standalone=\"no\" doctype-system=\"http://www.musicxml.org/dtds/timewise.dtd\" doctype-public=\"-//Recordare//DTD MusicXML 3.0 Timewise//EN\" /> <xsl:template match=\"/\"> <xsl:apply-templates select=\"./score-partwise\"/> <xsl:apply-templates select=\"./score-timewise\"/> </xsl:template> <xsl:template match=\"score-timewise\"> <xsl:copy-of select=\".\" /> </xsl:template> <xsl:template match=\"text()\"> <xsl:value-of select=\".\" /> </xsl:template> <xsl:template match=\"*|@*|comment()|processing-instruction()\"> <xsl:copy><xsl:apply-templates select=\"*|@*|comment()|processing-instruction()|text()\" /></xsl:copy> </xsl:template> <xsl:template match=\"score-partwise\"> <xsl:element name=\"score-timewise\"> <xsl:apply-templates select=\"@version[.!='1.0']\"/> <xsl:apply-templates select=\"work\"/> <xsl:apply-templates select=\"movement-number\"/> <xsl:apply-templates select=\"movement-title\"/> <xsl:apply-templates select=\"identification\"/> <xsl:apply-templates select=\"defaults\"/> <xsl:apply-templates select=\"credit\"/> <xsl:apply-templates select=\"part-list\"/> <xsl:for-each select=\"part[1]/measure\"> <xsl:letiable name=\"measure-number\"> <xsl:value-of select=\"@number\"/> </xsl:letiable> <xsl:element name=\"measure\"> <xsl:attribute name=\"number\"> <xsl:value-of select=\"$measure-number\"/> </xsl:attribute> <xsl:if test=\"@implicit[. = 'yes']\"> <xsl:attribute name=\"implicit\"> <xsl:value-of select=\"@implicit\"/> </xsl:attribute> </xsl:if> <xsl:if test=\"@non-controlling[. = 'yes']\"> <xsl:attribute name=\"non-controlling\"> <xsl:value-of select=\"@non-controlling\"/> </xsl:attribute> </xsl:if> <xsl:if test=\"@width\"> <xsl:attribute name=\"width\"> <xsl:value-of select=\"@width\"/> </xsl:attribute> </xsl:if> <xsl:for-each select=\"../../part/measure\"> <xsl:if test=\"@number=$measure-number\"> <xsl:element name=\"part\"> <xsl:attribute name=\"id\"> <xsl:value-of select=\"parent::part/@id\"/> </xsl:attribute> <xsl:apply-templates /> </xsl:element> </xsl:if> </xsl:for-each> </xsl:element> </xsl:for-each> </xsl:element> </xsl:template> </xsl:stylesheet>";
 
     if (isIE) {
+        xmlToDoc = function(str: string) {
+            return (new DOMParser).parseFromString(str, "text/xml");
+        }
         xmlToParttimeDoc = function(str: string) {
             let xslt = new ActiveXObject("Msxml2.XSLTemplate");
             let xmlDoc = new ActiveXObject("Msxml2.DOMDocument");
@@ -84,11 +229,14 @@ let xmlToParttimeDoc: (str: string) => Document;
             let xslProc = xslt.createProcessor();
             xslProc.input = xmlDoc;
             xslProc.transform();
-            return (new DOMParser).parseFromString(xslProc.output, "text/xml");
+            return xmlToDoc(xslProc.output);
         }
     } else if (isNode) {
         var DOMParser: typeof DOMParser = require("xmldom").DOMParser;
         let spawnSync = (<any>require("child_process")).spawnSync;
+        xmlToDoc = function(str: string) {
+            return (new DOMParser).parseFromString(str, "text/xml");
+        }
         xmlToParttimeDoc = function(str: string) {
             let res = spawnSync("xsltproc",
                 ["--nonet", "./vendor/musicxml-dtd/parttime.xsl", "-"],
@@ -101,13 +249,17 @@ let xmlToParttimeDoc: (str: string) => Document;
             if (res.error) {
                 throw res.error;
             }
-            return (new DOMParser).parseFromString(res.stdout.toString(), "text/xml");
+            return xmlToDoc(res.stdout.toString());
         }
     } else {
         let parttimeXSLDoc = (new DOMParser).parseFromString(parttimeXSLBuffer, "text/xml");
 
         let parttimeXSLProcessor: XSLTProcessor = new XSLTProcessor;
         parttimeXSLProcessor.importStylesheet(parttimeXSLDoc);
+
+        xmlToDoc = function(str: string) {
+            return (new DOMParser).parseFromString(str, "text/xml");
+        }
 
         xmlToParttimeDoc = function(str: string) {
             let dom: Document = (new DOMParser).parseFromString(str, "text/xml");
@@ -144,13 +296,7 @@ function toCamelCase(input: string) {
     });
 }
 
-/*---- Parsing ----------------------------------------------------------------------------------*/
-
-export function parse(documentString: string) {
-    let dom: Document = xmlToParttimeDoc(documentString);
-    let json: ScoreTimewise = xmlToScoreTimewise(dom.documentElement);
-    return json;
-}
+/*---- Types ------------------------------------------------------------------------------------*/
 
 export interface TextArray {
     acc?: AccidentalText;
@@ -24035,7 +24181,7 @@ export interface ScoreTimewise extends DocumentAttributes, ScoreHeader {
     measures: Measure[];
 }
 
-export function xmlToScoreTimewise(node: Node) {
+function xmlToScoreTimewise(node: Node) {
     let ret: ScoreTimewise = <any> {};
     let foundVersion_ = false;
     for (let i = 0; i < node.childNodes.length; ++i) {
@@ -24093,7 +24239,7 @@ export function xmlToScoreTimewise(node: Node) {
 export interface Part {
 }
 
-export function xmlToPart(node: Node) {
+function xmlToPart(node: Node) {
     let rarr: any[] = [];
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
@@ -25168,7 +25314,7 @@ function groupBarlineToXML(groupBarline: GroupBarline): string {
         colorToXML(groupBarline)}>${pcdata}</group-barline>`;
 }
 
-export function scoreHeaderToXML(header: ScoreHeader): string[] {
+function scoreHeaderToXML(header: ScoreHeader): string[] {
     // <!ENTITY % score-header
     // "(work?, movement-number?, movement-title?,
     // identification?, defaults?, credit*, part-list)">
@@ -25198,7 +25344,7 @@ export function scoreHeaderToXML(header: ScoreHeader): string[] {
     return children;
 }
 
-export function backupToXML(backup: Backup): string {
+function backupToXML(backup: Backup): string {
     // <!ELEMENT backup (duration, %editorial;)>
     let children: string[] = [];
     children.push(xml `<duration>${backup.duration}</duration>`);
@@ -25207,7 +25353,7 @@ export function backupToXML(backup: Backup): string {
         .map(n => "  " + n).join("\n")}\n</backup>`;
 }
 
-export function forwardToXML(forward: Forward): string {
+function forwardToXML(forward: Forward): string {
     // <!ELEMENT forward
     //     (duration, %editorial-voice;, staff?)>
     let children: string[] = [];
@@ -25218,7 +25364,7 @@ export function forwardToXML(forward: Forward): string {
         .map(n => "  " + n).join("\n")}\n</forward>`;
 }
 
-export function groupingToXML(grouping: Grouping): string {
+function groupingToXML(grouping: Grouping): string {
     // <!ELEMENT grouping ((feature)*)>
     // <!ATTLIST grouping
     //     type %start-stop-single; #REQUIRED
@@ -25250,7 +25396,7 @@ export function groupingToXML(grouping: Grouping): string {
         .map(n => "  " + n).join("\n")}\n</grouping>`;
 }
 
-export function harmonyToXML(harmony: Harmony): string {
+function harmonyToXML(harmony: Harmony): string {
     // <!ENTITY % harmony-chord "((root | function), kind,
     //     inversion?, bass?, degree*)">
     // 
@@ -25635,7 +25781,7 @@ function frameToXML(frame: Frame): string {
         .map(n => "  " + n).join("\n")}\n</frame>`;
 }
 
-export function printToXML(print: Print): string {
+function printToXML(print: Print): string {
     // <!ELEMENT print (page-layout?, system-layout?, staff-layout*,
     //     measure-layout?, measure-numbering?, part-name-display?,
     //     part-abbreviation-display?)>
@@ -25693,7 +25839,7 @@ export function printToXML(print: Print): string {
         .map(n => "  " + n).join("\n")}\n</print>`;
 }
 
-export function soundToXML(sound: Sound): string {
+function soundToXML(sound: Sound): string {
     // <!ELEMENT sound ((midi-device?, midi-instrument?, play?)*,
     //     offset?)>
     // <!ATTLIST sound
@@ -25784,7 +25930,7 @@ export function soundToXML(sound: Sound): string {
         .map(n => "  " + n).join("\n")}\n</sound>`;
 }
 
-export function staffDebugInfoToXMLComment(module: any): string[] {
+function staffDebugInfoToXMLComment(module: any): string[] {
     let comments: string[] = [];
     if (defined(module.divCount)) {
         comments.push(xml `<!--musicxml-interfaces:debug>\n${""
@@ -25807,7 +25953,7 @@ export function staffDebugInfoToXMLComment(module: any): string[] {
       </direction>
 */
 
-export function directionToXML(direction: Direction): string {
+function directionToXML(direction: Direction): string {
     // <!ELEMENT direction (direction-type+, offset?,
     //     %editorial-voice;, staff?, sound?)>
     // <!ATTLIST direction
@@ -25840,7 +25986,7 @@ export function directionToXML(direction: Direction): string {
         .map(n => "  " + n).join("\n")}\n</direction>`;
 }
 
-export function attributesToXML(attributes: Attributes): string {
+function attributesToXML(attributes: Attributes): string {
     // <!ELEMENT attributes (%editorial;, divisions?, key*, time*,
     //     staves?, part-symbol?, instruments?, clef*, staff-details*,
     //     transpose*, directive*, measure-style*)>
@@ -25886,14 +26032,6 @@ export function attributesToXML(attributes: Attributes): string {
     }
     return dangerous `<attributes>\n${children.join("\n").split("\n")
         .map(n => "  " + n).join("\n")}\n</attributes>`;
-}
-
-export function chordToXML(chord: {[key: number]: Note; length: number}) {
-    let xml = "";
-    for (let i = 0; i < chord.length; ++i) {
-        xml += noteToXML(chord[i]) + "\n";
-    }
-    return xml;
 }
 
 let countToXML: {[key: number]: string} = {
@@ -26035,7 +26173,7 @@ let stemToXML: {[key: number]: string} = {
     1: "up"
 };
 
-export function noteToXML(note: Note) {
+function noteToXML(note: Note) {
     // <!ATTLIST note
     //     %print-style;
     //     %printout;
@@ -27462,7 +27600,7 @@ export function noteToXML(note: Note) {
         .map(n => "  " + n).join("\n")}\n</note>`;
 }
 
-export function figuredBassToXML(figuredBass: FiguredBass): string {
+function figuredBassToXML(figuredBass: FiguredBass): string {
     // <!ELEMENT figured-bass (figure+, duration?, %editorial;)>
     // <!ATTLIST figured-bass
     //     %print-style;
@@ -27524,7 +27662,7 @@ let barlineLocationToXML: {[key: number]: string} = {
     0: "left"
 };
 
-export function barlineToXML(barline: Barline): string {
+function barlineToXML(barline: Barline): string {
     // <!ELEMENT barline (bar-style?, %editorial;, wavy-line?,
     //     segno?, coda?, (fermata, fermata?)?, ending?, repeat?)>
     // <!ATTLIST barline

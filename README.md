@@ -4,7 +4,7 @@ MusicXML is the standard open format for exchanging digital sheet music. This li
 
  - methods for parsing, manipulating, and serializing MusicXML files
  - full **TypeScript** type definitions
- - support for IE 8+ and other browsers, Node.js, and io.js
+ - support for IE 9+ and other browsers, Node.js, and io.js
 
 ## Getting MusicXML Interfaces
 
@@ -15,18 +15,52 @@ MusicXML is the standard open format for exchanging digital sheet music. This li
    - Or download `musicxml-interfaces.d.ts` and add a reference to it.
 
 ## Parsing
-To convert a song to a JavaScript object that implements MusicXML.ScoreTimewise:
+The parsing API is available at `MusicXML.parse`:
 
 ```
 var MusicXML = require("musicxml-interfaces");
-var score = MusicXML.parse(documentString); // => MusicXML.ScoreTimewise;
+var score = MusicXML.parse("..."); // => Pares a score, returns a MusicXML.ScoreTimewise;
+```
+
+You can also parse certain subsets of a document:
+```
+MusicXML.parse.scoreHeader("..."); // => MusicXML.ScoreHeader
+MusicXML.parse.measure("..."); // => MusicXML.Measure
+MusicXML.parse.note("..."); // => MusicXML.Note
+MusicXML.parse.backup("..."); // => MusicXML.Backup
+MusicXML.parse.harmony("..."); // => MusicXML.Harmony
+MusicXML.parse.forward("..."); // => MusicXML.Forward
+MusicXML.parse.print("..."); // => MusicXML.Print
+MusicXML.parse.figuredBass("..."); // => MusicXML.FiguredBass
+MusicXML.parse.direction("..."); // => MusicXML.Direction
+MusicXML.parse.attributes("..."); // => MusicXML.Attributes
+MusicXML.parse.sound("..."); // => MusicXML.Sound
+MusicXML.parse.barline("..."); // => MusicXML.Barline
+MusicXML.parse.grouping("..."); // => MusicXML.Grouping
 ```
 
 ## Manipulating
-Documentation coming soon.
+All `MusicXML.parse` functions return simple JSON objects. You can see the documentation
+for their full specification.
 
 ## Serializing
-Not yet stable enough for use.
+The serialization API looks a lot like the parsing API.
+```
+MusicXML.serialize(...);
+MusicXML.serialize.scoreHeader(...); // => string
+MusicXML.serialize.measure(...); // => string
+MusicXML.serialize.note(...); // => string
+MusicXML.serialize.backup(...); // => string
+MusicXML.serialize.harmony(...); // => string
+MusicXML.serialize.forward(...); // => string
+MusicXML.serialize.print(...); // => string
+MusicXML.serialize.figuredBass(...); // => string
+MusicXML.serialize.direction(...); // => string
+MusicXML.serialize.attributes(...); // => string
+MusicXML.serialize.sound(...); // => string
+MusicXML.serialize.barline(...); // => string
+MusicXML.serialize.grouping(...); // => string
+```
 
 ## Copyright
 ```
