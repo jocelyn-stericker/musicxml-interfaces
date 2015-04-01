@@ -67,6 +67,7 @@ declare module "musicxml-interfaces" {
     export function serialize(score: ScoreTimewise): string;
     export module serialize {
         function scoreHeader(scoreHeader: ScoreHeader): string;
+        let measure: (measure: Measure) => string;
         let note: (note: Note) => string;
         let backup: (backup: Backup) => string;
         let harmony: (harmony: Harmony) => string;
@@ -5131,11 +5132,6 @@ declare module "musicxml-interfaces" {
      */
     export interface ScoreTimewise extends DocumentAttributes, ScoreHeader {
         measures: Measure[];
-    }
-    /**
-     * The basic musical data that is associated with a measure.
-     */
-    export interface Part {
     }
     /**
      * Represents a measure.

@@ -1,29 +1,39 @@
 # MusicXML Interfaces for JavaScript
 
-MusicXML is the standard open format for exchanging digital sheet music. This library is a **work in progress** that provides:
+MusicXML is the standard open format for exchanging digital sheet music. This library provides:
 
- - methods for parsing, manipulating, and serializing MusicXML files
+ - methods for parsing and serializing MusicXML scores
  - full **TypeScript** type definitions
  - support for IE 9+ and other browsers, Node.js, and io.js
 
+This project is not affiliated with MakeMusic, Inc. MusicXML™ is a registered trademark owned by MakeMusic, Inc.
+
 ## Getting MusicXML Interfaces
 
- - To install, use npm: `npm install --save musicxml-interfaces`
+ - To install, use npm: `npm install --save ripieno/musicxml-interfaces`
  - You need `xsltproc`. If you're on OS X or Linux, you probably already have it installed.
  - If you want to take advantage of TypeScript definitions, either
    - Install tsd 0.6 (that's a prerelease as of March 2015) and run `npm install` and`tsd link`,
    - Or download `musicxml-interfaces.d.ts` and add a reference to it.
 
-## Parsing
-The parsing API is available at `MusicXML.parse`:
+## Parsing ([MusicXML.parse](https://ripieno.github.io/musicxml-interfaces/))
 
-```
+### Obtaining a [ScoreTimewise](https://ripieno.github.io/musicxml-interfaces/interfaces/scoretimewise.html) from XML
+
+The easiest way to use MusicXML Interfaces for JavaScript is to call `MusicXML.parse`:
+
+``` javascript
 var MusicXML = require("musicxml-interfaces");
-var score = MusicXML.parse("..."); // => Pares a score, returns a MusicXML.ScoreTimewise;
+var score = MusicXML.parse("...");
 ```
 
-You can also parse certain subsets of a document:
-```
+This will return a plain JSON object with the **[MusicXML.ScoreTimewise](https://ripieno.github.io/musicxml-interfaces/interfaces/scoretimewise.html)** interface.
+
+### Advanced parsing
+
+You can also parse certain subsets of a document. For full type specifications, see [the documentation](http://ripieno.github.io/musicxml-interfaces/).
+
+``` javascript
 MusicXML.parse.scoreHeader("..."); // => MusicXML.ScoreHeader
 MusicXML.parse.measure("..."); // => MusicXML.Measure
 MusicXML.parse.note("..."); // => MusicXML.Note
@@ -40,11 +50,11 @@ MusicXML.parse.grouping("..."); // => MusicXML.Grouping
 ```
 
 ## Manipulating
-All `MusicXML.parse` functions return simple JSON objects. You can see the documentation
-for their full specification.
+The objects returned from MusicXML.parse are all plain objects (i.e., they do not have any additional prototypes). You can manipulate them any you manipulate other plain JavaScript objects.
 
-## Serializing
+## Serializing [MusicXML.serialize](https://ripieno.github.io/musicxml-interfaces/)
 The serialization API looks a lot like the parsing API.
+
 ```
 MusicXML.serialize(...);
 MusicXML.serialize.scoreHeader(...); // => string
@@ -61,6 +71,15 @@ MusicXML.serialize.sound(...); // => string
 MusicXML.serialize.barline(...); // => string
 MusicXML.serialize.grouping(...); // => string
 ```
+
+## Contributing
+Please report issues! In particular,
+
+ - If there is a discrepency between a DTD in `vendor/musicxml-dtd` and the TypeScript interfaces in `musicxml-interfaces.d.ts`, just state the discrepency.
+ - If the TypeScript interface definitions are correct, but there is an error in importing a file, provide a minimal MusicXML file that illustrates the issue.
+ - If there is an error in exporting MusicXML interfaces back to MusicXML, provide a minimal valid JSON structure that is not exported correctly.
+
+Pull requests are currently not accepted.
 
 ## Copyright
 ```
@@ -95,12 +114,3 @@ available from:
 
 http://www.musicxml.org/dtds/license.html
 ```
-
-## Contributing
-Please report issues!
-
- - If there is a discrepency between a DTD in `vendor/musicxml-dtd` and the TypeScript interfaces in `musicxml-interfaces.d.ts`, just state the discrepency.
- - If the TypeScript interface definitions are correct, but there is an error in importing a file, provide a minimal MusicXML file that illustrates the issue.
- - If there is an error in exporting MusicXML interfaces back to MusicXML, provide a minimal valid JSON structure that is not exported correctly.
-
-Pull requests are currently not accepted.

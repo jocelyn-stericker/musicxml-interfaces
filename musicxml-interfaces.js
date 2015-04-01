@@ -144,6 +144,10 @@ var parse;
 function serialize(score) {
     return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE score-timewise\n  PUBLIC \"-//Recordare//DTD MusicXML 3.0 Timewise//EN\" \"http://www.musicxml.org/dtds/timewise.dtd\">\n<score-timewise version=\"3.0\">\n" + scoreHeaderToXML(score).join("\n").split("\n").map(function (line) {
         return "  " + line;
+    }).join("\n") + "\n" + score.measures.map(function (measure) {
+        return measureToXML(measure);
+    }).join("\n").split("\n").map(function (line) {
+        return "  " + line;
     }).join("\n") + "\n</score-timewise>";
 }
 exports.serialize = serialize;
@@ -153,7 +157,7 @@ var serialize;
         return scoreHeaderToXML(scoreHeader).join("\n");
     }
     serialize.scoreHeader = scoreHeader;
-    // export let measure = measureToXML;
+    serialize.measure = measureToXML;
     serialize.note = noteToXML;
     serialize.backup = backupToXML;
     serialize.harmony = harmonyToXML;
@@ -20267,6 +20271,83 @@ var stemToXML = {
     0: "down",
     1: "up"
 };
+function measureToXML(measure) {
+    // <!ATTLIST measure
+    //     number CDATA #REQUIRED
+    //     implicit %yes-no; #IMPLIED
+    //     non-controlling %yes-no; #IMPLIED
+    //     width %tenths; #IMPLIED
+    // >
+    // <!ELEMENT measure (part+)>
+    var attribs = "";
+    if (defined(measure.number)) {
+        attribs += (_d = [" number=\"", "\""], _d.raw = [" number=\"", "\""], xml(_d, measure.number));
+    }
+    if (defined(measure.implicit)) {
+        attribs += (_e = [" implicit=\"", "\""], _e.raw = [" implicit=\"", "\""], yesNo(_e, measure.implicit));
+    }
+    if (defined(measure.nonControlling)) {
+        attribs += (_f = [" implicit=\"", "\""], _f.raw = [" implicit=\"", "\""], yesNo(_f, measure.nonControlling));
+    }
+    if (defined(measure.width)) {
+        attribs += (_g = [" width=\"", "\""], _g.raw = [" width=\"", "\""], xml(_g, measure.width));
+    }
+    var elements = [];
+    for (var key in measure.parts) {
+        elements.push(partToXML(measure.parts[key], key));
+    }
+    return (_h = ["<measure", ">\n", "\n</measure>"], _h.raw = ["<measure", ">\\n", "\\n</measure>"], dangerous(_h, attribs, elements.join("\n").split("\n").map(function (n) {
+        return "  " + n;
+    }).join("\n")));
+    var _d, _e, _f, _g, _h;
+}
+function partToXML(part, id) {
+    // <!ELEMENT part (%music-data;)>
+    // <!ATTLIST part
+    //     id IDREF #REQUIRED
+    // >
+    var attribs = (_d = [" id=\"", "\""], _d.raw = [" id=\"", "\""], xml(_d, id));
+    // <!ENTITY % music-data
+    //     "(note | backup | forward | direction | attributes |
+    //       harmony | figured-bass | print | sound | barline |
+    //       grouping | link | bookmark)*">
+    var elements = part.map(function (element) {
+        switch (element._class) {
+            case "Note":
+                return noteToXML(element);
+            case "Backup":
+                return backupToXML(element);
+            case "Forward":
+                return forwardToXML(element);
+            case "Direction":
+                return directionToXML(element);
+            case "Attributes":
+                return attributesToXML(element);
+            case "Harmony":
+                return harmonyToXML(element);
+            case "FiguredBass":
+                return figuredBassToXML(element);
+            case "Print":
+                return printToXML(element);
+            case "Sound":
+                return soundToXML(element);
+            case "Barline":
+                return barlineToXML(element);
+            case "Grouping":
+                return groupingToXML(element);
+            case "Link":
+                return "<!-- link not implemented -->";
+            case "Bookmark":
+                return "<!-- bookmark not implemented -->";
+            default:
+                return "<!-- unknown type (was _class set?) -->";
+        }
+    });
+    return (_e = ["<part", ">\n", "\n</part>"], _e.raw = ["<part", ">\\n", "\\n</part>"], dangerous(_e, attribs, elements.join("\n").split("\n").map(function (n) {
+        return "  " + n;
+    }).join("\n")));
+    var _d, _e;
+}
 function noteToXML(note) {
     // <!ATTLIST note
     //     %print-style;

@@ -151,6 +151,8 @@ export function serialize(score: ScoreTimewise): string {
   PUBLIC "-//Recordare//DTD MusicXML 3.0 Timewise//EN" "http://www.musicxml.org/dtds/timewise.dtd">
 <score-timewise version="3.0">
 ${scoreHeaderToXML(score).join("\n").split("\n").map(line => "  " + line).join("\n")}
+${score.measures.map(measure => measureToXML(measure)).join("\n")
+    .split("\n").map(line => "  " + line).join("\n")}
 </score-timewise>`;
 }
 
@@ -158,7 +160,7 @@ export module serialize {
     export function scoreHeader(scoreHeader: ScoreHeader) {
         return scoreHeaderToXML(scoreHeader).join("\n");
     }
-    // export let measure = measureToXML;
+    export let measure = <(measure: Measure) => string> measureToXML;
     export let note = <(note: Note) => string> noteToXML;
     export let backup = <(backup: Backup) => string> backupToXML;
     export let harmony = <(harmony: Harmony) => string> harmonyToXML;
@@ -24233,12 +24235,6 @@ function xmlToScoreTimewise(node: Node) {
     return ret;
 }
 
-/**
- * The basic musical data that is associated with a measure.
- */
-export interface Part {
-}
-
 function xmlToPart(node: Node) {
     let rarr: any[] = [];
     for (let i = 0; i < node.childNodes.length; ++i) {
@@ -26172,6 +26168,83 @@ let stemToXML: {[key: number]: string} = {
     0: "down",
     1: "up"
 };
+
+function measureToXML(measure: Measure) {
+    // <!ATTLIST measure
+    //     number CDATA #REQUIRED
+    //     implicit %yes-no; #IMPLIED
+    //     non-controlling %yes-no; #IMPLIED
+    //     width %tenths; #IMPLIED
+    // >
+    // <!ELEMENT measure (part+)>
+    let attribs = "";
+    if (defined(measure.number)) {
+        attribs += xml ` number="${measure.number}"`;
+    }
+    if (defined(measure.implicit)) {
+        attribs += yesNo ` implicit="${measure.implicit}"`;
+    }
+    if (defined(measure.nonControlling)) {
+        attribs += yesNo ` implicit="${measure.nonControlling}"`;
+    }
+    if (defined(measure.width)) {
+        attribs += xml ` width="${measure.width}"`;
+    }
+
+    let elements: string[] = [];
+    for (let key in measure.parts) {
+        elements.push(partToXML(measure.parts[key], key));
+    }
+
+    return dangerous `<measure${attribs}>\n${elements.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</measure>`;
+}
+
+function partToXML(part: any[], id: string) {
+    // <!ELEMENT part (%music-data;)>
+    // <!ATTLIST part
+    //     id IDREF #REQUIRED
+    // >
+    let attribs = xml ` id="${id}"`;
+    // <!ENTITY % music-data
+    //     "(note | backup | forward | direction | attributes |
+    //       harmony | figured-bass | print | sound | barline |
+    //       grouping | link | bookmark)*">
+    let elements = part.map(element => {
+        switch(element._class) {
+            case "Note":
+                return noteToXML(element);
+            case "Backup":
+                return backupToXML(element);
+            case "Forward":
+                return forwardToXML(element);
+            case "Direction":
+                return directionToXML(element);
+            case "Attributes":
+                return attributesToXML(element);
+            case "Harmony":
+                return harmonyToXML(element);
+            case "FiguredBass":
+                return figuredBassToXML(element);
+            case "Print":
+                return printToXML(element);
+            case "Sound":
+                return soundToXML(element);
+            case "Barline":
+                return barlineToXML(element);
+            case "Grouping":
+                return groupingToXML(element);
+            case "Link":
+                return "<!-- link not implemented -->";
+            case "Bookmark":
+                return "<!-- bookmark not implemented -->";
+            default:
+                return "<!-- unknown type (was _class set?) -->";
+        }
+    });
+    return dangerous `<part${attribs}>\n${elements.join("\n").split("\n")
+        .map(n => "  " + n).join("\n")}\n</part>`;
+}
 
 function noteToXML(note: Note) {
     // <!ATTLIST note
