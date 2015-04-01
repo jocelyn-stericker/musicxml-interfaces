@@ -52,91 +52,91 @@ var parse;
      * This function is a bit faster though, if you only care about metadata.
      */
     function scoreHeader(score) {
-        return xmlToScoreHeader(xmlToDoc(score));
+        return xmlToScoreHeader(xmlToDoc(score).documentElement);
     }
     parse.scoreHeader = scoreHeader;
     /**
      * Converts a MusicXML <measure /> from a **parttime** document into JSON.
      */
     function measure(str) {
-        return xmlToMeasure(xmlToDoc(str));
+        return xmlToMeasure(xmlToDoc(str).documentElement);
     }
     parse.measure = measure;
     /**
      * Converts a MusicXML <note /> into JSON.
      */
     function note(str) {
-        return xmlToNote(xmlToDoc(str));
+        return xmlToNote(xmlToDoc(str).documentElement);
     }
     parse.note = note;
     /**
      * Converts a MusicXML <backup /> into JSON.
      */
     function backup(str) {
-        return xmlToBackup(xmlToDoc(str));
+        return xmlToBackup(xmlToDoc(str).documentElement);
     }
     parse.backup = backup;
     /**
      * Converts a MusicXML <harmony /> into JSON.
      */
     function harmony(str) {
-        return xmlToHarmony(xmlToDoc(str));
+        return xmlToHarmony(xmlToDoc(str).documentElement);
     }
     parse.harmony = harmony;
     /**
      * Converts a MusicXML <forward /> into JSON.
      */
     function forward(str) {
-        return xmlToForward(xmlToDoc(str));
+        return xmlToForward(xmlToDoc(str).documentElement);
     }
     parse.forward = forward;
     /**
      * Converts a MusicXML <print /> into JSON.
      */
     function print(str) {
-        return xmlToPrint(xmlToDoc(str));
+        return xmlToPrint(xmlToDoc(str).documentElement);
     }
     parse.print = print;
     /**
      * Converts a MusicXML <figured-bass /> into JSON.
      */
     function figuredBass(str) {
-        return xmlToFiguredBass(xmlToDoc(str));
+        return xmlToFiguredBass(xmlToDoc(str).documentElement);
     }
     parse.figuredBass = figuredBass;
     /**
      * Converts a MusicXML <direction /> into JSON.
      */
     function direction(str) {
-        return xmlToDirection(xmlToDoc(str));
+        return xmlToDirection(xmlToDoc(str).documentElement);
     }
     parse.direction = direction;
     /**
      * Converts a MusicXML <attributes /> object into JSON.
      */
     function attributes(str) {
-        return xmlToAttributes(xmlToDoc(str));
+        return xmlToAttributes(xmlToDoc(str).documentElement);
     }
     parse.attributes = attributes;
     /**
      * Converts a MusicXML <sound /> into JSON.
      */
     function sound(str) {
-        return xmlToSound(xmlToDoc(str));
+        return xmlToSound(xmlToDoc(str).documentElement);
     }
     parse.sound = sound;
     /**
      * Converts a MusicXML <barline /> into JSON.
      */
     function barline(str) {
-        return xmlToBarline(xmlToDoc(str));
+        return xmlToBarline(xmlToDoc(str).documentElement);
     }
     parse.barline = barline;
     /**
      * Converts a MusicXML <grouping /> into JSON.
      */
     function grouping(str) {
-        return xmlToGrouping(xmlToDoc(str));
+        return xmlToGrouping(xmlToDoc(str).documentElement);
     }
     parse.grouping = grouping;
 })(parse = exports.parse || (exports.parse = {}));
