@@ -72,6 +72,13 @@ export module parse {
     }
 
     /**
+     * Converts a MusicXML <clef /> into JSON.
+     */
+    export function clef(str: string) {
+        return xmlToClef(xmlToDoc(str).documentElement);
+    }
+
+    /**
      * Converts a MusicXML <backup /> into JSON.
      */
     export function backup(str: string) {
@@ -162,6 +169,7 @@ export module serialize {
     }
     export let measure = <(measure: Measure) => string> measureToXML;
     export let note = <(note: Note) => string> noteToXML;
+    export let clef = <(clef: Clef) => string> clefToXML;
     export let backup = <(backup: Backup) => string> backupToXML;
     export let harmony = <(harmony: Harmony) => string> harmonyToXML;
     export let forward = <(forward: Forward) => string> forwardToXML;

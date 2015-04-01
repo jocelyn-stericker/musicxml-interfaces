@@ -24,6 +24,10 @@ declare module "musicxml-interfaces" {
          */
         function note(str: string): Note;
         /**
+         * Converts a MusicXML <clef /> into JSON.
+         */
+        function clef(str: string): Clef;
+        /**
          * Converts a MusicXML <backup /> into JSON.
          */
         function backup(str: string): Backup;
@@ -69,6 +73,7 @@ declare module "musicxml-interfaces" {
         function scoreHeader(scoreHeader: ScoreHeader): string;
         let measure: (measure: Measure) => string;
         let note: (note: Note) => string;
+        let clef: (clef: Clef) => string;
         let backup: (backup: Backup) => string;
         let harmony: (harmony: Harmony) => string;
         let forward: (forward: Forward) => string;

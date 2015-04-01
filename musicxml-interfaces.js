@@ -70,6 +70,13 @@ var parse;
     }
     parse.note = note;
     /**
+     * Converts a MusicXML <clef /> into JSON.
+     */
+    function clef(str) {
+        return xmlToClef(xmlToDoc(str).documentElement);
+    }
+    parse.clef = clef;
+    /**
      * Converts a MusicXML <backup /> into JSON.
      */
     function backup(str) {
@@ -159,6 +166,7 @@ var serialize;
     serialize.scoreHeader = scoreHeader;
     serialize.measure = measureToXML;
     serialize.note = noteToXML;
+    serialize.clef = clefToXML;
     serialize.backup = backupToXML;
     serialize.harmony = harmonyToXML;
     serialize.forward = forwardToXML;
