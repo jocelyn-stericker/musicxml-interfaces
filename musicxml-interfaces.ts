@@ -28791,7 +28791,7 @@ function timeToXML(time: Time): string {
 
     let children: string[] = [];
 
-    if (time.senzaMisura !== undefined) {
+    if (time.senzaMisura != null) {
         // <!ELEMENT senza-misura (#PCDATA)>
         // TODO musicxml-interfaces: PCDATA?
         children.push(xml `<senza-misura />`);

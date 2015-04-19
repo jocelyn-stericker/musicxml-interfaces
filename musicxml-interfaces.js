@@ -149,13 +149,8 @@ var parse;
 })(parse = exports.parse || (exports.parse = {}));
 /*---- Serialization API ------------------------------------------------------------------------*/
 function serialize(score) {
-    return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE score-timewise\n  PUBLIC \"-//Recordare//DTD MusicXML 3.0 Timewise//EN\" \"http://www.musicxml.org/dtds/timewise.dtd\">\n<score-timewise version=\"3.0\">\n" + scoreHeaderToXML(score).join("\n").split("\n").map(function (line) {
-        return "  " + line;
-    }).join("\n") + "\n" + score.measures.map(function (measure) {
-        return measureToXML(measure);
-    }).join("\n").split("\n").map(function (line) {
-        return "  " + line;
-    }).join("\n") + "\n</score-timewise>";
+    return "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n<!DOCTYPE score-timewise\n  PUBLIC \"-//Recordare//DTD MusicXML 3.0 Timewise//EN\" \"http://www.musicxml.org/dtds/timewise.dtd\">\n<score-timewise version=\"3.0\">\n" + scoreHeaderToXML(score).join("\n").split("\n").map(function (line) { return "  " + line; }).join("\n") + "\n" + score.measures.map(function (measure) { return measureToXML(measure); }).join("\n")
+        .split("\n").map(function (line) { return "  " + line; }).join("\n") + "\n</score-timewise>";
 }
 exports.serialize = serialize;
 var serialize;
@@ -214,11 +209,7 @@ var xmlToDoc;
             return (new DOMParser).parseFromString(str, "text/xml");
         };
         xmlToParttimeDoc = function (str) {
-            var res = spawnSync("xsltproc", [
-                "--nonet",
-                "./vendor/musicxml-dtd/parttime.xsl",
-                "-"
-            ], {
+            var res = spawnSync("xsltproc", ["--nonet", "./vendor/musicxml-dtd/parttime.xsl", "-"], {
                 input: str,
                 env: {
                     "XML_CATALOG_FILES": "./vendor/musicxml-dtd/catalog.xml"
@@ -292,8 +283,8 @@ function xmlToMeasure(node) {
             ret.parts[ch.getAttribute("id")] = dataPart;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getString(ch2, true);
             ret.number = dataNumber;
@@ -382,8 +373,8 @@ function xmlToLyric(node) {
             ret.level = dataLevel;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber_ = getNumber(ch2, true);
             ret.number = dataNumber_;
@@ -732,8 +723,8 @@ function xmlToPosition(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -759,8 +750,8 @@ function xmlToPlacement(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
             ret.placement = dataPlacement;
@@ -777,8 +768,8 @@ function xmlToDirectiveEntity(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "directive") {
             var dataDirective = xmlToYesNo(ch2);
             ret.directive = dataDirective;
@@ -791,8 +782,8 @@ function xmlToBezier(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "bezier-x2") {
             var dataBezierX2 = getNumber(ch2, true);
             ret.bezierX2 = dataBezierX2;
@@ -826,8 +817,8 @@ function xmlToOrientation(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "orientation") {
             var dataOrientation = getOverUnder(ch2, 0 /* Unspecified */);
             ret.orientation = dataOrientation;
@@ -846,8 +837,8 @@ function xmlToFont(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -1054,8 +1045,8 @@ function xmlToColor(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
             ret.color = dataColor;
@@ -1075,8 +1066,8 @@ function xmlToTextDecoration(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "underline") {
             var dataUnderline = getNumber(ch2, true);
             ret.underline = dataUnderline;
@@ -1110,8 +1101,8 @@ function xmlToJustify(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -1129,8 +1120,8 @@ function xmlToHalign(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "halign") {
             var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
             ret.halign = dataHalign;
@@ -1148,8 +1139,8 @@ function xmlToValign(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "valign") {
             var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
             ret.valign = dataValign;
@@ -1167,8 +1158,8 @@ function xmlToValignImage(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "valign") {
             var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
             ret.valignImage = dataValignImage;
@@ -1186,8 +1177,8 @@ function xmlToLetterSpacing(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "letter-spacing") {
             var dataLetterSpacing = getString(ch2, true);
             ret.letterSpacing = dataLetterSpacing;
@@ -1205,8 +1196,8 @@ function xmlToLineHeight(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-height") {
             var dataLineHeight = getString(ch2, true);
             ret.lineHeight = dataLineHeight;
@@ -1224,8 +1215,8 @@ function xmlToTextDirection(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "dir") {
             var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
             ret.dir = dataDir;
@@ -1243,8 +1234,8 @@ function xmlToTextRotation(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "rotation") {
             var dataRotation = getNumber(ch2, true);
             ret.rotation = dataRotation;
@@ -1262,8 +1253,8 @@ function xmlToEnclosure(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "enclosure") {
             var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
             ret.enclosure = dataEnclosure;
@@ -1283,8 +1274,8 @@ function xmlToPrintStyle(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -1346,8 +1337,8 @@ function xmlToPrintStyleAlign(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -1421,8 +1412,8 @@ function xmlToLineShape(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
             var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
             ret.lineShape = dataLineShape;
@@ -1441,8 +1432,8 @@ function xmlToDashedFormatting(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "dash-length") {
             var dataDashLength = getNumber(ch2, true);
             ret.dashLength = dataDashLength;
@@ -1468,8 +1459,8 @@ function xmlToPrintObject(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -1487,8 +1478,8 @@ function xmlToPrintSpacing(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-spacing") {
             var dataPrintSpacing = xmlToYesNo(ch2);
             ret.printSpacing = dataPrintSpacing;
@@ -1519,8 +1510,8 @@ function xmlToTextFormatting(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -1668,8 +1659,8 @@ function xmlToLevelDisplay(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "bracket") {
             var dataBracket = xmlToYesNo(ch2);
             ret.bracket = dataBracket;
@@ -1709,8 +1700,8 @@ function xmlToTrillSound(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "start-note") {
             var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
             ret.startNote = dataStartNote;
@@ -1779,8 +1770,8 @@ function xmlToBendSound(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "accelerate") {
             var dataAccelerate = xmlToYesNo(ch2);
             ret.accelerate = dataAccelerate;
@@ -1821,8 +1812,8 @@ function xmlToTimeOnly(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "time-only") {
             var dataTimeOnly = getString(ch2, true);
             ret.timeOnly = dataTimeOnly;
@@ -1836,8 +1827,8 @@ function xmlToDocumentAttributes(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "version") {
             var dataVersion = getString(ch2, true);
             ret.version = dataVersion;
@@ -1862,8 +1853,8 @@ function xmlToEditorial(node) {
             ret.level = dataLevel;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -1884,8 +1875,8 @@ function xmlToEditorialVoice(node) {
             ret.level = dataLevel;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -1908,8 +1899,8 @@ function xmlToFootnote(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -2061,8 +2052,8 @@ function xmlToLevel(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "bracket") {
             var dataBracket = xmlToYesNo(ch2);
             ret.bracket = dataBracket;
@@ -2111,8 +2102,8 @@ function xmlToFermata(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -2193,8 +2184,8 @@ function xmlToWavyLine(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -2308,8 +2299,8 @@ function xmlToSegno(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -2387,8 +2378,8 @@ function xmlToCoda(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -2461,8 +2452,8 @@ function xmlToNormalDot(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -2577,8 +2568,8 @@ function xmlToDynamics(node) {
             ret.ffff = dataFfff;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -2698,8 +2689,8 @@ function xmlToFingering(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "substitution") {
             var dataSubstitution = xmlToYesNo(ch2);
             ret.substitution = dataSubstitution;
@@ -2789,8 +2780,8 @@ function xmlToFret(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -2838,8 +2829,8 @@ function xmlToString(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -2921,8 +2912,8 @@ function xmlToDisplayText(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -3084,8 +3075,8 @@ function xmlToAccidentalText(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -3236,8 +3227,8 @@ function xmlToMidiDevice(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "port") {
             var dataPort = getNumber(ch2, true);
             ret.port = dataPort;
@@ -3406,8 +3397,8 @@ function xmlToMidiInstrument(node) {
             ret.midiName = dataMidiName;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "id") {
             var dataId = getString(ch2, true);
             ret.id = dataId;
@@ -3442,8 +3433,8 @@ function xmlToPlay(node) {
             ret.semiPitched = dataSemiPitched;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "id") {
             var dataId = getString(ch2, true);
             ret.id = dataId;
@@ -3459,8 +3450,8 @@ function xmlToOtherPlay(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -3487,8 +3478,8 @@ function xmlToScaling(node) {
             ret.millimeters = dataMillimeters;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -3531,8 +3522,8 @@ function xmlToPageMargins(node) {
             ret.rightMargin = dataRightMargin;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getOddEvenBoth(ch2, 2 /* Both */);
             ret.type = dataType;
@@ -3561,8 +3552,8 @@ function xmlToPageLayout(node) {
             ret.pageMargins = (ret.pageMargins || []).concat(dataPageMargins);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -3587,8 +3578,8 @@ function xmlToSystemLayout(node) {
             ret.topSystemDistance = dataTopSystemDistance;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -3605,8 +3596,8 @@ function xmlToSystemMargins(node) {
             ret.rightMargin = dataRightMargin;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -3623,8 +3614,8 @@ function xmlToSystemDividers(node) {
             ret.leftDivider = dataLeftDivider;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -3639,8 +3630,8 @@ function xmlToLeftDivider(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -3727,8 +3718,8 @@ function xmlToRightDivider(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -3814,8 +3805,8 @@ function xmlToStaffLayout(node) {
             ret.staffDistance = dataStaffDistance;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "num") {
             var dataNum = getNumber(ch2, true);
             ret.num = dataNum;
@@ -3836,8 +3827,8 @@ function xmlToMeasureLayout(node) {
             ret.measureDistance = dataMeasureDistance;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -3846,8 +3837,8 @@ function xmlToLineWidth(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -3880,8 +3871,8 @@ function xmlToNoteSize(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getCueGraceLarge(ch2, null);
             ret.type = dataType;
@@ -3897,8 +3888,8 @@ function xmlToDistance(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -3933,8 +3924,8 @@ function xmlToAppearance(node) {
             ret.noteSizes[dataNoteSizes.type] = dataNoteSizes;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -3943,8 +3934,8 @@ function xmlToCreator(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -3960,8 +3951,8 @@ function xmlToRights(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -3977,8 +3968,8 @@ function xmlToEncoder(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -3994,8 +3985,8 @@ function xmlToRelation(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -4011,8 +4002,8 @@ function xmlToMiscellaneousField(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "name") {
             var dataName = getString(ch2, true);
             ret.name = dataName;
@@ -4032,8 +4023,8 @@ function xmlToMiscellaneous(node) {
             ret.miscellaneousFields = (ret.miscellaneousFields || []).concat(dataMiscellaneousFields);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -4066,8 +4057,8 @@ function xmlToIdentification(node) {
             ret.source = dataSource;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -4076,8 +4067,8 @@ function xmlToSupports(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "element") {
             var dataElement = getString(ch2, true);
             ret.element = dataElement;
@@ -4133,8 +4124,8 @@ function xmlToEncoding(node) {
             ret.softwares = (ret.softwares || []).concat(dataSoftwares);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -4167,8 +4158,8 @@ function xmlToTimeSeparator(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "separator") {
             var dataSeparator = getSeparatorType(ch2, 0 /* None */);
             ret.separator = dataSeparator;
@@ -4212,8 +4203,8 @@ function xmlToTimeSymbol(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
             var dataSymbol = getTimeSymbolType(ch2, 5 /* Normal */);
             ret.symbol = dataSymbol;
@@ -4248,8 +4239,8 @@ function xmlToCancel(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "location") {
             var dataLocation = getCancelLocation(ch2, 0 /* Left */);
             ret.location = dataLocation;
@@ -4270,8 +4261,8 @@ function xmlToKeyOctave(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -4327,8 +4318,8 @@ function xmlToKey(node) {
             ret.mode = dataMode;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -4424,8 +4415,8 @@ function xmlToTime(node) {
             ret.senzaMisura = dataSenzaMisura;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
             var dataSymbol = getTimeSymbolType(ch2, 5 /* Normal */);
             ret.symbol = dataSymbol;
@@ -4536,8 +4527,8 @@ function xmlToInterchangeable(node) {
             ret.timeRelation = dataTimeRelation;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
             var dataSymbol = getTimeSymbolType(ch2, 5 /* Normal */);
             ret.symbol = dataSymbol;
@@ -4588,8 +4579,8 @@ function xmlToPartSymbol(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "top-staff") {
             var dataTopStaff = getNumber(ch2, true);
             ret.topStaff = dataTopStaff;
@@ -4661,8 +4652,8 @@ function xmlToClef(node) {
             ret.line = dataLine;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -4771,8 +4762,8 @@ function xmlToStaffTuning(node) {
             ret.tuningOctave = dataTuningOctave;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line") {
             var dataLine = getString(ch2, true);
             ret.line = dataLine;
@@ -4823,8 +4814,8 @@ function xmlToStaffDetails(node) {
             ret.staffType = dataStaffType;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "show-frets") {
             var dataShowFrets = getShowFretsType(ch2, 0 /* Numbers */);
             ret.showFrets = dataShowFrets;
@@ -4865,8 +4856,8 @@ function xmlToDouble(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -4892,8 +4883,8 @@ function xmlToTranspose(node) {
             ret.chromatic = dataChromatic;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -4913,8 +4904,8 @@ function xmlToDirective(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -4974,8 +4965,8 @@ function xmlToSlashDot(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -4985,8 +4976,8 @@ function xmlToMultipleRest(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "use-symbols") {
             var dataUseSymbols = xmlToYesNo(ch2);
             ret.useSymbols = dataUseSymbols;
@@ -5007,8 +4998,8 @@ function xmlToMeasureRepeat(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getStartStop(ch2, null);
             ret.type = dataType;
@@ -5042,8 +5033,8 @@ function xmlToBeatRepeat(node) {
             ret.slashDots = (ret.slashDots || []).concat(dataSlashDots);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "use-dots") {
             var dataUseDots = xmlToYesNo(ch2);
             ret.useDots = dataUseDots;
@@ -5082,8 +5073,8 @@ function xmlToSlash(node) {
             ret.slashDots = (ret.slashDots || []).concat(dataSlashDots);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "use-dots") {
             var dataUseDots = xmlToYesNo(ch2);
             ret.useDots = dataUseDots;
@@ -5132,8 +5123,8 @@ function xmlToMeasureStyle(node) {
             ret.slash = dataSlash;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -5234,8 +5225,8 @@ function xmlToAttributes(node) {
             ret.directives = (ret.directives || []).concat(dataDirectives);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -5244,8 +5235,8 @@ function xmlToCue(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -5255,8 +5246,8 @@ function xmlToGrace(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "make-time") {
             var dataMakeTime = getString(ch2, true);
             ret.makeTime = dataMakeTime;
@@ -5285,8 +5276,8 @@ function xmlToChord(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -5303,8 +5294,8 @@ function xmlToUnpitched(node) {
             ret.displayOctave = dataDisplayOctave;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -5325,8 +5316,8 @@ function xmlToPitch(node) {
             ret.octave = dataOctave;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -5351,8 +5342,8 @@ function xmlToFullNote(node) {
             ret.rest = dataRest;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -5370,8 +5361,8 @@ function xmlToRest(node) {
             ret.displayOctave = dataDisplayOctave;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "measure") {
             var dataMeasure = xmlToYesNo(ch2);
             ret.measure = dataMeasure;
@@ -5388,8 +5379,8 @@ function xmlToTie(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "time-only") {
             var dataTimeOnly = getString(ch2, true);
             ret.timeOnly = dataTimeOnly;
@@ -5406,8 +5397,8 @@ function xmlToInstrument(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "id") {
             var dataId = getString(ch2, true);
             ret.id = dataId;
@@ -5526,8 +5517,8 @@ function xmlToNote(node) {
             ret.beams = (ret.beams || []).concat(dataBeams);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "attack") {
             var dataAttack = getNumber(ch2, true);
             ret.attack = dataAttack;
@@ -5703,8 +5694,8 @@ function xmlToType(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "size") {
             var dataSize = getSymbolSize(ch2, 0 /* Unspecified */);
             ret.size = dataSize;
@@ -5728,8 +5719,8 @@ function xmlToDot(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -5921,8 +5912,8 @@ function xmlToAccidental(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "cautionary") {
             var dataCautionary = xmlToYesNo(ch2);
             ret.cautionary = dataCautionary;
@@ -6038,8 +6029,8 @@ function xmlToTimeModification(node) {
             ret.normalDots = (ret.normalDots || []).concat(dataNormalDots);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -6069,8 +6060,8 @@ function xmlToStem(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -6195,8 +6186,8 @@ function xmlToNotehead(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -6291,8 +6282,8 @@ function xmlToBeam(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "repeater") {
             var dataRepeater = xmlToYesNo(ch2);
             ret.repeater = dataRepeater;
@@ -6393,8 +6384,8 @@ function xmlToNotations(node) {
             ret.otherNotations = (ret.otherNotations || []).concat(dataOtherNotations);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -6417,8 +6408,8 @@ function xmlToTied(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -6530,8 +6521,8 @@ function xmlToSlur(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -6670,8 +6661,8 @@ function xmlToTuplet(node) {
             ret.tupletActual = dataTupletActual;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "bracket") {
             var dataBracket = xmlToYesNo(ch2);
             ret.bracket = dataBracket;
@@ -6756,8 +6747,8 @@ function xmlToTupletActual(node) {
             ret.tupletType = dataTupletType;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -6778,8 +6769,8 @@ function xmlToTupletNormal(node) {
             ret.tupletType = dataTupletType;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -6791,8 +6782,8 @@ function xmlToTupletNumber(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -6839,8 +6830,8 @@ function xmlToTupletType(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -6887,8 +6878,8 @@ function xmlToTupletDot(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -6936,8 +6927,8 @@ function xmlToGlissando(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
             ret.lineType = dataLineType;
@@ -7044,8 +7035,8 @@ function xmlToSlide(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-type") {
             var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
             ret.lineType = dataLineType;
@@ -7178,8 +7169,8 @@ function xmlToOtherNotation(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -7265,8 +7256,8 @@ function xmlToOtherDirection(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -7417,8 +7408,8 @@ function xmlToOrnaments(node) {
             ret.schleifer = dataSchleifer;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -7550,8 +7541,8 @@ function xmlToTrillMark(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -7684,8 +7675,8 @@ function xmlToTurn(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "slash") {
             var dataSlash = xmlToYesNo(ch2);
             ret.slash = dataSlash;
@@ -7826,8 +7817,8 @@ function xmlToDelayedTurn(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "slash") {
             var dataSlash = xmlToYesNo(ch2);
             ret.slash = dataSlash;
@@ -7968,8 +7959,8 @@ function xmlToInvertedTurn(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "slash") {
             var dataSlash = xmlToYesNo(ch2);
             ret.slash = dataSlash;
@@ -8110,8 +8101,8 @@ function xmlToDelayedInvertedTurn(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "slash") {
             var dataSlash = xmlToYesNo(ch2);
             ret.slash = dataSlash;
@@ -8251,8 +8242,8 @@ function xmlToVerticalTurn(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -8384,8 +8375,8 @@ function xmlToShake(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -8517,8 +8508,8 @@ function xmlToMordent(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "long") {
             var dataLong = xmlToYesNo(ch2);
             ret.long = dataLong;
@@ -8662,8 +8653,8 @@ function xmlToInvertedMordent(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "long") {
             var dataLong = xmlToYesNo(ch2);
             ret.long = dataLong;
@@ -8800,8 +8791,8 @@ function xmlToSchleifer(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -8871,8 +8862,8 @@ function xmlToTremolo(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -8952,8 +8943,8 @@ function xmlToOtherOrnament(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9029,8 +9020,8 @@ function xmlToAccidentalMark(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9194,8 +9185,8 @@ function xmlToTechnical(node) {
             ret.fingering = dataFingering;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -9208,8 +9199,8 @@ function xmlToUpBow(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9278,8 +9269,8 @@ function xmlToDownBow(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9369,8 +9360,8 @@ function xmlToHarmonic(node) {
             ret.basePitch = dataBasePitch;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -9447,8 +9438,8 @@ function xmlToOpenString(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9517,8 +9508,8 @@ function xmlToThumbPosition(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9587,8 +9578,8 @@ function xmlToPluck(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9660,8 +9651,8 @@ function xmlToDoubleTongue(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9730,8 +9721,8 @@ function xmlToTripleTongue(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9800,8 +9791,8 @@ function xmlToStopped(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9870,8 +9861,8 @@ function xmlToSnapPizzicato(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -9941,8 +9932,8 @@ function xmlToHammerOn(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -10027,8 +10018,8 @@ function xmlToPullOff(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -10131,8 +10122,8 @@ function xmlToBend(node) {
             ret.release = dataRelease;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -10225,8 +10216,8 @@ function xmlToWithBar(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -10298,8 +10289,8 @@ function xmlToTap(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -10372,8 +10363,8 @@ function xmlToHeel(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "substitution") {
             var dataSubstitution = xmlToYesNo(ch2);
             ret.substitution = dataSubstitution;
@@ -10451,8 +10442,8 @@ function xmlToToe(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "substitution") {
             var dataSubstitution = xmlToYesNo(ch2);
             ret.substitution = dataSubstitution;
@@ -10529,8 +10520,8 @@ function xmlToFingernails(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -10611,8 +10602,8 @@ function xmlToHole(node) {
             ret.holeType = dataHoleType;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -10714,8 +10705,8 @@ function xmlToHoleClosed(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "location") {
             var dataLocation = getHoleLocation(ch2, null);
             ret.location = dataLocation;
@@ -10747,8 +10738,8 @@ function xmlToArrow(node) {
             ret.circularArrow = dataCircularArrow;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -10817,8 +10808,8 @@ function xmlToHandbell(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -10890,8 +10881,8 @@ function xmlToOtherTechnical(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11023,8 +11014,8 @@ function xmlToArticulations(node) {
             ret.tenuto = dataTenuto;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -11037,8 +11028,8 @@ function xmlToAccent(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11108,8 +11099,8 @@ function xmlToStrongAccent(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11186,8 +11177,8 @@ function xmlToStaccato(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11256,8 +11247,8 @@ function xmlToTenuto(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11326,8 +11317,8 @@ function xmlToDetachedLegato(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11396,8 +11387,8 @@ function xmlToStaccatissimo(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11466,8 +11457,8 @@ function xmlToSpiccato(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -11540,8 +11531,8 @@ function xmlToScoop(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
             var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
             ret.lineShape = dataLineShape;
@@ -11646,8 +11637,8 @@ function xmlToPlop(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
             var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
             ret.lineShape = dataLineShape;
@@ -11752,8 +11743,8 @@ function xmlToDoit(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
             var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
             ret.lineShape = dataLineShape;
@@ -11858,8 +11849,8 @@ function xmlToFalloff(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
             var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
             ret.lineShape = dataLineShape;
@@ -11981,8 +11972,8 @@ function xmlToBreathMark(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
             var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
             ret.lineShape = dataLineShape;
@@ -12086,8 +12077,8 @@ function xmlToCaesura(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -12156,8 +12147,8 @@ function xmlToStress(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -12226,8 +12217,8 @@ function xmlToUnstress(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -12296,8 +12287,8 @@ function xmlToOtherArticulation(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -12369,8 +12360,8 @@ function xmlToArpeggiate(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -12430,8 +12421,8 @@ function xmlToNonArpeggiate(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -12484,8 +12475,8 @@ function xmlToLaughing(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -12494,8 +12485,8 @@ function xmlToHumming(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -12504,8 +12495,8 @@ function xmlToEndLine(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -12514,8 +12505,8 @@ function xmlToEndParagraph(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -12529,43 +12520,43 @@ function xmlToLyricParts(node) {
             data._class = "Extend";
         }
         if (ch.nodeName === "end-line") {
-            var _data = xmlToEndLine(ch);
-            rarr = (rarr || []).concat(_data);
-            _data._class = "EndLine";
+            var data = xmlToEndLine(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "EndLine";
         }
         if (ch.nodeName === "syllabic") {
-            var _data_1 = xmlToSyllabic(ch);
-            rarr = (rarr || []).concat(_data_1);
-            _data_1._class = "Syllabic";
+            var data = xmlToSyllabic(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Syllabic";
         }
         if (ch.nodeName === "text") {
-            var _data_2 = xmlToText(ch);
-            rarr = (rarr || []).concat(_data_2);
-            _data_2._class = "Text";
+            var data = xmlToText(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Text";
         }
         if (ch.nodeName === "laughing") {
-            var _data_3 = xmlToLaughing(ch);
-            rarr = (rarr || []).concat(_data_3);
-            _data_3._class = "Laughing";
+            var data = xmlToLaughing(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Laughing";
         }
         if (ch.nodeName === "humming") {
-            var _data_4 = xmlToHumming(ch);
-            rarr = (rarr || []).concat(_data_4);
-            _data_4._class = "Humming";
+            var data = xmlToHumming(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Humming";
         }
         if (ch.nodeName === "end-paragraph") {
-            var _data_5 = xmlToEndParagraph(ch);
-            rarr = (rarr || []).concat(_data_5);
-            _data_5._class = "EndParagraph";
+            var data = xmlToEndParagraph(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "EndParagraph";
         }
         if (ch.nodeName === "elision") {
-            var _data_6 = xmlToElision(ch);
-            rarr = (rarr || []).concat(_data_6);
-            _data_6._class = "Elision";
+            var data = xmlToElision(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Elision";
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return rarr;
 }
@@ -12583,8 +12574,8 @@ function xmlToText(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -12699,8 +12690,8 @@ function xmlToSyllabic(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -12747,8 +12738,8 @@ function xmlToElision(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -12796,8 +12787,8 @@ function xmlToExtend(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -12884,8 +12875,8 @@ function xmlToFiguredBass(node) {
             ret.duration = dataDuration;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -12993,8 +12984,8 @@ function xmlToFigure(node) {
             ret.suffix = dataSuffix;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -13054,8 +13045,8 @@ function xmlToPrefix(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -13118,8 +13109,8 @@ function xmlToFigureNumber(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -13182,8 +13173,8 @@ function xmlToSuffix(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -13255,8 +13246,8 @@ function xmlToBackup(node) {
             ret.duration = dataDuration;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -13285,8 +13276,8 @@ function xmlToForward(node) {
             ret.staff = dataStaff;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -13348,8 +13339,8 @@ function xmlToBarline(node) {
             ret.repeat = dataRepeat;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "location") {
             var dataLocation = getBarlineLocation(ch2, null);
             ret.location = dataLocation;
@@ -13416,8 +13407,8 @@ function xmlToBarStyle(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
             ret.color = dataColor;
@@ -13458,8 +13449,8 @@ function xmlToEnding(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "end-length") {
             var dataEndLength = getNumber(ch2, true);
             ret.endLength = dataEndLength;
@@ -13585,8 +13576,8 @@ function xmlToRepeat(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "times") {
             var dataTimes = getString(ch2, true);
             ret.times = dataTimes;
@@ -13672,8 +13663,8 @@ function xmlToDirection(node) {
             ret.sound = dataSound;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "placement") {
             var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
             ret.placement = dataPlacement;
@@ -13782,8 +13773,8 @@ function xmlToDirectionType(node) {
             ret.codas = (ret.codas || []).concat(dataCodas);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -13806,8 +13797,8 @@ function xmlToRehearsal(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -13969,8 +13960,8 @@ function xmlToWords(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -14144,8 +14135,8 @@ function xmlToWedge(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -14230,8 +14221,8 @@ function xmlToDashes(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -14320,8 +14311,8 @@ function xmlToBracket(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "end-length") {
             var dataEndLength = getNumber(ch2, true);
             ret.endLength = dataEndLength;
@@ -14423,8 +14414,8 @@ function xmlToPedal(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "line") {
             var dataLine = xmlToYesNo(ch2);
             ret.line = dataLine;
@@ -14552,8 +14543,8 @@ function xmlToMetronome(node) {
             ret.metronomeRelation = dataMetronomeRelation;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -14638,8 +14629,8 @@ function xmlToBeatUnitDot(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -14650,8 +14641,8 @@ function xmlToPerMinute(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -14703,8 +14694,8 @@ function xmlToMetronomeNote(node) {
             ret.metronomeTuplet = dataMetronomeTuplet;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -14713,8 +14704,8 @@ function xmlToMetronomeDot(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -14724,8 +14715,8 @@ function xmlToMetronomeBeam(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -14763,8 +14754,8 @@ function xmlToMetronomeTuplet(node) {
             ret.normalDots = (ret.normalDots || []).concat(dataNormalDots);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "bracket") {
             var dataBracket = xmlToYesNo(ch2);
             ret.bracket = dataBracket;
@@ -14819,8 +14810,8 @@ function xmlToOctaveShift(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -14918,8 +14909,8 @@ function xmlToHarpPedals(node) {
             ret.pedalTunings = (ret.pedalTunings || []).concat(dataPedalTunings);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15000,8 +14991,8 @@ function xmlToPedalTuning(node) {
             ret.pedalAlter = dataPedalAlter;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -15015,8 +15006,8 @@ function xmlToDamp(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15094,8 +15085,8 @@ function xmlToDampAll(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15173,8 +15164,8 @@ function xmlToEyeglasses(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15252,8 +15243,8 @@ function xmlToStringMute(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15334,8 +15325,8 @@ function xmlToScordatura(node) {
             ret.accords = (ret.accords || []).concat(dataAccords);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -15356,8 +15347,8 @@ function xmlToAccord(node) {
             ret.tuningOctave = dataTuningOctave;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "string") {
             var dataString = getString(ch2, true);
             ret.string = dataString;
@@ -15372,8 +15363,8 @@ function xmlToImage(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15447,8 +15438,8 @@ function xmlToPrincipalVoice(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
             var dataSymbol = getVoiceSymbol(ch2, null);
             ret.symbol = dataSymbol;
@@ -15549,8 +15540,8 @@ function xmlToAccordionRegistration(node) {
             ret.accordionLow = dataAccordionLow;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15673,8 +15664,8 @@ function xmlToPercussion(node) {
             ret.beater = dataBeater;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -15755,8 +15746,8 @@ function xmlToTimpani(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -15765,8 +15756,8 @@ function xmlToBeater(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "tip") {
             var dataTip = getTipDirection(ch2, null);
             ret.tip = dataTip;
@@ -15790,8 +15781,8 @@ function xmlToStick(node) {
             ret.stickType = dataStickType;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "tip") {
             var dataTip = getTipDirection(ch2, null);
             ret.tip = dataTip;
@@ -15805,8 +15796,8 @@ function xmlToOffset(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "sound") {
             var dataSound = xmlToYesNo(ch2);
             ret.sound = dataSound;
@@ -15857,8 +15848,8 @@ function xmlToHarmonyChord(node) {
             ret.bass = dataBass;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -15945,8 +15936,8 @@ function xmlToHarmony(node) {
             ret.offset = dataOffset;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-frame") {
             var dataPrintFrame = xmlToYesNo(ch2);
             ret.printFrame = dataPrintFrame;
@@ -16035,8 +16026,8 @@ function xmlToRoot(node) {
             ret.rootAlter = dataRootAlter;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -16048,8 +16039,8 @@ function xmlToRootStep(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "text") {
             var dataText = getString(ch2, true);
             ret.text = dataText;
@@ -16117,8 +16108,8 @@ function xmlToRootAlter(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "location") {
             var dataLocation = getLeftRight(ch2, null);
             ret.location = dataLocation;
@@ -16193,8 +16184,8 @@ function xmlToFunction(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -16259,8 +16250,8 @@ function xmlToKind(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "parentheses-degrees") {
             var dataParenthesesDegrees = xmlToYesNo(ch2);
             ret.parenthesesDegrees = dataParenthesesDegrees;
@@ -16359,8 +16350,8 @@ function xmlToInversion(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -16428,8 +16419,8 @@ function xmlToBass(node) {
             ret.bassAlter = dataBassAlter;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -16441,8 +16432,8 @@ function xmlToBassStep(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "text") {
             var dataText = getString(ch2, true);
             ret.text = dataText;
@@ -16510,8 +16501,8 @@ function xmlToBassAlter(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "location") {
             var dataLocation = getLeftRight(ch2, null);
             ret.location = dataLocation;
@@ -16596,8 +16587,8 @@ function xmlToDegree(node) {
             ret.degreeType = dataDegreeType;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "print-object") {
             var dataPrintObject = xmlToYesNo(ch2);
             ret.printObject = dataPrintObject;
@@ -16640,8 +16631,8 @@ function xmlToDegreeValue(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
             var dataSymbol = getChordType(ch2, null);
             ret.symbol = dataSymbol;
@@ -16712,8 +16703,8 @@ function xmlToDegreeAlter(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "plus-minus") {
             var dataPlusMinus = xmlToYesNo(ch2);
             ret.plusMinus = dataPlusMinus;
@@ -16780,8 +16771,8 @@ function xmlToDegreeType(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "text") {
             var dataText = getString(ch2, true);
             ret.text = dataText;
@@ -16864,8 +16855,8 @@ function xmlToFrame(node) {
             ret.firstFret = dataFirstFret;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "unplayed") {
             var dataUnplayed = getString(ch2, true);
             ret.unplayed = dataUnplayed;
@@ -16926,8 +16917,8 @@ function xmlToFirstFret(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "text") {
             var dataText = getString(ch2, true);
             ret.text = dataText;
@@ -16963,8 +16954,8 @@ function xmlToFrameNote(node) {
             ret.fret = dataFret;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -16974,8 +16965,8 @@ function xmlToBarre(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
             ret.color = dataColor;
@@ -17001,8 +16992,8 @@ function xmlToGrouping(node) {
             ret.features = (ret.features || []).concat(dataFeatures);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -17027,8 +17018,8 @@ function xmlToFeature(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "type") {
             var dataType = getString(ch2, true);
             ret.type = dataType;
@@ -17072,8 +17063,8 @@ function xmlToPrint(node) {
             ret.staffLayouts = (ret.staffLayouts || []).concat(dataStaffLayouts);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "new-system") {
             var dataNewSystem = xmlToYesNo(ch2);
             ret.newSystem = dataNewSystem;
@@ -17107,8 +17098,8 @@ function xmlToMeasureNumbering(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -17200,8 +17191,8 @@ function xmlToSound(node) {
             ret.midiDevices = (ret.midiDevices || []).concat(dataMidiDevices);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "soft-pedal") {
             var dataSoftPedal = getString(ch2, true);
             ret.softPedal = dataSoftPedal;
@@ -17290,8 +17281,8 @@ function xmlToWork(node) {
             ret.opus = dataOpus;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -17300,8 +17291,8 @@ function xmlToOpus(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -17346,8 +17337,8 @@ function xmlToDefaults(node) {
             ret.musicFont = dataMusicFont;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -17358,8 +17349,8 @@ function xmlToMusicFont(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -17394,8 +17385,8 @@ function xmlToWordFont(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "font-family") {
             var dataFontFamily = getString(ch2, true);
             ret.fontFamily = dataFontFamily;
@@ -17430,8 +17421,8 @@ function xmlToLyricFont(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -17472,8 +17463,8 @@ function xmlToLyricLanguage(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -17505,8 +17496,8 @@ function xmlToCredit(node) {
             ret.creditImage = dataCreditImage;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "page") {
             var dataPage = getNumber(ch2, true);
             ret.page = dataPage;
@@ -17541,8 +17532,8 @@ function xmlToCreditWords(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
             var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
             ret.justify = dataJustify;
@@ -17712,8 +17703,8 @@ function xmlToCreditImage(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -17773,8 +17764,8 @@ function xmlToPartList(node) {
             ret.partGroups = (ret.partGroups || []).concat(dataPartGroups);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -17830,8 +17821,8 @@ function xmlToScorePart(node) {
             ret.midiInstruments = (ret.midiInstruments || []).concat(dataMidiInstruments);
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "id") {
             var dataId = getString(ch2, true);
             ret.id = dataId;
@@ -17857,8 +17848,8 @@ function xmlToPartName(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -17939,8 +17930,8 @@ function xmlToPartAbbreviation(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -18053,8 +18044,8 @@ function xmlToPartGroup(node) {
             ret.groupTime = dataGroupTime;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "number") {
             var dataNumber = getNumber(ch2, true);
             ret.number = dataNumber;
@@ -18079,8 +18070,8 @@ function xmlToGroupName(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -18152,8 +18143,8 @@ function xmlToGroupAbbreviation(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -18223,8 +18214,8 @@ function xmlToGroupSymbol(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "default-x") {
             var dataDefaultX = getNumber(ch2, true);
             ret.defaultX = dataDefaultX;
@@ -18264,8 +18255,8 @@ function xmlToGroupBarline(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "color") {
             var dataColor = getString(ch2, true);
             ret.color = dataColor;
@@ -18285,8 +18276,8 @@ function xmlToGroupTime(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -18327,8 +18318,8 @@ function xmlToScoreInstrument(node) {
             ret.solo = dataSolo;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "id") {
             var dataId = getString(ch2, true);
             ret.id = dataId;
@@ -18341,8 +18332,8 @@ function xmlToSolo(node) {
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -18359,8 +18350,8 @@ function xmlToVirtualInstrument(node) {
             ret.virtualName = dataVirtualName;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -18397,8 +18388,8 @@ function xmlToScoreHeader(node) {
             ret.movementNumber = dataMovementNumber;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return ret;
 }
@@ -18440,8 +18431,8 @@ function xmlToScoreTimewise(node) {
             ret.movementNumber = dataMovementNumber;
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
         if (ch2.name === "version") {
             var dataVersion = getString(ch2, true);
             ret.version = dataVersion;
@@ -18463,58 +18454,58 @@ function xmlToPart(node) {
             data._class = "Note";
         }
         if (ch.nodeName === "backup") {
-            var _data = xmlToBackup(ch);
-            rarr = (rarr || []).concat(_data);
-            _data._class = "Backup";
+            var data = xmlToBackup(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Backup";
         }
         if (ch.nodeName === "harmony") {
-            var _data_1 = xmlToHarmony(ch);
-            rarr = (rarr || []).concat(_data_1);
-            _data_1._class = "Harmony";
+            var data = xmlToHarmony(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Harmony";
         }
         if (ch.nodeName === "forward") {
-            var _data_2 = xmlToForward(ch);
-            rarr = (rarr || []).concat(_data_2);
-            _data_2._class = "Forward";
+            var data = xmlToForward(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Forward";
         }
         if (ch.nodeName === "print") {
-            var _data_3 = xmlToPrint(ch);
-            rarr = (rarr || []).concat(_data_3);
-            _data_3._class = "Print";
+            var data = xmlToPrint(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Print";
         }
         if (ch.nodeName === "figured-bass") {
-            var _data_4 = xmlToFiguredBass(ch);
-            rarr = (rarr || []).concat(_data_4);
-            _data_4._class = "FiguredBass";
+            var data = xmlToFiguredBass(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "FiguredBass";
         }
         if (ch.nodeName === "direction") {
-            var _data_5 = xmlToDirection(ch);
-            rarr = (rarr || []).concat(_data_5);
-            _data_5._class = "Direction";
+            var data = xmlToDirection(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Direction";
         }
         if (ch.nodeName === "attributes") {
-            var _data_6 = xmlToAttributes(ch);
-            rarr = (rarr || []).concat(_data_6);
-            _data_6._class = "Attributes";
+            var data = xmlToAttributes(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Attributes";
         }
         if (ch.nodeName === "sound") {
-            var _data_7 = xmlToSound(ch);
-            rarr = (rarr || []).concat(_data_7);
-            _data_7._class = "Sound";
+            var data = xmlToSound(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Sound";
         }
         if (ch.nodeName === "barline") {
-            var _data_8 = xmlToBarline(ch);
-            rarr = (rarr || []).concat(_data_8);
-            _data_8._class = "Barline";
+            var data = xmlToBarline(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Barline";
         }
         if (ch.nodeName === "grouping") {
-            var _data_9 = xmlToGrouping(ch);
-            rarr = (rarr || []).concat(_data_9);
-            _data_9._class = "Grouping";
+            var data = xmlToGrouping(ch);
+            rarr = (rarr || []).concat(data);
+            data._class = "Grouping";
         }
     }
-    for (var _i = 0; _i < node.attributes.length; ++_i) {
-        var ch2 = node.attributes[_i];
+    for (var i = 0; i < node.attributes.length; ++i) {
+        var ch2 = node.attributes[i];
     }
     return rarr;
 }
@@ -18531,7 +18522,12 @@ function xml(literals) {
     for (var i = 0; i < literals.length; ++i) {
         escaped += literals[i];
         if (i < vals.length) {
-            escaped += ("" + vals[i]).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/"/g, "&apos;");
+            escaped += ("" + vals[i])
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/"/g, "&apos;");
         }
     }
     return escaped;
@@ -18582,9 +18578,8 @@ function scalingToXML(scaling) {
     if (defined(scaling.tenths)) {
         children.push(tenthsToXML(scaling.tenths));
     }
-    return (_a = ["<scaling>\n", "\n</scaling>"], _a.raw = ["<scaling>\\n", "\\n</scaling>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<scaling>\n", "\n</scaling>"], _a.raw = ["<scaling>\\n", "\\n</scaling>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function millimetersToXML(mm) {
@@ -18610,9 +18605,8 @@ function pageLayoutToXML(pageLayout) {
     (pageLayout.pageMargins || []).forEach(function (pageMargins) {
         children.push(pageMarginsToXML(pageMargins));
     });
-    return (_c = ["<page-layout>\n", "\n</page-layout>"], _c.raw = ["<page-layout>\\n", "\\n</page-layout>"], dangerous(_c, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_c = ["<page-layout>\n", "\n</page-layout>"], _c.raw = ["<page-layout>\\n", "\\n</page-layout>"], dangerous(_c, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c;
 }
 var oddEvenBothToXML = {
@@ -18633,9 +18627,8 @@ function pageMarginsToXML(pageMargins) {
     if (defined(pageMargins.type)) {
         attribs += (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, oddEvenBothToXML[pageMargins.type]));
     }
-    return (_b = ["<page-margins", ">\n", "\n</page-margins>"], _b.raw = ["<page-margins", ">\\n", "\\n</page-margins>"], dangerous(_b, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_b = ["<page-margins", ">\n", "\n</page-margins>"], _b.raw = ["<page-margins", ">\\n", "\\n</page-margins>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b;
 }
 function hmarginsToXML(hmargins) {
@@ -18681,17 +18674,15 @@ function systemLayoutToXML(systemLayout) {
     if (defined(systemLayout.systemDividers)) {
         children.push(systemDividersToXML(systemLayout.systemDividers));
     }
-    return (_c = ["<system-layout>\n", "\n</system-layout>"], _c.raw = ["<system-layout>\\n", "\\n</system-layout>"], dangerous(_c, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_c = ["<system-layout>\n", "\n</system-layout>"], _c.raw = ["<system-layout>\\n", "\\n</system-layout>"], dangerous(_c, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c;
 }
 function systemMarginsToXML(systemMargins) {
     // <!ELEMENT system-margins (left-margin, right-margin)>
     var children = hmarginsToXML(systemMargins);
-    return (_a = ["<system-margins>\n", "\n</system-margins>"], _a.raw = ["<system-margins>\\n", "\\n</system-margins>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<system-margins>\n", "\n</system-margins>"], _a.raw = ["<system-margins>\\n", "\\n</system-margins>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function systemDividersToXML(systemDividers) {
@@ -18708,14 +18699,15 @@ function systemDividersToXML(systemDividers) {
     // >
     var children = [];
     if (defined(systemDividers.leftDivider)) {
-        children.push((_a = ["<left-divider", " />"], _a.raw = ["<left-divider", " />"], xml(_a, printObjectToXML(systemDividers.leftDivider) + printStyleAlignToXML(systemDividers.leftDivider))));
+        children.push((_a = ["<left-divider", " />"], _a.raw = ["<left-divider", " />"], xml(_a, printObjectToXML(systemDividers.leftDivider) +
+            printStyleAlignToXML(systemDividers.leftDivider))));
     }
     if (defined(systemDividers.rightDivider)) {
-        children.push((_b = ["<right-divider", " />"], _b.raw = ["<right-divider", " />"], xml(_b, printObjectToXML(systemDividers.rightDivider) + printStyleAlignToXML(systemDividers.rightDivider))));
+        children.push((_b = ["<right-divider", " />"], _b.raw = ["<right-divider", " />"], xml(_b, printObjectToXML(systemDividers.rightDivider) +
+            printStyleAlignToXML(systemDividers.rightDivider))));
     }
-    return (_c = ["<system-dividers>\n", "\n</system-dividers>"], _c.raw = ["<system-dividers>\\n", "\\n</system-dividers>"], dangerous(_c, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_c = ["<system-dividers>\n", "\n</system-dividers>"], _c.raw = ["<system-dividers>\\n", "\\n</system-dividers>"], dangerous(_c, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c;
 }
 function appearanceToXML(appearance) {
@@ -18736,9 +18728,8 @@ function appearanceToXML(appearance) {
     // appearance.otherAppearances.forEach(otherAppearance => {
     //     children.push(otherAppearanceToXML(otherAppearance));
     // });
-    return (_a = ["<appearance>\n", "\n</appearance>"], _a.raw = ["<appearance>\\n", "\\n</appearance>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<appearance>\n", "\n</appearance>"], _a.raw = ["<appearance>\\n", "\\n</appearance>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function lineWidthToXML(lineWidth) {
@@ -18792,9 +18783,8 @@ function workToXML(work) {
         console.warn("link-attributes in <opus /> aren't implemented."); // TODO: IMPLEMENT link-attributes
         children.push((_d = ["<opus />"], _d.raw = ["<opus />"], dangerous(_d)));
     }
-    return (_e = ["<work>\n", "\n</work>"], _e.raw = ["<work>\\n", "\\n</work>"], dangerous(_e, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_e = ["<work>\n", "\n</work>"], _e.raw = ["<work>\\n", "\\n</work>"], dangerous(_e, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c, _d, _e;
 }
 function movementNumberToXML(movementNumber) {
@@ -18835,9 +18825,8 @@ function identificationToXML(identification) {
     if (defined(identification.miscellaneous)) {
         children.push(miscellaneousToXML(identification.miscellaneous));
     }
-    return (_a = ["<identification>\n", "\n</identification>"], _a.raw = ["<identification>\\n", "\\n</identification>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<identification>\n", "\n</identification>"], _a.raw = ["<identification>\\n", "\\n</identification>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function creatorToXML(creator) {
@@ -18885,9 +18874,8 @@ function encodingToXML(encoding) {
     Object.keys(encoding.supports || {}).forEach(function (key) {
         children.push(supportsToXML(encoding.supports[key]));
     });
-    return (_a = ["<encoding>\n", "\n</encoding>"], _a.raw = ["<encoding>\\n", "\\n</encoding>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<encoding>\n", "\n</encoding>"], _a.raw = ["<encoding>\\n", "\\n</encoding>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function encodingDateToXML(encodingDate) {
@@ -18961,12 +18949,9 @@ function relationToXML(relation) {
 }
 function miscellaneousToXML(miscellaneous) {
     // <!ELEMENT miscellaneous (miscellaneous-field*)>
-    var children = miscellaneous.miscellaneousFields.map(function (field) {
-        return miscellaneousFieldToXML(field);
-    });
-    return (_a = ["<miscellaneous>\n", "\n</miscellaneous>"], _a.raw = ["<miscellaneous>\\n", "\\n</miscellaneous>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    var children = miscellaneous.miscellaneousFields.map(function (field) { return miscellaneousFieldToXML(field); });
+    return (_a = ["<miscellaneous>\n", "\n</miscellaneous>"], _a.raw = ["<miscellaneous>\\n", "\\n</miscellaneous>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function miscellaneousFieldToXML(field) {
@@ -19006,9 +18991,8 @@ function defaultsToXML(defaults) {
     (defaults.lyricLanguages || []).forEach(function (lyricLanguage) {
         children.push(lyricLanguageToXML(lyricLanguage));
     });
-    return (_a = ["<defaults>\n", "\n</defaults>"], _a.raw = ["<defaults>\\n", "\\n</defaults>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<defaults>\n", "\n</defaults>"], _a.raw = ["<defaults>\\n", "\\n</defaults>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function musicFontToXML(musicFont) {
@@ -19034,7 +19018,9 @@ function lyricFontToXML(lyricFont) {
     //     name CDATA #IMPLIED
     //     %font;
     // >
-    return (_a = ["<lyric-font", " />"], _a.raw = ["<lyric-font", " />"], dangerous(_a, numberLevelToXML(lyricFont) + nameToXML(lyricFont) + fontToXML(lyricFont)));
+    return (_a = ["<lyric-font", " />"], _a.raw = ["<lyric-font", " />"], dangerous(_a, numberLevelToXML(lyricFont) +
+        nameToXML(lyricFont) +
+        fontToXML(lyricFont)));
     var _a;
 }
 function lyricLanguageToXML(lyricLanguage) {
@@ -19044,7 +19030,8 @@ function lyricLanguageToXML(lyricLanguage) {
     //     name CDATA #IMPLIED
     //     xml:lang NMTOKEN #REQUIRED TODO musicxml-interfaces
     // >
-    return (_a = ["<lyric-language", " />"], _a.raw = ["<lyric-language", " />"], dangerous(_a, numberLevelToXML(lyricLanguage) + nameToXML(lyricLanguage)));
+    return (_a = ["<lyric-language", " />"], _a.raw = ["<lyric-language", " />"], dangerous(_a, numberLevelToXML(lyricLanguage) +
+        nameToXML(lyricLanguage)));
     var _a;
 }
 function creditToXML(credit) {
@@ -19075,9 +19062,8 @@ function creditToXML(credit) {
     if (defined(credit.page)) {
         attributes += (_a = [" page=\"", "\""], _a.raw = [" page=\"", "\""], xml(_a, credit.page));
     }
-    return (_b = ["<credit", ">\n", "\n</credit>"], _b.raw = ["<credit", ">\\n", "\\n</credit>"], dangerous(_b, attributes, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_b = ["<credit", ">\n", "\n</credit>"], _b.raw = ["<credit", ">\\n", "\\n</credit>"], dangerous(_b, attributes, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b;
 }
 function creditTypeToXML(creditType) {
@@ -19110,7 +19096,9 @@ function creditImageToXML(creditImage) {
     if (defined(creditImage.type)) {
         attribs += (_b = [" type=\"", "\""], _b.raw = [" type=\"", "\""], xml(_b, creditImage.type));
     }
-    attribs += positionToXML(creditImage) + halignToXML(creditImage) + valignImageToXML(creditImage);
+    attribs += positionToXML(creditImage) +
+        halignToXML(creditImage) +
+        valignImageToXML(creditImage);
     return (_c = ["<credit-image", " />"], _c.raw = ["<credit-image", " />"], dangerous(_c, attribs));
     var _a, _b, _c;
 }
@@ -19140,9 +19128,8 @@ function partListToXML(partList) {
     (partList.scoreParts || []).forEach(function (scorePart) {
         children.push(scorePartToXML(scorePart));
     });
-    return (_a = ["<part-list>\n", "\n</part-list>"], _a.raw = ["<part-list>\\n", "\\n</part-list>"], dangerous(_a, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<part-list>\n", "\n</part-list>"], _a.raw = ["<part-list>\\n", "\\n</part-list>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function scorePartToXML(scorePart) {
@@ -19191,9 +19178,8 @@ function scorePartToXML(scorePart) {
     if (defined(scorePart.id)) {
         attribs += (_a = [" id=\"", "\""], _a.raw = [" id=\"", "\""], xml(_a, scorePart.id));
     }
-    return (_b = ["<score-part", ">\n", "\n</score-part>"], _b.raw = ["<score-part", ">\\n", "\\n</score-part>"], dangerous(_b, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_b = ["<score-part", ">\n", "\n</score-part>"], _b.raw = ["<score-part", ">\\n", "\\n</score-part>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b;
 }
 function partNameToXML(partName) {
@@ -19204,7 +19190,9 @@ function partNameToXML(partName) {
     //     %justify;
     // >
     var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, partName.partName));
-    return (_b = ["<part-name", ">", "</part-name>"], _b.raw = ["<part-name", ">", "</part-name>"], dangerous(_b, printStyleToXML(partName) + printObjectToXML(partName) + justifyToXML(partName), pcdata));
+    return (_b = ["<part-name", ">", "</part-name>"], _b.raw = ["<part-name", ">", "</part-name>"], dangerous(_b, printStyleToXML(partName) +
+        printObjectToXML(partName) +
+        justifyToXML(partName), pcdata));
     var _a, _b;
 }
 function partNameDisplayToXML(partNameDisplay) {
@@ -19213,9 +19201,8 @@ function partNameDisplayToXML(partNameDisplay) {
     // <!ATTLIST part-name-display
     //     %print-object;
     // >
-    return (_a = ["<part-name-display", ">\n", "</part-name-display>"], _a.raw = ["<part-name-display", ">\\n", "</part-name-display>"], dangerous(_a, printObjectToXML(partNameDisplay), textArrayToXML(partNameDisplay.name).join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<part-name-display", ">\n", "</part-name-display>"], _a.raw = ["<part-name-display", ">\\n", "</part-name-display>"], dangerous(_a, printObjectToXML(partNameDisplay), textArrayToXML(partNameDisplay.name).join("\n")
+        .split("\n").map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function partAbbreviationToXML(abbreviation) {
@@ -19226,7 +19213,9 @@ function partAbbreviationToXML(abbreviation) {
     //     %justify;
     // >
     var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, abbreviation.abbreviation));
-    return (_b = ["<part-abbreviation", ">", "</part-abbreviation>"], _b.raw = ["<part-abbreviation", ">", "</part-abbreviation>"], dangerous(_b, printStyleToXML(abbreviation) + printObjectToXML(abbreviation) + justifyToXML(abbreviation), pcdata));
+    return (_b = ["<part-abbreviation", ">", "</part-abbreviation>"], _b.raw = ["<part-abbreviation", ">", "</part-abbreviation>"], dangerous(_b, printStyleToXML(abbreviation) +
+        printObjectToXML(abbreviation) +
+        justifyToXML(abbreviation), pcdata));
     var _a, _b;
 }
 function partAbbreviationDisplayToXML(partAbbreviationDisplay) {
@@ -19235,18 +19224,19 @@ function partAbbreviationDisplayToXML(partAbbreviationDisplay) {
     // <!ATTLIST part-abbreviation-display
     //     %print-object;
     // >
-    return (_a = ["<part-abbreviation-display", ">", "</part-abbreviation-display>"], _a.raw = ["<part-abbreviation-display", ">", "</part-abbreviation-display>"], dangerous(_a, printObjectToXML(partAbbreviationDisplay), textArrayToXML(partAbbreviationDisplay.name).join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_a = ["<part-abbreviation-display", ">", "</part-abbreviation-display>"], _a.raw = ["<part-abbreviation-display", ">", "</part-abbreviation-display>"], dangerous(_a, printObjectToXML(partAbbreviationDisplay), textArrayToXML(partAbbreviationDisplay.name).join("\n")
+        .split("\n").map(function (n) { return "  " + n; }).join("\n")));
     var _a;
 }
 function textArrayToXML(texts) {
     return texts.map(function (text) {
         if (text.acc) {
-            return (_a = ["<accidental-text", ""], _a.raw = ["<accidental-text", ""], dangerous(_a, textFormattingToXML(text.acc))) + (_b = [">", "</accidental-text>"], _b.raw = [">", "</accidental-text>"], xml(_b, text.acc.text));
+            return (_a = ["<accidental-text", ""], _a.raw = ["<accidental-text", ""], dangerous(_a, textFormattingToXML(text.acc))) +
+                (_b = [">", "</accidental-text>"], _b.raw = [">", "</accidental-text>"], xml(_b, text.acc.text));
         }
         else if (text.text) {
-            return (_c = ["<display-text", ""], _c.raw = ["<display-text", ""], dangerous(_c, textFormattingToXML(text.text))) + (_d = [">", "</display-text>"], _d.raw = [">", "</display-text>"], xml(_d, text.text.text));
+            return (_c = ["<display-text", ""], _c.raw = ["<display-text", ""], dangerous(_c, textFormattingToXML(text.text))) +
+                (_d = [">", "</display-text>"], _d.raw = [">", "</display-text>"], xml(_d, text.text.text));
         }
         else {
             throw "Unknown type " + text;
@@ -19315,9 +19305,8 @@ function midiInstrumentToXML(midiInstrument) {
     if (defined(midiInstrument.id)) {
         attribs += (_j = [" id=\"", "\""], _j.raw = [" id=\"", "\""], xml(_j, midiInstrument.id));
     }
-    return (_k = ["<midi-instrument", ">\n", "\n</midi-instrument>"], _k.raw = ["<midi-instrument", ">\\n", "\\n</midi-instrument>"], dangerous(_k, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_k = ["<midi-instrument", ">\n", "\n</midi-instrument>"], _k.raw = ["<midi-instrument", ">\\n", "\\n</midi-instrument>"], dangerous(_k, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 }
 function scoreInstrumentToXML(scoreInstrument) {
@@ -19363,13 +19352,11 @@ function scoreInstrumentToXML(scoreInstrument) {
             // <!ELEMENT virtual-name (#PCDATA)>
             vChildren.push((_h = ["<virtual-name>", "</virtual-name>"], _h.raw = ["<virtual-name>", "</virtual-name>"], xml(_h, v.virtualName)));
         }
-        children.push((_j = ["<virtual-instrument>\n", "\n</virtual-instrument>"], _j.raw = ["<virtual-instrument>\\n", "\\n</virtual-instrument>"], dangerous(_j, vChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
+        children.push((_j = ["<virtual-instrument>\n", "\n</virtual-instrument>"], _j.raw = ["<virtual-instrument>\\n", "\\n</virtual-instrument>"], dangerous(_j, vChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
     }
-    return (_k = ["<score-instrument", ">\n", "\n</score-instrument>"], _k.raw = ["<score-instrument", ">\\n", "\\n</score-instrument>"], dangerous(_k, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_k = ["<score-instrument", ">\n", "\n</score-instrument>"], _k.raw = ["<score-instrument", ">\\n", "\\n</score-instrument>"], dangerous(_k, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 }
 function partGroupToXML(partGroup) {
@@ -19382,7 +19369,9 @@ function partGroupToXML(partGroup) {
     // >
     // <!ELEMENT group-time EMPTY>
     var children = [];
-    var attribs = "" + startStopToXML(partGroup) + numberLevelToXML(partGroup);
+    var attribs = "" +
+        startStopToXML(partGroup) +
+        numberLevelToXML(partGroup);
     if (defined(partGroup.groupName)) {
         children.push(groupNameToXML(partGroup.groupName));
     }
@@ -19405,9 +19394,8 @@ function partGroupToXML(partGroup) {
         children.push((_a = ["<group-time />"], _a.raw = ["<group-time />"], xml(_a)));
     }
     children = children.concat(editorialToXML(partGroup));
-    return (_b = ["<part-group", ">\n", "\n</part-group>"], _b.raw = ["<part-group", ">\\n", "\\n</part-group>"], dangerous(_b, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_b = ["<part-group", ">\n", "\n</part-group>"], _b.raw = ["<part-group", ">\\n", "\\n</part-group>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b;
 }
 function groupNameToXML(groupName) {
@@ -19417,7 +19405,8 @@ function groupNameToXML(groupName) {
     //     %justify;
     // >
     var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, groupName.name));
-    return (_b = ["<group-name", ">", "</group-name>"], _b.raw = ["<group-name", ">", "</group-name>"], dangerous(_b, printStyleToXML(groupName) + justifyToXML(groupName), pcdata));
+    return (_b = ["<group-name", ">", "</group-name>"], _b.raw = ["<group-name", ">", "</group-name>"], dangerous(_b, printStyleToXML(groupName) +
+        justifyToXML(groupName), pcdata));
     var _a, _b;
 }
 function groupNameDisplayToXML(groupNameDisplay) {
@@ -19439,7 +19428,8 @@ function groupAbbreviationToXML(groupAbbreviation) {
     //     %justify;
     // >
     var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, groupAbbreviation.text));
-    return (_b = ["<group-abbreviation", ">", "</group-abbreviation>"], _b.raw = ["<group-abbreviation", ">", "</group-abbreviation>"], dangerous(_b, printStyleToXML(groupAbbreviation) + justifyToXML(groupAbbreviation), pcdata));
+    return (_b = ["<group-abbreviation", ">", "</group-abbreviation>"], _b.raw = ["<group-abbreviation", ">", "</group-abbreviation>"], dangerous(_b, printStyleToXML(groupAbbreviation) +
+        justifyToXML(groupAbbreviation), pcdata));
     var _a, _b;
 }
 function groupAbbreviationDisplayToXML(groupAbbreviationDisplay) {
@@ -19461,7 +19451,8 @@ function groupSymbolToXML(groupSymbol) {
     //     %color;
     // >
     var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, groupSymbol.data));
-    return (_b = ["<group-symbol", ">", "</group-symbol>"], _b.raw = ["<group-symbol", ">", "</group-symbol>"], dangerous(_b, positionToXML(groupSymbol) + colorToXML(groupSymbol), pcdata));
+    return (_b = ["<group-symbol", ">", "</group-symbol>"], _b.raw = ["<group-symbol", ">", "</group-symbol>"], dangerous(_b, positionToXML(groupSymbol) +
+        colorToXML(groupSymbol), pcdata));
     var _a, _b;
 }
 function groupBarlineToXML(groupBarline) {
@@ -19507,9 +19498,8 @@ function backupToXML(backup) {
     var children = [];
     children.push((_a = ["<duration>", "</duration>"], _a.raw = ["<duration>", "</duration>"], xml(_a, backup.duration)));
     children = children.concat(editorialToXML(backup));
-    return (_b = ["<backup>\n", "\n</backup>"], _b.raw = ["<backup>\\n", "\\n</backup>"], dangerous(_b, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_b = ["<backup>\n", "\n</backup>"], _b.raw = ["<backup>\\n", "\\n</backup>"], dangerous(_b, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b;
 }
 function forwardToXML(forward) {
@@ -19519,9 +19509,8 @@ function forwardToXML(forward) {
     children.push((_a = ["<duration>", "</duration>"], _a.raw = ["<duration>", "</duration>"], xml(_a, forward.duration)));
     children = children.concat(editorialVoiceToXML(forward));
     children.push((_b = ["<staff>", "</staff>"], _b.raw = ["<staff>", "</staff>"], xml(_b, forward.staff)));
-    return (_c = ["<forward>\n", "\n</forward>"], _c.raw = ["<forward>\\n", "\\n</forward>"], dangerous(_c, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_c = ["<forward>\n", "\n</forward>"], _c.raw = ["<forward>\\n", "\\n</forward>"], dangerous(_c, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c;
 }
 function groupingToXML(grouping) {
@@ -19539,20 +19528,21 @@ function groupingToXML(grouping) {
         //     type CDATA #IMPLIED
         // >
         var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, feature.data));
-        var _attribs = "";
+        var attribs = "";
         if (defined(feature.type)) {
-            _attribs += (_b = [" type=\"", "\""], _b.raw = [" type=\"", "\""], xml(_b, feature.type));
+            attribs += (_b = [" type=\"", "\""], _b.raw = [" type=\"", "\""], xml(_b, feature.type));
         }
-        children.push((_c = ["<grouping", ">", "</grouping>"], _c.raw = ["<grouping", ">", "</grouping>"], dangerous(_c, _attribs, pcdata)));
+        children.push((_c = ["<grouping", ">", "</grouping>"], _c.raw = ["<grouping", ">", "</grouping>"], dangerous(_c, attribs, pcdata)));
         var _a, _b, _c;
     });
-    var attribs = "" + startStopSingleToXML(grouping) + numberLevelToXML(grouping);
+    var attribs = "" +
+        startStopSingleToXML(grouping) +
+        numberLevelToXML(grouping);
     if (defined(grouping.memberOf)) {
         attribs += (_a = [" member-of=\"", "\""], _a.raw = [" member-of=\"", "\""], xml(_a, grouping.memberOf));
     }
-    return (_b = ["<grouping", ">\n", "\n</grouping>"], _b.raw = ["<grouping", ">\\n", "\\n</grouping>"], dangerous(_b, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_b = ["<grouping", ">\n", "\n</grouping>"], _b.raw = ["<grouping", ">\\n", "\\n</grouping>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b;
 }
 function harmonyToXML(harmony) {
@@ -19568,11 +19558,15 @@ function harmonyToXML(harmony) {
     //     %print-style;
     //     %placement;
     // >
-    var attribs = "" + explicitImpliedAlternateToXML(harmony) + printObjectToXML(harmony);
+    var attribs = "" +
+        explicitImpliedAlternateToXML(harmony) +
+        printObjectToXML(harmony);
     if (defined(harmony.printFrame)) {
         attribs += (_a = [" print-frame=\"", "\""], _a.raw = [" print-frame=\"", "\""], yesNo(_a, harmony.printFrame));
     }
-    attribs += printStyleToXML(harmony) + placementToXML(harmony);
+    attribs +=
+        printStyleToXML(harmony) +
+            placementToXML(harmony);
     var children = [];
     children = children.concat(staffDebugInfoToXMLComment(harmony));
     // TODO: multiple of everything in harmony-chord!
@@ -19602,22 +19596,22 @@ function harmonyToXML(harmony) {
     if (!isNaN(harmony.staff)) {
         children.push((_b = ["<staff>", "</staff>"], _b.raw = ["<staff>", "</staff>"], xml(_b, harmony.staff)));
     }
-    return (_c = ["<harmony", ">\n", "\n</harmony>"], _c.raw = ["<harmony", ">\\n", "\\n</harmony>"], dangerous(_c, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
+    return (_c = ["<harmony", ">\n", "\n</harmony>"], _c.raw = ["<harmony", ">\\n", "\\n</harmony>"], dangerous(_c, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c;
 }
 var eiaTypeToXML = (_a = {},
     _a[1 /* Explicit */] = "explicit",
     _a[2 /* Implied */] = "implied",
     _a[3 /* Alternate */] = "alternate",
-    _a);
+    _a
+);
 function explicitImpliedAlternateToXML(eia) {
     if (defined(eia.type)) {
-        return (_b = [" type=\"", "\""], _b.raw = [" type=\"", "\""], xml(_b, eiaTypeToXML[eia.type]));
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, eiaTypeToXML[eia.type]));
     }
     return "";
-    var _b;
+    var _a;
 }
 function rootToXML(root) {
     // <!ELEMENT root (root-step, root-alter?)>
@@ -19630,11 +19624,11 @@ function rootToXML(root) {
         // >
         var attribs = "";
         if (defined(root.rootStep.text)) {
-            attribs += (_b = [" text=\"", "\""], _b.raw = [" text=\"", "\""], xml(_b, root.rootStep.text));
+            attribs += (_a = [" text=\"", "\""], _a.raw = [" text=\"", "\""], xml(_a, root.rootStep.text));
         }
         attribs += printStyleToXML(root.rootStep);
-        var pcdata = (_c = ["", ""], _c.raw = ["", ""], xml(_c, root.rootStep.data));
-        children.push((_d = ["<root-step", ">", "</root-step>"], _d.raw = ["<root-step", ">", "</root-step>"], dangerous(_d, attribs, pcdata)));
+        var pcdata = (_b = ["", ""], _b.raw = ["", ""], xml(_b, root.rootStep.data));
+        children.push((_c = ["<root-step", ">", "</root-step>"], _c.raw = ["<root-step", ">", "</root-step>"], dangerous(_c, attribs, pcdata)));
     }
     if (defined(root.rootAlter)) {
         // <!ELEMENT root-alter (#PCDATA)>
@@ -19643,27 +19637,27 @@ function rootToXML(root) {
         //     %print-style;
         //     location %left-right; #IMPLIED
         // >
-        var _attribs = printObjectToXML(root.rootAlter) + printStyleToXML(root.rootAlter);
+        var attribs = printObjectToXML(root.rootAlter) +
+            printStyleToXML(root.rootAlter);
         if (defined(root.rootAlter.location)) {
-            _attribs += (_e = [" location=\"", "\""], _e.raw = [" location=\"", "\""], xml(_e, root.rootAlter.location === 0 /* Left */ ? "left" : "right"));
+            attribs += (_d = [" location=\"", "\""], _d.raw = [" location=\"", "\""], xml(_d, root.rootAlter.location === 0 /* Left */ ? "left" : "right"));
         }
-        var _pcdata = root.rootAlter.data;
-        children.push((_f = ["<root-alter", ">", "</root-alter>"], _f.raw = ["<root-alter", ">", "</root-alter>"], dangerous(_f, _attribs, _pcdata)));
+        var pcdata = root.rootAlter.data;
+        children.push((_e = ["<root-alter", ">", "</root-alter>"], _e.raw = ["<root-alter", ">", "</root-alter>"], dangerous(_e, attribs, pcdata)));
     }
-    return (_g = ["<root>\n", "\n</root>"], _g.raw = ["<root>\\n", "\\n</root>"], dangerous(_g, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _b, _c, _d, _e, _f, _g;
+    return (_f = ["<root>\n", "\n</root>"], _f.raw = ["<root>\\n", "\\n</root>"], dangerous(_f, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f;
 }
 function functionToXML(func) {
     // <!ELEMENT function (#PCDATA)>
     // <!ATTLIST function
     //     %print-style;
     // >
-    var pcdata = (_b = ["", ""], _b.raw = ["", ""], xml(_b, func.data));
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, func.data));
     var attribs = printStyleToXML(func);
     return "<function" + attribs + ">" + pcdata + "</function>";
-    var _b;
+    var _a;
 }
 function kindToXML(kind) {
     // <!ELEMENT kind (#PCDATA)>
@@ -19679,31 +19673,34 @@ function kindToXML(kind) {
     // >
     var attribs = "";
     if (defined(kind.useSymbols)) {
-        attribs += (_b = [" kind=\"", "\""], _b.raw = [" kind=\"", "\""], yesNo(_b, kind.useSymbols));
+        attribs += (_a = [" kind=\"", "\""], _a.raw = [" kind=\"", "\""], yesNo(_a, kind.useSymbols));
     }
     if (defined(kind.text)) {
-        attribs += (_c = [" text=\"", "\""], _c.raw = [" text=\"", "\""], xml(_c, kind.text));
+        attribs += (_b = [" text=\"", "\""], _b.raw = [" text=\"", "\""], xml(_b, kind.text));
     }
     if (defined(kind.stackDegrees)) {
-        attribs += (_d = [" stack-degrees=\"", "\""], _d.raw = [" stack-degrees=\"", "\""], yesNo(_d, kind.stackDegrees));
+        attribs += (_c = [" stack-degrees=\"", "\""], _c.raw = [" stack-degrees=\"", "\""], yesNo(_c, kind.stackDegrees));
     }
     if (defined(kind.parenthesesDegrees)) {
-        attribs += (_e = [" parentheses-degrees=\"", "\""], _e.raw = [" parentheses-degrees=\"", "\""], yesNo(_e, kind.parenthesesDegrees));
+        attribs += (_d = [" parentheses-degrees=\"", "\""], _d.raw = [" parentheses-degrees=\"", "\""], yesNo(_d, kind.parenthesesDegrees));
     }
-    attribs += printStyleToXML(kind) + halignToXML(kind) + valignToXML(kind);
-    var pcdata = (_f = ["", ""], _f.raw = ["", ""], xml(_f, kind.data));
-    return (_g = ["<kind", ">\n", "</kind>"], _g.raw = ["<kind", ">\\n", "</kind>"], dangerous(_g, attribs, pcdata));
-    var _b, _c, _d, _e, _f, _g;
+    attribs +=
+        printStyleToXML(kind) +
+            halignToXML(kind) +
+            valignToXML(kind);
+    var pcdata = (_e = ["", ""], _e.raw = ["", ""], xml(_e, kind.data));
+    return (_f = ["<kind", ">\n", "</kind>"], _f.raw = ["<kind", ">\\n", "</kind>"], dangerous(_f, attribs, pcdata));
+    var _a, _b, _c, _d, _e, _f;
 }
 function inversionToXML(inversion) {
     // <!ELEMENT inversion (#PCDATA)>
     // <!ATTLIST inversion
     //     %print-style;
     //     >
-    var pcdata = (_b = ["", ""], _b.raw = ["", ""], xml(_b, inversion.data));
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, inversion.data));
     var attribs = printStyleToXML(inversion);
     return "<inversion" + attribs + ">" + pcdata + "</inversion>";
-    var _b;
+    var _a;
 }
 function bassToXML(bass) {
     // <!ELEMENT bass (bass-step, bass-alter?)>
@@ -19716,11 +19713,11 @@ function bassToXML(bass) {
         // >
         var attribs = "";
         if (defined(bass.bassStep.text)) {
-            attribs += (_b = [" text=\"", "\""], _b.raw = [" text=\"", "\""], xml(_b, bass.bassStep.text));
+            attribs += (_a = [" text=\"", "\""], _a.raw = [" text=\"", "\""], xml(_a, bass.bassStep.text));
         }
         attribs += printStyleToXML(bass.bassStep);
-        var pcdata = (_c = ["", ""], _c.raw = ["", ""], xml(_c, bass.bassStep.data));
-        children.push((_d = ["<bass-step", ">", "</bass-step>"], _d.raw = ["<bass-step", ">", "</bass-step>"], dangerous(_d, attribs, pcdata)));
+        var pcdata = (_b = ["", ""], _b.raw = ["", ""], xml(_b, bass.bassStep.data));
+        children.push((_c = ["<bass-step", ">", "</bass-step>"], _c.raw = ["<bass-step", ">", "</bass-step>"], dangerous(_c, attribs, pcdata)));
     }
     if (defined(bass.bassAlter)) {
         // <!ELEMENT bass-alter (#PCDATA)>
@@ -19729,17 +19726,17 @@ function bassToXML(bass) {
         //     %print-style;
         //     location (left | right) #IMPLIED
         // >
-        var _attribs = printObjectToXML(bass.bassAlter) + printStyleToXML(bass.bassAlter);
+        var attribs = printObjectToXML(bass.bassAlter) +
+            printStyleToXML(bass.bassAlter);
         if (defined(bass.bassAlter.location)) {
-            _attribs += (_e = [" location=\"", "\""], _e.raw = [" location=\"", "\""], xml(_e, bass.bassAlter.location === 0 /* Left */ ? "left" : "right"));
+            attribs += (_d = [" location=\"", "\""], _d.raw = [" location=\"", "\""], xml(_d, bass.bassAlter.location === 0 /* Left */ ? "left" : "right"));
         }
-        var _pcdata = bass.bassAlter.data;
-        children.push((_f = ["<bass-alter", ">", "</bass-alter>"], _f.raw = ["<bass-alter", ">", "</bass-alter>"], dangerous(_f, _attribs, _pcdata)));
+        var pcdata = bass.bassAlter.data;
+        children.push((_e = ["<bass-alter", ">", "</bass-alter>"], _e.raw = ["<bass-alter", ">", "</bass-alter>"], dangerous(_e, attribs, pcdata)));
     }
-    return (_g = ["<bass>\n", "\n</bass>"], _g.raw = ["<bass>\\n", "\\n</bass>"], dangerous(_g, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _b, _c, _d, _e, _f, _g;
+    return (_f = ["<bass>\n", "\n</bass>"], _f.raw = ["<bass>\\n", "\\n</bass>"], dangerous(_f, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f;
 }
 var chordTypeToXML = (_b = {},
     _b[3 /* Augmented */] = "augmented",
@@ -19747,7 +19744,8 @@ var chordTypeToXML = (_b = {},
     _b[1 /* Major */] = "major",
     _b[2 /* Minor */] = "minor",
     _b[5 /* HalfDiminished */] = "half-diminished",
-    _b);
+    _b
+);
 function degreeToXML(degree) {
     // <!ELEMENT degree (degree-value, degree-alter, degree-type)>
     // <!ATTLIST degree
@@ -19764,14 +19762,14 @@ function degreeToXML(degree) {
         // >
         var lattribs = "";
         if (defined(degree.degreeValue.symbol)) {
-            lattribs += (_c = [" symbol=\"", "\""], _c.raw = [" symbol=\"", "\""], xml(_c, chordTypeToXML[degree.degreeValue.symbol]));
+            lattribs += (_a = [" symbol=\"", "\""], _a.raw = [" symbol=\"", "\""], xml(_a, chordTypeToXML[degree.degreeValue.symbol]));
         }
         if (defined(degree.degreeValue.text)) {
-            lattribs += (_d = [" text=\"", "\""], _d.raw = [" text=\"", "\""], xml(_d, degree.degreeValue.text));
+            lattribs += (_b = [" text=\"", "\""], _b.raw = [" text=\"", "\""], xml(_b, degree.degreeValue.text));
         }
         lattribs += printStyleToXML(degree.degreeValue);
-        var pcdata = (_e = ["", ""], _e.raw = ["", ""], xml(_e, degree.degreeValue.data));
-        children.push((_f = ["<degree-value", ">", "</degree-value>"], _f.raw = ["<degree-value", ">", "</degree-value>"], dangerous(_f, lattribs, pcdata)));
+        var pcdata = (_c = ["", ""], _c.raw = ["", ""], xml(_c, degree.degreeValue.data));
+        children.push((_d = ["<degree-value", ">", "</degree-value>"], _d.raw = ["<degree-value", ">", "</degree-value>"], dangerous(_d, lattribs, pcdata)));
     }
     if (defined(degree.degreeAlter)) {
         // <!ELEMENT degree-alter (#PCDATA)>
@@ -19779,12 +19777,12 @@ function degreeToXML(degree) {
         //     %print-style;
         //     plus-minus %yes-no; #IMPLIED
         // >
-        var _lattribs = printStyleToXML(degree.degreeAlter);
+        var lattribs = printStyleToXML(degree.degreeAlter);
         if (defined(degree.degreeAlter.plusMinus)) {
-            _lattribs += (_g = [" plus-minus=\"", "\""], _g.raw = [" plus-minus=\"", "\""], yesNo(_g, degree.degreeAlter.plusMinus));
+            lattribs += (_e = [" plus-minus=\"", "\""], _e.raw = [" plus-minus=\"", "\""], yesNo(_e, degree.degreeAlter.plusMinus));
         }
-        var _pcdata = (_h = ["", ""], _h.raw = ["", ""], xml(_h, degree.degreeAlter.data));
-        children.push((_j = ["<degree-alter", ">", "</degree-alter>"], _j.raw = ["<degree-alter", ">", "</degree-alter>"], dangerous(_j, _lattribs, _pcdata)));
+        var pcdata = (_f = ["", ""], _f.raw = ["", ""], xml(_f, degree.degreeAlter.data));
+        children.push((_g = ["<degree-alter", ">", "</degree-alter>"], _g.raw = ["<degree-alter", ">", "</degree-alter>"], dangerous(_g, lattribs, pcdata)));
     }
     if (defined(degree.degreeType)) {
         // <!ELEMENT degree-type (#PCDATA)>
@@ -19792,18 +19790,17 @@ function degreeToXML(degree) {
         //     text CDATA #IMPLIED
         //     %print-style;
         // >
-        var _lattribs_1 = printStyleToXML(degree.degreeType);
+        var lattribs = printStyleToXML(degree.degreeType);
         if (defined(degree.degreeType.text)) {
-            _lattribs_1 += (_k = [" text=\"", "\""], _k.raw = [" text=\"", "\""], xml(_k, degree.degreeType.text));
+            lattribs += (_h = [" text=\"", "\""], _h.raw = [" text=\"", "\""], xml(_h, degree.degreeType.text));
         }
-        var _pcdata_1 = (_l = ["", ""], _l.raw = ["", ""], xml(_l, degree.degreeType.data));
-        children.push((_m = ["<degree-type", ">", "</degree-type>"], _m.raw = ["<degree-type", ">", "</degree-type>"], dangerous(_m, _lattribs_1, _pcdata_1)));
+        var pcdata = (_j = ["", ""], _j.raw = ["", ""], xml(_j, degree.degreeType.data));
+        children.push((_k = ["<degree-type", ">", "</degree-type>"], _k.raw = ["<degree-type", ">", "</degree-type>"], dangerous(_k, lattribs, pcdata)));
     }
     var attribs = printObjectToXML(degree);
-    return (_o = ["<degree", ">\n", "\n</degree>"], _o.raw = ["<degree", ">\\n", "\\n</degree>"], dangerous(_o, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
+    return (_l = ["<degree", ">\n", "\n</degree>"], _l.raw = ["<degree", ">\\n", "\\n</degree>"], dangerous(_l, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 }
 function frameToXML(frame) {
     // <!ELEMENT frame
@@ -19817,24 +19814,27 @@ function frameToXML(frame) {
     //     width   %tenths;  #IMPLIED
     //     unplayed CDATA    #IMPLIED
     // >
-    var attribs = positionToXML(frame) + colorToXML(frame) + halignToXML(frame) + valignImageToXML(frame);
+    var attribs = positionToXML(frame) +
+        colorToXML(frame) +
+        halignToXML(frame) +
+        valignImageToXML(frame);
     if (defined(frame.height)) {
-        attribs += (_c = [" height=\"", "\""], _c.raw = [" height=\"", "\""], xml(_c, frame.height));
+        attribs += (_a = [" height=\"", "\""], _a.raw = [" height=\"", "\""], xml(_a, frame.height));
     }
     if (defined(frame.width)) {
-        attribs += (_d = [" width=\"", "\""], _d.raw = [" width=\"", "\""], xml(_d, frame.width));
+        attribs += (_b = [" width=\"", "\""], _b.raw = [" width=\"", "\""], xml(_b, frame.width));
     }
     if (defined(frame.unplayed)) {
-        attribs += (_e = [" unplayed=\"", "\""], _e.raw = [" unplayed=\"", "\""], xml(_e, frame.unplayed));
+        attribs += (_c = [" unplayed=\"", "\""], _c.raw = [" unplayed=\"", "\""], xml(_c, frame.unplayed));
     }
     var children = [];
     if (defined(frame.frameStrings)) {
         // <!ELEMENT frame-strings (#PCDATA)>
-        children.push((_f = ["<frame-strings>", "</frame-strings>"], _f.raw = ["<frame-strings>", "</frame-strings>"], xml(_f, frame.frameStrings)));
+        children.push((_d = ["<frame-strings>", "</frame-strings>"], _d.raw = ["<frame-strings>", "</frame-strings>"], xml(_d, frame.frameStrings)));
     }
     if (defined(frame.frameFrets)) {
         // <!ELEMENT frame-frets (#PCDATA)>
-        children.push((_g = ["<frame-frets>", "</frame-frets>"], _g.raw = ["<frame-frets>", "</frame-frets>"], xml(_g, frame.frameFrets)));
+        children.push((_e = ["<frame-frets>", "</frame-frets>"], _e.raw = ["<frame-frets>", "</frame-frets>"], xml(_e, frame.frameFrets)));
     }
     if (defined(frame.firstFret)) {
         // <!ELEMENT first-fret (#PCDATA)>
@@ -19842,13 +19842,14 @@ function frameToXML(frame) {
         //     text CDATA #IMPLIED
         //     location %left-right; #IMPLIED
         // >
-        var pcdata = (_h = ["", ""], _h.raw = ["", ""], xml(_h, frame.firstFret.data));
-        var _attribs = "";
+        var pcdata = (_f = ["", ""], _f.raw = ["", ""], xml(_f, frame.firstFret.data));
+        var attribs_1 = "";
         if (defined(frame.firstFret.text)) {
-            _attribs += (_j = [" text=\"", "\""], _j.raw = [" text=\"", "\""], xml(_j, frame.firstFret.text));
+            attribs_1 += (_g = [" text=\"", "\""], _g.raw = [" text=\"", "\""], xml(_g, frame.firstFret.text));
         }
         if (defined(frame.firstFret.location)) {
-            _attribs += (_k = [" location=\"", "\""], _k.raw = [" location=\"", "\""], xml(_k, frame.firstFret.location === 0 /* Left */ ? "left" : "right"));
+            attribs_1 += (_h = [" location=\"", "\""], _h.raw = [" location=\"", "\""], xml(_h, frame.firstFret.location === 0 /* Left */ ?
+                "left" : "right"));
         }
     }
     (frame.frameNotes || []).forEach(function (frameNote) {
@@ -19860,8 +19861,9 @@ function frameToXML(frame) {
         //     %placement;
         // >
         if (defined(frameNote.string)) {
-            var _pcdata = (_l = ["", ""], _l.raw = ["", ""], xml(_l, frameNote.string.stringNum));
-            fChildren.push((_m = ["<string", ">", "</string>"], _m.raw = ["<string", ">", "</string>"], dangerous(_m, printStyleToXML(frameNote.string) + placementToXML(frameNote.string), _pcdata)));
+            var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, frameNote.string.stringNum));
+            fChildren.push((_b = ["<string", ">", "</string>"], _b.raw = ["<string", ">", "</string>"], dangerous(_b, printStyleToXML(frameNote.string) +
+                placementToXML(frameNote.string), pcdata)));
         }
         // <!ELEMENT fret (#PCDATA)>
         // <!ATTLIST fret
@@ -19869,8 +19871,9 @@ function frameToXML(frame) {
         //     %color;
         // >
         if (defined(frameNote.fret)) {
-            var _pcdata_1 = (_o = ["", ""], _o.raw = ["", ""], xml(_o, frameNote.fret.fret));
-            fChildren.push((_p = ["<fret", ">", "</fret>"], _p.raw = ["<fret", ">", "</fret>"], dangerous(_p, fontToXML(frameNote.fret) + colorToXML(frameNote.fret), _pcdata_1)));
+            var pcdata = (_c = ["", ""], _c.raw = ["", ""], xml(_c, frameNote.fret.fret));
+            fChildren.push((_d = ["<fret", ">", "</fret>"], _d.raw = ["<fret", ">", "</fret>"], dangerous(_d, fontToXML(frameNote.fret) +
+                colorToXML(frameNote.fret), pcdata)));
         }
         // <!ELEMENT fingering (#PCDATA)>
         // <!ATTLIST fingering
@@ -19880,15 +19883,17 @@ function frameToXML(frame) {
         //     %placement;
         // >
         if (defined(frameNote.fingering)) {
-            var _pcdata_2 = (_q = ["", ""], _q.raw = ["", ""], xml(_q, frameNote.fingering.finger));
+            var pcdata = (_e = ["", ""], _e.raw = ["", ""], xml(_e, frameNote.fingering.finger));
             var coreAttribs = "";
             if (defined(frameNote.fingering.substitution)) {
-                coreAttribs += (_r = [" substitution=\"", "\""], _r.raw = [" substitution=\"", "\""], yesNo(_r, frameNote.fingering.substitution));
+                coreAttribs += (_f = [" substitution=\"", "\""], _f.raw = [" substitution=\"", "\""], yesNo(_f, frameNote.fingering.substitution));
             }
             if (defined(frameNote.fingering.alternate)) {
-                coreAttribs += (_s = [" alternate=\"", "\""], _s.raw = [" alternate=\"", "\""], yesNo(_s, frameNote.fingering.alternate));
+                coreAttribs += (_g = [" alternate=\"", "\""], _g.raw = [" alternate=\"", "\""], yesNo(_g, frameNote.fingering.alternate));
             }
-            fChildren.push((_t = ["<fingering", ">", "</fingering>"], _t.raw = ["<fingering", ">", "</fingering>"], dangerous(_t, coreAttribs + printStyleToXML(frameNote.fingering) + placementToXML(frameNote.fingering), _pcdata_2)));
+            fChildren.push((_h = ["<fingering", ">", "</fingering>"], _h.raw = ["<fingering", ">", "</fingering>"], dangerous(_h, coreAttribs +
+                printStyleToXML(frameNote.fingering) +
+                placementToXML(frameNote.fingering), pcdata)));
         }
         // <!ELEMENT barre EMPTY>
         // <!ATTLIST barre
@@ -19896,17 +19901,16 @@ function frameToXML(frame) {
         //     %color;
         // >
         if (defined(frameNote.barre)) {
-            fChildren.push((_u = ["<barre", " />"], _u.raw = ["<barre", " />"], dangerous(_u, startStopToXML(frameNote.barre) + colorToXML(frameNote.barre))));
+            fChildren.push((_j = ["<barre", " />"], _j.raw = ["<barre", " />"], dangerous(_j, startStopToXML(frameNote.barre) +
+                colorToXML(frameNote.barre))));
         }
-        children.push((_v = ["<frame-note>\n", "\n</frame-note>"], _v.raw = ["<frame-note>\\n", "\\n</frame-note>"], dangerous(_v, fChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
-        var _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
+        children.push((_k = ["<frame-note>\n", "\n</frame-note>"], _k.raw = ["<frame-note>\\n", "\\n</frame-note>"], dangerous(_k, fChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
     });
-    return (_l = ["<frame", ">\n", "\n</frame>"], _l.raw = ["<frame", ">\\n", "\\n</frame>"], dangerous(_l, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _c, _d, _e, _f, _g, _h, _j, _k, _l;
+    return (_j = ["<frame", ">\n", "\n</frame>"], _j.raw = ["<frame", ">\\n", "\\n</frame>"], dangerous(_j, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 }
 function printToXML(print) {
     // <!ELEMENT print (page-layout?, system-layout?, staff-layout*,
@@ -19923,19 +19927,19 @@ function printToXML(print) {
     var children = [];
     children = children.concat(staffDebugInfoToXMLComment(print));
     if (defined(print.staffSpacing)) {
-        attribs += (_c = [" staff-spacing=\"", "\""], _c.raw = [" staff-spacing=\"", "\""], xml(_c, print.staffSpacing));
+        attribs += (_a = [" staff-spacing=\"", "\""], _a.raw = [" staff-spacing=\"", "\""], xml(_a, print.staffSpacing));
     }
     if (defined(print.newSystem)) {
-        attribs += (_d = [" new-system=\"", "\""], _d.raw = [" new-system=\"", "\""], yesNo(_d, print.newSystem));
+        attribs += (_b = [" new-system=\"", "\""], _b.raw = [" new-system=\"", "\""], yesNo(_b, print.newSystem));
     }
     if (defined(print.newPage)) {
-        attribs += (_e = [" new-page=\"", "\""], _e.raw = [" new-page=\"", "\""], yesNo(_e, print.newPage));
+        attribs += (_c = [" new-page=\"", "\""], _c.raw = [" new-page=\"", "\""], yesNo(_c, print.newPage));
     }
     if (defined(print.blankPage)) {
-        attribs += (_f = [" blank-page=\"", "\""], _f.raw = [" blank-page=\"", "\""], xml(_f, print.blankPage));
+        attribs += (_d = [" blank-page=\"", "\""], _d.raw = [" blank-page=\"", "\""], xml(_d, print.blankPage));
     }
     if (defined(print.pageNumber)) {
-        attribs += (_g = [" page-number=\"", "\""], _g.raw = [" page-number=\"", "\""], xml(_g, print.pageNumber));
+        attribs += (_e = [" page-number=\"", "\""], _e.raw = [" page-number=\"", "\""], xml(_e, print.pageNumber));
     }
     if (defined(print.pageLayout)) {
         children.push(pageLayoutToXML(print.pageLayout));
@@ -19958,10 +19962,9 @@ function printToXML(print) {
     if (defined(print.partAbbreviationDisplay)) {
         children.push(partAbbreviationDisplayToXML(print.partAbbreviationDisplay));
     }
-    return (_h = ["<print", ">\n", "\n</print>"], _h.raw = ["<print", ">\\n", "\\n</print>"], dangerous(_h, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _c, _d, _e, _f, _g, _h;
+    return (_f = ["<print", ">\n", "\n</print>"], _f.raw = ["<print", ">\\n", "\\n</print>"], dangerous(_f, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f;
 }
 function soundToXML(sound) {
     // <!ELEMENT sound ((midi-device?, midi-instrument?, play?)*,
@@ -19999,66 +20002,65 @@ function soundToXML(sound) {
         children.push(playToXML(play));
     });
     if (defined(sound.tempo)) {
-        attribs += (_c = [" tempo=\"", "\""], _c.raw = [" tempo=\"", "\""], xml(_c, sound.tempo));
+        attribs += (_a = [" tempo=\"", "\""], _a.raw = [" tempo=\"", "\""], xml(_a, sound.tempo));
     }
     if (defined(sound.dynamics)) {
-        attribs += (_d = [" dynamics=\"", "\""], _d.raw = [" dynamics=\"", "\""], xml(_d, sound.dynamics));
+        attribs += (_b = [" dynamics=\"", "\""], _b.raw = [" dynamics=\"", "\""], xml(_b, sound.dynamics));
     }
     if (defined(sound.decapo)) {
-        attribs += (_e = [" decapo=\"", "\""], _e.raw = [" decapo=\"", "\""], yesNo(_e, sound.decapo));
+        attribs += (_c = [" decapo=\"", "\""], _c.raw = [" decapo=\"", "\""], yesNo(_c, sound.decapo));
     }
     if (defined(sound.segno)) {
-        attribs += (_f = [" segno=\"", "\""], _f.raw = [" segno=\"", "\""], xml(_f, sound.segno));
+        attribs += (_d = [" segno=\"", "\""], _d.raw = [" segno=\"", "\""], xml(_d, sound.segno));
     }
     if (defined(sound.dalsegno)) {
-        attribs += (_g = [" dalsegno=\"", "\""], _g.raw = [" dalsegno=\"", "\""], xml(_g, sound.dalsegno));
+        attribs += (_e = [" dalsegno=\"", "\""], _e.raw = [" dalsegno=\"", "\""], xml(_e, sound.dalsegno));
     }
     if (defined(sound.coda)) {
-        attribs += (_h = [" coda=\"", "\""], _h.raw = [" coda=\"", "\""], xml(_h, sound.coda));
+        attribs += (_f = [" coda=\"", "\""], _f.raw = [" coda=\"", "\""], xml(_f, sound.coda));
     }
     if (defined(sound.tocoda)) {
-        attribs += (_j = [" tocoda=\"", "\""], _j.raw = [" tocoda=\"", "\""], xml(_j, sound.tocoda));
+        attribs += (_g = [" tocoda=\"", "\""], _g.raw = [" tocoda=\"", "\""], xml(_g, sound.tocoda));
     }
     if (defined(sound.divisions)) {
-        attribs += (_k = [" divisions=\"", "\""], _k.raw = [" divisions=\"", "\""], xml(_k, sound.divisions));
+        attribs += (_h = [" divisions=\"", "\""], _h.raw = [" divisions=\"", "\""], xml(_h, sound.divisions));
     }
     if (defined(sound.forwardRepeat)) {
-        attribs += (_l = [" forward-repeat=\"", "\""], _l.raw = [" forward-repeat=\"", "\""], yesNo(_l, sound.forwardRepeat));
+        attribs += (_j = [" forward-repeat=\"", "\""], _j.raw = [" forward-repeat=\"", "\""], yesNo(_j, sound.forwardRepeat));
     }
     if (defined(sound.fine)) {
-        attribs += (_m = [" fine=\"", "\""], _m.raw = [" fine=\"", "\""], xml(_m, sound.fine));
+        attribs += (_k = [" fine=\"", "\""], _k.raw = [" fine=\"", "\""], xml(_k, sound.fine));
     }
     attribs += timeOnlyToXML(sound);
     if (defined(sound.pizzicato)) {
-        attribs += (_o = [" pizzicato=\"", "\""], _o.raw = [" pizzicato=\"", "\""], yesNo(_o, sound.pizzicato));
+        attribs += (_l = [" pizzicato=\"", "\""], _l.raw = [" pizzicato=\"", "\""], yesNo(_l, sound.pizzicato));
     }
     if (defined(sound.pan)) {
-        attribs += (_p = [" pan=\"", "\""], _p.raw = [" pan=\"", "\""], xml(_p, sound.pan));
+        attribs += (_m = [" pan=\"", "\""], _m.raw = [" pan=\"", "\""], xml(_m, sound.pan));
     }
     if (defined(sound.elevation)) {
-        attribs += (_q = [" elevation=\"", "\""], _q.raw = [" elevation=\"", "\""], xml(_q, sound.elevation));
+        attribs += (_o = [" elevation=\"", "\""], _o.raw = [" elevation=\"", "\""], xml(_o, sound.elevation));
     }
     if (defined(sound.damperPedal)) {
-        attribs += (_r = [" damper-pedal=\"", "\""], _r.raw = [" damper-pedal=\"", "\""], xml(_r, sound.damperPedal));
+        attribs += (_p = [" damper-pedal=\"", "\""], _p.raw = [" damper-pedal=\"", "\""], xml(_p, sound.damperPedal));
     }
     if (defined(sound.softPedal)) {
-        attribs += (_s = [" soft-pedal=\"", "\""], _s.raw = [" soft-pedal=\"", "\""], xml(_s, sound.softPedal));
+        attribs += (_q = [" soft-pedal=\"", "\""], _q.raw = [" soft-pedal=\"", "\""], xml(_q, sound.softPedal));
     }
     if (defined(sound.sostenutoPedal)) {
-        attribs += (_t = [" sostenuto-pedal=\"", "\""], _t.raw = [" sostenuto-pedal=\"", "\""], xml(_t, sound.sostenutoPedal));
+        attribs += (_r = [" sostenuto-pedal=\"", "\""], _r.raw = [" sostenuto-pedal=\"", "\""], xml(_r, sound.sostenutoPedal));
     }
-    return (_u = ["<sound", ">\n", "\n</sound>"], _u.raw = ["<sound", ">\\n", "\\n</sound>"], dangerous(_u, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+    return (_s = ["<sound", ">\n", "\n</sound>"], _s.raw = ["<sound", ">\\n", "\\n</sound>"], dangerous(_s, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
 }
 function staffDebugInfoToXMLComment(module) {
     var comments = [];
     if (defined(module.divCount)) {
-        comments.push((_c = ["<!--musicxml-interfaces:debug>\n", "  <div-count>", "</div-count>\n", "</musicxml-interfaces:debug-->"], _c.raw = ["<!--musicxml-interfaces:debug>\\n", "  <div-count>", "</div-count>\\n", "</musicxml-interfaces:debug-->"], xml(_c, "", module.divCount, "")));
+        comments.push((_a = ["<!--musicxml-interfaces:debug>\n", "  <div-count>", "</div-count>\n", "</musicxml-interfaces:debug-->"], _a.raw = ["<!--musicxml-interfaces:debug>\\n", "  <div-count>", "</div-count>\\n", "</musicxml-interfaces:debug-->"], xml(_a, "", module.divCount, "")));
     }
     return comments;
-    var _c;
+    var _a;
 }
 /*
 
@@ -20089,19 +20091,19 @@ function directionToXML(direction) {
     }
     children = children.concat(editorialVoiceToXML(direction));
     if (defined(direction.staff)) {
-        children.push((_c = ["<staff>", "</staff>"], _c.raw = ["<staff>", "</staff>"], xml(_c, direction.staff)));
+        children.push((_a = ["<staff>", "</staff>"], _a.raw = ["<staff>", "</staff>"], xml(_a, direction.staff)));
     }
     if (defined(direction.sound)) {
         children.push(soundToXML(direction.sound));
     }
-    var attribs = "" + placementToXML(direction);
+    var attribs = "" +
+        placementToXML(direction);
     if (defined(direction.directive)) {
-        attribs += (_d = [" directive=\"", "\""], _d.raw = [" directive=\"", "\""], yesNo(_d, direction.directive));
+        attribs += (_b = [" directive=\"", "\""], _b.raw = [" directive=\"", "\""], yesNo(_b, direction.directive));
     }
-    return (_e = ["<direction", ">\n", "\n</direction>"], _e.raw = ["<direction", ">\\n", "\\n</direction>"], dangerous(_e, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _c, _d, _e;
+    return (_c = ["<direction", ">\n", "\n</direction>"], _c.raw = ["<direction", ">\\n", "\\n</direction>"], dangerous(_c, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c;
 }
 function attributesToXML(attributes) {
     // <!ELEMENT attributes (%editorial;, divisions?, key*, time*,
@@ -20112,7 +20114,7 @@ function attributesToXML(attributes) {
     children = children.concat(editorialToXML(attributes));
     if (defined(attributes.divisions)) {
         // <!ELEMENT divisions (#PCDATA)>
-        children.push((_c = ["<divisions>", "</divisions>"], _c.raw = ["<divisions>", "</divisions>"], xml(_c, attributes.divisions)));
+        children.push((_a = ["<divisions>", "</divisions>"], _a.raw = ["<divisions>", "</divisions>"], xml(_a, attributes.divisions)));
     }
     (attributes.keySignatures || []).forEach(function (keySignature) {
         children.push(keyToXML(keySignature));
@@ -20122,14 +20124,14 @@ function attributesToXML(attributes) {
     });
     if (defined(attributes.staves)) {
         // <!ELEMENT staves (#PCDATA)>
-        children.push((_d = ["<staves>", "</staves>"], _d.raw = ["<staves>", "</staves>"], xml(_d, attributes.staves)));
+        children.push((_b = ["<staves>", "</staves>"], _b.raw = ["<staves>", "</staves>"], xml(_b, attributes.staves)));
     }
     if (defined(attributes.partSymbol)) {
         children.push(partSymbolToXML(attributes.partSymbol));
     }
     if (defined(attributes.instruments)) {
         // <!ELEMENT instruments (#PCDATA)>
-        children.push((_e = ["<instruments>", "</instruments>"], _e.raw = ["<instruments>", "</instruments>"], xml(_e, attributes.instruments)));
+        children.push((_c = ["<instruments>", "</instruments>"], _c.raw = ["<instruments>", "</instruments>"], xml(_c, attributes.instruments)));
     }
     (attributes.clefs || []).forEach(function (clef) {
         children.push(clefToXML(clef));
@@ -20146,10 +20148,9 @@ function attributesToXML(attributes) {
     if (defined(attributes.measureStyle)) {
         children.push(measureStyleToXML(attributes.measureStyle));
     }
-    return (_f = ["<attributes>\n", "\n</attributes>"], _f.raw = ["<attributes>\\n", "\\n</attributes>"], dangerous(_f, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _c, _d, _e, _f;
+    return (_d = ["<attributes>\n", "\n</attributes>"], _d.raw = ["<attributes>\\n", "\\n</attributes>"], dangerous(_d, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d;
 }
 var countToXML = {
     4: "quarter",
@@ -20232,7 +20233,8 @@ var actualBothNoneToXML = (_c = {},
     _c[2 /* None */] = "none",
     _c[1 /* Both */] = "both",
     _c[0 /* Actual */] = "actual",
-    _c);
+    _c
+);
 var beamTypeToXML = {
     4: "backward hook",
     0: "begin",
@@ -20289,32 +20291,31 @@ function measureToXML(measure) {
     // <!ELEMENT measure (part+)>
     var attribs = "";
     if (defined(measure.number)) {
-        attribs += (_d = [" number=\"", "\""], _d.raw = [" number=\"", "\""], xml(_d, measure.number));
+        attribs += (_a = [" number=\"", "\""], _a.raw = [" number=\"", "\""], xml(_a, measure.number));
     }
     if (defined(measure.implicit)) {
-        attribs += (_e = [" implicit=\"", "\""], _e.raw = [" implicit=\"", "\""], yesNo(_e, measure.implicit));
+        attribs += (_b = [" implicit=\"", "\""], _b.raw = [" implicit=\"", "\""], yesNo(_b, measure.implicit));
     }
     if (defined(measure.nonControlling)) {
-        attribs += (_f = [" implicit=\"", "\""], _f.raw = [" implicit=\"", "\""], yesNo(_f, measure.nonControlling));
+        attribs += (_c = [" implicit=\"", "\""], _c.raw = [" implicit=\"", "\""], yesNo(_c, measure.nonControlling));
     }
     if (defined(measure.width)) {
-        attribs += (_g = [" width=\"", "\""], _g.raw = [" width=\"", "\""], xml(_g, measure.width));
+        attribs += (_d = [" width=\"", "\""], _d.raw = [" width=\"", "\""], xml(_d, measure.width));
     }
     var elements = [];
     for (var key in measure.parts) {
         elements.push(partToXML(measure.parts[key], key));
     }
-    return (_h = ["<measure", ">\n", "\n</measure>"], _h.raw = ["<measure", ">\\n", "\\n</measure>"], dangerous(_h, attribs, elements.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _d, _e, _f, _g, _h;
+    return (_e = ["<measure", ">\n", "\n</measure>"], _e.raw = ["<measure", ">\\n", "\\n</measure>"], dangerous(_e, attribs, elements.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e;
 }
 function partToXML(part, id) {
     // <!ELEMENT part (%music-data;)>
     // <!ATTLIST part
     //     id IDREF #REQUIRED
     // >
-    var attribs = (_d = [" id=\"", "\""], _d.raw = [" id=\"", "\""], xml(_d, id));
+    var attribs = (_a = [" id=\"", "\""], _a.raw = [" id=\"", "\""], xml(_a, id));
     // <!ENTITY % music-data
     //     "(note | backup | forward | direction | attributes |
     //       harmony | figured-bass | print | sound | barline |
@@ -20351,10 +20352,9 @@ function partToXML(part, id) {
                 return "<!-- unknown type (was _class set?) -->";
         }
     });
-    return (_e = ["<part", ">\n", "\n</part>"], _e.raw = ["<part", ">\\n", "\\n</part>"], dangerous(_e, attribs, elements.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _d, _e;
+    return (_b = ["<part", ">\n", "\n</part>"], _b.raw = ["<part", ">\\n", "\\n</part>"], dangerous(_b, attribs, elements.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b;
 }
 function noteToXML(note) {
     // <!ATTLIST note
@@ -20371,20 +20371,20 @@ function noteToXML(note) {
     attribs += printStyleToXML(note);
     attribs += printoutToXML(note);
     if (defined(note.dynamics)) {
-        attribs += (_d = [" dynamics=\"", "\""], _d.raw = [" dynamics=\"", "\""], xml(_d, note.dynamics));
+        attribs += (_a = [" dynamics=\"", "\""], _a.raw = [" dynamics=\"", "\""], xml(_a, note.dynamics));
     }
     if (defined(note.endDynamics)) {
-        attribs += (_e = [" end-dynamics=\"", "\""], _e.raw = [" end-dynamics=\"", "\""], xml(_e, note.endDynamics));
+        attribs += (_b = [" end-dynamics=\"", "\""], _b.raw = [" end-dynamics=\"", "\""], xml(_b, note.endDynamics));
     }
     if (defined(note.attack)) {
-        attribs += (_f = [" attack=\"", "\""], _f.raw = [" attack=\"", "\""], xml(_f, note.attack));
+        attribs += (_c = [" attack=\"", "\""], _c.raw = [" attack=\"", "\""], xml(_c, note.attack));
     }
     if (defined(note.release)) {
-        attribs += (_g = [" release=\"", "\""], _g.raw = [" release=\"", "\""], xml(_g, note.release));
+        attribs += (_d = [" release=\"", "\""], _d.raw = [" release=\"", "\""], xml(_d, note.release));
     }
     attribs += timeOnlyToXML(note);
     if (defined(note.pizzicato)) {
-        attribs += (_h = [" pizzicato=\"", "\""], _h.raw = [" pizzicato=\"", "\""], yesNo(_h, note.pizzicato));
+        attribs += (_e = [" pizzicato=\"", "\""], _e.raw = [" pizzicato=\"", "\""], yesNo(_e, note.pizzicato));
     }
     // <!ELEMENT note
     //     (((grace, %full-note;, (tie, tie?)?) |
@@ -20404,27 +20404,27 @@ function noteToXML(note) {
             >
         */
         if (note.grace.stealTimePrevious) {
-            graceAttribs += (_j = [" steal-time-previous=\"", "\""], _j.raw = [" steal-time-previous=\"", "\""], xml(_j, note.grace.stealTimePrevious));
+            graceAttribs += (_f = [" steal-time-previous=\"", "\""], _f.raw = [" steal-time-previous=\"", "\""], xml(_f, note.grace.stealTimePrevious));
         }
         if (note.grace.stealTimeFollowing) {
-            graceAttribs += (_k = [" steal-time-following=\"", "\""], _k.raw = [" steal-time-following=\"", "\""], xml(_k, note.grace.stealTimeFollowing));
+            graceAttribs += (_g = [" steal-time-following=\"", "\""], _g.raw = [" steal-time-following=\"", "\""], xml(_g, note.grace.stealTimeFollowing));
         }
         if (note.grace.makeTime) {
-            graceAttribs += (_l = [" make-time=\"", "\""], _l.raw = [" make-time=\"", "\""], xml(_l, note.grace.makeTime));
+            graceAttribs += (_h = [" make-time=\"", "\""], _h.raw = [" make-time=\"", "\""], xml(_h, note.grace.makeTime));
         }
         if (note.grace.slash !== undefined && note.grace.slash !== null) {
-            graceAttribs += (_m = [" slash=\"", "\""], _m.raw = [" slash=\"", "\""], yesNo(_m, note.grace.slash));
+            graceAttribs += (_j = [" slash=\"", "\""], _j.raw = [" slash=\"", "\""], yesNo(_j, note.grace.slash));
         }
-        elements.push((_o = ["<grace", " />"], _o.raw = ["<grace", " />"], dangerous(_o, graceAttribs)));
+        elements.push((_k = ["<grace", " />"], _k.raw = ["<grace", " />"], dangerous(_k, graceAttribs)));
     }
     else if (note.cue) {
-        elements.push((_p = ["<cue />"], _p.raw = ["<cue />"], xml(_p)));
+        elements.push((_l = ["<cue />"], _l.raw = ["<cue />"], xml(_l)));
     }
     /*
         <!ENTITY % full-note "(chord?, (pitch | unpitched | rest))">
     */
     if (note.chord) {
-        elements.push((_q = ["<chord />"], _q.raw = ["<chord />"], xml(_q)));
+        elements.push((_m = ["<chord />"], _m.raw = ["<chord />"], xml(_m)));
     }
     if (note.pitch) {
         /*
@@ -20435,30 +20435,28 @@ function noteToXML(note) {
         */
         var pitchElements = [];
         if (note.pitch.step) {
-            pitchElements.push((_r = ["<step>", "</step>"], _r.raw = ["<step>", "</step>"], xml(_r, note.pitch.step)));
+            pitchElements.push((_o = ["<step>", "</step>"], _o.raw = ["<step>", "</step>"], xml(_o, note.pitch.step)));
         }
         if (note.pitch.alter) {
-            pitchElements.push((_s = ["<alter>", "</alter>"], _s.raw = ["<alter>", "</alter>"], xml(_s, note.pitch.alter)));
+            pitchElements.push((_p = ["<alter>", "</alter>"], _p.raw = ["<alter>", "</alter>"], xml(_p, note.pitch.alter)));
         }
         if (note.pitch.octave) {
-            pitchElements.push((_t = ["<octave>", "</octave>"], _t.raw = ["<octave>", "</octave>"], xml(_t, note.pitch.octave)));
+            pitchElements.push((_q = ["<octave>", "</octave>"], _q.raw = ["<octave>", "</octave>"], xml(_q, note.pitch.octave)));
         }
-        elements.push((_u = ["<pitch>\n", "\n</pitch>"], _u.raw = ["<pitch>\\n", "\\n</pitch>"], dangerous(_u, pitchElements.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
+        elements.push((_r = ["<pitch>\n", "\n</pitch>"], _r.raw = ["<pitch>\\n", "\\n</pitch>"], dangerous(_r, pitchElements.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
     }
     else if (note.unpitched) {
         // <!ELEMENT unpitched ((display-step, display-octave)?)>
         var upChildren = [];
         if (note.unpitched.displayStep) {
-            upChildren.push((_v = ["<display-step>", "</display-step>"], _v.raw = ["<display-step>", "</display-step>"], xml(_v, note.unpitched.displayStep)));
+            upChildren.push((_s = ["<display-step>", "</display-step>"], _s.raw = ["<display-step>", "</display-step>"], xml(_s, note.unpitched.displayStep)));
         }
         if (note.unpitched.displayOctave) {
-            upChildren.push((_w = ["<display-octave>", "</display-octave>"], _w.raw = ["<display-octave>", "</display-octave>"], xml(_w, note.unpitched.displayOctave)));
+            upChildren.push((_t = ["<display-octave>", "</display-octave>"], _t.raw = ["<display-octave>", "</display-octave>"], xml(_t, note.unpitched.displayOctave)));
         }
-        elements.push((_x = ["<unpitched>\n", "\n</unpitched>"], _x.raw = ["<unpitched>\\n", "\\n</unpitched>"], dangerous(_x, upChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
+        elements.push((_u = ["<unpitched>\n", "\n</unpitched>"], _u.raw = ["<unpitched>\\n", "\\n</unpitched>"], dangerous(_u, upChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
     }
     else if (note.rest) {
         var restAttribs = "";
@@ -20470,32 +20468,31 @@ function noteToXML(note) {
             restChildren.push("<display-octave>" + note.rest.displayOctave + "</display-octave>");
         }
         if (note.rest.measure !== undefined && note.rest.measure !== null) {
-            restAttribs += (_y = [" measure=\"", "\""], _y.raw = [" measure=\"", "\""], yesNo(_y, note.rest.measure));
+            restAttribs += (_v = [" measure=\"", "\""], _v.raw = [" measure=\"", "\""], yesNo(_v, note.rest.measure));
         }
-        elements.push((_z = ["<rest", ">\n", "\n</rest>"], _z.raw = ["<rest", ">\\n", "\\n</rest>"], dangerous(_z, restAttribs, restChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
+        elements.push((_w = ["<rest", ">\n", "\n</rest>"], _w.raw = ["<rest", ">\\n", "\\n</rest>"], dangerous(_w, restAttribs, restChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
     }
     if (!note.grace && note.duration) {
-        elements.push((_0 = ["<duration>", "</duration>"], _0.raw = ["<duration>", "</duration>"], xml(_0, note.duration)));
+        elements.push((_x = ["<duration>", "</duration>"], _x.raw = ["<duration>", "</duration>"], xml(_x, note.duration)));
     }
     if (note.ties && note.ties.length) {
-        var tieAttribs = (_1 = [" type=\"", "\""], _1.raw = [" type=\"", "\""], xml(_1, note.ties[0].type === 1 /* Stop */ ? "stop" : "start"));
-        elements.push((_2 = ["<tie", " />"], _2.raw = ["<tie", " />"], dangerous(_2, tieAttribs)));
+        var tieAttribs = (_y = [" type=\"", "\""], _y.raw = [" type=\"", "\""], xml(_y, note.ties[0].type === 1 /* Stop */ ? "stop" : "start"));
+        elements.push((_z = ["<tie", " />"], _z.raw = ["<tie", " />"], dangerous(_z, tieAttribs)));
     }
     // ...
     // instrument?, %editorial-voice;, type?, dot*,
     // ...
     if (note.instrument) {
-        elements.push((_3 = ["<instrument id=\"", "\" />"], _3.raw = ["<instrument id=\"", "\" />"], xml(_3, note.instrument.id)));
+        elements.push((_0 = ["<instrument id=\"", "\" />"], _0.raw = ["<instrument id=\"", "\" />"], xml(_0, note.instrument.id)));
     }
     elements = elements.concat(editorialVoiceToXML(note));
     if (note.noteType && defined(note.noteType.duration)) {
-        elements.push((_4 = ["<type>", "</type>"], _4.raw = ["<type>", "</type>"], xml(_4, countToXML[note.noteType.duration])));
+        elements.push((_1 = ["<type>", "</type>"], _1.raw = ["<type>", "</type>"], xml(_1, countToXML[note.noteType.duration])));
     }
     (note.dots || []).forEach(function () {
-        elements.push((_5 = ["<dot />"], _5.raw = ["<dot />"], xml(_5)));
-        var _5;
+        elements.push((_a = ["<dot />"], _a.raw = ["<dot />"], xml(_a)));
+        var _a;
     });
     // ...
     // accidental?, time-modification?, stem?, notehead?,
@@ -20503,12 +20500,12 @@ function noteToXML(note) {
     if (note.accidental) {
         var accidentalAttribs = "";
         if (note.accidental.editorial !== undefined && note.accidental.editorial !== null) {
-            accidentalAttribs += (_5 = [" editorial=\"", "\""], _5.raw = [" editorial=\"", "\""], yesNo(_5, note.accidental.editorial));
+            accidentalAttribs += (_2 = [" editorial=\"", "\""], _2.raw = [" editorial=\"", "\""], yesNo(_2, note.accidental.editorial));
         }
         if (note.accidental.cautionary !== undefined && note.accidental.cautionary !== null) {
-            accidentalAttribs += (_6 = [" cautionary=\"", "\""], _6.raw = [" cautionary=\"", "\""], yesNo(_6, note.accidental.cautionary));
+            accidentalAttribs += (_3 = [" cautionary=\"", "\""], _3.raw = [" cautionary=\"", "\""], yesNo(_3, note.accidental.cautionary));
         }
-        elements.push((_7 = ["<accidental", ">", "</accidental>"], _7.raw = ["<accidental", ">", "</accidental>"], dangerous(_7, accidentalAttribs, accidentalToXML[note.accidental.accidental]))); // (safe)
+        elements.push((_4 = ["<accidental", ">", "</accidental>"], _4.raw = ["<accidental", ">", "</accidental>"], dangerous(_4, accidentalAttribs, accidentalToXML[note.accidental.accidental]))); // (safe)
     }
     if (note.timeModification) {
         var timeModificationChildren = [];
@@ -20520,35 +20517,38 @@ function noteToXML(note) {
         // <!ELEMENT normal-type (#PCDATA)>
         // <!ELEMENT normal-dot EMPTY>
         if (note.timeModification.actualNotes) {
-            timeModificationChildren.push((_8 = ["<actual-notes>", "</actual-notes>"], _8.raw = ["<actual-notes>", "</actual-notes>"], xml(_8, note.timeModification.actualNotes)));
+            timeModificationChildren.push((_5 = ["<actual-notes>", "</actual-notes>"], _5.raw = ["<actual-notes>", "</actual-notes>"], xml(_5, note.timeModification.actualNotes)));
         }
         if (note.timeModification.normalNotes) {
-            timeModificationChildren.push((_9 = ["<normal-notes>", "</normal-notes>"], _9.raw = ["<normal-notes>", "</normal-notes>"], xml(_9, note.timeModification.normalNotes)));
+            timeModificationChildren.push((_6 = ["<normal-notes>", "</normal-notes>"], _6.raw = ["<normal-notes>", "</normal-notes>"], xml(_6, note.timeModification.normalNotes)));
         }
         if (note.timeModification.normalType) {
-            timeModificationChildren.push((_10 = ["<normal-type>", "</normal-type>"], _10.raw = ["<normal-type>", "</normal-type>"], xml(_10, note.timeModification.normalType)));
+            timeModificationChildren.push((_7 = ["<normal-type>", "</normal-type>"], _7.raw = ["<normal-type>", "</normal-type>"], xml(_7, note.timeModification.normalType)));
         }
         (note.timeModification.normalDots || []).forEach(function () {
-            timeModificationChildren.push((_11 = ["<normal-dot />"], _11.raw = ["<normal-dot />"], xml(_11)));
-            var _11;
+            timeModificationChildren.push((_a = ["<normal-dot />"], _a.raw = ["<normal-dot />"], xml(_a)));
+            var _a;
         });
-        elements.push((_11 = ["<time-modification>\n", "\n</time-modification>"], _11.raw = ["<time-modification>\\n", "\\n</time-modification>"], dangerous(_11, timeModificationChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
+        elements.push((_8 = ["<time-modification>\n", "\n</time-modification>"], _8.raw = ["<time-modification>\\n", "\\n</time-modification>"], dangerous(_8, timeModificationChildren
+            .join("\n").split("\n").map(function (n) { return "  " + n; }).join("\n"))));
     }
     if (note.stem) {
-        var stemAttribs = "" + positionToXML(note.stem) + colorToXML(note.color);
-        elements.push((_12 = ["<stem", ">", "</stem>"], _12.raw = ["<stem", ">", "</stem>"], dangerous(_12, stemAttribs, stemToXML[note.stem.type]))); // (safe)
+        var stemAttribs = "" +
+            positionToXML(note.stem) +
+            colorToXML(note.color);
+        elements.push((_9 = ["<stem", ">", "</stem>"], _9.raw = ["<stem", ">", "</stem>"], dangerous(_9, stemAttribs, stemToXML[note.stem.type]))); // (safe)
     }
     if (note.notehead) {
-        var hattribs = "" + fontToXML(note.notehead) + colorToXML(note.color);
+        var hattribs = "" +
+            fontToXML(note.notehead) +
+            colorToXML(note.color);
         if (defined(note.notehead.filled)) {
-            hattribs += (_13 = [" filled=\"", "\""], _13.raw = [" filled=\"", "\""], yesNo(_13, note.notehead.filled));
+            hattribs += (_10 = [" filled=\"", "\""], _10.raw = [" filled=\"", "\""], yesNo(_10, note.notehead.filled));
         }
         if (defined(note.notehead.parentheses)) {
-            hattribs += (_14 = [" parentheses=\"", "\""], _14.raw = [" parentheses=\"", "\""], yesNo(_14, note.notehead.parentheses));
+            hattribs += (_11 = [" parentheses=\"", "\""], _11.raw = [" parentheses=\"", "\""], yesNo(_11, note.notehead.parentheses));
         }
-        elements.push((_15 = ["<notehead", ">", "</notehead>"], _15.raw = ["<notehead", ">", "</notehead>"], dangerous(_15, hattribs, noteheadTypeToXML[note.notehead.type])));
+        elements.push((_12 = ["<notehead", ">", "</notehead>"], _12.raw = ["<notehead", ">", "</notehead>"], dangerous(_12, hattribs, noteheadTypeToXML[note.notehead.type])));
     }
     // ...
     // notehead-text?, staff?, beam*, notations*, lyric*, play?)>
@@ -20559,18 +20559,18 @@ function noteToXML(note) {
         elements = elements.concat(textArrayToXML(note.noteheadText.text));
     }
     if (!isNaN(note.staff)) {
-        elements.push((_16 = ["<staff>", "</staff>"], _16.raw = ["<staff>", "</staff>"], xml(_16, note.staff)));
+        elements.push((_13 = ["<staff>", "</staff>"], _13.raw = ["<staff>", "</staff>"], xml(_13, note.staff)));
     }
     (note.beams || []).forEach(function (beam) {
-        var beamAttribs = (_17 = [" number=\"", "\""], _17.raw = [" number=\"", "\""], xml(_17, beam.number));
+        var beamAttribs = (_a = [" number=\"", "\""], _a.raw = [" number=\"", "\""], xml(_a, beam.number));
         if (defined(beam.repeater)) {
-            beamAttribs += (_18 = [" repeater=\"", "\""], _18.raw = [" repeater=\"", "\""], yesNo(_18, beam.repeater));
+            beamAttribs += (_b = [" repeater=\"", "\""], _b.raw = [" repeater=\"", "\""], yesNo(_b, beam.repeater));
         }
         if (defined(beam.fan)) {
-            beamAttribs += (_19 = [" fan=\"", "\""], _19.raw = [" fan=\"", "\""], xml(_19, accelRitNoneToXML[beam.fan]));
+            beamAttribs += (_c = [" fan=\"", "\""], _c.raw = [" fan=\"", "\""], xml(_c, accelRitNoneToXML[beam.fan]));
         }
-        elements.push((_20 = ["<beam", ">", "</beam>"], _20.raw = ["<beam", ">", "</beam>"], dangerous(_20, beamAttribs, beamTypeToXML[beam.type]))); // safe
-        var _17, _18, _19, _20;
+        elements.push((_d = ["<beam", ">", "</beam>"], _d.raw = ["<beam", ">", "</beam>"], dangerous(_d, beamAttribs, beamTypeToXML[beam.type]))); // safe
+        var _a, _b, _c, _d;
     });
     (note.notations || []).forEach(function (notation) {
         /**
@@ -20591,7 +20591,7 @@ function noteToXML(note) {
         var notationsAttribs = "";
         var nChildren = [];
         if (defined(notation.printObject)) {
-            notationsAttribs += (_17 = [" print-object=\"", "\""], _17.raw = [" print-object=\"", "\""], yesNo(_17, notation.printObject));
+            notationsAttribs += (_a = [" print-object=\"", "\""], _a.raw = [" print-object=\"", "\""], yesNo(_a, notation.printObject));
         }
         nChildren = nChildren.concat(editorialToXML(notation));
         (notation.tieds || []).forEach(function (tied) {
@@ -20606,8 +20606,16 @@ function noteToXML(note) {
             //     %bezier;
             //     %color;
             // >
-            nChildren.push((_18 = ["<tied", " />"], _18.raw = ["<tied", " />"], dangerous(_18, startStopContinueToXML(tied) + numberLevelToXML(tied) + lineTypeToXML(tied) + dashedFormattingToXML(tied) + positionToXML(tied) + placementToXML(tied) + orientationToXML(tied) + bezierToXML(tied) + colorToXML(tied))));
-            var _18;
+            nChildren.push((_a = ["<tied", " />"], _a.raw = ["<tied", " />"], dangerous(_a, startStopContinueToXML(tied) +
+                numberLevelToXML(tied) +
+                lineTypeToXML(tied) +
+                dashedFormattingToXML(tied) +
+                positionToXML(tied) +
+                placementToXML(tied) +
+                orientationToXML(tied) +
+                bezierToXML(tied) +
+                colorToXML(tied))));
+            var _a;
         });
         (notation.slurs || []).forEach(function (slur) {
             // <!ATTLIST slur
@@ -20621,8 +20629,16 @@ function noteToXML(note) {
             //     %bezier;
             //     %color;
             // >
-            nChildren.push((_18 = ["<slur", " />"], _18.raw = ["<slur", " />"], dangerous(_18, startStopContinueToXML(slur) + numberLevelToXML(slur) + lineTypeToXML(slur) + dashedFormattingToXML(slur) + positionToXML(slur) + placementToXML(slur) + orientationToXML(slur) + bezierToXML(slur) + colorToXML(slur))));
-            var _18;
+            nChildren.push((_a = ["<slur", " />"], _a.raw = ["<slur", " />"], dangerous(_a, startStopContinueToXML(slur) +
+                numberLevelToXML(slur) +
+                lineTypeToXML(slur) +
+                dashedFormattingToXML(slur) +
+                positionToXML(slur) +
+                placementToXML(slur) +
+                orientationToXML(slur) +
+                bezierToXML(slur) +
+                colorToXML(slur))));
+            var _a;
         });
         (notation.tuplets || []).forEach(function (tuplet) {
             // <!ELEMENT tuplet (tuplet-actual?, tuplet-normal?)>
@@ -20655,30 +20671,23 @@ function noteToXML(note) {
             //     %font;
             //     %color;
             // >
-            var tattribs = "" + startStopToXML(tuplet) + numberLevelToXML(tuplet);
+            var tattribs = "" +
+                startStopToXML(tuplet) +
+                numberLevelToXML(tuplet);
             if (defined(tuplet.bracket)) {
-                tattribs += (_18 = [" bracket=\"", "\""], _18.raw = [" bracket=\"", "\""], yesNo(_18, tuplet.bracket));
+                tattribs += (_a = [" bracket=\"", "\""], _a.raw = [" bracket=\"", "\""], yesNo(_a, tuplet.bracket));
             }
             if (defined(tuplet.showNumber)) {
-                tattribs += (_19 = [" show-number=\"", "\""], _19.raw = [" show-number=\"", "\""], xml(_19, actualBothNoneToXML[tuplet.showNumber]));
+                tattribs += (_b = [" show-number=\"", "\""], _b.raw = [" show-number=\"", "\""], xml(_b, actualBothNoneToXML[tuplet.showNumber]));
             }
             if (defined(tuplet.showType)) {
-                tattribs += (_20 = [" show-type=\"", "\""], _20.raw = [" show-type=\"", "\""], xml(_20, actualBothNoneToXML[tuplet.showType]));
+                tattribs += (_c = [" show-type=\"", "\""], _c.raw = [" show-type=\"", "\""], xml(_c, actualBothNoneToXML[tuplet.showType]));
             }
             tattribs += lineShapeToXML(tuplet);
             tattribs += positionToXML(tuplet);
             tattribs += placementToXML(tuplet);
             var tChildren = [];
-            [
-                [
-                    "tuplet-actual",
-                    "tupletActual"
-                ],
-                [
-                    "tuplet-normal",
-                    "tupletNormal"
-                ]
-            ].forEach(function (tup) {
+            [["tuplet-actual", "tupletActual"], ["tuplet-normal", "tupletNormal"]].forEach(function (tup) {
                 var data = tuplet[tup[1]];
                 if (!data) {
                     return;
@@ -20686,27 +20695,25 @@ function noteToXML(note) {
                 var dataChildren = [];
                 if (data.tupletNumber) {
                     var num = data.tupletNumber;
-                    var pcdata = (_21 = ["", ""], _21.raw = ["", ""], xml(_21, num.text));
-                    dataChildren.push((_22 = ["<tuplet-number", ">", "</tuplet-number>"], _22.raw = ["<tuplet-number", ">", "</tuplet-number>"], dangerous(_22, fontToXML(num) + colorToXML(num), pcdata)));
+                    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, num.text));
+                    dataChildren.push((_b = ["<tuplet-number", ">", "</tuplet-number>"], _b.raw = ["<tuplet-number", ">", "</tuplet-number>"], dangerous(_b, fontToXML(num) + colorToXML(num), pcdata)));
                 }
                 if (data.tupletType) {
                     var type = data.tupletType;
-                    var _pcdata = (_23 = ["", ""], _23.raw = ["", ""], xml(_23, type.text));
-                    dataChildren.push((_24 = ["<tuplet-type", ">", "</tuplet-type>"], _24.raw = ["<tuplet-type", ">", "</tuplet-type>"], dangerous(_24, fontToXML(type) + colorToXML(type), _pcdata)));
+                    var pcdata = (_c = ["", ""], _c.raw = ["", ""], xml(_c, type.text));
+                    dataChildren.push((_d = ["<tuplet-type", ">", "</tuplet-type>"], _d.raw = ["<tuplet-type", ">", "</tuplet-type>"], dangerous(_d, fontToXML(type) + colorToXML(type), pcdata)));
                 }
                 (data.tupletDots || []).forEach(function (dot) {
-                    dataChildren.push((_25 = ["<tuplet-dot", " />"], _25.raw = ["<tuplet-dot", " />"], dangerous(_25, fontToXML(dot) + colorToXML(dot))));
-                    var _25;
+                    dataChildren.push((_a = ["<tuplet-dot", " />"], _a.raw = ["<tuplet-dot", " />"], dangerous(_a, fontToXML(dot) + colorToXML(dot))));
+                    var _a;
                 });
-                tChildren.push((_25 = ["<", ">\n", "\n</", ">"], _25.raw = ["<", ">\\n", "\\n</", ">"], dangerous(_25, tup[0], dataChildren.join("\n").split("\n").map(function (n) {
-                    return "  " + n;
-                }).join("\n"), tup[0])));
-                var _21, _22, _23, _24, _25;
+                tChildren.push((_e = ["<", ">\n", "\n</", ">"], _e.raw = ["<", ">\\n", "\\n</", ">"], dangerous(_e, tup[0], dataChildren.join("\n").split("\n")
+                    .map(function (n) { return "  " + n; }).join("\n"), tup[0])));
+                var _a, _b, _c, _d, _e;
             });
-            nChildren.push((_21 = ["<tuplet", ">\n", "\n</tuplet>"], _21.raw = ["<tuplet", ">\\n", "\\n</tuplet>"], dangerous(_21, tattribs, tChildren.join("\n").split("\n").map(function (n) {
-                return "  " + n;
-            }).join("\n"))));
-            var _18, _19, _20, _21;
+            nChildren.push((_d = ["<tuplet", ">\n", "\n</tuplet>"], _d.raw = ["<tuplet", ">\\n", "\\n</tuplet>"], dangerous(_d, tattribs, tChildren.join("\n").split("\n")
+                .map(function (n) { return "  " + n; }).join("\n"))));
+            var _a, _b, _c, _d;
         });
         (notation.glissandos || []).forEach(function (glissando) {
             // <!ELEMENT glissando (#PCDATA)>
@@ -20717,9 +20724,13 @@ function noteToXML(note) {
             //     %dashed-formatting;
             //     %print-style;
             // >
-            var pcdata = (_18 = ["", ""], _18.raw = ["", ""], xml(_18, glissando.text));
-            nChildren.push((_19 = ["<glissando", ">", "</glissando>"], _19.raw = ["<glissando", ">", "</glissando>"], dangerous(_19, startStopToXML(glissando) + numberLevelToXML(glissando) + lineTypeToXML(glissando) + dashedFormattingToXML(glissando) + printStyleToXML(glissando), pcdata)));
-            var _18, _19;
+            var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, glissando.text));
+            nChildren.push((_b = ["<glissando", ">", "</glissando>"], _b.raw = ["<glissando", ">", "</glissando>"], dangerous(_b, startStopToXML(glissando) +
+                numberLevelToXML(glissando) +
+                lineTypeToXML(glissando) +
+                dashedFormattingToXML(glissando) +
+                printStyleToXML(glissando), pcdata)));
+            var _a, _b;
         });
         (notation.slides || []).forEach(function (slide) {
             // <!ELEMENT slide (#PCDATA)>
@@ -20731,9 +20742,14 @@ function noteToXML(note) {
             //     %print-style;
             //     %bend-sound;
             // >
-            var pcdata = (_18 = ["", ""], _18.raw = ["", ""], xml(_18, slide.text));
-            nChildren.push((_19 = ["<slide", ">", "</slide>"], _19.raw = ["<slide", ">", "</slide>"], dangerous(_19, startStopToXML(slide) + numberLevelToXML(slide) + lineTypeToXML(slide) + dashedFormattingToXML(slide) + printStyleToXML(slide) + bendSoundToXML(slide), pcdata)));
-            var _18, _19;
+            var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, slide.text));
+            nChildren.push((_b = ["<slide", ">", "</slide>"], _b.raw = ["<slide", ">", "</slide>"], dangerous(_b, startStopToXML(slide) +
+                numberLevelToXML(slide) +
+                lineTypeToXML(slide) +
+                dashedFormattingToXML(slide) +
+                printStyleToXML(slide) +
+                bendSoundToXML(slide), pcdata)));
+            var _a, _b;
         });
         (notation.ornaments || []).forEach(function (ornaments) {
             // <!ELEMENT ornaments
@@ -20749,7 +20765,9 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.trillMark) {
-                oChildren.push((_18 = ["<trill-mark", " />"], _18.raw = ["<trill-mark", " />"], dangerous(_18, printStyleToXML(ornaments.trillMark) + placementToXML(ornaments.trillMark) + trillSoundToXML(ornaments.trillMark))));
+                oChildren.push((_a = ["<trill-mark", " />"], _a.raw = ["<trill-mark", " />"], dangerous(_a, printStyleToXML(ornaments.trillMark) +
+                    placementToXML(ornaments.trillMark) +
+                    trillSoundToXML(ornaments.trillMark))));
             }
             // <!ATTLIST turn
             //     %print-style;
@@ -20758,7 +20776,10 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.turn) {
-                oChildren.push((_19 = ["<turn", " />"], _19.raw = ["<turn", " />"], dangerous(_19, printStyleToXML(ornaments.turn) + placementToXML(ornaments.turn) + trillSoundToXML(ornaments.turn) + slashToXML(ornaments.turn))));
+                oChildren.push((_b = ["<turn", " />"], _b.raw = ["<turn", " />"], dangerous(_b, printStyleToXML(ornaments.turn) +
+                    placementToXML(ornaments.turn) +
+                    trillSoundToXML(ornaments.turn) +
+                    slashToXML(ornaments.turn))));
             }
             // <!ATTLIST delayed-turn
             //     %print-style;
@@ -20767,7 +20788,10 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.delayedTurn) {
-                oChildren.push((_20 = ["<delayed-turn", " />"], _20.raw = ["<delayed-turn", " />"], dangerous(_20, printStyleToXML(ornaments.delayedTurn) + placementToXML(ornaments.delayedTurn) + trillSoundToXML(ornaments.delayedTurn) + slashToXML(ornaments.delayedTurn))));
+                oChildren.push((_c = ["<delayed-turn", " />"], _c.raw = ["<delayed-turn", " />"], dangerous(_c, printStyleToXML(ornaments.delayedTurn) +
+                    placementToXML(ornaments.delayedTurn) +
+                    trillSoundToXML(ornaments.delayedTurn) +
+                    slashToXML(ornaments.delayedTurn))));
             }
             // <!ATTLIST inverted-turn
             //     %print-style;
@@ -20776,7 +20800,10 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.invertedTurn) {
-                oChildren.push((_21 = ["<inverted-turn", " />"], _21.raw = ["<inverted-turn", " />"], dangerous(_21, printStyleToXML(ornaments.invertedTurn) + placementToXML(ornaments.invertedTurn) + trillSoundToXML(ornaments.invertedTurn) + slashToXML(ornaments.invertedTurn))));
+                oChildren.push((_d = ["<inverted-turn", " />"], _d.raw = ["<inverted-turn", " />"], dangerous(_d, printStyleToXML(ornaments.invertedTurn) +
+                    placementToXML(ornaments.invertedTurn) +
+                    trillSoundToXML(ornaments.invertedTurn) +
+                    slashToXML(ornaments.invertedTurn))));
             }
             // <!ATTLIST delayed-inverted-turn
             //     %print-style;
@@ -20785,7 +20812,10 @@ function noteToXML(note) {
             //     slash %yes-no; #IMPLIED
             // >
             if (ornaments.delayedInvertedTurn) {
-                oChildren.push((_22 = ["<delayed-inverted-turn", " />"], _22.raw = ["<delayed-inverted-turn", " />"], dangerous(_22, printStyleToXML(ornaments.delayedInvertedTurn) + placementToXML(ornaments.delayedInvertedTurn) + trillSoundToXML(ornaments.delayedInvertedTurn) + slashToXML(ornaments.delayedInvertedTurn))));
+                oChildren.push((_e = ["<delayed-inverted-turn", " />"], _e.raw = ["<delayed-inverted-turn", " />"], dangerous(_e, printStyleToXML(ornaments.delayedInvertedTurn) +
+                    placementToXML(ornaments.delayedInvertedTurn) +
+                    trillSoundToXML(ornaments.delayedInvertedTurn) +
+                    slashToXML(ornaments.delayedInvertedTurn))));
             }
             // <!ATTLIST vertical-turn
             //     %print-style;
@@ -20793,7 +20823,9 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.verticalTurn) {
-                oChildren.push((_23 = ["<vertical-turn", " />"], _23.raw = ["<vertical-turn", " />"], dangerous(_23, printStyleToXML(ornaments.verticalTurn) + placementToXML(ornaments.verticalTurn) + trillSoundToXML(ornaments.verticalTurn))));
+                oChildren.push((_f = ["<vertical-turn", " />"], _f.raw = ["<vertical-turn", " />"], dangerous(_f, printStyleToXML(ornaments.verticalTurn) +
+                    placementToXML(ornaments.verticalTurn) +
+                    trillSoundToXML(ornaments.verticalTurn))));
             }
             // 
             // <!ATTLIST shake
@@ -20802,7 +20834,9 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.shake) {
-                oChildren.push((_24 = ["<shake", " />"], _24.raw = ["<shake", " />"], dangerous(_24, printStyleToXML(ornaments.shake) + placementToXML(ornaments.shake) + trillSoundToXML(ornaments.shake))));
+                oChildren.push((_g = ["<shake", " />"], _g.raw = ["<shake", " />"], dangerous(_g, printStyleToXML(ornaments.shake) +
+                    placementToXML(ornaments.shake) +
+                    trillSoundToXML(ornaments.shake))));
             }
             // 
             // <!ATTLIST mordent
@@ -20814,7 +20848,10 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.mordent) {
-                oChildren.push((_25 = ["<mordent", " />"], _25.raw = ["<mordent", " />"], dangerous(_25, mordentSubsetToXML(ornaments.mordent) + printStyleToXML(ornaments.mordent) + placementToXML(ornaments.mordent) + trillSoundToXML(ornaments.mordent))));
+                oChildren.push((_h = ["<mordent", " />"], _h.raw = ["<mordent", " />"], dangerous(_h, mordentSubsetToXML(ornaments.mordent) +
+                    printStyleToXML(ornaments.mordent) +
+                    placementToXML(ornaments.mordent) +
+                    trillSoundToXML(ornaments.mordent))));
             }
             // <!ATTLIST inverted-mordent
             //     long %yes-no; #IMPLIED
@@ -20825,7 +20862,10 @@ function noteToXML(note) {
             //     %trill-sound;
             // >
             if (ornaments.invertedMordent) {
-                oChildren.push((_26 = ["<inverted-mordent", " />"], _26.raw = ["<inverted-mordent", " />"], dangerous(_26, mordentSubsetToXML(ornaments.invertedMordent) + printStyleToXML(ornaments.invertedMordent) + placementToXML(ornaments.invertedMordent) + trillSoundToXML(ornaments.invertedMordent))));
+                oChildren.push((_j = ["<inverted-mordent", " />"], _j.raw = ["<inverted-mordent", " />"], dangerous(_j, mordentSubsetToXML(ornaments.invertedMordent) +
+                    printStyleToXML(ornaments.invertedMordent) +
+                    placementToXML(ornaments.invertedMordent) +
+                    trillSoundToXML(ornaments.invertedMordent))));
             }
             // 
             // <!ATTLIST schleifer
@@ -20833,7 +20873,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (ornaments.schleifer) {
-                oChildren.push((_27 = ["<schleifer", " />"], _27.raw = ["<schleifer", " />"], dangerous(_27, printStyleToXML(ornaments.schleifer) + placementToXML(ornaments.schleifer))));
+                oChildren.push((_k = ["<schleifer", " />"], _k.raw = ["<schleifer", " />"], dangerous(_k, printStyleToXML(ornaments.schleifer) +
+                    placementToXML(ornaments.schleifer))));
             }
             // 
             // <!ELEMENT tremolo (#PCDATA)>
@@ -20843,8 +20884,10 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (ornaments.tremolo) {
-                var pcdata = (_28 = ["", ""], _28.raw = ["", ""], xml(_28, ornaments.tremolo.data || ""));
-                oChildren.push((_29 = ["<tremolo", ">", "</tremolo>"], _29.raw = ["<tremolo", ">", "</tremolo>"], dangerous(_29, startStopSingleToXML(ornaments.tremolo) + printStyleToXML(ornaments.tremolo) + placementToXML(ornaments.tremolo), pcdata)));
+                var pcdata = (_l = ["", ""], _l.raw = ["", ""], xml(_l, ornaments.tremolo.data || ""));
+                oChildren.push((_m = ["<tremolo", ">", "</tremolo>"], _m.raw = ["<tremolo", ">", "</tremolo>"], dangerous(_m, startStopSingleToXML(ornaments.tremolo) +
+                    printStyleToXML(ornaments.tremolo) +
+                    placementToXML(ornaments.tremolo), pcdata)));
             }
             // 
             // <!ELEMENT other-ornament (#PCDATA)>
@@ -20853,8 +20896,9 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (ornaments.otherOrnament) {
-                var _pcdata = (_30 = ["", ""], _30.raw = ["", ""], xml(_30, ornaments.otherOrnament.data || ""));
-                oChildren.push((_31 = ["<other-ornament", ">", "</other-ornament>"], _31.raw = ["<other-ornament", ">", "</other-ornament>"], dangerous(_31, printStyleToXML(ornaments.otherOrnament) + placementToXML(ornaments.otherOrnament), _pcdata)));
+                var pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, ornaments.otherOrnament.data || ""));
+                oChildren.push((_p = ["<other-ornament", ">", "</other-ornament>"], _p.raw = ["<other-ornament", ">", "</other-ornament>"], dangerous(_p, printStyleToXML(ornaments.otherOrnament) +
+                    placementToXML(ornaments.otherOrnament), pcdata)));
             }
             // 
             // <!ELEMENT accidental-mark (#PCDATA)>
@@ -20863,14 +20907,14 @@ function noteToXML(note) {
             //     %placement;
             // >
             (ornaments.accidentalMarks || []).forEach(function (accidentalMark) {
-                var _pcdata_1 = (_32 = ["", ""], _32.raw = ["", ""], xml(_32, accidentalMark.mark || ""));
-                oChildren.push((_33 = ["<accidental-mark", ">", "</accidental-mark>"], _33.raw = ["<accidental-mark", ">", "</accidental-mark>"], dangerous(_33, printStyleToXML(accidentalMark) + placementToXML(accidentalMark), _pcdata_1)));
-                var _32, _33;
+                var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, accidentalMark.mark || ""));
+                oChildren.push((_b = ["<accidental-mark", ">", "</accidental-mark>"], _b.raw = ["<accidental-mark", ">", "</accidental-mark>"], dangerous(_b, printStyleToXML(accidentalMark) +
+                    placementToXML(accidentalMark), pcdata)));
+                var _a, _b;
             });
-            nChildren.push((_32 = ["<ornaments>\n", "\n</ornaments>"], _32.raw = ["<ornaments>\\n", "\\n</ornaments>"], dangerous(_32, oChildren.join("\n").split("\n").map(function (n) {
-                return "  " + n;
-            }).join("\n"))));
-            var _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32;
+            nChildren.push((_q = ["<ornaments>\n", "\n</ornaments>"], _q.raw = ["<ornaments>\\n", "\\n</ornaments>"], dangerous(_q, oChildren.join("\n").split("\n")
+                .map(function (n) { return "  " + n; }).join("\n"))));
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
         });
         (notation.technicals || []).forEach(function (technical) {
             var oChildren = [];
@@ -20887,14 +20931,16 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.upBow) {
-                oChildren.push((_18 = ["<up-bow", " />"], _18.raw = ["<up-bow", " />"], dangerous(_18, printStyleToXML(technical.upBow) + placementToXML(technical.upBow))));
+                oChildren.push((_a = ["<up-bow", " />"], _a.raw = ["<up-bow", " />"], dangerous(_a, printStyleToXML(technical.upBow) +
+                    placementToXML(technical.upBow))));
             }
             // <!ATTLIST down-bow
             //     %print-style;
             //     %placement;
             // >
             if (technical.downBow) {
-                oChildren.push((_19 = ["<down-bow", " />"], _19.raw = ["<down-bow", " />"], dangerous(_19, printStyleToXML(technical.downBow) + placementToXML(technical.downBow))));
+                oChildren.push((_b = ["<down-bow", " />"], _b.raw = ["<down-bow", " />"], dangerous(_b, printStyleToXML(technical.downBow) +
+                    placementToXML(technical.downBow))));
             }
             // <!ELEMENT harmonic
             //     ((natural | artificial)?,
@@ -20912,30 +20958,32 @@ function noteToXML(note) {
                 // <!ELEMENT touching-pitch EMPTY>
                 // <!ELEMENT sounding-pitch EMPTY>
                 if (technical.harmonic.natural) {
-                    hChildren.push((_20 = ["<natural />"], _20.raw = ["<natural />"], xml(_20)));
+                    hChildren.push((_c = ["<natural />"], _c.raw = ["<natural />"], xml(_c)));
                 }
                 if (technical.harmonic.artificial) {
-                    hChildren.push((_21 = ["<artificial />"], _21.raw = ["<artificial />"], xml(_21)));
+                    hChildren.push((_d = ["<artificial />"], _d.raw = ["<artificial />"], xml(_d)));
                 }
                 if (technical.harmonic.basePitch) {
-                    hChildren.push((_22 = ["<base-pitch />"], _22.raw = ["<base-pitch />"], xml(_22)));
+                    hChildren.push((_e = ["<base-pitch />"], _e.raw = ["<base-pitch />"], xml(_e)));
                 }
                 if (technical.harmonic.touchingPitch) {
-                    hChildren.push((_23 = ["<touching-pitch />"], _23.raw = ["<touching-pitch />"], xml(_23)));
+                    hChildren.push((_f = ["<touching-pitch />"], _f.raw = ["<touching-pitch />"], xml(_f)));
                 }
                 if (technical.harmonic.soundingPitch) {
-                    hChildren.push((_24 = ["<sounding-pitch />"], _24.raw = ["<sounding-pitch />"], xml(_24)));
+                    hChildren.push((_g = ["<sounding-pitch />"], _g.raw = ["<sounding-pitch />"], xml(_g)));
                 }
-                oChildren.push((_25 = ["<harmonic", ">", "\n</harmonic>"], _25.raw = ["<harmonic", ">", "\\n</harmonic>"], dangerous(_25, printObjectToXML(technical.harmonic) + printStyleToXML(technical.harmonic) + placementToXML(technical.harmonic), hChildren.join("\n").split("\n").map(function (n) {
-                    return "  " + n;
-                }).join("\n"))));
+                oChildren.push((_h = ["<harmonic", ">", "\n</harmonic>"], _h.raw = ["<harmonic", ">", "\\n</harmonic>"], dangerous(_h, printObjectToXML(technical.harmonic) +
+                    printStyleToXML(technical.harmonic) +
+                    placementToXML(technical.harmonic), hChildren.join("\n").split("\n")
+                    .map(function (n) { return "  " + n; }).join("\n"))));
             }
             // <!ATTLIST open-string
             //     %print-style;
             //     %placement;
             // >
             if (technical.openString) {
-                oChildren.push((_26 = ["<open-string", " />"], _26.raw = ["<open-string", " />"], dangerous(_26, printStyleToXML(technical.openString) + placementToXML(technical.openString))));
+                oChildren.push((_j = ["<open-string", " />"], _j.raw = ["<open-string", " />"], dangerous(_j, printStyleToXML(technical.openString) +
+                    placementToXML(technical.openString))));
             }
             // 
             // <!ATTLIST thumb-position
@@ -20943,7 +20991,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.thumbPosition) {
-                oChildren.push((_27 = ["<thumb-position", " />"], _27.raw = ["<thumb-position", " />"], dangerous(_27, printStyleToXML(technical.thumbPosition) + placementToXML(technical.thumbPosition))));
+                oChildren.push((_k = ["<thumb-position", " />"], _k.raw = ["<thumb-position", " />"], dangerous(_k, printStyleToXML(technical.thumbPosition) +
+                    placementToXML(technical.thumbPosition))));
             }
             // 
             // <!ELEMENT pluck (#PCDATA)>
@@ -20952,7 +21001,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.pluck) {
-                oChildren.push((_28 = ["<pluck", " />"], _28.raw = ["<pluck", " />"], dangerous(_28, printStyleToXML(technical.pluck) + placementToXML(technical.pluck))));
+                oChildren.push((_l = ["<pluck", " />"], _l.raw = ["<pluck", " />"], dangerous(_l, printStyleToXML(technical.pluck) +
+                    placementToXML(technical.pluck))));
             }
             // 
             // <!ATTLIST double-tongue
@@ -20960,7 +21010,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.doubleTongue) {
-                oChildren.push((_29 = ["<double-tongue", " />"], _29.raw = ["<double-tongue", " />"], dangerous(_29, printStyleToXML(technical.doubleTongue) + placementToXML(technical.doubleTongue))));
+                oChildren.push((_m = ["<double-tongue", " />"], _m.raw = ["<double-tongue", " />"], dangerous(_m, printStyleToXML(technical.doubleTongue) +
+                    placementToXML(technical.doubleTongue))));
             }
             // 
             // <!ATTLIST triple-tongue
@@ -20968,7 +21019,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.tripleTongue) {
-                oChildren.push((_30 = ["<triple-tongue", " />"], _30.raw = ["<triple-tongue", " />"], dangerous(_30, printStyleToXML(technical.tripleTongue) + placementToXML(technical.tripleTongue))));
+                oChildren.push((_o = ["<triple-tongue", " />"], _o.raw = ["<triple-tongue", " />"], dangerous(_o, printStyleToXML(technical.tripleTongue) +
+                    placementToXML(technical.tripleTongue))));
             }
             // 
             // <!ATTLIST stopped
@@ -20976,7 +21028,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.stopped) {
-                oChildren.push((_31 = ["<stopped", " />"], _31.raw = ["<stopped", " />"], dangerous(_31, printStyleToXML(technical.stopped) + placementToXML(technical.stopped))));
+                oChildren.push((_p = ["<stopped", " />"], _p.raw = ["<stopped", " />"], dangerous(_p, printStyleToXML(technical.stopped) +
+                    placementToXML(technical.stopped))));
             }
             // 
             // <!ATTLIST snap-pizzicato
@@ -20984,7 +21037,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.snapPizzicato) {
-                oChildren.push((_32 = ["<snap-pizzicato", " />"], _32.raw = ["<snap-pizzicato", " />"], dangerous(_32, printStyleToXML(technical.snapPizzicato) + placementToXML(technical.snapPizzicato))));
+                oChildren.push((_q = ["<snap-pizzicato", " />"], _q.raw = ["<snap-pizzicato", " />"], dangerous(_q, printStyleToXML(technical.snapPizzicato) +
+                    placementToXML(technical.snapPizzicato))));
             }
             // 
             // <!ELEMENT hammer-on (#PCDATA)>
@@ -20995,8 +21049,11 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.hammerOn) {
-                var pcdata = (_33 = ["", ""], _33.raw = ["", ""], xml(_33, technical.hammerOn.data));
-                oChildren.push((_34 = ["<hammer-on", ">", "</hammer-on>"], _34.raw = ["<hammer-on", ">", "</hammer-on>"], dangerous(_34, startStopToXML(technical.hammerOn) + numberLevelToXML(technical.hammerOn) + printStyleToXML(technical.hammerOn) + placementToXML(technical.hammerOn), pcdata)));
+                var pcdata = (_r = ["", ""], _r.raw = ["", ""], xml(_r, technical.hammerOn.data));
+                oChildren.push((_s = ["<hammer-on", ">", "</hammer-on>"], _s.raw = ["<hammer-on", ">", "</hammer-on>"], dangerous(_s, startStopToXML(technical.hammerOn) +
+                    numberLevelToXML(technical.hammerOn) +
+                    printStyleToXML(technical.hammerOn) +
+                    placementToXML(technical.hammerOn), pcdata)));
             }
             // <!ELEMENT pull-off (#PCDATA)>
             // <!ATTLIST pull-off
@@ -21006,8 +21063,11 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.pullOff) {
-                var _pcdata = (_35 = ["", ""], _35.raw = ["", ""], xml(_35, technical.pullOff.data));
-                oChildren.push((_36 = ["<pull-off", ">", "</pull-off>"], _36.raw = ["<pull-off", ">", "</pull-off>"], dangerous(_36, startStopToXML(technical.pullOff) + numberLevelToXML(technical.pullOff) + printStyleToXML(technical.pullOff) + placementToXML(technical.pullOff), _pcdata)));
+                var pcdata = (_t = ["", ""], _t.raw = ["", ""], xml(_t, technical.pullOff.data));
+                oChildren.push((_u = ["<pull-off", ">", "</pull-off>"], _u.raw = ["<pull-off", ">", "</pull-off>"], dangerous(_u, startStopToXML(technical.pullOff) +
+                    numberLevelToXML(technical.pullOff) +
+                    printStyleToXML(technical.pullOff) +
+                    placementToXML(technical.pullOff), pcdata)));
             }
             // 
             // <!ELEMENT bend
@@ -21027,21 +21087,22 @@ function noteToXML(note) {
             if (technical.bend) {
                 var bendChildren = [];
                 if (defined(technical.bend.bendAlter)) {
-                    bendChildren.push((_37 = ["<bend-alter>", "</bend-alter>"], _37.raw = ["<bend-alter>", "</bend-alter>"], xml(_37, technical.bend.bendAlter)));
+                    bendChildren.push((_v = ["<bend-alter>", "</bend-alter>"], _v.raw = ["<bend-alter>", "</bend-alter>"], xml(_v, technical.bend.bendAlter)));
                 }
                 if (defined(technical.bend.preBend)) {
-                    bendChildren.push((_38 = ["<pre-bend />"], _38.raw = ["<pre-bend />"], xml(_38)));
+                    bendChildren.push((_w = ["<pre-bend />"], _w.raw = ["<pre-bend />"], xml(_w)));
                 }
                 else if (defined(technical.bend.release)) {
-                    bendChildren.push((_39 = ["<release />"], _39.raw = ["<release />"], xml(_39)));
+                    bendChildren.push((_x = ["<release />"], _x.raw = ["<release />"], xml(_x)));
                 }
                 if (defined(technical.bend.withBar)) {
-                    var _pcdata_1 = (_40 = ["", ""], _40.raw = ["", ""], xml(_40, technical.bend.withBar.data));
-                    bendChildren.push((_41 = ["<with-bar", ">", "</with-bar>"], _41.raw = ["<with-bar", ">", "</with-bar>"], dangerous(_41, printStyleToXML(technical.bend.withBar) + placementToXML(technical.bend.withBar), _pcdata_1)));
+                    var pcdata = (_y = ["", ""], _y.raw = ["", ""], xml(_y, technical.bend.withBar.data));
+                    bendChildren.push((_z = ["<with-bar", ">", "</with-bar>"], _z.raw = ["<with-bar", ">", "</with-bar>"], dangerous(_z, printStyleToXML(technical.bend.withBar) +
+                        placementToXML(technical.bend.withBar), pcdata)));
                 }
-                oChildren.push((_42 = ["<bend", ">\n", "\n</bend>"], _42.raw = ["<bend", ">\\n", "\\n</bend>"], dangerous(_42, printStyleToXML(technical.bend) + bendSoundToXML(technical.bend), bendChildren.join("\n").split("\n").map(function (n) {
-                    return "  " + n;
-                }).join("\n"))));
+                oChildren.push((_0 = ["<bend", ">\n", "\n</bend>"], _0.raw = ["<bend", ">\\n", "\\n</bend>"], dangerous(_0, printStyleToXML(technical.bend) +
+                    bendSoundToXML(technical.bend), bendChildren.join("\n").split("\n")
+                    .map(function (n) { return "  " + n; }).join("\n"))));
             }
             // 
             // <!ELEMENT tap (#PCDATA)>
@@ -21050,8 +21111,9 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.tap) {
-                var _pcdata_2 = (_43 = ["", ""], _43.raw = ["", ""], xml(_43, technical.tap.data));
-                oChildren.push((_44 = ["<tap", ">", "</tap>"], _44.raw = ["<tap", ">", "</tap>"], dangerous(_44, printStyleToXML(technical.tap) + placementToXML(technical.tap), _pcdata_2)));
+                var pcdata = (_1 = ["", ""], _1.raw = ["", ""], xml(_1, technical.tap.data));
+                oChildren.push((_2 = ["<tap", ">", "</tap>"], _2.raw = ["<tap", ">", "</tap>"], dangerous(_2, printStyleToXML(technical.tap) +
+                    placementToXML(technical.tap), pcdata)));
             }
             // 
             // <!ATTLIST heel
@@ -21062,9 +21124,11 @@ function noteToXML(note) {
             if (technical.heel) {
                 var substitution = "";
                 if (defined(technical.heel.substitution)) {
-                    substitution += (_45 = [" substitution=\"", "\""], _45.raw = [" substitution=\"", "\""], yesNo(_45, technical.heel.substitution));
+                    substitution += (_3 = [" substitution=\"", "\""], _3.raw = [" substitution=\"", "\""], yesNo(_3, technical.heel.substitution));
                 }
-                oChildren.push((_46 = ["<heel", " />"], _46.raw = ["<heel", " />"], dangerous(_46, substitution + printStyleToXML(technical.heel) + placementToXML(technical.heel))));
+                oChildren.push((_4 = ["<heel", " />"], _4.raw = ["<heel", " />"], dangerous(_4, substitution +
+                    printStyleToXML(technical.heel) +
+                    placementToXML(technical.heel))));
             }
             // <!ATTLIST toe
             //     substitution %yes-no; #IMPLIED
@@ -21072,11 +21136,13 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.toe) {
-                var _substitution = "";
+                var substitution = "";
                 if (defined(technical.toe.substitution)) {
-                    _substitution += (_47 = [" substitution=\"", "\""], _47.raw = [" substitution=\"", "\""], yesNo(_47, technical.toe.substitution));
+                    substitution += (_5 = [" substitution=\"", "\""], _5.raw = [" substitution=\"", "\""], yesNo(_5, technical.toe.substitution));
                 }
-                oChildren.push((_48 = ["<toe", " />"], _48.raw = ["<toe", " />"], dangerous(_48, _substitution + printStyleToXML(technical.toe) + placementToXML(technical.toe))));
+                oChildren.push((_6 = ["<toe", " />"], _6.raw = ["<toe", " />"], dangerous(_6, substitution +
+                    printStyleToXML(technical.toe) +
+                    placementToXML(technical.toe))));
             }
             // 
             // <!ATTLIST fingernails
@@ -21084,7 +21150,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.fingernails) {
-                oChildren.push((_49 = ["<fingernails", " />"], _49.raw = ["<fingernails", " />"], dangerous(_49, printStyleToXML(technical.fingernails) + placementToXML(technical.fingernails))));
+                oChildren.push((_7 = ["<fingernails", " />"], _7.raw = ["<fingernails", " />"], dangerous(_7, printStyleToXML(technical.fingernails) +
+                    placementToXML(technical.fingernails))));
             }
             // 
             // <!ELEMENT hole (hole-type?, hole-closed, hole-shape?)>
@@ -21101,21 +21168,21 @@ function noteToXML(note) {
             if (technical.hole) {
                 var holeChildren = [];
                 if (defined(technical.hole.holeType)) {
-                    holeChildren.push((_50 = ["<hole-type>", "</hole-type>"], _50.raw = ["<hole-type>", "</hole-type>"], xml(_50, technical.hole.holeType)));
+                    holeChildren.push((_8 = ["<hole-type>", "</hole-type>"], _8.raw = ["<hole-type>", "</hole-type>"], xml(_8, technical.hole.holeType)));
                 }
                 if (defined(technical.hole.holeClosed)) {
                     var holeClosedAttribs = "";
                     if (defined(technical.hole.holeClosed.location)) {
-                        holeClosedAttribs = (_51 = [" location=\"", "\""], _51.raw = [" location=\"", "\""], xml(_51, holeLocationToXML[technical.hole.holeClosed.location]));
+                        holeClosedAttribs = (_9 = [" location=\"", "\""], _9.raw = [" location=\"", "\""], xml(_9, holeLocationToXML[technical.hole.holeClosed.location]));
                     }
-                    holeChildren.push((_52 = ["<hole-closed", ">", "</hole-closed>"], _52.raw = ["<hole-closed", ">", "</hole-closed>"], dangerous(_52, holeClosedAttribs, holeClosedTypeToXML[technical.hole.holeClosed.data])));
+                    holeChildren.push((_10 = ["<hole-closed", ">", "</hole-closed>"], _10.raw = ["<hole-closed", ">", "</hole-closed>"], dangerous(_10, holeClosedAttribs, holeClosedTypeToXML[technical.hole.holeClosed.data])));
                 }
                 if (defined(technical.hole.holeShape)) {
-                    holeChildren.push((_53 = ["<hole-shape>", "</hole-shape>"], _53.raw = ["<hole-shape>", "</hole-shape>"], xml(_53, technical.hole.holeShape)));
+                    holeChildren.push((_11 = ["<hole-shape>", "</hole-shape>"], _11.raw = ["<hole-shape>", "</hole-shape>"], xml(_11, technical.hole.holeShape)));
                 }
-                oChildren.push((_54 = ["<hole", ">", "\n</hole>"], _54.raw = ["<hole", ">", "\\n</hole>"], dangerous(_54, printStyleToXML(technical.hole) + placementToXML(technical.hole), holeChildren.join("\n").split("\n").map(function (n) {
-                    return "  " + n;
-                }).join("\n"))));
+                oChildren.push((_12 = ["<hole", ">", "\n</hole>"], _12.raw = ["<hole", ">", "\\n</hole>"], dangerous(_12, printStyleToXML(technical.hole) +
+                    placementToXML(technical.hole), holeChildren.join("\n").split("\n")
+                    .map(function (n) { return "  " + n; }).join("\n"))));
             }
             // 
             // <!ELEMENT arrow
@@ -21130,17 +21197,17 @@ function noteToXML(note) {
             if (technical.arrow) {
                 var arrowChildren = [];
                 if (defined(technical.arrow.arrowDirection)) {
-                    arrowChildren.push((_55 = ["<arrow-direction>\n                        ", "</arrow-direction>"], _55.raw = ["<arrow-direction>\n                        ", "</arrow-direction>"], xml(_55, technical.arrow.arrowDirection)));
+                    arrowChildren.push((_13 = ["<arrow-direction>\n                        ", "</arrow-direction>"], _13.raw = ["<arrow-direction>\n                        ", "</arrow-direction>"], xml(_13, technical.arrow.arrowDirection)));
                 }
                 if (defined(technical.arrow.arrowStyle)) {
-                    arrowChildren.push((_56 = ["<arrow-style>\n                        ", "</arrow-style>"], _56.raw = ["<arrow-style>\n                        ", "</arrow-style>"], xml(_56, technical.arrow.arrowStyle)));
+                    arrowChildren.push((_14 = ["<arrow-style>\n                        ", "</arrow-style>"], _14.raw = ["<arrow-style>\n                        ", "</arrow-style>"], xml(_14, technical.arrow.arrowStyle)));
                 }
                 if (defined(technical.arrow.circularArrow)) {
-                    arrowChildren.push((_57 = ["<circular-arrow>>\n                        ", "</circular-arrow>"], _57.raw = ["<circular-arrow>>\n                        ", "</circular-arrow>"], xml(_57, technical.arrow.circularArrow)));
+                    arrowChildren.push((_15 = ["<circular-arrow>>\n                        ", "</circular-arrow>"], _15.raw = ["<circular-arrow>>\n                        ", "</circular-arrow>"], xml(_15, technical.arrow.circularArrow)));
                 }
-                oChildren.push((_58 = ["<arrow", ">", "\n</arrow>"], _58.raw = ["<arrow", ">", "\\n</arrow>"], dangerous(_58, printStyleToXML(technical.arrow) + placementToXML(technical.arrow), arrowChildren.join("\n").split("\n").map(function (n) {
-                    return "  " + n;
-                }).join("\n"))));
+                oChildren.push((_16 = ["<arrow", ">", "\n</arrow>"], _16.raw = ["<arrow", ">", "\\n</arrow>"], dangerous(_16, printStyleToXML(technical.arrow) +
+                    placementToXML(technical.arrow), arrowChildren.join("\n").split("\n")
+                    .map(function (n) { return "  " + n; }).join("\n"))));
             }
             // 
             // <!ELEMENT handbell (#PCDATA)>
@@ -21149,8 +21216,9 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.handbell) {
-                var _pcdata_3 = (_59 = ["", ""], _59.raw = ["", ""], xml(_59, technical.handbell.data));
-                oChildren.push((_60 = ["<handbell", ">", "</handbell>"], _60.raw = ["<handbell", ">", "</handbell>"], dangerous(_60, printStyleToXML(technical.handbell) + placementToXML(technical.handbell), _pcdata_3)));
+                var pcdata = (_17 = ["", ""], _17.raw = ["", ""], xml(_17, technical.handbell.data));
+                oChildren.push((_18 = ["<handbell", ">", "</handbell>"], _18.raw = ["<handbell", ">", "</handbell>"], dangerous(_18, printStyleToXML(technical.handbell) +
+                    placementToXML(technical.handbell), pcdata)));
             }
             // 
             // <!ELEMENT other-technical (#PCDATA)>
@@ -21159,13 +21227,13 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (technical.otherTechnical) {
-                var _pcdata_4 = (_61 = ["", ""], _61.raw = ["", ""], xml(_61, technical.otherTechnical.data));
-                oChildren.push((_62 = ["<other-technical", ">", "</other-technical>"], _62.raw = ["<other-technical", ">", "</other-technical>"], dangerous(_62, printStyleToXML(technical.otherTechnical) + placementToXML(technical.otherTechnical), _pcdata_4)));
+                var pcdata = (_19 = ["", ""], _19.raw = ["", ""], xml(_19, technical.otherTechnical.data));
+                oChildren.push((_20 = ["<other-technical", ">", "</other-technical>"], _20.raw = ["<other-technical", ">", "</other-technical>"], dangerous(_20, printStyleToXML(technical.otherTechnical) +
+                    placementToXML(technical.otherTechnical), pcdata)));
             }
-            nChildren.push((_63 = ["<technical>\n", "\n</technical>"], _63.raw = ["<technical>\\n", "\\n</technical>"], dangerous(_63, oChildren.join("\n").split("\n").map(function (n) {
-                return "  " + n;
-            }).join("\n"))));
-            var _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50, _51, _52, _53, _54, _55, _56, _57, _58, _59, _60, _61, _62, _63;
+            nChildren.push((_21 = ["<technical>\n", "\n</technical>"], _21.raw = ["<technical>\\n", "\\n</technical>"], dangerous(_21, oChildren.join("\n").split("\n")
+                .map(function (n) { return "  " + n; }).join("\n"))));
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21;
         });
         (notation.articulations || []).forEach(function (articulation) {
             var oChildren = [];
@@ -21180,7 +21248,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.accent) {
-                oChildren.push((_18 = ["<accent", " />"], _18.raw = ["<accent", " />"], dangerous(_18, printStyleToXML(articulation.accent) + placementToXML(articulation.accent))));
+                oChildren.push((_a = ["<accent", " />"], _a.raw = ["<accent", " />"], dangerous(_a, printStyleToXML(articulation.accent) +
+                    placementToXML(articulation.accent))));
             }
             // <!ATTLIST strong-accent
             //     %print-style;
@@ -21188,7 +21257,9 @@ function noteToXML(note) {
             //     type %up-down; "up"
             // >
             if (articulation.strongAccent) {
-                oChildren.push((_19 = ["<strong-accent", " />"], _19.raw = ["<strong-accent", " />"], dangerous(_19, printStyleToXML(articulation.strongAccent) + placementToXML(articulation.strongAccent) + upDownToXML(articulation.strongAccent))));
+                oChildren.push((_b = ["<strong-accent", " />"], _b.raw = ["<strong-accent", " />"], dangerous(_b, printStyleToXML(articulation.strongAccent) +
+                    placementToXML(articulation.strongAccent) +
+                    upDownToXML(articulation.strongAccent))));
             }
             // 
             // <!ATTLIST staccato
@@ -21196,21 +21267,24 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.staccato) {
-                oChildren.push((_20 = ["<staccato", " />"], _20.raw = ["<staccato", " />"], dangerous(_20, printStyleToXML(articulation.staccato) + placementToXML(articulation.staccato))));
+                oChildren.push((_c = ["<staccato", " />"], _c.raw = ["<staccato", " />"], dangerous(_c, printStyleToXML(articulation.staccato) +
+                    placementToXML(articulation.staccato))));
             }
             // <!ATTLIST tenuto
             //     %print-style;
             //     %placement;
             // >
             if (articulation.tenuto) {
-                oChildren.push((_21 = ["<tenuto", " />"], _21.raw = ["<tenuto", " />"], dangerous(_21, printStyleToXML(articulation.tenuto) + placementToXML(articulation.tenuto))));
+                oChildren.push((_d = ["<tenuto", " />"], _d.raw = ["<tenuto", " />"], dangerous(_d, printStyleToXML(articulation.tenuto) +
+                    placementToXML(articulation.tenuto))));
             }
             // <!ATTLIST detached-legato
             //     %print-style;
             //     %placement;
             // >
             if (articulation.detachedLegato) {
-                oChildren.push((_22 = ["<detached-legato", " />"], _22.raw = ["<detached-legato", " />"], dangerous(_22, printStyleToXML(articulation.detachedLegato) + placementToXML(articulation.detachedLegato))));
+                oChildren.push((_e = ["<detached-legato", " />"], _e.raw = ["<detached-legato", " />"], dangerous(_e, printStyleToXML(articulation.detachedLegato) +
+                    placementToXML(articulation.detachedLegato))));
             }
             // 
             // <!ATTLIST staccatissimo
@@ -21218,7 +21292,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.staccatissimo) {
-                oChildren.push((_23 = ["<staccatissimo", " />"], _23.raw = ["<staccatissimo", " />"], dangerous(_23, printStyleToXML(articulation.staccatissimo) + placementToXML(articulation.staccatissimo))));
+                oChildren.push((_f = ["<staccatissimo", " />"], _f.raw = ["<staccatissimo", " />"], dangerous(_f, printStyleToXML(articulation.staccatissimo) +
+                    placementToXML(articulation.staccatissimo))));
             }
             // 
             // <!ATTLIST spiccato
@@ -21226,7 +21301,8 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.spiccato) {
-                oChildren.push((_24 = ["<spiccato", " />"], _24.raw = ["<spiccato", " />"], dangerous(_24, printStyleToXML(articulation.spiccato) + placementToXML(articulation.spiccato))));
+                oChildren.push((_g = ["<spiccato", " />"], _g.raw = ["<spiccato", " />"], dangerous(_g, printStyleToXML(articulation.spiccato) +
+                    placementToXML(articulation.spiccato))));
             }
             // 
             // <!ATTLIST scoop
@@ -21237,7 +21313,11 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.scoop) {
-                oChildren.push((_25 = ["<scoop", " />"], _25.raw = ["<scoop", " />"], dangerous(_25, lineShapeToXML(articulation.scoop) + lineTypeToXML(articulation.scoop) + dashedFormattingToXML(articulation.scoop) + printStyleToXML(articulation.scoop) + placementToXML(articulation.scoop))));
+                oChildren.push((_h = ["<scoop", " />"], _h.raw = ["<scoop", " />"], dangerous(_h, lineShapeToXML(articulation.scoop) +
+                    lineTypeToXML(articulation.scoop) +
+                    dashedFormattingToXML(articulation.scoop) +
+                    printStyleToXML(articulation.scoop) +
+                    placementToXML(articulation.scoop))));
             }
             // <!ATTLIST plop
             //     %line-shape;
@@ -21247,7 +21327,11 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.plop) {
-                oChildren.push((_26 = ["<plop", " />"], _26.raw = ["<plop", " />"], dangerous(_26, lineShapeToXML(articulation.plop) + lineTypeToXML(articulation.plop) + dashedFormattingToXML(articulation.plop) + printStyleToXML(articulation.plop) + placementToXML(articulation.plop))));
+                oChildren.push((_j = ["<plop", " />"], _j.raw = ["<plop", " />"], dangerous(_j, lineShapeToXML(articulation.plop) +
+                    lineTypeToXML(articulation.plop) +
+                    dashedFormattingToXML(articulation.plop) +
+                    printStyleToXML(articulation.plop) +
+                    placementToXML(articulation.plop))));
             }
             // <!ATTLIST doit
             //     %line-shape;
@@ -21257,7 +21341,11 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.doit) {
-                oChildren.push((_27 = ["<doit", " />"], _27.raw = ["<doit", " />"], dangerous(_27, lineShapeToXML(articulation.doit) + lineTypeToXML(articulation.doit) + dashedFormattingToXML(articulation.doit) + printStyleToXML(articulation.doit) + placementToXML(articulation.doit))));
+                oChildren.push((_k = ["<doit", " />"], _k.raw = ["<doit", " />"], dangerous(_k, lineShapeToXML(articulation.doit) +
+                    lineTypeToXML(articulation.doit) +
+                    dashedFormattingToXML(articulation.doit) +
+                    printStyleToXML(articulation.doit) +
+                    placementToXML(articulation.doit))));
             }
             // <!ATTLIST falloff
             //     %line-shape;
@@ -21267,7 +21355,11 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.falloff) {
-                oChildren.push((_28 = ["<falloff", " />"], _28.raw = ["<falloff", " />"], dangerous(_28, lineShapeToXML(articulation.falloff) + lineTypeToXML(articulation.falloff) + dashedFormattingToXML(articulation.falloff) + printStyleToXML(articulation.falloff) + placementToXML(articulation.falloff))));
+                oChildren.push((_l = ["<falloff", " />"], _l.raw = ["<falloff", " />"], dangerous(_l, lineShapeToXML(articulation.falloff) +
+                    lineTypeToXML(articulation.falloff) +
+                    dashedFormattingToXML(articulation.falloff) +
+                    printStyleToXML(articulation.falloff) +
+                    placementToXML(articulation.falloff))));
             }
             // 
             // <!ELEMENT breath-mark (#PCDATA)>
@@ -21276,8 +21368,9 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.breathMark) {
-                var pcdata = (_29 = ["", ""], _29.raw = ["", ""], xml(_29, breathMarkTypeToXML[articulation.breathMark.type]));
-                oChildren.push((_30 = ["<breath-mark", ">", "</breath-mark>"], _30.raw = ["<breath-mark", ">", "</breath-mark>"], dangerous(_30, printStyleToXML(articulation.breathMark) + placementToXML(articulation.breathMark), pcdata)));
+                var pcdata = (_m = ["", ""], _m.raw = ["", ""], xml(_m, breathMarkTypeToXML[articulation.breathMark.type]));
+                oChildren.push((_o = ["<breath-mark", ">", "</breath-mark>"], _o.raw = ["<breath-mark", ">", "</breath-mark>"], dangerous(_o, printStyleToXML(articulation.breathMark) +
+                    placementToXML(articulation.breathMark), pcdata)));
             }
             // 
             // <!ATTLIST caesura
@@ -21285,21 +21378,24 @@ function noteToXML(note) {
             //     %placement;
             // >
             if (articulation.caesura) {
-                oChildren.push((_31 = ["<caesura", " />"], _31.raw = ["<caesura", " />"], dangerous(_31, printStyleToXML(articulation.caesura) + placementToXML(articulation.caesura))));
+                oChildren.push((_p = ["<caesura", " />"], _p.raw = ["<caesura", " />"], dangerous(_p, printStyleToXML(articulation.caesura) +
+                    placementToXML(articulation.caesura))));
             }
             // <!ATTLIST stress
             //     %print-style;
             //     %placement;
             // >
             if (articulation.stress) {
-                oChildren.push((_32 = ["<stress", " />"], _32.raw = ["<stress", " />"], dangerous(_32, printStyleToXML(articulation.stress) + placementToXML(articulation.stress))));
+                oChildren.push((_q = ["<stress", " />"], _q.raw = ["<stress", " />"], dangerous(_q, printStyleToXML(articulation.stress) +
+                    placementToXML(articulation.stress))));
             }
             // <!ATTLIST unstress
             //     %print-style;
             //     %placement;
             // >
             if (articulation.unstress) {
-                oChildren.push((_33 = ["<unstress", " />"], _33.raw = ["<unstress", " />"], dangerous(_33, printStyleToXML(articulation.unstress) + placementToXML(articulation.unstress))));
+                oChildren.push((_r = ["<unstress", " />"], _r.raw = ["<unstress", " />"], dangerous(_r, printStyleToXML(articulation.unstress) +
+                    placementToXML(articulation.unstress))));
             }
             // <!ELEMENT other-articulation (#PCDATA)>
             // <!ATTLIST other-articulation
@@ -21307,14 +21403,14 @@ function noteToXML(note) {
             //     %placement;
             // >
             (articulation.otherArticulations || []).forEach(function (articulation) {
-                var _pcdata = (_34 = ["", ""], _34.raw = ["", ""], xml(_34, articulation.data));
-                oChildren.push((_35 = ["<other-articulation", ">", "</other-articulation>"], _35.raw = ["<other-articulation", ">", "</other-articulation>"], dangerous(_35, printStyleToXML(articulation) + placementToXML(articulation), _pcdata)));
-                var _34, _35;
+                var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, articulation.data));
+                oChildren.push((_b = ["<other-articulation", ">", "</other-articulation>"], _b.raw = ["<other-articulation", ">", "</other-articulation>"], dangerous(_b, printStyleToXML(articulation) +
+                    placementToXML(articulation), pcdata)));
+                var _a, _b;
             });
-            nChildren.push((_34 = ["<articulations>\n", "\n</articulations>"], _34.raw = ["<articulations>\\n", "\\n</articulations>"], dangerous(_34, oChildren.join("\n").split("\n").map(function (n) {
-                return "  " + n;
-            }).join("\n"))));
-            var _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34;
+            nChildren.push((_s = ["<articulations>\n", "\n</articulations>"], _s.raw = ["<articulations>\\n", "\\n</articulations>"], dangerous(_s, oChildren.join("\n").split("\n")
+                .map(function (n) { return "  " + n; }).join("\n"))));
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
         });
         (notation.dynamics || []).forEach(function (dynamics) {
             nChildren.push(dynamicsToXML(dynamics));
@@ -21330,8 +21426,12 @@ function noteToXML(note) {
             //     %placement;
             //     %color;
             // >
-            nChildren.push((_18 = ["<arpeggiate", " />"], _18.raw = ["<arpeggiate", " />"], dangerous(_18, numberLevelToXML(arpeggiate) + upDownToXML(arpeggiate) + positionToXML(arpeggiate) + placementToXML(arpeggiate) + colorToXML(arpeggiate))));
-            var _18;
+            nChildren.push((_a = ["<arpeggiate", " />"], _a.raw = ["<arpeggiate", " />"], dangerous(_a, numberLevelToXML(arpeggiate) +
+                upDownToXML(arpeggiate) +
+                positionToXML(arpeggiate) +
+                placementToXML(arpeggiate) +
+                colorToXML(arpeggiate))));
+            var _a;
         });
         (notation.nonArpeggiates || []).forEach(function (nonArpeggiate) {
             // <!ATTLIST non-arpeggiate
@@ -21341,8 +21441,12 @@ function noteToXML(note) {
             //     %placement;
             //     %color;
             // >
-            nChildren.push((_18 = ["<non-arpeggiate", " />"], _18.raw = ["<non-arpeggiate", " />"], dangerous(_18, topBottomToXML(nonArpeggiate) + numberLevelToXML(nonArpeggiate) + positionToXML(nonArpeggiate) + placementToXML(nonArpeggiate) + colorToXML(nonArpeggiate))));
-            var _18;
+            nChildren.push((_a = ["<non-arpeggiate", " />"], _a.raw = ["<non-arpeggiate", " />"], dangerous(_a, topBottomToXML(nonArpeggiate) +
+                numberLevelToXML(nonArpeggiate) +
+                positionToXML(nonArpeggiate) +
+                placementToXML(nonArpeggiate) +
+                colorToXML(nonArpeggiate))));
+            var _a;
         });
         (notation.accidentalMarks || []).forEach(function (accidentalMark) {
             // <!ELEMENT accidental-mark (#PCDATA)>
@@ -21350,9 +21454,10 @@ function noteToXML(note) {
             //     %print-style;
             //     %placement;
             // >
-            var pcdata = (_18 = ["", ""], _18.raw = ["", ""], xml(_18, accidentalMark.mark));
-            nChildren.push((_19 = ["<accidental-mark", ">", "</accidental-mark>"], _19.raw = ["<accidental-mark", ">", "</accidental-mark>"], dangerous(_19, printStyleToXML(accidentalMark) + placementToXML(accidentalMark), pcdata)));
-            var _18, _19;
+            var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, accidentalMark.mark));
+            nChildren.push((_b = ["<accidental-mark", ">", "</accidental-mark>"], _b.raw = ["<accidental-mark", ">", "</accidental-mark>"], dangerous(_b, printStyleToXML(accidentalMark) +
+                placementToXML(accidentalMark), pcdata)));
+            var _a, _b;
         });
         (notation.otherNotations || []).forEach(function (otherNotation) {
             // <!ELEMENT other-notation (#PCDATA)>
@@ -21363,14 +21468,17 @@ function noteToXML(note) {
             //     %print-style;
             //     %placement;
             // >
-            var pcdata = (_18 = ["", ""], _18.raw = ["", ""], xml(_18, otherNotation.data));
-            nChildren.push((_19 = ["<other-notation", ">", "</other-notation>"], _19.raw = ["<other-notation", ">", "</other-notation>"], dangerous(_19, startStopSingleToXML(otherNotation) + numberLevelToXML(otherNotation) + printObjectToXML(otherNotation) + printStyleToXML(otherNotation) + placementToXML(otherNotation), pcdata)));
-            var _18, _19;
+            var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, otherNotation.data));
+            nChildren.push((_b = ["<other-notation", ">", "</other-notation>"], _b.raw = ["<other-notation", ">", "</other-notation>"], dangerous(_b, startStopSingleToXML(otherNotation) +
+                numberLevelToXML(otherNotation) +
+                printObjectToXML(otherNotation) +
+                printStyleToXML(otherNotation) +
+                placementToXML(otherNotation), pcdata)));
+            var _a, _b;
         });
-        elements.push((_18 = ["<notations", ">\n", "\n</notations>"], _18.raw = ["<notations", ">\\n", "\\n</notations>"], dangerous(_18, notationsAttribs, nChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
-        var _17, _18;
+        elements.push((_b = ["<notations", ">\n", "\n</notations>"], _b.raw = ["<notations", ">\\n", "\\n</notations>"], dangerous(_b, notationsAttribs, nChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
+        var _a, _b;
     });
     (note.lyrics || []).forEach(function (lyric) {
         // <!ELEMENT lyric
@@ -21388,14 +21496,21 @@ function noteToXML(note) {
         //     %print-object;
         // >
         // TODO: should validate other (e.g., no end-paragraph after syllabic)
-        var lyricAttribs = "" + numberLevelToXML(lyric) + nameToXML(lyric) + justifyToXML(lyric) + positionToXML(lyric) + placementToXML(lyric) + colorToXML(lyric) + printObjectToXML(lyric);
+        var lyricAttribs = "" +
+            numberLevelToXML(lyric) +
+            nameToXML(lyric) +
+            justifyToXML(lyric) +
+            positionToXML(lyric) +
+            placementToXML(lyric) +
+            colorToXML(lyric) +
+            printObjectToXML(lyric);
         var lyricChildren = [];
         (lyric.lyricParts || []).forEach(function (part) {
             // relies on part._class as set in musicxml-interfaces
             switch (part._class) {
                 case "Syllabic":
                     // <!ELEMENT syllabic (#PCDATA)>
-                    lyricChildren.push((_17 = ["<syllabic>", "</syllabic>"], _17.raw = ["<syllabic>", "</syllabic>"], dangerous(_17, syllabicTypeToXML[part.data])));
+                    lyricChildren.push((_a = ["<syllabic>", "</syllabic>"], _a.raw = ["<syllabic>", "</syllabic>"], dangerous(_a, syllabicTypeToXML[part.data])));
                     break;
                 case "Text":
                     // <!ELEMENT text (#PCDATA)>
@@ -21407,8 +21522,13 @@ function noteToXML(note) {
                     //     %letter-spacing;
                     //     xml:lang NMTOKEN #IMPLIED TODO musicxml-interfaces
                     //     %text-direction;
-                    var textpcdata = (_18 = ["", ""], _18.raw = ["", ""], xml(_18, part.data));
-                    lyricChildren.push((_19 = ["<text", ">", "</text>"], _19.raw = ["<text", ">", "</text>"], dangerous(_19, fontToXML(part) + colorToXML(part) + textDecorationToXML(part) + textRotationToXML(part) + letterSpacingToXML(part) + textDirectionToXML(part), textpcdata)));
+                    var textpcdata = (_b = ["", ""], _b.raw = ["", ""], xml(_b, part.data));
+                    lyricChildren.push((_c = ["<text", ">", "</text>"], _c.raw = ["<text", ">", "</text>"], dangerous(_c, fontToXML(part) +
+                        colorToXML(part) +
+                        textDecorationToXML(part) +
+                        textRotationToXML(part) +
+                        letterSpacingToXML(part) +
+                        textDirectionToXML(part), textpcdata)));
                     break;
                 case "Elision":
                     // <!ELEMENT elision (#PCDATA)>
@@ -21416,8 +21536,9 @@ function noteToXML(note) {
                     //     %font;
                     //     %color;
                     // >
-                    var pcdata = (_20 = ["", ""], _20.raw = ["", ""], xml(_20, part.data));
-                    lyricChildren.push((_21 = ["<elision", ">", "</elision>"], _21.raw = ["<elision", ">", "</elision>"], dangerous(_21, startStopContinueToXML(part) + printStyleToXML(part), pcdata)));
+                    var pcdata = (_d = ["", ""], _d.raw = ["", ""], xml(_d, part.data));
+                    lyricChildren.push((_e = ["<elision", ">", "</elision>"], _e.raw = ["<elision", ">", "</elision>"], dangerous(_e, startStopContinueToXML(part) +
+                        printStyleToXML(part), pcdata)));
                     break;
                 case "Extend":
                     // <!ELEMENT extend EMPTY>
@@ -21425,23 +21546,24 @@ function noteToXML(note) {
                     //     type %start-stop-continue; #IMPLIED
                     //     %print-style;
                     // >
-                    lyricChildren.push((_22 = ["<extend", " />"], _22.raw = ["<extend", " />"], dangerous(_22, startStopContinueToXML(part) + printStyleToXML(part))));
+                    lyricChildren.push((_f = ["<extend", " />"], _f.raw = ["<extend", " />"], dangerous(_f, startStopContinueToXML(part) +
+                        printStyleToXML(part))));
                     break;
                 case "Laughing":
                     // <!ELEMENT laughing EMPTY>
-                    lyricChildren.push((_23 = ["<laughing />"], _23.raw = ["<laughing />"], xml(_23)));
+                    lyricChildren.push((_g = ["<laughing />"], _g.raw = ["<laughing />"], xml(_g)));
                     break;
                 case "Humming":
                     // <!ELEMENT humming EMPTY>
-                    lyricChildren.push((_24 = ["<humming />"], _24.raw = ["<humming />"], xml(_24)));
+                    lyricChildren.push((_h = ["<humming />"], _h.raw = ["<humming />"], xml(_h)));
                     break;
                 case "EndLine":
                     // <!ELEMENT end-line EMPTY>
-                    lyricChildren.push((_25 = ["<end-line />"], _25.raw = ["<end-line />"], xml(_25)));
+                    lyricChildren.push((_j = ["<end-line />"], _j.raw = ["<end-line />"], xml(_j)));
                     break;
                 case "EndParagraph":
                     // <!ELEMENT end-paragraph EMPTY>
-                    lyricChildren.push((_26 = ["<end-paragraph />"], _26.raw = ["<end-paragraph />"], xml(_26)));
+                    lyricChildren.push((_k = ["<end-paragraph />"], _k.raw = ["<end-paragraph />"], xml(_k)));
                     break;
                 case "Footnote":
                 case "Level":
@@ -21449,12 +21571,11 @@ function noteToXML(note) {
                     lyricChildren = lyricChildren.concat(editorialToXML(part));
                     break;
             }
-            var _17, _18, _19, _20, _21, _22, _23, _24, _25, _26;
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
         });
-        elements.push((_17 = ["<lyric", ">\n", "\n</lyric>"], _17.raw = ["<lyric", ">\\n", "\\n</lyric>"], dangerous(_17, lyricAttribs, lyricChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
-        var _17;
+        elements.push((_a = ["<lyric", ">\n", "\n</lyric>"], _a.raw = ["<lyric", ">\\n", "\\n</lyric>"], dangerous(_a, lyricAttribs, lyricChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
+        var _a;
     });
     if (defined(note.play)) {
         // <!ELEMENT play ((ipa | mute | semi-pitched | other-play)*)>
@@ -21469,36 +21590,34 @@ function noteToXML(note) {
         // }
         // <!ELEMENT ipa (#PCDATA)>
         if (defined(note.play.ipa)) {
-            playChildren.push((_17 = ["<ipa>", "</ipa>"], _17.raw = ["<ipa>", "</ipa>"], xml(_17, note.play.ipa)));
+            playChildren.push((_14 = ["<ipa>", "</ipa>"], _14.raw = ["<ipa>", "</ipa>"], xml(_14, note.play.ipa)));
         }
         // <!ELEMENT mute (#PCDATA)>
         if (defined(note.play.mute)) {
-            playChildren.push((_18 = ["<mute>", "</mute>"], _18.raw = ["<mute>", "</mute>"], xml(_18, note.play.mute)));
+            playChildren.push((_15 = ["<mute>", "</mute>"], _15.raw = ["<mute>", "</mute>"], xml(_15, note.play.mute)));
         }
         // <!ELEMENT semi-pitched (#PCDATA)>
         if (defined(note.play.semiPitched)) {
-            playChildren.push((_19 = ["<semi-pitched>", "</semi-pitched>"], _19.raw = ["<semi-pitched>", "</semi-pitched>"], xml(_19, note.play.semiPitched)));
+            playChildren.push((_16 = ["<semi-pitched>", "</semi-pitched>"], _16.raw = ["<semi-pitched>", "</semi-pitched>"], xml(_16, note.play.semiPitched)));
         }
         // <!ELEMENT other-play (#PCDATA)>
         // <!ATTLIST other-play
         //     type CDATA #REQUIRED
         // >
         if (defined(note.play.otherPlay)) {
-            var oPcdata = (_20 = ["", ""], _20.raw = ["", ""], xml(_20, note.play.otherPlay.data));
+            var oPcdata = (_17 = ["", ""], _17.raw = ["", ""], xml(_17, note.play.otherPlay.data));
             var oAttribs = "";
             if (defined(note.play.otherPlay.type)) {
-                oAttribs += (_21 = [" type=\"", "\""], _21.raw = [" type=\"", "\""], xml(_21, note.play.otherPlay.type));
+                oAttribs += (_18 = [" type=\"", "\""], _18.raw = [" type=\"", "\""], xml(_18, note.play.otherPlay.type));
             }
-            playChildren.push((_22 = ["<other-play", ">", "</other-play>"], _22.raw = ["<other-play", ">", "</other-play>"], dangerous(_22, oAttribs, oPcdata)));
+            playChildren.push((_19 = ["<other-play", ">", "</other-play>"], _19.raw = ["<other-play", ">", "</other-play>"], dangerous(_19, oAttribs, oPcdata)));
         }
-        elements.push((_23 = ["<play", ">\n", "\n</play>"], _23.raw = ["<play", ">\\n", "\\n</play>"], dangerous(_23, playAttribs, playChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
+        elements.push((_20 = ["<play", ">\n", "\n</play>"], _20.raw = ["<play", ">\\n", "\\n</play>"], dangerous(_20, playAttribs, playChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
     }
-    return (_24 = ["<note", ">\n", "\n</note>"], _24.raw = ["<note", ">\\n", "\\n</note>"], dangerous(_24, attribs, elements.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24;
+    return (_21 = ["<note", ">\n", "\n</note>"], _21.raw = ["<note", ">\\n", "\\n</note>"], dangerous(_21, attribs, elements.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21;
 }
 function figuredBassToXML(figuredBass) {
     // <!ELEMENT figured-bass (figure+, duration?, %editorial;)>
@@ -21507,9 +21626,11 @@ function figuredBassToXML(figuredBass) {
     //     %printout;
     //     parentheses %yes-no; #IMPLIED
     // >
-    var attribs = "" + printStyleToXML(figuredBass) + printoutToXML(figuredBass);
+    var attribs = "" +
+        printStyleToXML(figuredBass) +
+        printoutToXML(figuredBass);
     if (defined(figuredBass.parentheses)) {
-        attribs += (_d = [" parentheses=\"", "\""], _d.raw = [" parentheses=\"", "\""], yesNo(_d, figuredBass.parentheses));
+        attribs += (_a = [" parentheses=\"", "\""], _a.raw = [" parentheses=\"", "\""], yesNo(_a, figuredBass.parentheses));
     }
     var children = [];
     children = children.concat(staffDebugInfoToXMLComment(figuredBass));
@@ -21521,38 +21642,36 @@ function figuredBassToXML(figuredBass) {
         //     %print-style;
         // >
         if (defined(figure.prefix)) {
-            var pcdata = (_e = ["", ""], _e.raw = ["", ""], xml(_e, figure.prefix.data));
-            fChildren.push((_f = ["<prefix", ">", "</prefix>"], _f.raw = ["<prefix", ">", "</prefix>"], dangerous(_f, printStyleToXML(figure.prefix), pcdata)));
+            var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, figure.prefix.data));
+            fChildren.push((_b = ["<prefix", ">", "</prefix>"], _b.raw = ["<prefix", ">", "</prefix>"], dangerous(_b, printStyleToXML(figure.prefix), pcdata)));
         }
         // <!ELEMENT figure-number (#PCDATA)>
         // <!ATTLIST figure-number
         //     %print-style;
         // >
         if (defined(figure.figureNumber)) {
-            var _pcdata = (_g = ["", ""], _g.raw = ["", ""], xml(_g, figure.figureNumber.data));
-            fChildren.push((_h = ["<figure-number", ">", "</figure-number>"], _h.raw = ["<figure-number", ">", "</figure-number>"], dangerous(_h, printStyleToXML(figure.figureNumber), _pcdata)));
+            var pcdata = (_c = ["", ""], _c.raw = ["", ""], xml(_c, figure.figureNumber.data));
+            fChildren.push((_d = ["<figure-number", ">", "</figure-number>"], _d.raw = ["<figure-number", ">", "</figure-number>"], dangerous(_d, printStyleToXML(figure.figureNumber), pcdata)));
         }
         // <!ELEMENT suffix (#PCDATA)>
         // <!ATTLIST suffix
         //     %print-style;
         // >
         if (defined(figure.suffix)) {
-            var _pcdata_1 = (_j = ["", ""], _j.raw = ["", ""], xml(_j, figure.suffix.data));
-            fChildren.push((_k = ["<suffix", ">", "</suffix>"], _k.raw = ["<suffix", ">", "</suffix>"], dangerous(_k, printStyleToXML(figure.suffix), _pcdata_1)));
+            var pcdata = (_e = ["", ""], _e.raw = ["", ""], xml(_e, figure.suffix.data));
+            fChildren.push((_f = ["<suffix", ">", "</suffix>"], _f.raw = ["<suffix", ">", "</suffix>"], dangerous(_f, printStyleToXML(figure.suffix), pcdata)));
         }
-        children.push((_l = ["<figure>\n", "\n</figure>"], _l.raw = ["<figure>\\n", "\\n</figure>"], dangerous(_l, fChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
-        var _e, _f, _g, _h, _j, _k, _l;
+        children.push((_g = ["<figure>\n", "\n</figure>"], _g.raw = ["<figure>\\n", "\\n</figure>"], dangerous(_g, fChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
+        var _a, _b, _c, _d, _e, _f, _g;
     });
     if (defined(figuredBass.duration)) {
-        children.push((_e = ["<duration>", "</duration>"], _e.raw = ["<duration>", "</duration>"], xml(_e, figuredBass.duration)));
+        children.push((_b = ["<duration>", "</duration>"], _b.raw = ["<duration>", "</duration>"], xml(_b, figuredBass.duration)));
     }
     children = children.concat(editorialToXML(figuredBass));
-    return (_f = ["<figured-bass", ">\n", "\n</figured-bass>"], _f.raw = ["<figured-bass", ">\\n", "\\n</figured-bass>"], dangerous(_f, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _d, _e, _f;
+    return (_c = ["<figured-bass", ">\n", "\n</figured-bass>"], _c.raw = ["<figured-bass", ">\\n", "\\n</figured-bass>"], dangerous(_c, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c;
 }
 var barlineLocationToXML = {
     1: "right",
@@ -21594,21 +21713,20 @@ function barlineToXML(barline) {
         children.push(repeatToXML(barline.repeat));
     }
     if (defined(barline.location)) {
-        attribs += (_d = [" location=\"", "\""], _d.raw = [" location=\"", "\""], xml(_d, barlineLocationToXML[barline.location]));
+        attribs += (_a = [" location=\"", "\""], _a.raw = [" location=\"", "\""], xml(_a, barlineLocationToXML[barline.location]));
     }
     if (defined(barline.segnoAttrib)) {
-        attribs += (_e = [" segno=\"", "\""], _e.raw = [" segno=\"", "\""], xml(_e, barline.segnoAttrib));
+        attribs += (_b = [" segno=\"", "\""], _b.raw = [" segno=\"", "\""], xml(_b, barline.segnoAttrib));
     }
     if (defined(barline.codaAttrib)) {
-        attribs += (_f = [" coda=\"", "\""], _f.raw = [" coda=\"", "\""], xml(_f, barline.codaAttrib));
+        attribs += (_c = [" coda=\"", "\""], _c.raw = [" coda=\"", "\""], xml(_c, barline.codaAttrib));
     }
     if (defined(barline.divisions)) {
-        attribs += (_g = [" divisions=\"", "\""], _g.raw = [" divisions=\"", "\""], xml(_g, barline.divisions));
+        attribs += (_d = [" divisions=\"", "\""], _d.raw = [" divisions=\"", "\""], xml(_d, barline.divisions));
     }
-    return (_h = ["<barline", ">\n", "\n</barline>"], _h.raw = ["<barline", ">\\n", "\\n</barline>"], dangerous(_h, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _d, _e, _f, _g, _h;
+    return (_e = ["<barline", ">\n", "\n</barline>"], _e.raw = ["<barline", ">\\n", "\\n</barline>"], dangerous(_e, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e;
 }
 function directionTypeToXML(d) {
     // <!ELEMENT direction-type (rehearsal+ | segno+ | words+ |
@@ -21684,45 +21802,45 @@ function directionTypeToXML(d) {
     if (defined(d.otherDirection)) {
         children.push(otherDirectionToXML(d.otherDirection));
     }
-    return (_d = ["<direction-type>\n", "\n</direction-type>"], _d.raw = ["<direction-type>\\n", "\\n</direction-type>"], dangerous(_d, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _d;
+    return (_a = ["<direction-type>\n", "\n</direction-type>"], _a.raw = ["<direction-type>\\n", "\\n</direction-type>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a;
 }
 function offsetToXML(offset) {
     // <!ELEMENT offset (#PCDATA)>
     // <!ATTLIST offset
     //     sound %yes-no; #IMPLIED
     // >
-    var pcdata = (_d = ["", ""], _d.raw = ["", ""], xml(_d, offset.data || ""));
-    var attribs = (_e = [" sound=\"", "\""], _e.raw = [" sound=\"", "\""], yesNo(_e, offset.sound));
-    return (_f = ["<offset", ">", "</offset>"], _f.raw = ["<offset", ">", "</offset>"], dangerous(_f, attribs, pcdata));
-    var _d, _e, _f;
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, offset.data || ""));
+    var attribs = (_b = [" sound=\"", "\""], _b.raw = [" sound=\"", "\""], yesNo(_b, offset.sound));
+    return (_c = ["<offset", ">", "</offset>"], _c.raw = ["<offset", ">", "</offset>"], dangerous(_c, attribs, pcdata));
+    var _a, _b, _c;
 }
 function rehearsalToXML(rehearsal) {
     // <!ELEMENT rehearsal (#PCDATA)>
     // <!ATTLIST rehearsal
     //     %text-formatting;
     // >
-    var pcdata = (_d = ["", ""], _d.raw = ["", ""], xml(_d, rehearsal.data));
-    return (_e = ["<rehearsal", ">", "</rehearsal>"], _e.raw = ["<rehearsal", ">", "</rehearsal>"], dangerous(_e, textFormattingToXML(rehearsal), pcdata));
-    var _d, _e;
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, rehearsal.data));
+    return (_b = ["<rehearsal", ">", "</rehearsal>"], _b.raw = ["<rehearsal", ">", "</rehearsal>"], dangerous(_b, textFormattingToXML(rehearsal), pcdata));
+    var _a, _b;
 }
 function wordsToXML(words) {
     // <!ELEMENT words (#PCDATA)>
     // <!ATTLIST words
     //     %text-formatting;
     // >
-    var pcdata = (_d = ["", ""], _d.raw = ["", ""], xml(_d, words.data));
-    return (_e = ["<words", ">", "</words>"], _e.raw = ["<words", ">", "</words>"], dangerous(_e, textFormattingToXML(words), pcdata));
-    var _d, _e;
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, words.data));
+    return (_b = ["<words", ">", "</words>"], _b.raw = ["<words", ">", "</words>"], dangerous(_b, textFormattingToXML(words), pcdata));
+    var _a, _b;
 }
 var wedgeTypeToXML = (_d = {},
     _d[1 /* Diminuendo */] = "diminuendo",
     _d[0 /* Crescendo */] = "crescendo",
     _d[2 /* Stop */] = "stop",
     _d[3 /* Continue */] = "continue",
-    _d);
+    _d
+);
 function wedgeToXML(wedge) {
     // <!ELEMENT wedge EMPTY>
     // <!ATTLIST wedge
@@ -21735,17 +21853,23 @@ function wedgeToXML(wedge) {
     //     %position;
     //     %color;
     // >
-    var attribs = "" + (_e = [" type=\"", "\""], _e.raw = [" type=\"", "\""], xml(_e, wedgeTypeToXML[wedge.type])) + numberLevelToXML(wedge);
+    var attribs = "" +
+        (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, wedgeTypeToXML[wedge.type])) +
+        numberLevelToXML(wedge);
     if (defined(wedge.spread)) {
-        attribs += (_f = [" spread=\"", "\""], _f.raw = [" spread=\"", "\""], xml(_f, wedge.spread));
+        attribs += (_b = [" spread=\"", "\""], _b.raw = [" spread=\"", "\""], xml(_b, wedge.spread));
     }
     // TODO musicxml-interfaces: **niente not neinte
     // if (defined(wedge.niente)) {
     //     attribs += yesNo ` niente="${wedge.niente}"`;
     // }
-    attribs += lineTypeToXML(wedge) + dashedFormattingToXML(wedge) + positionToXML(wedge) + colorToXML(wedge);
-    return (_g = ["<wedge", " />"], _g.raw = ["<wedge", " />"], dangerous(_g, attribs));
-    var _e, _f, _g;
+    attribs +=
+        lineTypeToXML(wedge) +
+            dashedFormattingToXML(wedge) +
+            positionToXML(wedge) +
+            colorToXML(wedge);
+    return (_c = ["<wedge", " />"], _c.raw = ["<wedge", " />"], dangerous(_c, attribs));
+    var _a, _b, _c;
 }
 function dynamicsToXML(dynamics) {
     // <!ELEMENT dynamics ((p | pp | ppp | pppp | ppppp | pppppp |
@@ -21764,42 +21888,22 @@ function dynamicsToXML(dynamics) {
     var oChildren = [];
     Object.keys(dynamics || {}).forEach(function (key) {
         var subDynamic = dynamics[key];
-        if (!!subDynamic && [
-            "p",
-            "pp",
-            "ppp",
-            "pppp",
-            "ppppp",
-            "pppppp",
-            "f",
-            "ff",
-            "fff",
-            "ffff",
-            "fffff",
-            "ffffff",
-            "mp",
-            "mf",
-            "sf",
-            "sfp",
-            "sfpp",
-            "fp",
-            "rf",
-            "rfz",
-            "sfz",
-            "sffz",
-            "fz"
-        ].indexOf(key) !== -1) {
-            oChildren.push((_e = ["<", " />"], _e.raw = ["<", " />"], dangerous(_e, key)));
+        if (!!subDynamic && ["p", "pp", "ppp", "pppp", "ppppp", "pppppp",
+            "f", "ff", "fff", "ffff", "fffff", "ffffff", "mp", "mf", "sf",
+            "sfp", "sfpp", "fp", "rf", "rfz", "sfz", "sffz", "fz"].indexOf(key) !== -1) {
+            oChildren.push((_a = ["<", " />"], _a.raw = ["<", " />"], dangerous(_a, key)));
         }
-        var _e;
+        var _a;
     });
     if (dynamics.otherDynamics) {
-        oChildren.push((_e = ["<other-dynamics>", "</other-dynamics>"], _e.raw = ["<other-dynamics>", "</other-dynamics>"], xml(_e, dynamics.otherDynamics)));
+        oChildren.push((_a = ["<other-dynamics>", "</other-dynamics>"], _a.raw = ["<other-dynamics>", "</other-dynamics>"], xml(_a, dynamics.otherDynamics)));
     }
-    return (_f = ["<dynamics", ">\n", "\n</dynamics>"], _f.raw = ["<dynamics", ">\\n", "\\n</dynamics>"], dangerous(_f, printStyleAlignToXML(dynamics) + placementToXML(dynamics) + textDecorationToXML(dynamics) + enclosureToXML(dynamics), oChildren.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _e, _f;
+    return (_b = ["<dynamics", ">\n", "\n</dynamics>"], _b.raw = ["<dynamics", ">\\n", "\\n</dynamics>"], dangerous(_b, printStyleAlignToXML(dynamics) +
+        placementToXML(dynamics) +
+        textDecorationToXML(dynamics) +
+        enclosureToXML(dynamics), oChildren.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b;
 }
 function dashesToXML(dashes) {
     // <!ELEMENT dashes EMPTY>
@@ -21810,9 +21914,14 @@ function dashesToXML(dashes) {
     //     %position;
     //     %color;
     // >
-    var attribs = "" + startStopContinueToXML(dashes) + numberLevelToXML(dashes) + dashedFormattingToXML(dashes) + positionToXML(dashes) + colorToXML(dashes);
-    return (_e = ["<dashes", " />"], _e.raw = ["<dashes", " />"], dangerous(_e, attribs));
-    var _e;
+    var attribs = "" +
+        startStopContinueToXML(dashes) +
+        numberLevelToXML(dashes) +
+        dashedFormattingToXML(dashes) +
+        positionToXML(dashes) +
+        colorToXML(dashes);
+    return (_a = ["<dashes", " />"], _a.raw = ["<dashes", " />"], dangerous(_a, attribs));
+    var _a;
 }
 var lineEndTypeToXML = (_e = {},
     _e[4 /* None */] = "none",
@@ -21820,7 +21929,8 @@ var lineEndTypeToXML = (_e = {},
     _e[3 /* Arrow */] = "arrow",
     _e[1 /* Down */] = "down",
     _e[0 /* Up */] = "up",
-    _e);
+    _e
+);
 function bracketToXML(bracket) {
     // <!ELEMENT bracket EMPTY>
     // <!ATTLIST bracket
@@ -21833,21 +21943,28 @@ function bracketToXML(bracket) {
     //     %position;
     //     %color;
     // >
-    var attribs = "" + startStopContinueToXML(bracket) + numberLevelToXML(bracket);
-    attribs += (_f = [" line-end=\"", "\""], _f.raw = [" line-end=\"", "\""], xml(_f, lineEndTypeToXML[bracket.lineEnd]));
+    var attribs = "" +
+        startStopContinueToXML(bracket) +
+        numberLevelToXML(bracket);
+    attribs += (_a = [" line-end=\"", "\""], _a.raw = [" line-end=\"", "\""], xml(_a, lineEndTypeToXML[bracket.lineEnd]));
     if (defined(bracket.endLength)) {
-        attribs += (_g = [" end-length=\"", "\""], _g.raw = [" end-length=\"", "\""], xml(_g, bracket.endLength));
+        attribs += (_b = [" end-length=\"", "\""], _b.raw = [" end-length=\"", "\""], xml(_b, bracket.endLength));
     }
-    attribs += lineTypeToXML(bracket) + dashedFormattingToXML(bracket) + positionToXML(bracket) + colorToXML(bracket);
-    return (_h = ["<bracket", " />"], _h.raw = ["<bracket", " />"], dangerous(_h, attribs));
-    var _f, _g, _h;
+    attribs +=
+        lineTypeToXML(bracket) +
+            dashedFormattingToXML(bracket) +
+            positionToXML(bracket) +
+            colorToXML(bracket);
+    return (_c = ["<bracket", " />"], _c.raw = ["<bracket", " />"], dangerous(_c, attribs));
+    var _a, _b, _c;
 }
 var pedalTypeToXML = (_f = {},
     _f[3 /* Change */] = "change",
     _f[0 /* Start */] = "start",
     _f[1 /* Stop */] = "stop",
     _f[2 /* Continue */] = "continue",
-    _f);
+    _f
+);
 function pedalToXML(pedal) {
     // <!ELEMENT pedal EMPTY>
     // <!ATTLIST pedal
@@ -21856,16 +21973,17 @@ function pedalToXML(pedal) {
     //     sign %yes-no; #IMPLIED
     //     %print-style-align;
     // >
-    var attribs = "" + (_g = [" type=\"", "\""], _g.raw = [" type=\"", "\""], xml(_g, pedalTypeToXML[pedal.type]));
+    var attribs = "" +
+        (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, pedalTypeToXML[pedal.type]));
     if (defined(pedal.line)) {
-        attribs += (_h = [" line=\"", "\""], _h.raw = [" line=\"", "\""], yesNo(_h, pedal.line));
+        attribs += (_b = [" line=\"", "\""], _b.raw = [" line=\"", "\""], yesNo(_b, pedal.line));
     }
     if (defined(pedal.sign)) {
-        attribs += (_j = [" sign=\"", "\""], _j.raw = [" sign=\"", "\""], yesNo(_j, pedal.sign));
+        attribs += (_c = [" sign=\"", "\""], _c.raw = [" sign=\"", "\""], yesNo(_c, pedal.sign));
     }
     attribs += printStyleAlignToXML(pedal);
-    return (_k = ["<pedal", " />"], _k.raw = ["<pedal", " />"], dangerous(_k, attribs));
-    var _g, _h, _j, _k;
+    return (_d = ["<pedal", " />"], _d.raw = ["<pedal", " />"], dangerous(_d, attribs));
+    var _a, _b, _c, _d;
 }
 function metronomeToXML(metronome) {
     // <!ELEMENT metronome
@@ -21878,36 +21996,38 @@ function metronomeToXML(metronome) {
     //     parentheses %yes-no; #IMPLIED
     // >
     var children = [];
-    var attribs = "" + printStyleAlignToXML(metronome) + justifyToXML(metronome);
+    var attribs = "" +
+        printStyleAlignToXML(metronome) +
+        justifyToXML(metronome);
     if (defined(metronome.parentheses)) {
-        attribs += (_g = [" parentheses=\"", "\""], _g.raw = [" parentheses=\"", "\""], yesNo(_g, metronome.parentheses));
+        attribs += (_a = [" parentheses=\"", "\""], _a.raw = [" parentheses=\"", "\""], yesNo(_a, metronome.parentheses));
     }
     if (defined(metronome.beatUnit)) {
         // <!ELEMENT beat-unit (#PCDATA)>
-        children.push((_h = ["<beat-unit>", "</beat-unit>"], _h.raw = ["<beat-unit>", "</beat-unit>"], xml(_h, metronome.beatUnit)));
+        children.push((_b = ["<beat-unit>", "</beat-unit>"], _b.raw = ["<beat-unit>", "</beat-unit>"], xml(_b, metronome.beatUnit)));
     }
     (metronome.beatUnitDots || []).forEach(function () {
         // <!ELEMENT beat-unit-dot EMPTY>
-        children.push((_j = ["<beat-unit-dot />"], _j.raw = ["<beat-unit-dot />"], xml(_j)));
-        var _j;
+        children.push((_a = ["<beat-unit-dot />"], _a.raw = ["<beat-unit-dot />"], xml(_a)));
+        var _a;
     });
     if (defined(metronome.perMinute)) {
         // <!ELEMENT per-minute (#PCDATA)>
         // <!ATTLIST per-minute
         //     %font;
         // >
-        var pcdata = (_j = ["", ""], _j.raw = ["", ""], xml(_j, metronome.perMinute.data));
-        children.push((_k = ["<per-minute", ">", "</per-minute>"], _k.raw = ["<per-minute", ">", "</per-minute>"], dangerous(_k, fontToXML(metronome.perMinute), pcdata)));
+        var pcdata = (_c = ["", ""], _c.raw = ["", ""], xml(_c, metronome.perMinute.data));
+        children.push((_d = ["<per-minute", ">", "</per-minute>"], _d.raw = ["<per-minute", ">", "</per-minute>"], dangerous(_d, fontToXML(metronome.perMinute), pcdata)));
     }
     else {
         if (defined(metronome.beatUnitChange)) {
             // <!ELEMENT beat-unit (#PCDATA)>
-            children.push((_l = ["<beat-unit>", "</beat-unit>"], _l.raw = ["<beat-unit>", "</beat-unit>"], xml(_l, metronome.beatUnitChange)));
+            children.push((_e = ["<beat-unit>", "</beat-unit>"], _e.raw = ["<beat-unit>", "</beat-unit>"], xml(_e, metronome.beatUnitChange)));
         }
         (metronome.beatUnitDotsChange || []).forEach(function () {
             // <!ELEMENT beat-unit-dot EMPTY>
-            children.push((_m = ["<beat-unit-dot />"], _m.raw = ["<beat-unit-dot />"], xml(_m)));
-            var _m;
+            children.push((_a = ["<beat-unit-dot />"], _a.raw = ["<beat-unit-dot />"], xml(_a)));
+            var _a;
         });
     }
     // TODO musicxml-interfaces second beat-unit!!
@@ -21918,38 +22038,36 @@ function metronomeToXML(metronome) {
         var oChildren = [];
         if (defined(note.metronomeType)) {
             // <!ELEMENT metronome-type (#PCDATA)>
-            oChildren.push((_m = ["<metronome-type>", "</metronome-type>"], _m.raw = ["<metronome-type>", "</metronome-type>"], xml(_m, note.metronomeType)));
+            oChildren.push((_a = ["<metronome-type>", "</metronome-type>"], _a.raw = ["<metronome-type>", "</metronome-type>"], xml(_a, note.metronomeType)));
         }
         (note.metronomeDots || []).forEach(function () {
             // <!ELEMENT metronome-dot EMPTY>
-            oChildren.push((_o = ["<metronome-dot />"], _o.raw = ["<metronome-dot />"], xml(_o)));
-            var _o;
+            oChildren.push((_a = ["<metronome-dot />"], _a.raw = ["<metronome-dot />"], xml(_a)));
+            var _a;
         });
         (note.metronomeBeams || []).forEach(function (beam) {
             // <!ELEMENT metronome-beam (#PCDATA)>
             // <!ATTLIST metronome-beam
             //     number %beam-level; "1"
             // >
-            var _pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, beam.data));
-            oChildren.push((_p = ["<metronome-beam", ">", "</metronome-beam>"], _p.raw = ["<metronome-beam", ">", "</metronome-beam>"], dangerous(_p, numberLevelToXML(beam), _pcdata)));
-            var _o, _p;
+            var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, beam.data));
+            oChildren.push((_b = ["<metronome-beam", ">", "</metronome-beam>"], _b.raw = ["<metronome-beam", ">", "</metronome-beam>"], dangerous(_b, numberLevelToXML(beam), pcdata)));
+            var _a, _b;
         });
         if (defined(note.metronomeTuplet)) {
             oChildren.push(metronomeTupletToXML(note.metronomeTuplet));
         }
-        children.push((_o = ["<metronome-note>\n", "\n</metronome-note>"], _o.raw = ["<metronome-note>\\n", "\\n</metronome-note>"], dangerous(_o, oChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
-        var _m, _o;
+        children.push((_b = ["<metronome-note>\n", "\n</metronome-note>"], _b.raw = ["<metronome-note>\\n", "\\n</metronome-note>"], dangerous(_b, oChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
+        var _a, _b;
     });
     if (defined(metronome.metronomeRelation)) {
         // <!ELEMENT metronome-relation (#PCDATA)>
-        children.push((_m = ["<metronome-relation>", "</metronome-relation>"], _m.raw = ["<metronome-relation>", "</metronome-relation>"], xml(_m, metronome.metronomeRelation)));
+        children.push((_f = ["<metronome-relation>", "</metronome-relation>"], _f.raw = ["<metronome-relation>", "</metronome-relation>"], xml(_f, metronome.metronomeRelation)));
     }
-    return (_o = ["<metronome", ">\n", "\n</metronome>"], _o.raw = ["<metronome", ">\\n", "\\n</metronome>"], dangerous(_o, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _g, _h, _j, _k, _l, _m, _o;
+    return (_g = ["<metronome", ">\n", "\n</metronome>"], _g.raw = ["<metronome", ">\\n", "\\n</metronome>"], dangerous(_g, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g;
 }
 function metronomeTupletToXML(metronomeTuplet) {
     // <!ELEMENT metronome-tuplet
@@ -21961,37 +22079,38 @@ function metronomeTupletToXML(metronomeTuplet) {
     //     show-number (actual | both | none) #IMPLIED
     // >
     var children = [];
-    var attribs = "" + startStopToXML(metronomeTuplet);
+    var attribs = "" +
+        startStopToXML(metronomeTuplet);
     if (defined(metronomeTuplet.bracket)) {
-        attribs += (_g = [" bracket=\"", "\""], _g.raw = [" bracket=\"", "\""], yesNo(_g, metronomeTuplet.bracket));
+        attribs += (_a = [" bracket=\"", "\""], _a.raw = [" bracket=\"", "\""], yesNo(_a, metronomeTuplet.bracket));
     }
     if (defined(metronomeTuplet.showNumber)) {
-        attribs += (_h = [" show-number=\"", "\""], _h.raw = [" show-number=\"", "\""], xml(_h, actualBothNoneToXML[metronomeTuplet.showNumber]));
+        attribs += (_b = [" show-number=\"", "\""], _b.raw = [" show-number=\"", "\""], xml(_b, actualBothNoneToXML[metronomeTuplet.showNumber]));
     }
     if (metronomeTuplet.actualNotes) {
-        children.push((_j = ["<actual-notes>", "</actual-notes>"], _j.raw = ["<actual-notes>", "</actual-notes>"], xml(_j, metronomeTuplet.actualNotes)));
+        children.push((_c = ["<actual-notes>", "</actual-notes>"], _c.raw = ["<actual-notes>", "</actual-notes>"], xml(_c, metronomeTuplet.actualNotes)));
     }
     if (metronomeTuplet.normalNotes) {
-        children.push((_k = ["<normal-notes>", "</normal-notes>"], _k.raw = ["<normal-notes>", "</normal-notes>"], xml(_k, metronomeTuplet.normalNotes)));
+        children.push((_d = ["<normal-notes>", "</normal-notes>"], _d.raw = ["<normal-notes>", "</normal-notes>"], xml(_d, metronomeTuplet.normalNotes)));
     }
     if (metronomeTuplet.normalType) {
-        children.push((_l = ["<normal-type>", "</normal-type>"], _l.raw = ["<normal-type>", "</normal-type>"], xml(_l, metronomeTuplet.normalType)));
+        children.push((_e = ["<normal-type>", "</normal-type>"], _e.raw = ["<normal-type>", "</normal-type>"], xml(_e, metronomeTuplet.normalType)));
     }
     (metronomeTuplet.normalDots || []).forEach(function () {
-        children.push((_m = ["<normal-dot />"], _m.raw = ["<normal-dot />"], xml(_m)));
-        var _m;
+        children.push((_a = ["<normal-dot />"], _a.raw = ["<normal-dot />"], xml(_a)));
+        var _a;
     });
-    return (_m = ["<metronome-tuplet", ">\n", "\n</metronome-tuplet>"], _m.raw = ["<metronome-tuplet", ">\\n", "\\n</metronome-tuplet>"], dangerous(_m, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _g, _h, _j, _k, _l, _m;
+    return (_f = ["<metronome-tuplet", ">\n", "\n</metronome-tuplet>"], _f.raw = ["<metronome-tuplet", ">\\n", "\\n</metronome-tuplet>"], dangerous(_f, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f;
 }
 var octaveShiftTypeToXML = (_g = {},
     _g[2 /* Down */] = "down",
     _g[3 /* Stop */] = "stop",
     _g[1 /* Up */] = "up",
     _g[4 /* Continue */] = "continue",
-    _g);
+    _g
+);
 function octaveShiftToXML(octaveShift) {
     // <!ELEMENT octave-shift EMPTY>
     // <!ATTLIST octave-shift
@@ -22001,13 +22120,17 @@ function octaveShiftToXML(octaveShift) {
     //     %dashed-formatting;
     //     %print-style;
     // >
-    var attribs = "" + (_h = [" type=\"", "\""], _h.raw = [" type=\"", "\""], xml(_h, octaveShiftTypeToXML[octaveShift.type])) + numberLevelToXML(octaveShift);
+    var attribs = "" +
+        (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, octaveShiftTypeToXML[octaveShift.type])) +
+        numberLevelToXML(octaveShift);
     if (defined(octaveShift.size)) {
-        attribs += (_j = [" size=\"", "\""], _j.raw = [" size=\"", "\""], xml(_j, octaveShift.size));
+        attribs += (_b = [" size=\"", "\""], _b.raw = [" size=\"", "\""], xml(_b, octaveShift.size));
     }
-    attribs += dashedFormattingToXML(octaveShift) + printStyleToXML(octaveShift);
-    return (_k = ["<octave-shift", " />"], _k.raw = ["<octave-shift", " />"], dangerous(_k, attribs));
-    var _h, _j, _k;
+    attribs +=
+        dashedFormattingToXML(octaveShift) +
+            printStyleToXML(octaveShift);
+    return (_c = ["<octave-shift", " />"], _c.raw = ["<octave-shift", " />"], dangerous(_c, attribs));
+    var _a, _b, _c;
 }
 function harpPedalsToXML(harpPedals) {
     // <!ELEMENT harp-pedals (pedal-tuning)+>
@@ -22021,45 +22144,43 @@ function harpPedalsToXML(harpPedals) {
     (harpPedals.pedalTunings || []).forEach(function (tuning) {
         var nChildren = [];
         if (tuning.pedalStep) {
-            nChildren.push((_h = ["<pedal-step>", "</pedal-step>"], _h.raw = ["<pedal-step>", "</pedal-step>"], xml(_h, tuning.pedalStep)));
+            nChildren.push((_a = ["<pedal-step>", "</pedal-step>"], _a.raw = ["<pedal-step>", "</pedal-step>"], xml(_a, tuning.pedalStep)));
         }
         if (tuning.pedalAlter) {
-            nChildren.push((_j = ["<pedal-alter>", "</pedal-alter>"], _j.raw = ["<pedal-alter>", "</pedal-alter>"], xml(_j, tuning.pedalAlter)));
+            nChildren.push((_b = ["<pedal-alter>", "</pedal-alter>"], _b.raw = ["<pedal-alter>", "</pedal-alter>"], xml(_b, tuning.pedalAlter)));
         }
-        children.push((_k = ["<pedal-tuning>\n", "\n</pedal-tuning>"], _k.raw = ["<pedal-tuning>\\n", "\\n</pedal-tuning>"], dangerous(_k, nChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
-        var _h, _j, _k;
+        children.push((_c = ["<pedal-tuning>\n", "\n</pedal-tuning>"], _c.raw = ["<pedal-tuning>\\n", "\\n</pedal-tuning>"], dangerous(_c, nChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
+        var _a, _b, _c;
     });
     var attribs = printStyleAlignToXML(harpPedals);
-    return (_h = ["<harp-pedals", ">\n", "\n</harp-pedals>"], _h.raw = ["<harp-pedals", ">\\n", "\\n</harp-pedals>"], dangerous(_h, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _h;
+    return (_a = ["<harp-pedals", ">\n", "\n</harp-pedals>"], _a.raw = ["<harp-pedals", ">\\n", "\\n</harp-pedals>"], dangerous(_a, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a;
 }
 function dampToXML(damp) {
     // <!ELEMENT damp EMPTY>
     // <!ATTLIST damp
     //     %print-style-align;
     // >
-    return (_h = ["<damp", " />"], _h.raw = ["<damp", " />"], dangerous(_h, printStyleAlignToXML(damp)));
-    var _h;
+    return (_a = ["<damp", " />"], _a.raw = ["<damp", " />"], dangerous(_a, printStyleAlignToXML(damp)));
+    var _a;
 }
 function dampAllToXML(dampAll) {
     // <!ELEMENT damp-all EMPTY>
     // <!ATTLIST damp-all
     //     %print-style-align;
     // >
-    return (_h = ["<damp-all", " />"], _h.raw = ["<damp-all", " />"], dangerous(_h, printStyleAlignToXML(dampAll)));
-    var _h;
+    return (_a = ["<damp-all", " />"], _a.raw = ["<damp-all", " />"], dangerous(_a, printStyleAlignToXML(dampAll)));
+    var _a;
 }
 function eyeglassesToXML(eyeglasses) {
     // <!ELEMENT eyeglasses EMPTY>
     // <!ATTLIST eyeglasses
     //     %print-style-align;
     // >
-    return (_h = ["<eyeglasses", " />"], _h.raw = ["<eyeglasses", " />"], dangerous(_h, printStyleAlignToXML(eyeglasses)));
-    var _h;
+    return (_a = ["<eyeglasses", " />"], _a.raw = ["<eyeglasses", " />"], dangerous(_a, printStyleAlignToXML(eyeglasses)));
+    var _a;
 }
 function stringMuteToXML(stringMute) {
     // <!ELEMENT string-mute EMPTY>
@@ -22067,9 +22188,9 @@ function stringMuteToXML(stringMute) {
     //     type (on | off) #REQUIRED
     //     %print-style-align;
     // >
-    var attribs = (_h = [" type=\"", "\""], _h.raw = [" type=\"", "\""], xml(_h, stringMute.type)) + printStyleAlignToXML(stringMute);
-    return (_j = ["<string-mute", " />"], _j.raw = ["<string-mute", " />"], dangerous(_j, attribs));
-    var _h, _j;
+    var attribs = (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, stringMute.type)) + printStyleAlignToXML(stringMute);
+    return (_b = ["<string-mute", " />"], _b.raw = ["<string-mute", " />"], dangerous(_b, attribs));
+    var _a, _b;
 }
 function scordaturaToXML(scordatura) {
     // <!ELEMENT scordatura (accord+)>
@@ -22081,16 +22202,14 @@ function scordaturaToXML(scordatura) {
     var children = [];
     (scordatura.accords || []).forEach(function (accord) {
         var oChildren = tuningStepAlterOctaveToXML(accord);
-        var oAttribs = (_h = [" string=\"", "\""], _h.raw = [" string=\"", "\""], xml(_h, accord.string));
-        children.push((_j = ["<accord", ">\n", "\n</accord>"], _j.raw = ["<accord", ">\\n", "\\n</accord>"], dangerous(_j, oAttribs, oChildren.join("\n").split("\n").map(function (n) {
-            return "  " + n;
-        }).join("\n"))));
-        var _h, _j;
+        var oAttribs = (_a = [" string=\"", "\""], _a.raw = [" string=\"", "\""], xml(_a, accord.string));
+        children.push((_b = ["<accord", ">\n", "\n</accord>"], _b.raw = ["<accord", ">\\n", "\\n</accord>"], dangerous(_b, oAttribs, oChildren.join("\n").split("\n")
+            .map(function (n) { return "  " + n; }).join("\n"))));
+        var _a, _b;
     });
-    return (_h = ["<scordatura>\n", "\n</scordatura>"], _h.raw = ["<scordatura>\\n", "\\n</scordatura>"], dangerous(_h, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _h;
+    return (_a = ["<scordatura>\n", "\n</scordatura>"], _a.raw = ["<scordatura>\\n", "\\n</scordatura>"], dangerous(_a, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a;
 }
 function imageToXML(image) {
     // <!ELEMENT image EMPTY>
@@ -22101,16 +22220,22 @@ function imageToXML(image) {
     //     %halign;
     //     %valign-image;
     // >
-    var attribs = "" + (_h = [" source=\"", "\""], _h.raw = [" source=\"", "\""], xml(_h, image.source)) + (_j = [" type=\"", "\""], _j.raw = [" type=\"", "\""], xml(_j, image.type)) + positionToXML(image) + halignToXML(image) + valignImageToXML(image);
-    return (_k = ["<image", " />"], _k.raw = ["<image", " />"], dangerous(_k, attribs));
-    var _h, _j, _k;
+    var attribs = "" +
+        (_a = [" source=\"", "\""], _a.raw = [" source=\"", "\""], xml(_a, image.source)) +
+        (_b = [" type=\"", "\""], _b.raw = [" type=\"", "\""], xml(_b, image.type)) +
+        positionToXML(image) +
+        halignToXML(image) +
+        valignImageToXML(image);
+    return (_c = ["<image", " />"], _c.raw = ["<image", " />"], dangerous(_c, attribs));
+    var _a, _b, _c;
 }
 var voiceSymbolToXML = (_h = {},
     _h[4 /* None */] = "none",
     _h[1 /* Hauptstimme */] = "hauptstimme",
     _h[2 /* Nebenstimme */] = "nebenstimme",
     _h[3 /* Plain */] = "plain",
-    _h);
+    _h
+);
 function principalVoiceToXML(principalVoice) {
     // <!ELEMENT principal-voice (#PCDATA)>
     // <!ATTLIST principal-voice
@@ -22118,10 +22243,12 @@ function principalVoiceToXML(principalVoice) {
     //     symbol (Hauptstimme | Nebenstimme | plain | none) #REQUIRED
     //     %print-style-align;
     // >
-    var pcdata = (_j = ["", ""], _j.raw = ["", ""], xml(_j, principalVoice.data));
-    var attribs = startStopToXML(principalVoice) + (_k = [" symbol=\"", "\""], _k.raw = [" symbol=\"", "\""], xml(_k, voiceSymbolToXML[principalVoice.symbol])) + printStyleAlignToXML(principalVoice);
-    return (_l = ["<principal-voice", "", "</principal-voice>"], _l.raw = ["<principal-voice", "", "</principal-voice>"], dangerous(_l, attribs, pcdata));
-    var _j, _k, _l;
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, principalVoice.data));
+    var attribs = startStopToXML(principalVoice) +
+        (_b = [" symbol=\"", "\""], _b.raw = [" symbol=\"", "\""], xml(_b, voiceSymbolToXML[principalVoice.symbol])) +
+        printStyleAlignToXML(principalVoice);
+    return (_c = ["<principal-voice", "", "</principal-voice>"], _c.raw = ["<principal-voice", "", "</principal-voice>"], dangerous(_c, attribs, pcdata));
+    var _a, _b, _c;
 }
 function accordionRegistrationToXML(accordionRegistration) {
     // <!ELEMENT accordion-registration
@@ -22135,18 +22262,17 @@ function accordionRegistrationToXML(accordionRegistration) {
     var children = [];
     var attribs = printStyleAlignToXML(accordionRegistration);
     if (defined(accordionRegistration.accordionHigh)) {
-        children.push((_j = ["<accordion-high />"], _j.raw = ["<accordion-high />"], xml(_j)));
+        children.push((_a = ["<accordion-high />"], _a.raw = ["<accordion-high />"], xml(_a)));
     }
     if (defined(accordionRegistration.accordionMiddle)) {
-        children.push((_k = ["<accordion-middle>", "</accordion-middle>"], _k.raw = ["<accordion-middle>", "</accordion-middle>"], xml(_k, accordionRegistration.accordionMiddle || "")));
+        children.push((_b = ["<accordion-middle>", "</accordion-middle>"], _b.raw = ["<accordion-middle>", "</accordion-middle>"], xml(_b, accordionRegistration.accordionMiddle || "")));
     }
     if (defined(accordionRegistration.accordionLow)) {
-        children.push((_l = ["<accordion-low />"], _l.raw = ["<accordion-low />"], xml(_l)));
+        children.push((_c = ["<accordion-low />"], _c.raw = ["<accordion-low />"], xml(_c)));
     }
-    return (_m = ["<accordion-registration", ">\n", "\n</accordion-registration>"], _m.raw = ["<accordion-registration", ">\\n", "\\n</accordion-registration>"], dangerous(_m, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _j, _k, _l, _m;
+    return (_d = ["<accordion-registration", ">\n", "\n</accordion-registration>"], _d.raw = ["<accordion-registration", ">\\n", "\\n</accordion-registration>"], dangerous(_d, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d;
 }
 var tipDirectionToXML = (_j = {},
     _j[3 /* Right */] = "right",
@@ -22157,7 +22283,8 @@ var tipDirectionToXML = (_j = {},
     _j[6 /* Southeast */] = "southeast",
     _j[0 /* Up */] = "up",
     _j[2 /* Left */] = "left",
-    _j);
+    _j
+);
 function percussionToXML(percussion) {
     // <!ELEMENT percussion
     //     (glass | metal | wood | pitched | membrane | effect |
@@ -22170,43 +22297,43 @@ function percussionToXML(percussion) {
     var children = [];
     if (defined(percussion.glass)) {
         // <!ELEMENT glass (#PCDATA)>
-        children.push((_k = ["<glass>", "</glass>"], _k.raw = ["<glass>", "</glass>"], xml(_k, percussion.glass)));
+        children.push((_a = ["<glass>", "</glass>"], _a.raw = ["<glass>", "</glass>"], xml(_a, percussion.glass)));
     }
     if (defined(percussion.metal)) {
         // <!ELEMENT metal (#PCDATA)>
-        children.push((_l = ["<metal>", "</metal>"], _l.raw = ["<metal>", "</metal>"], xml(_l, percussion.metal)));
+        children.push((_b = ["<metal>", "</metal>"], _b.raw = ["<metal>", "</metal>"], xml(_b, percussion.metal)));
     }
     if (defined(percussion.wood)) {
         // <!ELEMENT wood (#PCDATA)>
-        children.push((_m = ["<wood>", "</wood>"], _m.raw = ["<wood>", "</wood>"], xml(_m, percussion.wood)));
+        children.push((_c = ["<wood>", "</wood>"], _c.raw = ["<wood>", "</wood>"], xml(_c, percussion.wood)));
     }
     if (defined(percussion.pitched)) {
         // <!ELEMENT pitched (#PCDATA)>
-        children.push((_o = ["<pitched>", "</pitched>"], _o.raw = ["<pitched>", "</pitched>"], xml(_o, percussion.pitched)));
+        children.push((_d = ["<pitched>", "</pitched>"], _d.raw = ["<pitched>", "</pitched>"], xml(_d, percussion.pitched)));
     }
     if (defined(percussion.membrane)) {
         // <!ELEMENT membrane (#PCDATA)>
-        children.push((_p = ["<membrane>", "</membrane>"], _p.raw = ["<membrane>", "</membrane>"], xml(_p, percussion.membrane)));
+        children.push((_e = ["<membrane>", "</membrane>"], _e.raw = ["<membrane>", "</membrane>"], xml(_e, percussion.membrane)));
     }
     if (defined(percussion.effect)) {
         // <!ELEMENT effect (#PCDATA)>
-        children.push((_q = ["<effect>", "</effect>"], _q.raw = ["<effect>", "</effect>"], xml(_q, percussion.effect)));
+        children.push((_f = ["<effect>", "</effect>"], _f.raw = ["<effect>", "</effect>"], xml(_f, percussion.effect)));
     }
     if (defined(percussion.timpani)) {
         // <!ELEMENT timpani EMPTY>
-        children.push((_r = ["<timpani />"], _r.raw = ["<timpani />"], xml(_r)));
+        children.push((_g = ["<timpani />"], _g.raw = ["<timpani />"], xml(_g)));
     }
     if (defined(percussion.beater)) {
         // <!ELEMENT beater (#PCDATA)>
         // <!ATTLIST beater
         //     tip %tip-direction; #IMPLIED
         // >
-        var pcdata = (_s = ["", ""], _s.raw = ["", ""], xml(_s, percussion.beater.data || ""));
+        var pcdata = (_h = ["", ""], _h.raw = ["", ""], xml(_h, percussion.beater.data || ""));
         var oAttribs = "";
         if (defined(percussion.beater.tip)) {
-            oAttribs += (_t = [" tip=\"", "\""], _t.raw = [" tip=\"", "\""], xml(_t, tipDirectionToXML[percussion.beater.tip]));
+            oAttribs += (_j = [" tip=\"", "\""], _j.raw = [" tip=\"", "\""], xml(_j, tipDirectionToXML[percussion.beater.tip]));
         }
-        children.push((_u = ["<beater", ">", "</beater>"], _u.raw = ["<beater", ">", "</beater>"], dangerous(_u, oAttribs, pcdata)));
+        children.push((_k = ["<beater", ">", "</beater>"], _k.raw = ["<beater", ">", "</beater>"], dangerous(_k, oAttribs, pcdata)));
     }
     if (defined(percussion.stick)) {
         // <!ELEMENT stick (stick-type, stick-material)>
@@ -22215,31 +22342,30 @@ function percussionToXML(percussion) {
         //     >
         // <!ELEMENT stick-type (#PCDATA)>
         // <!ELEMENT stick-material (#PCDATA)>
-        var _pcdata = "";
-        var _oAttribs = "";
+        var pcdata = "";
+        var oAttribs = "";
         if (defined(percussion.stick.tip)) {
-            _oAttribs += (_v = [" tip=\"", "\""], _v.raw = [" tip=\"", "\""], xml(_v, tipDirectionToXML[percussion.stick.tip]));
+            oAttribs += (_l = [" tip=\"", "\""], _l.raw = [" tip=\"", "\""], xml(_l, tipDirectionToXML[percussion.stick.tip]));
         }
         if (defined(percussion.stick.stickType)) {
-            _pcdata += (_w = ["  <stick-type>", "</stick-type>\n"], _w.raw = ["  <stick-type>", "</stick-type>\\n"], xml(_w, percussion.stick.stickType));
+            pcdata += (_m = ["  <stick-type>", "</stick-type>\n"], _m.raw = ["  <stick-type>", "</stick-type>\\n"], xml(_m, percussion.stick.stickType));
         }
         if (defined(percussion.stick.stickMaterial)) {
-            _pcdata += (_x = ["  <stick-material>", "</stick-material>\n"], _x.raw = ["  <stick-material>", "</stick-material>\\n"], xml(_x, percussion.stick.stickMaterial));
+            pcdata += (_o = ["  <stick-material>", "</stick-material>\n"], _o.raw = ["  <stick-material>", "</stick-material>\\n"], xml(_o, percussion.stick.stickMaterial));
         }
-        children.push((_y = ["<stick", ">", "</stick>"], _y.raw = ["<stick", ">", "</stick>"], dangerous(_y, _oAttribs, _pcdata)));
+        children.push((_p = ["<stick", ">", "</stick>"], _p.raw = ["<stick", ">", "</stick>"], dangerous(_p, oAttribs, pcdata)));
     }
     if (defined(percussion.stickLocation)) {
         // <!ELEMENT stick-location (#PCDATA)>
-        children.push((_z = ["<stick-location>", "</stick-location>"], _z.raw = ["<stick-location>", "</stick-location>"], xml(_z, percussion.stickLocation)));
+        children.push((_q = ["<stick-location>", "</stick-location>"], _q.raw = ["<stick-location>", "</stick-location>"], xml(_q, percussion.stickLocation)));
     }
     if (defined(percussion.otherPercussion)) {
         // <!ELEMENT other-percussion (#PCDATA)>
-        children.push((_0 = ["<other-percussion>", "</other-percussion>"], _0.raw = ["<other-percussion>", "</other-percussion>"], xml(_0, percussion.otherPercussion)));
+        children.push((_r = ["<other-percussion>", "</other-percussion>"], _r.raw = ["<other-percussion>", "</other-percussion>"], xml(_r, percussion.otherPercussion)));
     }
-    return (_1 = ["<percussion>\n", "\n</percussion>"], _1.raw = ["<percussion>\\n", "\\n</percussion>"], dangerous(_1, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1;
+    return (_s = ["<percussion>\n", "\n</percussion>"], _s.raw = ["<percussion>\\n", "\\n</percussion>"], dangerous(_s, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
 }
 function otherDirectionToXML(otherDirection) {
     // <!ELEMENT other-direction (#PCDATA)>
@@ -22247,9 +22373,10 @@ function otherDirectionToXML(otherDirection) {
     //     %print-object;
     //     %print-style-align;
     // >
-    var pcdata = (_k = ["", ""], _k.raw = ["", ""], xml(_k, otherDirection.data));
-    return (_l = ["<other-direction", ">", "</other-direction>"], _l.raw = ["<other-direction", ">", "</other-direction>"], dangerous(_l, printObjectToXML(otherDirection) + printStyleAlignToXML(otherDirection), pcdata));
-    var _k, _l;
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, otherDirection.data));
+    return (_b = ["<other-direction", ">", "</other-direction>"], _b.raw = ["<other-direction", ">", "</other-direction>"], dangerous(_b, printObjectToXML(otherDirection) +
+        printStyleAlignToXML(otherDirection), pcdata));
+    var _a, _b;
 }
 function wavyLineToXML(wavyLine) {
     // <!ELEMENT wavy-line EMPTY>
@@ -22261,9 +22388,15 @@ function wavyLineToXML(wavyLine) {
     //     %color;
     //     %trill-sound;
     // >
-    var attribs = "" + startStopContinueToXML(wavyLine) + numberLevelToXML(wavyLine) + positionToXML(wavyLine) + placementToXML(wavyLine) + colorToXML(wavyLine) + trillSoundToXML(wavyLine);
-    return (_k = ["<wavy-line", " />"], _k.raw = ["<wavy-line", " />"], dangerous(_k, attribs));
-    var _k;
+    var attribs = "" +
+        startStopContinueToXML(wavyLine) +
+        numberLevelToXML(wavyLine) +
+        positionToXML(wavyLine) +
+        placementToXML(wavyLine) +
+        colorToXML(wavyLine) +
+        trillSoundToXML(wavyLine);
+    return (_a = ["<wavy-line", " />"], _a.raw = ["<wavy-line", " />"], dangerous(_a, attribs));
+    var _a;
 }
 var barStyleTypeToXML = {
     0: "regular",
@@ -22283,16 +22416,18 @@ function barStyleToXML(barStyle) {
     // <!ATTLIST bar-style
     //     %color;
     // >
-    var attribs = "" + colorToXML(barStyle);
-    var pcdata = (_k = ["", ""], _k.raw = ["", ""], xml(_k, barStyleTypeToXML[barStyle.data] || ""));
-    return (_l = ["<bar-style", ">", "</bar-style>"], _l.raw = ["<bar-style", ">", "</bar-style>"], dangerous(_l, attribs, pcdata));
-    var _k, _l;
+    var attribs = "" +
+        colorToXML(barStyle);
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, barStyleTypeToXML[barStyle.data] || ""));
+    return (_b = ["<bar-style", ">", "</bar-style>"], _b.raw = ["<bar-style", ">", "</bar-style>"], dangerous(_b, attribs, pcdata));
+    var _a, _b;
 }
 var startStopDiscontinueTypeToXML = (_k = {},
     _k[0 /* Start */] = "start",
     _k[1 /* Stop */] = "stop",
     _k[2 /* Discontinue */] = "discontinue",
-    _k);
+    _k
+);
 function endingToXML(ending) {
     // <!ELEMENT ending (#PCDATA)>
     // <!ATTLIST ending
@@ -22304,31 +22439,37 @@ function endingToXML(ending) {
     //     text-x %tenths; #IMPLIED
     //     text-y %tenths; #IMPLIED
     // >
-    var attribs = "" + numberLevelToXML(ending) + startStopDiscontinueToXML(ending) + printObjectToXML(ending) + printStyleToXML(ending);
+    var attribs = "" +
+        numberLevelToXML(ending) +
+        startStopDiscontinueToXML(ending) +
+        printObjectToXML(ending) +
+        printStyleToXML(ending);
     if (defined(ending.endLength)) {
-        attribs += (_l = [" end-length=\"", "\""], _l.raw = [" end-length=\"", "\""], xml(_l, ending.endLength));
+        attribs += (_a = [" end-length=\"", "\""], _a.raw = [" end-length=\"", "\""], xml(_a, ending.endLength));
     }
     if (defined(ending.textX)) {
-        attribs += (_m = [" text-x=\"", "\""], _m.raw = [" text-x=\"", "\""], xml(_m, ending.textX));
+        attribs += (_b = [" text-x=\"", "\""], _b.raw = [" text-x=\"", "\""], xml(_b, ending.textX));
     }
     if (defined(ending.textY)) {
-        attribs += (_o = [" text-y=\"", "\""], _o.raw = [" text-y=\"", "\""], xml(_o, ending.textY));
+        attribs += (_c = [" text-y=\"", "\""], _c.raw = [" text-y=\"", "\""], xml(_c, ending.textY));
     }
-    var pcdata = (_p = ["", ""], _p.raw = ["", ""], xml(_p, ending.ending));
-    return (_q = ["<ending", ">", "</ending>"], _q.raw = ["<ending", ">", "</ending>"], dangerous(_q, attribs, pcdata));
-    var _l, _m, _o, _p, _q;
+    var pcdata = (_d = ["", ""], _d.raw = ["", ""], xml(_d, ending.ending));
+    return (_e = ["<ending", ">", "</ending>"], _e.raw = ["<ending", ">", "</ending>"], dangerous(_e, attribs, pcdata));
+    var _a, _b, _c, _d, _e;
 }
 var directionTypeBgToXML = (_l = {},
     _l[1 /* Forward */] = "forward",
     _l[0 /* Backward */] = "backward",
-    _l);
+    _l
+);
 var wingedTypeToXML = (_m = {},
     _m[0 /* None */] = "none",
     _m[2 /* Curved */] = "curved",
     _m[4 /* DoubleCurved */] = "double-curved",
     _m[1 /* Straight */] = "straight",
     _m[3 /* DoubleStraight */] = "double-straight",
-    _m);
+    _m
+);
 function repeatToXML(repeat) {
     // <!ELEMENT repeat EMPTY>
     // <!ATTLIST repeat
@@ -22337,33 +22478,36 @@ function repeatToXML(repeat) {
     //     winged (none | straight | curved |
     //         double-straight | double-curved) #IMPLIED
     // >
-    var attribs = "" + (_o = [" direction=\"", "\""], _o.raw = [" direction=\"", "\""], xml(_o, directionTypeBgToXML[repeat.direction]));
+    var attribs = "" +
+        (_a = [" direction=\"", "\""], _a.raw = [" direction=\"", "\""], xml(_a, directionTypeBgToXML[repeat.direction]));
     if (defined(repeat.times)) {
-        attribs += (_p = [" times=\"", "\""], _p.raw = [" times=\"", "\""], xml(_p, repeat.times));
+        attribs += (_b = [" times=\"", "\""], _b.raw = [" times=\"", "\""], xml(_b, repeat.times));
     }
     if (defined(repeat.winged)) {
-        attribs += (_q = [" winged=\"", "\""], _q.raw = [" winged=\"", "\""], xml(_q, wingedTypeToXML[repeat.winged]));
+        attribs += (_c = [" winged=\"", "\""], _c.raw = [" winged=\"", "\""], xml(_c, wingedTypeToXML[repeat.winged]));
     }
-    return (_r = ["<repeat", " />"], _r.raw = ["<repeat", " />"], dangerous(_r, attribs));
-    var _o, _p, _q, _r;
+    return (_d = ["<repeat", " />"], _d.raw = ["<repeat", " />"], dangerous(_d, attribs));
+    var _a, _b, _c, _d;
 }
 function segnoToXML(segno) {
     // <!ELEMENT segno EMPTY>
     // <!ATTLIST segno
     //     %print-style-align;
     // >
-    var attribs = "" + printStyleAlignToXML(segno);
-    return (_o = ["<segno", " />"], _o.raw = ["<segno", " />"], dangerous(_o, attribs));
-    var _o;
+    var attribs = "" +
+        printStyleAlignToXML(segno);
+    return (_a = ["<segno", " />"], _a.raw = ["<segno", " />"], dangerous(_a, attribs));
+    var _a;
 }
 function codaToXML(coda) {
     // <!ELEMENT coda EMPTY>
     // <!ATTLIST coda
     //     %print-style-align;
     // >
-    var attribs = "" + printStyleAlignToXML(coda);
-    return (_o = ["<coda", " />"], _o.raw = ["<coda", " />"], dangerous(_o, attribs));
-    var _o;
+    var attribs = "" +
+        printStyleAlignToXML(coda);
+    return (_a = ["<coda", " />"], _a.raw = ["<coda", " />"], dangerous(_a, attribs));
+    var _a;
 }
 var uprightInvertedToXML = {
     0: "upright",
@@ -22381,10 +22525,10 @@ function fermataToXML(fermata) {
     //     %print-style;
     // >
     var pcdata = defined(fermata.shape) ? normalAngledSquareToXML[fermata.shape] : "";
-    var attribs = defined(fermata.type) ? (_o = [" type=\"", "\""], _o.raw = [" type=\"", "\""], xml(_o, uprightInvertedToXML[fermata.type])) : "";
+    var attribs = defined(fermata.type) ? (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, uprightInvertedToXML[fermata.type])) : "";
     attribs += printStyleToXML(fermata);
-    return (_p = ["<fermata", ">", "</fermata>"], _p.raw = ["<fermata", ">", "</fermata>"], dangerous(_p, attribs, pcdata));
-    var _o, _p;
+    return (_b = ["<fermata", ">", "</fermata>"], _b.raw = ["<fermata", ">", "</fermata>"], dangerous(_b, attribs, pcdata));
+    var _a, _b;
 }
 function playToXML(play) {
     // <!ELEMENT play ((ipa | mute | semi-pitched | other-play)*)>
@@ -22394,26 +22538,25 @@ function playToXML(play) {
     // TODO musicxml-interfaces: missing id
     var children = [];
     if (defined(play.ipa)) {
-        children.push((_o = ["<ipa>", "</ipa>"], _o.raw = ["<ipa>", "</ipa>"], xml(_o, play.ipa)));
+        children.push((_a = ["<ipa>", "</ipa>"], _a.raw = ["<ipa>", "</ipa>"], xml(_a, play.ipa)));
     }
     if (defined(play.mute)) {
-        children.push((_p = ["<mute>", "</mute>"], _p.raw = ["<mute>", "</mute>"], xml(_p, play.mute)));
+        children.push((_b = ["<mute>", "</mute>"], _b.raw = ["<mute>", "</mute>"], xml(_b, play.mute)));
     }
     if (defined(play.semiPitched)) {
-        children.push((_q = ["<semi-pitched>", "</semi-pitched>"], _q.raw = ["<semi-pitched>", "</semi-pitched>"], xml(_q, play.semiPitched)));
+        children.push((_c = ["<semi-pitched>", "</semi-pitched>"], _c.raw = ["<semi-pitched>", "</semi-pitched>"], xml(_c, play.semiPitched)));
     }
     if (defined(play.otherPlay)) {
-        var pcdata = (_r = ["", ""], _r.raw = ["", ""], xml(_r, play.otherPlay.data));
+        var pcdata = (_d = ["", ""], _d.raw = ["", ""], xml(_d, play.otherPlay.data));
         var oAttribs = "";
         if (defined(play.otherPlay.type)) {
-            oAttribs += (_s = [" type=\"", "\""], _s.raw = [" type=\"", "\""], xml(_s, play.otherPlay.type));
+            oAttribs += (_e = [" type=\"", "\""], _e.raw = [" type=\"", "\""], xml(_e, play.otherPlay.type));
         }
-        children.push((_t = ["<other-play", ">", "</other-play>"], _t.raw = ["<other-play", ">", "</other-play>"], dangerous(_t, oAttribs, pcdata)));
+        children.push((_f = ["<other-play", ">", "</other-play>"], _f.raw = ["<other-play", ">", "</other-play>"], dangerous(_f, oAttribs, pcdata)));
     }
-    return (_u = ["<play>\n", "\n</play>"], _u.raw = ["<play>\\n", "\\n</play>"], dangerous(_u, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p, _q, _r, _s, _t, _u;
+    return (_g = ["<play>\n", "\n</play>"], _g.raw = ["<play>\\n", "\\n</play>"], dangerous(_g, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g;
 }
 function staffLayoutToXML(staffLayout) {
     // <!ELEMENT staff-layout (staff-distance?)>
@@ -22423,25 +22566,23 @@ function staffLayoutToXML(staffLayout) {
     // >
     var children = [];
     if (defined(staffLayout.staffDistance)) {
-        children.push((_o = ["<staff-distance>", "</staff-distance>"], _o.raw = ["<staff-distance>", "</staff-distance>"], xml(_o, staffLayout.staffDistance)));
+        children.push((_a = ["<staff-distance>", "</staff-distance>"], _a.raw = ["<staff-distance>", "</staff-distance>"], xml(_a, staffLayout.staffDistance)));
     }
     var attribs = numberLevelToXML(staffLayout);
-    return (_p = ["<staff-layout", ">\n", "\n</staff-layout>"], _p.raw = ["<staff-layout", ">\\n", "\\n</staff-layout>"], dangerous(_p, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p;
+    return (_b = ["<staff-layout", ">\n", "\n</staff-layout>"], _b.raw = ["<staff-layout", ">\\n", "\\n</staff-layout>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b;
 }
 function measureLayoutToXML(measureLayout) {
     // <!ELEMENT measure-layout (measure-distance?)>
     // <!ELEMENT measure-distance %layout-tenths;>
     var children = [];
     if (defined(measureLayout.measureDistance)) {
-        children.push((_o = ["<measure-distance>", "</measure-distance>"], _o.raw = ["<measure-distance>", "</measure-distance>"], xml(_o, measureLayout.measureDistance)));
+        children.push((_a = ["<measure-distance>", "</measure-distance>"], _a.raw = ["<measure-distance>", "</measure-distance>"], xml(_a, measureLayout.measureDistance)));
     }
-    return (_p = ["<measure-layout>\n", "\n</measure-layout>"], _p.raw = ["<measure-layout>\\n", "\\n</measure-layout>"], dangerous(_p, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p;
+    return (_b = ["<measure-layout>\n", "\n</measure-layout>"], _b.raw = ["<measure-layout>\\n", "\\n</measure-layout>"], dangerous(_b, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b;
 }
 function measureNumberingToXML(measureNumbering) {
     // <!ELEMENT measure-numbering (#PCDATA)>
@@ -22449,9 +22590,9 @@ function measureNumberingToXML(measureNumbering) {
     //     %print-style-align;
     // >
     var attribs = printStyleAlignToXML(measureNumbering);
-    var pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, measureNumbering.data));
-    return (_p = ["<measure-numbering", ">", "</measure-numbering>"], _p.raw = ["<measure-numbering", ">", "</measure-numbering>"], dangerous(_p, attribs, pcdata));
-    var _o, _p;
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, measureNumbering.data));
+    return (_b = ["<measure-numbering", ">", "</measure-numbering>"], _b.raw = ["<measure-numbering", ">", "</measure-numbering>"], dangerous(_b, attribs, pcdata));
+    var _a, _b;
 }
 function keyToXML(key) {
     // <!ELEMENT key (((cancel?, fifths, mode?) |
@@ -22462,36 +22603,38 @@ function keyToXML(key) {
     //     %print-object;
     // >
     var children = [];
-    var attribs = "" + numberLevelToXML(key) + printStyleToXML(key) + printObjectToXML(key);
+    var attribs = "" +
+        numberLevelToXML(key) +
+        printStyleToXML(key) +
+        printObjectToXML(key);
     if (defined(key.cancel)) {
         children.push(cancelToXML(key.cancel));
     }
     if (defined(key.fifths)) {
         // <!ELEMENT fifths (#PCDATA)>
-        children.push((_o = ["<fifths>", "</fifths>"], _o.raw = ["<fifths>", "</fifths>"], xml(_o, key.fifths)));
+        children.push((_a = ["<fifths>", "</fifths>"], _a.raw = ["<fifths>", "</fifths>"], xml(_a, key.fifths)));
     }
     if (defined(key.mode)) {
         // <!ELEMENT mode (#PCDATA)>
-        children.push((_p = ["<mode>", "</mode>"], _p.raw = ["<mode>", "</mode>"], xml(_p, key.mode)));
+        children.push((_b = ["<mode>", "</mode>"], _b.raw = ["<mode>", "</mode>"], xml(_b, key.mode)));
     }
     (key.keySteps || []).forEach(function (keyStep, idx) {
         // <!ELEMENT key-step (#PCDATA)>
         // <!ELEMENT key-alter (#PCDATA)>
         // <!ELEMENT key-accidental (#PCDATA)>
-        children.push((_q = ["<key-step>", "</key-step>"], _q.raw = ["<key-step>", "</key-step>"], xml(_q, keyStep)));
-        children.push((_r = ["<key-alter>", "</key-alter>"], _r.raw = ["<key-alter>", "</key-alter>"], xml(_r, key.keyAlters[idx])));
+        children.push((_a = ["<key-step>", "</key-step>"], _a.raw = ["<key-step>", "</key-step>"], xml(_a, keyStep)));
+        children.push((_b = ["<key-alter>", "</key-alter>"], _b.raw = ["<key-alter>", "</key-alter>"], xml(_b, key.keyAlters[idx])));
         if (!!key.keyAccidentals[idx]) {
-            children.push((_s = ["<key-accidental>", "</key-accidental>"], _s.raw = ["<key-accidental>", "</key-accidental>"], xml(_s, key.keyAccidentals[idx])));
+            children.push((_c = ["<key-accidental>", "</key-accidental>"], _c.raw = ["<key-accidental>", "</key-accidental>"], xml(_c, key.keyAccidentals[idx])));
         }
-        var _q, _r, _s;
+        var _a, _b, _c;
     });
     (key.keyOctaves || []).forEach(function (keyOctave) {
         children.push(keyOctaveToXML(keyOctave));
     });
-    return (_q = ["<key", ">\n", "\n</key>"], _q.raw = ["<key", ">\\n", "\\n</key>"], dangerous(_q, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p, _q;
+    return (_c = ["<key", ">\n", "\n</key>"], _c.raw = ["<key", ">\\n", "\\n</key>"], dangerous(_c, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c;
 }
 var cancelLocationToXML = {
     1: "right",
@@ -22504,12 +22647,12 @@ function cancelToXML(cancel) {
     //     location (left | right | before-barline) #IMPLIED
     // >
     var attribs = "";
-    var pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, cancel.fifths));
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, cancel.fifths));
     if (defined(cancel.location)) {
-        attribs += (_p = [" location=\"", "\""], _p.raw = [" location=\"", "\""], xml(_p, cancelLocationToXML[cancel.location]));
+        attribs += (_b = [" location=\"", "\""], _b.raw = [" location=\"", "\""], xml(_b, cancelLocationToXML[cancel.location]));
     }
-    return (_q = ["<cancel", ">", "</cancel>"], _q.raw = ["<cancel", ">", "</cancel>"], dangerous(_q, attribs, pcdata));
-    var _o, _p, _q;
+    return (_c = ["<cancel", ">", "</cancel>"], _c.raw = ["<cancel", ">", "</cancel>"], dangerous(_c, attribs, pcdata));
+    var _a, _b, _c;
 }
 function keyOctaveToXML(keyOctave) {
     // <!ELEMENT key-octave (#PCDATA)>
@@ -22518,12 +22661,12 @@ function keyOctaveToXML(keyOctave) {
     //     cancel %yes-no; #IMPLIED
     // >
     var attribs = numberLevelToXML(keyOctave);
-    var pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, keyOctave.octave));
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, keyOctave.octave));
     if (defined(keyOctave.cancel)) {
-        attribs += (_p = [" cancel=\"", "\""], _p.raw = [" cancel=\"", "\""], yesNo(_p, keyOctave.cancel));
+        attribs += (_b = [" cancel=\"", "\""], _b.raw = [" cancel=\"", "\""], yesNo(_b, keyOctave.cancel));
     }
-    return (_q = ["<key-octave", ">", "</key-octave>"], _q.raw = ["<key-octave", ">", "</key-octave>"], dangerous(_q, attribs, pcdata));
-    var _o, _p, _q;
+    return (_c = ["<key-octave", ">", "</key-octave>"], _c.raw = ["<key-octave", ">", "</key-octave>"], dangerous(_c, attribs, pcdata));
+    var _a, _b, _c;
 }
 function timeToXML(time) {
     // <!ELEMENT time
@@ -22535,30 +22678,34 @@ function timeToXML(time) {
     //     %print-style-align;
     //     %print-object;
     // >
-    var attribs = "" + numberLevelToXML(time) + timeSymbolToXML(time) + timeSeparatorToXML(time) + printStyleAlignToXML(time) + printObjectToXML(time);
+    var attribs = "" +
+        numberLevelToXML(time) +
+        timeSymbolToXML(time) +
+        timeSeparatorToXML(time) +
+        printStyleAlignToXML(time) +
+        printObjectToXML(time);
     var children = [];
-    if (time.senzaMisura !== undefined) {
+    if (time.senzaMisura != null) {
         // <!ELEMENT senza-misura (#PCDATA)>
         // TODO musicxml-interfaces: PCDATA?
-        children.push((_o = ["<senza-misura />"], _o.raw = ["<senza-misura />"], xml(_o)));
+        children.push((_a = ["<senza-misura />"], _a.raw = ["<senza-misura />"], xml(_a)));
     }
     else {
         // TODO musicxml-interfaces: check this
         (time.beats || []).forEach(function (beats, idx) {
             // <!ELEMENT beats (#PCDATA)>
             // <!ELEMENT beat-type (#PCDATA)>
-            children.push((_p = ["<beats>", "</beats>"], _p.raw = ["<beats>", "</beats>"], xml(_p, beats)));
-            children.push((_q = ["<beat-type>", "</beat-type>"], _q.raw = ["<beat-type>", "</beat-type>"], xml(_q, time.beatTypes[idx])));
-            var _p, _q;
+            children.push((_a = ["<beats>", "</beats>"], _a.raw = ["<beats>", "</beats>"], xml(_a, beats)));
+            children.push((_b = ["<beat-type>", "</beat-type>"], _b.raw = ["<beat-type>", "</beat-type>"], xml(_b, time.beatTypes[idx])));
+            var _a, _b;
         });
         if (defined(time.interchangeable)) {
             children.push(interchangeableToXML(time.interchangeable));
         }
     }
-    return (_p = ["<time", ">\n", "\n</time>"], _p.raw = ["<time", ">\\n", "\\n</time>"], dangerous(_p, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p;
+    return (_b = ["<time", ">\n", "\n</time>"], _b.raw = ["<time", ">\\n", "\\n</time>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b;
 }
 var timeSymbolTypeToXML = {
     4: "dotted-note",
@@ -22573,10 +22720,10 @@ function timeSymbolToXML(timeSymbol) {
     //     "symbol (common | cut | single-number |
     //              note | dotted-note | normal) #IMPLIED">
     if (defined(timeSymbol.symbol)) {
-        return (_o = [" symbol=\"", "\""], _o.raw = [" symbol=\"", "\""], xml(_o, timeSymbolTypeToXML[timeSymbol.symbol]));
+        return (_a = [" symbol=\"", "\""], _a.raw = [" symbol=\"", "\""], xml(_a, timeSymbolTypeToXML[timeSymbol.symbol]));
     }
     return "";
-    var _o;
+    var _a;
 }
 var separatorTypeToXML = {
     0: "none",
@@ -22590,10 +22737,10 @@ function timeSeparatorToXML(timeSeparator) {
     //     "separator (none | horizontal | diagonal |
     //         vertical | adjacent) #IMPLIED">
     if (defined(timeSeparator.separator)) {
-        return (_o = [" separator=\"", "\""], _o.raw = [" separator=\"", "\""], xml(_o, separatorTypeToXML[timeSeparator.separator]));
+        return (_a = [" separator=\"", "\""], _a.raw = [" separator=\"", "\""], xml(_a, separatorTypeToXML[timeSeparator.separator]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function interchangeableToXML(interchangeable) {
     // <!ELEMENT interchangeable (time-relation?, (beats, beat-type)+)>
@@ -22601,23 +22748,24 @@ function interchangeableToXML(interchangeable) {
     //     %time-symbol;
     //     %time-separator;
     // >
-    var attribs = "" + timeSymbolToXML(interchangeable) + timeSeparatorToXML(interchangeable);
+    var attribs = "" +
+        timeSymbolToXML(interchangeable) +
+        timeSeparatorToXML(interchangeable);
     var children = [];
     (interchangeable.beats || []).forEach(function (beats, idx) {
         // <!ELEMENT beats (#PCDATA)>
         // <!ELEMENT beat-type (#PCDATA)>
-        children.push((_o = ["<beats>", "</beats>"], _o.raw = ["<beats>", "</beats>"], xml(_o, beats)));
-        children.push((_p = ["<beat-type>", "</beat-type>"], _p.raw = ["<beat-type>", "</beat-type>"], xml(_p, interchangeable.beatTypes[idx])));
-        var _o, _p;
+        children.push((_a = ["<beats>", "</beats>"], _a.raw = ["<beats>", "</beats>"], xml(_a, beats)));
+        children.push((_b = ["<beat-type>", "</beat-type>"], _b.raw = ["<beat-type>", "</beat-type>"], xml(_b, interchangeable.beatTypes[idx])));
+        var _a, _b;
     });
     if (defined(interchangeable.timeRelation)) {
         // <!ELEMENT time-relation (#PCDATA)>
-        children.push((_o = ["<time-relation>", "</time-relation>"], _o.raw = ["<time-relation>", "</time-relation>"], xml(_o, interchangeable.timeRelation)));
+        children.push((_a = ["<time-relation>", "</time-relation>"], _a.raw = ["<time-relation>", "</time-relation>"], xml(_a, interchangeable.timeRelation)));
     }
-    return (_p = ["<interchangeable", ">\n", "\n</interchangeable>"], _p.raw = ["<interchangeable", ">\\n", "\\n</interchangeable>"], dangerous(_p, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p;
+    return (_b = ["<interchangeable", ">\n", "\n</interchangeable>"], _b.raw = ["<interchangeable", ">\\n", "\\n</interchangeable>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b;
 }
 var partSymbolTypeToXML = {
     0: "none",
@@ -22636,18 +22784,19 @@ function partSymbolToXML(partSymbol) {
     // >
     var pcdata = "";
     if (defined(partSymbol.type)) {
-        pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, partSymbolTypeToXML[partSymbol.type]));
+        pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, partSymbolTypeToXML[partSymbol.type]));
     }
     var attribs = "";
     if (defined(partSymbol.topStaff)) {
-        attribs += (_p = [" top-staff=\"", "\""], _p.raw = [" top-staff=\"", "\""], xml(_p, partSymbol.topStaff));
+        attribs += (_b = [" top-staff=\"", "\""], _b.raw = [" top-staff=\"", "\""], xml(_b, partSymbol.topStaff));
     }
     if (defined(partSymbol.bottomStaff)) {
-        attribs += (_q = [" bottom-staff=\"", "\""], _q.raw = [" bottom-staff=\"", "\""], xml(_q, partSymbol.bottomStaff));
+        attribs += (_c = [" bottom-staff=\"", "\""], _c.raw = [" bottom-staff=\"", "\""], xml(_c, partSymbol.bottomStaff));
     }
-    attribs += positionToXML(partSymbol) + colorToXML(partSymbol);
-    return (_r = ["<part-symbol", ">", "</part-symbol>"], _r.raw = ["<part-symbol", ">", "</part-symbol>"], dangerous(_r, attribs, pcdata));
-    var _o, _p, _q, _r;
+    attribs += positionToXML(partSymbol) +
+        colorToXML(partSymbol);
+    return (_d = ["<part-symbol", ">", "</part-symbol>"], _d.raw = ["<part-symbol", ">", "</part-symbol>"], dangerous(_d, attribs, pcdata));
+    var _a, _b, _c, _d;
 }
 var symbolSizeToXML = {
     1: "full",
@@ -22664,34 +22813,34 @@ function clefToXML(clef) {
     //     %print-style;
     //     %print-object;
     // >
-    var attribs = "" + numberLevelToXML(clef);
+    var attribs = "" +
+        numberLevelToXML(clef);
     var children = [];
     if (defined(clef.additional)) {
-        attribs += (_o = [" additional=\"", "\""], _o.raw = [" additional=\"", "\""], yesNo(_o, clef.additional));
+        attribs += (_a = [" additional=\"", "\""], _a.raw = [" additional=\"", "\""], yesNo(_a, clef.additional));
     }
     if (clef.size >= 0 /* Unspecified */) {
-        attribs += (_p = [" size=\"", "\""], _p.raw = [" size=\"", "\""], xml(_p, symbolSizeToXML[clef.size]));
+        attribs += (_b = [" size=\"", "\""], _b.raw = [" size=\"", "\""], xml(_b, symbolSizeToXML[clef.size]));
     }
     if (defined(clef.afterBarline)) {
-        attribs += (_q = [" after-barline=\"", "\""], _q.raw = [" after-barline=\"", "\""], yesNo(_q, clef.afterBarline));
+        attribs += (_c = [" after-barline=\"", "\""], _c.raw = [" after-barline=\"", "\""], yesNo(_c, clef.afterBarline));
     }
     attribs += printStyleToXML(clef) + printObjectToXML(clef);
     if (defined(clef.sign)) {
         // <!ELEMENT sign (#PCDATA)>
-        children.push((_r = ["<sign>", "</sign>"], _r.raw = ["<sign>", "</sign>"], xml(_r, clef.sign)));
+        children.push((_d = ["<sign>", "</sign>"], _d.raw = ["<sign>", "</sign>"], xml(_d, clef.sign)));
     }
     if (defined(clef.line)) {
         // <!ELEMENT line (#PCDATA)>
-        children.push((_s = ["<line>", "</line>"], _s.raw = ["<line>", "</line>"], xml(_s, clef.line)));
+        children.push((_e = ["<line>", "</line>"], _e.raw = ["<line>", "</line>"], xml(_e, clef.line)));
     }
     if (defined(clef.clefOctaveChange)) {
         // <!ELEMENT clef-octave-change (#PCDATA)>
-        children.push((_t = ["<clef-octave-change>", "</clef-octave-change>"], _t.raw = ["<clef-octave-change>", "</clef-octave-change>"], xml(_t, clef.clefOctaveChange)));
+        children.push((_f = ["<clef-octave-change>", "</clef-octave-change>"], _f.raw = ["<clef-octave-change>", "</clef-octave-change>"], xml(_f, clef.clefOctaveChange)));
     }
-    return (_u = ["<clef", ">\n", "\n</clef>"], _u.raw = ["<clef", ">\\n", "\\n</clef>"], dangerous(_u, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p, _q, _r, _s, _t, _u;
+    return (_g = ["<clef", ">\n", "\n</clef>"], _g.raw = ["<clef", ">\\n", "\\n</clef>"], dangerous(_g, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e, _f, _g;
 }
 function staffDetailsToXML(staffDetails) {
     // <!ELEMENT staff-details (staff-type?, staff-lines?,
@@ -22710,27 +22859,26 @@ function staffDetailsToXML(staffDetails) {
     attribs += printSpacingToXML(staffDetails);
     if (defined(staffDetails.staffType)) {
         // <!ELEMENT staff-type (#PCDATA)>
-        children.push((_o = ["<staff-type>", "</staff-type>"], _o.raw = ["<staff-type>", "</staff-type>"], xml(_o, staffDetails.staffType)));
+        children.push((_a = ["<staff-type>", "</staff-type>"], _a.raw = ["<staff-type>", "</staff-type>"], xml(_a, staffDetails.staffType)));
     }
     if (defined(staffDetails.staffLines)) {
         // <!ELEMENT staff-lines (#PCDATA)>
-        children.push((_p = ["<staff-lines>", "</staff-lines>"], _p.raw = ["<staff-lines>", "</staff-lines>"], xml(_p, staffDetails.staffLines)));
+        children.push((_b = ["<staff-lines>", "</staff-lines>"], _b.raw = ["<staff-lines>", "</staff-lines>"], xml(_b, staffDetails.staffLines)));
     }
     (staffDetails.staffTunings || []).forEach(function (tuning) {
         children.push(staffTuningToXML(tuning));
     });
     if (defined(staffDetails.capo)) {
         // <!ELEMENT capo (#PCDATA)>
-        children.push((_q = ["<capo>", "</capo>"], _q.raw = ["<capo>", "</capo>"], xml(_q, staffDetails.capo)));
+        children.push((_c = ["<capo>", "</capo>"], _c.raw = ["<capo>", "</capo>"], xml(_c, staffDetails.capo)));
     }
     if (defined(staffDetails.staffSize)) {
         // <!ELEMENT staff-size (#PCDATA)>
-        children.push((_r = ["<staff-size>", "</staff-size>"], _r.raw = ["<staff-size>", "</staff-size>"], xml(_r, staffDetails.staffSize)));
+        children.push((_d = ["<staff-size>", "</staff-size>"], _d.raw = ["<staff-size>", "</staff-size>"], xml(_d, staffDetails.staffSize)));
     }
-    return (_s = ["<staff-details", ">\n", "\n</staff-details>"], _s.raw = ["<staff-details", ">\\n", "\\n</staff-details>"], dangerous(_s, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p, _q, _r, _s;
+    return (_e = ["<staff-details", ">\n", "\n</staff-details>"], _e.raw = ["<staff-details", ">\\n", "\\n</staff-details>"], dangerous(_e, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e;
 }
 function staffTuningToXML(staffTuning) {
     // <!ELEMENT staff-tuning
@@ -22740,30 +22888,29 @@ function staffTuningToXML(staffTuning) {
     var children = [];
     var attribs = "";
     if (defined(staffTuning.line)) {
-        attribs += (_o = [" line=\"", "\""], _o.raw = [" line=\"", "\""], xml(_o, staffTuning.line));
+        attribs += (_a = [" line=\"", "\""], _a.raw = [" line=\"", "\""], xml(_a, staffTuning.line));
     }
     children = children.concat(tuningStepAlterOctaveToXML(staffTuning));
-    return (_p = ["<staff-tuning", ">\n", "\n</staff-tuning>"], _p.raw = ["<staff-tuning", ">\\n", "\\n</staff-tuning>"], dangerous(_p, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p;
+    return (_b = ["<staff-tuning", ">\n", "\n</staff-tuning>"], _b.raw = ["<staff-tuning", ">\\n", "\\n</staff-tuning>"], dangerous(_b, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b;
 }
 function tuningStepAlterOctaveToXML(tuning) {
     var children = [];
     if (defined(tuning.tuningStep)) {
         // <!ELEMENT tuning-step (#PCDATA)>
-        children.push((_o = ["<tuning-step>", "</tuning-step>"], _o.raw = ["<tuning-step>", "</tuning-step>"], xml(_o, tuning.tuningStep)));
+        children.push((_a = ["<tuning-step>", "</tuning-step>"], _a.raw = ["<tuning-step>", "</tuning-step>"], xml(_a, tuning.tuningStep)));
     }
     if (defined(tuning.tuningAlter)) {
         // <!ELEMENT tuning-alter (#PCDATA)>
-        children.push((_p = ["<tuning-alter>", "</tuning-alter>"], _p.raw = ["<tuning-alter>", "</tuning-alter>"], xml(_p, tuning.tuningAlter)));
+        children.push((_b = ["<tuning-alter>", "</tuning-alter>"], _b.raw = ["<tuning-alter>", "</tuning-alter>"], xml(_b, tuning.tuningAlter)));
     }
     if (defined(tuning.tuningOctave)) {
         // <!ELEMENT tuning-octave (#PCDATA)>
-        children.push((_q = ["<tuning-octave>", "</tuning-octave>"], _q.raw = ["<tuning-octave>", "</tuning-octave>"], xml(_q, tuning.tuningOctave)));
+        children.push((_c = ["<tuning-octave>", "</tuning-octave>"], _c.raw = ["<tuning-octave>", "</tuning-octave>"], xml(_c, tuning.tuningOctave)));
     }
     return children;
-    var _o, _p, _q;
+    var _a, _b, _c;
 }
 function transposeToXML(transpose) {
     // <!ELEMENT transpose
@@ -22775,24 +22922,23 @@ function transposeToXML(transpose) {
     var attribs = numberLevelToXML(transpose);
     if (defined(transpose.diatonic)) {
         // <!ELEMENT diatonic (#PCDATA)>
-        children.push((_o = ["<diatonic>", "</diatonic>"], _o.raw = ["<diatonic>", "</diatonic>"], xml(_o, transpose.diatonic)));
+        children.push((_a = ["<diatonic>", "</diatonic>"], _a.raw = ["<diatonic>", "</diatonic>"], xml(_a, transpose.diatonic)));
     }
     if (defined(transpose.chromatic)) {
         // <!ELEMENT chromatic (#PCDATA)>
-        children.push((_p = ["<chromatic>", "</chromatic>"], _p.raw = ["<chromatic>", "</chromatic>"], xml(_p, transpose.chromatic)));
+        children.push((_b = ["<chromatic>", "</chromatic>"], _b.raw = ["<chromatic>", "</chromatic>"], xml(_b, transpose.chromatic)));
     }
     if (defined(transpose.octaveChange)) {
         // <!ELEMENT octave-change (#PCDATA)>
-        children.push((_q = ["<octave-change>", "</octave-change>"], _q.raw = ["<octave-change>", "</octave-change>"], xml(_q, transpose.octaveChange)));
+        children.push((_c = ["<octave-change>", "</octave-change>"], _c.raw = ["<octave-change>", "</octave-change>"], xml(_c, transpose.octaveChange)));
     }
     if (defined(transpose.double)) {
         // <!ELEMENT double EMPTY>
-        children.push((_r = ["<double />"], _r.raw = ["<double />"], xml(_r)));
+        children.push((_d = ["<double />"], _d.raw = ["<double />"], xml(_d)));
     }
-    return (_s = ["<transpose", ">\n", "\n</transpose>"], _s.raw = ["<transpose", ">\\n", "\\n</transpose>"], dangerous(_s, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p, _q, _r, _s;
+    return (_e = ["<transpose", ">\n", "\n</transpose>"], _e.raw = ["<transpose", ">\\n", "\\n</transpose>"], dangerous(_e, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d, _e;
 }
 function directiveToXML(directive) {
     // <!ELEMENT directive (#PCDATA)>
@@ -22800,10 +22946,10 @@ function directiveToXML(directive) {
     //     %print-style;
     //     xml:lang NMTOKEN #IMPLIED
     // >
-    var pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, directive.data));
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, directive.data));
     var attribs = printStyleToXML(directive); // TODO musicxml-interfaces xml:lang
-    return (_p = ["<directive", ">", "</directive>"], _p.raw = ["<directive", ">", "</directive>"], dangerous(_p, attribs, pcdata));
-    var _o, _p;
+    return (_b = ["<directive", ">", "</directive>"], _b.raw = ["<directive", ">", "</directive>"], dangerous(_b, attribs, pcdata));
+    var _a, _b;
 }
 function measureStyleToXML(measureStyle) {
     // <!ELEMENT measure-style (multiple-rest |
@@ -22814,7 +22960,10 @@ function measureStyleToXML(measureStyle) {
     //     %color;
     // >
     var children = [];
-    var attribs = "" + numberLevelToXML(measureStyle) + fontToXML(measureStyle) + colorToXML(measureStyle);
+    var attribs = "" +
+        numberLevelToXML(measureStyle) +
+        fontToXML(measureStyle) +
+        colorToXML(measureStyle);
     // TODO: Make one at a time!!
     if (defined(measureStyle.multipleRest)) {
         children.push(multipleRestToXML(measureStyle.multipleRest));
@@ -22828,10 +22977,9 @@ function measureStyleToXML(measureStyle) {
     if (defined(measureStyle.slash)) {
         children.push(slashElToXML(measureStyle.slash));
     }
-    return (_o = ["<measure-style", ">\n", "\n</measure-style>"], _o.raw = ["<measure-style", ">\\n", "\\n</measure-style>"], dangerous(_o, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o;
+    return (_a = ["<measure-style", ">\n", "\n</measure-style>"], _a.raw = ["<measure-style", ">\\n", "\\n</measure-style>"], dangerous(_a, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a;
 }
 function multipleRestToXML(multipleRest) {
     // <!ELEMENT multiple-rest (#PCDATA)>
@@ -22839,12 +22987,12 @@ function multipleRestToXML(multipleRest) {
     //     use-symbols %yes-no; #IMPLIED
     // >
     var attribs = "";
-    var pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, multipleRest.count));
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, multipleRest.count));
     if (defined(multipleRest.useSymbols)) {
-        attribs += (_p = [" use-symbols=\"", "\""], _p.raw = [" use-symbols=\"", "\""], yesNo(_p, multipleRest.useSymbols));
+        attribs += (_b = [" use-symbols=\"", "\""], _b.raw = [" use-symbols=\"", "\""], yesNo(_b, multipleRest.useSymbols));
     }
-    return (_q = ["<multiple-rest", ">", "</multiple-rest>"], _q.raw = ["<multiple-rest", ">", "</multiple-rest>"], dangerous(_q, attribs, pcdata));
-    var _o, _p, _q;
+    return (_c = ["<multiple-rest", ">", "</multiple-rest>"], _c.raw = ["<multiple-rest", ">", "</multiple-rest>"], dangerous(_c, attribs, pcdata));
+    var _a, _b, _c;
 }
 function measureRepeatToXML(measureRepeat) {
     // <!ELEMENT measure-repeat (#PCDATA)>
@@ -22853,11 +23001,11 @@ function measureRepeatToXML(measureRepeat) {
     //     slashes NMTOKEN #IMPLIED
     // >
     var attribs = "";
-    var pcdata = (_o = ["", ""], _o.raw = ["", ""], xml(_o, measureRepeat.data || ""));
+    var pcdata = (_a = ["", ""], _a.raw = ["", ""], xml(_a, measureRepeat.data || ""));
     attribs += startStopToXML(measureRepeat);
     // TODO: musicxml-interfaces: slashed -> slashes
-    return (_p = ["<measure-repeat", ">", "</measure-repeat>"], _p.raw = ["<measure-repeat", ">", "</measure-repeat>"], dangerous(_p, attribs, pcdata));
-    var _o, _p;
+    return (_b = ["<measure-repeat", ">", "</measure-repeat>"], _b.raw = ["<measure-repeat", ">", "</measure-repeat>"], dangerous(_b, attribs, pcdata));
+    var _a, _b;
 }
 function beatRepeatToXML(beatRepeat) {
     // <!ELEMENT beat-repeat ((slash-type, slash-dot*)?)>
@@ -22868,23 +23016,23 @@ function beatRepeatToXML(beatRepeat) {
     // >
     // <!ELEMENT slash-type (#PCDATA)>
     var children = [];
-    var attribs = "" + startStopToXML(beatRepeat);
+    var attribs = "" +
+        startStopToXML(beatRepeat);
     // TODO: musicxml-interfaces: slases -> slashes
     if (defined(beatRepeat.useDots)) {
-        attribs += (_o = [" use-dots=\"", "\""], _o.raw = [" use-dots=\"", "\""], yesNo(_o, beatRepeat.useDots));
+        attribs += (_a = [" use-dots=\"", "\""], _a.raw = [" use-dots=\"", "\""], yesNo(_a, beatRepeat.useDots));
     }
     if (defined(beatRepeat.slashType)) {
-        children.push((_p = ["<slash-type>", "</slash-type>"], _p.raw = ["<slash-type>", "</slash-type>"], xml(_p, beatRepeat.slashType)));
+        children.push((_b = ["<slash-type>", "</slash-type>"], _b.raw = ["<slash-type>", "</slash-type>"], xml(_b, beatRepeat.slashType)));
     }
     (beatRepeat.slashDots || []).forEach(function (dot) {
         // <!ELEMENT slash-dot EMPTY>
-        children.push((_q = ["<slash-dot />"], _q.raw = ["<slash-dot />"], xml(_q)));
-        var _q;
+        children.push((_a = ["<slash-dot />"], _a.raw = ["<slash-dot />"], xml(_a)));
+        var _a;
     });
-    return (_q = ["<beat-repeat", ">\n", "\n</beat-repeat>"], _q.raw = ["<beat-repeat", ">\\n", "\\n</beat-repeat>"], dangerous(_q, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p, _q;
+    return (_c = ["<beat-repeat", ">\n", "\n</beat-repeat>"], _c.raw = ["<beat-repeat", ">\\n", "\\n</beat-repeat>"], dangerous(_c, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c;
 }
 function slashElToXML(slash) {
     // <!ELEMENT slash ((slash-type, slash-dot*)?)>
@@ -22895,31 +23043,32 @@ function slashElToXML(slash) {
     // >
     var attribs = startStopToXML(slash);
     if (defined(slash.useDots)) {
-        attribs += (_o = [" use-dots=\"", "\""], _o.raw = [" use-dots=\"", "\""], yesNo(_o, slash.useDots));
+        attribs += (_a = [" use-dots=\"", "\""], _a.raw = [" use-dots=\"", "\""], yesNo(_a, slash.useDots));
     }
     if (defined(slash.useStems)) {
-        attribs += (_p = [" use-stems=\"", "\""], _p.raw = [" use-stems=\"", "\""], yesNo(_p, slash.useStems));
+        attribs += (_b = [" use-stems=\"", "\""], _b.raw = [" use-stems=\"", "\""], yesNo(_b, slash.useStems));
     }
     var children = [];
     if (defined(slash.slashType)) {
-        children.push((_q = ["<slash-type>", "</slash-type>"], _q.raw = ["<slash-type>", "</slash-type>"], xml(_q, slash.slashType)));
+        children.push((_c = ["<slash-type>", "</slash-type>"], _c.raw = ["<slash-type>", "</slash-type>"], xml(_c, slash.slashType)));
     }
     (slash.slashDots || []).forEach(function (dot) {
         // <!ELEMENT slash-dot EMPTY>
-        children.push((_r = ["<slash-dot />"], _r.raw = ["<slash-dot />"], xml(_r)));
-        var _r;
+        children.push((_a = ["<slash-dot />"], _a.raw = ["<slash-dot />"], xml(_a)));
+        var _a;
     });
-    return (_r = ["<slash", ">\n", "\n</slash>"], _r.raw = ["<slash", ">\\n", "\\n</slash>"], dangerous(_r, attribs, children.join("\n").split("\n").map(function (n) {
-        return "  " + n;
-    }).join("\n")));
-    var _o, _p, _q, _r;
+    return (_d = ["<slash", ">\n", "\n</slash>"], _d.raw = ["<slash", ">\\n", "\\n</slash>"], dangerous(_d, attribs, children.join("\n").split("\n")
+        .map(function (n) { return "  " + n; }).join("\n")));
+    var _a, _b, _c, _d;
 }
 function printStyleToXML(printStyle) {
     // <!ENTITY % print-style
     //     "%position;
     //      %font;
     //      %color;">
-    return positionToXML(printStyle) + fontToXML(printStyle) + colorToXML(printStyle);
+    return positionToXML(printStyle) +
+        fontToXML(printStyle) +
+        colorToXML(printStyle);
 }
 function printoutToXML(printout) {
     // <!ENTITY % printout
@@ -22929,23 +23078,23 @@ function printoutToXML(printout) {
     //      print-lyric   %yes-no;  #IMPLIED">
     var attribs = printObjectToXML(printout);
     if (defined(printout.printDot)) {
-        attribs += (_o = [" print-dot=\"", "\""], _o.raw = [" print-dot=\"", "\""], yesNo(_o, printout.printDot));
+        attribs += (_a = [" print-dot=\"", "\""], _a.raw = [" print-dot=\"", "\""], yesNo(_a, printout.printDot));
     }
     attribs += printSpacingToXML(printout);
     if (defined(printout.printLyric)) {
-        attribs += (_p = [" print-lyric=\"", "\""], _p.raw = [" print-lyric=\"", "\""], yesNo(_p, printout.printLyric));
+        attribs += (_b = [" print-lyric=\"", "\""], _b.raw = [" print-lyric=\"", "\""], yesNo(_b, printout.printLyric));
     }
     return attribs;
-    var _o, _p;
+    var _a, _b;
 }
 function timeOnlyToXML(timeOnly) {
     // <!ENTITY % time-only
     //     "time-only CDATA #IMPLIED">
     if (defined(timeOnly.timeOnly)) {
-        return (_o = [" time-only=\"", "\""], _o.raw = [" time-only=\"", "\""], xml(_o, timeOnly.timeOnly));
+        return (_a = [" time-only=\"", "\""], _a.raw = [" time-only=\"", "\""], xml(_a, timeOnly.timeOnly));
     }
     return "";
-    var _o;
+    var _a;
 }
 function editorialToXML(editorial) {
     // <!ENTITY % editorial "(footnote?, level?)">
@@ -22961,20 +23110,20 @@ function editorialToXML(editorial) {
     // <!ELEMENT voice (#PCDATA)>
     var elements = [];
     if (defined(editorial.footnote) && !!editorial.footnote.text) {
-        var footnoteEscaped = (_o = ["", ""], _o.raw = ["", ""], xml(_o, editorial.footnote.text));
-        elements.push((_p = ["<footnote", ">\n            ", "</footnote>"], _p.raw = ["<footnote", ">\n            ", "</footnote>"], dangerous(_p, textFormattingToXML(editorial.footnote), footnoteEscaped)));
+        var footnoteEscaped = (_a = ["", ""], _a.raw = ["", ""], xml(_a, editorial.footnote.text));
+        elements.push((_b = ["<footnote", ">\n            ", "</footnote>"], _b.raw = ["<footnote", ">\n            ", "</footnote>"], dangerous(_b, textFormattingToXML(editorial.footnote), footnoteEscaped)));
     }
     if (defined(editorial.level) && !!editorial.level.text) {
-        var levelEscaped = (_q = ["", ""], _q.raw = ["", ""], xml(_q, editorial.level.text));
+        var levelEscaped = (_c = ["", ""], _c.raw = ["", ""], xml(_c, editorial.level.text));
         var attribs = "";
         if (defined(editorial.level.reference)) {
-            attribs += (_r = [" reference=\"", "\""], _r.raw = [" reference=\"", "\""], yesNo(_r, editorial.level.reference));
+            attribs += (_d = [" reference=\"", "\""], _d.raw = [" reference=\"", "\""], yesNo(_d, editorial.level.reference));
         }
         attribs += levelDisplayToXML(editorial.level);
-        elements.push((_s = ["<level", ">", "</level>"], _s.raw = ["<level", ">", "</level>"], dangerous(_s, attribs, levelEscaped)));
+        elements.push((_e = ["<level", ">", "</level>"], _e.raw = ["<level", ">", "</level>"], dangerous(_e, attribs, levelEscaped)));
     }
     return elements;
-    var _o, _p, _q, _r, _s;
+    var _a, _b, _c, _d, _e;
 }
 function editorialVoiceToXML(editorial) {
     // <!ENTITY % editorial-voice "(footnote?, level?, voice?)">
@@ -22990,10 +23139,10 @@ function editorialVoiceToXML(editorial) {
     var elements = editorialToXML(editorial);
     // <!ELEMENT voice (#PCDATA)>
     if (defined(editorial.voice)) {
-        elements.push((_o = ["<voice>", "</voice>"], _o.raw = ["<voice>", "</voice>"], xml(_o, editorial.voice)));
+        elements.push((_a = ["<voice>", "</voice>"], _a.raw = ["<voice>", "</voice>"], xml(_a, editorial.voice)));
     }
     return elements;
-    var _o;
+    var _a;
 }
 var solidDashedDottedWavyToXML = {
     1: "dashed",
@@ -23005,33 +23154,34 @@ function lineTypeToXML(lineType) {
     // <!ENTITY % line-type
     //     "line-type (solid | dashed | dotted | wavy) #IMPLIED">
     if (defined(lineType.lineType)) {
-        return (_o = [" line-type=\"", "\""], _o.raw = [" line-type=\"", "\""], xml(_o, solidDashedDottedWavyToXML[lineType.lineType]));
+        return (_a = [" line-type=\"", "\""], _a.raw = [" line-type=\"", "\""], xml(_a, solidDashedDottedWavyToXML[lineType.lineType]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function startStopToXML(startStop) {
     // <!ENTITY % start-stop "(start | stop)">
     if (defined(startStop.type)) {
-        return (_o = [" type=\"", "\""], _o.raw = [" type=\"", "\""], xml(_o, startStop.type === 0 /* Start */ ? "start" : "stop"));
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, startStop.type === 0 /* Start */ ?
+            "start" : "stop"));
     }
     return "";
-    var _o;
+    var _a;
 }
 function startStopDiscontinueToXML(startStop) {
     // <!ENTITY % start-stop "(start | stop)">
     if (defined(startStop.type)) {
-        return (_o = [" type=\"", "\""], _o.raw = [" type=\"", "\""], xml(_o, startStopDiscontinueTypeToXML[startStop.type]));
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, startStopDiscontinueTypeToXML[startStop.type]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function numberLevelToXML(numberLevel) {
     if (defined(numberLevel.number)) {
-        return (_o = [" number=\"", "\""], _o.raw = [" number=\"", "\""], xml(_o, numberLevel.number));
+        return (_a = [" number=\"", "\""], _a.raw = [" number=\"", "\""], xml(_a, numberLevel.number));
     }
     return "";
-    var _o;
+    var _a;
 }
 var startStopContinueSingleToXML = {
     0: "start",
@@ -23042,25 +23192,25 @@ var startStopContinueSingleToXML = {
 function startStopContinueToXML(startStopContinue) {
     // <!ENTITY % start-stop-continue "(start | stop | continue)">
     if (defined(startStopContinue.type)) {
-        return (_o = [" type=\"", "\""], _o.raw = [" type=\"", "\""], xml(_o, startStopContinueSingleToXML[startStopContinue.type]));
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, startStopContinueSingleToXML[startStopContinue.type]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function nameToXML(name) {
     if (defined(name.name)) {
-        return (_o = [" name=\"", "\""], _o.raw = [" name=\"", "\""], xml(_o, name.name));
+        return (_a = [" name=\"", "\""], _a.raw = [" name=\"", "\""], xml(_a, name.name));
     }
     return "";
-    var _o;
+    var _a;
 }
 function startStopSingleToXML(startStopSingle) {
     // <!ENTITY % start-stop-single "(start | stop | single)">
     if (defined(startStopSingle.type)) {
-        return (_o = [" type=\"", "\""], _o.raw = [" type=\"", "\""], xml(_o, startStopContinueSingleToXML[startStopSingle.type]));
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, startStopContinueSingleToXML[startStopSingle.type]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function dashedFormattingToXML(dashedFormatting) {
     // <!ENTITY % dashed-formatting
@@ -23068,13 +23218,13 @@ function dashedFormattingToXML(dashedFormatting) {
     //      space-length  %tenths;  #IMPLIED">
     var attribs = "";
     if (defined(dashedFormatting.dashLength)) {
-        attribs += (_o = [" dash-length=\"", "\""], _o.raw = [" dash-length=\"", "\""], xml(_o, dashedFormatting.dashLength));
+        attribs += (_a = [" dash-length=\"", "\""], _a.raw = [" dash-length=\"", "\""], xml(_a, dashedFormatting.dashLength));
     }
     if (defined(dashedFormatting.spaceLength)) {
-        attribs += (_p = [" space-length=\"", "\""], _p.raw = [" space-length=\"", "\""], xml(_p, dashedFormatting.spaceLength));
+        attribs += (_b = [" space-length=\"", "\""], _b.raw = [" space-length=\"", "\""], xml(_b, dashedFormatting.spaceLength));
     }
     return attribs;
-    var _o, _p;
+    var _a, _b;
 }
 var straightCurvedToXML = {
     1: "curved",
@@ -23082,10 +23232,10 @@ var straightCurvedToXML = {
 };
 function lineShapeToXML(lineShape) {
     if (defined(lineShape.lineShape)) {
-        return (_o = [" line-shape=\"", "\""], _o.raw = [" line-shape=\"", "\""], xml(_o, straightCurvedToXML[lineShape.lineShape]));
+        return (_a = [" line-shape=\"", "\""], _a.raw = [" line-shape=\"", "\""], xml(_a, straightCurvedToXML[lineShape.lineShape]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function positionToXML(pos) {
     // <!ENTITY % position
@@ -23095,37 +23245,39 @@ function positionToXML(pos) {
     //      relative-y    %tenths;    #IMPLIED">
     var attribs = "";
     if (defined(pos.defaultX)) {
-        attribs += (_o = [" default-x=\"", "\""], _o.raw = [" default-x=\"", "\""], xml(_o, pos.defaultX));
+        attribs += (_a = [" default-x=\"", "\""], _a.raw = [" default-x=\"", "\""], xml(_a, pos.defaultX));
     }
     if (defined(pos.defaultY)) {
-        attribs += (_p = [" default-y=\"", "\""], _p.raw = [" default-y=\"", "\""], xml(_p, pos.defaultY));
+        attribs += (_b = [" default-y=\"", "\""], _b.raw = [" default-y=\"", "\""], xml(_b, pos.defaultY));
     }
     if (defined(pos.relativeX)) {
-        attribs += (_q = [" relative-x=\"", "\""], _q.raw = [" relative-x=\"", "\""], xml(_q, pos.relativeX));
+        attribs += (_c = [" relative-x=\"", "\""], _c.raw = [" relative-x=\"", "\""], xml(_c, pos.relativeX));
     }
     if (defined(pos.relativeY)) {
-        attribs += (_r = [" relative-y=\"", "\""], _r.raw = [" relative-y=\"", "\""], xml(_r, pos.relativeY));
+        attribs += (_d = [" relative-y=\"", "\""], _d.raw = [" relative-y=\"", "\""], xml(_d, pos.relativeY));
     }
     return attribs;
-    var _o, _p, _q, _r;
+    var _a, _b, _c, _d;
 }
 function placementToXML(placement) {
     // <!ENTITY % placement
     //     "placement %above-below; #IMPLIED">
     if (placement.placement > 0 /* Unspecified */) {
-        return (_o = [" placement=\"", "\""], _o.raw = [" placement=\"", "\""], xml(_o, placement.placement === 1 /* Above */ ? "above" : "below"));
+        return (_a = [" placement=\"", "\""], _a.raw = [" placement=\"", "\""], xml(_a, placement.placement === 1 /* Above */ ?
+            "above" : "below"));
     }
     return "";
-    var _o;
+    var _a;
 }
 function orientationToXML(orientation) {
     // <!ENTITY % orientation
     //     "orientation (over | under) #IMPLIED">
     if (orientation.orientation > 0 /* Unspecified */) {
-        return (_o = [" orientation=\"", "\""], _o.raw = [" orientation=\"", "\""], xml(_o, orientation.orientation === 1 /* Over */ ? "over" : "under"));
+        return (_a = [" orientation=\"", "\""], _a.raw = [" orientation=\"", "\""], xml(_a, orientation.orientation === 1 /* Over */ ?
+            "over" : "under"));
     }
     return "";
-    var _o;
+    var _a;
 }
 function bezierToXML(bezier) {
     // <!ENTITY % bezier
@@ -23137,25 +23289,25 @@ function bezierToXML(bezier) {
     //      bezier-y2      %tenths;  #IMPLIED">
     var attribs = "";
     if (defined(bezier.bezierOffset)) {
-        attribs += (_o = [" bezier-offset=\"", "\""], _o.raw = [" bezier-offset=\"", "\""], xml(_o, bezier.bezierOffset));
+        attribs += (_a = [" bezier-offset=\"", "\""], _a.raw = [" bezier-offset=\"", "\""], xml(_a, bezier.bezierOffset));
     }
     if (defined(bezier.bezierOffset2)) {
-        attribs += (_p = [" bezier-offset2=\"", "\""], _p.raw = [" bezier-offset2=\"", "\""], xml(_p, bezier.bezierOffset2));
+        attribs += (_b = [" bezier-offset2=\"", "\""], _b.raw = [" bezier-offset2=\"", "\""], xml(_b, bezier.bezierOffset2));
     }
     if (defined(bezier.bezierX)) {
-        attribs += (_q = [" bezier-x=\"", "\""], _q.raw = [" bezier-x=\"", "\""], xml(_q, bezier.bezierX));
+        attribs += (_c = [" bezier-x=\"", "\""], _c.raw = [" bezier-x=\"", "\""], xml(_c, bezier.bezierX));
     }
     if (defined(bezier.bezierY)) {
-        attribs += (_r = [" bezier-y=\"", "\""], _r.raw = [" bezier-y=\"", "\""], xml(_r, bezier.bezierY));
+        attribs += (_d = [" bezier-y=\"", "\""], _d.raw = [" bezier-y=\"", "\""], xml(_d, bezier.bezierY));
     }
     if (defined(bezier.bezierX2)) {
-        attribs += (_s = [" bezier-x2=\"", "\""], _s.raw = [" bezier-x2=\"", "\""], xml(_s, bezier.bezierX2));
+        attribs += (_e = [" bezier-x2=\"", "\""], _e.raw = [" bezier-x2=\"", "\""], xml(_e, bezier.bezierX2));
     }
     if (defined(bezier.bezierY2)) {
-        attribs += (_t = [" bezier-y2=\"", "\""], _t.raw = [" bezier-y2=\"", "\""], xml(_t, bezier.bezierY2));
+        attribs += (_f = [" bezier-y2=\"", "\""], _f.raw = [" bezier-y2=\"", "\""], xml(_f, bezier.bezierY2));
     }
     return attribs;
-    var _o, _p, _q, _r, _s, _t;
+    var _a, _b, _c, _d, _e, _f;
 }
 function fontToXML(font) {
     // <!ENTITY % font
@@ -23165,37 +23317,39 @@ function fontToXML(font) {
     //      font-weight  CDATA  #IMPLIED">
     var attribs = "";
     if (defined(font.fontFamily)) {
-        attribs += (_o = [" font-family=\"", "\""], _o.raw = [" font-family=\"", "\""], xml(_o, font.fontFamily));
+        attribs += (_a = [" font-family=\"", "\""], _a.raw = [" font-family=\"", "\""], xml(_a, font.fontFamily));
     }
     if (defined(font.fontStyle)) {
-        attribs += (_p = [" font-style=\"", "\""], _p.raw = [" font-style=\"", "\""], xml(_p, font.fontStyle === 1 /* Italic */ ? "italic" : "normal"));
+        attribs += (_b = [" font-style=\"", "\""], _b.raw = [" font-style=\"", "\""], xml(_b, font.fontStyle ===
+            1 /* Italic */ ? "italic" : "normal"));
     }
     if (defined(font.fontSize)) {
-        attribs += (_q = [" font-size=\"", "\""], _q.raw = [" font-size=\"", "\""], xml(_q, font.fontSize));
+        attribs += (_c = [" font-size=\"", "\""], _c.raw = [" font-size=\"", "\""], xml(_c, font.fontSize));
     }
     if (defined(font.fontWeight)) {
-        attribs += (_r = [" font-weight=\"", "\""], _r.raw = [" font-weight=\"", "\""], xml(_r, font.fontWeight === 2 /* Bold */ ? "bold" : "normal"));
+        attribs += (_d = [" font-weight=\"", "\""], _d.raw = [" font-weight=\"", "\""], xml(_d, font.fontWeight ===
+            2 /* Bold */ ? "bold" : "normal"));
     }
     return attribs;
-    var _o, _p, _q, _r;
+    var _a, _b, _c, _d;
 }
 function printObjectToXML(printObject) {
     // <!ENTITY % print-object
     //     "print-object  %yes-no;  #IMPLIED">
     if (defined(printObject.printObject)) {
-        return (_o = [" print-object=\"", "\""], _o.raw = [" print-object=\"", "\""], yesNo(_o, printObject.printObject));
+        return (_a = [" print-object=\"", "\""], _a.raw = [" print-object=\"", "\""], yesNo(_a, printObject.printObject));
     }
     return "";
-    var _o;
+    var _a;
 }
 function printSpacingToXML(printSpacing) {
     // <!ENTITY % print-spacing
     //     "print-spacing %yes-no;  #IMPLIED">
     if (defined(printSpacing.printSpacing)) {
-        return (_o = [" print-spacing=\"", "\""], _o.raw = [" print-spacing=\"", "\""], yesNo(_o, printSpacing.printSpacing));
+        return (_a = [" print-spacing=\"", "\""], _a.raw = [" print-spacing=\"", "\""], yesNo(_a, printSpacing.printSpacing));
     }
     return "";
-    var _o;
+    var _a;
 }
 function textFormattingToXML(textFormatting) {
     // <!ENTITY % text-formatting
@@ -23209,7 +23363,15 @@ function textFormattingToXML(textFormatting) {
     //      xml:space (default | preserve) #IMPLIED TODO musicxml-interfaces
     //      %text-direction;
     //      %enclosure;">
-    return "" + justifyToXML(textFormatting) + printStyleAlignToXML(textFormatting) + textDecorationToXML(textFormatting) + textRotationToXML(textFormatting) + letterSpacingToXML(textFormatting) + lineHeightToXML(textFormatting) + textDirectionToXML(textFormatting) + enclosureToXML(textFormatting);
+    return "" +
+        justifyToXML(textFormatting) +
+        printStyleAlignToXML(textFormatting) +
+        textDecorationToXML(textFormatting) +
+        textRotationToXML(textFormatting) +
+        letterSpacingToXML(textFormatting) +
+        lineHeightToXML(textFormatting) +
+        textDirectionToXML(textFormatting) +
+        enclosureToXML(textFormatting);
 }
 var leftCenterRightToXML = {
     1: "right",
@@ -23218,27 +23380,30 @@ var leftCenterRightToXML = {
 };
 function justifyToXML(justify) {
     if (defined(justify.justify)) {
-        return (_o = [" justify=\"", "\""], _o.raw = [" justify=\"", "\""], xml(_o, leftCenterRightToXML[justify.justify]));
+        return (_a = [" justify=\"", "\""], _a.raw = [" justify=\"", "\""], xml(_a, leftCenterRightToXML[justify.justify]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function halignToXML(halign) {
     if (defined(halign.halign)) {
-        return (_o = [" halign=\"", "\""], _o.raw = [" halign=\"", "\""], xml(_o, leftCenterRightToXML[halign.halign]));
+        return (_a = [" halign=\"", "\""], _a.raw = [" halign=\"", "\""], xml(_a, leftCenterRightToXML[halign.halign]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function valignToXML(valign) {
     if (defined(valign.valign)) {
-        return (_o = [" valign=\"", "\""], _o.raw = [" valign=\"", "\""], xml(_o, topMiddleBottomBaselineToXML[valign.valign]));
+        return (_a = [" valign=\"", "\""], _a.raw = [" valign=\"", "\""], xml(_a, topMiddleBottomBaselineToXML[valign.valign]));
     }
     return "";
-    var _o;
+    var _a;
 }
 function printStyleAlignToXML(printStyleAlign) {
-    return "" + printStyleToXML(printStyleAlign) + halignToXML(printStyleAlign) + valignToXML(printStyleAlign);
+    return "" +
+        printStyleToXML(printStyleAlign) +
+        halignToXML(printStyleAlign) +
+        valignToXML(printStyleAlign);
 }
 function textDecorationToXML(textDecoration) {
     // <!ENTITY % text-decoration
@@ -23247,40 +23412,40 @@ function textDecorationToXML(textDecoration) {
     //      line-through  %number-of-lines;   #IMPLIED">
     var attribs = "";
     if (defined(textDecoration.underline)) {
-        attribs += (_o = [" underline=\"", "\""], _o.raw = [" underline=\"", "\""], xml(_o, textDecoration.underline));
+        attribs += (_a = [" underline=\"", "\""], _a.raw = [" underline=\"", "\""], xml(_a, textDecoration.underline));
     }
     if (defined(textDecoration.overline)) {
-        attribs += (_p = [" overline=\"", "\""], _p.raw = [" overline=\"", "\""], xml(_p, textDecoration.overline));
+        attribs += (_b = [" overline=\"", "\""], _b.raw = [" overline=\"", "\""], xml(_b, textDecoration.overline));
     }
     if (defined(textDecoration.lineThrough)) {
-        attribs += (_q = [" line-through=\"", "\""], _q.raw = [" line-through=\"", "\""], xml(_q, textDecoration.lineThrough));
+        attribs += (_c = [" line-through=\"", "\""], _c.raw = [" line-through=\"", "\""], xml(_c, textDecoration.lineThrough));
     }
     return attribs;
-    var _o, _p, _q;
+    var _a, _b, _c;
 }
 function textRotationToXML(textRotation) {
     var attribs = "";
     if (defined(textRotation.rotation)) {
-        attribs += (_o = [" rotation=\"", "\""], _o.raw = [" rotation=\"", "\""], xml(_o, textRotation.rotation));
+        attribs += (_a = [" rotation=\"", "\""], _a.raw = [" rotation=\"", "\""], xml(_a, textRotation.rotation));
     }
     return attribs;
-    var _o;
+    var _a;
 }
 function letterSpacingToXML(letterSpacing) {
     var attribs = "";
     if (defined(letterSpacing.letterSpacing)) {
-        attribs += (_o = [" letter-spacing=\"", "\""], _o.raw = [" letter-spacing=\"", "\""], xml(_o, letterSpacing.letterSpacing));
+        attribs += (_a = [" letter-spacing=\"", "\""], _a.raw = [" letter-spacing=\"", "\""], xml(_a, letterSpacing.letterSpacing));
     }
     return attribs;
-    var _o;
+    var _a;
 }
 function lineHeightToXML(lineHeight) {
     var attribs = "";
     if (defined(lineHeight.lineHeight)) {
-        attribs += (_o = [" line-height=\"", "\""], _o.raw = [" line-height=\"", "\""], xml(_o, lineHeight.lineHeight));
+        attribs += (_a = [" line-height=\"", "\""], _a.raw = [" line-height=\"", "\""], xml(_a, lineHeight.lineHeight));
     }
     return attribs;
-    var _o;
+    var _a;
 }
 var directionModeToXML = {
     0: "ltr",
@@ -23293,10 +23458,10 @@ function textDirectionToXML(textDirection) {
     //     "dir (ltr | rtl | lro | rlo) #IMPLIED">
     var attribs = "";
     if (defined(textDirection.dir)) {
-        attribs += (_o = [" dir=\"", "\""], _o.raw = [" dir=\"", "\""], xml(_o, directionModeToXML[textDirection.dir]));
+        attribs += (_a = [" dir=\"", "\""], _a.raw = [" dir=\"", "\""], xml(_a, directionModeToXML[textDirection.dir]));
     }
     return attribs;
-    var _o;
+    var _a;
 }
 var enclosureShapeToXML = {
     3: "circle",
@@ -23311,41 +23476,41 @@ var enclosureShapeToXML = {
 function enclosureToXML(enclosure) {
     var attribs = "";
     if (defined(enclosure.enclosure)) {
-        attribs += (_o = [" enclosure=\"", "\""], _o.raw = [" enclosure=\"", "\""], xml(_o, enclosureShapeToXML[enclosure.enclosure]));
+        attribs += (_a = [" enclosure=\"", "\""], _a.raw = [" enclosure=\"", "\""], xml(_a, enclosureShapeToXML[enclosure.enclosure]));
     }
     return attribs;
-    var _o;
+    var _a;
 }
 function levelDisplayToXML(levelDisplay) {
     var attribs = "";
     if (defined(levelDisplay.bracket)) {
-        attribs += (_o = [" bracket=\"", "\""], _o.raw = [" bracket=\"", "\""], yesNo(_o, levelDisplay.bracket));
+        attribs += (_a = [" bracket=\"", "\""], _a.raw = [" bracket=\"", "\""], yesNo(_a, levelDisplay.bracket));
     }
     if (levelDisplay.size >= 0 /* Unspecified */) {
-        attribs += (_p = [" size=\"", "\""], _p.raw = [" size=\"", "\""], xml(_p, symbolSizeToXML[levelDisplay.size]));
+        attribs += (_b = [" size=\"", "\""], _b.raw = [" size=\"", "\""], xml(_b, symbolSizeToXML[levelDisplay.size]));
     }
     if (defined(levelDisplay.parentheses)) {
-        attribs += (_q = [" parentheses=\"", "\""], _q.raw = [" parentheses=\"", "\""], yesNo(_q, levelDisplay.bracket));
+        attribs += (_c = [" parentheses=\"", "\""], _c.raw = [" parentheses=\"", "\""], yesNo(_c, levelDisplay.bracket));
     }
     return attribs;
-    var _o, _p, _q;
+    var _a, _b, _c;
 }
 function bendSoundToXML(bendSound) {
     var attribs = "";
     if (defined(bendSound.accelerate)) {
-        attribs += (_o = [" accelerate=\"", "\""], _o.raw = [" accelerate=\"", "\""], yesNo(_o, bendSound.accelerate));
+        attribs += (_a = [" accelerate=\"", "\""], _a.raw = [" accelerate=\"", "\""], yesNo(_a, bendSound.accelerate));
     }
     if (defined(bendSound.beats)) {
-        attribs += (_p = [" beats=\"", "\""], _p.raw = [" beats=\"", "\""], xml(_p, bendSound.beats));
+        attribs += (_b = [" beats=\"", "\""], _b.raw = [" beats=\"", "\""], xml(_b, bendSound.beats));
     }
     if (defined(bendSound.firstBeat)) {
-        attribs += (_q = [" first-beat=\"", "\""], _q.raw = [" first-beat=\"", "\""], xml(_q, bendSound.firstBeat));
+        attribs += (_c = [" first-beat=\"", "\""], _c.raw = [" first-beat=\"", "\""], xml(_c, bendSound.firstBeat));
     }
     if (defined(bendSound.lastBeat)) {
-        attribs += (_r = [" last-beat=\"", "\""], _r.raw = [" last-beat=\"", "\""], xml(_r, bendSound.lastBeat));
+        attribs += (_d = [" last-beat=\"", "\""], _d.raw = [" last-beat=\"", "\""], xml(_d, bendSound.lastBeat));
     }
     return attribs;
-    var _o, _p, _q, _r;
+    var _a, _b, _c, _d;
 }
 var upperMainBelowToXML = {
     1: "main",
@@ -23373,35 +23538,35 @@ function trillSoundToXML(trillSound) {
     //      last-beat     CDATA    #IMPLIED">
     var attribs = "";
     if (defined(trillSound.startNote)) {
-        attribs += (_o = [" start-note=\"", "\""], _o.raw = [" start-note=\"", "\""], xml(_o, upperMainBelowToXML[trillSound.startNote]));
+        attribs += (_a = [" start-note=\"", "\""], _a.raw = [" start-note=\"", "\""], xml(_a, upperMainBelowToXML[trillSound.startNote]));
     }
     if (defined(trillSound.trillStep)) {
-        attribs += (_p = [" trill-step=\"", "\""], _p.raw = [" trill-step=\"", "\""], xml(_p, wholeHalfUnisonToXML[trillSound.trillStep]));
+        attribs += (_b = [" trill-step=\"", "\""], _b.raw = [" trill-step=\"", "\""], xml(_b, wholeHalfUnisonToXML[trillSound.trillStep]));
     }
     if (defined(trillSound.twoNoteTurn)) {
-        attribs += (_q = [" two-note-turn=\"", "\""], _q.raw = [" two-note-turn=\"", "\""], xml(_q, wholeHalfNoneToXML[trillSound.twoNoteTurn]));
+        attribs += (_c = [" two-note-turn=\"", "\""], _c.raw = [" two-note-turn=\"", "\""], xml(_c, wholeHalfNoneToXML[trillSound.twoNoteTurn]));
     }
     if (defined(trillSound.accelerate)) {
-        attribs += (_r = [" accelerate=\"", "\""], _r.raw = [" accelerate=\"", "\""], yesNo(_r, trillSound.accelerate));
+        attribs += (_d = [" accelerate=\"", "\""], _d.raw = [" accelerate=\"", "\""], yesNo(_d, trillSound.accelerate));
     }
     if (defined(trillSound.beats)) {
-        attribs += (_s = [" beats=\"", "\""], _s.raw = [" beats=\"", "\""], xml(_s, trillSound.beats));
+        attribs += (_e = [" beats=\"", "\""], _e.raw = [" beats=\"", "\""], xml(_e, trillSound.beats));
     }
     if (defined(trillSound.secondBeat)) {
-        attribs += (_t = [" second-beat=\"", "\""], _t.raw = [" second-beat=\"", "\""], xml(_t, trillSound.secondBeat));
+        attribs += (_f = [" second-beat=\"", "\""], _f.raw = [" second-beat=\"", "\""], xml(_f, trillSound.secondBeat));
     }
     if (defined(trillSound.lastBeat)) {
-        attribs += (_u = [" last-beat=\"", "\""], _u.raw = [" last-beat=\"", "\""], xml(_u, trillSound.lastBeat));
+        attribs += (_g = [" last-beat=\"", "\""], _g.raw = [" last-beat=\"", "\""], xml(_g, trillSound.lastBeat));
     }
     return attribs;
-    var _o, _p, _q, _r, _s, _t, _u;
+    var _a, _b, _c, _d, _e, _f, _g;
 }
 function slashToXML(slash) {
     if (defined(slash.slash)) {
-        return (_o = [" slash=\"", "\""], _o.raw = [" slash=\"", "\""], yesNo(_o, slash.slash));
+        return (_a = [" slash=\"", "\""], _a.raw = [" slash=\"", "\""], yesNo(_a, slash.slash));
     }
     return "";
-    var _o;
+    var _a;
 }
 function mordentSubsetToXML(mordent) {
     //     long %yes-no; #IMPLIED
@@ -23409,38 +23574,40 @@ function mordentSubsetToXML(mordent) {
     //     departure %above-below; #IMPLIED
     var attribs = "";
     if (defined(mordent.long)) {
-        attribs += (_o = [" long=\"", "\""], _o.raw = [" long=\"", "\""], yesNo(_o, mordent.long));
+        attribs += (_a = [" long=\"", "\""], _a.raw = [" long=\"", "\""], yesNo(_a, mordent.long));
     }
     if (defined(mordent.approach)) {
-        attribs += (_p = [" approach=\"", "\""], _p.raw = [" approach=\"", "\""], xml(_p, mordent.approach === 1 /* Above */ ? "above" : "below"));
+        attribs += (_b = [" approach=\"", "\""], _b.raw = [" approach=\"", "\""], xml(_b, mordent.approach === 1 /* Above */ ?
+            "above" : "below"));
     }
     if (defined(mordent.departure)) {
-        attribs += (_q = [" departure=\"", "\""], _q.raw = [" departure=\"", "\""], xml(_q, mordent.departure === 1 /* Above */ ? "above" : "below"));
+        attribs += (_c = [" departure=\"", "\""], _c.raw = [" departure=\"", "\""], xml(_c, mordent.departure === 1 /* Above */ ?
+            "above" : "below"));
     }
     return attribs;
-    var _o, _p, _q;
+    var _a, _b, _c;
 }
 function upDownToXML(upDown) {
     if (defined(upDown.type)) {
-        return (_o = [" type=\"", "\""], _o.raw = [" type=\"", "\""], xml(_o, upDown.type ? "down" : "up"));
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, upDown.type ? "down" : "up"));
     }
     return "";
-    var _o;
+    var _a;
 }
 function topBottomToXML(topBottom) {
     if (defined(topBottom.type)) {
-        return (_o = [" type=\"", "\""], _o.raw = [" type=\"", "\""], xml(_o, topBottom.type ? "bottom" : "top"));
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, topBottom.type ? "bottom" : "top"));
     }
     return "";
-    var _o;
+    var _a;
 }
 function colorToXML(color) {
     // <!ENTITY % color
     //     "color CDATA #IMPLIED">
     if (defined(color.color)) {
-        return (_o = [" color=\"", "\""], _o.raw = [" color=\"", "\""], xml(_o, color.color));
+        return (_a = [" color=\"", "\""], _a.raw = [" color=\"", "\""], xml(_a, color.color));
     }
     return "";
-    var _o;
+    var _a;
 }
 var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
