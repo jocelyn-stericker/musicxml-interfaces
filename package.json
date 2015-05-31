@@ -1,10 +1,10 @@
 {
     "name": "musicxml-interfaces",
-    "version": "0.0.3-alpha2",
+    "version": "0.0.3-alpha3",
     "description": "MusicXML parser and serializer for JavaScript and TypeScript",
 
     "author": "Josh Netterfield",
-    "license": "AGPLv3",
+    "license": "AGPL-3.0",
 
     "repository": {
         "type": "git",
@@ -22,6 +22,10 @@
     "files": ["./typescript"],
     "typescript": {
         "definition": "musicxml-interfaces.d.ts"
+    },
+    "browser": {
+        "xmldom": false,
+        "child_process": false
     },
     "files": [
         "musicxml-interfaces.d.ts",
