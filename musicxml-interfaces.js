@@ -4313,7 +4313,9 @@ function xmlToKey(node) {
         }
         if (ch.nodeName === "key-accidental") {
             var dataKeyAccidentals = getString(ch, true);
-            ret.keyAccidentals = (ret.keyAccidentals || []).concat(dataKeyAccidentals);
+            ret.keyAccidentals = (ret.keyAccidentals || []);
+            ret.keyAccidentals.length = Math.max(ret.keyAccidentals.length, ret.keySteps.length);
+            ret.keyAccidentals[ret.keySteps.length - 1] = dataKeyAccidentals;
         }
         if (ch.nodeName === "mode") {
             var dataMode = getString(ch, true);
@@ -22626,7 +22628,7 @@ function keyToXML(key) {
         // <!ELEMENT key-accidental (#PCDATA)>
         children.push((_a = ["<key-step>", "</key-step>"], _a.raw = ["<key-step>", "</key-step>"], xml(_a, keyStep)));
         children.push((_b = ["<key-alter>", "</key-alter>"], _b.raw = ["<key-alter>", "</key-alter>"], xml(_b, key.keyAlters[idx])));
-        if (!!key.keyAccidentals[idx]) {
+        if (key.keyAccidentals && key.keyAccidentals[idx]) {
             children.push((_c = ["<key-accidental>", "</key-accidental>"], _c.raw = ["<key-accidental>", "</key-accidental>"], xml(_c, key.keyAccidentals[idx])));
         }
         var _a, _b, _c;

@@ -6311,7 +6311,9 @@ function xmlToKey(node: Node) {
         }
         if (ch.nodeName === "key-accidental") {
             let dataKeyAccidentals = getString(ch, true);
-            ret.keyAccidentals = (ret.keyAccidentals|| []).concat(dataKeyAccidentals);
+            ret.keyAccidentals = (ret.keyAccidentals||[]);
+            ret.keyAccidentals.length = Math.max(ret.keyAccidentals.length, ret.keySteps.length);
+            ret.keyAccidentals[ret.keySteps.length - 1] = dataKeyAccidentals;
         }
         if (ch.nodeName === "mode") {
             let dataMode = getString(ch, true);
@@ -28728,7 +28730,7 @@ function keyToXML(key: Key): string {
         // <!ELEMENT key-accidental (#PCDATA)>
         children.push(xml `<key-step>${keyStep}</key-step>`);
         children.push(xml `<key-alter>${key.keyAlters[idx]}</key-alter>`);
-        if (!!key.keyAccidentals[idx]) { // TODO: Check musicxml-interfaces import
+        if (key.keyAccidentals && key.keyAccidentals[idx]) {
             children.push(xml `<key-accidental>${key.keyAccidentals[idx]}</key-accidental>`);
         }
     });
