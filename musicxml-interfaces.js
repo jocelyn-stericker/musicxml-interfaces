@@ -5232,6 +5232,7 @@ function xmlToAttributes(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
+    ret._class = "Attributes";
     return ret;
 }
 function xmlToCue(node) {
@@ -5640,6 +5641,7 @@ function xmlToNote(node) {
     if (!foundPrintSpacing) {
         ret.printSpacing = true;
     }
+    ret._class = "Note";
     return ret;
 }
 function getCount(node, fallbackVal) {
@@ -12482,6 +12484,7 @@ function xmlToLaughing(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
+    ret._class = "Laughing";
     return ret;
 }
 function xmlToHumming(node) {
@@ -12492,6 +12495,7 @@ function xmlToHumming(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
+    ret._class = "Humming";
     return ret;
 }
 function xmlToEndLine(node) {
@@ -12502,6 +12506,7 @@ function xmlToEndLine(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
+    ret._class = "EndLine";
     return ret;
 }
 function xmlToEndParagraph(node) {
@@ -12512,6 +12517,7 @@ function xmlToEndParagraph(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
+    ret._class = "EndParagraph";
     return ret;
 }
 function xmlToLyricParts(node) {
@@ -12521,42 +12527,34 @@ function xmlToLyricParts(node) {
         if (ch.nodeName === "extend") {
             var data = xmlToExtend(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Extend";
         }
         if (ch.nodeName === "end-line") {
             var data = xmlToEndLine(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "EndLine";
         }
         if (ch.nodeName === "syllabic") {
             var data = xmlToSyllabic(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Syllabic";
         }
         if (ch.nodeName === "text") {
             var data = xmlToText(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Text";
         }
         if (ch.nodeName === "laughing") {
             var data = xmlToLaughing(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Laughing";
         }
         if (ch.nodeName === "humming") {
             var data = xmlToHumming(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Humming";
         }
         if (ch.nodeName === "end-paragraph") {
             var data = xmlToEndParagraph(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "EndParagraph";
         }
         if (ch.nodeName === "elision") {
             var data = xmlToElision(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Elision";
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {
@@ -12664,6 +12662,7 @@ function xmlToText(node) {
     if (!foundDir) {
         ret.dir = 0 /* Ltr */;
     }
+    ret._class = "Text";
     return ret;
 }
 function getSyllabicType(node, fallbackVal) {
@@ -12732,6 +12731,7 @@ function xmlToSyllabic(node) {
     if (!foundColor) {
         ret.color = "#000000";
     }
+    ret._class = "Syllabic";
     return ret;
 }
 function xmlToElision(node) {
@@ -12780,6 +12780,7 @@ function xmlToElision(node) {
     if (!foundColor) {
         ret.color = "#000000";
     }
+    ret._class = "Elision";
     return ret;
 }
 function xmlToExtend(node) {
@@ -12850,6 +12851,7 @@ function xmlToExtend(node) {
     if (!foundType) {
         ret.type = 0 /* Start */;
     }
+    ret._class = "Extend";
     return ret;
 }
 function xmlToFiguredBass(node) {
@@ -12962,6 +12964,7 @@ function xmlToFiguredBass(node) {
     if (!foundParentheses) {
         ret.parentheses = false;
     }
+    ret._class = "FiguredBass";
     return ret;
 }
 function xmlToFigure(node) {
@@ -13253,6 +13256,7 @@ function xmlToBackup(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
+    ret._class = "Backup";
     return ret;
 }
 function xmlToForward(node) {
@@ -13283,6 +13287,7 @@ function xmlToForward(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
     }
+    ret._class = "Forward";
     return ret;
 }
 function getBarlineLocation(node, fallbackVal) {
@@ -13362,6 +13367,7 @@ function xmlToBarline(node) {
             ret.divisions = dataDivisions;
         }
     }
+    ret._class = "Barline";
     return ret;
 }
 function getBarStyleType(node, fallbackVal) {
@@ -13682,6 +13688,7 @@ function xmlToDirection(node) {
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
     }
+    ret._class = "Direction";
     return ret;
 }
 function xmlToDirectionType(node) {
@@ -16015,6 +16022,7 @@ function xmlToHarmony(node) {
     if (!foundPlacement) {
         ret.placement = 0 /* Unspecified */;
     }
+    ret._class = "Harmony";
     return ret;
 }
 function xmlToRoot(node) {
@@ -17015,6 +17023,7 @@ function xmlToGrouping(node) {
     if (!foundNumber_) {
         ret.number = 1;
     }
+    ret._class = "Grouping";
     return ret;
 }
 function xmlToFeature(node) {
@@ -17090,6 +17099,7 @@ function xmlToPrint(node) {
             ret.pageNumber = dataPageNumber;
         }
     }
+    ret._class = "Print";
     return ret;
 }
 function xmlToMeasureNumbering(node) {
@@ -17266,6 +17276,7 @@ function xmlToSound(node) {
             ret.forwardRepeat = dataForwardRepeat;
         }
     }
+    ret._class = "Sound";
     return ret;
 }
 function xmlToWork(node) {
@@ -18455,57 +18466,46 @@ function xmlToPart(node) {
         if (ch.nodeName === "note") {
             var data = xmlToNote(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Note";
         }
         if (ch.nodeName === "backup") {
             var data = xmlToBackup(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Backup";
         }
         if (ch.nodeName === "harmony") {
             var data = xmlToHarmony(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Harmony";
         }
         if (ch.nodeName === "forward") {
             var data = xmlToForward(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Forward";
         }
         if (ch.nodeName === "print") {
             var data = xmlToPrint(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Print";
         }
         if (ch.nodeName === "figured-bass") {
             var data = xmlToFiguredBass(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "FiguredBass";
         }
         if (ch.nodeName === "direction") {
             var data = xmlToDirection(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Direction";
         }
         if (ch.nodeName === "attributes") {
             var data = xmlToAttributes(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Attributes";
         }
         if (ch.nodeName === "sound") {
             var data = xmlToSound(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Sound";
         }
         if (ch.nodeName === "barline") {
             var data = xmlToBarline(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Barline";
         }
         if (ch.nodeName === "grouping") {
             var data = xmlToGrouping(ch);
             rarr = (rarr || []).concat(data);
-            data._class = "Grouping";
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {

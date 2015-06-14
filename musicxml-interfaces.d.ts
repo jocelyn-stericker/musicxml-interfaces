@@ -823,6 +823,7 @@ declare module "musicxml-interfaces" {
     export interface Editorial {
         footnote?: Footnote;
         level?: Level;
+        _class?: string;
     }
     /**
      * Two entities for editorial information in notes. These
@@ -833,6 +834,7 @@ declare module "musicxml-interfaces" {
         voice?: number;
         footnote?: Footnote;
         level?: Level;
+        _class?: string;
     }
     /**
      * Footnote and level are used to specify editorial
@@ -3575,12 +3577,14 @@ declare module "musicxml-interfaces" {
      * Humdrum.
      */
     export interface Laughing {
+        _class?: string;
     }
     /**
      * Humming and laughing representations are taken from
      * Humdrum.
      */
     export interface Humming {
+        _class?: string;
     }
     /**
      * The end-line and end-paragraph elements come
@@ -3589,6 +3593,7 @@ declare module "musicxml-interfaces" {
      * similar applications.
      */
     export interface EndLine {
+        _class?: string;
     }
     /**
      * The end-line and end-paragraph elements come
@@ -3597,6 +3602,7 @@ declare module "musicxml-interfaces" {
      * similar applications.
      */
     export interface EndParagraph {
+        _class?: string;
     }
     /**
      * Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.
@@ -3630,6 +3636,7 @@ declare module "musicxml-interfaces" {
     }
     export interface Text extends Font, Color, TextDecoration, TextRotation, LetterSpacing, TextDirection {
         data: string;
+        _class?: string;
     }
     export const enum SyllabicType {
         Single = 0,
@@ -3645,6 +3652,7 @@ declare module "musicxml-interfaces" {
      */
     export interface Syllabic extends Font, Color {
         data: SyllabicType;
+        _class?: string;
     }
     /**
      * Multiple syllables on a single note are separated by elision
@@ -3660,6 +3668,7 @@ declare module "musicxml-interfaces" {
      */
     export interface Elision extends Font, Color {
         data: string;
+        _class?: string;
     }
     /**
      * Word extensions are represented using the extend element.
@@ -3671,6 +3680,7 @@ declare module "musicxml-interfaces" {
      */
     export interface Extend extends PrintStyle {
         type?: StartStopContinue;
+        _class?: string;
     }
     /**
      * Figured bass elements take their position from the first
@@ -4652,6 +4662,7 @@ declare module "musicxml-interfaces" {
         number: number;
         type: StartStopSingle;
         memberOf: string;
+        _class?: string;
     }
     export interface Feature {
         data: string;
@@ -4706,6 +4717,7 @@ declare module "musicxml-interfaces" {
         staffSpacing: number;
         staffLayouts: StaffLayout[];
         pageNumber: string;
+        _class?: string;
     }
     /**
      * The measure-numbering element describes how measure
@@ -4822,6 +4834,7 @@ declare module "musicxml-interfaces" {
         midiDevices: MidiDevice[];
         tempo: string;
         forwardRepeat: boolean;
+        _class?: string;
     }
     /**
      * Works and movements are optionally identified by number

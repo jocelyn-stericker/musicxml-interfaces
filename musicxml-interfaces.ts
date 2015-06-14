@@ -2753,6 +2753,7 @@ function xmlToDocumentAttributes(node: Node) {
 export interface Editorial {
     footnote?: Footnote;
     level?: Level;
+    _class?: string;
 }
 
 function xmlToEditorial(node: Node) {
@@ -2783,6 +2784,7 @@ export interface EditorialVoice {
     voice?: number;
     footnote?: Footnote;
     level?: Level;
+    _class?: string;
 }
 
 function xmlToEditorialVoice(node: Node) {
@@ -7648,6 +7650,7 @@ function xmlToAttributes(node: Node) {
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
     }
+    ret._class = "Attributes";
     return ret;
 }
 
@@ -8238,6 +8241,7 @@ function xmlToNote(node: Node) {
     if (!foundPrintSpacing) {
         ret.printSpacing = true;
     }
+    ret._class = "Note";
     return ret;
 }
 
@@ -16480,6 +16484,7 @@ function xmlToNonArpeggiate(node: Node) {
  * Humdrum.
  */
 export interface Laughing {
+    _class?: string;
 }
 
 function xmlToLaughing(node: Node) {
@@ -16490,6 +16495,7 @@ function xmlToLaughing(node: Node) {
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
     }
+    ret._class = "Laughing";
     return ret;
 }
 
@@ -16498,6 +16504,7 @@ function xmlToLaughing(node: Node) {
  * Humdrum.
  */
 export interface Humming {
+    _class?: string;
 }
 
 function xmlToHumming(node: Node) {
@@ -16508,6 +16515,7 @@ function xmlToHumming(node: Node) {
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
     }
+    ret._class = "Humming";
     return ret;
 }
 
@@ -16518,6 +16526,7 @@ function xmlToHumming(node: Node) {
  * similar applications.
  */
 export interface EndLine {
+    _class?: string;
 }
 
 function xmlToEndLine(node: Node) {
@@ -16528,6 +16537,7 @@ function xmlToEndLine(node: Node) {
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
     }
+    ret._class = "EndLine"
     return ret;
 }
 
@@ -16538,6 +16548,7 @@ function xmlToEndLine(node: Node) {
  * similar applications.
  */
 export interface EndParagraph {
+    _class?: string;
 }
 
 function xmlToEndParagraph(node: Node) {
@@ -16548,6 +16559,7 @@ function xmlToEndParagraph(node: Node) {
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
     }
+    ret._class = "EndParagraph";
     return ret;
 }
 
@@ -16564,42 +16576,34 @@ function xmlToLyricParts(node: Node) {
         if (ch.nodeName === "extend") {
             let data: any = xmlToExtend(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Extend"
         }
         if (ch.nodeName === "end-line") {
             let data: any = xmlToEndLine(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "EndLine"
         }
         if (ch.nodeName === "syllabic") {
             let data: any = xmlToSyllabic(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Syllabic"
         }
         if (ch.nodeName === "text") {
             let data: any = xmlToText(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Text"
         }
         if (ch.nodeName === "laughing") {
             let data: any = xmlToLaughing(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Laughing"
         }
         if (ch.nodeName === "humming") {
             let data: any = xmlToHumming(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Humming"
         }
         if (ch.nodeName === "end-paragraph") {
             let data: any = xmlToEndParagraph(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "EndParagraph"
         }
         if (ch.nodeName === "elision") {
             let data: any = xmlToElision(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Elision"
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -16636,6 +16640,7 @@ export interface Lyric extends Justify, Position, Placement, Color, PrintObject,
 
 export interface Text extends Font, Color, TextDecoration, TextRotation, LetterSpacing, TextDirection {
     data: string;
+    _class?: string;
 }
 
 function xmlToText(node: Node) {
@@ -16738,6 +16743,7 @@ function xmlToText(node: Node) {
     if (!foundDir) {
         ret.dir = DirectionMode.Ltr;
     }
+    ret._class = "Text"
     return ret;
 }
 
@@ -16777,6 +16783,7 @@ function getSyllabicType(node: Node, fallbackVal?: SyllabicType) {
  */
 export interface Syllabic extends Font, Color {
     data: SyllabicType;
+    _class?: string;
 }
 
 function xmlToSyllabic(node: Node) {
@@ -16825,6 +16832,7 @@ function xmlToSyllabic(node: Node) {
     if (!foundColor) {
         ret.color = "#000000";
     }
+    ret._class = "Syllabic"
     return ret;
 }
 
@@ -16842,6 +16850,7 @@ function xmlToSyllabic(node: Node) {
  */
 export interface Elision extends Font, Color {
     data: string;
+    _class?: string;
 }
 
 function xmlToElision(node: Node) {
@@ -16890,6 +16899,7 @@ function xmlToElision(node: Node) {
     if (!foundColor) {
         ret.color = "#000000";
     }
+    ret._class = "Elision";
     return ret;
 }
 
@@ -16903,6 +16913,7 @@ function xmlToElision(node: Node) {
  */
 export interface Extend extends PrintStyle {
     type?: StartStopContinue;
+    _class?: string;
 }
 
 function xmlToExtend(node: Node) {
@@ -16973,6 +16984,7 @@ function xmlToExtend(node: Node) {
     if (!foundType) {
         ret.type = StartStopContinue.Start;
     }
+    ret._class = "Extend"
     return ret;
 }
 
@@ -17110,6 +17122,7 @@ function xmlToFiguredBass(node: Node) {
     if (!foundParentheses) {
         ret.parentheses = false;
     }
+    ret._class = "FiguredBass";
     return ret;
 }
 
@@ -17440,6 +17453,7 @@ function xmlToBackup(node: Node) {
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
     }
+    ret._class = "Backup";
     return ret;
 }
 
@@ -17486,6 +17500,7 @@ function xmlToForward(node: Node) {
     for (let i = 0; i < node.attributes.length; ++i) {
         let ch2 = node.attributes[i];
     }
+    ret._class = "Forward";
     return ret;
 }
 
@@ -17615,6 +17630,7 @@ function xmlToBarline(node: Node) {
             ret.divisions = dataDivisions;
         }
     }
+    ret._class = "Barline";
     return ret;
 }
 
@@ -18080,6 +18096,7 @@ function xmlToDirection(node: Node) {
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
     }
+    ret._class = "Direction";
     return ret;
 }
 
@@ -20929,6 +20946,7 @@ function xmlToHarmony(node: Node) {
     if (!foundPlacement) {
         ret.placement = AboveBelow.Unspecified;
     }
+    ret._class = "Harmony";
     return ret;
 }
 
@@ -22237,6 +22255,7 @@ export interface Grouping {
     number: number;
     type: StartStopSingle;
     memberOf: string;
+    _class?: string;
 }
 
 function xmlToGrouping(node: Node) {
@@ -22268,6 +22287,7 @@ function xmlToGrouping(node: Node) {
     if (!foundNumber_) {
         ret.number = 1;
     }
+    ret._class = "Grouping"
     return ret;
 }
 
@@ -22343,6 +22363,7 @@ export interface Print {
     staffSpacing: number;
     staffLayouts: StaffLayout[];
     pageNumber: string;
+    _class?: string;
 }
 
 function xmlToPrint(node: Node) {
@@ -22401,6 +22422,7 @@ function xmlToPrint(node: Node) {
             ret.pageNumber = dataPageNumber;
         }
     }
+    ret._class = "Print";
     return ret;
 }
 
@@ -22603,6 +22625,7 @@ export interface Sound extends TimeOnly {
     midiDevices: MidiDevice[];
     tempo: string;
     forwardRepeat: boolean;
+    _class?: string;
 }
 
 function xmlToSound(node: Node) {
@@ -22697,6 +22720,7 @@ function xmlToSound(node: Node) {
             ret.forwardRepeat = dataForwardRepeat;
         }
     }
+    ret._class = "Sound";
     return ret;
 }
 
@@ -24254,57 +24278,46 @@ function xmlToPart(node: Node) {
         if (ch.nodeName === "note") {
             let data: any = xmlToNote(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Note"
         }
         if (ch.nodeName === "backup") {
             let data: any = xmlToBackup(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Backup"
         }
         if (ch.nodeName === "harmony") {
             let data: any = xmlToHarmony(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Harmony"
         }
         if (ch.nodeName === "forward") {
             let data: any = xmlToForward(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Forward"
         }
         if (ch.nodeName === "print") {
             let data: any = xmlToPrint(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Print"
         }
         if (ch.nodeName === "figured-bass") {
             let data: any = xmlToFiguredBass(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "FiguredBass"
         }
         if (ch.nodeName === "direction") {
             let data: any = xmlToDirection(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Direction"
         }
         if (ch.nodeName === "attributes") {
             let data: any = xmlToAttributes(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Attributes"
         }
         if (ch.nodeName === "sound") {
             let data: any = xmlToSound(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Sound"
         }
         if (ch.nodeName === "barline") {
             let data: any = xmlToBarline(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Barline"
         }
         if (ch.nodeName === "grouping") {
             let data: any = xmlToGrouping(ch) ;
             rarr = (rarr|| []).concat(data);
-            data._class = "Grouping"
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
