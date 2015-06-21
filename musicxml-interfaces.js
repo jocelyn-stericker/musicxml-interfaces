@@ -17764,19 +17764,16 @@ function xmlToCreditImage(node) {
     return ret;
 }
 function xmlToPartList(node) {
-    var ret = {
-        scoreParts: [],
-        partGroups: []
-    };
+    var ret = [];
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
         if (ch.nodeName === "score-part") {
             var dataScoreParts = xmlToScorePart(ch);
-            ret.scoreParts = (ret.scoreParts || []).concat(dataScoreParts);
+            ret.push(dataScoreParts);
         }
         if (ch.nodeName === "part-group") {
             var dataPartGroups = xmlToPartGroup(ch);
-            ret.partGroups = (ret.partGroups || []).concat(dataPartGroups);
+            ret.push(dataPartGroups);
         }
     }
     for (var i = 0; i < node.attributes.length; ++i) {
@@ -17786,6 +17783,7 @@ function xmlToPartList(node) {
 }
 function xmlToScorePart(node) {
     var ret = {
+        _class: "ScorePart",
         identification: null,
         partNameDisplay: null,
         scoreInstruments: [],
@@ -18018,7 +18016,9 @@ function xmlToPartAbbreviation(node) {
     return ret;
 }
 function xmlToPartGroup(node) {
-    var ret = {};
+    var ret = {
+        _class: "PartGroup"
+    };
     var foundNumber_ = false;
     for (var i = 0; i < node.childNodes.length; ++i) {
         var ch = node.childNodes[i];
@@ -19124,13 +19124,17 @@ function valignImageToXML(valignImage) {
 function partListToXML(partList) {
     // <!ELEMENT part-list (part-group*, score-part,
     //     (part-group | score-part)*)>
-    // TODO musicxml-interfaces might have a broken PartList!
     var children = [];
-    (partList.partGroups || []).forEach(function (partGroup) {
-        children.push(partGroupToXML(partGroup));
-    });
-    (partList.scoreParts || []).forEach(function (scorePart) {
-        children.push(scorePartToXML(scorePart));
+    partList.forEach(function (partGroupOrScorePart) {
+        if (partGroupOrScorePart._class === 'PartGroup') {
+            children.push(partGroupToXML(partGroupOrScorePart));
+        }
+        else if (partGroupOrScorePart._class === 'ScorePart') {
+            children.push(scorePartToXML(partGroupOrScorePart));
+        }
+        else {
+            console.warn("Unknwn type for", partGroupOrScorePart);
+        }
     });
     return (_a = ["<part-list>\n", "\n</part-list>"], _a.raw = ["<part-list>\\n", "\\n</part-list>"], dangerous(_a, children.join("\n").split("\n")
         .map(function (n) { return "  " + n; }).join("\n")));

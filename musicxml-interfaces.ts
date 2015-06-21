@@ -23335,25 +23335,19 @@ function xmlToCreditImage(node: Node) {
  * instruments. Initial midi-instrument assignments may be
  * made here as well.
  */
-export interface PartList {
-    scoreParts: ScorePart[];
-    partGroups: PartGroup[];
-}
+export type PartList = Array<ScorePart | PartGroup>;
 
-function xmlToPartList(node: Node) {
-    let ret: PartList = {
-        scoreParts: [],
-        partGroups: []
-    };
+function xmlToPartList(node: Node): PartList {
+    let ret: PartList = [];
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "score-part") {
             let dataScoreParts = xmlToScorePart(ch) ;
-            ret.scoreParts = (ret.scoreParts|| []).concat(dataScoreParts);
+            ret.push(dataScoreParts);
         }
         if (ch.nodeName === "part-group") {
             let dataPartGroups = xmlToPartGroup(ch) ;
-            ret.partGroups = (ret.partGroups|| []).concat(dataPartGroups);
+            ret.push(dataPartGroups);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -23373,10 +23367,13 @@ export interface ScorePart {
     groups: string[];
     midiInstruments: MidiInstrument[];
     id: string;
+    /** Equals "ScorePart" */
+    _class: string;
 }
 
 function xmlToScorePart(node: Node) {
     let ret: ScorePart = {
+        _class: "ScorePart",
         identification: null,
         partNameDisplay: null,
         scoreInstruments: [],
@@ -23667,10 +23664,14 @@ export interface PartGroup extends Editorial {
     groupAbbreviation: GroupAbbreviation;
     type: StartStop;
     groupTime: GroupTime;
+    /** Equals "PartGroup" */
+    _class: string;
 }
 
 function xmlToPartGroup(node: Node) {
-    let ret: PartGroup = <any> {};
+    let ret: PartGroup = <any> {
+        _class: "PartGroup"
+    };
     let foundNumber_ = false;
     for (let i = 0; i < node.childNodes.length; ++i) {
         let ch = node.childNodes[i];
@@ -24972,13 +24973,15 @@ function partListToXML(partList: PartList): string {
     // <!ELEMENT part-list (part-group*, score-part,
     //     (part-group | score-part)*)>
 
-    // TODO musicxml-interfaces might have a broken PartList!
     let children: string[] = [];
-    (partList.partGroups||[]).forEach(partGroup => {
-        children.push(partGroupToXML(partGroup));
-    });
-    (partList.scoreParts||[]).forEach(scorePart => {
-        children.push(scorePartToXML(scorePart));
+    partList.forEach(partGroupOrScorePart => {
+        if (partGroupOrScorePart._class === 'PartGroup') {
+            children.push(partGroupToXML(<PartGroup> partGroupOrScorePart));
+        } else if (partGroupOrScorePart._class === 'ScorePart') {
+            children.push(scorePartToXML(<ScorePart> partGroupOrScorePart));
+        } else {
+            console.warn("Unknwn type for", partGroupOrScorePart);
+        }
     });
     return dangerous `<part-list>\n${children.join("\n").split("\n")
         .map(n => "  " + n).join("\n")}\n</part-list>`;

@@ -1,76 +1,81 @@
-# MusicXML Interfaces for JavaScript
+# MusicXML Interfaces
 
-MusicXML is the standard open format for exchanging digital sheet music. This library provides:
-
- - methods for parsing and serializing MusicXML scores
- - full **TypeScript** type definitions
- - support for IE 9+ and other browsers, Node.js, and io.js
+MusicXML Interfaces converts MusicXML -- an open format for exchanging digital sheet music -- to and from JavaScript objects.
 
 This project is not affiliated with MakeMusic, Inc. MusicXML™ is a registered trademark owned by MakeMusic, Inc.
 
-## Getting MusicXML Interfaces
+## Getting musicxml-interfaces
 
- - To install, use npm: `npm install --save ripieno/musicxml-interfaces`
- - You need `xsltproc`. If you're on OS X or Linux, you probably already have it installed.
- - If you want to take advantage of TypeScript definitions, either
-   - Install tsd 0.6 (that's a prerelease as of March 2015) and run `npm install` and`tsd link`,
-   - Or download `musicxml-interfaces.d.ts` and add a reference to it.
-
-## Parsing ([MusicXML.parse](https://ripieno.github.io/musicxml-interfaces/))
-
-### Obtaining a [ScoreTimewise](https://ripieno.github.io/musicxml-interfaces/interfaces/scoretimewise.html) from XML
-
-The easiest way to use MusicXML Interfaces for JavaScript is to call `MusicXML.parse`:
-
-``` javascript
-var MusicXML = require("musicxml-interfaces");
-var score = MusicXML.parse("...");
-```
-
-This will return a plain JSON object with the **[MusicXML.ScoreTimewise](https://ripieno.github.io/musicxml-interfaces/interfaces/scoretimewise.html)** interface.
-
-### Advanced parsing
-
-You can also parse certain subsets of a document. For full type specifications, see [the documentation](http://ripieno.github.io/musicxml-interfaces/).
-
-``` javascript
-MusicXML.parse.scoreHeader("..."); // => MusicXML.ScoreHeader
-MusicXML.parse.measure("..."); // => MusicXML.Measure
-MusicXML.parse.note("..."); // => MusicXML.Note
-MusicXML.parse.backup("..."); // => MusicXML.Backup
-MusicXML.parse.harmony("..."); // => MusicXML.Harmony
-MusicXML.parse.forward("..."); // => MusicXML.Forward
-MusicXML.parse.print("..."); // => MusicXML.Print
-MusicXML.parse.figuredBass("..."); // => MusicXML.FiguredBass
-MusicXML.parse.direction("..."); // => MusicXML.Direction
-MusicXML.parse.attributes("..."); // => MusicXML.Attributes
-MusicXML.parse.sound("..."); // => MusicXML.Sound
-MusicXML.parse.barline("..."); // => MusicXML.Barline
-MusicXML.parse.grouping("..."); // => MusicXML.Grouping
-```
-
-## Manipulating
-The objects returned from MusicXML.parse are all plain objects (i.e., they do not have any additional prototypes). You can manipulate them any you manipulate other plain JavaScript objects.
-
-## Serializing [MusicXML.serialize](https://ripieno.github.io/musicxml-interfaces/)
-The serialization API looks a lot like the parsing API.
+Use `npm` to install this package for node, io.js, or browsers. For use with browsers, you'll also need to use a loader such as webpack.
 
 ```
-MusicXML.serialize(...);
-MusicXML.serialize.scoreHeader(...); // => string
-MusicXML.serialize.measure(...); // => string
-MusicXML.serialize.note(...); // => string
-MusicXML.serialize.backup(...); // => string
-MusicXML.serialize.harmony(...); // => string
-MusicXML.serialize.forward(...); // => string
-MusicXML.serialize.print(...); // => string
-MusicXML.serialize.figuredBass(...); // => string
-MusicXML.serialize.direction(...); // => string
-MusicXML.serialize.attributes(...); // => string
-MusicXML.serialize.sound(...); // => string
-MusicXML.serialize.barline(...); // => string
-MusicXML.serialize.grouping(...); // => string
+npm install --save musicxml-interfaces
 ```
+
+## Basic Usage
+`MusicXML.parse` converts MusicXML strings into JavaScript objects.
+
+`MusicXML.serialize` converts JavaScript object into MusicXML strings.
+ 
+```
+import * as MusicXML from 'musicxml-interfaces';
+import fetch from 'whatwg-fetch';
+
+fetch('/sonata.xml')
+  .then(function(response) {
+    return response.text()
+  }).then(function(xml) {
+    let document = MusicXML.parse(score);
+    console.log('Converted XML to ', document);
+
+    let xml = MusicXML.serialize(document);
+    console.log('Converted JavaScript document to ', xml);
+  });
+```
+
+## Other Endpoints
+The `MusicXML.parse.*` endpoints convert MusicXML fragments to parts of JSON documents.
+
+The `MusicXML.serialize.*` endpoints convert parts of JSON documents to MusicXML fragments.
+
+```
+MusicXML.parse = {
+    scoreHeader(scoreHeader: string) => ScoreHeader;
+    measure(measure: string) => Measure;
+    note(note: string) => Note;
+    clef(clef: string) => Clef;
+    backup(backup: string) => Backup;
+    harmony(harmony: string) => Harmony;
+    forward(forward: string) => Forward;
+    print(print: string) => Print;
+    figuredBass(figuredBass: string) => FiguredBass;
+    direction(direction: string) => Direction;
+    attributes(attributes: string) => Attributes;
+    sound(sound: string) => Sound;
+    barline(barline: string) => Barline;
+    grouping(grouping: string) => Grouping;
+}
+
+MusicXML.serialize = {
+    scoreHeader(scoreHeader: ScoreHeader) => string;
+    measure(measure: Measure) => string;
+    note(note: Note) => string;
+    clef(clef: Clef) => string;
+    backup(backup: Backup) => string;
+    harmony(harmony: Harmony) => string;
+    forward(forward: Forward) => string;
+    print(print: Print) => string;
+    figuredBass(figuredBass: FiguredBass) => string;
+    direction(direction: Direction) => string;
+    attributes(attributes: Attributes) => string;
+    sound(sound: Sound) => string;
+    barline(barline: Barline) => string;
+    grouping(grouping: Grouping) => string;
+}
+```
+
+## Types
+There is a one-to-one mapping of MusicXML and the JSON produced by MusicXML Interfaces. The [TypeScript defintion file](musicxml-interfaces.d.ts) fully documents MusicXML Interfaces types. If you use TypeScript and tsd, `tsd link` will load types into your project.
 
 ## Contributing
 Please report issues! In particular,
@@ -78,8 +83,6 @@ Please report issues! In particular,
  - If there is a discrepency between a DTD in `vendor/musicxml-dtd` and the TypeScript interfaces in `musicxml-interfaces.d.ts`, just state the discrepency.
  - If the TypeScript interface definitions are correct, but there is an error in importing a file, provide a minimal MusicXML file that illustrates the issue.
  - If there is an error in exporting MusicXML interfaces back to MusicXML, provide a minimal valid JSON structure that is not exported correctly.
-
-Pull requests are currently not accepted.
 
 ## Copyright
 ```

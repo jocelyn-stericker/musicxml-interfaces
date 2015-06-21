@@ -4943,10 +4943,7 @@ declare module "musicxml-interfaces" {
      * instruments. Initial midi-instrument assignments may be
      * made here as well.
      */
-    export interface PartList {
-        scoreParts: ScorePart[];
-        partGroups: PartGroup[];
-    }
+    export type PartList = Array<ScorePart | PartGroup>;
     export interface ScorePart {
         identification: Identification;
         partNameDisplay: PartNameDisplay;
@@ -4958,6 +4955,8 @@ declare module "musicxml-interfaces" {
         groups: string[];
         midiInstruments: MidiInstrument[];
         id: string;
+        /** Equals "ScorePart" */
+        _class: string;
     }
     /**
      * The part-name indicates the full name of the musical part.
@@ -5013,6 +5012,8 @@ declare module "musicxml-interfaces" {
         groupAbbreviation: GroupAbbreviation;
         type: StartStop;
         groupTime: GroupTime;
+        /** Equals "PartGroup" */
+        _class: string;
     }
     /**
      * As with parts, groups can have a name and abbreviation.
