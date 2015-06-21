@@ -6164,8 +6164,8 @@ function getNoteheadType(node, fallbackVal) {
     if (s == "re") {
         return 19 /* Re */;
     }
-    if (s == "nrectangle") {
-        return 16 /* Nrectangle */;
+    if (s == "rectangle") {
+        return 16 /* Rectangle */;
     }
     if (s == "square") {
         return 3 /* Square */;

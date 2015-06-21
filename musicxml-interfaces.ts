@@ -8879,7 +8879,7 @@ export const enum NoteheadType {
     Cluster = 13,
     Ti = 25,
     Re = 19,
-    Nrectangle = 16,
+    Rectangle = 16,
     Square = 3,
     ArrowDown = 8,
     X = 5,
@@ -8953,8 +8953,8 @@ function getNoteheadType(node: Node, fallbackVal?: NoteheadType) {
     if (s == "re") {
         return NoteheadType.Re;
     }
-    if (s == "nrectangle") {
-        return NoteheadType.Nrectangle;
+    if (s == "rectangle") {
+        return NoteheadType.Rectangle;
     }
     if (s == "square") {
         return NoteheadType.Square;

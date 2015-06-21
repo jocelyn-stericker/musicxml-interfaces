@@ -2509,7 +2509,7 @@ declare module "musicxml-interfaces" {
         Cluster = 13,
         Ti = 25,
         Re = 19,
-        Nrectangle = 16,
+        Rectangle = 16,
         Square = 3,
         ArrowDown = 8,
         X = 5,
