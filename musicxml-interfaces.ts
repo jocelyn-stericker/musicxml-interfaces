@@ -4857,7 +4857,7 @@ function xmlToPageLayout(node: Node) {
         }
         if (ch.nodeName === "page-margins") {
             let dataPageMargins = xmlToPageMargins(ch) ;
-            ret.pageMargins = (ret.pageMargins|| []).concat(dataPageMargins);
+            ret.pageMargins = (ret.pageMargins || []).concat(dataPageMargins);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -5570,7 +5570,7 @@ function xmlToAppearance(node: Node) {
         }
         if (ch.nodeName === "other-appearance") {
             let dataOtherAppearances = getString(ch, true);
-            ret.otherAppearances = (ret.otherAppearances|| []).concat(dataOtherAppearances);
+            ret.otherAppearances = (ret.otherAppearances || []).concat(dataOtherAppearances);
         }
         if (ch.nodeName === "note-size") {
             let dataNoteSizes = xmlToNoteSize(ch) ;
@@ -5738,7 +5738,7 @@ function xmlToMiscellaneous(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "miscellaneous-field") {
             let dataMiscellaneousFields = xmlToMiscellaneousField(ch) ;
-            ret.miscellaneousFields = (ret.miscellaneousFields|| []).concat(dataMiscellaneousFields);
+            ret.miscellaneousFields = (ret.miscellaneousFields || []).concat(dataMiscellaneousFields);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -5774,15 +5774,15 @@ function xmlToIdentification(node: Node) {
         }
         if (ch.nodeName === "creator") {
             let dataCreators = xmlToCreator(ch) ;
-            ret.creators = (ret.creators|| []).concat(dataCreators);
+            ret.creators = (ret.creators || []).concat(dataCreators);
         }
         if (ch.nodeName === "relation") {
             let dataRelations = xmlToRelation(ch) ;
-            ret.relations = (ret.relations|| []).concat(dataRelations);
+            ret.relations = (ret.relations || []).concat(dataRelations);
         }
         if (ch.nodeName === "rights") {
             let dataRights = xmlToRights(ch) ;
-            ret.rights = (ret.rights|| []).concat(dataRights);
+            ret.rights = (ret.rights || []).concat(dataRights);
         }
         if (ch.nodeName === "encoding") {
             let dataEncoding = xmlToEncoding(ch) ;
@@ -5873,7 +5873,7 @@ function xmlToEncoding(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "encoding-description") {
             let dataEncodingDescriptions = getString(ch, true);
-            ret.encodingDescriptions = (ret.encodingDescriptions|| []).concat(dataEncodingDescriptions);
+            ret.encodingDescriptions = (ret.encodingDescriptions || []).concat(dataEncodingDescriptions);
         }
         if (ch.nodeName === "encoding-date") {
             let dataEncodingDate = xmlToEncodingDate(ch) ;
@@ -5886,11 +5886,11 @@ function xmlToEncoding(node: Node) {
         }
         if (ch.nodeName === "encoder") {
             let dataEncoders = xmlToEncoder(ch) ;
-            ret.encoders = (ret.encoders|| []).concat(dataEncoders);
+            ret.encoders = (ret.encoders || []).concat(dataEncoders);
         }
         if (ch.nodeName === "software") {
             let dataSoftwares = getString(ch, true);
-            ret.softwares = (ret.softwares|| []).concat(dataSoftwares);
+            ret.softwares = (ret.softwares || []).concat(dataSoftwares);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -6297,11 +6297,11 @@ function xmlToKey(node: Node) {
         }
         if (ch.nodeName === "key-step") {
             let dataKeySteps = getString(ch, true);
-            ret.keySteps = (ret.keySteps|| []).concat(dataKeySteps);
+            ret.keySteps = (ret.keySteps || []).concat(dataKeySteps);
         }
         if (ch.nodeName === "key-octave") {
             let dataKeyOctaves = xmlToKeyOctave(ch) ;
-            ret.keyOctaves = (ret.keyOctaves|| []).concat(dataKeyOctaves);
+            ret.keyOctaves = (ret.keyOctaves || []).concat(dataKeyOctaves);
         }
         if (ch.nodeName === "fifths") {
             let dataFifths = getNumber(ch, true);
@@ -6309,11 +6309,11 @@ function xmlToKey(node: Node) {
         }
         if (ch.nodeName === "key-alter") {
             let dataKeyAlters = getString(ch, true);
-            ret.keyAlters = (ret.keyAlters|| []).concat(dataKeyAlters);
+            ret.keyAlters = (ret.keyAlters || []).concat(dataKeyAlters);
         }
         if (ch.nodeName === "key-accidental") {
             let dataKeyAccidentals = getString(ch, true);
-            ret.keyAccidentals = (ret.keyAccidentals||[]);
+            ret.keyAccidentals = (ret.keyAccidentals || []);
             ret.keyAccidentals.length = Math.max(ret.keyAccidentals.length, ret.keySteps.length);
             ret.keyAccidentals[ret.keySteps.length - 1] = dataKeyAccidentals;
         }
@@ -6452,11 +6452,11 @@ function xmlToTime(node: Node) {
         }
         if (ch.nodeName === "beats") {
             let dataBeats = getString(ch, true);
-            ret.beats = (ret.beats|| []).concat(dataBeats);
+            ret.beats = (ret.beats || []).concat(dataBeats);
         }
         if (ch.nodeName === "beat-type") {
             let dataBeatTypes = getNumber(ch, true);
-            ret.beatTypes = (ret.beatTypes|| []).concat(dataBeatTypes);
+            ret.beatTypes = (ret.beatTypes || []).concat(dataBeatTypes);
         }
         if (ch.nodeName === "senza-misura") {
             let dataSenzaMisura = getString(ch, true);
@@ -6607,11 +6607,11 @@ function xmlToInterchangeable(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "beats") {
             let dataBeats = getString(ch, true);
-            ret.beats = (ret.beats|| []).concat(dataBeats);
+            ret.beats = (ret.beats || []).concat(dataBeats);
         }
         if (ch.nodeName === "beat-type") {
             let dataBeatTypes = getNumber(ch, true);
-            ret.beatTypes = (ret.beatTypes|| []).concat(dataBeatTypes);
+            ret.beatTypes = (ret.beatTypes || []).concat(dataBeatTypes);
         }
         if (ch.nodeName === "time-relation") {
             let dataTimeRelation = getString(ch, true);
@@ -7019,7 +7019,7 @@ function xmlToStaffDetails(node: Node) {
         }
         if (ch.nodeName === "staff-tuning") {
             let dataStaffTunings = xmlToStaffTuning(ch) ;
-            ret.staffTunings = (ret.staffTunings|| []).concat(dataStaffTunings);
+            ret.staffTunings = (ret.staffTunings || []).concat(dataStaffTunings);
         }
         if (ch.nodeName === "staff-size") {
             let dataStaffSize = getNumber(ch, true);
@@ -7389,7 +7389,7 @@ function xmlToBeatRepeat(node: Node) {
         }
         if (ch.nodeName === "slash-dot") {
             let dataSlashDots = xmlToSlashDot(ch) ;
-            ret.slashDots = (ret.slashDots|| []).concat(dataSlashDots);
+            ret.slashDots = (ret.slashDots || []).concat(dataSlashDots);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -7447,7 +7447,7 @@ function xmlToSlash(node: Node) {
         }
         if (ch.nodeName === "slash-dot") {
             let dataSlashDots = xmlToSlashDot(ch) ;
-            ret.slashDots = (ret.slashDots|| []).concat(dataSlashDots);
+            ret.slashDots = (ret.slashDots || []).concat(dataSlashDots);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -7580,7 +7580,7 @@ export interface Attributes extends Editorial {
     divisions?: number;
     partSymbol?: PartSymbol;
     clefs?: Clef[];
-    measureStyle?: MeasureStyle;
+    measureStyles?: MeasureStyle[];
     times?: Time[];
     staffDetails?: StaffDetails[];
     transposes?: Transpose[];
@@ -7604,23 +7604,23 @@ function xmlToAttributes(node: Node) {
         }
         if (ch.nodeName === "clef") {
             let dataClefs = xmlToClef(ch) ;
-            ret.clefs = (ret.clefs|| []).concat(dataClefs);
+            ret.clefs = (ret.clefs || []).concat(dataClefs);
         }
         if (ch.nodeName === "measure-style") {
             let dataMeasureStyle = xmlToMeasureStyle(ch) ;
-            ret.measureStyle = dataMeasureStyle;
+            ret.measureStyles = (ret.measureStyles || []).concat(dataMeasureStyle);
         }
         if (ch.nodeName === "time") {
             let dataTimes = xmlToTime(ch) ;
-            ret.times = (ret.times|| []).concat(dataTimes);
+            ret.times = (ret.times || []).concat(dataTimes);
         }
         if (ch.nodeName === "staff-details") {
             let dataStaffDetails = xmlToStaffDetails(ch) ;
-            ret.staffDetails = (ret.staffDetails|| []).concat(dataStaffDetails);
+            ret.staffDetails = (ret.staffDetails || []).concat(dataStaffDetails);
         }
         if (ch.nodeName === "transpose") {
             let dataTransposes = xmlToTranspose(ch) ;
-            ret.transposes = (ret.transposes|| []).concat(dataTransposes);
+            ret.transposes = (ret.transposes || []).concat(dataTransposes);
         }
         if (ch.nodeName === "footnote") {
             let dataFootnote = xmlToFootnote(ch) ;
@@ -7640,11 +7640,11 @@ function xmlToAttributes(node: Node) {
         }
         if (ch.nodeName === "key") {
             let dataKeySignatures = xmlToKey(ch) ;
-            ret.keySignatures = (ret.keySignatures|| []).concat(dataKeySignatures);
+            ret.keySignatures = (ret.keySignatures || []).concat(dataKeySignatures);
         }
         if (ch.nodeName === "directive") {
             let dataDirectives = xmlToDirective(ch) ;
-            ret.directives = (ret.directives|| []).concat(dataDirectives);
+            ret.directives = (ret.directives || []).concat(dataDirectives);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -8043,15 +8043,15 @@ function xmlToNote(node: Node) {
         }
         if (ch.nodeName === "lyric") {
             let dataLyrics = xmlToLyric(ch) ;
-            ret.lyrics = (ret.lyrics|| []).concat(dataLyrics);
+            ret.lyrics = (ret.lyrics || []).concat(dataLyrics);
         }
         if (ch.nodeName === "dot") {
             let dataDots = xmlToDot(ch) ;
-            ret.dots = (ret.dots|| []).concat(dataDots);
+            ret.dots = (ret.dots || []).concat(dataDots);
         }
         if (ch.nodeName === "notations") {
             let dataNotations = xmlToNotations(ch) ;
-            ret.notations = (ret.notations|| []).concat(dataNotations);
+            ret.notations = (ret.notations || []).concat(dataNotations);
         }
         if (ch.nodeName === "stem") {
             let dataStem = xmlToStem(ch) ;
@@ -8071,7 +8071,7 @@ function xmlToNote(node: Node) {
         }
         if (ch.nodeName === "tie") {
             let dataTies = xmlToTie(ch) ;
-            ret.ties = (ret.ties|| []).concat(dataTies);
+            ret.ties = (ret.ties || []).concat(dataTies);
         }
         if (ch.nodeName === "play") {
             let dataPlay = xmlToPlay(ch) ;
@@ -8119,7 +8119,7 @@ function xmlToNote(node: Node) {
         }
         if (ch.nodeName === "beam") {
             let dataBeams = xmlToBeam(ch) ;
-            ret.beams = (ret.beams|| []).concat(dataBeams);
+            ret.beams = (ret.beams || []).concat(dataBeams);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -8768,7 +8768,7 @@ function xmlToTimeModification(node: Node) {
         }
         if (ch.nodeName === "normal-dot") {
             let dataNormalDots = xmlToNormalDot(ch) ;
-            ret.normalDots = (ret.normalDots|| []).concat(dataNormalDots);
+            ret.normalDots = (ret.normalDots || []).concat(dataNormalDots);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -9269,19 +9269,19 @@ function xmlToNotations(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "slur") {
             let dataSlurs = xmlToSlur(ch) ;
-            ret.slurs = (ret.slurs|| []).concat(dataSlurs);
+            ret.slurs = (ret.slurs || []).concat(dataSlurs);
         }
         if (ch.nodeName === "articulations") {
             let dataArticulations = xmlToArticulations(ch) ;
-            ret.articulations = (ret.articulations|| []).concat(dataArticulations);
+            ret.articulations = (ret.articulations || []).concat(dataArticulations);
         }
         if (ch.nodeName === "slide") {
             let dataSlides = xmlToSlide(ch) ;
-            ret.slides = (ret.slides|| []).concat(dataSlides);
+            ret.slides = (ret.slides || []).concat(dataSlides);
         }
         if (ch.nodeName === "technical") {
             let dataTechnicals = xmlToTechnical(ch) ;
-            ret.technicals = (ret.technicals|| []).concat(dataTechnicals);
+            ret.technicals = (ret.technicals || []).concat(dataTechnicals);
         }
         if (ch.nodeName === "footnote") {
             let dataFootnote = xmlToFootnote(ch) ;
@@ -9293,43 +9293,43 @@ function xmlToNotations(node: Node) {
         }
         if (ch.nodeName === "tied") {
             let dataTieds = xmlToTied(ch) ;
-            ret.tieds = (ret.tieds|| []).concat(dataTieds);
+            ret.tieds = (ret.tieds || []).concat(dataTieds);
         }
         if (ch.nodeName === "tuplet") {
             let dataTuplets = xmlToTuplet(ch) ;
-            ret.tuplets = (ret.tuplets|| []).concat(dataTuplets);
+            ret.tuplets = (ret.tuplets || []).concat(dataTuplets);
         }
         if (ch.nodeName === "glissando") {
             let dataGlissandos = xmlToGlissando(ch) ;
-            ret.glissandos = (ret.glissandos|| []).concat(dataGlissandos);
+            ret.glissandos = (ret.glissandos || []).concat(dataGlissandos);
         }
         if (ch.nodeName === "dynamics") {
             let dataDynamics = xmlToDynamics(ch) ;
-            ret.dynamics = (ret.dynamics|| []).concat(dataDynamics);
+            ret.dynamics = (ret.dynamics || []).concat(dataDynamics);
         }
         if (ch.nodeName === "fermata") {
             let dataFermatas = xmlToFermata(ch) ;
-            ret.fermatas = (ret.fermatas|| []).concat(dataFermatas);
+            ret.fermatas = (ret.fermatas || []).concat(dataFermatas);
         }
         if (ch.nodeName === "accidental-mark") {
             let dataAccidentalMarks = xmlToAccidentalMark(ch) ;
-            ret.accidentalMarks = (ret.accidentalMarks|| []).concat(dataAccidentalMarks);
+            ret.accidentalMarks = (ret.accidentalMarks || []).concat(dataAccidentalMarks);
         }
         if (ch.nodeName === "ornaments") {
             let dataOrnaments = xmlToOrnaments(ch) ;
-            ret.ornaments = (ret.ornaments|| []).concat(dataOrnaments);
+            ret.ornaments = (ret.ornaments || []).concat(dataOrnaments);
         }
         if (ch.nodeName === "arpeggiate") {
             let dataArpeggiates = xmlToArpeggiate(ch) ;
-            ret.arpeggiates = (ret.arpeggiates|| []).concat(dataArpeggiates);
+            ret.arpeggiates = (ret.arpeggiates || []).concat(dataArpeggiates);
         }
         if (ch.nodeName === "non-arpeggiate") {
             let dataNonArpeggiates = xmlToNonArpeggiate(ch) ;
-            ret.nonArpeggiates = (ret.nonArpeggiates|| []).concat(dataNonArpeggiates);
+            ret.nonArpeggiates = (ret.nonArpeggiates || []).concat(dataNonArpeggiates);
         }
         if (ch.nodeName === "other-notation") {
             let dataOtherNotations = xmlToOtherNotation(ch) ;
-            ret.otherNotations = (ret.otherNotations|| []).concat(dataOtherNotations);
+            ret.otherNotations = (ret.otherNotations || []).concat(dataOtherNotations);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -9804,7 +9804,7 @@ function xmlToTupletActual(node: Node) {
         }
         if (ch.nodeName === "tuplet-dot") {
             let dataTupletDots = xmlToTupletDot(ch) ;
-            ret.tupletDots = (ret.tupletDots|| []).concat(dataTupletDots);
+            ret.tupletDots = (ret.tupletDots || []).concat(dataTupletDots);
         }
         if (ch.nodeName === "tuplet-type") {
             let dataTupletType = xmlToTupletType(ch) ;
@@ -9864,7 +9864,7 @@ function xmlToTupletNormal(node: Node) {
         }
         if (ch.nodeName === "tuplet-dot") {
             let dataTupletDots = xmlToTupletDot(ch) ;
-            ret.tupletDots = (ret.tupletDots|| []).concat(dataTupletDots);
+            ret.tupletDots = (ret.tupletDots || []).concat(dataTupletDots);
         }
         if (ch.nodeName === "tuplet-type") {
             let dataTupletType = xmlToTupletType(ch) ;
@@ -10681,7 +10681,7 @@ function xmlToOrnaments(node: Node) {
         }
         if (ch.nodeName === "accidental-mark") {
             let dataAccidentalMarks = xmlToAccidentalMark(ch) ;
-            ret.accidentalMarks = (ret.accidentalMarks|| []).concat(dataAccidentalMarks);
+            ret.accidentalMarks = (ret.accidentalMarks || []).concat(dataAccidentalMarks);
         }
         if (ch.nodeName === "trill-mark") {
             let dataTrillMark = xmlToTrillMark(ch) ;
@@ -14814,7 +14814,7 @@ function xmlToArticulations(node: Node) {
         }
         if (ch.nodeName === "other-articulation") {
             let dataOtherArticulations = xmlToOtherArticulation(ch) ;
-            ret.otherArticulations = (ret.otherArticulations|| []).concat(dataOtherArticulations);
+            ret.otherArticulations = (ret.otherArticulations || []).concat(dataOtherArticulations);
         }
         if (ch.nodeName === "detached-legato") {
             let dataDetachedLegato = xmlToDetachedLegato(ch) ;
@@ -16575,35 +16575,35 @@ function xmlToLyricParts(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "extend") {
             let data: any = xmlToExtend(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "end-line") {
             let data: any = xmlToEndLine(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "syllabic") {
             let data: any = xmlToSyllabic(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "text") {
             let data: any = xmlToText(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "laughing") {
             let data: any = xmlToLaughing(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "humming") {
             let data: any = xmlToHumming(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "end-paragraph") {
             let data: any = xmlToEndParagraph(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "elision") {
             let data: any = xmlToElision(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -17032,7 +17032,7 @@ function xmlToFiguredBass(node: Node) {
         }
         if (ch.nodeName === "figure") {
             let dataFigures = xmlToFigure(ch) ;
-            ret.figures = (ret.figures|| []).concat(dataFigures);
+            ret.figures = (ret.figures || []).concat(dataFigures);
         }
         if (ch.nodeName === "duration") {
             let dataDuration = getNumber(ch, true);
@@ -17596,7 +17596,7 @@ function xmlToBarline(node: Node) {
         }
         if (ch.nodeName === "fermata") {
             let dataFermatas = xmlToFermata(ch) ;
-            ret.fermatas = (ret.fermatas|| []).concat(dataFermatas);
+            ret.fermatas = (ret.fermatas || []).concat(dataFermatas);
         }
         if (ch.nodeName === "bar-style") {
             let dataBarStyle = xmlToBarStyle(ch) ;
@@ -18066,7 +18066,7 @@ function xmlToDirection(node: Node) {
         }
         if (ch.nodeName === "direction-type") {
             let dataDirectionTypes = xmlToDirectionType(ch) ;
-            ret.directionTypes = (ret.directionTypes|| []).concat(dataDirectionTypes);
+            ret.directionTypes = (ret.directionTypes || []).concat(dataDirectionTypes);
         }
         if (ch.nodeName === "staff") {
             let dataStaff = getNumber(ch, true);
@@ -18137,11 +18137,11 @@ function xmlToDirectionType(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "percussion") {
             let dataPercussions = xmlToPercussion(ch) ;
-            ret.percussions = (ret.percussions|| []).concat(dataPercussions);
+            ret.percussions = (ret.percussions || []).concat(dataPercussions);
         }
         if (ch.nodeName === "rehearsal") {
             let dataRehearsals = xmlToRehearsal(ch) ;
-            ret.rehearsals = (ret.rehearsals|| []).concat(dataRehearsals);
+            ret.rehearsals = (ret.rehearsals || []).concat(dataRehearsals);
         }
         if (ch.nodeName === "pedal") {
             let dataPedal = xmlToPedal(ch) ;
@@ -18177,7 +18177,7 @@ function xmlToDirectionType(node: Node) {
         }
         if (ch.nodeName === "segno") {
             let dataSegnos = xmlToSegno(ch) ;
-            ret.segnos = (ret.segnos|| []).concat(dataSegnos);
+            ret.segnos = (ret.segnos || []).concat(dataSegnos);
         }
         if (ch.nodeName === "scordatura") {
             let dataScordatura = xmlToScordatura(ch) ;
@@ -18213,7 +18213,7 @@ function xmlToDirectionType(node: Node) {
         }
         if (ch.nodeName === "words") {
             let dataWords = xmlToWords(ch) ;
-            ret.words = (ret.words|| []).concat(dataWords);
+            ret.words = (ret.words || []).concat(dataWords);
         }
         if (ch.nodeName === "damp-all") {
             let dataDampAll = xmlToDampAll(ch) ;
@@ -18221,7 +18221,7 @@ function xmlToDirectionType(node: Node) {
         }
         if (ch.nodeName === "coda") {
             let dataCodas = xmlToCoda(ch) ;
-            ret.codas = (ret.codas|| []).concat(dataCodas);
+            ret.codas = (ret.codas || []).concat(dataCodas);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -19120,7 +19120,7 @@ function xmlToMetronome(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "metronome-note") {
             let dataMetronomeNotes = xmlToMetronomeNote(ch) ;
-            ret.metronomeNotes = (ret.metronomeNotes|| []).concat(dataMetronomeNotes);
+            ret.metronomeNotes = (ret.metronomeNotes || []).concat(dataMetronomeNotes);
         }
         if (ch.nodeName === "per-minute") {
             let dataPerMinute = xmlToPerMinute(ch) ;
@@ -19141,9 +19141,9 @@ function xmlToMetronome(node: Node) {
         if (ch.nodeName === "beat-unit-dot") {
             let dataBeatUnitDots = xmlToBeatUnitDot(ch) ;
             if (!gotSecondPair) {
-                ret.beatUnitDots = (ret.beatUnitDots|| []).concat(dataBeatUnitDots);
+                ret.beatUnitDots = (ret.beatUnitDots || []).concat(dataBeatUnitDots);
             } else {
-                ret.beatUnitDotsChange = (ret.beatUnitDotsChange|| []).concat(dataBeatUnitDots);
+                ret.beatUnitDotsChange = (ret.beatUnitDotsChange || []).concat(dataBeatUnitDots);
             }
         }
         if (ch.nodeName === "metronome-relation") {
@@ -19304,11 +19304,11 @@ function xmlToMetronomeNote(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "metronome-dot") {
             let dataMetronomeDots = xmlToMetronomeDot(ch) ;
-            ret.metronomeDots = (ret.metronomeDots|| []).concat(dataMetronomeDots);
+            ret.metronomeDots = (ret.metronomeDots || []).concat(dataMetronomeDots);
         }
         if (ch.nodeName === "metronome-beam") {
             let dataMetronomeBeams = xmlToMetronomeBeam(ch) ;
-            ret.metronomeBeams = (ret.metronomeBeams|| []).concat(dataMetronomeBeams);
+            ret.metronomeBeams = (ret.metronomeBeams || []).concat(dataMetronomeBeams);
         }
         if (ch.nodeName === "metronome-type") {
             let dataMetronomeType = getString(ch, true);
@@ -19397,7 +19397,7 @@ function xmlToMetronomeTuplet(node: Node) {
         }
         if (ch.nodeName === "normal-dot") {
             let dataNormalDots = xmlToNormalDot(ch) ;
-            ret.normalDots = (ret.normalDots|| []).concat(dataNormalDots);
+            ret.normalDots = (ret.normalDots || []).concat(dataNormalDots);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -19588,7 +19588,7 @@ function xmlToHarpPedals(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "pedal-tuning") {
             let dataPedalTunings = xmlToPedalTuning(ch) ;
-            ret.pedalTunings = (ret.pedalTunings|| []).concat(dataPedalTunings);
+            ret.pedalTunings = (ret.pedalTunings || []).concat(dataPedalTunings);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -20042,7 +20042,7 @@ function xmlToScordatura(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "accord") {
             let dataAccords = xmlToAccord(ch) ;
-            ret.accords = (ret.accords|| []).concat(dataAccords);
+            ret.accords = (ret.accords || []).concat(dataAccords);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -22054,7 +22054,7 @@ function xmlToFrame(node: Node) {
         }
         if (ch.nodeName === "frame-note") {
             let dataFrameNotes = xmlToFrameNote(ch) ;
-            ret.frameNotes = (ret.frameNotes|| []).concat(dataFrameNotes);
+            ret.frameNotes = (ret.frameNotes || []).concat(dataFrameNotes);
         }
         if (ch.nodeName === "frame-frets") {
             let dataFrameFrets = getString(ch, true);
@@ -22265,7 +22265,7 @@ function xmlToGrouping(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "feature") {
             let dataFeatures = xmlToFeature(ch) ;
-            ret.features = (ret.features|| []).concat(dataFeatures);
+            ret.features = (ret.features || []).concat(dataFeatures);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -22396,7 +22396,7 @@ function xmlToPrint(node: Node) {
         }
         if (ch.nodeName === "staff-layout") {
             let dataStaffLayouts = xmlToStaffLayout(ch) ;
-            ret.staffLayouts = (ret.staffLayouts|| []).concat(dataStaffLayouts);
+            ret.staffLayouts = (ret.staffLayouts || []).concat(dataStaffLayouts);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -22634,11 +22634,11 @@ function xmlToSound(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "midi-instrument") {
             let dataMidiInstruments = xmlToMidiInstrument(ch) ;
-            ret.midiInstruments = (ret.midiInstruments|| []).concat(dataMidiInstruments);
+            ret.midiInstruments = (ret.midiInstruments || []).concat(dataMidiInstruments);
         }
         if (ch.nodeName === "play") {
             let dataPlays = xmlToPlay(ch) ;
-            ret.plays = (ret.plays|| []).concat(dataPlays);
+            ret.plays = (ret.plays || []).concat(dataPlays);
         }
         if (ch.nodeName === "offset") {
             let dataOffset = xmlToOffset(ch) ;
@@ -22646,7 +22646,7 @@ function xmlToSound(node: Node) {
         }
         if (ch.nodeName === "midi-device") {
             let dataMidiDevices = xmlToMidiDevice(ch) ;
-            ret.midiDevices = (ret.midiDevices|| []).concat(dataMidiDevices);
+            ret.midiDevices = (ret.midiDevices || []).concat(dataMidiDevices);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -22809,11 +22809,11 @@ function xmlToDefaults(node: Node) {
         }
         if (ch.nodeName === "lyric-language") {
             let dataLyricLanguages = xmlToLyricLanguage(ch) ;
-            ret.lyricLanguages = (ret.lyricLanguages|| []).concat(dataLyricLanguages);
+            ret.lyricLanguages = (ret.lyricLanguages || []).concat(dataLyricLanguages);
         }
         if (ch.nodeName === "lyric-font") {
             let dataLyricFonts = xmlToLyricFont(ch) ;
-            ret.lyricFonts = (ret.lyricFonts|| []).concat(dataLyricFonts);
+            ret.lyricFonts = (ret.lyricFonts || []).concat(dataLyricFonts);
         }
         if (ch.nodeName === "page-layout") {
             let dataPageLayout = xmlToPageLayout(ch) ;
@@ -22833,7 +22833,7 @@ function xmlToDefaults(node: Node) {
         }
         if (ch.nodeName === "staff-layout") {
             let dataStaffLayouts = xmlToStaffLayout(ch) ;
-            ret.staffLayouts = (ret.staffLayouts|| []).concat(dataStaffLayouts);
+            ret.staffLayouts = (ret.staffLayouts || []).concat(dataStaffLayouts);
         }
         if (ch.nodeName === "music-font") {
             let dataMusicFont = xmlToMusicFont(ch) ;
@@ -23039,7 +23039,7 @@ function xmlToCredit(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "credit-type") {
             let dataCreditTypes = getString(ch, true);
-            ret.creditTypes = (ret.creditTypes|| []).concat(dataCreditTypes);
+            ret.creditTypes = (ret.creditTypes || []).concat(dataCreditTypes);
             foundCreditTypes = true;
         }
         if (ch.nodeName === "credit-words") {
@@ -23397,11 +23397,11 @@ function xmlToScorePart(node: Node) {
         }
         if (ch.nodeName === "score-instrument") {
             let dataScoreInstruments = xmlToScoreInstrument(ch) ;
-            ret.scoreInstruments = (ret.scoreInstruments|| []).concat(dataScoreInstruments);
+            ret.scoreInstruments = (ret.scoreInstruments || []).concat(dataScoreInstruments);
         }
         if (ch.nodeName === "midi-device") {
             let dataMidiDevices = xmlToMidiDevice(ch) ;
-            ret.midiDevices = (ret.midiDevices|| []).concat(dataMidiDevices);
+            ret.midiDevices = (ret.midiDevices || []).concat(dataMidiDevices);
         }
         if (ch.nodeName === "part-name") {
             let dataPartName = xmlToPartName(ch) ;
@@ -23417,11 +23417,11 @@ function xmlToScorePart(node: Node) {
         }
         if (ch.nodeName === "group") {
             let dataGroups = getString(ch, true);
-            ret.groups = (ret.groups|| []).concat(dataGroups);
+            ret.groups = (ret.groups || []).concat(dataGroups);
         }
         if (ch.nodeName === "midi-instrument") {
             let dataMidiInstruments = xmlToMidiInstrument(ch) ;
-            ret.midiInstruments = (ret.midiInstruments|| []).concat(dataMidiInstruments);
+            ret.midiInstruments = (ret.midiInstruments || []).concat(dataMidiInstruments);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -24192,7 +24192,7 @@ function xmlToScoreHeader(node: Node) {
         }
         if (ch.nodeName === "credit") {
             let dataCredits = xmlToCredit(ch) ;
-            ret.credits = (ret.credits|| []).concat(dataCredits);
+            ret.credits = (ret.credits || []).concat(dataCredits);
         }
         if (ch.nodeName === "part-list") {
             let dataPartList = xmlToPartList(ch) ;
@@ -24227,7 +24227,7 @@ function xmlToScoreTimewise(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "measure") {
             let dataMeasures = xmlToMeasure(ch) ;
-            ret.measures = (ret.measures|| []).concat(dataMeasures);
+            ret.measures = (ret.measures || []).concat(dataMeasures);
         }
         if (ch.nodeName === "movement-title") {
             let dataMovementTitle = getString(ch, true);
@@ -24247,7 +24247,7 @@ function xmlToScoreTimewise(node: Node) {
         }
         if (ch.nodeName === "credit") {
             let dataCredits = xmlToCredit(ch) ;
-            ret.credits = (ret.credits|| []).concat(dataCredits);
+            ret.credits = (ret.credits || []).concat(dataCredits);
         }
         if (ch.nodeName === "part-list") {
             let dataPartList = xmlToPartList(ch) ;
@@ -24278,47 +24278,47 @@ function xmlToPart(node: Node) {
         let ch = node.childNodes[i];
         if (ch.nodeName === "note") {
             let data: any = xmlToNote(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "backup") {
             let data: any = xmlToBackup(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "harmony") {
             let data: any = xmlToHarmony(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "forward") {
             let data: any = xmlToForward(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "print") {
             let data: any = xmlToPrint(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "figured-bass") {
             let data: any = xmlToFiguredBass(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "direction") {
             let data: any = xmlToDirection(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "attributes") {
             let data: any = xmlToAttributes(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "sound") {
             let data: any = xmlToSound(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "barline") {
             let data: any = xmlToBarline(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
         if (ch.nodeName === "grouping") {
             let data: any = xmlToGrouping(ch) ;
-            rarr = (rarr|| []).concat(data);
+            rarr = (rarr || []).concat(data);
         }
     }
     for (let i = 0; i < node.attributes.length; ++i) {
@@ -24427,7 +24427,7 @@ function pageLayoutToXML(pageLayout: PageLayout): string {
     if (defined(pageLayout.pageWidth)) {
         children.push(xml `<page-width>${pageLayout.pageWidth}</page-width>`);
     }
-    (pageLayout.pageMargins||[]).forEach(pageMargins => {
+    (pageLayout.pageMargins || []).forEach(pageMargins => {
         children.push(pageMarginsToXML(pageMargins));
     });
 
@@ -24549,13 +24549,13 @@ function appearanceToXML(appearance: Appearance): string {
     //     (line-width*, note-size*, distance*,
     //      other-appearance*)>
     let children: string[] = [];
-    Object.keys(appearance.lineWidths||{}).forEach(key => {
+    Object.keys(appearance.lineWidths ||{}).forEach(key => {
         children.push(lineWidthToXML(appearance.lineWidths[key]));
     });
-    Object.keys(appearance.noteSizes||{}).forEach(key => {
+    Object.keys(appearance.noteSizes ||{}).forEach(key => {
         children.push(noteSizeToXML(appearance.noteSizes[key]));
     });
-    Object.keys(appearance.distances||{}).forEach(key => {
+    Object.keys(appearance.distances ||{}).forEach(key => {
         children.push(distanceToXML(appearance.distances[key]));
     });
     // TODO: fix musicxml-interfaces
@@ -24645,10 +24645,10 @@ function identificationToXML(identification: Identification): string {
     // <!ELEMENT identification (creator*, rights*, encoding?,
     //     source?, relation*, miscellaneous?)>
     let children: string[] = [];
-    (identification.creators||[]).forEach(creator => {
+    (identification.creators || []).forEach(creator => {
         children.push(creatorToXML(creator));
     });
-    (identification.rights||[]).forEach(rights => {
+    (identification.rights || []).forEach(rights => {
         children.push(rightsToXML(rights));
     });
     if (defined(identification.encoding)) {
@@ -24657,7 +24657,7 @@ function identificationToXML(identification: Identification): string {
     if (defined(identification.source) && !!identification.source) {
         children.push(sourceToXML(identification.source));
     }
-    (identification.relations||[]).forEach(relation => {
+    (identification.relations || []).forEach(relation => {
         children.push(relationToXML(relation));
     });
     if (defined(identification.miscellaneous)) {
@@ -24701,16 +24701,16 @@ function encodingToXML(encoding: Encoding): string {
     if (defined(encoding.encodingDate)) {
         children.push(encodingDateToXML(encoding.encodingDate));
     }
-    (encoding.encoders||[]).forEach(encoder => {
+    (encoding.encoders || []).forEach(encoder => {
         children.push(encoderToXML(encoder));
     });
-    (encoding.softwares||[]).forEach(software => {
+    (encoding.softwares || []).forEach(software => {
         children.push(softwareToXML(software));
     });
-    (encoding.encodingDescriptions||[]).forEach(encodingDescription => {
+    (encoding.encodingDescriptions || []).forEach(encodingDescription => {
         children.push(encodingDescriptionToXML(encodingDescription));
     });
-    Object.keys(encoding.supports||{}).forEach(key => {
+    Object.keys(encoding.supports ||{}).forEach(key => {
         children.push(supportsToXML(encoding.supports[key]));
     });
     return dangerous `<encoding>\n${children.join("\n").split("\n")
@@ -24830,10 +24830,10 @@ function defaultsToXML(defaults: Defaults): string {
     if (defined(defaults.wordFont)) {
         children.push(wordFontToXML(defaults.wordFont));
     }
-    (defaults.lyricFonts||[]).forEach(lyricFont => {
+    (defaults.lyricFonts || []).forEach(lyricFont => {
         children.push(lyricFontToXML(lyricFont));
     });
-    (defaults.lyricLanguages||[]).forEach(lyricLanguage => {
+    (defaults.lyricLanguages || []).forEach(lyricLanguage => {
         children.push(lyricLanguageToXML(lyricLanguage));
     });
     return dangerous `<defaults>\n${children.join("\n").split("\n")
@@ -24891,7 +24891,7 @@ function creditToXML(credit: Credit): string {
     // >
     let attributes = "";
     let children: string[] = [];
-    (credit.creditTypes||[]).forEach(creditType => {
+    (credit.creditTypes || []).forEach(creditType => {
         children.push(creditTypeToXML(creditType));
     });
     // credit.links.forEach(link => { // TODO: missing in musicxml-interfaces
@@ -25013,20 +25013,20 @@ function scorePartToXML(scorePart: ScorePart): string {
     if (defined(scorePart.partAbbreviationDisplay)) {
         children.push(partAbbreviationDisplayToXML(scorePart.partAbbreviationDisplay));
     }
-    (scorePart.groups||[]).forEach(group => {
+    (scorePart.groups || []).forEach(group => {
         children.push(xml `<group>${group}</group>`);
     });
-    (scorePart.scoreInstruments||[]).forEach(scoreInstrument => {
+    (scorePart.scoreInstruments || []).forEach(scoreInstrument => {
         children.push(scoreInstrumentToXML(scoreInstrument));
     });
     // Is it okay if there are different numbers of devices and instruments?
-    (scorePart.midiDevices||[]).forEach((device, idx) => {
+    (scorePart.midiDevices || []).forEach((device, idx) => {
         children.push(midiDeviceToXML(device));
         if (scorePart.midiInstruments[idx]) {
             children.push(midiInstrumentToXML(scorePart.midiInstruments[idx]));
         }
     });
-    (scorePart.midiInstruments||[]).forEach(midiInstrument => {
+    (scorePart.midiInstruments || []).forEach(midiInstrument => {
         children.push(midiInstrumentToXML(midiInstrument));
     });
     if (defined(scorePart.id)) {
@@ -25359,7 +25359,7 @@ function scoreHeaderToXML(header: ScoreHeader): string[] {
     if (defined(header.defaults)) {
         children.push(defaultsToXML(header.defaults));
     }
-    (header.credits||[]).forEach(credit => {
+    (header.credits || []).forEach(credit => {
         children.push(creditToXML(credit));
     });
     if (defined(header.partList)) {
@@ -25397,7 +25397,7 @@ function groupingToXML(grouping: Grouping): string {
     // >
     let children: string[] = [];
     children = children.concat(staffDebugInfoToXMLComment(grouping));
-    (grouping.features||[]).forEach(feature => {
+    (grouping.features || []).forEach(feature => {
         // <!ELEMENT feature (#PCDATA)>
         // <!ATTLIST feature
         //     type CDATA #IMPLIED
@@ -25461,7 +25461,7 @@ function harmonyToXML(harmony: Harmony): string {
     if (defined(harmony.bass)) {
         children.push(bassToXML(harmony.bass));
     }
-    (harmony.degrees||[]).forEach(degree => {
+    (harmony.degrees || []).forEach(degree => {
         children.push(degreeToXML(degree));
     });
 
@@ -25739,7 +25739,7 @@ function frameToXML(frame: Frame): string {
                 "left" : "right"}"`;
         }
     }
-    (frame.frameNotes||[]).forEach(frameNote => {
+    (frame.frameNotes || []).forEach(frameNote => {
         // <!ELEMENT frame-note (string, fret, fingering?, barre?)>
         let fChildren: string[] = [];
 
@@ -25843,7 +25843,7 @@ function printToXML(print: Print): string {
     if (defined(print.systemLayout)) {
         children.push(systemLayoutToXML(print.systemLayout));
     }
-    (print.staffLayouts||[]).forEach(staffLayout => {
+    (print.staffLayouts || []).forEach(staffLayout => {
         children.push(staffLayoutToXML(staffLayout));
     });
     if (defined(print.measureLayout)) {
@@ -25891,13 +25891,13 @@ function soundToXML(sound: Sound): string {
     children = children.concat(staffDebugInfoToXMLComment(sound));
 
     // TODO musicxml-interfaces: can have many midi-devices, instruments, etc.
-    (sound.midiDevices||[]).forEach(midiDevice => {
+    (sound.midiDevices || []).forEach(midiDevice => {
         children.push(midiDeviceToXML(midiDevice));
     });
-    (sound.midiInstruments||[]).forEach(midiInstrument => {
+    (sound.midiInstruments || []).forEach(midiInstrument => {
         children.push(midiInstrumentToXML(midiInstrument));
     });
-    (sound.plays||[]).forEach(play => {
+    (sound.plays || []).forEach(play => {
         children.push(playToXML(play));
     });
 
@@ -25986,7 +25986,7 @@ function directionToXML(direction: Direction): string {
     // >
     let children: string[] = [];
     children = children.concat(staffDebugInfoToXMLComment(direction));
-    (direction.directionTypes||[]).forEach(directionType => {
+    (direction.directionTypes || []).forEach(directionType => {
         children.push(directionTypeToXML(directionType));
     });
     if (defined(direction.offset)) {
@@ -26022,10 +26022,10 @@ function attributesToXML(attributes: Attributes): string {
         // <!ELEMENT divisions (#PCDATA)>
         children.push(xml `<divisions>${attributes.divisions}</divisions>`);
     }
-    (attributes.keySignatures||[]).forEach(keySignature => {
+    (attributes.keySignatures || []).forEach(keySignature => {
         children.push(keyToXML(keySignature));
     });
-    (attributes.times||[]).forEach(time => {
+    (attributes.times || []).forEach(time => {
         children.push(timeToXML(time));
     });
     if (defined(attributes.staves)) {
@@ -26039,21 +26039,21 @@ function attributesToXML(attributes: Attributes): string {
         // <!ELEMENT instruments (#PCDATA)>
         children.push(xml `<instruments>${attributes.instruments}</instruments>`);
     }
-    (attributes.clefs||[]).forEach(clef => {
+    (attributes.clefs || []).forEach(clef => {
         children.push(clefToXML(clef));
     });
-    (attributes.staffDetails||[]).forEach(staffDetails => {
+    (attributes.staffDetails || []).forEach(staffDetails => {
         children.push(staffDetailsToXML(staffDetails));
     });
-    (attributes.transposes||[]).forEach(transpose => {
+    (attributes.transposes || []).forEach(transpose => {
         children.push(transposeToXML(transpose));
     });
-    (attributes.directives||[]).forEach(directive => {
+    (attributes.directives || []).forEach(directive => {
         children.push(directiveToXML(directive));
     });
-    if (defined(attributes.measureStyle)) {
-        children.push(measureStyleToXML(attributes.measureStyle));
-    }
+    (attributes.measureStyles || []).forEach(measureStyle => {
+        children.push(measureStyleToXML(measureStyle));
+    });
     return dangerous `<attributes>\n${children.join("\n").split("\n")
         .map(n => "  " + n).join("\n")}\n</attributes>`;
 }
@@ -26417,7 +26417,7 @@ function noteToXML(note: Note) {
         elements.push(xml `<type>${countToXML[note.noteType.duration]}</type>`);
     }
 
-    (note.dots||[]).forEach(() => {
+    (note.dots || []).forEach(() => {
         elements.push(xml `<dot />`);
     });
 
@@ -26460,7 +26460,7 @@ function noteToXML(note: Note) {
             timeModificationChildren.push(xml `<normal-type>${
                     note.timeModification.normalType}</normal-type>`);
         }
-        (note.timeModification.normalDots||[]).forEach(() => {
+        (note.timeModification.normalDots || []).forEach(() => {
             timeModificationChildren.push(xml `<normal-dot />`);
         });
 
@@ -26504,7 +26504,7 @@ function noteToXML(note: Note) {
         elements.push(xml `<staff>${note.staff}</staff>`);
     }
 
-    (note.beams||[]).forEach(beam => {
+    (note.beams || []).forEach(beam => {
         let beamAttribs = xml ` number="${beam.number}"`;
 
         if (defined(beam.repeater)) {
@@ -26516,7 +26516,7 @@ function noteToXML(note: Note) {
         elements.push(dangerous `<beam${beamAttribs}>${beamTypeToXML[beam.type]}</beam>`); // safe
     });
 
-    (note.notations||[]).forEach(notation => {
+    (note.notations || []).forEach(notation => {
         /**
             * <!ELEMENT notations
             *      (%editorial;,
@@ -26539,7 +26539,7 @@ function noteToXML(note: Note) {
         }
         nChildren = nChildren.concat(editorialToXML(notation));
 
-        (notation.tieds||[]).forEach(tied => {
+        (notation.tieds || []).forEach(tied => {
             // <!ATTLIST tied
             //     type %start-stop-continue; #REQUIRED
             //     number %number-level; #IMPLIED
@@ -26564,7 +26564,7 @@ function noteToXML(note: Note) {
             } />`);
         });
 
-        (notation.slurs||[]).forEach(slur => {
+        (notation.slurs || []).forEach(slur => {
             // <!ATTLIST slur
             //     type %start-stop-continue; #REQUIRED
             //     number %number-level; "1"
@@ -26589,7 +26589,7 @@ function noteToXML(note: Note) {
             } />`);
         });
 
-        (notation.tuplets||[]).forEach(tuplet => {
+        (notation.tuplets || []).forEach(tuplet => {
             // <!ELEMENT tuplet (tuplet-actual?, tuplet-normal?)>
             // <!ATTLIST tuplet
             //     type %start-stop; #REQUIRED
@@ -26658,7 +26658,7 @@ function noteToXML(note: Note) {
                     dataChildren.push(dangerous `<tuplet-type${
                         fontToXML(type) + colorToXML(type)}>${pcdata}</tuplet-type>`);
                 }
-                (data.tupletDots||[]).forEach(dot => {
+                (data.tupletDots || []).forEach(dot => {
                     dataChildren.push(dangerous `<tuplet-dot${
                         fontToXML(dot) + colorToXML(dot)} />`);
                 });
@@ -26670,7 +26670,7 @@ function noteToXML(note: Note) {
                 .map(n => "  " + n).join("\n")}\n</tuplet>`);
         });
 
-        (notation.glissandos||[]).forEach(glissando => {
+        (notation.glissandos || []).forEach(glissando => {
             // <!ELEMENT glissando (#PCDATA)>
             // <!ATTLIST glissando
             //     type %start-stop; #REQUIRED
@@ -26689,7 +26689,7 @@ function noteToXML(note: Note) {
             }>${pcdata}</glissando>`);
         });
 
-        (notation.slides||[]).forEach(slide => {
+        (notation.slides || []).forEach(slide => {
             // <!ELEMENT slide (#PCDATA)>
             // <!ATTLIST slide
             //     type %start-stop; #REQUIRED
@@ -26710,7 +26710,7 @@ function noteToXML(note: Note) {
             }>${pcdata}</slide>`);
         });
 
-        (notation.ornaments||[]).forEach(ornaments => {
+        (notation.ornaments || []).forEach(ornaments => {
             // <!ELEMENT ornaments
             //     (((trill-mark | turn | delayed-turn | inverted-turn |
             //        delayed-inverted-turn | vertical-turn | shake |
@@ -26887,7 +26887,7 @@ function noteToXML(note: Note) {
             //     %print-style;
             //     %placement;
             // >
-            (ornaments.accidentalMarks||[]).forEach(accidentalMark => {
+            (ornaments.accidentalMarks || []).forEach(accidentalMark => {
                 let pcdata = xml `${accidentalMark.mark || ""}`;
                 oChildren.push(dangerous `<accidental-mark${
                     printStyleToXML(accidentalMark) +
@@ -26900,7 +26900,7 @@ function noteToXML(note: Note) {
                 .map(n => "  " + n).join("\n")}\n</ornaments>`);
         });
 
-        (notation.technicals||[]).forEach(technical => {
+        (notation.technicals || []).forEach(technical => {
             let oChildren: string[] = [];
             // <!ELEMENT technical
             //     ((up-bow | down-bow | harmonic | open-string |
@@ -27267,7 +27267,7 @@ function noteToXML(note: Note) {
                 .map(n => "  " + n).join("\n")}\n</technical>`);
         });
 
-        (notation.articulations||[]).forEach(articulation => {
+        (notation.articulations || []).forEach(articulation => {
             let oChildren: string[] = [];
             // <!ELEMENT articulations
             //     ((accent | strong-accent | staccato | tenuto |
@@ -27464,7 +27464,7 @@ function noteToXML(note: Note) {
             //     %print-style;
             //     %placement;
             // >
-            (articulation.otherArticulations||[]).forEach(articulation => {
+            (articulation.otherArticulations || []).forEach(articulation => {
                 let pcdata = xml `${articulation.data}`;
                 oChildren.push(dangerous `<other-articulation${
                     printStyleToXML(articulation) +
@@ -27476,15 +27476,15 @@ function noteToXML(note: Note) {
                 .map(n => "  " + n).join("\n")}\n</articulations>`);
         });
 
-        (notation.dynamics||[]).forEach(dynamics => {
+        (notation.dynamics || []).forEach(dynamics => {
             nChildren.push(dynamicsToXML(dynamics));
         });
 
-        (notation.fermatas||[]).forEach(fermata => {
+        (notation.fermatas || []).forEach(fermata => {
             nChildren.push(fermataToXML(fermata));
         });
 
-        (notation.arpeggiates||[]).forEach(arpeggiate => {
+        (notation.arpeggiates || []).forEach(arpeggiate => {
             // <!ATTLIST arpeggiate
             //     number %number-level; #IMPLIED
             //     direction %up-down; #IMPLIED
@@ -27500,7 +27500,7 @@ function noteToXML(note: Note) {
                 colorToXML(arpeggiate)} />`);
         });
 
-        (notation.nonArpeggiates||[]).forEach(nonArpeggiate => {
+        (notation.nonArpeggiates || []).forEach(nonArpeggiate => {
             // <!ATTLIST non-arpeggiate
             //     type %top-bottom; #REQUIRED
             //     number %number-level; #IMPLIED
@@ -27516,7 +27516,7 @@ function noteToXML(note: Note) {
                 colorToXML(nonArpeggiate)} />`);
         });
 
-        (notation.accidentalMarks||[]).forEach(accidentalMark => {
+        (notation.accidentalMarks || []).forEach(accidentalMark => {
             // <!ELEMENT accidental-mark (#PCDATA)>
             // <!ATTLIST accidental-mark
             //     %print-style;
@@ -27529,7 +27529,7 @@ function noteToXML(note: Note) {
             }>${pcdata}</accidental-mark>`);
         });
 
-        (notation.otherNotations||[]).forEach(otherNotation => {
+        (notation.otherNotations || []).forEach(otherNotation => {
             // <!ELEMENT other-notation (#PCDATA)>
             // <!ATTLIST other-notation
             //     type %start-stop-single; #REQUIRED
@@ -27552,7 +27552,7 @@ function noteToXML(note: Note) {
             .map(n => "  " + n).join("\n")}\n</notations>`);
     });
 
-    (note.lyrics||[]).forEach(lyric => {
+    (note.lyrics || []).forEach(lyric => {
         // <!ELEMENT lyric
         //     ((((syllabic?, text),
         //        (elision?, syllabic?, text)*, extend?) |
@@ -27578,7 +27578,7 @@ function noteToXML(note: Note) {
             printObjectToXML(lyric);
 
         let lyricChildren: string[] = [];
-        (lyric.lyricParts||[]).forEach(part => {
+        (lyric.lyricParts || []).forEach(part => {
             // relies on part._class as set in musicxml-interfaces
             switch(part._class) {
                 case "Syllabic":
@@ -27788,7 +27788,7 @@ function barlineToXML(barline: Barline): string {
     if (defined(barline.coda)) {
         children.push(codaToXML(barline.coda));
     }
-    (barline.fermatas||[]).forEach(fermata => {
+    (barline.fermatas || []).forEach(fermata => {
         children.push(fermataToXML(fermata));
     });
     if (defined(barline.ending)) {
@@ -27817,17 +27817,17 @@ function directionTypeToXML(d: DirectionType) {
     // <!ELEMENT direction-type (rehearsal+ | segno+ | words+ |
     let children: string[] = [];
 
-    (d.rehearsals||[]).forEach(rehearsal => {
+    (d.rehearsals || []).forEach(rehearsal => {
         children.push(rehearsalToXML(rehearsal));
     });
-    (d.segnos||[]).forEach(segno => {
+    (d.segnos || []).forEach(segno => {
         children.push(segnoToXML(segno));
     });
-    (d.words||[]).forEach(words => {
+    (d.words || []).forEach(words => {
         children.push(wordsToXML(words));
     });
     //     coda+ | wedge | dynamics+ | dashes | bracket | pedal |
-    (d.codas||[]).forEach(coda => {
+    (d.codas || []).forEach(coda => {
         children.push(codaToXML(coda));
     });
     if (defined(d.wedge)) {
@@ -27881,7 +27881,7 @@ function directionTypeToXML(d: DirectionType) {
     if (defined(d.accordionRegistration)) {
         children.push(accordionRegistrationToXML(d.accordionRegistration));
     }
-    (d.percussions||[]).forEach(p => {
+    (d.percussions || []).forEach(p => {
         children.push(percussionToXML(p));
     });
     //     other-direction)>
@@ -27976,7 +27976,7 @@ function dynamicsToXML(dynamics: Dynamics): string {
     // <!ELEMENT other-dynamics (#PCDATA)>
     let oChildren: string[] = [];
 
-    Object.keys(dynamics||{}).forEach(key => {
+    Object.keys(dynamics ||{}).forEach(key => {
         let subDynamic = dynamics[key];
         if (!!subDynamic && ["p", "pp", "ppp", "pppp", "ppppp", "pppppp",
                 "f",  "ff",  "fff",  "ffff",  "fffff",  "ffffff",  "mp",  "mf",  "sf", 
@@ -28102,7 +28102,7 @@ function metronomeToXML(metronome: Metronome): string {
         // <!ELEMENT beat-unit (#PCDATA)>
         children.push(xml `<beat-unit>${metronome.beatUnit}</beat-unit>`);
     }
-    (metronome.beatUnitDots||[]).forEach(() => {
+    (metronome.beatUnitDots || []).forEach(() => {
         // <!ELEMENT beat-unit-dot EMPTY>
         children.push(xml `<beat-unit-dot />`);
     });
@@ -28119,7 +28119,7 @@ function metronomeToXML(metronome: Metronome): string {
             // <!ELEMENT beat-unit (#PCDATA)>
             children.push(xml `<beat-unit>${metronome.beatUnitChange}</beat-unit>`);
         }
-        (metronome.beatUnitDotsChange||[]).forEach(() => {
+        (metronome.beatUnitDotsChange || []).forEach(() => {
             // <!ELEMENT beat-unit-dot EMPTY>
             children.push(xml `<beat-unit-dot />`);
         });
@@ -28127,7 +28127,7 @@ function metronomeToXML(metronome: Metronome): string {
 
     // TODO musicxml-interfaces second beat-unit!!
 
-    (metronome.metronomeNotes||[]).forEach(note => {
+    (metronome.metronomeNotes || []).forEach(note => {
         // <!ELEMENT metronome-note
         //     (metronome-type, metronome-dot*,
         //      metronome-beam*, metronome-tuplet?)>
@@ -28137,11 +28137,11 @@ function metronomeToXML(metronome: Metronome): string {
             // <!ELEMENT metronome-type (#PCDATA)>
             oChildren.push(xml `<metronome-type>${note.metronomeType}</metronome-type>`);
         }
-        (note.metronomeDots||[]).forEach(() => {
+        (note.metronomeDots || []).forEach(() => {
             // <!ELEMENT metronome-dot EMPTY>
             oChildren.push(xml `<metronome-dot />`);
         });
-        (note.metronomeBeams||[]).forEach(beam => {
+        (note.metronomeBeams || []).forEach(beam => {
             // <!ELEMENT metronome-beam (#PCDATA)>
             // <!ATTLIST metronome-beam
             //     number %beam-level; "1"
@@ -28197,7 +28197,7 @@ function metronomeTupletToXML(metronomeTuplet: MetronomeTuplet): string {
         children.push(xml `<normal-type>${
                 metronomeTuplet.normalType}</normal-type>`);
     }
-    (metronomeTuplet.normalDots||[]).forEach(() => {
+    (metronomeTuplet.normalDots || []).forEach(() => {
         children.push(xml `<normal-dot />`);
     });
     return dangerous `<metronome-tuplet${attribs}>\n${children.join("\n").split("\n")
@@ -28243,7 +28243,7 @@ function harpPedalsToXML(harpPedals: HarpPedals): string {
     // <!ELEMENT pedal-step (#PCDATA)>
     // <!ELEMENT pedal-alter (#PCDATA)>
     let children: string[] = [];
-    (harpPedals.pedalTunings||[]).forEach(tuning => {
+    (harpPedals.pedalTunings || []).forEach(tuning => {
         let nChildren: string[] = [];
         if (tuning.pedalStep) {
             nChildren.push(xml `<pedal-step>${tuning.pedalStep}</pedal-step>`);
@@ -28303,7 +28303,7 @@ function scordaturaToXML(scordatura: Scordatura): string {
     //     string CDATA #REQUIRED
     // >
     let children: string[] = [];
-    (scordatura.accords||[]).forEach(accord => {
+    (scordatura.accords || []).forEach(accord => {
         let oChildren = tuningStepAlterOctaveToXML(accord);
         let oAttribs = xml ` string="${accord.string}"`;
         children.push(dangerous `<accord${oAttribs}>\n${oChildren.join("\n").split("\n")
@@ -28370,7 +28370,7 @@ function accordionRegistrationToXML(accordionRegistration: AccordionRegistration
     }
     if (defined(accordionRegistration.accordionMiddle)) {
         children.push(xml `<accordion-middle>${
-            accordionRegistration.accordionMiddle||""}</accordion-middle>`);
+            accordionRegistration.accordionMiddle ||""}</accordion-middle>`);
     }
     if (defined(accordionRegistration.accordionLow)) {
         children.push(xml `<accordion-low />`);
@@ -28433,7 +28433,7 @@ function percussionToXML(percussion: Percussion): string {
         // <!ATTLIST beater
         //     tip %tip-direction; #IMPLIED
         // >
-        let pcdata = xml `${percussion.beater.data||""}`;
+        let pcdata = xml `${percussion.beater.data ||""}`;
         let oAttribs = "";
         if (defined(percussion.beater.tip)) {
             oAttribs += xml ` tip="${tipDirectionToXML[percussion.beater.tip]}"`;
@@ -28740,7 +28740,7 @@ function keyToXML(key: Key): string {
         children.push(xml `<mode>${key.mode}</mode>`);
     }
 
-    (key.keySteps||[]).forEach((keyStep, idx) => {
+    (key.keySteps || []).forEach((keyStep, idx) => {
         // <!ELEMENT key-step (#PCDATA)>
         // <!ELEMENT key-alter (#PCDATA)>
         // <!ELEMENT key-accidental (#PCDATA)>
@@ -28751,7 +28751,7 @@ function keyToXML(key: Key): string {
         }
     });
 
-    (key.keyOctaves||[]).forEach(keyOctave => {
+    (key.keyOctaves || []).forEach(keyOctave => {
         children.push(keyOctaveToXML(keyOctave));
     });
 
@@ -28817,7 +28817,7 @@ function timeToXML(time: Time): string {
         children.push(xml `<senza-misura />`);
     } else {
         // TODO musicxml-interfaces: check this
-        (time.beats||[]).forEach((beats, idx) => {
+        (time.beats || []).forEach((beats, idx) => {
             // <!ELEMENT beats (#PCDATA)>
             // <!ELEMENT beat-type (#PCDATA)>
             children.push(xml `<beats>${beats}</beats>`);
@@ -28881,7 +28881,7 @@ function interchangeableToXML(interchangeable: Interchangeable): string {
         timeSeparatorToXML(interchangeable);
 
     let children: string[] = [];
-    (interchangeable.beats||[]).forEach((beats, idx) => {
+    (interchangeable.beats || []).forEach((beats, idx) => {
         // <!ELEMENT beats (#PCDATA)>
         // <!ELEMENT beat-type (#PCDATA)>
         children.push(xml `<beats>${beats}</beats>`);
@@ -29008,7 +29008,7 @@ function staffDetailsToXML(staffDetails: StaffDetails): string {
         // <!ELEMENT staff-lines (#PCDATA)>
         children.push(xml `<staff-lines>${staffDetails.staffLines}</staff-lines>`);
     }
-    (staffDetails.staffTunings||[]).forEach(tuning => {
+    (staffDetails.staffTunings || []).forEach(tuning => {
         children.push(staffTuningToXML(tuning));
     });
     if (defined(staffDetails.capo)) {
@@ -29171,7 +29171,7 @@ function beatRepeatToXML(beatRepeat: BeatRepeat): string {
     if (defined(beatRepeat.slashType)) {
         children.push(xml `<slash-type>${beatRepeat.slashType}</slash-type>`);
     }
-    (beatRepeat.slashDots||[]).forEach(dot => {
+    (beatRepeat.slashDots || []).forEach(dot => {
         // <!ELEMENT slash-dot EMPTY>
         children.push(xml `<slash-dot />`);
     });
@@ -29197,7 +29197,7 @@ function slashElToXML(slash: Slash): string {
     if (defined(slash.slashType)) {
         children.push(xml `<slash-type>${slash.slashType}</slash-type>`);
     }
-    (slash.slashDots||[]).forEach(dot => {
+    (slash.slashDots || []).forEach(dot => {
         // <!ELEMENT slash-dot EMPTY>
         children.push(xml `<slash-dot />`);
     });

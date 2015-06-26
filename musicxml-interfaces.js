@@ -5190,7 +5190,7 @@ function xmlToAttributes(node) {
         }
         if (ch.nodeName === "measure-style") {
             var dataMeasureStyle = xmlToMeasureStyle(ch);
-            ret.measureStyle = dataMeasureStyle;
+            ret.measureStyles = (ret.measureStyles || []).concat(dataMeasureStyle);
         }
         if (ch.nodeName === "time") {
             var dataTimes = xmlToTime(ch);
@@ -20153,9 +20153,9 @@ function attributesToXML(attributes) {
     (attributes.directives || []).forEach(function (directive) {
         children.push(directiveToXML(directive));
     });
-    if (defined(attributes.measureStyle)) {
-        children.push(measureStyleToXML(attributes.measureStyle));
-    }
+    (attributes.measureStyles || []).forEach(function (measureStyle) {
+        children.push(measureStyleToXML(measureStyle));
+    });
     return (_d = ["<attributes>\n", "\n</attributes>"], _d.raw = ["<attributes>\\n", "\\n</attributes>"], dangerous(_d, children.join("\n").split("\n")
         .map(function (n) { return "  " + n; }).join("\n")));
     var _a, _b, _c, _d;

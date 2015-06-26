@@ -2174,7 +2174,7 @@ declare module "musicxml-interfaces" {
         divisions?: number;
         partSymbol?: PartSymbol;
         clefs?: Clef[];
-        measureStyle?: MeasureStyle;
+        measureStyles?: MeasureStyle[];
         times?: Time[];
         staffDetails?: StaffDetails[];
         transposes?: Transpose[];
