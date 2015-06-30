@@ -79,6 +79,27 @@ export module parse {
     }
 
     /**
+     * Converts a MusicXML <time /> into JSON.
+     */
+    export function time(str: string) {
+        return xmlToTime(xmlToDoc(str).documentElement);
+    }
+
+    /**
+     * Converts a MusicXML <key /> into JSON.
+     */
+    export function key(str: string) {
+        return xmlToKey(xmlToDoc(str).documentElement);
+    }
+
+    /**
+     * Converts a MusicXML <part-symbol /> into JSON.
+     */
+    export function partSymbol(str: string) {
+        return xmlToPartSymbol(xmlToDoc(str).documentElement);
+    }
+
+    /**
      * Converts a MusicXML <backup /> into JSON.
      */
     export function backup(str: string) {
@@ -170,6 +191,9 @@ export module serialize {
     export let measure = <(measure: Measure) => string> measureToXML;
     export let note = <(note: Note) => string> noteToXML;
     export let clef = <(clef: Clef) => string> clefToXML;
+    export let time = <(time: Time) => string> timeToXML;
+    export let key = <(key: Key) => string> keyToXML;
+    export let partSymbol = <(partSymbol: PartSymbol) => string> partSymbolToXML;
     export let backup = <(backup: Backup) => string> backupToXML;
     export let harmony = <(harmony: Harmony) => string> harmonyToXML;
     export let forward = <(forward: Forward) => string> forwardToXML;
@@ -6281,6 +6305,7 @@ export interface Key extends PrintStyle, PrintObject {
     keyAlters: string[];
     keyAccidentals: string[];
     mode?: string;
+    _class?: string;
 }
 
 function xmlToKey(node: Node) {
@@ -6388,6 +6413,7 @@ function xmlToKey(node: Node) {
     if (!ret.keyAccidentals) {
         ret.keyAccidentals = [];
     }
+    ret._class = "Key";
     return ret;
 }
 
@@ -6432,6 +6458,7 @@ export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintO
     beats: string[];
     beatTypes: number[];
     senzaMisura?: string;
+    _class?: string;
 }
 
 function xmlToTime(node: Node) {
@@ -6554,6 +6581,7 @@ function xmlToTime(node: Node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
+    ret._class = "Time";
     return ret;
 }
 
@@ -6689,6 +6717,7 @@ export interface PartSymbol extends Position, Color {
     topStaff?: number;
     type: PartSymbolType;
     bottomStaff?: number;
+    _class?: string;
 }
 
 function xmlToPartSymbol(node: Node) {
@@ -6745,6 +6774,7 @@ function xmlToPartSymbol(node: Node) {
     if (!foundBottomStaff) {
         ret.bottomStaff = -1;
     }
+    ret._class = "PartSymbol";
     return ret;
 }
 

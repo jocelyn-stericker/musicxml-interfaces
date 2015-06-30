@@ -77,6 +77,27 @@ var parse;
     }
     parse.clef = clef;
     /**
+     * Converts a MusicXML <time /> into JSON.
+     */
+    function time(str) {
+        return xmlToTime(xmlToDoc(str).documentElement);
+    }
+    parse.time = time;
+    /**
+     * Converts a MusicXML <key /> into JSON.
+     */
+    function key(str) {
+        return xmlToKey(xmlToDoc(str).documentElement);
+    }
+    parse.key = key;
+    /**
+     * Converts a MusicXML <part-symbol /> into JSON.
+     */
+    function partSymbol(str) {
+        return xmlToPartSymbol(xmlToDoc(str).documentElement);
+    }
+    parse.partSymbol = partSymbol;
+    /**
      * Converts a MusicXML <backup /> into JSON.
      */
     function backup(str) {
@@ -162,6 +183,9 @@ var serialize;
     serialize.measure = measureToXML;
     serialize.note = noteToXML;
     serialize.clef = clefToXML;
+    serialize.time = timeToXML;
+    serialize.key = keyToXML;
+    serialize.partSymbol = partSymbolToXML;
     serialize.backup = backupToXML;
     serialize.harmony = harmonyToXML;
     serialize.forward = forwardToXML;
@@ -4388,6 +4412,7 @@ function xmlToKey(node) {
     if (!ret.keyAccidentals) {
         ret.keyAccidentals = [];
     }
+    ret._class = "Key";
     return ret;
 }
 function xmlToTime(node) {
@@ -4510,6 +4535,7 @@ function xmlToTime(node) {
     if (!foundPrintObject) {
         ret.printObject = true;
     }
+    ret._class = "Time";
     return ret;
 }
 function xmlToInterchangeable(node) {
@@ -4629,6 +4655,7 @@ function xmlToPartSymbol(node) {
     if (!foundBottomStaff) {
         ret.bottomStaff = -1;
     }
+    ret._class = "PartSymbol";
     return ret;
 }
 function xmlToClef(node) {

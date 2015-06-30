@@ -28,6 +28,18 @@ declare module "musicxml-interfaces" {
          */
         function clef(str: string): Clef;
         /**
+         * Converts a MusicXML <time /> into JSON.
+         */
+        function time(str: string): Time;
+        /**
+         * Converts a MusicXML <key /> into JSON.
+         */
+        function key(str: string): Key;
+        /**
+         * Converts a MusicXML <part-symbol /> into JSON.
+         */
+        function partSymbol(str: string): PartSymbol;
+        /**
          * Converts a MusicXML <backup /> into JSON.
          */
         function backup(str: string): Backup;
@@ -74,6 +86,9 @@ declare module "musicxml-interfaces" {
         let measure: (measure: Measure) => string;
         let note: (note: Note) => string;
         let clef: (clef: Clef) => string;
+        let time: (time: Time) => string;
+        let key: (key: Key) => string;
+        let partSymbol: (partSymbol: PartSymbol) => string;
         let backup: (backup: Backup) => string;
         let harmony: (harmony: Harmony) => string;
         let forward: (forward: Forward) => string;
@@ -1800,6 +1815,7 @@ declare module "musicxml-interfaces" {
         keyAlters: string[];
         keyAccidentals: string[];
         mode?: string;
+        _class?: string;
     }
     /**
      * Time signatures are represented by two elements. The
@@ -1842,6 +1858,7 @@ declare module "musicxml-interfaces" {
         beats: string[];
         beatTypes: number[];
         senzaMisura?: string;
+        _class?: string;
     }
     /**
      * Time signatures are represented by two elements. The
@@ -1908,6 +1925,7 @@ declare module "musicxml-interfaces" {
         topStaff?: number;
         type: PartSymbolType;
         bottomStaff?: number;
+        _class?: string;
     }
     /**
      * Clefs are represented by the sign, line, and
