@@ -284,6 +284,223 @@ function toCamelCase(input) {
         return group1.toUpperCase();
     });
 }
+/**
+ * The start-stop entity is used for musical elements that
+ * can either start or stop, such as slurs, tuplets, and
+ * wedges.
+ *
+ * See also start-stop-continue and start-stop-single.
+ *
+ * The values of start and stop refer to how an
+ * element appears in musical score order, not in MusicXML
+ * document order. An element with a stop attribute may
+ * precede the corresponding element with a start attribute
+ * within a MusicXML document. This is particularly common
+ * in multi-staff music. For example, the stopping point for
+ * a slur may appear in staff 1 before the starting point for
+ * the slur appears in staff 2 later in the document.
+ */
+(function (StartStop) {
+    StartStop[StartStop["Start"] = 0] = "Start";
+    StartStop[StartStop["Stop"] = 1] = "Stop";
+})(exports.StartStop || (exports.StartStop = {}));
+var StartStop = exports.StartStop;
+/**
+ * The start-stop-continue (as opposed to the start-stop entity)
+ * entity is used when there is a need to refer to an
+ * intermediate point in the symbol, as for complex slurs
+ * or for specifying formatting of symbols across system
+ * breaks.
+ *
+ * The values of start, stop, and continue refer to how an
+ * element appears in musical score order, not in MusicXML
+ * document order. An element with a stop attribute may
+ * precede the corresponding element with a start attribute
+ * within a MusicXML document. This is particularly common
+ * in multi-staff music. For example, the stopping point for
+ * a slur may appear in staff 1 before the starting point for
+ * the slur appears in staff 2 later in the document.
+ */
+(function (StartStopContinue) {
+    StartStopContinue[StartStopContinue["Start"] = 0] = "Start";
+    StartStopContinue[StartStopContinue["Stop"] = 1] = "Stop";
+    StartStopContinue[StartStopContinue["Continue"] = 2] = "Continue";
+})(exports.StartStopContinue || (exports.StartStopContinue = {}));
+var StartStopContinue = exports.StartStopContinue;
+/**
+ * The start-stop-single entity (as opposed to start-stop
+ * and start-stop-continue) is used when the same
+ * element is used for multi-note and single-note notations,
+ * as for tremolos.
+ *
+ * The values of start and stop refer to how an
+ * element appears in musical score order, not in MusicXML
+ * document order. An element with a stop attribute may
+ * precede the corresponding element with a start attribute
+ * within a MusicXML document. This is particularly common
+ * in multi-staff music. For example, the stopping point for
+ * a slur may appear in staff 1 before the starting point for
+ * the slur appears in staff 2 later in the document.
+ */
+(function (StartStopSingle) {
+    StartStopSingle[StartStopSingle["Single"] = 3] = "Single";
+    StartStopSingle[StartStopSingle["Start"] = 0] = "Start";
+    StartStopSingle[StartStopSingle["Stop"] = 1] = "Stop";
+})(exports.StartStopSingle || (exports.StartStopSingle = {}));
+var StartStopSingle = exports.StartStopSingle;
+/**
+ * The symbol-size entity is used to indicate full vs.
+ * cue-sized vs. oversized symbols. The large value
+ * for oversized symbols was added in version 1.1.
+ */
+(function (SymbolSize) {
+    /**
+     * Context-dependant.
+     */
+    SymbolSize[SymbolSize["Unspecified"] = 0] = "Unspecified";
+    SymbolSize[SymbolSize["Full"] = 1] = "Full";
+    SymbolSize[SymbolSize["Cue"] = 2] = "Cue";
+    /**
+     * Oversized.
+     */
+    SymbolSize[SymbolSize["Large"] = 3] = "Large";
+})(exports.SymbolSize || (exports.SymbolSize = {}));
+var SymbolSize = exports.SymbolSize;
+/**
+ * The above-below type is used to indicate whether one
+ * element appears above or below another element.
+ */
+(function (AboveBelow) {
+    AboveBelow[AboveBelow["Above"] = 1] = "Above";
+    AboveBelow[AboveBelow["Below"] = 2] = "Below";
+    AboveBelow[AboveBelow["Unspecified"] = 0] = "Unspecified";
+})(exports.AboveBelow || (exports.AboveBelow = {}));
+var AboveBelow = exports.AboveBelow;
+/**
+ * Specifies orientation.
+ */
+(function (OverUnder) {
+    OverUnder[OverUnder["Over"] = 1] = "Over";
+    OverUnder[OverUnder["Under"] = 2] = "Under";
+    OverUnder[OverUnder["Unspecified"] = 0] = "Unspecified";
+})(exports.OverUnder || (exports.OverUnder = {}));
+var OverUnder = exports.OverUnder;
+/**
+ * The up-down entity is used for arrow direction,
+ * indicating which way the tip is pointing.
+ */
+(function (UpDown) {
+    UpDown[UpDown["Down"] = 1] = "Down";
+    UpDown[UpDown["Up"] = 0] = "Up";
+})(exports.UpDown || (exports.UpDown = {}));
+var UpDown = exports.UpDown;
+/**
+ * The top-bottom entity is used to indicate the top or
+ * bottom part of a vertical shape like non-arpeggiate.
+ */
+(function (TopBottom) {
+    TopBottom[TopBottom["Top"] = 0] = "Top";
+    TopBottom[TopBottom["Bottom"] = 1] = "Bottom";
+})(exports.TopBottom || (exports.TopBottom = {}));
+var TopBottom = exports.TopBottom;
+/**
+ * The left-right entity is used to indicate whether one
+ * element appears to the left or the right of another
+ * element.
+ */
+(function (LeftRight) {
+    LeftRight[LeftRight["Right"] = 1] = "Right";
+    LeftRight[LeftRight["Left"] = 0] = "Left";
+})(exports.LeftRight || (exports.LeftRight = {}));
+var LeftRight = exports.LeftRight;
+/**
+ * The enclosure-shape entity describes the shape and
+ * presence / absence of an enclosure around text. A bracket
+ * enclosure is similar to a rectangle with the bottom line
+ * missing, as is common in jazz notation.
+ */
+(function (EnclosureShape) {
+    EnclosureShape[EnclosureShape["Circle"] = 3] = "Circle";
+    EnclosureShape[EnclosureShape["Bracket"] = 4] = "Bracket";
+    EnclosureShape[EnclosureShape["Triangle"] = 5] = "Triangle";
+    EnclosureShape[EnclosureShape["Diamond"] = 6] = "Diamond";
+    EnclosureShape[EnclosureShape["None"] = 7] = "None";
+    EnclosureShape[EnclosureShape["Square"] = 1] = "Square";
+    EnclosureShape[EnclosureShape["Oval"] = 2] = "Oval";
+    EnclosureShape[EnclosureShape["Rectangle"] = 0] = "Rectangle";
+})(exports.EnclosureShape || (exports.EnclosureShape = {}));
+var EnclosureShape = exports.EnclosureShape;
+(function (NormalItalic) {
+    NormalItalic[NormalItalic["Italic"] = 1] = "Italic";
+    NormalItalic[NormalItalic["Normal"] = 0] = "Normal";
+})(exports.NormalItalic || (exports.NormalItalic = {}));
+var NormalItalic = exports.NormalItalic;
+(function (NormalBold) {
+    NormalBold[NormalBold["Bold"] = 2] = "Bold";
+    NormalBold[NormalBold["Normal"] = 0] = "Normal";
+})(exports.NormalBold || (exports.NormalBold = {}));
+var NormalBold = exports.NormalBold;
+(function (LeftCenterRight) {
+    LeftCenterRight[LeftCenterRight["Right"] = 1] = "Right";
+    LeftCenterRight[LeftCenterRight["Center"] = 2] = "Center";
+    LeftCenterRight[LeftCenterRight["Left"] = 0] = "Left";
+})(exports.LeftCenterRight || (exports.LeftCenterRight = {}));
+var LeftCenterRight = exports.LeftCenterRight;
+(function (TopMiddleBottomBaseline) {
+    TopMiddleBottomBaseline[TopMiddleBottomBaseline["Top"] = 0] = "Top";
+    TopMiddleBottomBaseline[TopMiddleBottomBaseline["Middle"] = 1] = "Middle";
+    TopMiddleBottomBaseline[TopMiddleBottomBaseline["Baseline"] = 3] = "Baseline";
+    TopMiddleBottomBaseline[TopMiddleBottomBaseline["Bottom"] = 2] = "Bottom";
+})(exports.TopMiddleBottomBaseline || (exports.TopMiddleBottomBaseline = {}));
+var TopMiddleBottomBaseline = exports.TopMiddleBottomBaseline;
+(function (DirectionMode) {
+    DirectionMode[DirectionMode["Lro"] = 2] = "Lro";
+    DirectionMode[DirectionMode["Rlo"] = 3] = "Rlo";
+    DirectionMode[DirectionMode["Ltr"] = 0] = "Ltr";
+    DirectionMode[DirectionMode["Rtl"] = 1] = "Rtl";
+})(exports.DirectionMode || (exports.DirectionMode = {}));
+var DirectionMode = exports.DirectionMode;
+(function (StraightCurved) {
+    StraightCurved[StraightCurved["Curved"] = 1] = "Curved";
+    StraightCurved[StraightCurved["Straight"] = 0] = "Straight";
+})(exports.StraightCurved || (exports.StraightCurved = {}));
+var StraightCurved = exports.StraightCurved;
+(function (SolidDashedDottedWavy) {
+    SolidDashedDottedWavy[SolidDashedDottedWavy["Dashed"] = 1] = "Dashed";
+    SolidDashedDottedWavy[SolidDashedDottedWavy["Wavy"] = 3] = "Wavy";
+    SolidDashedDottedWavy[SolidDashedDottedWavy["Dotted"] = 2] = "Dotted";
+    SolidDashedDottedWavy[SolidDashedDottedWavy["Solid"] = 0] = "Solid";
+})(exports.SolidDashedDottedWavy || (exports.SolidDashedDottedWavy = {}));
+var SolidDashedDottedWavy = exports.SolidDashedDottedWavy;
+(function (NormalAngledSquare) {
+    NormalAngledSquare[NormalAngledSquare["Angled"] = 1] = "Angled";
+    NormalAngledSquare[NormalAngledSquare["Square"] = 2] = "Square";
+    NormalAngledSquare[NormalAngledSquare["Normal"] = 0] = "Normal";
+})(exports.NormalAngledSquare || (exports.NormalAngledSquare = {}));
+var NormalAngledSquare = exports.NormalAngledSquare;
+(function (UprightInverted) {
+    UprightInverted[UprightInverted["Upright"] = 0] = "Upright";
+    UprightInverted[UprightInverted["Inverted"] = 1] = "Inverted";
+})(exports.UprightInverted || (exports.UprightInverted = {}));
+var UprightInverted = exports.UprightInverted;
+(function (UpperMainBelow) {
+    UpperMainBelow[UpperMainBelow["Main"] = 1] = "Main";
+    UpperMainBelow[UpperMainBelow["Below"] = 2] = "Below";
+    UpperMainBelow[UpperMainBelow["Upper"] = 0] = "Upper";
+})(exports.UpperMainBelow || (exports.UpperMainBelow = {}));
+var UpperMainBelow = exports.UpperMainBelow;
+(function (WholeHalfUnison) {
+    WholeHalfUnison[WholeHalfUnison["Unison"] = 2] = "Unison";
+    WholeHalfUnison[WholeHalfUnison["Whole"] = 0] = "Whole";
+    WholeHalfUnison[WholeHalfUnison["Half"] = 1] = "Half";
+})(exports.WholeHalfUnison || (exports.WholeHalfUnison = {}));
+var WholeHalfUnison = exports.WholeHalfUnison;
+(function (WholeHalfNone) {
+    WholeHalfNone[WholeHalfNone["None"] = 3] = "None";
+    WholeHalfNone[WholeHalfNone["Whole"] = 0] = "Whole";
+    WholeHalfNone[WholeHalfNone["Half"] = 1] = "Half";
+})(exports.WholeHalfNone || (exports.WholeHalfNone = {}));
+var WholeHalfNone = exports.WholeHalfNone;
 function xmlToEncodingDate(node) {
     var text = getString(node, true);
     if (text.length < 10) {
@@ -407,7 +624,7 @@ function xmlToLyric(node) {
             foundNumber_ = true;
         }
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -432,7 +649,7 @@ function xmlToLyric(node) {
             foundRelativeX = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -457,7 +674,7 @@ function xmlToLyric(node) {
         ret.number = 1;
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundDefaultX) {
         ret.defaultX = NaN;
@@ -472,7 +689,7 @@ function xmlToLyric(node) {
         ret.relativeX = 0;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -492,10 +709,10 @@ function getStartStop(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "start") {
-        return 0 /* Start */;
+        return StartStop.Start;
     }
     if (s == "stop") {
-        return 1 /* Stop */;
+        return StartStop.Stop;
     }
     return fallbackVal;
 }
@@ -506,13 +723,13 @@ function getStartStopContinue(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "start") {
-        return 0 /* Start */;
+        return StartStopContinue.Start;
     }
     if (s == "stop") {
-        return 1 /* Stop */;
+        return StartStopContinue.Stop;
     }
     if (s == "continue") {
-        return 2 /* Continue */;
+        return StartStopContinue.Continue;
     }
     return fallbackVal;
 }
@@ -523,13 +740,13 @@ function getStartStopSingle(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "single") {
-        return 3 /* Single */;
+        return StartStopSingle.Single;
     }
     if (s == "start") {
-        return 0 /* Start */;
+        return StartStopSingle.Start;
     }
     if (s == "stop") {
-        return 1 /* Stop */;
+        return StartStopSingle.Stop;
     }
     return fallbackVal;
 }
@@ -540,16 +757,16 @@ function getSymbolSize(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "unspecified") {
-        return 0 /* Unspecified */;
+        return SymbolSize.Unspecified;
     }
     if (s == "full") {
-        return 1 /* Full */;
+        return SymbolSize.Full;
     }
     if (s == "cue") {
-        return 2 /* Cue */;
+        return SymbolSize.Cue;
     }
     if (s == "large") {
-        return 3 /* Large */;
+        return SymbolSize.Large;
     }
     return fallbackVal;
 }
@@ -560,13 +777,13 @@ function getAboveBelow(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "above") {
-        return 1 /* Above */;
+        return AboveBelow.Above;
     }
     if (s == "below") {
-        return 2 /* Below */;
+        return AboveBelow.Below;
     }
     if (s == "unspecified") {
-        return 0 /* Unspecified */;
+        return AboveBelow.Unspecified;
     }
     return fallbackVal;
 }
@@ -577,10 +794,10 @@ function getUpDown(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "down") {
-        return 1 /* Down */;
+        return UpDown.Down;
     }
     if (s == "up") {
-        return 0 /* Up */;
+        return UpDown.Up;
     }
     return fallbackVal;
 }
@@ -591,13 +808,13 @@ function getOverUnder(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "over") {
-        return 1 /* Over */;
+        return OverUnder.Over;
     }
     if (s == "under") {
-        return 2 /* Under */;
+        return OverUnder.Under;
     }
     if (s == "unspecified") {
-        return 0 /* Unspecified */;
+        return OverUnder.Unspecified;
     }
     return fallbackVal;
 }
@@ -608,10 +825,10 @@ function getTopBottom(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "top") {
-        return 0 /* Top */;
+        return TopBottom.Top;
     }
     if (s == "bottom") {
-        return 1 /* Bottom */;
+        return TopBottom.Bottom;
     }
     return fallbackVal;
 }
@@ -622,10 +839,10 @@ function getLeftRight(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "right") {
-        return 1 /* Right */;
+        return LeftRight.Right;
     }
     if (s == "left") {
-        return 0 /* Left */;
+        return LeftRight.Left;
     }
     return fallbackVal;
 }
@@ -656,28 +873,28 @@ function getEnclosureShape(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "circle") {
-        return 3 /* Circle */;
+        return EnclosureShape.Circle;
     }
     if (s == "bracket") {
-        return 4 /* Bracket */;
+        return EnclosureShape.Bracket;
     }
     if (s == "triangle") {
-        return 5 /* Triangle */;
+        return EnclosureShape.Triangle;
     }
     if (s == "diamond") {
-        return 6 /* Diamond */;
+        return EnclosureShape.Diamond;
     }
     if (s == "none") {
-        return 7 /* None */;
+        return EnclosureShape.None;
     }
     if (s == "square") {
-        return 1 /* Square */;
+        return EnclosureShape.Square;
     }
     if (s == "oval") {
-        return 2 /* Oval */;
+        return EnclosureShape.Oval;
     }
     if (s == "rectangle") {
-        return 0 /* Rectangle */;
+        return EnclosureShape.Rectangle;
     }
     return fallbackVal;
 }
@@ -688,10 +905,10 @@ function getNormalItalic(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "italic") {
-        return 1 /* Italic */;
+        return NormalItalic.Italic;
     }
     if (s == "normal") {
-        return 0 /* Normal */;
+        return NormalItalic.Normal;
     }
     return fallbackVal;
 }
@@ -702,10 +919,10 @@ function getNormalBold(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "bold") {
-        return 2 /* Bold */;
+        return NormalBold.Bold;
     }
     if (s == "normal") {
-        return 0 /* Normal */;
+        return NormalBold.Normal;
     }
     return fallbackVal;
 }
@@ -779,13 +996,13 @@ function xmlToPlacement(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -846,13 +1063,13 @@ function xmlToOrientation(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "orientation") {
-            var dataOrientation = getOverUnder(ch2, 0 /* Unspecified */);
+            var dataOrientation = getOverUnder(ch2, OverUnder.Unspecified);
             ret.orientation = dataOrientation;
             foundOrientation = true;
         }
     }
     if (!foundOrientation) {
-        ret.orientation = 0 /* Unspecified */;
+        ret.orientation = OverUnder.Unspecified;
     }
     return ret;
 }
@@ -870,12 +1087,12 @@ function xmlToFont(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -885,10 +1102,10 @@ function xmlToFont(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     return ret;
 }
@@ -899,13 +1116,13 @@ function getLeftCenterRight(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "right") {
-        return 1 /* Right */;
+        return LeftCenterRight.Right;
     }
     if (s == "center") {
-        return 2 /* Center */;
+        return LeftCenterRight.Center;
     }
     if (s == "left") {
-        return 0 /* Left */;
+        return LeftCenterRight.Left;
     }
     return fallbackVal;
 }
@@ -916,16 +1133,16 @@ function getTopMiddleBottomBaseline(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "top") {
-        return 0 /* Top */;
+        return TopMiddleBottomBaseline.Top;
     }
     if (s == "middle") {
-        return 1 /* Middle */;
+        return TopMiddleBottomBaseline.Middle;
     }
     if (s == "baseline") {
-        return 3 /* Baseline */;
+        return TopMiddleBottomBaseline.Baseline;
     }
     if (s == "bottom") {
-        return 2 /* Bottom */;
+        return TopMiddleBottomBaseline.Bottom;
     }
     return fallbackVal;
 }
@@ -936,16 +1153,16 @@ function getDirectionMode(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "lro") {
-        return 2 /* Lro */;
+        return DirectionMode.Lro;
     }
     if (s == "rlo") {
-        return 3 /* Rlo */;
+        return DirectionMode.Rlo;
     }
     if (s == "ltr") {
-        return 0 /* Ltr */;
+        return DirectionMode.Ltr;
     }
     if (s == "rtl") {
-        return 1 /* Rtl */;
+        return DirectionMode.Rtl;
     }
     return fallbackVal;
 }
@@ -956,10 +1173,10 @@ function getStraightCurved(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "curved") {
-        return 1 /* Curved */;
+        return StraightCurved.Curved;
     }
     if (s == "straight") {
-        return 0 /* Straight */;
+        return StraightCurved.Straight;
     }
     return fallbackVal;
 }
@@ -970,16 +1187,16 @@ function getSolidDashedDottedWavy(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "dashed") {
-        return 1 /* Dashed */;
+        return SolidDashedDottedWavy.Dashed;
     }
     if (s == "wavy") {
-        return 3 /* Wavy */;
+        return SolidDashedDottedWavy.Wavy;
     }
     if (s == "dotted") {
-        return 2 /* Dotted */;
+        return SolidDashedDottedWavy.Dotted;
     }
     if (s == "solid") {
-        return 0 /* Solid */;
+        return SolidDashedDottedWavy.Solid;
     }
     return fallbackVal;
 }
@@ -990,13 +1207,13 @@ function getNormalAngledSquare(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "angled") {
-        return 1 /* Angled */;
+        return NormalAngledSquare.Angled;
     }
     if (s == "square") {
-        return 2 /* Square */;
+        return NormalAngledSquare.Square;
     }
     if (s == "normal") {
-        return 0 /* Normal */;
+        return NormalAngledSquare.Normal;
     }
     return fallbackVal;
 }
@@ -1007,10 +1224,10 @@ function getUprightInverted(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "upright") {
-        return 0 /* Upright */;
+        return UprightInverted.Upright;
     }
     if (s == "inverted") {
-        return 1 /* Inverted */;
+        return UprightInverted.Inverted;
     }
     return fallbackVal;
 }
@@ -1021,13 +1238,13 @@ function getUpperMainBelow(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "main") {
-        return 1 /* Main */;
+        return UpperMainBelow.Main;
     }
     if (s == "below") {
-        return 2 /* Below */;
+        return UpperMainBelow.Below;
     }
     if (s == "upper") {
-        return 0 /* Upper */;
+        return UpperMainBelow.Upper;
     }
     return fallbackVal;
 }
@@ -1038,13 +1255,13 @@ function getWholeHalfUnison(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "unison") {
-        return 2 /* Unison */;
+        return WholeHalfUnison.Unison;
     }
     if (s == "whole") {
-        return 0 /* Whole */;
+        return WholeHalfUnison.Whole;
     }
     if (s == "half") {
-        return 1 /* Half */;
+        return WholeHalfUnison.Half;
     }
     return fallbackVal;
 }
@@ -1055,13 +1272,13 @@ function getWholeHalfNone(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 3 /* None */;
+        return WholeHalfNone.None;
     }
     if (s == "whole") {
-        return 0 /* Whole */;
+        return WholeHalfNone.Whole;
     }
     if (s == "half") {
-        return 1 /* Half */;
+        return WholeHalfNone.Half;
     }
     return fallbackVal;
 }
@@ -1130,13 +1347,13 @@ function xmlToJustify(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     return ret;
 }
@@ -1149,13 +1366,13 @@ function xmlToHalign(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     return ret;
 }
@@ -1168,13 +1385,13 @@ function xmlToValign(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -1187,13 +1404,13 @@ function xmlToValignImage(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "valign") {
-            var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
         }
     }
     if (!foundValignImage) {
-        ret.valignImage = 2 /* Bottom */;
+        ret.valignImage = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -1244,13 +1461,13 @@ function xmlToTextDirection(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     return ret;
 }
@@ -1282,13 +1499,13 @@ function xmlToEnclosure(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -1323,12 +1540,12 @@ function xmlToPrintStyle(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -1343,10 +1560,10 @@ function xmlToPrintStyle(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -1386,12 +1603,12 @@ function xmlToPrintStyleAlign(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -1405,30 +1622,30 @@ function xmlToPrintStyleAlign(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -1441,13 +1658,13 @@ function xmlToLineShape(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
-            var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
+            var dataLineShape = getStraightCurved(ch2, StraightCurved.Straight);
             ret.lineShape = dataLineShape;
             foundLineShape = true;
         }
     }
     if (!foundLineShape) {
-        ret.lineShape = 0 /* Straight */;
+        ret.lineShape = StraightCurved.Straight;
     }
     return ret;
 }
@@ -1539,7 +1756,7 @@ function xmlToTextFormatting(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -1564,12 +1781,12 @@ function xmlToTextFormatting(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -1583,12 +1800,12 @@ function xmlToTextFormatting(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -1623,33 +1840,33 @@ function xmlToTextFormatting(node) {
             foundLineHeight = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -1670,10 +1887,10 @@ function xmlToTextFormatting(node) {
         ret.lineHeight = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -1693,7 +1910,7 @@ function xmlToLevelDisplay(node) {
             foundBracket = true;
         }
         if (ch2.name === "size") {
-            var dataSize = getSymbolSize(ch2, 0 /* Unspecified */);
+            var dataSize = getSymbolSize(ch2, SymbolSize.Unspecified);
             ret.size = dataSize;
             foundSize = true;
         }
@@ -1707,7 +1924,7 @@ function xmlToLevelDisplay(node) {
         ret.bracket = false;
     }
     if (!foundSize) {
-        ret.size = 0 /* Unspecified */;
+        ret.size = SymbolSize.Unspecified;
     }
     if (!foundParentheses) {
         ret.parentheses = false;
@@ -1729,7 +1946,7 @@ function xmlToTrillSound(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -1749,12 +1966,12 @@ function xmlToTrillSound(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -1765,7 +1982,7 @@ function xmlToTrillSound(node) {
         }
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -1777,10 +1994,10 @@ function xmlToTrillSound(node) {
         ret.lastBeat = 24;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 12;
@@ -1928,7 +2145,7 @@ function xmlToFootnote(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -1953,12 +2170,12 @@ function xmlToFootnote(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -1972,12 +2189,12 @@ function xmlToFootnote(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -2012,12 +2229,12 @@ function xmlToFootnote(node) {
             foundLineHeight = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
@@ -2026,22 +2243,22 @@ function xmlToFootnote(node) {
     var dataText = getString(ch3, true);
     ret.text = dataText;
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -2062,10 +2279,10 @@ function xmlToFootnote(node) {
         ret.lineHeight = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -2086,7 +2303,7 @@ function xmlToLevel(node) {
             foundBracket = true;
         }
         if (ch2.name === "size") {
-            var dataSize = getSymbolSize(ch2, 0 /* Unspecified */);
+            var dataSize = getSymbolSize(ch2, SymbolSize.Unspecified);
             ret.size = dataSize;
             foundSize = true;
         }
@@ -2108,7 +2325,7 @@ function xmlToLevel(node) {
         ret.bracket = false;
     }
     if (!foundSize) {
-        ret.size = 0 /* Unspecified */;
+        ret.size = SymbolSize.Unspecified;
     }
     if (!foundParentheses) {
         ret.parentheses = false;
@@ -2151,12 +2368,12 @@ function xmlToFermata(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2170,28 +2387,28 @@ function xmlToFermata(node) {
             foundColor = true;
         }
         if (ch2.name === "type") {
-            var dataType = getUprightInverted(ch2, 0 /* Upright */);
+            var dataType = getUprightInverted(ch2, UprightInverted.Upright);
             ret.type = dataType;
             foundType = true;
         }
     }
     var ch3 = node;
-    var dataShape = getNormalAngledSquare(ch3, 0 /* Normal */);
+    var dataShape = getNormalAngledSquare(ch3, NormalAngledSquare.Normal);
     ret.shape = dataShape;
     if (!foundShape) {
-        ret.shape = 0 /* Normal */;
+        ret.shape = NormalAngledSquare.Normal;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundType) {
-        ret.type = 0 /* Upright */;
+        ret.type = UprightInverted.Upright;
     }
     return ret;
 }
@@ -2234,7 +2451,7 @@ function xmlToWavyLine(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -2244,7 +2461,7 @@ function xmlToWavyLine(node) {
             foundColor = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -2264,12 +2481,12 @@ function xmlToWavyLine(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -2287,13 +2504,13 @@ function xmlToWavyLine(node) {
         ret.number = 1;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -2305,10 +2522,10 @@ function xmlToWavyLine(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -2348,12 +2565,12 @@ function xmlToSegno(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2367,30 +2584,30 @@ function xmlToSegno(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -2427,12 +2644,12 @@ function xmlToCoda(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2446,30 +2663,30 @@ function xmlToCoda(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -2617,12 +2834,12 @@ function xmlToDynamics(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2636,17 +2853,17 @@ function xmlToDynamics(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -2666,28 +2883,28 @@ function xmlToDynamics(node) {
             foundLineThrough = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -2699,7 +2916,7 @@ function xmlToDynamics(node) {
         ret.lineThrough = 0;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -2743,12 +2960,12 @@ function xmlToFingering(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2762,7 +2979,7 @@ function xmlToFingering(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -2782,16 +2999,16 @@ function xmlToFingering(node) {
         ret.substitution = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundAlternate) {
         ret.alternate = false;
@@ -2813,12 +3030,12 @@ function xmlToFret(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2836,10 +3053,10 @@ function xmlToFret(node) {
     var dataFret = getNumber(ch3, true);
     ret.fret = dataFret;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -2878,12 +3095,12 @@ function xmlToString(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2897,7 +3114,7 @@ function xmlToString(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -2906,16 +3123,16 @@ function xmlToString(node) {
     var dataStringNum = getNumber(ch3, true);
     ret.stringNum = dataStringNum;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -2941,7 +3158,7 @@ function xmlToDisplayText(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -2966,12 +3183,12 @@ function xmlToDisplayText(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -2985,12 +3202,12 @@ function xmlToDisplayText(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -3025,12 +3242,12 @@ function xmlToDisplayText(node) {
             foundLineHeight = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
@@ -3039,22 +3256,22 @@ function xmlToDisplayText(node) {
     var dataText = getString(ch3, true);
     ret.text = dataText;
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -3075,10 +3292,10 @@ function xmlToDisplayText(node) {
         ret.lineHeight = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -3104,7 +3321,7 @@ function xmlToAccidentalText(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -3129,12 +3346,12 @@ function xmlToAccidentalText(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -3148,12 +3365,12 @@ function xmlToAccidentalText(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -3188,12 +3405,12 @@ function xmlToAccidentalText(node) {
             foundLineHeight = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
@@ -3202,22 +3419,22 @@ function xmlToAccidentalText(node) {
     var dataText = getString(ch3, true);
     ret.text = dataText;
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -3238,10 +3455,10 @@ function xmlToAccidentalText(node) {
         ret.lineHeight = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -3509,6 +3726,12 @@ function xmlToScaling(node) {
     }
     return ret;
 }
+(function (OddEvenBoth) {
+    OddEvenBoth[OddEvenBoth["Both"] = 2] = "Both";
+    OddEvenBoth[OddEvenBoth["Even"] = 1] = "Even";
+    OddEvenBoth[OddEvenBoth["Odd"] = 0] = "Odd";
+})(exports.OddEvenBoth || (exports.OddEvenBoth = {}));
+var OddEvenBoth = exports.OddEvenBoth;
 function getOddEvenBoth(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -3516,13 +3739,13 @@ function getOddEvenBoth(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "both") {
-        return 2 /* Both */;
+        return OddEvenBoth.Both;
     }
     if (s == "even") {
-        return 1 /* Even */;
+        return OddEvenBoth.Even;
     }
     if (s == "odd") {
-        return 0 /* Odd */;
+        return OddEvenBoth.Odd;
     }
     return fallbackVal;
 }
@@ -3551,13 +3774,13 @@ function xmlToPageMargins(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "type") {
-            var dataType = getOddEvenBoth(ch2, 2 /* Both */);
+            var dataType = getOddEvenBoth(ch2, OddEvenBoth.Both);
             ret.type = dataType;
             foundType = true;
         }
     }
     if (!foundType) {
-        ret.type = 2 /* Both */;
+        ret.type = OddEvenBoth.Both;
     }
     return ret;
 }
@@ -3684,12 +3907,12 @@ function xmlToLeftDivider(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -3703,12 +3926,12 @@ function xmlToLeftDivider(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -3717,19 +3940,19 @@ function xmlToLeftDivider(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -3772,12 +3995,12 @@ function xmlToRightDivider(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -3791,12 +4014,12 @@ function xmlToRightDivider(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -3805,19 +4028,19 @@ function xmlToRightDivider(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -3875,6 +4098,12 @@ function xmlToLineWidth(node) {
     ret.tenths = dataTenths;
     return ret;
 }
+(function (CueGraceLarge) {
+    CueGraceLarge[CueGraceLarge["Grace"] = 1] = "Grace";
+    CueGraceLarge[CueGraceLarge["Cue"] = 0] = "Cue";
+    CueGraceLarge[CueGraceLarge["Large"] = 2] = "Large";
+})(exports.CueGraceLarge || (exports.CueGraceLarge = {}));
+var CueGraceLarge = exports.CueGraceLarge;
 function getCueGraceLarge(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -3882,13 +4111,13 @@ function getCueGraceLarge(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "grace") {
-        return 1 /* Grace */;
+        return CueGraceLarge.Grace;
     }
     if (s == "cue") {
-        return 0 /* Cue */;
+        return CueGraceLarge.Cue;
     }
     if (s == "large") {
-        return 2 /* Large */;
+        return CueGraceLarge.Large;
     }
     return fallbackVal;
 }
@@ -4155,6 +4384,14 @@ function xmlToEncoding(node) {
     }
     return ret;
 }
+(function (SeparatorType) {
+    SeparatorType[SeparatorType["None"] = 0] = "None";
+    SeparatorType[SeparatorType["Horizontal"] = 1] = "Horizontal";
+    SeparatorType[SeparatorType["Diagonal"] = 2] = "Diagonal";
+    SeparatorType[SeparatorType["Vertical"] = 3] = "Vertical";
+    SeparatorType[SeparatorType["Adjacent"] = 4] = "Adjacent";
+})(exports.SeparatorType || (exports.SeparatorType = {}));
+var SeparatorType = exports.SeparatorType;
 function getSeparatorType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -4162,19 +4399,19 @@ function getSeparatorType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 0 /* None */;
+        return SeparatorType.None;
     }
     if (s == "horizontal") {
-        return 1 /* Horizontal */;
+        return SeparatorType.Horizontal;
     }
     if (s == "diagonal") {
-        return 2 /* Diagonal */;
+        return SeparatorType.Diagonal;
     }
     if (s == "vertical") {
-        return 3 /* Vertical */;
+        return SeparatorType.Vertical;
     }
     if (s == "adjacent") {
-        return 4 /* Adjacent */;
+        return SeparatorType.Adjacent;
     }
     return fallbackVal;
 }
@@ -4187,16 +4424,25 @@ function xmlToTimeSeparator(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "separator") {
-            var dataSeparator = getSeparatorType(ch2, 0 /* None */);
+            var dataSeparator = getSeparatorType(ch2, SeparatorType.None);
             ret.separator = dataSeparator;
             foundSeparator = true;
         }
     }
     if (!foundSeparator) {
-        ret.separator = 0 /* None */;
+        ret.separator = SeparatorType.None;
     }
     return ret;
 }
+(function (TimeSymbolType) {
+    TimeSymbolType[TimeSymbolType["DottedNote"] = 4] = "DottedNote";
+    TimeSymbolType[TimeSymbolType["Cut"] = 1] = "Cut";
+    TimeSymbolType[TimeSymbolType["SingleNumber"] = 2] = "SingleNumber";
+    TimeSymbolType[TimeSymbolType["Note"] = 3] = "Note";
+    TimeSymbolType[TimeSymbolType["Common"] = 0] = "Common";
+    TimeSymbolType[TimeSymbolType["Normal"] = 5] = "Normal";
+})(exports.TimeSymbolType || (exports.TimeSymbolType = {}));
+var TimeSymbolType = exports.TimeSymbolType;
 function getTimeSymbolType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -4204,22 +4450,22 @@ function getTimeSymbolType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "dotted-note") {
-        return 4 /* DottedNote */;
+        return TimeSymbolType.DottedNote;
     }
     if (s == "cut") {
-        return 1 /* Cut */;
+        return TimeSymbolType.Cut;
     }
     if (s == "single-number") {
-        return 2 /* SingleNumber */;
+        return TimeSymbolType.SingleNumber;
     }
     if (s == "note") {
-        return 3 /* Note */;
+        return TimeSymbolType.Note;
     }
     if (s == "common") {
-        return 0 /* Common */;
+        return TimeSymbolType.Common;
     }
     if (s == "normal") {
-        return 5 /* Normal */;
+        return TimeSymbolType.Normal;
     }
     return fallbackVal;
 }
@@ -4232,16 +4478,22 @@ function xmlToTimeSymbol(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
-            var dataSymbol = getTimeSymbolType(ch2, 5 /* Normal */);
+            var dataSymbol = getTimeSymbolType(ch2, TimeSymbolType.Normal);
             ret.symbol = dataSymbol;
             foundSymbol = true;
         }
     }
     if (!foundSymbol) {
-        ret.symbol = 5 /* Normal */;
+        ret.symbol = TimeSymbolType.Normal;
     }
     return ret;
 }
+(function (CancelLocation) {
+    CancelLocation[CancelLocation["Right"] = 1] = "Right";
+    CancelLocation[CancelLocation["BeforeBarline"] = 2] = "BeforeBarline";
+    CancelLocation[CancelLocation["Left"] = 0] = "Left";
+})(exports.CancelLocation || (exports.CancelLocation = {}));
+var CancelLocation = exports.CancelLocation;
 function getCancelLocation(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -4249,13 +4501,13 @@ function getCancelLocation(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "right") {
-        return 1 /* Right */;
+        return CancelLocation.Right;
     }
     if (s == "before-barline") {
-        return 2 /* BeforeBarline */;
+        return CancelLocation.BeforeBarline;
     }
     if (s == "left") {
-        return 0 /* Left */;
+        return CancelLocation.Left;
     }
     return fallbackVal;
 }
@@ -4268,7 +4520,7 @@ function xmlToCancel(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "location") {
-            var dataLocation = getCancelLocation(ch2, 0 /* Left */);
+            var dataLocation = getCancelLocation(ch2, CancelLocation.Left);
             ret.location = dataLocation;
             foundLocation = true;
         }
@@ -4277,7 +4529,7 @@ function xmlToCancel(node) {
     var dataFifths = getNumber(ch3, true);
     ret.fifths = dataFifths;
     if (!foundLocation) {
-        ret.location = 0 /* Left */;
+        ret.location = CancelLocation.Left;
     }
     return ret;
 }
@@ -4373,12 +4625,12 @@ function xmlToKey(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -4398,10 +4650,10 @@ function xmlToKey(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -4447,12 +4699,12 @@ function xmlToTime(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
-            var dataSymbol = getTimeSymbolType(ch2, 5 /* Normal */);
+            var dataSymbol = getTimeSymbolType(ch2, TimeSymbolType.Normal);
             ret.symbol = dataSymbol;
             foundSymbol = true;
         }
         if (ch2.name === "separator") {
-            var dataSeparator = getSeparatorType(ch2, 0 /* None */);
+            var dataSeparator = getSeparatorType(ch2, SeparatorType.None);
             ret.separator = dataSeparator;
             foundSeparator = true;
         }
@@ -4477,12 +4729,12 @@ function xmlToTime(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -4496,12 +4748,12 @@ function xmlToTime(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -4512,25 +4764,25 @@ function xmlToTime(node) {
         }
     }
     if (!foundSymbol) {
-        ret.symbol = 5 /* Normal */;
+        ret.symbol = TimeSymbolType.Normal;
     }
     if (!foundSeparator) {
-        ret.separator = 0 /* None */;
+        ret.separator = SeparatorType.None;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundPrintObject) {
         ret.printObject = true;
@@ -4560,24 +4812,32 @@ function xmlToInterchangeable(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "symbol") {
-            var dataSymbol = getTimeSymbolType(ch2, 5 /* Normal */);
+            var dataSymbol = getTimeSymbolType(ch2, TimeSymbolType.Normal);
             ret.symbol = dataSymbol;
             foundSymbol = true;
         }
         if (ch2.name === "separator") {
-            var dataSeparator = getSeparatorType(ch2, 0 /* None */);
+            var dataSeparator = getSeparatorType(ch2, SeparatorType.None);
             ret.separator = dataSeparator;
             foundSeparator = true;
         }
     }
     if (!foundSymbol) {
-        ret.symbol = 5 /* Normal */;
+        ret.symbol = TimeSymbolType.Normal;
     }
     if (!foundSeparator) {
-        ret.separator = 0 /* None */;
+        ret.separator = SeparatorType.None;
     }
     return ret;
 }
+(function (PartSymbolType) {
+    PartSymbolType[PartSymbolType["None"] = 0] = "None";
+    PartSymbolType[PartSymbolType["Line"] = 2] = "Line";
+    PartSymbolType[PartSymbolType["Bracket"] = 3] = "Bracket";
+    PartSymbolType[PartSymbolType["Square"] = 4] = "Square";
+    PartSymbolType[PartSymbolType["Brace"] = 1] = "Brace";
+})(exports.PartSymbolType || (exports.PartSymbolType = {}));
+var PartSymbolType = exports.PartSymbolType;
 function getPartSymbolType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -4585,19 +4845,19 @@ function getPartSymbolType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 0 /* None */;
+        return PartSymbolType.None;
     }
     if (s == "line") {
-        return 2 /* Line */;
+        return PartSymbolType.Line;
     }
     if (s == "bracket") {
-        return 3 /* Bracket */;
+        return PartSymbolType.Bracket;
     }
     if (s == "square") {
-        return 4 /* Square */;
+        return PartSymbolType.Square;
     }
     if (s == "brace") {
-        return 1 /* Brace */;
+        return PartSymbolType.Brace;
     }
     return fallbackVal;
 }
@@ -4691,7 +4951,7 @@ function xmlToClef(node) {
             foundNumber_ = true;
         }
         if (ch2.name === "size") {
-            var dataSize = getSymbolSize(ch2, 1 /* Full */);
+            var dataSize = getSymbolSize(ch2, SymbolSize.Full);
             ret.size = dataSize;
             foundSize = true;
         }
@@ -4716,12 +4976,12 @@ function xmlToClef(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -4754,13 +5014,13 @@ function xmlToClef(node) {
         ret.number = 1;
     }
     if (!foundSize) {
-        ret.size = 1 /* Full */;
+        ret.size = SymbolSize.Full;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -4802,6 +5062,11 @@ function xmlToStaffTuning(node) {
     }
     return ret;
 }
+(function (ShowFretsType) {
+    ShowFretsType[ShowFretsType["Letters"] = 1] = "Letters";
+    ShowFretsType[ShowFretsType["Numbers"] = 0] = "Numbers";
+})(exports.ShowFretsType || (exports.ShowFretsType = {}));
+var ShowFretsType = exports.ShowFretsType;
 function getShowFretsType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -4809,10 +5074,10 @@ function getShowFretsType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "letters") {
-        return 1 /* Letters */;
+        return ShowFretsType.Letters;
     }
     if (s == "numbers") {
-        return 0 /* Numbers */;
+        return ShowFretsType.Numbers;
     }
     return fallbackVal;
 }
@@ -4848,7 +5113,7 @@ function xmlToStaffDetails(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "show-frets") {
-            var dataShowFrets = getShowFretsType(ch2, 0 /* Numbers */);
+            var dataShowFrets = getShowFretsType(ch2, ShowFretsType.Numbers);
             ret.showFrets = dataShowFrets;
             foundShowFrets = true;
         }
@@ -4869,7 +5134,7 @@ function xmlToStaffDetails(node) {
         }
     }
     if (!foundShowFrets) {
-        ret.showFrets = 0 /* Numbers */;
+        ret.showFrets = ShowFretsType.Numbers;
     }
     if (!foundNumber_) {
         ret.number = 1;
@@ -4958,12 +5223,12 @@ function xmlToDirective(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -4981,10 +5246,10 @@ function xmlToDirective(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5166,12 +5431,12 @@ function xmlToMeasureStyle(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -5189,10 +5454,10 @@ function xmlToMeasureStyle(node) {
         ret.number = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5597,12 +5862,12 @@ function xmlToNote(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -5654,10 +5919,10 @@ function xmlToNote(node) {
         ret.release = NaN;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -5671,6 +5936,23 @@ function xmlToNote(node) {
     ret._class = "Note";
     return ret;
 }
+(function (Count) {
+    Count[Count["Quarter"] = 4] = "Quarter";
+    Count[Count["Breve"] = 9990] = "Breve";
+    Count[Count["Long"] = 9991] = "Long";
+    Count[Count["_1024th"] = 1024] = "_1024th";
+    Count[Count["_32nd"] = 32] = "_32nd";
+    Count[Count["_16th"] = 16] = "_16th";
+    Count[Count["Eighth"] = 8] = "Eighth";
+    Count[Count["Maxima"] = 9992] = "Maxima";
+    Count[Count["_512th"] = 512] = "_512th";
+    Count[Count["_64th"] = 64] = "_64th";
+    Count[Count["_256th"] = 256] = "_256th";
+    Count[Count["_128th"] = 128] = "_128th";
+    Count[Count["Half"] = 2] = "Half";
+    Count[Count["Whole"] = 1] = "Whole";
+})(exports.Count || (exports.Count = {}));
+var Count = exports.Count;
 function getCount(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -5678,46 +5960,46 @@ function getCount(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "quarter") {
-        return 4 /* Quarter */;
+        return Count.Quarter;
     }
     if (s == "breve") {
-        return 9990 /* Breve */;
+        return Count.Breve;
     }
     if (s == "long") {
-        return 9991 /* Long */;
+        return Count.Long;
     }
     if (s == "1024th") {
-        return 1024 /* _1024th */;
+        return Count._1024th;
     }
     if (s == "32nd") {
-        return 32 /* _32nd */;
+        return Count._32nd;
     }
     if (s == "16th") {
-        return 16 /* _16th */;
+        return Count._16th;
     }
     if (s == "eighth") {
-        return 8 /* Eighth */;
+        return Count.Eighth;
     }
     if (s == "maxima") {
-        return 9992 /* Maxima */;
+        return Count.Maxima;
     }
     if (s == "512th") {
-        return 512 /* _512th */;
+        return Count._512th;
     }
     if (s == "64th") {
-        return 64 /* _64th */;
+        return Count._64th;
     }
     if (s == "256th") {
-        return 256 /* _256th */;
+        return Count._256th;
     }
     if (s == "128th") {
-        return 128 /* _128th */;
+        return Count._128th;
     }
     if (s == "half") {
-        return 2 /* Half */;
+        return Count.Half;
     }
     if (s == "whole") {
-        return 1 /* Whole */;
+        return Count.Whole;
     }
     return fallbackVal;
 }
@@ -5730,7 +6012,7 @@ function xmlToType(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "size") {
-            var dataSize = getSymbolSize(ch2, 0 /* Unspecified */);
+            var dataSize = getSymbolSize(ch2, SymbolSize.Unspecified);
             ret.size = dataSize;
             foundSize = true;
         }
@@ -5739,7 +6021,7 @@ function xmlToType(node) {
     var dataDuration = getCount(ch3, null);
     ret.duration = dataDuration;
     if (!foundSize) {
-        ret.size = 0 /* Unspecified */;
+        ret.size = SymbolSize.Unspecified;
     }
     return ret;
 }
@@ -5775,12 +6057,12 @@ function xmlToDot(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -5794,25 +6076,65 @@ function xmlToDot(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
+(function (MxmlAccidental) {
+    MxmlAccidental[MxmlAccidental["NaturalFlat"] = 7] = "NaturalFlat";
+    MxmlAccidental[MxmlAccidental["SharpUp"] = 13] = "SharpUp";
+    MxmlAccidental[MxmlAccidental["ThreeQuartersFlat"] = 10] = "ThreeQuartersFlat";
+    MxmlAccidental[MxmlAccidental["ThreeQuartersSharp"] = 11] = "ThreeQuartersSharp";
+    MxmlAccidental[MxmlAccidental["QuarterFlat"] = 8] = "QuarterFlat";
+    MxmlAccidental[MxmlAccidental["Flat"] = 2] = "Flat";
+    MxmlAccidental[MxmlAccidental["TripleSharp"] = 18] = "TripleSharp";
+    MxmlAccidental[MxmlAccidental["Flat1"] = 27] = "Flat1";
+    MxmlAccidental[MxmlAccidental["Flat2"] = 28] = "Flat2";
+    MxmlAccidental[MxmlAccidental["Flat3"] = 29] = "Flat3";
+    MxmlAccidental[MxmlAccidental["Flat4"] = 291] = "Flat4";
+    MxmlAccidental[MxmlAccidental["TripleFlat"] = 191] = "TripleFlat";
+    MxmlAccidental[MxmlAccidental["Flat5"] = 30] = "Flat5";
+    MxmlAccidental[MxmlAccidental["Sharp"] = 0] = "Sharp";
+    MxmlAccidental[MxmlAccidental["QuarterSharp"] = 9] = "QuarterSharp";
+    MxmlAccidental[MxmlAccidental["SlashFlat"] = 21] = "SlashFlat";
+    MxmlAccidental[MxmlAccidental["FlatDown"] = 16] = "FlatDown";
+    MxmlAccidental[MxmlAccidental["NaturalDown"] = 14] = "NaturalDown";
+    MxmlAccidental[MxmlAccidental["SlashQuarterSharp"] = 19] = "SlashQuarterSharp";
+    MxmlAccidental[MxmlAccidental["SharpSharp"] = 4] = "SharpSharp";
+    MxmlAccidental[MxmlAccidental["Sharp1"] = 23] = "Sharp1";
+    MxmlAccidental[MxmlAccidental["FlatUp"] = 17] = "FlatUp";
+    MxmlAccidental[MxmlAccidental["Sharp2"] = 24] = "Sharp2";
+    MxmlAccidental[MxmlAccidental["Sharp3"] = 25] = "Sharp3";
+    MxmlAccidental[MxmlAccidental["DoubleSharp"] = 3] = "DoubleSharp";
+    MxmlAccidental[MxmlAccidental["Sharp4"] = 251] = "Sharp4";
+    MxmlAccidental[MxmlAccidental["Sharp5"] = 26] = "Sharp5";
+    MxmlAccidental[MxmlAccidental["Sori"] = 31] = "Sori";
+    MxmlAccidental[MxmlAccidental["DoubleSlashFlat"] = 22] = "DoubleSlashFlat";
+    MxmlAccidental[MxmlAccidental["SharpDown"] = 12] = "SharpDown";
+    MxmlAccidental[MxmlAccidental["Koron"] = 32] = "Koron";
+    MxmlAccidental[MxmlAccidental["NaturalUp"] = 15] = "NaturalUp";
+    MxmlAccidental[MxmlAccidental["SlashSharp"] = 20] = "SlashSharp";
+    MxmlAccidental[MxmlAccidental["NaturalSharp"] = 6] = "NaturalSharp";
+    MxmlAccidental[MxmlAccidental["FlatFlat"] = 5] = "FlatFlat";
+    MxmlAccidental[MxmlAccidental["Natural"] = 1] = "Natural";
+    MxmlAccidental[MxmlAccidental["DoubleFlat"] = 33] = "DoubleFlat";
+})(exports.MxmlAccidental || (exports.MxmlAccidental = {}));
+var MxmlAccidental = exports.MxmlAccidental;
 function getMxmlAccidental(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -5820,115 +6142,115 @@ function getMxmlAccidental(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "natural-flat") {
-        return 7 /* NaturalFlat */;
+        return MxmlAccidental.NaturalFlat;
     }
     if (s == "sharp-up") {
-        return 13 /* SharpUp */;
+        return MxmlAccidental.SharpUp;
     }
     if (s == "three-quarters-flat") {
-        return 10 /* ThreeQuartersFlat */;
+        return MxmlAccidental.ThreeQuartersFlat;
     }
     if (s == "three-quarters-sharp") {
-        return 11 /* ThreeQuartersSharp */;
+        return MxmlAccidental.ThreeQuartersSharp;
     }
     if (s == "quarter-flat") {
-        return 8 /* QuarterFlat */;
+        return MxmlAccidental.QuarterFlat;
     }
     if (s == "flat") {
-        return 2 /* Flat */;
+        return MxmlAccidental.Flat;
     }
     if (s == "triple-sharp") {
-        return 18 /* TripleSharp */;
+        return MxmlAccidental.TripleSharp;
     }
     if (s == "flat-1") {
-        return 27 /* Flat1 */;
+        return MxmlAccidental.Flat1;
     }
     if (s == "flat-2") {
-        return 28 /* Flat2 */;
+        return MxmlAccidental.Flat2;
     }
     if (s == "flat-3") {
-        return 29 /* Flat3 */;
+        return MxmlAccidental.Flat3;
     }
     if (s == "flat-4") {
-        return 291 /* Flat4 */;
+        return MxmlAccidental.Flat4;
     }
     if (s == "triple-flat") {
-        return 191 /* TripleFlat */;
+        return MxmlAccidental.TripleFlat;
     }
     if (s == "flat-5") {
-        return 30 /* Flat5 */;
+        return MxmlAccidental.Flat5;
     }
     if (s == "sharp") {
-        return 0 /* Sharp */;
+        return MxmlAccidental.Sharp;
     }
     if (s == "quarter-sharp") {
-        return 9 /* QuarterSharp */;
+        return MxmlAccidental.QuarterSharp;
     }
     if (s == "slash-flat") {
-        return 21 /* SlashFlat */;
+        return MxmlAccidental.SlashFlat;
     }
     if (s == "flat-down") {
-        return 16 /* FlatDown */;
+        return MxmlAccidental.FlatDown;
     }
     if (s == "natural-down") {
-        return 14 /* NaturalDown */;
+        return MxmlAccidental.NaturalDown;
     }
     if (s == "slash-quarter-sharp") {
-        return 19 /* SlashQuarterSharp */;
+        return MxmlAccidental.SlashQuarterSharp;
     }
     if (s == "sharp-sharp") {
-        return 4 /* SharpSharp */;
+        return MxmlAccidental.SharpSharp;
     }
     if (s == "sharp-1") {
-        return 23 /* Sharp1 */;
+        return MxmlAccidental.Sharp1;
     }
     if (s == "flat-up") {
-        return 17 /* FlatUp */;
+        return MxmlAccidental.FlatUp;
     }
     if (s == "sharp-2") {
-        return 24 /* Sharp2 */;
+        return MxmlAccidental.Sharp2;
     }
     if (s == "sharp-3") {
-        return 25 /* Sharp3 */;
+        return MxmlAccidental.Sharp3;
     }
     if (s == "double-sharp") {
-        return 3 /* DoubleSharp */;
+        return MxmlAccidental.DoubleSharp;
     }
     if (s == "sharp-4") {
-        return 251 /* Sharp4 */;
+        return MxmlAccidental.Sharp4;
     }
     if (s == "sharp-5") {
-        return 26 /* Sharp5 */;
+        return MxmlAccidental.Sharp5;
     }
     if (s == "sori") {
-        return 31 /* Sori */;
+        return MxmlAccidental.Sori;
     }
     if (s == "double-slash-flat") {
-        return 22 /* DoubleSlashFlat */;
+        return MxmlAccidental.DoubleSlashFlat;
     }
     if (s == "sharp-down") {
-        return 12 /* SharpDown */;
+        return MxmlAccidental.SharpDown;
     }
     if (s == "koron") {
-        return 32 /* Koron */;
+        return MxmlAccidental.Koron;
     }
     if (s == "natural-up") {
-        return 15 /* NaturalUp */;
+        return MxmlAccidental.NaturalUp;
     }
     if (s == "slash-sharp") {
-        return 20 /* SlashSharp */;
+        return MxmlAccidental.SlashSharp;
     }
     if (s == "natural-sharp") {
-        return 6 /* NaturalSharp */;
+        return MxmlAccidental.NaturalSharp;
     }
     if (s == "flat-flat") {
-        return 5 /* FlatFlat */;
+        return MxmlAccidental.FlatFlat;
     }
     if (s == "natural") {
-        return 1 /* Natural */;
+        return MxmlAccidental.Natural;
     }
     if (s == "double-flat") {
-        return 33 /* DoubleFlat */;
+        return MxmlAccidental.DoubleFlat;
     }
     return fallbackVal;
 }
@@ -5958,7 +6280,7 @@ function xmlToAccidental(node) {
             foundBracket = true;
         }
         if (ch2.name === "size") {
-            var dataSize = getSymbolSize(ch2, 0 /* Unspecified */);
+            var dataSize = getSymbolSize(ch2, SymbolSize.Unspecified);
             ret.size = dataSize;
             foundSize = true;
         }
@@ -5988,12 +6310,12 @@ function xmlToAccidental(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -6022,16 +6344,16 @@ function xmlToAccidental(node) {
         ret.bracket = false;
     }
     if (!foundSize) {
-        ret.size = 0 /* Unspecified */;
+        ret.size = SymbolSize.Unspecified;
     }
     if (!foundParentheses) {
         ret.parentheses = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6067,6 +6389,13 @@ function xmlToTimeModification(node) {
     }
     return ret;
 }
+(function (StemType) {
+    StemType[StemType["None"] = 2] = "None";
+    StemType[StemType["Double"] = 3] = "Double";
+    StemType[StemType["Down"] = 0] = "Down";
+    StemType[StemType["Up"] = 1] = "Up";
+})(exports.StemType || (exports.StemType = {}));
+var StemType = exports.StemType;
 function getStemType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -6074,16 +6403,16 @@ function getStemType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 2 /* None */;
+        return StemType.None;
     }
     if (s == "double") {
-        return 3 /* Double */;
+        return StemType.Double;
     }
     if (s == "down") {
-        return 0 /* Down */;
+        return StemType.Down;
     }
     if (s == "up") {
-        return 1 /* Up */;
+        return StemType.Up;
     }
     return fallbackVal;
 }
@@ -6125,6 +6454,35 @@ function xmlToStem(node) {
     }
     return ret;
 }
+(function (NoteheadType) {
+    NoteheadType[NoteheadType["InvertedTriangle"] = 7] = "InvertedTriangle";
+    NoteheadType[NoteheadType["CircleDot"] = 14] = "CircleDot";
+    NoteheadType[NoteheadType["ArrowUp"] = 9] = "ArrowUp";
+    NoteheadType[NoteheadType["Do"] = 18] = "Do";
+    NoteheadType[NoteheadType["Mi"] = 20] = "Mi";
+    NoteheadType[NoteheadType["Cross"] = 4] = "Cross";
+    NoteheadType[NoteheadType["Slash"] = 0] = "Slash";
+    NoteheadType[NoteheadType["Fa"] = 21] = "Fa";
+    NoteheadType[NoteheadType["Triangle"] = 1] = "Triangle";
+    NoteheadType[NoteheadType["FaUp"] = 22] = "FaUp";
+    NoteheadType[NoteheadType["So"] = 23] = "So";
+    NoteheadType[NoteheadType["LeftTriangle"] = 15] = "LeftTriangle";
+    NoteheadType[NoteheadType["BackSlashed"] = 11] = "BackSlashed";
+    NoteheadType[NoteheadType["None"] = 17] = "None";
+    NoteheadType[NoteheadType["La"] = 24] = "La";
+    NoteheadType[NoteheadType["Slashed"] = 10] = "Slashed";
+    NoteheadType[NoteheadType["Normal"] = 12] = "Normal";
+    NoteheadType[NoteheadType["Cluster"] = 13] = "Cluster";
+    NoteheadType[NoteheadType["Ti"] = 25] = "Ti";
+    NoteheadType[NoteheadType["Re"] = 19] = "Re";
+    NoteheadType[NoteheadType["Rectangle"] = 16] = "Rectangle";
+    NoteheadType[NoteheadType["Square"] = 3] = "Square";
+    NoteheadType[NoteheadType["ArrowDown"] = 8] = "ArrowDown";
+    NoteheadType[NoteheadType["X"] = 5] = "X";
+    NoteheadType[NoteheadType["Diamond"] = 2] = "Diamond";
+    NoteheadType[NoteheadType["CircleX"] = 6] = "CircleX";
+})(exports.NoteheadType || (exports.NoteheadType = {}));
+var NoteheadType = exports.NoteheadType;
 function getNoteheadType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -6132,82 +6490,82 @@ function getNoteheadType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "inverted triangle") {
-        return 7 /* InvertedTriangle */;
+        return NoteheadType.InvertedTriangle;
     }
     if (s == "circle dot") {
-        return 14 /* CircleDot */;
+        return NoteheadType.CircleDot;
     }
     if (s == "arrow up") {
-        return 9 /* ArrowUp */;
+        return NoteheadType.ArrowUp;
     }
     if (s == "do") {
-        return 18 /* Do */;
+        return NoteheadType.Do;
     }
     if (s == "mi") {
-        return 20 /* Mi */;
+        return NoteheadType.Mi;
     }
     if (s == "cross") {
-        return 4 /* Cross */;
+        return NoteheadType.Cross;
     }
     if (s == "slash") {
-        return 0 /* Slash */;
+        return NoteheadType.Slash;
     }
     if (s == "fa") {
-        return 21 /* Fa */;
+        return NoteheadType.Fa;
     }
     if (s == "triangle") {
-        return 1 /* Triangle */;
+        return NoteheadType.Triangle;
     }
     if (s == "fa up") {
-        return 22 /* FaUp */;
+        return NoteheadType.FaUp;
     }
     if (s == "so") {
-        return 23 /* So */;
+        return NoteheadType.So;
     }
     if (s == "left triangle") {
-        return 15 /* LeftTriangle */;
+        return NoteheadType.LeftTriangle;
     }
     if (s == "back slashed") {
-        return 11 /* BackSlashed */;
+        return NoteheadType.BackSlashed;
     }
     if (s == "none") {
-        return 17 /* None */;
+        return NoteheadType.None;
     }
     if (s == "la") {
-        return 24 /* La */;
+        return NoteheadType.La;
     }
     if (s == "slashed") {
-        return 10 /* Slashed */;
+        return NoteheadType.Slashed;
     }
     if (s == "normal") {
-        return 12 /* Normal */;
+        return NoteheadType.Normal;
     }
     if (s == "cluster") {
-        return 13 /* Cluster */;
+        return NoteheadType.Cluster;
     }
     if (s == "ti") {
-        return 25 /* Ti */;
+        return NoteheadType.Ti;
     }
     if (s == "re") {
-        return 19 /* Re */;
+        return NoteheadType.Re;
     }
     if (s == "rectangle") {
-        return 16 /* Rectangle */;
+        return NoteheadType.Rectangle;
     }
     if (s == "square") {
-        return 3 /* Square */;
+        return NoteheadType.Square;
     }
     if (s == "arrow down") {
-        return 8 /* ArrowDown */;
+        return NoteheadType.ArrowDown;
     }
     if (s == "x") {
-        return 5 /* X */;
+        return NoteheadType.X;
     }
     if (s == "diamond") {
-        return 2 /* Diamond */;
+        return NoteheadType.Diamond;
     }
     if (s == "circle-x") {
-        return 6 /* CircleX */;
+        return NoteheadType.CircleX;
     }
     return fallbackVal;
 }
@@ -6226,12 +6584,12 @@ function xmlToNotehead(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -6257,16 +6615,24 @@ function xmlToNotehead(node) {
     var dataType = getNoteheadType(ch3, null);
     ret.type = dataType;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     return ret;
 }
+(function (BeamType) {
+    BeamType[BeamType["BackwardHook"] = 4] = "BackwardHook";
+    BeamType[BeamType["Begin"] = 0] = "Begin";
+    BeamType[BeamType["ForwardHook"] = 3] = "ForwardHook";
+    BeamType[BeamType["Continue"] = 1] = "Continue";
+    BeamType[BeamType["End"] = 2] = "End";
+})(exports.BeamType || (exports.BeamType = {}));
+var BeamType = exports.BeamType;
 function getBeamType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -6274,22 +6640,28 @@ function getBeamType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "backward hook") {
-        return 4 /* BackwardHook */;
+        return BeamType.BackwardHook;
     }
     if (s == "begin") {
-        return 0 /* Begin */;
+        return BeamType.Begin;
     }
     if (s == "forward hook") {
-        return 3 /* ForwardHook */;
+        return BeamType.ForwardHook;
     }
     if (s == "continue") {
-        return 1 /* Continue */;
+        return BeamType.Continue;
     }
     if (s == "end") {
-        return 2 /* End */;
+        return BeamType.End;
     }
     return fallbackVal;
 }
+(function (AccelRitNone) {
+    AccelRitNone[AccelRitNone["Accel"] = 0] = "Accel";
+    AccelRitNone[AccelRitNone["None"] = 2] = "None";
+    AccelRitNone[AccelRitNone["Rit"] = 1] = "Rit";
+})(exports.AccelRitNone || (exports.AccelRitNone = {}));
+var AccelRitNone = exports.AccelRitNone;
 function getAccelRitNone(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -6297,13 +6669,13 @@ function getAccelRitNone(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "accel") {
-        return 0 /* Accel */;
+        return AccelRitNone.Accel;
     }
     if (s == "none") {
-        return 2 /* None */;
+        return AccelRitNone.None;
     }
     if (s == "rit") {
-        return 1 /* Rit */;
+        return AccelRitNone.Rit;
     }
     return fallbackVal;
 }
@@ -6328,7 +6700,7 @@ function xmlToBeam(node) {
             foundNumber_ = true;
         }
         if (ch2.name === "fan") {
-            var dataFan = getAccelRitNone(ch2, 2 /* None */);
+            var dataFan = getAccelRitNone(ch2, AccelRitNone.None);
             ret.fan = dataFan;
             foundFan = true;
         }
@@ -6343,7 +6715,7 @@ function xmlToBeam(node) {
         ret.number = 1;
     }
     if (!foundFan) {
-        ret.fan = 2 /* None */;
+        ret.fan = AccelRitNone.None;
     }
     return ret;
 }
@@ -6448,7 +6820,7 @@ function xmlToTied(node) {
             ret.number = dataNumber;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -6479,12 +6851,12 @@ function xmlToTied(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "orientation") {
-            var dataOrientation = getOverUnder(ch2, 0 /* Unspecified */);
+            var dataOrientation = getOverUnder(ch2, OverUnder.Unspecified);
             ret.orientation = dataOrientation;
             foundOrientation = true;
         }
@@ -6523,7 +6895,7 @@ function xmlToTied(node) {
         }
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -6532,10 +6904,10 @@ function xmlToTied(node) {
         ret.spaceLength = 1;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundOrientation) {
-        ret.orientation = 0 /* Unspecified */;
+        ret.orientation = OverUnder.Unspecified;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6562,7 +6934,7 @@ function xmlToSlur(node) {
             foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -6593,12 +6965,12 @@ function xmlToSlur(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "orientation") {
-            var dataOrientation = getOverUnder(ch2, 0 /* Unspecified */);
+            var dataOrientation = getOverUnder(ch2, OverUnder.Unspecified);
             ret.orientation = dataOrientation;
             foundOrientation = true;
         }
@@ -6640,7 +7012,7 @@ function xmlToSlur(node) {
         ret.number = 1;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -6649,16 +7021,22 @@ function xmlToSlur(node) {
         ret.spaceLength = 1;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundOrientation) {
-        ret.orientation = 0 /* Unspecified */;
+        ret.orientation = OverUnder.Unspecified;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     return ret;
 }
+(function (ActualBothNone) {
+    ActualBothNone[ActualBothNone["None"] = 2] = "None";
+    ActualBothNone[ActualBothNone["Both"] = 1] = "Both";
+    ActualBothNone[ActualBothNone["Actual"] = 0] = "Actual";
+})(exports.ActualBothNone || (exports.ActualBothNone = {}));
+var ActualBothNone = exports.ActualBothNone;
 function getActualBothNone(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -6666,13 +7044,13 @@ function getActualBothNone(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 2 /* None */;
+        return ActualBothNone.None;
     }
     if (s == "both") {
-        return 1 /* Both */;
+        return ActualBothNone.Both;
     }
     if (s == "actual") {
-        return 0 /* Actual */;
+        return ActualBothNone.Actual;
     }
     return fallbackVal;
 }
@@ -6706,12 +7084,12 @@ function xmlToTuplet(node) {
             ret.number = dataNumber;
         }
         if (ch2.name === "show-number") {
-            var dataShowNumber = getActualBothNone(ch2, 0 /* Actual */);
+            var dataShowNumber = getActualBothNone(ch2, ActualBothNone.Actual);
             ret.showNumber = dataShowNumber;
             foundShowNumber = true;
         }
         if (ch2.name === "line-shape") {
-            var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
+            var dataLineShape = getStraightCurved(ch2, StraightCurved.Straight);
             ret.lineShape = dataLineShape;
             foundLineShape = true;
         }
@@ -6732,7 +7110,7 @@ function xmlToTuplet(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -6741,7 +7119,7 @@ function xmlToTuplet(node) {
             ret.type = dataType;
         }
         if (ch2.name === "show-type") {
-            var dataShowType = getActualBothNone(ch2, 2 /* None */);
+            var dataShowType = getActualBothNone(ch2, ActualBothNone.None);
             ret.showType = dataShowType;
             foundShowType = true;
         }
@@ -6750,16 +7128,16 @@ function xmlToTuplet(node) {
         ret.bracket = false;
     }
     if (!foundShowNumber) {
-        ret.showNumber = 0 /* Actual */;
+        ret.showNumber = ActualBothNone.Actual;
     }
     if (!foundLineShape) {
-        ret.lineShape = 0 /* Straight */;
+        ret.lineShape = StraightCurved.Straight;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundShowType) {
-        ret.showType = 2 /* None */;
+        ret.showType = ActualBothNone.None;
     }
     return ret;
 }
@@ -6822,12 +7200,12 @@ function xmlToTupletNumber(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -6845,10 +7223,10 @@ function xmlToTupletNumber(node) {
     var dataText = getString(ch3, true);
     ret.text = dataText;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6870,12 +7248,12 @@ function xmlToTupletType(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -6893,10 +7271,10 @@ function xmlToTupletType(node) {
     var dataText = getString(ch3, true);
     ret.text = dataText;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6918,12 +7296,12 @@ function xmlToTupletDot(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -6938,10 +7316,10 @@ function xmlToTupletDot(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -6963,7 +7341,7 @@ function xmlToGlissando(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -6998,12 +7376,12 @@ function xmlToGlissando(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7030,7 +7408,7 @@ function xmlToGlissando(node) {
     var dataText = getString(ch3, false);
     ret.text = dataText;
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -7039,10 +7417,10 @@ function xmlToGlissando(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -7071,7 +7449,7 @@ function xmlToSlide(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -7106,12 +7484,12 @@ function xmlToSlide(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7158,7 +7536,7 @@ function xmlToSlide(node) {
     var dataText = getString(ch3, false);
     ret.text = dataText;
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -7167,10 +7545,10 @@ function xmlToSlide(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -7230,12 +7608,12 @@ function xmlToOtherNotation(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7249,7 +7627,7 @@ function xmlToOtherNotation(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -7265,16 +7643,16 @@ function xmlToOtherNotation(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -7317,12 +7695,12 @@ function xmlToOtherDirection(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7336,12 +7714,12 @@ function xmlToOtherDirection(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -7353,19 +7731,19 @@ function xmlToOtherDirection(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -7464,12 +7842,12 @@ function xmlToOrnaments(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7483,12 +7861,12 @@ function xmlToOrnaments(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -7508,12 +7886,12 @@ function xmlToOrnaments(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -7524,19 +7902,19 @@ function xmlToOrnaments(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -7548,10 +7926,10 @@ function xmlToOrnaments(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -7597,12 +7975,12 @@ function xmlToTrillMark(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7616,12 +7994,12 @@ function xmlToTrillMark(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -7641,12 +8019,12 @@ function xmlToTrillMark(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -7657,19 +8035,19 @@ function xmlToTrillMark(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -7681,10 +8059,10 @@ function xmlToTrillMark(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -7736,12 +8114,12 @@ function xmlToTurn(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7755,12 +8133,12 @@ function xmlToTurn(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -7780,12 +8158,12 @@ function xmlToTurn(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -7799,19 +8177,19 @@ function xmlToTurn(node) {
         ret.slash = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -7823,10 +8201,10 @@ function xmlToTurn(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -7878,12 +8256,12 @@ function xmlToDelayedTurn(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -7897,12 +8275,12 @@ function xmlToDelayedTurn(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -7922,12 +8300,12 @@ function xmlToDelayedTurn(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -7941,19 +8319,19 @@ function xmlToDelayedTurn(node) {
         ret.slash = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -7965,10 +8343,10 @@ function xmlToDelayedTurn(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -8020,12 +8398,12 @@ function xmlToInvertedTurn(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8039,12 +8417,12 @@ function xmlToInvertedTurn(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -8064,12 +8442,12 @@ function xmlToInvertedTurn(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -8083,19 +8461,19 @@ function xmlToInvertedTurn(node) {
         ret.slash = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -8107,10 +8485,10 @@ function xmlToInvertedTurn(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -8162,12 +8540,12 @@ function xmlToDelayedInvertedTurn(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8181,12 +8559,12 @@ function xmlToDelayedInvertedTurn(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -8206,12 +8584,12 @@ function xmlToDelayedInvertedTurn(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -8225,19 +8603,19 @@ function xmlToDelayedInvertedTurn(node) {
         ret.slash = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -8249,10 +8627,10 @@ function xmlToDelayedInvertedTurn(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -8298,12 +8676,12 @@ function xmlToVerticalTurn(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8317,12 +8695,12 @@ function xmlToVerticalTurn(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -8342,12 +8720,12 @@ function xmlToVerticalTurn(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -8358,19 +8736,19 @@ function xmlToVerticalTurn(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -8382,10 +8760,10 @@ function xmlToVerticalTurn(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -8431,12 +8809,12 @@ function xmlToShake(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8450,12 +8828,12 @@ function xmlToShake(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -8475,12 +8853,12 @@ function xmlToShake(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -8491,19 +8869,19 @@ function xmlToShake(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -8515,10 +8893,10 @@ function xmlToShake(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -8576,12 +8954,12 @@ function xmlToMordent(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8595,12 +8973,12 @@ function xmlToMordent(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -8620,12 +8998,12 @@ function xmlToMordent(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -8636,19 +9014,19 @@ function xmlToMordent(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -8660,10 +9038,10 @@ function xmlToMordent(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -8721,12 +9099,12 @@ function xmlToInvertedMordent(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8740,12 +9118,12 @@ function xmlToInvertedMordent(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "start-note") {
-            var dataStartNote = getUpperMainBelow(ch2, 0 /* Upper */);
+            var dataStartNote = getUpperMainBelow(ch2, UpperMainBelow.Upper);
             ret.startNote = dataStartNote;
             foundStartNote = true;
         }
@@ -8765,12 +9143,12 @@ function xmlToInvertedMordent(node) {
             foundLastBeat = true;
         }
         if (ch2.name === "trill-step") {
-            var dataTrillStep = getWholeHalfUnison(ch2, 0 /* Whole */);
+            var dataTrillStep = getWholeHalfUnison(ch2, WholeHalfUnison.Whole);
             ret.trillStep = dataTrillStep;
             foundTrillStep = true;
         }
         if (ch2.name === "two-note-turn") {
-            var dataTwoNoteTurn = getWholeHalfNone(ch2, 3 /* None */);
+            var dataTwoNoteTurn = getWholeHalfNone(ch2, WholeHalfNone.None);
             ret.twoNoteTurn = dataTwoNoteTurn;
             foundTwoNoteTurn = true;
         }
@@ -8781,19 +9159,19 @@ function xmlToInvertedMordent(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundStartNote) {
-        ret.startNote = 0 /* Upper */;
+        ret.startNote = UpperMainBelow.Upper;
     }
     if (!foundAccelerate) {
         ret.accelerate = false;
@@ -8805,10 +9183,10 @@ function xmlToInvertedMordent(node) {
         ret.lastBeat = 75;
     }
     if (!foundTrillStep) {
-        ret.trillStep = 0 /* Whole */;
+        ret.trillStep = WholeHalfUnison.Whole;
     }
     if (!foundTwoNoteTurn) {
-        ret.twoNoteTurn = 3 /* None */;
+        ret.twoNoteTurn = WholeHalfNone.None;
     }
     if (!foundSecondBeat) {
         ret.secondBeat = 25;
@@ -8847,12 +9225,12 @@ function xmlToSchleifer(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8866,22 +9244,22 @@ function xmlToSchleifer(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -8918,12 +9296,12 @@ function xmlToTremolo(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -8937,12 +9315,12 @@ function xmlToTremolo(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "type") {
-            var dataType = getStartStopSingle(ch2, 3 /* Single */);
+            var dataType = getStartStopSingle(ch2, StartStopSingle.Single);
             ret.type = dataType;
             foundType = true;
         }
@@ -8951,19 +9329,19 @@ function xmlToTremolo(node) {
     var dataData = getString(ch3, false);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundType) {
-        ret.type = 3 /* Single */;
+        ret.type = StartStopSingle.Single;
     }
     return ret;
 }
@@ -8999,12 +9377,12 @@ function xmlToOtherOrnament(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9018,7 +9396,7 @@ function xmlToOtherOrnament(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -9031,16 +9409,16 @@ function xmlToOtherOrnament(node) {
     var dataData = getString(ch3, false);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9076,12 +9454,12 @@ function xmlToAccidentalMark(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9095,7 +9473,7 @@ function xmlToAccidentalMark(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -9104,16 +9482,16 @@ function xmlToAccidentalMark(node) {
     var dataMark = getString(ch3, true);
     ret.mark = dataMark;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9255,12 +9633,12 @@ function xmlToUpBow(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9274,22 +9652,22 @@ function xmlToUpBow(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9325,12 +9703,12 @@ function xmlToDownBow(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9344,22 +9722,22 @@ function xmlToDownBow(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9421,12 +9799,12 @@ function xmlToHarmonic(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9440,7 +9818,7 @@ function xmlToHarmonic(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -9449,16 +9827,16 @@ function xmlToHarmonic(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9494,12 +9872,12 @@ function xmlToOpenString(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9513,22 +9891,22 @@ function xmlToOpenString(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9564,12 +9942,12 @@ function xmlToThumbPosition(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9583,22 +9961,22 @@ function xmlToThumbPosition(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9634,12 +10012,12 @@ function xmlToPluck(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9653,7 +10031,7 @@ function xmlToPluck(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -9662,16 +10040,16 @@ function xmlToPluck(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9707,12 +10085,12 @@ function xmlToDoubleTongue(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9726,22 +10104,22 @@ function xmlToDoubleTongue(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9777,12 +10155,12 @@ function xmlToTripleTongue(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9796,22 +10174,22 @@ function xmlToTripleTongue(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9847,12 +10225,12 @@ function xmlToStopped(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9866,22 +10244,22 @@ function xmlToStopped(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9917,12 +10295,12 @@ function xmlToSnapPizzicato(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -9936,22 +10314,22 @@ function xmlToSnapPizzicato(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -9993,12 +10371,12 @@ function xmlToHammerOn(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10012,7 +10390,7 @@ function xmlToHammerOn(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10028,16 +10406,16 @@ function xmlToHammerOn(node) {
         ret.number = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10079,12 +10457,12 @@ function xmlToPullOff(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10098,7 +10476,7 @@ function xmlToPullOff(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10114,16 +10492,16 @@ function xmlToPullOff(node) {
         ret.number = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10178,12 +10556,12 @@ function xmlToBend(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10218,10 +10596,10 @@ function xmlToBend(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -10272,12 +10650,12 @@ function xmlToWithBar(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10291,7 +10669,7 @@ function xmlToWithBar(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10300,16 +10678,16 @@ function xmlToWithBar(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10345,12 +10723,12 @@ function xmlToTap(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10364,7 +10742,7 @@ function xmlToTap(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10373,16 +10751,16 @@ function xmlToTap(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10424,12 +10802,12 @@ function xmlToHeel(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10443,7 +10821,7 @@ function xmlToHeel(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10452,16 +10830,16 @@ function xmlToHeel(node) {
         ret.substitution = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10503,12 +10881,12 @@ function xmlToToe(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10522,7 +10900,7 @@ function xmlToToe(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10531,16 +10909,16 @@ function xmlToToe(node) {
         ret.substitution = false;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10576,12 +10954,12 @@ function xmlToFingernails(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10595,22 +10973,22 @@ function xmlToFingernails(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10658,12 +11036,12 @@ function xmlToHole(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10677,25 +11055,32 @@ function xmlToHole(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
+(function (HoleLocation) {
+    HoleLocation[HoleLocation["Right"] = 0] = "Right";
+    HoleLocation[HoleLocation["Top"] = 3] = "Top";
+    HoleLocation[HoleLocation["Bottom"] = 1] = "Bottom";
+    HoleLocation[HoleLocation["Left"] = 2] = "Left";
+})(exports.HoleLocation || (exports.HoleLocation = {}));
+var HoleLocation = exports.HoleLocation;
 function getHoleLocation(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -10703,19 +11088,25 @@ function getHoleLocation(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "right") {
-        return 0 /* Right */;
+        return HoleLocation.Right;
     }
     if (s == "top") {
-        return 3 /* Top */;
+        return HoleLocation.Top;
     }
     if (s == "bottom") {
-        return 1 /* Bottom */;
+        return HoleLocation.Bottom;
     }
     if (s == "left") {
-        return 2 /* Left */;
+        return HoleLocation.Left;
     }
     return fallbackVal;
 }
+(function (HoleClosedType) {
+    HoleClosedType[HoleClosedType["No"] = 1] = "No";
+    HoleClosedType[HoleClosedType["Yes"] = 0] = "Yes";
+    HoleClosedType[HoleClosedType["Half"] = 2] = "Half";
+})(exports.HoleClosedType || (exports.HoleClosedType = {}));
+var HoleClosedType = exports.HoleClosedType;
 function getHoleClosedType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -10723,13 +11114,13 @@ function getHoleClosedType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "no") {
-        return 1 /* No */;
+        return HoleClosedType.No;
     }
     if (s == "yes") {
-        return 0 /* Yes */;
+        return HoleClosedType.Yes;
     }
     if (s == "half") {
-        return 2 /* Half */;
+        return HoleClosedType.Half;
     }
     return fallbackVal;
 }
@@ -10794,12 +11185,12 @@ function xmlToArrow(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10813,22 +11204,22 @@ function xmlToArrow(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10864,12 +11255,12 @@ function xmlToHandbell(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10883,7 +11274,7 @@ function xmlToHandbell(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10892,16 +11283,16 @@ function xmlToHandbell(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -10937,12 +11328,12 @@ function xmlToOtherTechnical(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -10956,7 +11347,7 @@ function xmlToOtherTechnical(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -10965,16 +11356,16 @@ function xmlToOtherTechnical(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11084,12 +11475,12 @@ function xmlToAccent(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11103,22 +11494,22 @@ function xmlToAccent(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11155,12 +11546,12 @@ function xmlToStrongAccent(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11174,30 +11565,30 @@ function xmlToStrongAccent(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
         if (ch2.name === "type") {
-            var dataType = getUpDown(ch2, 0 /* Up */);
+            var dataType = getUpDown(ch2, UpDown.Up);
             ret.type = dataType;
             foundType = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundType) {
-        ret.type = 0 /* Up */;
+        ret.type = UpDown.Up;
     }
     return ret;
 }
@@ -11233,12 +11624,12 @@ function xmlToStaccato(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11252,22 +11643,22 @@ function xmlToStaccato(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11303,12 +11694,12 @@ function xmlToTenuto(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11322,22 +11713,22 @@ function xmlToTenuto(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11373,12 +11764,12 @@ function xmlToDetachedLegato(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11392,22 +11783,22 @@ function xmlToDetachedLegato(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11443,12 +11834,12 @@ function xmlToStaccatissimo(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11462,22 +11853,22 @@ function xmlToStaccatissimo(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11513,12 +11904,12 @@ function xmlToSpiccato(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11532,22 +11923,22 @@ function xmlToSpiccato(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11567,12 +11958,12 @@ function xmlToScoop(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
-            var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
+            var dataLineShape = getStraightCurved(ch2, StraightCurved.Straight);
             ret.lineShape = dataLineShape;
             foundLineShape = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -11607,12 +11998,12 @@ function xmlToScoop(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11626,16 +12017,16 @@ function xmlToScoop(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundLineShape) {
-        ret.lineShape = 0 /* Straight */;
+        ret.lineShape = StraightCurved.Straight;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -11644,16 +12035,16 @@ function xmlToScoop(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11673,12 +12064,12 @@ function xmlToPlop(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
-            var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
+            var dataLineShape = getStraightCurved(ch2, StraightCurved.Straight);
             ret.lineShape = dataLineShape;
             foundLineShape = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -11713,12 +12104,12 @@ function xmlToPlop(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11732,16 +12123,16 @@ function xmlToPlop(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundLineShape) {
-        ret.lineShape = 0 /* Straight */;
+        ret.lineShape = StraightCurved.Straight;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -11750,16 +12141,16 @@ function xmlToPlop(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11779,12 +12170,12 @@ function xmlToDoit(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
-            var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
+            var dataLineShape = getStraightCurved(ch2, StraightCurved.Straight);
             ret.lineShape = dataLineShape;
             foundLineShape = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -11819,12 +12210,12 @@ function xmlToDoit(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11838,16 +12229,16 @@ function xmlToDoit(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundLineShape) {
-        ret.lineShape = 0 /* Straight */;
+        ret.lineShape = StraightCurved.Straight;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -11856,16 +12247,16 @@ function xmlToDoit(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -11885,12 +12276,12 @@ function xmlToFalloff(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
-            var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
+            var dataLineShape = getStraightCurved(ch2, StraightCurved.Straight);
             ret.lineShape = dataLineShape;
             foundLineShape = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -11925,12 +12316,12 @@ function xmlToFalloff(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -11944,16 +12335,16 @@ function xmlToFalloff(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundLineShape) {
-        ret.lineShape = 0 /* Straight */;
+        ret.lineShape = StraightCurved.Straight;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -11962,19 +12353,25 @@ function xmlToFalloff(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
+(function (BreathMarkType) {
+    BreathMarkType[BreathMarkType["Empty"] = 2] = "Empty";
+    BreathMarkType[BreathMarkType["Comma"] = 0] = "Comma";
+    BreathMarkType[BreathMarkType["Tick"] = 1] = "Tick";
+})(exports.BreathMarkType || (exports.BreathMarkType = {}));
+var BreathMarkType = exports.BreathMarkType;
 function getBreathMarkType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -11982,13 +12379,13 @@ function getBreathMarkType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "") {
-        return 2 /* Empty */;
+        return BreathMarkType.Empty;
     }
     if (s == "comma") {
-        return 0 /* Comma */;
+        return BreathMarkType.Comma;
     }
     if (s == "tick") {
-        return 1 /* Tick */;
+        return BreathMarkType.Tick;
     }
     return fallbackVal;
 }
@@ -12008,12 +12405,12 @@ function xmlToBreathMark(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "line-shape") {
-            var dataLineShape = getStraightCurved(ch2, 0 /* Straight */);
+            var dataLineShape = getStraightCurved(ch2, StraightCurved.Straight);
             ret.lineShape = dataLineShape;
             foundLineShape = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -12048,12 +12445,12 @@ function xmlToBreathMark(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12067,7 +12464,7 @@ function xmlToBreathMark(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -12076,10 +12473,10 @@ function xmlToBreathMark(node) {
     var dataType = getBreathMarkType(ch3, null);
     ret.type = dataType;
     if (!foundLineShape) {
-        ret.lineShape = 0 /* Straight */;
+        ret.lineShape = StraightCurved.Straight;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -12088,16 +12485,16 @@ function xmlToBreathMark(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -12133,12 +12530,12 @@ function xmlToCaesura(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12152,22 +12549,22 @@ function xmlToCaesura(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -12203,12 +12600,12 @@ function xmlToStress(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12222,22 +12619,22 @@ function xmlToStress(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -12273,12 +12670,12 @@ function xmlToUnstress(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12292,22 +12689,22 @@ function xmlToUnstress(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -12343,12 +12740,12 @@ function xmlToOtherArticulation(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12362,7 +12759,7 @@ function xmlToOtherArticulation(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -12371,16 +12768,16 @@ function xmlToOtherArticulation(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     return ret;
 }
@@ -12417,7 +12814,7 @@ function xmlToArpeggiate(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -12427,7 +12824,7 @@ function xmlToArpeggiate(node) {
             foundColor = true;
         }
         if (ch2.name === "direction") {
-            var dataDirection = getUpDown(ch2, 0 /* Up */);
+            var dataDirection = getUpDown(ch2, UpDown.Up);
             ret.direction = dataDirection;
             foundDirection = true;
         }
@@ -12436,13 +12833,13 @@ function xmlToArpeggiate(node) {
         ret.number = 1;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundDirection) {
-        ret.direction = 0 /* Up */;
+        ret.direction = UpDown.Up;
     }
     return ret;
 }
@@ -12478,7 +12875,7 @@ function xmlToNonArpeggiate(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -12496,7 +12893,7 @@ function xmlToNonArpeggiate(node) {
         ret.number = 1;
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12610,12 +13007,12 @@ function xmlToText(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12654,7 +13051,7 @@ function xmlToText(node) {
             foundLetterSpacing = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
@@ -12663,10 +13060,10 @@ function xmlToText(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12687,11 +13084,18 @@ function xmlToText(node) {
         ret.letterSpacing = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     ret._class = "Text";
     return ret;
 }
+(function (SyllabicType) {
+    SyllabicType[SyllabicType["Single"] = 0] = "Single";
+    SyllabicType[SyllabicType["Begin"] = 1] = "Begin";
+    SyllabicType[SyllabicType["Middle"] = 3] = "Middle";
+    SyllabicType[SyllabicType["End"] = 2] = "End";
+})(exports.SyllabicType || (exports.SyllabicType = {}));
+var SyllabicType = exports.SyllabicType;
 function getSyllabicType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -12699,16 +13103,16 @@ function getSyllabicType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "single") {
-        return 0 /* Single */;
+        return SyllabicType.Single;
     }
     if (s == "begin") {
-        return 1 /* Begin */;
+        return SyllabicType.Begin;
     }
     if (s == "middle") {
-        return 3 /* Middle */;
+        return SyllabicType.Middle;
     }
     if (s == "end") {
-        return 2 /* End */;
+        return SyllabicType.End;
     }
     return fallbackVal;
 }
@@ -12727,12 +13131,12 @@ function xmlToSyllabic(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12750,10 +13154,10 @@ function xmlToSyllabic(node) {
     var dataData = getSyllabicType(ch3, null);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12776,12 +13180,12 @@ function xmlToElision(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12799,10 +13203,10 @@ function xmlToElision(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -12842,12 +13246,12 @@ function xmlToExtend(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12861,22 +13265,22 @@ function xmlToExtend(node) {
             foundColor = true;
         }
         if (ch2.name === "type") {
-            var dataType = getStartStopContinue(ch2, 0 /* Start */);
+            var dataType = getStartStopContinue(ch2, StartStopContinue.Start);
             ret.type = dataType;
             foundType = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundType) {
-        ret.type = 0 /* Start */;
+        ret.type = StartStopContinue.Start;
     }
     ret._class = "Extend";
     return ret;
@@ -12931,12 +13335,12 @@ function xmlToFiguredBass(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -12974,10 +13378,10 @@ function xmlToFiguredBass(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13041,12 +13445,12 @@ function xmlToFigure(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -13061,10 +13465,10 @@ function xmlToFigure(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13102,12 +13506,12 @@ function xmlToPrefix(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -13125,10 +13529,10 @@ function xmlToPrefix(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13166,12 +13570,12 @@ function xmlToFigureNumber(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -13189,10 +13593,10 @@ function xmlToFigureNumber(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13230,12 +13634,12 @@ function xmlToSuffix(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -13253,10 +13657,10 @@ function xmlToSuffix(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -13317,6 +13721,12 @@ function xmlToForward(node) {
     ret._class = "Forward";
     return ret;
 }
+(function (BarlineLocation) {
+    BarlineLocation[BarlineLocation["Right"] = 1] = "Right";
+    BarlineLocation[BarlineLocation["Middle"] = 2] = "Middle";
+    BarlineLocation[BarlineLocation["Left"] = 0] = "Left";
+})(exports.BarlineLocation || (exports.BarlineLocation = {}));
+var BarlineLocation = exports.BarlineLocation;
 function getBarlineLocation(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -13324,13 +13734,13 @@ function getBarlineLocation(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "right") {
-        return 1 /* Right */;
+        return BarlineLocation.Right;
     }
     if (s == "middle") {
-        return 2 /* Middle */;
+        return BarlineLocation.Middle;
     }
     if (s == "left") {
-        return 0 /* Left */;
+        return BarlineLocation.Left;
     }
     return fallbackVal;
 }
@@ -13397,6 +13807,27 @@ function xmlToBarline(node) {
     ret._class = "Barline";
     return ret;
 }
+/**
+ * Bar-style contains style information. Choices are
+ * regular, dotted, dashed, heavy, light-light,
+ * light-heavy, heavy-light, heavy-heavy, tick (a
+ * short stroke through the top line), short (a partial
+ * barline between the 2nd and 4th lines), and none.
+ */
+(function (BarStyleType) {
+    BarStyleType[BarStyleType["Regular"] = 0] = "Regular";
+    BarStyleType[BarStyleType["LightHeavy"] = 5] = "LightHeavy";
+    BarStyleType[BarStyleType["HeavyLight"] = 6] = "HeavyLight";
+    BarStyleType[BarStyleType["Short"] = 9] = "Short";
+    BarStyleType[BarStyleType["None"] = 10] = "None";
+    BarStyleType[BarStyleType["Dashed"] = 2] = "Dashed";
+    BarStyleType[BarStyleType["HeavyHeavy"] = 7] = "HeavyHeavy";
+    BarStyleType[BarStyleType["Tick"] = 8] = "Tick";
+    BarStyleType[BarStyleType["Dotted"] = 1] = "Dotted";
+    BarStyleType[BarStyleType["Heavy"] = 3] = "Heavy";
+    BarStyleType[BarStyleType["LightLight"] = 4] = "LightLight";
+})(exports.BarStyleType || (exports.BarStyleType = {}));
+var BarStyleType = exports.BarStyleType;
 function getBarStyleType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -13404,37 +13835,37 @@ function getBarStyleType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "regular") {
-        return 0 /* Regular */;
+        return BarStyleType.Regular;
     }
     if (s == "light-heavy") {
-        return 5 /* LightHeavy */;
+        return BarStyleType.LightHeavy;
     }
     if (s == "heavy-light") {
-        return 6 /* HeavyLight */;
+        return BarStyleType.HeavyLight;
     }
     if (s == "short") {
-        return 9 /* Short */;
+        return BarStyleType.Short;
     }
     if (s == "none") {
-        return 10 /* None */;
+        return BarStyleType.None;
     }
     if (s == "dashed") {
-        return 2 /* Dashed */;
+        return BarStyleType.Dashed;
     }
     if (s == "heavy-heavy") {
-        return 7 /* HeavyHeavy */;
+        return BarStyleType.HeavyHeavy;
     }
     if (s == "tick") {
-        return 8 /* Tick */;
+        return BarStyleType.Tick;
     }
     if (s == "dotted") {
-        return 1 /* Dotted */;
+        return BarStyleType.Dotted;
     }
     if (s == "heavy") {
-        return 3 /* Heavy */;
+        return BarStyleType.Heavy;
     }
     if (s == "light-light") {
-        return 4 /* LightLight */;
+        return BarStyleType.LightLight;
     }
     return fallbackVal;
 }
@@ -13460,6 +13891,12 @@ function xmlToBarStyle(node) {
     }
     return ret;
 }
+(function (StartStopDiscontinue) {
+    StartStopDiscontinue[StartStopDiscontinue["Discontinue"] = 2] = "Discontinue";
+    StartStopDiscontinue[StartStopDiscontinue["Start"] = 0] = "Start";
+    StartStopDiscontinue[StartStopDiscontinue["Stop"] = 1] = "Stop";
+})(exports.StartStopDiscontinue || (exports.StartStopDiscontinue = {}));
+var StartStopDiscontinue = exports.StartStopDiscontinue;
 function getStartStopDiscontinue(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -13467,13 +13904,13 @@ function getStartStopDiscontinue(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "discontinue") {
-        return 2 /* Discontinue */;
+        return StartStopDiscontinue.Discontinue;
     }
     if (s == "start") {
-        return 0 /* Start */;
+        return StartStopDiscontinue.Start;
     }
     if (s == "stop") {
-        return 1 /* Stop */;
+        return StartStopDiscontinue.Stop;
     }
     return fallbackVal;
 }
@@ -13530,12 +13967,12 @@ function xmlToEnding(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -13560,16 +13997,24 @@ function xmlToEnding(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     return ret;
 }
+(function (WingedType) {
+    WingedType[WingedType["None"] = 0] = "None";
+    WingedType[WingedType["Curved"] = 2] = "Curved";
+    WingedType[WingedType["DoubleCurved"] = 4] = "DoubleCurved";
+    WingedType[WingedType["Straight"] = 1] = "Straight";
+    WingedType[WingedType["DoubleStraight"] = 3] = "DoubleStraight";
+})(exports.WingedType || (exports.WingedType = {}));
+var WingedType = exports.WingedType;
 function getWingedType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -13577,22 +14022,27 @@ function getWingedType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 0 /* None */;
+        return WingedType.None;
     }
     if (s == "curved") {
-        return 2 /* Curved */;
+        return WingedType.Curved;
     }
     if (s == "double-curved") {
-        return 4 /* DoubleCurved */;
+        return WingedType.DoubleCurved;
     }
     if (s == "straight") {
-        return 1 /* Straight */;
+        return WingedType.Straight;
     }
     if (s == "double-straight") {
-        return 3 /* DoubleStraight */;
+        return WingedType.DoubleStraight;
     }
     return fallbackVal;
 }
+(function (DirectionTypeBg) {
+    DirectionTypeBg[DirectionTypeBg["Forward"] = 1] = "Forward";
+    DirectionTypeBg[DirectionTypeBg["Backward"] = 0] = "Backward";
+})(exports.DirectionTypeBg || (exports.DirectionTypeBg = {}));
+var DirectionTypeBg = exports.DirectionTypeBg;
 function getDirectionTypeBg(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -13600,10 +14050,10 @@ function getDirectionTypeBg(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "forward") {
-        return 1 /* Forward */;
+        return DirectionTypeBg.Forward;
     }
     if (s == "backward") {
-        return 0 /* Backward */;
+        return DirectionTypeBg.Backward;
     }
     return fallbackVal;
 }
@@ -13620,7 +14070,7 @@ function xmlToRepeat(node) {
             ret.times = dataTimes;
         }
         if (ch2.name === "winged") {
-            var dataWinged = getWingedType(ch2, 0 /* None */);
+            var dataWinged = getWingedType(ch2, WingedType.None);
             ret.winged = dataWinged;
             foundWinged = true;
         }
@@ -13630,10 +14080,26 @@ function xmlToRepeat(node) {
         }
     }
     if (!foundWinged) {
-        ret.winged = 0 /* None */;
+        ret.winged = WingedType.None;
     }
     return ret;
 }
+/**
+ * The tip-direction entity represents the direction in which
+ * the tip of a stick or beater points, using Unicode arrow
+ * terminology.
+ */
+(function (TipDirection) {
+    TipDirection[TipDirection["Right"] = 3] = "Right";
+    TipDirection[TipDirection["Northwest"] = 4] = "Northwest";
+    TipDirection[TipDirection["Southwest"] = 7] = "Southwest";
+    TipDirection[TipDirection["Down"] = 1] = "Down";
+    TipDirection[TipDirection["Northeast"] = 5] = "Northeast";
+    TipDirection[TipDirection["Southeast"] = 6] = "Southeast";
+    TipDirection[TipDirection["Up"] = 0] = "Up";
+    TipDirection[TipDirection["Left"] = 2] = "Left";
+})(exports.TipDirection || (exports.TipDirection = {}));
+var TipDirection = exports.TipDirection;
 function getTipDirection(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -13641,28 +14107,28 @@ function getTipDirection(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "right") {
-        return 3 /* Right */;
+        return TipDirection.Right;
     }
     if (s == "northwest") {
-        return 4 /* Northwest */;
+        return TipDirection.Northwest;
     }
     if (s == "southwest") {
-        return 7 /* Southwest */;
+        return TipDirection.Southwest;
     }
     if (s == "down") {
-        return 1 /* Down */;
+        return TipDirection.Down;
     }
     if (s == "northeast") {
-        return 5 /* Northeast */;
+        return TipDirection.Northeast;
     }
     if (s == "southeast") {
-        return 6 /* Southeast */;
+        return TipDirection.Southeast;
     }
     if (s == "up") {
-        return 0 /* Up */;
+        return TipDirection.Up;
     }
     if (s == "left") {
-        return 2 /* Left */;
+        return TipDirection.Left;
     }
     return fallbackVal;
 }
@@ -13703,7 +14169,7 @@ function xmlToDirection(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -13713,7 +14179,7 @@ function xmlToDirection(node) {
         }
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     ret._class = "Direction";
     return ret;
@@ -13838,7 +14304,7 @@ function xmlToRehearsal(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -13863,12 +14329,12 @@ function xmlToRehearsal(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -13882,12 +14348,12 @@ function xmlToRehearsal(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -13922,12 +14388,12 @@ function xmlToRehearsal(node) {
             foundLineHeight = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
@@ -13936,22 +14402,22 @@ function xmlToRehearsal(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -13972,10 +14438,10 @@ function xmlToRehearsal(node) {
         ret.lineHeight = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -14001,7 +14467,7 @@ function xmlToWords(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -14026,12 +14492,12 @@ function xmlToWords(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -14045,12 +14511,12 @@ function xmlToWords(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -14085,12 +14551,12 @@ function xmlToWords(node) {
             foundLineHeight = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
@@ -14099,22 +14565,22 @@ function xmlToWords(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -14135,13 +14601,20 @@ function xmlToWords(node) {
         ret.lineHeight = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
+(function (WedgeType) {
+    WedgeType[WedgeType["Diminuendo"] = 1] = "Diminuendo";
+    WedgeType[WedgeType["Crescendo"] = 0] = "Crescendo";
+    WedgeType[WedgeType["Stop"] = 2] = "Stop";
+    WedgeType[WedgeType["Continue"] = 3] = "Continue";
+})(exports.WedgeType || (exports.WedgeType = {}));
+var WedgeType = exports.WedgeType;
 function getWedgeType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -14149,16 +14622,16 @@ function getWedgeType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "diminuendo") {
-        return 1 /* Diminuendo */;
+        return WedgeType.Diminuendo;
     }
     if (s == "crescendo") {
-        return 0 /* Crescendo */;
+        return WedgeType.Crescendo;
     }
     if (s == "stop") {
-        return 2 /* Stop */;
+        return WedgeType.Stop;
     }
     if (s == "continue") {
-        return 3 /* Continue */;
+        return WedgeType.Continue;
     }
     return fallbackVal;
 }
@@ -14186,7 +14659,7 @@ function xmlToWedge(node) {
             foundNiente = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -14237,7 +14710,7 @@ function xmlToWedge(node) {
         ret.niente = false;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -14316,6 +14789,14 @@ function xmlToDashes(node) {
     }
     return ret;
 }
+(function (LineEndType) {
+    LineEndType[LineEndType["None"] = 4] = "None";
+    LineEndType[LineEndType["Both"] = 2] = "Both";
+    LineEndType[LineEndType["Arrow"] = 3] = "Arrow";
+    LineEndType[LineEndType["Down"] = 1] = "Down";
+    LineEndType[LineEndType["Up"] = 0] = "Up";
+})(exports.LineEndType || (exports.LineEndType = {}));
+var LineEndType = exports.LineEndType;
 function getLineEndType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -14323,19 +14804,19 @@ function getLineEndType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 4 /* None */;
+        return LineEndType.None;
     }
     if (s == "both") {
-        return 2 /* Both */;
+        return LineEndType.Both;
     }
     if (s == "arrow") {
-        return 3 /* Arrow */;
+        return LineEndType.Arrow;
     }
     if (s == "down") {
-        return 1 /* Down */;
+        return LineEndType.Down;
     }
     if (s == "up") {
-        return 0 /* Up */;
+        return LineEndType.Up;
     }
     return fallbackVal;
 }
@@ -14361,7 +14842,7 @@ function xmlToBracket(node) {
             foundNumber_ = true;
         }
         if (ch2.name === "line-type") {
-            var dataLineType = getSolidDashedDottedWavy(ch2, 0 /* Solid */);
+            var dataLineType = getSolidDashedDottedWavy(ch2, SolidDashedDottedWavy.Solid);
             ret.lineType = dataLineType;
             foundLineType = true;
         }
@@ -14409,7 +14890,7 @@ function xmlToBracket(node) {
         ret.number = 1;
     }
     if (!foundLineType) {
-        ret.lineType = 0 /* Solid */;
+        ret.lineType = SolidDashedDottedWavy.Solid;
     }
     if (!foundDashLength) {
         ret.dashLength = 1;
@@ -14422,6 +14903,13 @@ function xmlToBracket(node) {
     }
     return ret;
 }
+(function (PedalType) {
+    PedalType[PedalType["Change"] = 3] = "Change";
+    PedalType[PedalType["Start"] = 0] = "Start";
+    PedalType[PedalType["Stop"] = 1] = "Stop";
+    PedalType[PedalType["Continue"] = 2] = "Continue";
+})(exports.PedalType || (exports.PedalType = {}));
+var PedalType = exports.PedalType;
 function getPedalType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -14429,16 +14917,16 @@ function getPedalType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "change") {
-        return 3 /* Change */;
+        return PedalType.Change;
     }
     if (s == "start") {
-        return 0 /* Start */;
+        return PedalType.Start;
     }
     if (s == "stop") {
-        return 1 /* Stop */;
+        return PedalType.Stop;
     }
     if (s == "continue") {
-        return 2 /* Continue */;
+        return PedalType.Continue;
     }
     return fallbackVal;
 }
@@ -14483,12 +14971,12 @@ function xmlToPedal(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -14502,12 +14990,12 @@ function xmlToPedal(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -14517,19 +15005,19 @@ function xmlToPedal(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -14604,12 +15092,12 @@ function xmlToMetronome(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -14623,17 +15111,17 @@ function xmlToMetronome(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -14643,22 +15131,22 @@ function xmlToMetronome(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     return ret;
 }
@@ -14686,12 +15174,12 @@ function xmlToPerMinute(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -14704,10 +15192,10 @@ function xmlToPerMinute(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     return ret;
 }
@@ -14800,7 +15288,7 @@ function xmlToMetronomeTuplet(node) {
             foundBracket = true;
         }
         if (ch2.name === "show-number") {
-            var dataShowNumber = getActualBothNone(ch2, 1 /* Both */);
+            var dataShowNumber = getActualBothNone(ch2, ActualBothNone.Both);
             ret.showNumber = dataShowNumber;
             foundShowNumber = true;
         }
@@ -14813,10 +15301,17 @@ function xmlToMetronomeTuplet(node) {
         ret.bracket = false;
     }
     if (!foundShowNumber) {
-        ret.showNumber = 1 /* Both */;
+        ret.showNumber = ActualBothNone.Both;
     }
     return ret;
 }
+(function (OctaveShiftType) {
+    OctaveShiftType[OctaveShiftType["Down"] = 2] = "Down";
+    OctaveShiftType[OctaveShiftType["Stop"] = 3] = "Stop";
+    OctaveShiftType[OctaveShiftType["Up"] = 1] = "Up";
+    OctaveShiftType[OctaveShiftType["Continue"] = 4] = "Continue";
+})(exports.OctaveShiftType || (exports.OctaveShiftType = {}));
+var OctaveShiftType = exports.OctaveShiftType;
 function getOctaveShiftType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -14824,16 +15319,16 @@ function getOctaveShiftType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "down") {
-        return 2 /* Down */;
+        return OctaveShiftType.Down;
     }
     if (s == "stop") {
-        return 3 /* Stop */;
+        return OctaveShiftType.Stop;
     }
     if (s == "up") {
-        return 1 /* Up */;
+        return OctaveShiftType.Up;
     }
     if (s == "continue") {
-        return 4 /* Continue */;
+        return OctaveShiftType.Continue;
     }
     return fallbackVal;
 }
@@ -14890,12 +15385,12 @@ function xmlToOctaveShift(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -14923,10 +15418,10 @@ function xmlToOctaveShift(node) {
         ret.spaceLength = 1;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -14970,12 +15465,12 @@ function xmlToHarpPedals(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -14989,30 +15484,30 @@ function xmlToHarpPedals(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -15067,12 +15562,12 @@ function xmlToDamp(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -15086,30 +15581,30 @@ function xmlToDamp(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -15146,12 +15641,12 @@ function xmlToDampAll(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -15165,30 +15660,30 @@ function xmlToDampAll(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -15225,12 +15720,12 @@ function xmlToEyeglasses(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -15244,30 +15739,30 @@ function xmlToEyeglasses(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -15304,12 +15799,12 @@ function xmlToStringMute(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -15323,12 +15818,12 @@ function xmlToStringMute(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -15338,19 +15833,19 @@ function xmlToStringMute(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -15420,12 +15915,12 @@ function xmlToImage(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
         }
@@ -15439,13 +15934,20 @@ function xmlToImage(node) {
         }
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValignImage) {
-        ret.valignImage = 2 /* Bottom */;
+        ret.valignImage = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
+(function (VoiceSymbol) {
+    VoiceSymbol[VoiceSymbol["None"] = 4] = "None";
+    VoiceSymbol[VoiceSymbol["Hauptstimme"] = 1] = "Hauptstimme";
+    VoiceSymbol[VoiceSymbol["Nebenstimme"] = 2] = "Nebenstimme";
+    VoiceSymbol[VoiceSymbol["Plain"] = 3] = "Plain";
+})(exports.VoiceSymbol || (exports.VoiceSymbol = {}));
+var VoiceSymbol = exports.VoiceSymbol;
 function getVoiceSymbol(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -15453,16 +15955,16 @@ function getVoiceSymbol(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "none") {
-        return 4 /* None */;
+        return VoiceSymbol.None;
     }
     if (s == "Hauptstimme") {
-        return 1 /* Hauptstimme */;
+        return VoiceSymbol.Hauptstimme;
     }
     if (s == "Nebenstimme") {
-        return 2 /* Nebenstimme */;
+        return VoiceSymbol.Nebenstimme;
     }
     if (s == "plain") {
-        return 3 /* Plain */;
+        return VoiceSymbol.Plain;
     }
     return fallbackVal;
 }
@@ -15503,12 +16005,12 @@ function xmlToPrincipalVoice(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -15522,12 +16024,12 @@ function xmlToPrincipalVoice(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -15540,19 +16042,19 @@ function xmlToPrincipalVoice(node) {
     var dataData = getString(ch3, false);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -15601,12 +16103,12 @@ function xmlToAccordionRegistration(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -15620,30 +16122,30 @@ function xmlToAccordionRegistration(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -15725,12 +16227,12 @@ function xmlToPercussion(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -15744,38 +16246,38 @@ function xmlToPercussion(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     return ret;
 }
@@ -15891,6 +16393,12 @@ function xmlToHarmonyChord(node) {
     }
     return ret;
 }
+(function (ExplicitImpliedAlternate) {
+    ExplicitImpliedAlternate[ExplicitImpliedAlternate["Explicit"] = 1] = "Explicit";
+    ExplicitImpliedAlternate[ExplicitImpliedAlternate["Implied"] = 2] = "Implied";
+    ExplicitImpliedAlternate[ExplicitImpliedAlternate["Alternate"] = 3] = "Alternate";
+})(exports.ExplicitImpliedAlternate || (exports.ExplicitImpliedAlternate = {}));
+var ExplicitImpliedAlternate = exports.ExplicitImpliedAlternate;
 function getExplicitImpliedAlternate(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -15898,13 +16406,13 @@ function getExplicitImpliedAlternate(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "explicit") {
-        return 1 /* Explicit */;
+        return ExplicitImpliedAlternate.Explicit;
     }
     if (s == "implied") {
-        return 2 /* Implied */;
+        return ExplicitImpliedAlternate.Implied;
     }
     if (s == "alternate") {
-        return 3 /* Alternate */;
+        return ExplicitImpliedAlternate.Alternate;
     }
     return fallbackVal;
 }
@@ -16006,12 +16514,12 @@ function xmlToHarmony(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16025,7 +16533,7 @@ function xmlToHarmony(node) {
             foundColor = true;
         }
         if (ch2.name === "placement") {
-            var dataPlacement = getAboveBelow(ch2, 0 /* Unspecified */);
+            var dataPlacement = getAboveBelow(ch2, AboveBelow.Unspecified);
             ret.placement = dataPlacement;
             foundPlacement = true;
         }
@@ -16038,16 +16546,16 @@ function xmlToHarmony(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundPlacement) {
-        ret.placement = 0 /* Unspecified */;
+        ret.placement = AboveBelow.Unspecified;
     }
     ret._class = "Harmony";
     return ret;
@@ -16105,12 +16613,12 @@ function xmlToRootStep(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16128,10 +16636,10 @@ function xmlToRootStep(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16179,12 +16687,12 @@ function xmlToRootAlter(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16205,10 +16713,10 @@ function xmlToRootAlter(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16246,12 +16754,12 @@ function xmlToFunction(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16269,10 +16777,10 @@ function xmlToFunction(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16324,12 +16832,12 @@ function xmlToKind(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16343,12 +16851,12 @@ function xmlToKind(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -16365,19 +16873,19 @@ function xmlToKind(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -16412,12 +16920,12 @@ function xmlToInversion(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16435,10 +16943,10 @@ function xmlToInversion(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16498,12 +17006,12 @@ function xmlToBassStep(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16521,10 +17029,10 @@ function xmlToBassStep(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16572,12 +17080,12 @@ function xmlToBassAlter(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16598,10 +17106,10 @@ function xmlToBassAlter(node) {
         ret.printObject = true;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16639,6 +17147,14 @@ function xmlToDegree(node) {
     }
     return ret;
 }
+(function (ChordType) {
+    ChordType[ChordType["Augmented"] = 3] = "Augmented";
+    ChordType[ChordType["Diminished"] = 4] = "Diminished";
+    ChordType[ChordType["Major"] = 1] = "Major";
+    ChordType[ChordType["Minor"] = 2] = "Minor";
+    ChordType[ChordType["HalfDiminished"] = 5] = "HalfDiminished";
+})(exports.ChordType || (exports.ChordType = {}));
+var ChordType = exports.ChordType;
 function getChordType(node, fallbackVal) {
     "use strict";
     var s = (node.nodeType === node.ATTRIBUTE_NODE ? node.value : node.textContent).trim();
@@ -16646,19 +17162,19 @@ function getChordType(node, fallbackVal) {
         return fallbackVal;
     }
     if (s == "augmented") {
-        return 3 /* Augmented */;
+        return ChordType.Augmented;
     }
     if (s == "diminished") {
-        return 4 /* Diminished */;
+        return ChordType.Diminished;
     }
     if (s == "major") {
-        return 1 /* Major */;
+        return ChordType.Major;
     }
     if (s == "minor") {
-        return 2 /* Minor */;
+        return ChordType.Minor;
     }
     if (s == "half-diminished") {
-        return 5 /* HalfDiminished */;
+        return ChordType.HalfDiminished;
     }
     return fallbackVal;
 }
@@ -16701,12 +17217,12 @@ function xmlToDegreeValue(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16724,10 +17240,10 @@ function xmlToDegreeValue(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16769,12 +17285,12 @@ function xmlToDegreeAlter(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16792,10 +17308,10 @@ function xmlToDegreeAlter(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16837,12 +17353,12 @@ function xmlToDegreeType(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -16860,10 +17376,10 @@ function xmlToDegreeType(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -16922,12 +17438,12 @@ function xmlToFrame(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
         }
@@ -16944,10 +17460,10 @@ function xmlToFrame(node) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValignImage) {
-        ret.valignImage = 2 /* Bottom */;
+        ret.valignImage = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -17162,12 +17678,12 @@ function xmlToMeasureNumbering(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -17181,12 +17697,12 @@ function xmlToMeasureNumbering(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -17195,19 +17711,19 @@ function xmlToMeasureNumbering(node) {
     var dataData = getString(ch3, true);
     ret.data = dataData;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -17398,12 +17914,12 @@ function xmlToMusicFont(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -17413,10 +17929,10 @@ function xmlToMusicFont(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     return ret;
 }
@@ -17434,12 +17950,12 @@ function xmlToWordFont(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -17449,10 +17965,10 @@ function xmlToWordFont(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     return ret;
 }
@@ -17474,12 +17990,12 @@ function xmlToLyricFont(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -17493,10 +18009,10 @@ function xmlToLyricFont(node) {
         }
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     return ret;
 }
@@ -17577,7 +18093,7 @@ function xmlToCreditWords(node) {
     for (var i = 0; i < node.attributes.length; ++i) {
         var ch2 = node.attributes[i];
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -17607,12 +18123,12 @@ function xmlToCreditWords(node) {
             foundFontFamily = true;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -17626,12 +18142,12 @@ function xmlToCreditWords(node) {
             foundColor = true;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValign = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValign = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valign = dataValign;
             foundValign = true;
         }
@@ -17666,12 +18182,12 @@ function xmlToCreditWords(node) {
             foundLineHeight = true;
         }
         if (ch2.name === "dir") {
-            var dataDir = getDirectionMode(ch2, 0 /* Ltr */);
+            var dataDir = getDirectionMode(ch2, DirectionMode.Ltr);
             ret.dir = dataDir;
             foundDir = true;
         }
         if (ch2.name === "enclosure") {
-            var dataEnclosure = getEnclosureShape(ch2, 7 /* None */);
+            var dataEnclosure = getEnclosureShape(ch2, EnclosureShape.None);
             ret.enclosure = dataEnclosure;
             foundEnclosure = true;
         }
@@ -17680,22 +18196,22 @@ function xmlToCreditWords(node) {
     var dataWords = getString(ch3, true);
     ret.words = dataWords;
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValign) {
-        ret.valign = 2 /* Bottom */;
+        ret.valign = TopMiddleBottomBaseline.Bottom;
     }
     if (!foundUnderline) {
         ret.underline = 0;
@@ -17716,10 +18232,10 @@ function xmlToCreditWords(node) {
         ret.lineHeight = "normal";
     }
     if (!foundDir) {
-        ret.dir = 0 /* Ltr */;
+        ret.dir = DirectionMode.Ltr;
     }
     if (!foundEnclosure) {
-        ret.enclosure = 7 /* None */;
+        ret.enclosure = EnclosureShape.None;
     }
     if (!foundFontFamily) {
         ret.fontFamily = "";
@@ -17764,12 +18280,12 @@ function xmlToCreditImage(node) {
             ret.relativeX = dataRelativeX;
         }
         if (ch2.name === "halign") {
-            var dataHalign = getLeftCenterRight(ch2, (ret.justify || 0 /* Left */));
+            var dataHalign = getLeftCenterRight(ch2, (ret.justify || LeftCenterRight.Left));
             ret.halign = dataHalign;
             foundHalign = true;
         }
         if (ch2.name === "valign") {
-            var dataValignImage = getTopMiddleBottomBaseline(ch2, 2 /* Bottom */);
+            var dataValignImage = getTopMiddleBottomBaseline(ch2, TopMiddleBottomBaseline.Bottom);
             ret.valignImage = dataValignImage;
             foundValignImage = true;
         }
@@ -17783,10 +18299,10 @@ function xmlToCreditImage(node) {
         }
     }
     if (!foundHalign) {
-        ret.halign = (ret.justify || 0 /* Left */);
+        ret.halign = (ret.justify || LeftCenterRight.Left);
     }
     if (!foundValignImage) {
-        ret.valignImage = 2 /* Bottom */;
+        ret.valignImage = TopMiddleBottomBaseline.Bottom;
     }
     return ret;
 }
@@ -17911,12 +18427,12 @@ function xmlToPartName(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -17935,7 +18451,7 @@ function xmlToPartName(node) {
             foundPrintObject = true;
         }
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -17944,10 +18460,10 @@ function xmlToPartName(node) {
     var dataPartName = getString(ch3, true);
     ret.partName = dataPartName;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -17956,7 +18472,7 @@ function xmlToPartName(node) {
         ret.printObject = true;
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     return ret;
 }
@@ -17993,12 +18509,12 @@ function xmlToPartAbbreviation(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -18017,7 +18533,7 @@ function xmlToPartAbbreviation(node) {
             foundPrintObject = true;
         }
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -18026,10 +18542,10 @@ function xmlToPartAbbreviation(node) {
     var dataAbbreviation = getString(ch3, true);
     ret.abbreviation = dataAbbreviation;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -18038,7 +18554,7 @@ function xmlToPartAbbreviation(node) {
         ret.printObject = true;
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     return ret;
 }
@@ -18135,12 +18651,12 @@ function xmlToGroupName(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -18154,7 +18670,7 @@ function xmlToGroupName(node) {
             foundColor = true;
         }
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -18163,16 +18679,16 @@ function xmlToGroupName(node) {
     var dataName = getString(ch3, true);
     ret.name = dataName;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     return ret;
 }
@@ -18208,12 +18724,12 @@ function xmlToGroupAbbreviation(node) {
             ret.fontFamily = dataFontFamily;
         }
         if (ch2.name === "font-weight") {
-            var dataFontWeight = getNormalBold(ch2, 0 /* Normal */);
+            var dataFontWeight = getNormalBold(ch2, NormalBold.Normal);
             ret.fontWeight = dataFontWeight;
             foundFontWeight = true;
         }
         if (ch2.name === "font-style") {
-            var dataFontStyle = getNormalItalic(ch2, 0 /* Normal */);
+            var dataFontStyle = getNormalItalic(ch2, NormalItalic.Normal);
             ret.fontStyle = dataFontStyle;
             foundFontStyle = true;
         }
@@ -18227,7 +18743,7 @@ function xmlToGroupAbbreviation(node) {
             foundColor = true;
         }
         if (ch2.name === "justify") {
-            var dataJustify = getLeftCenterRight(ch2, 0 /* Left */);
+            var dataJustify = getLeftCenterRight(ch2, LeftCenterRight.Left);
             ret.justify = dataJustify;
             foundJustify = true;
         }
@@ -18236,16 +18752,16 @@ function xmlToGroupAbbreviation(node) {
     var dataText = getString(ch3, true);
     ret.text = dataText;
     if (!foundFontWeight) {
-        ret.fontWeight = 0 /* Normal */;
+        ret.fontWeight = NormalBold.Normal;
     }
     if (!foundFontStyle) {
-        ret.fontStyle = 0 /* Normal */;
+        ret.fontStyle = NormalItalic.Normal;
     }
     if (!foundColor) {
         ret.color = "#000000";
     }
     if (!foundJustify) {
-        ret.justify = 0 /* Left */;
+        ret.justify = LeftCenterRight.Left;
     }
     return ret;
 }
@@ -18281,10 +18797,10 @@ function xmlToGroupSymbol(node) {
         }
     }
     var ch3 = node;
-    var dataData = getPartSymbolType(ch3, 0 /* None */);
+    var dataData = getPartSymbolType(ch3, PartSymbolType.None);
     ret.data = dataData;
     if (!foundData) {
-        ret.data = 0 /* None */;
+        ret.data = PartSymbolType.None;
     }
     if (!foundColor) {
         ret.color = "#000000";
@@ -19636,9 +20152,9 @@ function harmonyToXML(harmony) {
     var _a, _b, _c;
 }
 var eiaTypeToXML = (_a = {},
-    _a[1 /* Explicit */] = "explicit",
-    _a[2 /* Implied */] = "implied",
-    _a[3 /* Alternate */] = "alternate",
+    _a[ExplicitImpliedAlternate.Explicit] = "explicit",
+    _a[ExplicitImpliedAlternate.Implied] = "implied",
+    _a[ExplicitImpliedAlternate.Alternate] = "alternate",
     _a
 );
 function explicitImpliedAlternateToXML(eia) {
@@ -19675,7 +20191,7 @@ function rootToXML(root) {
         var attribs = printObjectToXML(root.rootAlter) +
             printStyleToXML(root.rootAlter);
         if (defined(root.rootAlter.location)) {
-            attribs += (_d = [" location=\"", "\""], _d.raw = [" location=\"", "\""], xml(_d, root.rootAlter.location === 0 /* Left */ ? "left" : "right"));
+            attribs += (_d = [" location=\"", "\""], _d.raw = [" location=\"", "\""], xml(_d, root.rootAlter.location === LeftRight.Left ? "left" : "right"));
         }
         var pcdata = root.rootAlter.data;
         children.push((_e = ["<root-alter", ">", "</root-alter>"], _e.raw = ["<root-alter", ">", "</root-alter>"], dangerous(_e, attribs, pcdata)));
@@ -19764,7 +20280,7 @@ function bassToXML(bass) {
         var attribs = printObjectToXML(bass.bassAlter) +
             printStyleToXML(bass.bassAlter);
         if (defined(bass.bassAlter.location)) {
-            attribs += (_d = [" location=\"", "\""], _d.raw = [" location=\"", "\""], xml(_d, bass.bassAlter.location === 0 /* Left */ ? "left" : "right"));
+            attribs += (_d = [" location=\"", "\""], _d.raw = [" location=\"", "\""], xml(_d, bass.bassAlter.location === LeftRight.Left ? "left" : "right"));
         }
         var pcdata = bass.bassAlter.data;
         children.push((_e = ["<bass-alter", ">", "</bass-alter>"], _e.raw = ["<bass-alter", ">", "</bass-alter>"], dangerous(_e, attribs, pcdata)));
@@ -19774,11 +20290,11 @@ function bassToXML(bass) {
     var _a, _b, _c, _d, _e, _f;
 }
 var chordTypeToXML = (_b = {},
-    _b[3 /* Augmented */] = "augmented",
-    _b[4 /* Diminished */] = "diminished",
-    _b[1 /* Major */] = "major",
-    _b[2 /* Minor */] = "minor",
-    _b[5 /* HalfDiminished */] = "half-diminished",
+    _b[ChordType.Augmented] = "augmented",
+    _b[ChordType.Diminished] = "diminished",
+    _b[ChordType.Major] = "major",
+    _b[ChordType.Minor] = "minor",
+    _b[ChordType.HalfDiminished] = "half-diminished",
     _b
 );
 function degreeToXML(degree) {
@@ -19883,7 +20399,7 @@ function frameToXML(frame) {
             attribs_1 += (_g = [" text=\"", "\""], _g.raw = [" text=\"", "\""], xml(_g, frame.firstFret.text));
         }
         if (defined(frame.firstFret.location)) {
-            attribs_1 += (_h = [" location=\"", "\""], _h.raw = [" location=\"", "\""], xml(_h, frame.firstFret.location === 0 /* Left */ ?
+            attribs_1 += (_h = [" location=\"", "\""], _h.raw = [" location=\"", "\""], xml(_h, frame.firstFret.location === LeftRight.Left ?
                 "left" : "right"));
         }
     }
@@ -20265,9 +20781,9 @@ var holeLocationToXML = {
     2: "left"
 };
 var actualBothNoneToXML = (_c = {},
-    _c[2 /* None */] = "none",
-    _c[1 /* Both */] = "both",
-    _c[0 /* Actual */] = "actual",
+    _c[ActualBothNone.None] = "none",
+    _c[ActualBothNone.Both] = "both",
+    _c[ActualBothNone.Actual] = "actual",
     _c
 );
 var beamTypeToXML = {
@@ -20512,7 +21028,7 @@ function noteToXML(note) {
         elements.push((_x = ["<duration>", "</duration>"], _x.raw = ["<duration>", "</duration>"], xml(_x, note.duration)));
     }
     if (note.ties && note.ties.length) {
-        var tieAttribs = (_y = [" type=\"", "\""], _y.raw = [" type=\"", "\""], xml(_y, note.ties[0].type === 1 /* Stop */ ? "stop" : "start"));
+        var tieAttribs = (_y = [" type=\"", "\""], _y.raw = [" type=\"", "\""], xml(_y, note.ties[0].type === StartStop.Stop ? "stop" : "start"));
         elements.push((_z = ["<tie", " />"], _z.raw = ["<tie", " />"], dangerous(_z, tieAttribs)));
     }
     // ...
@@ -21870,10 +22386,10 @@ function wordsToXML(words) {
     var _a, _b;
 }
 var wedgeTypeToXML = (_d = {},
-    _d[1 /* Diminuendo */] = "diminuendo",
-    _d[0 /* Crescendo */] = "crescendo",
-    _d[2 /* Stop */] = "stop",
-    _d[3 /* Continue */] = "continue",
+    _d[WedgeType.Diminuendo] = "diminuendo",
+    _d[WedgeType.Crescendo] = "crescendo",
+    _d[WedgeType.Stop] = "stop",
+    _d[WedgeType.Continue] = "continue",
     _d
 );
 function wedgeToXML(wedge) {
@@ -21959,11 +22475,11 @@ function dashesToXML(dashes) {
     var _a;
 }
 var lineEndTypeToXML = (_e = {},
-    _e[4 /* None */] = "none",
-    _e[2 /* Both */] = "both",
-    _e[3 /* Arrow */] = "arrow",
-    _e[1 /* Down */] = "down",
-    _e[0 /* Up */] = "up",
+    _e[LineEndType.None] = "none",
+    _e[LineEndType.Both] = "both",
+    _e[LineEndType.Arrow] = "arrow",
+    _e[LineEndType.Down] = "down",
+    _e[LineEndType.Up] = "up",
     _e
 );
 function bracketToXML(bracket) {
@@ -21994,10 +22510,10 @@ function bracketToXML(bracket) {
     var _a, _b, _c;
 }
 var pedalTypeToXML = (_f = {},
-    _f[3 /* Change */] = "change",
-    _f[0 /* Start */] = "start",
-    _f[1 /* Stop */] = "stop",
-    _f[2 /* Continue */] = "continue",
+    _f[PedalType.Change] = "change",
+    _f[PedalType.Start] = "start",
+    _f[PedalType.Stop] = "stop",
+    _f[PedalType.Continue] = "continue",
     _f
 );
 function pedalToXML(pedal) {
@@ -22140,10 +22656,10 @@ function metronomeTupletToXML(metronomeTuplet) {
     var _a, _b, _c, _d, _e, _f;
 }
 var octaveShiftTypeToXML = (_g = {},
-    _g[2 /* Down */] = "down",
-    _g[3 /* Stop */] = "stop",
-    _g[1 /* Up */] = "up",
-    _g[4 /* Continue */] = "continue",
+    _g[OctaveShiftType.Down] = "down",
+    _g[OctaveShiftType.Stop] = "stop",
+    _g[OctaveShiftType.Up] = "up",
+    _g[OctaveShiftType.Continue] = "continue",
     _g
 );
 function octaveShiftToXML(octaveShift) {
@@ -22265,10 +22781,10 @@ function imageToXML(image) {
     var _a, _b, _c;
 }
 var voiceSymbolToXML = (_h = {},
-    _h[4 /* None */] = "none",
-    _h[1 /* Hauptstimme */] = "hauptstimme",
-    _h[2 /* Nebenstimme */] = "nebenstimme",
-    _h[3 /* Plain */] = "plain",
+    _h[VoiceSymbol.None] = "none",
+    _h[VoiceSymbol.Hauptstimme] = "hauptstimme",
+    _h[VoiceSymbol.Nebenstimme] = "nebenstimme",
+    _h[VoiceSymbol.Plain] = "plain",
     _h
 );
 function principalVoiceToXML(principalVoice) {
@@ -22310,14 +22826,14 @@ function accordionRegistrationToXML(accordionRegistration) {
     var _a, _b, _c, _d;
 }
 var tipDirectionToXML = (_j = {},
-    _j[3 /* Right */] = "right",
-    _j[4 /* Northwest */] = "northwest",
-    _j[7 /* Southwest */] = "southwest",
-    _j[1 /* Down */] = "down",
-    _j[5 /* Northeast */] = "northeast",
-    _j[6 /* Southeast */] = "southeast",
-    _j[0 /* Up */] = "up",
-    _j[2 /* Left */] = "left",
+    _j[TipDirection.Right] = "right",
+    _j[TipDirection.Northwest] = "northwest",
+    _j[TipDirection.Southwest] = "southwest",
+    _j[TipDirection.Down] = "down",
+    _j[TipDirection.Northeast] = "northeast",
+    _j[TipDirection.Southeast] = "southeast",
+    _j[TipDirection.Up] = "up",
+    _j[TipDirection.Left] = "left",
     _j
 );
 function percussionToXML(percussion) {
@@ -22458,9 +22974,9 @@ function barStyleToXML(barStyle) {
     var _a, _b;
 }
 var startStopDiscontinueTypeToXML = (_k = {},
-    _k[0 /* Start */] = "start",
-    _k[1 /* Stop */] = "stop",
-    _k[2 /* Discontinue */] = "discontinue",
+    _k[StartStopDiscontinue.Start] = "start",
+    _k[StartStopDiscontinue.Stop] = "stop",
+    _k[StartStopDiscontinue.Discontinue] = "discontinue",
     _k
 );
 function endingToXML(ending) {
@@ -22493,16 +23009,16 @@ function endingToXML(ending) {
     var _a, _b, _c, _d, _e;
 }
 var directionTypeBgToXML = (_l = {},
-    _l[1 /* Forward */] = "forward",
-    _l[0 /* Backward */] = "backward",
+    _l[DirectionTypeBg.Forward] = "forward",
+    _l[DirectionTypeBg.Backward] = "backward",
     _l
 );
 var wingedTypeToXML = (_m = {},
-    _m[0 /* None */] = "none",
-    _m[2 /* Curved */] = "curved",
-    _m[4 /* DoubleCurved */] = "double-curved",
-    _m[1 /* Straight */] = "straight",
-    _m[3 /* DoubleStraight */] = "double-straight",
+    _m[WingedType.None] = "none",
+    _m[WingedType.Curved] = "curved",
+    _m[WingedType.DoubleCurved] = "double-curved",
+    _m[WingedType.Straight] = "straight",
+    _m[WingedType.DoubleStraight] = "double-straight",
     _m
 );
 function repeatToXML(repeat) {
@@ -22854,7 +23370,7 @@ function clefToXML(clef) {
     if (defined(clef.additional)) {
         attribs += (_a = [" additional=\"", "\""], _a.raw = [" additional=\"", "\""], yesNo(_a, clef.additional));
     }
-    if (clef.size >= 0 /* Unspecified */) {
+    if (clef.size >= SymbolSize.Unspecified) {
         attribs += (_b = [" size=\"", "\""], _b.raw = [" size=\"", "\""], xml(_b, symbolSizeToXML[clef.size]));
     }
     if (defined(clef.afterBarline)) {
@@ -23197,7 +23713,7 @@ function lineTypeToXML(lineType) {
 function startStopToXML(startStop) {
     // <!ENTITY % start-stop "(start | stop)">
     if (defined(startStop.type)) {
-        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, startStop.type === 0 /* Start */ ?
+        return (_a = [" type=\"", "\""], _a.raw = [" type=\"", "\""], xml(_a, startStop.type === StartStop.Start ?
             "start" : "stop"));
     }
     return "";
@@ -23297,8 +23813,8 @@ function positionToXML(pos) {
 function placementToXML(placement) {
     // <!ENTITY % placement
     //     "placement %above-below; #IMPLIED">
-    if (placement.placement > 0 /* Unspecified */) {
-        return (_a = [" placement=\"", "\""], _a.raw = [" placement=\"", "\""], xml(_a, placement.placement === 1 /* Above */ ?
+    if (placement.placement > AboveBelow.Unspecified) {
+        return (_a = [" placement=\"", "\""], _a.raw = [" placement=\"", "\""], xml(_a, placement.placement === AboveBelow.Above ?
             "above" : "below"));
     }
     return "";
@@ -23307,8 +23823,8 @@ function placementToXML(placement) {
 function orientationToXML(orientation) {
     // <!ENTITY % orientation
     //     "orientation (over | under) #IMPLIED">
-    if (orientation.orientation > 0 /* Unspecified */) {
-        return (_a = [" orientation=\"", "\""], _a.raw = [" orientation=\"", "\""], xml(_a, orientation.orientation === 1 /* Over */ ?
+    if (orientation.orientation > OverUnder.Unspecified) {
+        return (_a = [" orientation=\"", "\""], _a.raw = [" orientation=\"", "\""], xml(_a, orientation.orientation === OverUnder.Over ?
             "over" : "under"));
     }
     return "";
@@ -23356,14 +23872,14 @@ function fontToXML(font) {
     }
     if (defined(font.fontStyle)) {
         attribs += (_b = [" font-style=\"", "\""], _b.raw = [" font-style=\"", "\""], xml(_b, font.fontStyle ===
-            1 /* Italic */ ? "italic" : "normal"));
+            NormalItalic.Italic ? "italic" : "normal"));
     }
     if (defined(font.fontSize)) {
         attribs += (_c = [" font-size=\"", "\""], _c.raw = [" font-size=\"", "\""], xml(_c, font.fontSize));
     }
     if (defined(font.fontWeight)) {
         attribs += (_d = [" font-weight=\"", "\""], _d.raw = [" font-weight=\"", "\""], xml(_d, font.fontWeight ===
-            2 /* Bold */ ? "bold" : "normal"));
+            NormalBold.Bold ? "bold" : "normal"));
     }
     return attribs;
     var _a, _b, _c, _d;
@@ -23521,7 +24037,7 @@ function levelDisplayToXML(levelDisplay) {
     if (defined(levelDisplay.bracket)) {
         attribs += (_a = [" bracket=\"", "\""], _a.raw = [" bracket=\"", "\""], yesNo(_a, levelDisplay.bracket));
     }
-    if (levelDisplay.size >= 0 /* Unspecified */) {
+    if (levelDisplay.size >= SymbolSize.Unspecified) {
         attribs += (_b = [" size=\"", "\""], _b.raw = [" size=\"", "\""], xml(_b, symbolSizeToXML[levelDisplay.size]));
     }
     if (defined(levelDisplay.parentheses)) {
@@ -23612,11 +24128,11 @@ function mordentSubsetToXML(mordent) {
         attribs += (_a = [" long=\"", "\""], _a.raw = [" long=\"", "\""], yesNo(_a, mordent.long));
     }
     if (defined(mordent.approach)) {
-        attribs += (_b = [" approach=\"", "\""], _b.raw = [" approach=\"", "\""], xml(_b, mordent.approach === 1 /* Above */ ?
+        attribs += (_b = [" approach=\"", "\""], _b.raw = [" approach=\"", "\""], xml(_b, mordent.approach === AboveBelow.Above ?
             "above" : "below"));
     }
     if (defined(mordent.departure)) {
-        attribs += (_c = [" departure=\"", "\""], _c.raw = [" departure=\"", "\""], xml(_c, mordent.departure === 1 /* Above */ ?
+        attribs += (_c = [" departure=\"", "\""], _c.raw = [" departure=\"", "\""], xml(_c, mordent.departure === AboveBelow.Above ?
             "above" : "below"));
     }
     return attribs;

@@ -1,35 +1,30 @@
 {
-    "name": "musicxml-interfaces",
-    "version": "0.0.6",
-    "description": "MusicXML parser and serializer for JavaScript and TypeScript",
-
-    "author": "Josh Netterfield",
-    "license": "AGPL-3.0",
-
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/ripieno/musicxml-interfaces"
-    },
-
-    "dependencies": {
-        "xmldom": "^0.1.19"
-    },
-    "devDependencies": {
-        "typescript": "git://github.com/Microsoft/TypeScript.git"
-    },
-
-    "main": "./musicxml-interfaces.js",
-    "files": ["./typescript"],
-    "typescript": {
-        "definition": "musicxml-interfaces.d.ts"
-    },
-    "browser": {
-        "xmldom": false,
-        "child_process": false
-    },
-    "files": [
-        "musicxml-interfaces.d.ts",
-        "musicxml-interfaces.js",
-        "vendor"
-    ]
+  "name": "musicxml-interfaces",
+  "version": "0.0.7",
+  "description": "MusicXML parser and serializer for JavaScript and TypeScript",
+  "author": "Josh Netterfield",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ripieno/musicxml-interfaces"
+  },
+  "dependencies": {
+    "xmldom": "^0.1.19"
+  },
+  "devDependencies": {
+    "typescript": "^1.7.0-dev.20150829"
+  },
+  "main": "./musicxml-interfaces.js",
+  "files": [
+    "musicxml-interfaces.d.ts",
+    "musicxml-interfaces.js",
+    "vendor"
+  ],
+  "typescript": {
+    "definition": "musicxml-interfaces.d.ts"
+  },
+  "browser": {
+    "xmldom": false,
+    "child_process": false
+  }
 }
