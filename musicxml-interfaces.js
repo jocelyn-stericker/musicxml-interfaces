@@ -13390,7 +13390,7 @@ function xmlToBarline(node) {
             ret.segnoAttrib = dataSegnoAttrib;
         }
         if (ch2.name === "divisions") {
-            var dataDivisions = getString(ch2, true);
+            var dataDivisions = getNumber(ch2, true);
             ret.divisions = dataDivisions;
         }
     }
@@ -17251,7 +17251,7 @@ function xmlToSound(node) {
             ret.decapo = dataDecapo;
         }
         if (ch2.name === "divisions") {
-            var dataDivisions = getString(ch2, true);
+            var dataDivisions = getNumber(ch2, true);
             ret.divisions = dataDivisions;
         }
         if (ch2.name === "pizzicato") {

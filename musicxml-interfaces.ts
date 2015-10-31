@@ -17594,7 +17594,7 @@ export interface Barline extends Editorial {
     wavyLine?: WavyLine;
     fermatas?: Fermata[];
     segnoAttrib: string;
-    divisions: string;
+    divisions: number;
     barStyle?: BarStyle;
     ending?: Ending;
     repeat?: Repeat;
@@ -17656,7 +17656,7 @@ function xmlToBarline(node: Node) {
             ret.segnoAttrib = dataSegnoAttrib;
         }
         if (ch2.name === "divisions") {
-            let dataDivisions = getString(ch2, true);
+            let dataDivisions = getNumber(ch2, true);
             ret.divisions = dataDivisions;
         }
     }
@@ -22640,7 +22640,7 @@ export interface Sound extends TimeOnly {
     pan: string;
     tocoda: string;
     decapo: boolean;
-    divisions: string;
+    divisions: number;
     pizzicato: boolean;
     coda: string;
     segno: string;
@@ -22698,7 +22698,7 @@ function xmlToSound(node: Node) {
             ret.decapo = dataDecapo;
         }
         if (ch2.name === "divisions") {
-            let dataDivisions = getString(ch2, true);
+            let dataDivisions = getNumber(ch2, true);
             ret.divisions = dataDivisions;
         }
         if (ch2.name === "pizzicato") {
