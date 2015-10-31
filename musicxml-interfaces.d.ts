@@ -3807,7 +3807,7 @@ declare module "musicxml-interfaces" {
         wavyLine?: WavyLine;
         fermatas?: Fermata[];
         segnoAttrib: string;
-        divisions: string;
+        divisions: number;
         barStyle?: BarStyle;
         ending?: Ending;
         repeat?: Repeat;
@@ -4837,7 +4837,7 @@ declare module "musicxml-interfaces" {
         pan: string;
         tocoda: string;
         decapo: boolean;
-        divisions: string;
+        divisions: number;
         pizzicato: boolean;
         coda: string;
         segno: string;
