@@ -7607,7 +7607,7 @@ function xmlToMeasureStyle(node: Node) {
  * music in score order, not in MusicXML document order.
  */
 export interface Attributes extends Editorial {
-    divisions?: number;
+    divisions: number;
     partSymbol?: PartSymbol;
     clefs?: Clef[];
     measureStyles?: MeasureStyle[];

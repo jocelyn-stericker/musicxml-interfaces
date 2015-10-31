@@ -2189,7 +2189,7 @@ declare module "musicxml-interfaces" {
      * music in score order, not in MusicXML document order.
      */
     export interface Attributes extends Editorial {
-        divisions?: number;
+        divisions: number;
         partSymbol?: PartSymbol;
         clefs?: Clef[];
         measureStyles?: MeasureStyle[];
