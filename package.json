@@ -12,14 +12,14 @@
     },
 
     "dependencies": {
-        "xmldom": "^0.1.19"
+        "xmldom": "0.1.19"
     },
     "devDependencies": {
-        "typescript": "git://github.com/Microsoft/TypeScript.git"
+        "typescript": "1.6.2",
+        "dts-generator": "1.6.2"
     },
 
     "main": "./musicxml-interfaces.js",
-    "files": ["./typescript"],
     "typescript": {
         "definition": "musicxml-interfaces.d.ts"
     },

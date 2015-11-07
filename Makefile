@@ -16,17 +16,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-.PHONY: all
+.PHONY: all watch typings
 
-all: ./node_modules/typescript/bin/tsc
-	@./node_modules/typescript/bin/tsc ./musicxml-interfaces.ts  --module commonjs -t ES5
+all: ./node_modules/.bin/tsc typings
+	@./node_modules/.bin/tsc ./musicxml-interfaces.ts --module commonjs -t ES5
 
-watch: ./node_modules/typescript/bin/tsc
-	@./node_modules/typescript/bin/tsc ./musicxml-interfaces.ts  --module commonjs -t ES5 -w
+watch: ./node_modules/.bin/tsc
+	@./node_modules/.bin/tsc ./musicxml-interfaces.ts --module commonjs -t ES5 -w
 
-typings: ./node_modules/typescript/bin/tsc
-	@./node_modules/typescript/bin/tsc ./musicxml-interfaces.ts  --module commonjs -t ES5 -d
-	@./fixTypings.bash
+typings: ./node_modules/.bin/tsc
+	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/musicxml-interfaces' --out ./musicxml-interfaces.d.ts --baseDir . ./musicxml-interfaces.ts
 
-./node_modules/typescript/bin/tsc:
+./node_modules/.bin/tsc:
 	@npm install
