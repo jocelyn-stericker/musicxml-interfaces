@@ -16,16 +16,22 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 
-.PHONY: all watch typings
+.PHONY: all watch main
 
-all: ./node_modules/.bin/tsc typings
-	@./node_modules/.bin/tsc ./musicxml-interfaces.ts --module commonjs -t ES5
+all: ./node_modules/.bin/tsc main
+
+main: ./node_modules/.bin/tsc
+	@echo '' > ./builders.ts
+	@./node_modules/.bin/tsc
+	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/musicxml-interfaces' --out ./musicxml-interfaces.d.ts --baseDir . ./musicxml-interfaces.ts
+	@node ./operationGenerator.js ./musicxml-interfaces.d.ts --out ./spec.tmp.json
+	@node ./writeBuilders.js > builders.ts
+	@rm ./spec.tmp.json
+	@./node_modules/.bin/tsc
+	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/musicxml-interfaces' --out ./musicxml-interfaces.d.ts --baseDir . ./musicxml-interfaces.ts ./builders.ts
 
 watch: ./node_modules/.bin/tsc
-	@./node_modules/.bin/tsc ./musicxml-interfaces.ts --module commonjs -t ES5 -w
-
-typings: ./node_modules/.bin/tsc
-	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/musicxml-interfaces' --out ./musicxml-interfaces.d.ts --baseDir . ./musicxml-interfaces.ts
+	@./node_modules/.bin/tsc -w
 
 ./node_modules/.bin/tsc:
 	@npm install

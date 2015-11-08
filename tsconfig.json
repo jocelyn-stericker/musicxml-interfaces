@@ -5,6 +5,8 @@
         "declaration": false
     },
     "files": [
-        "musicxml-interfaces.ts"
+        "operationGenerator.ts",
+        "musicxml-interfaces.ts",
+        "builders.ts"
     ]
 }

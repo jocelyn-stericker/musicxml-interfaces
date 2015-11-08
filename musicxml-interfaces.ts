@@ -334,12 +334,10 @@ function toCamelCase(input: string) {
 
 /*---- Types ------------------------------------------------------------------------------------*/
 
-export interface TextArray {
+export interface TextArray extends Array<TextArray> {
     acc?: AccidentalText;
     text?: DisplayText;
 }
-
-export interface TextArray extends Array<TextArray> {}
 
 export interface EncodingDate extends CalendarDate {}
 
