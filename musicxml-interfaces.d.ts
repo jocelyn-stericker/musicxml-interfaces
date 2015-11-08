@@ -140,7 +140,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * a slur may appear in staff 1 before the starting point for
 	 * the slur appears in staff 2 later in the document.
 	 */
-	export const enum StartStop {
+	export enum StartStop {
 	    Start = 0,
 	    Stop = 1,
 	}
@@ -160,7 +160,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * a slur may appear in staff 1 before the starting point for
 	 * the slur appears in staff 2 later in the document.
 	 */
-	export const enum StartStopContinue {
+	export enum StartStopContinue {
 	    Start = 0,
 	    Stop = 1,
 	    Continue = 2,
@@ -180,7 +180,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * a slur may appear in staff 1 before the starting point for
 	 * the slur appears in staff 2 later in the document.
 	 */
-	export const enum StartStopSingle {
+	export enum StartStopSingle {
 	    Single = 3,
 	    Start = 0,
 	    Stop = 1,
@@ -190,7 +190,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * cue-sized vs. oversized symbols. The large value
 	 * for oversized symbols was added in version 1.1.
 	 */
-	export const enum SymbolSize {
+	export enum SymbolSize {
 	    /**
 	     * Context-dependant.
 	     */
@@ -206,7 +206,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * The above-below type is used to indicate whether one
 	 * element appears above or below another element.
 	 */
-	export const enum AboveBelow {
+	export enum AboveBelow {
 	    Above = 1,
 	    Below = 2,
 	    Unspecified = 0,
@@ -214,7 +214,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	/**
 	 * Specifies orientation.
 	 */
-	export const enum OverUnder {
+	export enum OverUnder {
 	    Over = 1,
 	    Under = 2,
 	    Unspecified = 0,
@@ -223,7 +223,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * The up-down entity is used for arrow direction,
 	 * indicating which way the tip is pointing.
 	 */
-	export const enum UpDown {
+	export enum UpDown {
 	    Down = 1,
 	    Up = 0,
 	}
@@ -231,7 +231,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * The top-bottom entity is used to indicate the top or
 	 * bottom part of a vertical shape like non-arpeggiate.
 	 */
-	export const enum TopBottom {
+	export enum TopBottom {
 	    Top = 0,
 	    Bottom = 1,
 	}
@@ -240,7 +240,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * element appears to the left or the right of another
 	 * element.
 	 */
-	export const enum LeftRight {
+	export enum LeftRight {
 	    Right = 1,
 	    Left = 0,
 	}
@@ -250,7 +250,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * enclosure is similar to a rectangle with the bottom line
 	 * missing, as is common in jazz notation.
 	 */
-	export const enum EnclosureShape {
+	export enum EnclosureShape {
 	    Circle = 3,
 	    Bracket = 4,
 	    Triangle = 5,
@@ -260,11 +260,11 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    Oval = 2,
 	    Rectangle = 0,
 	}
-	export const enum NormalItalic {
+	export enum NormalItalic {
 	    Italic = 1,
 	    Normal = 0,
 	}
-	export const enum NormalBold {
+	export enum NormalBold {
 	    Bold = 2,
 	    Normal = 0,
 	}
@@ -458,53 +458,53 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    fontStyle?: NormalItalic;
 	    fontSize?: string;
 	}
-	export const enum LeftCenterRight {
+	export enum LeftCenterRight {
 	    Right = 1,
 	    Center = 2,
 	    Left = 0,
 	}
-	export const enum TopMiddleBottomBaseline {
+	export enum TopMiddleBottomBaseline {
 	    Top = 0,
 	    Middle = 1,
 	    Baseline = 3,
 	    Bottom = 2,
 	}
-	export const enum DirectionMode {
+	export enum DirectionMode {
 	    Lro = 2,
 	    Rlo = 3,
 	    Ltr = 0,
 	    Rtl = 1,
 	}
-	export const enum StraightCurved {
+	export enum StraightCurved {
 	    Curved = 1,
 	    Straight = 0,
 	}
-	export const enum SolidDashedDottedWavy {
+	export enum SolidDashedDottedWavy {
 	    Dashed = 1,
 	    Wavy = 3,
 	    Dotted = 2,
 	    Solid = 0,
 	}
-	export const enum NormalAngledSquare {
+	export enum NormalAngledSquare {
 	    Angled = 1,
 	    Square = 2,
 	    Normal = 0,
 	}
-	export const enum UprightInverted {
+	export enum UprightInverted {
 	    Upright = 0,
 	    Inverted = 1,
 	}
-	export const enum UpperMainBelow {
+	export enum UpperMainBelow {
 	    Main = 1,
 	    Below = 2,
 	    Upper = 0,
 	}
-	export const enum WholeHalfUnison {
+	export enum WholeHalfUnison {
 	    Unison = 2,
 	    Whole = 0,
 	    Half = 1,
 	}
-	export const enum WholeHalfNone {
+	export enum WholeHalfNone {
 	    None = 3,
 	    Whole = 0,
 	    Half = 1,
@@ -1139,7 +1139,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    tenths?: number;
 	    millimeters?: number;
 	}
-	export const enum OddEvenBoth {
+	export enum OddEvenBoth {
 	    Both = 2,
 	    Even = 1,
 	    Odd = 0,
@@ -1362,7 +1362,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    tenths: number;
 	    type: string;
 	}
-	export const enum CueGraceLarge {
+	export enum CueGraceLarge {
 	    Grace = 1,
 	    Cue = 0,
 	    Large = 2,
@@ -1597,7 +1597,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    encoders?: Encoder[];
 	    softwares?: string[];
 	}
-	export const enum SeparatorType {
+	export enum SeparatorType {
 	    None = 0,
 	    Horizontal = 1,
 	    Diagonal = 2,
@@ -1619,7 +1619,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	export interface TimeSeparator {
 	    separator?: SeparatorType;
 	}
-	export const enum TimeSymbolType {
+	export enum TimeSymbolType {
 	    DottedNote = 4,
 	    Cut = 1,
 	    SingleNumber = 2,
@@ -1643,7 +1643,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	export interface TimeSymbol {
 	    symbol?: TimeSymbolType;
 	}
-	export const enum CancelLocation {
+	export enum CancelLocation {
 	    Right = 1,
 	    BeforeBarline = 2,
 	    Left = 0,
@@ -1899,7 +1899,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    beatTypes: number[];
 	    timeRelation?: string;
 	}
-	export const enum PartSymbolType {
+	export enum PartSymbolType {
 	    None = 0,
 	    Line = 2,
 	    Bracket = 3,
@@ -1983,7 +1983,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    tuningStep: string;
 	    tuningOctave: string;
 	}
-	export const enum ShowFretsType {
+	export enum ShowFretsType {
 	    Letters = 1,
 	    Numbers = 0,
 	}
@@ -2361,7 +2361,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    release?: number;
 	    beams?: Beam[];
 	}
-	export const enum Count {
+	export enum Count {
 	    Quarter = 4,
 	    Breve = 9990,
 	    Long = 9991,
@@ -2397,7 +2397,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 */
 	export interface Dot extends PrintStyle, Placement {
 	}
-	export const enum MxmlAccidental {
+	export enum MxmlAccidental {
 	    NaturalFlat = 7,
 	    SharpUp = 13,
 	    ThreeQuartersFlat = 10,
@@ -2485,7 +2485,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    normalNotes: number;
 	    normalDots?: NormalDot[];
 	}
-	export const enum StemType {
+	export enum StemType {
 	    None = 2,
 	    Double = 3,
 	    Down = 0,
@@ -2504,7 +2504,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	export interface Stem extends Position, Color {
 	    type: StemType;
 	}
-	export const enum NoteheadType {
+	export enum NoteheadType {
 	    InvertedTriangle = 7,
 	    CircleDot = 14,
 	    ArrowUp = 9,
@@ -2610,14 +2610,14 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	export interface NoteheadText {
 	    text: TextArray;
 	}
-	export const enum BeamType {
+	export enum BeamType {
 	    BackwardHook = 4,
 	    Begin = 0,
 	    ForwardHook = 3,
 	    Continue = 1,
 	    End = 2,
 	}
-	export const enum AccelRitNone {
+	export enum AccelRitNone {
 	    Accel = 0,
 	    None = 2,
 	    Rit = 1,
@@ -2699,7 +2699,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    number?: number;
 	    type: StartStopContinue;
 	}
-	export const enum ActualBothNone {
+	export enum ActualBothNone {
 	    None = 2,
 	    Both = 1,
 	    Actual = 0,
@@ -3374,13 +3374,13 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    holeShape: string;
 	    holeType?: string;
 	}
-	export const enum HoleLocation {
+	export enum HoleLocation {
 	    Right = 0,
 	    Top = 3,
 	    Bottom = 1,
 	    Left = 2,
 	}
-	export const enum HoleClosedType {
+	export enum HoleClosedType {
 	    No = 1,
 	    Yes = 0,
 	    Half = 2,
@@ -3536,7 +3536,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 */
 	export interface Falloff extends LineShape, LineType, DashedFormatting, PrintStyle, Placement {
 	}
-	export const enum BreathMarkType {
+	export enum BreathMarkType {
 	    Empty = 2,
 	    Comma = 0,
 	    Tick = 1,
@@ -3654,7 +3654,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    data: string;
 	    _class?: string;
 	}
-	export const enum SyllabicType {
+	export enum SyllabicType {
 	    Single = 0,
 	    Begin = 1,
 	    Middle = 3,
@@ -3764,7 +3764,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    duration: number;
 	    staff?: number;
 	}
-	export const enum BarlineLocation {
+	export enum BarlineLocation {
 	    Right = 1,
 	    Middle = 2,
 	    Left = 0,
@@ -3817,7 +3817,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * short stroke through the top line), short (a partial
 	 * barline between the 2nd and 4th lines), and none.
 	 */
-	export const enum BarStyleType {
+	export enum BarStyleType {
 	    Regular = 0,
 	    LightHeavy = 5,
 	    HeavyLight = 6,
@@ -3840,7 +3840,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	export interface BarStyle extends Color {
 	    data: BarStyleType;
 	}
-	export const enum StartStopDiscontinue {
+	export enum StartStopDiscontinue {
 	    Discontinue = 2,
 	    Start = 0,
 	    Stop = 1,
@@ -3877,14 +3877,14 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    type: StartStopDiscontinue;
 	    ending?: string;
 	}
-	export const enum WingedType {
+	export enum WingedType {
 	    None = 0,
 	    Curved = 2,
 	    DoubleCurved = 4,
 	    Straight = 1,
 	    DoubleStraight = 3,
 	}
-	export const enum DirectionTypeBg {
+	export enum DirectionTypeBg {
 	    Forward = 1,
 	    Backward = 0,
 	}
@@ -3909,7 +3909,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * the tip of a stick or beater points, using Unicode arrow
 	 * terminology.
 	 */
-	export const enum TipDirection {
+	export enum TipDirection {
 	    Right = 3,
 	    Northwest = 4,
 	    Southwest = 7,
@@ -3983,7 +3983,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	export interface Words extends TextFormatting {
 	    data: string;
 	}
-	export const enum WedgeType {
+	export enum WedgeType {
 	    Diminuendo = 1,
 	    Crescendo = 0,
 	    Stop = 2,
@@ -4019,7 +4019,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    number: number;
 	    type: StartStopContinue;
 	}
-	export const enum LineEndType {
+	export enum LineEndType {
 	    None = 4,
 	    Both = 2,
 	    Arrow = 3,
@@ -4041,7 +4041,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    type: StartStopContinue;
 	    lineEnd: LineEndType;
 	}
-	export const enum PedalType {
+	export enum PedalType {
 	    Change = 3,
 	    Start = 0,
 	    Stop = 1,
@@ -4133,7 +4133,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    normalNotes: number;
 	    normalDots: NormalDot[];
 	}
-	export const enum OctaveShiftType {
+	export enum OctaveShiftType {
 	    Down = 2,
 	    Stop = 3,
 	    Up = 1,
@@ -4214,7 +4214,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    type: string;
 	    source: string;
 	}
-	export const enum VoiceSymbol {
+	export enum VoiceSymbol {
 	    None = 4,
 	    Hauptstimme = 1,
 	    Nebenstimme = 2,
@@ -4366,7 +4366,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    inversion: Inversion;
 	    bass: Bass;
 	}
-	export const enum ExplicitImpliedAlternate {
+	export enum ExplicitImpliedAlternate {
 	    Explicit = 1,
 	    Implied = 2,
 	    Alternate = 3,
@@ -4579,7 +4579,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	    degreeValue: DegreeValue;
 	    degreeType: DegreeType;
 	}
-	export const enum ChordType {
+	export enum ChordType {
 	    Augmented = 3,
 	    Diminished = 4,
 	    Major = 1,
