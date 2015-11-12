@@ -17,17 +17,18 @@
     "lodash": "^3.10.1",
     "typescript": "1.6.2"
   },
-  "main": "./musicxml-interfaces.js",
+  "main": "lib/musicxml-interfaces.js",
   "typescript": {
-    "definition": "musicxml-interfaces.d.ts"
+    "definition": "lib/musicxml-interfaces.d.ts"
   },
   "browser": {
     "xmldom": false,
     "child_process": false
   },
   "files": [
-    "musicxml-interfaces.d.ts",
-    "musicxml-interfaces.js",
-    "vendor"
+    "lib/musicxml-interfaces.d.ts",
+    "lib/index.js",
+    "lib/builders.js",
+    "lib/operations.js"
   ]
 }

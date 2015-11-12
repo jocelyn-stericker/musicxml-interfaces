@@ -41,139 +41,137 @@
  * This function will accept timepart MusicXML files, but will still return a
  * structure similar to parttime.
  */
-export function parse(score: string): ScoreTimewise {
+export function parseScore(score: string): ScoreTimewise {
     let dom: Document = xmlToParttimeDoc(score);
     return xmlToScoreTimewise(dom.documentElement);
 }
 
-export module parse {
-    /**
-     * Reads a document, and returns header information.
-     * 
-     * ScoreHeader is a subset of ScoreTimewise, so you can always just call MusicXML.parse.score.
-     * This function is a bit faster though, if you only care about metadata.
-     */
-    export function scoreHeader(score: string): ScoreHeader {
-        return xmlToScoreHeader(xmlToDoc(score).documentElement);
-    }
+/**
+ * Reads a document, and returns header information.
+ * 
+ * ScoreHeader is a subset of ScoreTimewise, so you can always just call MusicXML.parse.score.
+ * This function is a bit faster though, if you only care about metadata.
+ */
+export function paseScoreHeader(score: string): ScoreHeader {
+    return xmlToScoreHeader(xmlToDoc(score).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <measure /> from a **parttime** document into JSON.
-     */
-    export function measure(str: string) {
-        return xmlToMeasure(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <measure /> from a **parttime** document into JSON.
+ */
+export function parseMeasure(str: string) {
+    return xmlToMeasure(xmlToDoc(str).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <note /> into JSON.
-     */
-    export function note(str: string) {
-        return xmlToNote(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <note /> into JSON.
+ */
+export function parseNote(str: string) {
+    return xmlToNote(xmlToDoc(str).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <clef /> into JSON.
-     */
-    export function clef(str: string) {
-        return xmlToClef(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <clef /> into JSON.
+ */
+export function parseClef(str: string) {
+    return xmlToClef(xmlToDoc(str).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <time /> into JSON.
-     */
-    export function time(str: string) {
-        return xmlToTime(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <time /> into JSON.
+ */
+export function parseTime(str: string) {
+    return xmlToTime(xmlToDoc(str).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <key /> into JSON.
-     */
-    export function key(str: string) {
-        return xmlToKey(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <key /> into JSON.
+ */
+export function parseKey(str: string) {
+    return xmlToKey(xmlToDoc(str).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <part-symbol /> into JSON.
-     */
-    export function partSymbol(str: string) {
-        return xmlToPartSymbol(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <part-symbol /> into JSON.
+ */
+export function parsePartSymbol(str: string) {
+    return xmlToPartSymbol(xmlToDoc(str).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <backup /> into JSON.
-     */
-    export function backup(str: string) {
-        return xmlToBackup(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <harmony /> into JSON.
-     */
-    export function harmony(str: string) {
-        return xmlToHarmony(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <forward /> into JSON.
-     */
-    export function forward(str: string) {
-        return xmlToForward(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <print /> into JSON.
-     */
-    export function print(str: string) {
-        return xmlToPrint(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <figured-bass /> into JSON.
-     */
-    export function figuredBass(str: string) {
-        return xmlToFiguredBass(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <direction /> into JSON.
-     */
-    export function direction(str: string) {
-        return xmlToDirection(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <attributes /> object into JSON.
-     */
-    export function attributes(str: string) {
-        return xmlToAttributes(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <sound /> into JSON.
-     */
-    export function sound(str: string) {
-        return xmlToSound(xmlToDoc(str).documentElement);
-    }
-    
-    /**
-     * Converts a MusicXML <barline /> into JSON.
-     */
-    export function barline(str: string) {
-        return xmlToBarline(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <backup /> into JSON.
+ */
+export function parseBackup(str: string) {
+    return xmlToBackup(xmlToDoc(str).documentElement);
+}
 
-    /**
-     * Converts a MusicXML <grouping /> into JSON.
-     */
-    export function grouping(str: string) {
-        return xmlToGrouping(xmlToDoc(str).documentElement);
-    }
+/**
+ * Converts a MusicXML <harmony /> into JSON.
+ */
+export function parseHarmony(str: string) {
+    return xmlToHarmony(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <forward /> into JSON.
+ */
+export function parseForward(str: string) {
+    return xmlToForward(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <print /> into JSON.
+ */
+export function parsePrint(str: string) {
+    return xmlToPrint(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <figured-bass /> into JSON.
+ */
+export function parseFiguredBass(str: string) {
+    return xmlToFiguredBass(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <direction /> into JSON.
+ */
+export function parseDirection(str: string) {
+    return xmlToDirection(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <attributes /> object into JSON.
+ */
+export function parseAttributes(str: string) {
+    return xmlToAttributes(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <sound /> into JSON.
+ */
+export function parseSound(str: string) {
+    return xmlToSound(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <barline /> into JSON.
+ */
+export function parseBarline(str: string) {
+    return xmlToBarline(xmlToDoc(str).documentElement);
+}
+
+/**
+ * Converts a MusicXML <grouping /> into JSON.
+ */
+export function parseGrouping(str: string) {
+    return xmlToGrouping(xmlToDoc(str).documentElement);
 }
 
 
 /*---- Serialization API ------------------------------------------------------------------------*/
 
-export function serialize(score: ScoreTimewise): string {
+export function serializeScore(score: ScoreTimewise): string {
     return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-timewise
   PUBLIC "-//Recordare//DTD MusicXML 3.0 Timewise//EN" "http://www.musicxml.org/dtds/timewise.dtd">
@@ -184,27 +182,25 @@ ${score.measures.map(measure => measureToXML(measure)).join("\n")
 </score-timewise>`;
 }
 
-export module serialize {
-    export function scoreHeader(scoreHeader: ScoreHeader) {
-        return scoreHeaderToXML(scoreHeader).join("\n");
-    }
-    export let measure = <(measure: Measure) => string> measureToXML;
-    export let note = <(note: Note) => string> noteToXML;
-    export let clef = <(clef: Clef) => string> clefToXML;
-    export let time = <(time: Time) => string> timeToXML;
-    export let key = <(key: Key) => string> keyToXML;
-    export let partSymbol = <(partSymbol: PartSymbol) => string> partSymbolToXML;
-    export let backup = <(backup: Backup) => string> backupToXML;
-    export let harmony = <(harmony: Harmony) => string> harmonyToXML;
-    export let forward = <(forward: Forward) => string> forwardToXML;
-    export let print = <(print: Print) => string> printToXML;
-    export let figuredBass = <(figuredBass: FiguredBass) => string> figuredBassToXML;
-    export let direction = <(direction: Direction) => string> directionToXML;
-    export let attributes = <(attributes: Attributes) => string> attributesToXML;
-    export let sound = <(sound: Sound) => string> soundToXML;
-    export let barline = <(barline: Barline) => string> barlineToXML;
-    export let grouping = <(grouping: Grouping) => string> groupingToXML;
+export function serializeScoreHeader(scoreHeader: ScoreHeader) {
+    return scoreHeaderToXML(scoreHeader).join("\n");
 }
+export let serializeMeasure = <(measure: Measure) => string> measureToXML;
+export let serializeNote = <(note: Note) => string> noteToXML;
+export let serializeClef = <(clef: Clef) => string> clefToXML;
+export let serializeTime = <(time: Time) => string> timeToXML;
+export let serializeKey = <(key: Key) => string> keyToXML;
+export let serializePartSymbol = <(partSymbol: PartSymbol) => string> partSymbolToXML;
+export let serializeBackup = <(backup: Backup) => string> backupToXML;
+export let serializeHarmony = <(harmony: Harmony) => string> harmonyToXML;
+export let serializeForward = <(forward: Forward) => string> forwardToXML;
+export let serializePrint = <(print: Print) => string> printToXML;
+export let serializeFiguredBass = <(figuredBass: FiguredBass) => string> figuredBassToXML;
+export let serializeDirection = <(direction: Direction) => string> directionToXML;
+export let serializeAttributes = <(attributes: Attributes) => string> attributesToXML;
+export let serializeSound = <(sound: Sound) => string> soundToXML;
+export let serializeBarline = <(barline: Barline) => string> barlineToXML;
+export let serializeGrouping = <(grouping: Grouping) => string> groupingToXML;
 
 
 /*---- Initialization and Utility ---------------------------------------------------------------*/
@@ -321,11 +317,6 @@ function getNumber(ch: Node, required: boolean) {
     }
 }
 
-function xmlToTextArray(node: Node) {
-    throw "xmlToTextArray not implemented";
-    return <TextArray> null;
-}
-
 function toCamelCase(input: string) { 
     return input.toLowerCase().replace(/-(.)/g, function(match, group1) {
         return group1.toUpperCase();
@@ -334,7 +325,7 @@ function toCamelCase(input: string) {
 
 /*---- Types ------------------------------------------------------------------------------------*/
 
-export interface TextArray extends Array<TextArray> {
+export interface TextSegment {
     acc?: AccidentalText;
     text?: DisplayText;
 }
@@ -4401,7 +4392,7 @@ function xmlToAccidentalText(node: Node) {
  * respectively.
  */
 export interface PartNameDisplay extends PrintObject {
-    name: TextArray;
+    name: TextSegment[];
 }
 
 /**
@@ -4417,7 +4408,7 @@ export interface PartNameDisplay extends PrintObject {
  * respectively.
  */
 export interface PartAbbreviationDisplay extends PrintObject {
-    name: TextArray;
+    name: TextSegment[];
 }
 
 /**
@@ -9136,7 +9127,7 @@ function xmlToNotehead(node: Node) {
  * text and accidentals.
  */
 export interface NoteheadText {
-    text: TextArray;
+    text: TextSegment[];
 }
 
 export enum BeamType {
@@ -23849,7 +23840,7 @@ function xmlToGroupName(node: Node) {
  * elements, respectively.
  */
 export interface GroupNameDisplay extends PrintObject {
-    name: TextArray;
+    name: TextSegment[];
 }
 
 /**
@@ -23943,7 +23934,7 @@ function xmlToGroupAbbreviation(node: Node) {
  * elements, respectively.
  */
 export interface GroupAbbreviationDisplay extends PrintObject {
-    name: TextArray;
+    name: TextSegment[];
 }
 
 /**
@@ -25117,7 +25108,7 @@ function partAbbreviationDisplayToXML(partAbbreviationDisplay:
             .split("\n").map(n => "  " + n).join("\n")}</part-abbreviation-display>`;
 }
 
-function textArrayToXML(texts: TextArray): string[] {
+function textArrayToXML(texts: TextSegment[]): string[] {
     return texts.map(text => {
         if (text.acc) {
             return dangerous `<accidental-text${textFormattingToXML(text.acc)}` +
@@ -27975,10 +27966,9 @@ function wedgeToXML(wedge: Wedge): string {
     if (defined(wedge.spread)) {
         attribs += xml ` spread="${wedge.spread}"`;
     }
-    // TODO musicxml-interfaces: **niente not neinte
-    // if (defined(wedge.niente)) {
-    //     attribs += yesNo ` niente="${wedge.niente}"`;
-    // }
+    if (defined(wedge.niente)) {
+        attribs += yesNo ` niente="${wedge.niente}"`;
+    }
     attribs +=
         lineTypeToXML(wedge) +
         dashedFormattingToXML(wedge) +

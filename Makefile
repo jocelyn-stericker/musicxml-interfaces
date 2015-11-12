@@ -20,15 +20,32 @@
 
 all: ./node_modules/.bin/tsc main
 
+NO_COLOR=\033[0m
+OK_COLOR=\033[32;01m
+ERROR_COLOR=\033[31;01m
+WARN_COLOR=\033[33;01m
+INFO_COLOR=\033[36;01m
+
+OK_STRING=$(OK_COLOR)  ...ok!$(NO_COLOR)
+BOOTSTRAP_STRING=$(INFO_COLOR)musicxml-interfaces» Bootstraping musicxml-interfaces.d.ts...$(NO_COLOR)
+BUILDER_STRING=$(INFO_COLOR)musicxml-interfaces» Generating builders.ts...$(NO_COLOR)
+LIB_STRING=$(INFO_COLOR)musicxml-interfaces» Building lib...$(NO_COLOR)
+
+
 main: ./node_modules/.bin/tsc
-	@echo '' > ./builders.ts
+	@printf "$(BOOTSTRAP_STRING)\n"
+	@echo '' > ./src/builders.ts
+	@./node_modules/.bin/tsc ./src/index.ts ./src/private/operationGenerator.ts --outDir lib --module commonjs
+	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./lib/musicxml-interfaces.d.ts --baseDir ./src ./src/index.ts
+	@printf "$(BUILDER_STRING)\n"
+	@node ./lib/private/operationGenerator.js ./lib/musicxml-interfaces.d.ts --out ./src/private/symbols.json
+	@node ./src/private/writeBuilders.js > ./src/builders.ts
+	@rm ./src/private/symbols.json
+	@printf "$(LIB_STRING)\n"
 	@./node_modules/.bin/tsc
-	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/musicxml-interfaces' --out ./musicxml-interfaces.d.ts --baseDir . ./musicxml-interfaces.ts
-	@node ./operationGenerator.js ./musicxml-interfaces.d.ts --out ./spec.tmp.json
-	@node ./writeBuilders.js > builders.ts
-	@rm ./spec.tmp.json
-	@./node_modules/.bin/tsc
-	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/musicxml-interfaces' --out ./musicxml-interfaces.d.ts --baseDir . ./musicxml-interfaces.ts ./builders.ts
+	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./lib/musicxml-interfaces.d.ts --baseDir ./src ./src/index.ts ./src/builders.ts ./src/operations.ts
+	@node ./lib/private/sanityTest.js
+	@rm -rf ./lib/private
 
 watch: ./node_modules/.bin/tsc
 	@./node_modules/.bin/tsc -w

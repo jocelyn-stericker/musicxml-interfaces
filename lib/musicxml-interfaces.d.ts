@@ -1,4 +1,4 @@
-declare module 'musicxml-interfaces/musicxml-interfaces' {
+declare module 'musicxml-interfaces/index' {
 	/**
 	 * Converts a MusicXML document into a MusicXML parttime-inspired JSON object.
 	 * See ScoreTimewise for full return type specification.
@@ -6,101 +6,97 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * This function will accept timepart MusicXML files, but will still return a
 	 * structure similar to parttime.
 	 */
-	export function parse(score: string): ScoreTimewise;
-	export module parse {
-	    /**
-	     * Reads a document, and returns header information.
-	     *
-	     * ScoreHeader is a subset of ScoreTimewise, so you can always just call MusicXML.parse.score.
-	     * This function is a bit faster though, if you only care about metadata.
-	     */
-	    function scoreHeader(score: string): ScoreHeader;
-	    /**
-	     * Converts a MusicXML <measure /> from a **parttime** document into JSON.
-	     */
-	    function measure(str: string): Measure;
-	    /**
-	     * Converts a MusicXML <note /> into JSON.
-	     */
-	    function note(str: string): Note;
-	    /**
-	     * Converts a MusicXML <clef /> into JSON.
-	     */
-	    function clef(str: string): Clef;
-	    /**
-	     * Converts a MusicXML <time /> into JSON.
-	     */
-	    function time(str: string): Time;
-	    /**
-	     * Converts a MusicXML <key /> into JSON.
-	     */
-	    function key(str: string): Key;
-	    /**
-	     * Converts a MusicXML <part-symbol /> into JSON.
-	     */
-	    function partSymbol(str: string): PartSymbol;
-	    /**
-	     * Converts a MusicXML <backup /> into JSON.
-	     */
-	    function backup(str: string): Backup;
-	    /**
-	     * Converts a MusicXML <harmony /> into JSON.
-	     */
-	    function harmony(str: string): Harmony;
-	    /**
-	     * Converts a MusicXML <forward /> into JSON.
-	     */
-	    function forward(str: string): Forward;
-	    /**
-	     * Converts a MusicXML <print /> into JSON.
-	     */
-	    function print(str: string): Print;
-	    /**
-	     * Converts a MusicXML <figured-bass /> into JSON.
-	     */
-	    function figuredBass(str: string): FiguredBass;
-	    /**
-	     * Converts a MusicXML <direction /> into JSON.
-	     */
-	    function direction(str: string): Direction;
-	    /**
-	     * Converts a MusicXML <attributes /> object into JSON.
-	     */
-	    function attributes(str: string): Attributes;
-	    /**
-	     * Converts a MusicXML <sound /> into JSON.
-	     */
-	    function sound(str: string): Sound;
-	    /**
-	     * Converts a MusicXML <barline /> into JSON.
-	     */
-	    function barline(str: string): Barline;
-	    /**
-	     * Converts a MusicXML <grouping /> into JSON.
-	     */
-	    function grouping(str: string): Grouping;
-	}
-	export function serialize(score: ScoreTimewise): string;
-	export module serialize {
-	    function scoreHeader(scoreHeader: ScoreHeader): string;
-	    let measure: (measure: Measure) => string;
-	    let note: (note: Note) => string;
-	    let clef: (clef: Clef) => string;
-	    let time: (time: Time) => string;
-	    let key: (key: Key) => string;
-	    let partSymbol: (partSymbol: PartSymbol) => string;
-	    let backup: (backup: Backup) => string;
-	    let harmony: (harmony: Harmony) => string;
-	    let forward: (forward: Forward) => string;
-	    let print: (print: Print) => string;
-	    let figuredBass: (figuredBass: FiguredBass) => string;
-	    let direction: (direction: Direction) => string;
-	    let attributes: (attributes: Attributes) => string;
-	    let sound: (sound: Sound) => string;
-	    let barline: (barline: Barline) => string;
-	    let grouping: (grouping: Grouping) => string;
-	}
-	export interface TextArray extends Array<TextArray> {
+	export function parseScore(score: string): ScoreTimewise;
+	/**
+	 * Reads a document, and returns header information.
+	 *
+	 * ScoreHeader is a subset of ScoreTimewise, so you can always just call MusicXML.parse.score.
+	 * This function is a bit faster though, if you only care about metadata.
+	 */
+	export function paseScoreHeader(score: string): ScoreHeader;
+	/**
+	 * Converts a MusicXML <measure /> from a **parttime** document into JSON.
+	 */
+	export function parseMeasure(str: string): Measure;
+	/**
+	 * Converts a MusicXML <note /> into JSON.
+	 */
+	export function parseNote(str: string): Note;
+	/**
+	 * Converts a MusicXML <clef /> into JSON.
+	 */
+	export function parseClef(str: string): Clef;
+	/**
+	 * Converts a MusicXML <time /> into JSON.
+	 */
+	export function parseTime(str: string): Time;
+	/**
+	 * Converts a MusicXML <key /> into JSON.
+	 */
+	export function parseKey(str: string): Key;
+	/**
+	 * Converts a MusicXML <part-symbol /> into JSON.
+	 */
+	export function parsePartSymbol(str: string): PartSymbol;
+	/**
+	 * Converts a MusicXML <backup /> into JSON.
+	 */
+	export function parseBackup(str: string): Backup;
+	/**
+	 * Converts a MusicXML <harmony /> into JSON.
+	 */
+	export function parseHarmony(str: string): Harmony;
+	/**
+	 * Converts a MusicXML <forward /> into JSON.
+	 */
+	export function parseForward(str: string): Forward;
+	/**
+	 * Converts a MusicXML <print /> into JSON.
+	 */
+	export function parsePrint(str: string): Print;
+	/**
+	 * Converts a MusicXML <figured-bass /> into JSON.
+	 */
+	export function parseFiguredBass(str: string): FiguredBass;
+	/**
+	 * Converts a MusicXML <direction /> into JSON.
+	 */
+	export function parseDirection(str: string): Direction;
+	/**
+	 * Converts a MusicXML <attributes /> object into JSON.
+	 */
+	export function parseAttributes(str: string): Attributes;
+	/**
+	 * Converts a MusicXML <sound /> into JSON.
+	 */
+	export function parseSound(str: string): Sound;
+	/**
+	 * Converts a MusicXML <barline /> into JSON.
+	 */
+	export function parseBarline(str: string): Barline;
+	/**
+	 * Converts a MusicXML <grouping /> into JSON.
+	 */
+	export function parseGrouping(str: string): Grouping;
+	export function serializeScore(score: ScoreTimewise): string;
+	export function serializeScoreHeader(scoreHeader: ScoreHeader): string;
+	export let serializeMeasure: (measure: Measure) => string;
+	export let serializeNote: (note: Note) => string;
+	export let serializeClef: (clef: Clef) => string;
+	export let serializeTime: (time: Time) => string;
+	export let serializeKey: (key: Key) => string;
+	export let serializePartSymbol: (partSymbol: PartSymbol) => string;
+	export let serializeBackup: (backup: Backup) => string;
+	export let serializeHarmony: (harmony: Harmony) => string;
+	export let serializeForward: (forward: Forward) => string;
+	export let serializePrint: (print: Print) => string;
+	export let serializeFiguredBass: (figuredBass: FiguredBass) => string;
+	export let serializeDirection: (direction: Direction) => string;
+	export let serializeAttributes: (attributes: Attributes) => string;
+	export let serializeSound: (sound: Sound) => string;
+	export let serializeBarline: (barline: Barline) => string;
+	export let serializeGrouping: (grouping: Grouping) => string;
+	export interface TextSegment {
 	    acc?: AccidentalText;
 	    text?: DisplayText;
 	}
@@ -1053,7 +1049,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * respectively.
 	 */
 	export interface PartNameDisplay extends PrintObject {
-	    name: TextArray;
+	    name: TextSegment[];
 	}
 	/**
 	 * The part-name-display and part-abbreviation-display
@@ -1068,7 +1064,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * respectively.
 	 */
 	export interface PartAbbreviationDisplay extends PrintObject {
-	    name: TextArray;
+	    name: TextSegment[];
 	}
 	/**
 	 * The midi-device content corresponds to the DeviceName
@@ -2608,7 +2604,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * text and accidentals.
 	 */
 	export interface NoteheadText {
-	    text: TextArray;
+	    text: TextSegment[];
 	}
 	export enum BeamType {
 	    BackwardHook = 4,
@@ -5047,7 +5043,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * elements, respectively.
 	 */
 	export interface GroupNameDisplay extends PrintObject {
-	    name: TextArray;
+	    name: TextSegment[];
 	}
 	/**
 	 * As with parts, groups can have a name and abbreviation.
@@ -5065,7 +5061,7 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	 * elements, respectively.
 	 */
 	export interface GroupAbbreviationDisplay extends PrintObject {
-	    name: TextArray;
+	    name: TextSegment[];
 	}
 	/**
 	 * The group-symbol element indicates how the symbol for
@@ -5182,68 +5178,262 @@ declare module 'musicxml-interfaces/musicxml-interfaces' {
 	}
 
 }
-declare module 'musicxml-interfaces/builders' {
-	import { StartStop, StartStopContinue, StartStopSingle, SymbolSize, AboveBelow, OverUnder, UpDown, TopBottom, LeftRight, EnclosureShape, NormalItalic, NormalBold, LeftCenterRight, TopMiddleBottomBaseline, DirectionMode, StraightCurved, SolidDashedDottedWavy, NormalAngledSquare, UprightInverted, UpperMainBelow, WholeHalfUnison, WholeHalfNone, OddEvenBoth, CueGraceLarge, SeparatorType, TimeSymbolType, CancelLocation, PartSymbolType, ShowFretsType, Count, MxmlAccidental, StemType, NoteheadType, BeamType, AccelRitNone, ActualBothNone, HoleLocation, HoleClosedType, BreathMarkType, SyllabicType, BarlineLocation, BarStyleType, StartStopDiscontinue, WingedType, DirectionTypeBg, TipDirection, WedgeType, LineEndType, PedalType, OctaveShiftType, VoiceSymbol, ExplicitImpliedAlternate, ChordType, TextArray, EncodingDate, CalendarDate, Position, Placement, Orientation, DirectiveEntity, Bezier, Font, Color, TextDecoration, Justify, Halign, Valign, ValignImage, LetterSpacing, LineHeight, TextDirection, TextRotation, Enclosure, PrintStyle, PrintStyleAlign, LineShape, LineType, DashedFormatting, PrintObject, PrintSpacing, Printout, TextFormatting, LevelDisplay, TrillSound, BendSound, TimeOnly, DocumentAttributes, Editorial, EditorialVoice, Footnote, Level, Fermata, WavyLine, Segno, Coda, NormalDot, Dynamics, Fingering, Fret, String, DisplayText, AccidentalText, PartNameDisplay, PartAbbreviationDisplay, MidiDevice, MidiInstrument, Play, OtherPlay, Scaling, PageMargins, PageLayout, SystemLayout, SystemMargins, SystemDividers, LeftDivider, RightDivider, StaffLayout, MeasureLayout, LineWidth, NoteSize, Distance, Appearance, Creator, Rights, Encoder, Relation, MiscellaneousField, Miscellaneous, Identification, Supports, Encoding, TimeSeparator, TimeSymbol, Cancel, KeyOctave, Key, Time, Interchangeable, PartSymbol, Clef, StaffTuning, StaffDetails, Double, Transpose, Directive, SlashDot, MultipleRest, MeasureRepeat, BeatRepeat, Slash, MeasureStyle, Attributes, Cue, Grace, Chord, Unpitched, Pitch, FullNote, Rest, Tie, Instrument, Note, Type, Dot, Accidental, TimeModification, Stem, Notehead, NoteheadText, Beam, Notations, Tied, Slur, Tuplet, TupletActual, TupletNormal, TupletNumber, TupletType, TupletDot, Glissando, Slide, OtherNotation, OtherDirection, Ornaments, TrillMark, Turn, DelayedTurn, InvertedTurn, DelayedInvertedTurn, VerticalTurn, Shake, Mordent, InvertedMordent, Schleifer, Tremolo, OtherOrnament, AccidentalMark, Technical, UpBow, DownBow, Harmonic, OpenString, ThumbPosition, Pluck, DoubleTongue, TripleTongue, Stopped, SnapPizzicato, HammerOn, PullOff, Bend, WithBar, Tap, Heel, Toe, Fingernails, Hole, HoleClosed, Arrow, Handbell, OtherTechnical, Articulations, Accent, StrongAccent, Staccato, Tenuto, DetachedLegato, Staccatissimo, Spiccato, Scoop, Plop, Doit, Falloff, BreathMark, Caesura, Stress, Unstress, OtherArticulation, Arpeggiate, NonArpeggiate, Laughing, Humming, EndLine, EndParagraph, LyricParts, Lyric, Text, Syllabic, Elision, Extend, FiguredBass, Figure, Prefix, FigureNumber, Suffix, Backup, Forward, Barline, BarStyle, Ending, Repeat, Direction, DirectionType, Rehearsal, Words, Wedge, Dashes, Bracket, Pedal, Metronome, BeatUnitDot, PerMinute, MetronomeNote, MetronomeDot, MetronomeBeam, MetronomeTuplet, OctaveShift, HarpPedals, PedalTuning, Damp, DampAll, Eyeglasses, StringMute, Scordatura, Accord, Image, PrincipalVoice, AccordionRegistration, Percussion, Timpani, Beater, Stick, Offset, HarmonyChord, Harmony, Root, RootStep, RootAlter, Function, Kind, Inversion, Bass, BassStep, BassAlter, Degree, DegreeValue, DegreeAlter, DegreeType, Frame, FirstFret, FrameNote, Barre, Grouping, Feature, Print, MeasureNumbering, Sound, Work, Opus, Defaults, MusicFont, WordFont, LyricFont, LyricLanguage, Credit, CreditWords, CreditImage, ScorePart, PartName, PartAbbreviation, PartGroup, GroupName, GroupNameDisplay, GroupAbbreviation, GroupAbbreviationDisplay, GroupSymbol, GroupBarline, GroupTime, ScoreInstrument, Solo, VirtualInstrument, ScoreHeader, ScoreTimewise, Measure, PartList } from 'musicxml-interfaces/musicxml-interfaces';
-	export interface ITextArrayBuilder {
-	    build: () => TextArray;
-	    patch: () => any[];
-	    acc: (build: (builder: IAccidentalTextBuilder) => IAccidentalTextBuilder) => ITextArrayBuilder;
-	    text: (build: (builder: IDisplayTextBuilder) => IDisplayTextBuilder) => ITextArrayBuilder;
+declare module 'musicxml-interfaces/operations' {
+	/**
+	 * This file has specs for the operations defined in the JSON0 OT Type spec.
+	 * https://github.com/ottypes/json0
+	 *
+	 * Permission is hereby granted, free of charge, to any person obtaining a copy
+	 * of this software and associated documentation files (the "Software"),
+	 * to deal in the Software without restriction, including without limitation the
+	 * rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+	 * sell copies of the Software, and to permit persons to whom the Software is
+	 * furnished to do so, subject to the following condition:
+	 *
+	 * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	 * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+	 * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+	 * DEALINGS IN THE SOFTWARE.
+	 */
+	/**
+	 * A path to an element in a JSON document.
+	 */
+	export type OTPath = (number | string)[];
+	/**
+	 * Adds x to the number at path
+	 */
+	export interface INumberAdd {
+	    /**
+	     * Path to a number.
+	     */
+	    p: OTPath;
+	    /**
+	     * The number to add to the number at `p`.
+	     */
+	    na: number;
 	}
-	export function patchTextArray(base: TextArray): ITextArrayBuilder;
-	export function buildTextArray(): ITextArrayBuilder;
+	/**
+	 * Inserts the object obj before the item at idx in the list at [path].
+	 */
+	export interface IListInsert<T> {
+	    /**
+	     * [...path, idx]
+	     */
+	    p: OTPath;
+	    /**
+	     * The object to insert before the item at idx `idx`.
+	     */
+	    li: T;
+	}
+	/**
+	 * Deletes the object obj from the index idx in the list at [path].
+	 */
+	export interface IListDelete<T> {
+	    /**
+	     * [...path, idx]
+	     */
+	    p: OTPath;
+	    /**
+	     * The object that will be removed at `idx`, for invertibility.
+	     */
+	    ld: T;
+	}
+	/**
+	 * Replaces the object before at the index idx in the list at [path] with the object after.
+	 */
+	export interface IListReplace<T> {
+	    /**
+	     * [...path, idx]
+	     */
+	    p: OTPath;
+	    /**
+	     * The object that will be removed at `idx`, for invertibility.
+	     */
+	    ld: T;
+	    /**
+	     * The object that will be added to `idx`.
+	     */
+	    li: T;
+	}
+	/**
+	 * Moves the object at idx1 such that the object will be at index idx2 in the list at [path].
+	 */
+	export interface IListMove {
+	    /**
+	     * [...path, idx]
+	     */
+	    p: OTPath;
+	    /**
+	     * The index to move the object to ("idx2")
+	     */
+	    lm: number;
+	}
+	/**
+	 * Inserts the object obj into the object at [path] with key key.
+	 */
+	export interface IObjectInsert<T> {
+	    /**
+	     * [...path, key: string]
+	     */
+	    p: OTPath;
+	    /**
+	     * The object to insert
+	     */
+	    oi: T;
+	}
+	/**
+	 * Deletes the object obj with key key from the object at [path].
+	 */
+	export interface IObjectDelete<T> {
+	    /**
+	     * [...path, key: string]
+	     */
+	    p: OTPath;
+	    /**
+	     * The object to delete, for invertibility
+	     */
+	    od: T;
+	}
+	/**
+	 * Replaces the object before with the object after at key key in the object at [path].
+	 */
+	export interface IObjectReplace<T> {
+	    /**
+	     * [...path, key: string]
+	     */
+	    p: OTPath;
+	    /**
+	     * The object to delete, for invertibility.
+	     */
+	    od: T;
+	    /**
+	     * The object to insert at key.
+	     */
+	    oi: T;
+	}
+	/**
+	 * Applies the subtype op o of type t to the object at [path].
+	 */
+	export interface IObjectApply {
+	    /**
+	     * [...path, key: string] to subtype
+	     */
+	    p: OTPath;
+	    /**
+	     * The subtype
+	     */
+	    t: any;
+	    /**
+	     * The operation.
+	     */
+	    o: any;
+	}
+	/**
+	 * Inserts the string s at offset offset into the string at [path] (uses subtypes internally).
+	 */
+	export interface IStringInsert {
+	    /**
+	     * Path to string
+	     */
+	    p: OTPath;
+	    si: string;
+	}
+	export interface IStringDelete {
+	    /**
+	     * Path to string
+	     */
+	    p: OTPath;
+	    /**
+	     * The string being removed, for length and invertibility
+	     */
+	    sd: string;
+	}
+	export type Operation<T> = INumberAdd | IListInsert<T> | IListDelete<T> | IListReplace<T> | IListMove | IObjectInsert<T> | IObjectDelete<T> | IObjectReplace<T> | IObjectApply | IStringInsert | IStringDelete;
+	export interface IAny {
+	    /**
+	     * Path to string
+	     */
+	    p: OTPath;
+	    si?: string;
+	    sd?: string;
+	    na?: number;
+	    li?: any;
+	    ld?: any;
+	    lm?: string;
+	    od?: any;
+	    oi?: any;
+	    t?: any;
+	    o?: any;
+	}
+	export function invert(ops: IAny[]): IAny[];
+
+}
+declare module 'musicxml-interfaces/builders' {
+	import { StartStop, StartStopContinue, StartStopSingle, SymbolSize, AboveBelow, OverUnder, UpDown, TopBottom, LeftRight, EnclosureShape, NormalItalic, NormalBold, LeftCenterRight, TopMiddleBottomBaseline, DirectionMode, StraightCurved, SolidDashedDottedWavy, NormalAngledSquare, UprightInverted, UpperMainBelow, WholeHalfUnison, WholeHalfNone, OddEvenBoth, CueGraceLarge, SeparatorType, TimeSymbolType, CancelLocation, PartSymbolType, ShowFretsType, Count, MxmlAccidental, StemType, NoteheadType, BeamType, AccelRitNone, ActualBothNone, HoleLocation, HoleClosedType, BreathMarkType, SyllabicType, BarlineLocation, BarStyleType, StartStopDiscontinue, WingedType, DirectionTypeBg, TipDirection, WedgeType, LineEndType, PedalType, OctaveShiftType, VoiceSymbol, ExplicitImpliedAlternate, ChordType, TextSegment, EncodingDate, CalendarDate, Position, Placement, Orientation, DirectiveEntity, Bezier, Font, Color, TextDecoration, Justify, Halign, Valign, ValignImage, LetterSpacing, LineHeight, TextDirection, TextRotation, Enclosure, PrintStyle, PrintStyleAlign, LineShape, LineType, DashedFormatting, PrintObject, PrintSpacing, Printout, TextFormatting, LevelDisplay, TrillSound, BendSound, TimeOnly, DocumentAttributes, Editorial, EditorialVoice, Footnote, Level, Fermata, WavyLine, Segno, Coda, NormalDot, Dynamics, Fingering, Fret, String, DisplayText, AccidentalText, PartNameDisplay, PartAbbreviationDisplay, MidiDevice, MidiInstrument, Play, OtherPlay, Scaling, PageMargins, PageLayout, SystemLayout, SystemMargins, SystemDividers, LeftDivider, RightDivider, StaffLayout, MeasureLayout, LineWidth, NoteSize, Distance, Appearance, Creator, Rights, Encoder, Relation, MiscellaneousField, Miscellaneous, Identification, Supports, Encoding, TimeSeparator, TimeSymbol, Cancel, KeyOctave, Key, Time, Interchangeable, PartSymbol, Clef, StaffTuning, StaffDetails, Double, Transpose, Directive, SlashDot, MultipleRest, MeasureRepeat, BeatRepeat, Slash, MeasureStyle, Attributes, Cue, Grace, Chord, Unpitched, Pitch, FullNote, Rest, Tie, Instrument, Note, Type, Dot, Accidental, TimeModification, Stem, Notehead, NoteheadText, Beam, Notations, Tied, Slur, Tuplet, TupletActual, TupletNormal, TupletNumber, TupletType, TupletDot, Glissando, Slide, OtherNotation, OtherDirection, Ornaments, TrillMark, Turn, DelayedTurn, InvertedTurn, DelayedInvertedTurn, VerticalTurn, Shake, Mordent, InvertedMordent, Schleifer, Tremolo, OtherOrnament, AccidentalMark, Technical, UpBow, DownBow, Harmonic, OpenString, ThumbPosition, Pluck, DoubleTongue, TripleTongue, Stopped, SnapPizzicato, HammerOn, PullOff, Bend, WithBar, Tap, Heel, Toe, Fingernails, Hole, HoleClosed, Arrow, Handbell, OtherTechnical, Articulations, Accent, StrongAccent, Staccato, Tenuto, DetachedLegato, Staccatissimo, Spiccato, Scoop, Plop, Doit, Falloff, BreathMark, Caesura, Stress, Unstress, OtherArticulation, Arpeggiate, NonArpeggiate, Laughing, Humming, EndLine, EndParagraph, LyricParts, Lyric, Text, Syllabic, Elision, Extend, FiguredBass, Figure, Prefix, FigureNumber, Suffix, Backup, Forward, Barline, BarStyle, Ending, Repeat, Direction, DirectionType, Rehearsal, Words, Wedge, Dashes, Bracket, Pedal, Metronome, BeatUnitDot, PerMinute, MetronomeNote, MetronomeDot, MetronomeBeam, MetronomeTuplet, OctaveShift, HarpPedals, PedalTuning, Damp, DampAll, Eyeglasses, StringMute, Scordatura, Accord, Image, PrincipalVoice, AccordionRegistration, Percussion, Timpani, Beater, Stick, Offset, HarmonyChord, Harmony, Root, RootStep, RootAlter, Function, Kind, Inversion, Bass, BassStep, BassAlter, Degree, DegreeValue, DegreeAlter, DegreeType, Frame, FirstFret, FrameNote, Barre, Grouping, Feature, Print, MeasureNumbering, Sound, Work, Opus, Defaults, MusicFont, WordFont, LyricFont, LyricLanguage, Credit, CreditWords, CreditImage, ScorePart, PartName, PartAbbreviation, PartGroup, GroupName, GroupNameDisplay, GroupAbbreviation, GroupAbbreviationDisplay, GroupSymbol, GroupBarline, GroupTime, ScoreInstrument, Solo, VirtualInstrument, ScoreHeader, ScoreTimewise, Measure, PartList } from 'musicxml-interfaces/index';
+	import { IAny } from 'musicxml-interfaces/operations';
+	export interface ITextSegmentBuilder {
+	    build?: () => TextSegment;
+	    patch: () => IAny[];
+	    acc: (build: AccidentalText | ((builder: IAccidentalTextBuilder) => IAccidentalTextBuilder)) => ITextSegmentBuilder;
+	    text: (build: DisplayText | ((builder: IDisplayTextBuilder) => IDisplayTextBuilder)) => ITextSegmentBuilder;
+	}
+	export function patchTextSegment(base: TextSegment, builder: (build: ITextSegmentBuilder) => ITextSegmentBuilder): IAny[];
+	export function buildTextSegment(builder: (build: ITextSegmentBuilder) => ITextSegmentBuilder): TextSegment;
 	export interface IEncodingDateBuilder {
-	    build: () => EncodingDate;
-	    patch: () => any[];
+	    build?: () => EncodingDate;
+	    patch: () => IAny[];
 	    month: (month: number) => IEncodingDateBuilder;
 	    day: (day: number) => IEncodingDateBuilder;
 	    year: (year: number) => IEncodingDateBuilder;
 	}
-	export function patchEncodingDate(base: EncodingDate): IEncodingDateBuilder;
-	export function buildEncodingDate(): IEncodingDateBuilder;
+	export function patchEncodingDate(base: EncodingDate, builder: (build: IEncodingDateBuilder) => IEncodingDateBuilder): IAny[];
+	export function buildEncodingDate(builder: (build: IEncodingDateBuilder) => IEncodingDateBuilder): EncodingDate;
 	export interface ICalendarDateBuilder {
-	    build: () => CalendarDate;
-	    patch: () => any[];
+	    build?: () => CalendarDate;
+	    patch: () => IAny[];
 	    month: (month: number) => ICalendarDateBuilder;
 	    day: (day: number) => ICalendarDateBuilder;
 	    year: (year: number) => ICalendarDateBuilder;
 	}
-	export function patchCalendarDate(base: CalendarDate): ICalendarDateBuilder;
-	export function buildCalendarDate(): ICalendarDateBuilder;
+	export function patchCalendarDate(base: CalendarDate, builder: (build: ICalendarDateBuilder) => ICalendarDateBuilder): IAny[];
+	export function buildCalendarDate(builder: (build: ICalendarDateBuilder) => ICalendarDateBuilder): CalendarDate;
 	export interface IPositionBuilder {
-	    build: () => Position;
-	    patch: () => any[];
+	    build?: () => Position;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IPositionBuilder;
 	    relativeY: (relativeY: number) => IPositionBuilder;
 	    defaultY: (defaultY: number) => IPositionBuilder;
 	    relativeX: (relativeX: number) => IPositionBuilder;
 	}
-	export function patchPosition(base: Position): IPositionBuilder;
-	export function buildPosition(): IPositionBuilder;
+	export function patchPosition(base: Position, builder: (build: IPositionBuilder) => IPositionBuilder): IAny[];
+	export function buildPosition(builder: (build: IPositionBuilder) => IPositionBuilder): Position;
 	export interface IPlacementBuilder {
-	    build: () => Placement;
-	    patch: () => any[];
+	    build?: () => Placement;
+	    patch: () => IAny[];
 	    placement: (placement: AboveBelow) => IPlacementBuilder;
 	}
-	export function patchPlacement(base: Placement): IPlacementBuilder;
-	export function buildPlacement(): IPlacementBuilder;
+	export function patchPlacement(base: Placement, builder: (build: IPlacementBuilder) => IPlacementBuilder): IAny[];
+	export function buildPlacement(builder: (build: IPlacementBuilder) => IPlacementBuilder): Placement;
 	export interface IOrientationBuilder {
-	    build: () => Orientation;
-	    patch: () => any[];
+	    build?: () => Orientation;
+	    patch: () => IAny[];
 	    orientation: (orientation: OverUnder) => IOrientationBuilder;
 	}
-	export function patchOrientation(base: Orientation): IOrientationBuilder;
-	export function buildOrientation(): IOrientationBuilder;
+	export function patchOrientation(base: Orientation, builder: (build: IOrientationBuilder) => IOrientationBuilder): IAny[];
+	export function buildOrientation(builder: (build: IOrientationBuilder) => IOrientationBuilder): Orientation;
 	export interface IDirectiveEntityBuilder {
-	    build: () => DirectiveEntity;
-	    patch: () => any[];
+	    build?: () => DirectiveEntity;
+	    patch: () => IAny[];
 	    directive: (directive: boolean) => IDirectiveEntityBuilder;
 	}
-	export function patchDirectiveEntity(base: DirectiveEntity): IDirectiveEntityBuilder;
-	export function buildDirectiveEntity(): IDirectiveEntityBuilder;
+	export function patchDirectiveEntity(base: DirectiveEntity, builder: (build: IDirectiveEntityBuilder) => IDirectiveEntityBuilder): IAny[];
+	export function buildDirectiveEntity(builder: (build: IDirectiveEntityBuilder) => IDirectiveEntityBuilder): DirectiveEntity;
 	export interface IBezierBuilder {
-	    build: () => Bezier;
-	    patch: () => any[];
+	    build?: () => Bezier;
+	    patch: () => IAny[];
 	    bezierX2: (bezierX2: number) => IBezierBuilder;
 	    bezierOffset: (bezierOffset: number) => IBezierBuilder;
 	    bezierOffset2: (bezierOffset2: number) => IBezierBuilder;
@@ -5251,181 +5441,181 @@ declare module 'musicxml-interfaces/builders' {
 	    bezierY: (bezierY: number) => IBezierBuilder;
 	    bezierY2: (bezierY2: number) => IBezierBuilder;
 	}
-	export function patchBezier(base: Bezier): IBezierBuilder;
-	export function buildBezier(): IBezierBuilder;
+	export function patchBezier(base: Bezier, builder: (build: IBezierBuilder) => IBezierBuilder): IAny[];
+	export function buildBezier(builder: (build: IBezierBuilder) => IBezierBuilder): Bezier;
 	export interface IFontBuilder {
-	    build: () => Font;
-	    patch: () => any[];
+	    build?: () => Font;
+	    patch: () => IAny[];
 	    fontFamily: (fontFamily: string) => IFontBuilder;
 	    fontWeight: (fontWeight: NormalBold) => IFontBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IFontBuilder;
 	    fontSize: (fontSize: string) => IFontBuilder;
 	}
-	export function patchFont(base: Font): IFontBuilder;
-	export function buildFont(): IFontBuilder;
+	export function patchFont(base: Font, builder: (build: IFontBuilder) => IFontBuilder): IAny[];
+	export function buildFont(builder: (build: IFontBuilder) => IFontBuilder): Font;
 	export interface IColorBuilder {
-	    build: () => Color;
-	    patch: () => any[];
+	    build?: () => Color;
+	    patch: () => IAny[];
 	    color: (color: string) => IColorBuilder;
 	}
-	export function patchColor(base: Color): IColorBuilder;
-	export function buildColor(): IColorBuilder;
+	export function patchColor(base: Color, builder: (build: IColorBuilder) => IColorBuilder): IAny[];
+	export function buildColor(builder: (build: IColorBuilder) => IColorBuilder): Color;
 	export interface ITextDecorationBuilder {
-	    build: () => TextDecoration;
-	    patch: () => any[];
+	    build?: () => TextDecoration;
+	    patch: () => IAny[];
 	    underline: (underline: number) => ITextDecorationBuilder;
 	    overline: (overline: number) => ITextDecorationBuilder;
 	    lineThrough: (lineThrough: number) => ITextDecorationBuilder;
 	}
-	export function patchTextDecoration(base: TextDecoration): ITextDecorationBuilder;
-	export function buildTextDecoration(): ITextDecorationBuilder;
+	export function patchTextDecoration(base: TextDecoration, builder: (build: ITextDecorationBuilder) => ITextDecorationBuilder): IAny[];
+	export function buildTextDecoration(builder: (build: ITextDecorationBuilder) => ITextDecorationBuilder): TextDecoration;
 	export interface IJustifyBuilder {
-	    build: () => Justify;
-	    patch: () => any[];
+	    build?: () => Justify;
+	    patch: () => IAny[];
 	    justify: (justify: LeftCenterRight) => IJustifyBuilder;
 	}
-	export function patchJustify(base: Justify): IJustifyBuilder;
-	export function buildJustify(): IJustifyBuilder;
+	export function patchJustify(base: Justify, builder: (build: IJustifyBuilder) => IJustifyBuilder): IAny[];
+	export function buildJustify(builder: (build: IJustifyBuilder) => IJustifyBuilder): Justify;
 	export interface IHalignBuilder {
-	    build: () => Halign;
-	    patch: () => any[];
+	    build?: () => Halign;
+	    patch: () => IAny[];
 	    halign: (halign: LeftCenterRight) => IHalignBuilder;
 	}
-	export function patchHalign(base: Halign): IHalignBuilder;
-	export function buildHalign(): IHalignBuilder;
+	export function patchHalign(base: Halign, builder: (build: IHalignBuilder) => IHalignBuilder): IAny[];
+	export function buildHalign(builder: (build: IHalignBuilder) => IHalignBuilder): Halign;
 	export interface IValignBuilder {
-	    build: () => Valign;
-	    patch: () => any[];
+	    build?: () => Valign;
+	    patch: () => IAny[];
 	    valign: (valign: TopMiddleBottomBaseline) => IValignBuilder;
 	}
-	export function patchValign(base: Valign): IValignBuilder;
-	export function buildValign(): IValignBuilder;
+	export function patchValign(base: Valign, builder: (build: IValignBuilder) => IValignBuilder): IAny[];
+	export function buildValign(builder: (build: IValignBuilder) => IValignBuilder): Valign;
 	export interface IValignImageBuilder {
-	    build: () => ValignImage;
-	    patch: () => any[];
+	    build?: () => ValignImage;
+	    patch: () => IAny[];
 	    valignImage: (valignImage: TopMiddleBottomBaseline) => IValignImageBuilder;
 	}
-	export function patchValignImage(base: ValignImage): IValignImageBuilder;
-	export function buildValignImage(): IValignImageBuilder;
+	export function patchValignImage(base: ValignImage, builder: (build: IValignImageBuilder) => IValignImageBuilder): IAny[];
+	export function buildValignImage(builder: (build: IValignImageBuilder) => IValignImageBuilder): ValignImage;
 	export interface ILetterSpacingBuilder {
-	    build: () => LetterSpacing;
-	    patch: () => any[];
+	    build?: () => LetterSpacing;
+	    patch: () => IAny[];
 	    letterSpacing: (letterSpacing: string) => ILetterSpacingBuilder;
 	}
-	export function patchLetterSpacing(base: LetterSpacing): ILetterSpacingBuilder;
-	export function buildLetterSpacing(): ILetterSpacingBuilder;
+	export function patchLetterSpacing(base: LetterSpacing, builder: (build: ILetterSpacingBuilder) => ILetterSpacingBuilder): IAny[];
+	export function buildLetterSpacing(builder: (build: ILetterSpacingBuilder) => ILetterSpacingBuilder): LetterSpacing;
 	export interface ILineHeightBuilder {
-	    build: () => LineHeight;
-	    patch: () => any[];
+	    build?: () => LineHeight;
+	    patch: () => IAny[];
 	    lineHeight: (lineHeight: string) => ILineHeightBuilder;
 	}
-	export function patchLineHeight(base: LineHeight): ILineHeightBuilder;
-	export function buildLineHeight(): ILineHeightBuilder;
+	export function patchLineHeight(base: LineHeight, builder: (build: ILineHeightBuilder) => ILineHeightBuilder): IAny[];
+	export function buildLineHeight(builder: (build: ILineHeightBuilder) => ILineHeightBuilder): LineHeight;
 	export interface ITextDirectionBuilder {
-	    build: () => TextDirection;
-	    patch: () => any[];
+	    build?: () => TextDirection;
+	    patch: () => IAny[];
 	    dir: (dir: DirectionMode) => ITextDirectionBuilder;
 	}
-	export function patchTextDirection(base: TextDirection): ITextDirectionBuilder;
-	export function buildTextDirection(): ITextDirectionBuilder;
+	export function patchTextDirection(base: TextDirection, builder: (build: ITextDirectionBuilder) => ITextDirectionBuilder): IAny[];
+	export function buildTextDirection(builder: (build: ITextDirectionBuilder) => ITextDirectionBuilder): TextDirection;
 	export interface ITextRotationBuilder {
-	    build: () => TextRotation;
-	    patch: () => any[];
+	    build?: () => TextRotation;
+	    patch: () => IAny[];
 	    rotation: (rotation: number) => ITextRotationBuilder;
 	}
-	export function patchTextRotation(base: TextRotation): ITextRotationBuilder;
-	export function buildTextRotation(): ITextRotationBuilder;
+	export function patchTextRotation(base: TextRotation, builder: (build: ITextRotationBuilder) => ITextRotationBuilder): IAny[];
+	export function buildTextRotation(builder: (build: ITextRotationBuilder) => ITextRotationBuilder): TextRotation;
 	export interface IEnclosureBuilder {
-	    build: () => Enclosure;
-	    patch: () => any[];
+	    build?: () => Enclosure;
+	    patch: () => IAny[];
 	    enclosure: (enclosure: EnclosureShape) => IEnclosureBuilder;
 	}
-	export function patchEnclosure(base: Enclosure): IEnclosureBuilder;
-	export function buildEnclosure(): IEnclosureBuilder;
+	export function patchEnclosure(base: Enclosure, builder: (build: IEnclosureBuilder) => IEnclosureBuilder): IAny[];
+	export function buildEnclosure(builder: (build: IEnclosureBuilder) => IEnclosureBuilder): Enclosure;
 	export interface IPrintStyleBuilder {
-	    build: () => PrintStyle;
-	    patch: () => any[];
+	    build?: () => PrintStyle;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IPrintStyleBuilder;
 	    relativeY: (relativeY: number) => IPrintStyleBuilder;
 	    defaultY: (defaultY: number) => IPrintStyleBuilder;
 	    relativeX: (relativeX: number) => IPrintStyleBuilder;
 	}
-	export function patchPrintStyle(base: PrintStyle): IPrintStyleBuilder;
-	export function buildPrintStyle(): IPrintStyleBuilder;
+	export function patchPrintStyle(base: PrintStyle, builder: (build: IPrintStyleBuilder) => IPrintStyleBuilder): IAny[];
+	export function buildPrintStyle(builder: (build: IPrintStyleBuilder) => IPrintStyleBuilder): PrintStyle;
 	export interface IPrintStyleAlignBuilder {
-	    build: () => PrintStyleAlign;
-	    patch: () => any[];
+	    build?: () => PrintStyleAlign;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IPrintStyleAlignBuilder;
 	    relativeY: (relativeY: number) => IPrintStyleAlignBuilder;
 	    defaultY: (defaultY: number) => IPrintStyleAlignBuilder;
 	    relativeX: (relativeX: number) => IPrintStyleAlignBuilder;
 	}
-	export function patchPrintStyleAlign(base: PrintStyleAlign): IPrintStyleAlignBuilder;
-	export function buildPrintStyleAlign(): IPrintStyleAlignBuilder;
+	export function patchPrintStyleAlign(base: PrintStyleAlign, builder: (build: IPrintStyleAlignBuilder) => IPrintStyleAlignBuilder): IAny[];
+	export function buildPrintStyleAlign(builder: (build: IPrintStyleAlignBuilder) => IPrintStyleAlignBuilder): PrintStyleAlign;
 	export interface ILineShapeBuilder {
-	    build: () => LineShape;
-	    patch: () => any[];
+	    build?: () => LineShape;
+	    patch: () => IAny[];
 	    lineShape: (lineShape: StraightCurved) => ILineShapeBuilder;
 	}
-	export function patchLineShape(base: LineShape): ILineShapeBuilder;
-	export function buildLineShape(): ILineShapeBuilder;
+	export function patchLineShape(base: LineShape, builder: (build: ILineShapeBuilder) => ILineShapeBuilder): IAny[];
+	export function buildLineShape(builder: (build: ILineShapeBuilder) => ILineShapeBuilder): LineShape;
 	export interface ILineTypeBuilder {
-	    build: () => LineType;
-	    patch: () => any[];
+	    build?: () => LineType;
+	    patch: () => IAny[];
 	    lineType: (lineType: SolidDashedDottedWavy) => ILineTypeBuilder;
 	}
-	export function patchLineType(base: LineType): ILineTypeBuilder;
-	export function buildLineType(): ILineTypeBuilder;
+	export function patchLineType(base: LineType, builder: (build: ILineTypeBuilder) => ILineTypeBuilder): IAny[];
+	export function buildLineType(builder: (build: ILineTypeBuilder) => ILineTypeBuilder): LineType;
 	export interface IDashedFormattingBuilder {
-	    build: () => DashedFormatting;
-	    patch: () => any[];
+	    build?: () => DashedFormatting;
+	    patch: () => IAny[];
 	    dashLength: (dashLength: number) => IDashedFormattingBuilder;
 	    spaceLength: (spaceLength: number) => IDashedFormattingBuilder;
 	}
-	export function patchDashedFormatting(base: DashedFormatting): IDashedFormattingBuilder;
-	export function buildDashedFormatting(): IDashedFormattingBuilder;
+	export function patchDashedFormatting(base: DashedFormatting, builder: (build: IDashedFormattingBuilder) => IDashedFormattingBuilder): IAny[];
+	export function buildDashedFormatting(builder: (build: IDashedFormattingBuilder) => IDashedFormattingBuilder): DashedFormatting;
 	export interface IPrintObjectBuilder {
-	    build: () => PrintObject;
-	    patch: () => any[];
+	    build?: () => PrintObject;
+	    patch: () => IAny[];
 	    printObject: (printObject: boolean) => IPrintObjectBuilder;
 	}
-	export function patchPrintObject(base: PrintObject): IPrintObjectBuilder;
-	export function buildPrintObject(): IPrintObjectBuilder;
+	export function patchPrintObject(base: PrintObject, builder: (build: IPrintObjectBuilder) => IPrintObjectBuilder): IAny[];
+	export function buildPrintObject(builder: (build: IPrintObjectBuilder) => IPrintObjectBuilder): PrintObject;
 	export interface IPrintSpacingBuilder {
-	    build: () => PrintSpacing;
-	    patch: () => any[];
+	    build?: () => PrintSpacing;
+	    patch: () => IAny[];
 	    printSpacing: (printSpacing: boolean) => IPrintSpacingBuilder;
 	}
-	export function patchPrintSpacing(base: PrintSpacing): IPrintSpacingBuilder;
-	export function buildPrintSpacing(): IPrintSpacingBuilder;
+	export function patchPrintSpacing(base: PrintSpacing, builder: (build: IPrintSpacingBuilder) => IPrintSpacingBuilder): IAny[];
+	export function buildPrintSpacing(builder: (build: IPrintSpacingBuilder) => IPrintSpacingBuilder): PrintSpacing;
 	export interface IPrintoutBuilder {
-	    build: () => Printout;
-	    patch: () => any[];
+	    build?: () => Printout;
+	    patch: () => IAny[];
 	    printDot: (printDot: boolean) => IPrintoutBuilder;
 	    printLyric: (printLyric: boolean) => IPrintoutBuilder;
 	    printObject: (printObject: boolean) => IPrintoutBuilder;
 	}
-	export function patchPrintout(base: Printout): IPrintoutBuilder;
-	export function buildPrintout(): IPrintoutBuilder;
+	export function patchPrintout(base: Printout, builder: (build: IPrintoutBuilder) => IPrintoutBuilder): IAny[];
+	export function buildPrintout(builder: (build: IPrintoutBuilder) => IPrintoutBuilder): Printout;
 	export interface ITextFormattingBuilder {
-	    build: () => TextFormatting;
-	    patch: () => any[];
+	    build?: () => TextFormatting;
+	    patch: () => IAny[];
 	    justify: (justify: LeftCenterRight) => ITextFormattingBuilder;
 	}
-	export function patchTextFormatting(base: TextFormatting): ITextFormattingBuilder;
-	export function buildTextFormatting(): ITextFormattingBuilder;
+	export function patchTextFormatting(base: TextFormatting, builder: (build: ITextFormattingBuilder) => ITextFormattingBuilder): IAny[];
+	export function buildTextFormatting(builder: (build: ITextFormattingBuilder) => ITextFormattingBuilder): TextFormatting;
 	export interface ILevelDisplayBuilder {
-	    build: () => LevelDisplay;
-	    patch: () => any[];
+	    build?: () => LevelDisplay;
+	    patch: () => IAny[];
 	    bracket: (bracket: boolean) => ILevelDisplayBuilder;
 	    size: (size: SymbolSize) => ILevelDisplayBuilder;
 	    parentheses: (parentheses: boolean) => ILevelDisplayBuilder;
 	}
-	export function patchLevelDisplay(base: LevelDisplay): ILevelDisplayBuilder;
-	export function buildLevelDisplay(): ILevelDisplayBuilder;
+	export function patchLevelDisplay(base: LevelDisplay, builder: (build: ILevelDisplayBuilder) => ILevelDisplayBuilder): IAny[];
+	export function buildLevelDisplay(builder: (build: ILevelDisplayBuilder) => ILevelDisplayBuilder): LevelDisplay;
 	export interface ITrillSoundBuilder {
-	    build: () => TrillSound;
-	    patch: () => any[];
+	    build?: () => TrillSound;
+	    patch: () => IAny[];
 	    startNote: (startNote: UpperMainBelow) => ITrillSoundBuilder;
 	    accelerate: (accelerate: boolean) => ITrillSoundBuilder;
 	    beats: (beats: number) => ITrillSoundBuilder;
@@ -5434,73 +5624,71 @@ declare module 'musicxml-interfaces/builders' {
 	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => ITrillSoundBuilder;
 	    secondBeat: (secondBeat: number) => ITrillSoundBuilder;
 	}
-	export function patchTrillSound(base: TrillSound): ITrillSoundBuilder;
-	export function buildTrillSound(): ITrillSoundBuilder;
+	export function patchTrillSound(base: TrillSound, builder: (build: ITrillSoundBuilder) => ITrillSoundBuilder): IAny[];
+	export function buildTrillSound(builder: (build: ITrillSoundBuilder) => ITrillSoundBuilder): TrillSound;
 	export interface IBendSoundBuilder {
-	    build: () => BendSound;
-	    patch: () => any[];
+	    build?: () => BendSound;
+	    patch: () => IAny[];
 	    accelerate: (accelerate: boolean) => IBendSoundBuilder;
 	    beats: (beats: number) => IBendSoundBuilder;
 	    firstBeat: (firstBeat: number) => IBendSoundBuilder;
 	    lastBeat: (lastBeat: number) => IBendSoundBuilder;
 	}
-	export function patchBendSound(base: BendSound): IBendSoundBuilder;
-	export function buildBendSound(): IBendSoundBuilder;
+	export function patchBendSound(base: BendSound, builder: (build: IBendSoundBuilder) => IBendSoundBuilder): IAny[];
+	export function buildBendSound(builder: (build: IBendSoundBuilder) => IBendSoundBuilder): BendSound;
 	export interface ITimeOnlyBuilder {
-	    build: () => TimeOnly;
-	    patch: () => any[];
+	    build?: () => TimeOnly;
+	    patch: () => IAny[];
 	    timeOnly: (timeOnly: string) => ITimeOnlyBuilder;
 	}
-	export function patchTimeOnly(base: TimeOnly): ITimeOnlyBuilder;
-	export function buildTimeOnly(): ITimeOnlyBuilder;
+	export function patchTimeOnly(base: TimeOnly, builder: (build: ITimeOnlyBuilder) => ITimeOnlyBuilder): IAny[];
+	export function buildTimeOnly(builder: (build: ITimeOnlyBuilder) => ITimeOnlyBuilder): TimeOnly;
 	export interface IDocumentAttributesBuilder {
-	    build: () => DocumentAttributes;
-	    patch: () => any[];
+	    build?: () => DocumentAttributes;
+	    patch: () => IAny[];
 	    version: (version: string) => IDocumentAttributesBuilder;
 	}
-	export function patchDocumentAttributes(base: DocumentAttributes): IDocumentAttributesBuilder;
-	export function buildDocumentAttributes(): IDocumentAttributesBuilder;
+	export function patchDocumentAttributes(base: DocumentAttributes, builder: (build: IDocumentAttributesBuilder) => IDocumentAttributesBuilder): IAny[];
+	export function buildDocumentAttributes(builder: (build: IDocumentAttributesBuilder) => IDocumentAttributesBuilder): DocumentAttributes;
 	export interface IEditorialBuilder {
-	    build: () => Editorial;
-	    patch: () => any[];
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IEditorialBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IEditorialBuilder;
-	    _class: (_class: string) => IEditorialBuilder;
+	    build?: () => Editorial;
+	    patch: () => IAny[];
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IEditorialBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IEditorialBuilder;
 	}
-	export function patchEditorial(base: Editorial): IEditorialBuilder;
-	export function buildEditorial(): IEditorialBuilder;
+	export function patchEditorial(base: Editorial, builder: (build: IEditorialBuilder) => IEditorialBuilder): IAny[];
+	export function buildEditorial(builder: (build: IEditorialBuilder) => IEditorialBuilder): Editorial;
 	export interface IEditorialVoiceBuilder {
-	    build: () => EditorialVoice;
-	    patch: () => any[];
+	    build?: () => EditorialVoice;
+	    patch: () => IAny[];
 	    voice: (voice: number) => IEditorialVoiceBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IEditorialVoiceBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IEditorialVoiceBuilder;
-	    _class: (_class: string) => IEditorialVoiceBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IEditorialVoiceBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IEditorialVoiceBuilder;
 	}
-	export function patchEditorialVoice(base: EditorialVoice): IEditorialVoiceBuilder;
-	export function buildEditorialVoice(): IEditorialVoiceBuilder;
+	export function patchEditorialVoice(base: EditorialVoice, builder: (build: IEditorialVoiceBuilder) => IEditorialVoiceBuilder): IAny[];
+	export function buildEditorialVoice(builder: (build: IEditorialVoiceBuilder) => IEditorialVoiceBuilder): EditorialVoice;
 	export interface IFootnoteBuilder {
-	    build: () => Footnote;
-	    patch: () => any[];
+	    build?: () => Footnote;
+	    patch: () => IAny[];
 	    text: (text: string) => IFootnoteBuilder;
 	    justify: (justify: LeftCenterRight) => IFootnoteBuilder;
 	}
-	export function patchFootnote(base: Footnote): IFootnoteBuilder;
-	export function buildFootnote(): IFootnoteBuilder;
+	export function patchFootnote(base: Footnote, builder: (build: IFootnoteBuilder) => IFootnoteBuilder): IAny[];
+	export function buildFootnote(builder: (build: IFootnoteBuilder) => IFootnoteBuilder): Footnote;
 	export interface ILevelBuilder {
-	    build: () => Level;
-	    patch: () => any[];
+	    build?: () => Level;
+	    patch: () => IAny[];
 	    text: (text: string) => ILevelBuilder;
 	    reference: (reference: boolean) => ILevelBuilder;
 	    bracket: (bracket: boolean) => ILevelBuilder;
 	    size: (size: SymbolSize) => ILevelBuilder;
 	    parentheses: (parentheses: boolean) => ILevelBuilder;
 	}
-	export function patchLevel(base: Level): ILevelBuilder;
-	export function buildLevel(): ILevelBuilder;
+	export function patchLevel(base: Level, builder: (build: ILevelBuilder) => ILevelBuilder): IAny[];
+	export function buildLevel(builder: (build: ILevelBuilder) => ILevelBuilder): Level;
 	export interface IFermataBuilder {
-	    build: () => Fermata;
-	    patch: () => any[];
+	    build?: () => Fermata;
+	    patch: () => IAny[];
 	    shape: (shape: NormalAngledSquare) => IFermataBuilder;
 	    type: (type: UprightInverted) => IFermataBuilder;
 	    defaultX: (defaultX: number) => IFermataBuilder;
@@ -5508,11 +5696,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IFermataBuilder;
 	    relativeX: (relativeX: number) => IFermataBuilder;
 	}
-	export function patchFermata(base: Fermata): IFermataBuilder;
-	export function buildFermata(): IFermataBuilder;
+	export function patchFermata(base: Fermata, builder: (build: IFermataBuilder) => IFermataBuilder): IAny[];
+	export function buildFermata(builder: (build: IFermataBuilder) => IFermataBuilder): Fermata;
 	export interface IWavyLineBuilder {
-	    build: () => WavyLine;
-	    patch: () => any[];
+	    build?: () => WavyLine;
+	    patch: () => IAny[];
 	    number: (number: number) => IWavyLineBuilder;
 	    type: (type: StartStopContinue) => IWavyLineBuilder;
 	    defaultX: (defaultX: number) => IWavyLineBuilder;
@@ -5520,37 +5708,37 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IWavyLineBuilder;
 	    relativeX: (relativeX: number) => IWavyLineBuilder;
 	}
-	export function patchWavyLine(base: WavyLine): IWavyLineBuilder;
-	export function buildWavyLine(): IWavyLineBuilder;
+	export function patchWavyLine(base: WavyLine, builder: (build: IWavyLineBuilder) => IWavyLineBuilder): IAny[];
+	export function buildWavyLine(builder: (build: IWavyLineBuilder) => IWavyLineBuilder): WavyLine;
 	export interface ISegnoBuilder {
-	    build: () => Segno;
-	    patch: () => any[];
+	    build?: () => Segno;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ISegnoBuilder;
 	    relativeY: (relativeY: number) => ISegnoBuilder;
 	    defaultY: (defaultY: number) => ISegnoBuilder;
 	    relativeX: (relativeX: number) => ISegnoBuilder;
 	}
-	export function patchSegno(base: Segno): ISegnoBuilder;
-	export function buildSegno(): ISegnoBuilder;
+	export function patchSegno(base: Segno, builder: (build: ISegnoBuilder) => ISegnoBuilder): IAny[];
+	export function buildSegno(builder: (build: ISegnoBuilder) => ISegnoBuilder): Segno;
 	export interface ICodaBuilder {
-	    build: () => Coda;
-	    patch: () => any[];
+	    build?: () => Coda;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ICodaBuilder;
 	    relativeY: (relativeY: number) => ICodaBuilder;
 	    defaultY: (defaultY: number) => ICodaBuilder;
 	    relativeX: (relativeX: number) => ICodaBuilder;
 	}
-	export function patchCoda(base: Coda): ICodaBuilder;
-	export function buildCoda(): ICodaBuilder;
+	export function patchCoda(base: Coda, builder: (build: ICodaBuilder) => ICodaBuilder): IAny[];
+	export function buildCoda(builder: (build: ICodaBuilder) => ICodaBuilder): Coda;
 	export interface INormalDotBuilder {
-	    build: () => NormalDot;
-	    patch: () => any[];
+	    build?: () => NormalDot;
+	    patch: () => IAny[];
 	}
-	export function patchNormalDot(base: NormalDot): INormalDotBuilder;
-	export function buildNormalDot(): INormalDotBuilder;
+	export function patchNormalDot(base: NormalDot, builder: (build: INormalDotBuilder) => INormalDotBuilder): IAny[];
+	export function buildNormalDot(builder: (build: INormalDotBuilder) => INormalDotBuilder): NormalDot;
 	export interface IDynamicsBuilder {
-	    build: () => Dynamics;
-	    patch: () => any[];
+	    build?: () => Dynamics;
+	    patch: () => IAny[];
 	    fp: (fp: boolean) => IDynamicsBuilder;
 	    pp: (pp: boolean) => IDynamicsBuilder;
 	    ppp: (ppp: boolean) => IDynamicsBuilder;
@@ -5580,11 +5768,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IDynamicsBuilder;
 	    relativeX: (relativeX: number) => IDynamicsBuilder;
 	}
-	export function patchDynamics(base: Dynamics): IDynamicsBuilder;
-	export function buildDynamics(): IDynamicsBuilder;
+	export function patchDynamics(base: Dynamics, builder: (build: IDynamicsBuilder) => IDynamicsBuilder): IAny[];
+	export function buildDynamics(builder: (build: IDynamicsBuilder) => IDynamicsBuilder): Dynamics;
 	export interface IFingeringBuilder {
-	    build: () => Fingering;
-	    patch: () => any[];
+	    build?: () => Fingering;
+	    patch: () => IAny[];
 	    substitution: (substitution: boolean) => IFingeringBuilder;
 	    finger: (finger: number) => IFingeringBuilder;
 	    alternate: (alternate: boolean) => IFingeringBuilder;
@@ -5593,74 +5781,78 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IFingeringBuilder;
 	    relativeX: (relativeX: number) => IFingeringBuilder;
 	}
-	export function patchFingering(base: Fingering): IFingeringBuilder;
-	export function buildFingering(): IFingeringBuilder;
+	export function patchFingering(base: Fingering, builder: (build: IFingeringBuilder) => IFingeringBuilder): IAny[];
+	export function buildFingering(builder: (build: IFingeringBuilder) => IFingeringBuilder): Fingering;
 	export interface IFretBuilder {
-	    build: () => Fret;
-	    patch: () => any[];
+	    build?: () => Fret;
+	    patch: () => IAny[];
 	    fret: (fret: number) => IFretBuilder;
 	    fontFamily: (fontFamily: string) => IFretBuilder;
 	    fontWeight: (fontWeight: NormalBold) => IFretBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IFretBuilder;
 	    fontSize: (fontSize: string) => IFretBuilder;
 	}
-	export function patchFret(base: Fret): IFretBuilder;
-	export function buildFret(): IFretBuilder;
+	export function patchFret(base: Fret, builder: (build: IFretBuilder) => IFretBuilder): IAny[];
+	export function buildFret(builder: (build: IFretBuilder) => IFretBuilder): Fret;
 	export interface IStringBuilder {
-	    build: () => String;
-	    patch: () => any[];
+	    build?: () => String;
+	    patch: () => IAny[];
 	    stringNum: (stringNum: number) => IStringBuilder;
 	    defaultX: (defaultX: number) => IStringBuilder;
 	    relativeY: (relativeY: number) => IStringBuilder;
 	    defaultY: (defaultY: number) => IStringBuilder;
 	    relativeX: (relativeX: number) => IStringBuilder;
 	}
-	export function patchString(base: String): IStringBuilder;
-	export function buildString(): IStringBuilder;
+	export function patchString(base: String, builder: (build: IStringBuilder) => IStringBuilder): IAny[];
+	export function buildString(builder: (build: IStringBuilder) => IStringBuilder): String;
 	export interface IDisplayTextBuilder {
-	    build: () => DisplayText;
-	    patch: () => any[];
+	    build?: () => DisplayText;
+	    patch: () => IAny[];
 	    text: (text: string) => IDisplayTextBuilder;
 	    justify: (justify: LeftCenterRight) => IDisplayTextBuilder;
 	}
-	export function patchDisplayText(base: DisplayText): IDisplayTextBuilder;
-	export function buildDisplayText(): IDisplayTextBuilder;
+	export function patchDisplayText(base: DisplayText, builder: (build: IDisplayTextBuilder) => IDisplayTextBuilder): IAny[];
+	export function buildDisplayText(builder: (build: IDisplayTextBuilder) => IDisplayTextBuilder): DisplayText;
 	export interface IAccidentalTextBuilder {
-	    build: () => AccidentalText;
-	    patch: () => any[];
+	    build?: () => AccidentalText;
+	    patch: () => IAny[];
 	    text: (text: string) => IAccidentalTextBuilder;
 	    justify: (justify: LeftCenterRight) => IAccidentalTextBuilder;
 	}
-	export function patchAccidentalText(base: AccidentalText): IAccidentalTextBuilder;
-	export function buildAccidentalText(): IAccidentalTextBuilder;
+	export function patchAccidentalText(base: AccidentalText, builder: (build: IAccidentalTextBuilder) => IAccidentalTextBuilder): IAny[];
+	export function buildAccidentalText(builder: (build: IAccidentalTextBuilder) => IAccidentalTextBuilder): AccidentalText;
 	export interface IPartNameDisplayBuilder {
-	    build: () => PartNameDisplay;
-	    patch: () => any[];
-	    name: (build: (builder: ITextArrayBuilder) => ITextArrayBuilder) => IPartNameDisplayBuilder;
+	    build?: () => PartNameDisplay;
+	    patch: () => IAny[];
+	    nameAt: (idx: number, build: TextSegment | ((builder: ITextSegmentBuilder) => ITextSegmentBuilder)) => IPartNameDisplayBuilder;
+	    nameSplice: (start: number, deleteCount: number, ...items: TextSegment[]) => IPartNameDisplayBuilder;
+	    name: (name: TextSegment[]) => IPartNameDisplayBuilder;
 	    printObject: (printObject: boolean) => IPartNameDisplayBuilder;
 	}
-	export function patchPartNameDisplay(base: PartNameDisplay): IPartNameDisplayBuilder;
-	export function buildPartNameDisplay(): IPartNameDisplayBuilder;
+	export function patchPartNameDisplay(base: PartNameDisplay, builder: (build: IPartNameDisplayBuilder) => IPartNameDisplayBuilder): IAny[];
+	export function buildPartNameDisplay(builder: (build: IPartNameDisplayBuilder) => IPartNameDisplayBuilder): PartNameDisplay;
 	export interface IPartAbbreviationDisplayBuilder {
-	    build: () => PartAbbreviationDisplay;
-	    patch: () => any[];
-	    name: (build: (builder: ITextArrayBuilder) => ITextArrayBuilder) => IPartAbbreviationDisplayBuilder;
+	    build?: () => PartAbbreviationDisplay;
+	    patch: () => IAny[];
+	    nameAt: (idx: number, build: TextSegment | ((builder: ITextSegmentBuilder) => ITextSegmentBuilder)) => IPartAbbreviationDisplayBuilder;
+	    nameSplice: (start: number, deleteCount: number, ...items: TextSegment[]) => IPartAbbreviationDisplayBuilder;
+	    name: (name: TextSegment[]) => IPartAbbreviationDisplayBuilder;
 	    printObject: (printObject: boolean) => IPartAbbreviationDisplayBuilder;
 	}
-	export function patchPartAbbreviationDisplay(base: PartAbbreviationDisplay): IPartAbbreviationDisplayBuilder;
-	export function buildPartAbbreviationDisplay(): IPartAbbreviationDisplayBuilder;
+	export function patchPartAbbreviationDisplay(base: PartAbbreviationDisplay, builder: (build: IPartAbbreviationDisplayBuilder) => IPartAbbreviationDisplayBuilder): IAny[];
+	export function buildPartAbbreviationDisplay(builder: (build: IPartAbbreviationDisplayBuilder) => IPartAbbreviationDisplayBuilder): PartAbbreviationDisplay;
 	export interface IMidiDeviceBuilder {
-	    build: () => MidiDevice;
-	    patch: () => any[];
+	    build?: () => MidiDevice;
+	    patch: () => IAny[];
 	    port: (port: number) => IMidiDeviceBuilder;
 	    deviceName: (deviceName: string) => IMidiDeviceBuilder;
 	    id: (id: number) => IMidiDeviceBuilder;
 	}
-	export function patchMidiDevice(base: MidiDevice): IMidiDeviceBuilder;
-	export function buildMidiDevice(): IMidiDeviceBuilder;
+	export function patchMidiDevice(base: MidiDevice, builder: (build: IMidiDeviceBuilder) => IMidiDeviceBuilder): IAny[];
+	export function buildMidiDevice(builder: (build: IMidiDeviceBuilder) => IMidiDeviceBuilder): MidiDevice;
 	export interface IMidiInstrumentBuilder {
-	    build: () => MidiInstrument;
-	    patch: () => any[];
+	    build?: () => MidiInstrument;
+	    patch: () => IAny[];
 	    midiUnpitched: (midiUnpitched: number) => IMidiInstrumentBuilder;
 	    volume: (volume: number) => IMidiInstrumentBuilder;
 	    pan: (pan: number) => IMidiInstrumentBuilder;
@@ -5671,311 +5863,322 @@ declare module 'musicxml-interfaces/builders' {
 	    midiChannel: (midiChannel: number) => IMidiInstrumentBuilder;
 	    midiName: (midiName: string) => IMidiInstrumentBuilder;
 	}
-	export function patchMidiInstrument(base: MidiInstrument): IMidiInstrumentBuilder;
-	export function buildMidiInstrument(): IMidiInstrumentBuilder;
+	export function patchMidiInstrument(base: MidiInstrument, builder: (build: IMidiInstrumentBuilder) => IMidiInstrumentBuilder): IAny[];
+	export function buildMidiInstrument(builder: (build: IMidiInstrumentBuilder) => IMidiInstrumentBuilder): MidiInstrument;
 	export interface IPlayBuilder {
-	    build: () => Play;
-	    patch: () => any[];
+	    build?: () => Play;
+	    patch: () => IAny[];
 	    ipa: (ipa: string) => IPlayBuilder;
 	    mute: (mute: string) => IPlayBuilder;
-	    otherPlay: (build: (builder: IOtherPlayBuilder) => IOtherPlayBuilder) => IPlayBuilder;
+	    otherPlay: (build: OtherPlay | ((builder: IOtherPlayBuilder) => IOtherPlayBuilder)) => IPlayBuilder;
 	    semiPitched: (semiPitched: string) => IPlayBuilder;
 	    id: (id: string) => IPlayBuilder;
 	}
-	export function patchPlay(base: Play): IPlayBuilder;
-	export function buildPlay(): IPlayBuilder;
+	export function patchPlay(base: Play, builder: (build: IPlayBuilder) => IPlayBuilder): IAny[];
+	export function buildPlay(builder: (build: IPlayBuilder) => IPlayBuilder): Play;
 	export interface IOtherPlayBuilder {
-	    build: () => OtherPlay;
-	    patch: () => any[];
+	    build?: () => OtherPlay;
+	    patch: () => IAny[];
 	    data: (data: string) => IOtherPlayBuilder;
 	    type: (type: string) => IOtherPlayBuilder;
 	}
-	export function patchOtherPlay(base: OtherPlay): IOtherPlayBuilder;
-	export function buildOtherPlay(): IOtherPlayBuilder;
+	export function patchOtherPlay(base: OtherPlay, builder: (build: IOtherPlayBuilder) => IOtherPlayBuilder): IAny[];
+	export function buildOtherPlay(builder: (build: IOtherPlayBuilder) => IOtherPlayBuilder): OtherPlay;
 	export interface IScalingBuilder {
-	    build: () => Scaling;
-	    patch: () => any[];
+	    build?: () => Scaling;
+	    patch: () => IAny[];
 	    tenths: (tenths: number) => IScalingBuilder;
 	    millimeters: (millimeters: number) => IScalingBuilder;
 	}
-	export function patchScaling(base: Scaling): IScalingBuilder;
-	export function buildScaling(): IScalingBuilder;
+	export function patchScaling(base: Scaling, builder: (build: IScalingBuilder) => IScalingBuilder): IAny[];
+	export function buildScaling(builder: (build: IScalingBuilder) => IScalingBuilder): Scaling;
 	export interface IPageMarginsBuilder {
-	    build: () => PageMargins;
-	    patch: () => any[];
+	    build?: () => PageMargins;
+	    patch: () => IAny[];
 	    topMargin: (topMargin: number) => IPageMarginsBuilder;
 	    leftMargin: (leftMargin: number) => IPageMarginsBuilder;
 	    bottomMargin: (bottomMargin: number) => IPageMarginsBuilder;
 	    type: (type: OddEvenBoth) => IPageMarginsBuilder;
 	    rightMargin: (rightMargin: number) => IPageMarginsBuilder;
 	}
-	export function patchPageMargins(base: PageMargins): IPageMarginsBuilder;
-	export function buildPageMargins(): IPageMarginsBuilder;
+	export function patchPageMargins(base: PageMargins, builder: (build: IPageMarginsBuilder) => IPageMarginsBuilder): IAny[];
+	export function buildPageMargins(builder: (build: IPageMarginsBuilder) => IPageMarginsBuilder): PageMargins;
 	export interface IPageLayoutBuilder {
-	    build: () => PageLayout;
-	    patch: () => any[];
+	    build?: () => PageLayout;
+	    patch: () => IAny[];
 	    pageHeight: (pageHeight: number) => IPageLayoutBuilder;
 	    pageWidth: (pageWidth: number) => IPageLayoutBuilder;
+	    pageMarginsAt: (idx: number, build: PageMargins | ((builder: IPageMarginsBuilder) => IPageMarginsBuilder)) => IPageLayoutBuilder;
+	    pageMarginsSplice: (start: number, deleteCount: number, ...items: PageMargins[]) => IPageLayoutBuilder;
 	    pageMargins: (pageMargins: PageMargins[]) => IPageLayoutBuilder;
 	}
-	export function patchPageLayout(base: PageLayout): IPageLayoutBuilder;
-	export function buildPageLayout(): IPageLayoutBuilder;
+	export function patchPageLayout(base: PageLayout, builder: (build: IPageLayoutBuilder) => IPageLayoutBuilder): IAny[];
+	export function buildPageLayout(builder: (build: IPageLayoutBuilder) => IPageLayoutBuilder): PageLayout;
 	export interface ISystemLayoutBuilder {
-	    build: () => SystemLayout;
-	    patch: () => any[];
-	    systemDividers: (build: (builder: ISystemDividersBuilder) => ISystemDividersBuilder) => ISystemLayoutBuilder;
-	    systemMargins: (build: (builder: ISystemMarginsBuilder) => ISystemMarginsBuilder) => ISystemLayoutBuilder;
+	    build?: () => SystemLayout;
+	    patch: () => IAny[];
+	    systemDividers: (build: SystemDividers | ((builder: ISystemDividersBuilder) => ISystemDividersBuilder)) => ISystemLayoutBuilder;
+	    systemMargins: (build: SystemMargins | ((builder: ISystemMarginsBuilder) => ISystemMarginsBuilder)) => ISystemLayoutBuilder;
 	    systemDistance: (systemDistance: number) => ISystemLayoutBuilder;
 	    topSystemDistance: (topSystemDistance: number) => ISystemLayoutBuilder;
 	}
-	export function patchSystemLayout(base: SystemLayout): ISystemLayoutBuilder;
-	export function buildSystemLayout(): ISystemLayoutBuilder;
+	export function patchSystemLayout(base: SystemLayout, builder: (build: ISystemLayoutBuilder) => ISystemLayoutBuilder): IAny[];
+	export function buildSystemLayout(builder: (build: ISystemLayoutBuilder) => ISystemLayoutBuilder): SystemLayout;
 	export interface ISystemMarginsBuilder {
-	    build: () => SystemMargins;
-	    patch: () => any[];
+	    build?: () => SystemMargins;
+	    patch: () => IAny[];
 	    leftMargin: (leftMargin: number) => ISystemMarginsBuilder;
 	    rightMargin: (rightMargin: number) => ISystemMarginsBuilder;
 	}
-	export function patchSystemMargins(base: SystemMargins): ISystemMarginsBuilder;
-	export function buildSystemMargins(): ISystemMarginsBuilder;
+	export function patchSystemMargins(base: SystemMargins, builder: (build: ISystemMarginsBuilder) => ISystemMarginsBuilder): IAny[];
+	export function buildSystemMargins(builder: (build: ISystemMarginsBuilder) => ISystemMarginsBuilder): SystemMargins;
 	export interface ISystemDividersBuilder {
-	    build: () => SystemDividers;
-	    patch: () => any[];
-	    rightDivider: (build: (builder: IRightDividerBuilder) => IRightDividerBuilder) => ISystemDividersBuilder;
-	    leftDivider: (build: (builder: ILeftDividerBuilder) => ILeftDividerBuilder) => ISystemDividersBuilder;
+	    build?: () => SystemDividers;
+	    patch: () => IAny[];
+	    rightDivider: (build: RightDivider | ((builder: IRightDividerBuilder) => IRightDividerBuilder)) => ISystemDividersBuilder;
+	    leftDivider: (build: LeftDivider | ((builder: ILeftDividerBuilder) => ILeftDividerBuilder)) => ISystemDividersBuilder;
 	}
-	export function patchSystemDividers(base: SystemDividers): ISystemDividersBuilder;
-	export function buildSystemDividers(): ISystemDividersBuilder;
+	export function patchSystemDividers(base: SystemDividers, builder: (build: ISystemDividersBuilder) => ISystemDividersBuilder): IAny[];
+	export function buildSystemDividers(builder: (build: ISystemDividersBuilder) => ISystemDividersBuilder): SystemDividers;
 	export interface ILeftDividerBuilder {
-	    build: () => LeftDivider;
-	    patch: () => any[];
+	    build?: () => LeftDivider;
+	    patch: () => IAny[];
 	    printObject: (printObject: boolean) => ILeftDividerBuilder;
 	}
-	export function patchLeftDivider(base: LeftDivider): ILeftDividerBuilder;
-	export function buildLeftDivider(): ILeftDividerBuilder;
+	export function patchLeftDivider(base: LeftDivider, builder: (build: ILeftDividerBuilder) => ILeftDividerBuilder): IAny[];
+	export function buildLeftDivider(builder: (build: ILeftDividerBuilder) => ILeftDividerBuilder): LeftDivider;
 	export interface IRightDividerBuilder {
-	    build: () => RightDivider;
-	    patch: () => any[];
+	    build?: () => RightDivider;
+	    patch: () => IAny[];
 	    printObject: (printObject: boolean) => IRightDividerBuilder;
 	}
-	export function patchRightDivider(base: RightDivider): IRightDividerBuilder;
-	export function buildRightDivider(): IRightDividerBuilder;
+	export function patchRightDivider(base: RightDivider, builder: (build: IRightDividerBuilder) => IRightDividerBuilder): IAny[];
+	export function buildRightDivider(builder: (build: IRightDividerBuilder) => IRightDividerBuilder): RightDivider;
 	export interface IStaffLayoutBuilder {
-	    build: () => StaffLayout;
-	    patch: () => any[];
+	    build?: () => StaffLayout;
+	    patch: () => IAny[];
 	    staffDistance: (staffDistance: number) => IStaffLayoutBuilder;
 	    num: (num: number) => IStaffLayoutBuilder;
 	}
-	export function patchStaffLayout(base: StaffLayout): IStaffLayoutBuilder;
-	export function buildStaffLayout(): IStaffLayoutBuilder;
+	export function patchStaffLayout(base: StaffLayout, builder: (build: IStaffLayoutBuilder) => IStaffLayoutBuilder): IAny[];
+	export function buildStaffLayout(builder: (build: IStaffLayoutBuilder) => IStaffLayoutBuilder): StaffLayout;
 	export interface IMeasureLayoutBuilder {
-	    build: () => MeasureLayout;
-	    patch: () => any[];
+	    build?: () => MeasureLayout;
+	    patch: () => IAny[];
 	    measureDistance: (measureDistance: number) => IMeasureLayoutBuilder;
 	}
-	export function patchMeasureLayout(base: MeasureLayout): IMeasureLayoutBuilder;
-	export function buildMeasureLayout(): IMeasureLayoutBuilder;
+	export function patchMeasureLayout(base: MeasureLayout, builder: (build: IMeasureLayoutBuilder) => IMeasureLayoutBuilder): IAny[];
+	export function buildMeasureLayout(builder: (build: IMeasureLayoutBuilder) => IMeasureLayoutBuilder): MeasureLayout;
 	export interface ILineWidthBuilder {
-	    build: () => LineWidth;
-	    patch: () => any[];
+	    build?: () => LineWidth;
+	    patch: () => IAny[];
 	    tenths: (tenths: number) => ILineWidthBuilder;
 	    type: (type: string) => ILineWidthBuilder;
 	}
-	export function patchLineWidth(base: LineWidth): ILineWidthBuilder;
-	export function buildLineWidth(): ILineWidthBuilder;
+	export function patchLineWidth(base: LineWidth, builder: (build: ILineWidthBuilder) => ILineWidthBuilder): IAny[];
+	export function buildLineWidth(builder: (build: ILineWidthBuilder) => ILineWidthBuilder): LineWidth;
 	export interface INoteSizeBuilder {
-	    build: () => NoteSize;
-	    patch: () => any[];
+	    build?: () => NoteSize;
+	    patch: () => IAny[];
 	    size: (size: number) => INoteSizeBuilder;
 	    type: (type: CueGraceLarge) => INoteSizeBuilder;
 	}
-	export function patchNoteSize(base: NoteSize): INoteSizeBuilder;
-	export function buildNoteSize(): INoteSizeBuilder;
+	export function patchNoteSize(base: NoteSize, builder: (build: INoteSizeBuilder) => INoteSizeBuilder): IAny[];
+	export function buildNoteSize(builder: (build: INoteSizeBuilder) => INoteSizeBuilder): NoteSize;
 	export interface IDistanceBuilder {
-	    build: () => Distance;
-	    patch: () => any[];
+	    build?: () => Distance;
+	    patch: () => IAny[];
 	    tenths: (tenths: number) => IDistanceBuilder;
 	    type: (type: string) => IDistanceBuilder;
 	}
-	export function patchDistance(base: Distance): IDistanceBuilder;
-	export function buildDistance(): IDistanceBuilder;
+	export function patchDistance(base: Distance, builder: (build: IDistanceBuilder) => IDistanceBuilder): IAny[];
+	export function buildDistance(builder: (build: IDistanceBuilder) => IDistanceBuilder): Distance;
 	export interface IAppearanceBuilder {
-	    build: () => Appearance;
-	    patch: () => any[];
+	    build?: () => Appearance;
+	    patch: () => IAny[];
 	    set: (key: string, val: NoteSize) => IAppearanceBuilder;
 	    otherAppearances: (otherAppearances: string[]) => IAppearanceBuilder;
 	}
-	export function patchAppearance(base: Appearance): IAppearanceBuilder;
-	export function buildAppearance(): IAppearanceBuilder;
+	export function patchAppearance(base: Appearance, builder: (build: IAppearanceBuilder) => IAppearanceBuilder): IAny[];
+	export function buildAppearance(builder: (build: IAppearanceBuilder) => IAppearanceBuilder): Appearance;
 	export interface ICreatorBuilder {
-	    build: () => Creator;
-	    patch: () => any[];
+	    build?: () => Creator;
+	    patch: () => IAny[];
 	    creator: (creator: string) => ICreatorBuilder;
 	    type: (type: string) => ICreatorBuilder;
 	}
-	export function patchCreator(base: Creator): ICreatorBuilder;
-	export function buildCreator(): ICreatorBuilder;
+	export function patchCreator(base: Creator, builder: (build: ICreatorBuilder) => ICreatorBuilder): IAny[];
+	export function buildCreator(builder: (build: ICreatorBuilder) => ICreatorBuilder): Creator;
 	export interface IRightsBuilder {
-	    build: () => Rights;
-	    patch: () => any[];
+	    build?: () => Rights;
+	    patch: () => IAny[];
 	    type: (type: string) => IRightsBuilder;
 	    rights: (rights: string) => IRightsBuilder;
 	}
-	export function patchRights(base: Rights): IRightsBuilder;
-	export function buildRights(): IRightsBuilder;
+	export function patchRights(base: Rights, builder: (build: IRightsBuilder) => IRightsBuilder): IAny[];
+	export function buildRights(builder: (build: IRightsBuilder) => IRightsBuilder): Rights;
 	export interface IEncoderBuilder {
-	    build: () => Encoder;
-	    patch: () => any[];
+	    build?: () => Encoder;
+	    patch: () => IAny[];
 	    encoder: (encoder: string) => IEncoderBuilder;
 	    type: (type: string) => IEncoderBuilder;
 	}
-	export function patchEncoder(base: Encoder): IEncoderBuilder;
-	export function buildEncoder(): IEncoderBuilder;
+	export function patchEncoder(base: Encoder, builder: (build: IEncoderBuilder) => IEncoderBuilder): IAny[];
+	export function buildEncoder(builder: (build: IEncoderBuilder) => IEncoderBuilder): Encoder;
 	export interface IRelationBuilder {
-	    build: () => Relation;
-	    patch: () => any[];
+	    build?: () => Relation;
+	    patch: () => IAny[];
 	    type: (type: string) => IRelationBuilder;
 	    data: (data: string) => IRelationBuilder;
 	}
-	export function patchRelation(base: Relation): IRelationBuilder;
-	export function buildRelation(): IRelationBuilder;
+	export function patchRelation(base: Relation, builder: (build: IRelationBuilder) => IRelationBuilder): IAny[];
+	export function buildRelation(builder: (build: IRelationBuilder) => IRelationBuilder): Relation;
 	export interface IMiscellaneousFieldBuilder {
-	    build: () => MiscellaneousField;
-	    patch: () => any[];
+	    build?: () => MiscellaneousField;
+	    patch: () => IAny[];
 	    data: (data: string) => IMiscellaneousFieldBuilder;
 	    name: (name: string) => IMiscellaneousFieldBuilder;
 	}
-	export function patchMiscellaneousField(base: MiscellaneousField): IMiscellaneousFieldBuilder;
-	export function buildMiscellaneousField(): IMiscellaneousFieldBuilder;
+	export function patchMiscellaneousField(base: MiscellaneousField, builder: (build: IMiscellaneousFieldBuilder) => IMiscellaneousFieldBuilder): IAny[];
+	export function buildMiscellaneousField(builder: (build: IMiscellaneousFieldBuilder) => IMiscellaneousFieldBuilder): MiscellaneousField;
 	export interface IMiscellaneousBuilder {
-	    build: () => Miscellaneous;
-	    patch: () => any[];
+	    build?: () => Miscellaneous;
+	    patch: () => IAny[];
+	    miscellaneousFieldsAt: (idx: number, build: MiscellaneousField | ((builder: IMiscellaneousFieldBuilder) => IMiscellaneousFieldBuilder)) => IMiscellaneousBuilder;
+	    miscellaneousFieldsSplice: (start: number, deleteCount: number, ...items: MiscellaneousField[]) => IMiscellaneousBuilder;
 	    miscellaneousFields: (miscellaneousFields: MiscellaneousField[]) => IMiscellaneousBuilder;
 	}
-	export function patchMiscellaneous(base: Miscellaneous): IMiscellaneousBuilder;
-	export function buildMiscellaneous(): IMiscellaneousBuilder;
+	export function patchMiscellaneous(base: Miscellaneous, builder: (build: IMiscellaneousBuilder) => IMiscellaneousBuilder): IAny[];
+	export function buildMiscellaneous(builder: (build: IMiscellaneousBuilder) => IMiscellaneousBuilder): Miscellaneous;
 	export interface IIdentificationBuilder {
-	    build: () => Identification;
-	    patch: () => any[];
-	    miscellaneous: (build: (builder: IMiscellaneousBuilder) => IMiscellaneousBuilder) => IIdentificationBuilder;
+	    build?: () => Identification;
+	    patch: () => IAny[];
+	    miscellaneous: (build: Miscellaneous | ((builder: IMiscellaneousBuilder) => IMiscellaneousBuilder)) => IIdentificationBuilder;
+	    creatorsAt: (idx: number, build: Creator | ((builder: ICreatorBuilder) => ICreatorBuilder)) => IIdentificationBuilder;
+	    creatorsSplice: (start: number, deleteCount: number, ...items: Creator[]) => IIdentificationBuilder;
 	    creators: (creators: Creator[]) => IIdentificationBuilder;
+	    relationsAt: (idx: number, build: Relation | ((builder: IRelationBuilder) => IRelationBuilder)) => IIdentificationBuilder;
+	    relationsSplice: (start: number, deleteCount: number, ...items: Relation[]) => IIdentificationBuilder;
 	    relations: (relations: Relation[]) => IIdentificationBuilder;
+	    rightsAt: (idx: number, build: Rights | ((builder: IRightsBuilder) => IRightsBuilder)) => IIdentificationBuilder;
+	    rightsSplice: (start: number, deleteCount: number, ...items: Rights[]) => IIdentificationBuilder;
 	    rights: (rights: Rights[]) => IIdentificationBuilder;
-	    encoding: (build: (builder: IEncodingBuilder) => IEncodingBuilder) => IIdentificationBuilder;
+	    encoding: (build: Encoding | ((builder: IEncodingBuilder) => IEncodingBuilder)) => IIdentificationBuilder;
 	    source: (source: string) => IIdentificationBuilder;
 	}
-	export function patchIdentification(base: Identification): IIdentificationBuilder;
-	export function buildIdentification(): IIdentificationBuilder;
+	export function patchIdentification(base: Identification, builder: (build: IIdentificationBuilder) => IIdentificationBuilder): IAny[];
+	export function buildIdentification(builder: (build: IIdentificationBuilder) => IIdentificationBuilder): Identification;
 	export interface ISupportsBuilder {
-	    build: () => Supports;
-	    patch: () => any[];
+	    build?: () => Supports;
+	    patch: () => IAny[];
 	    element: (element: string) => ISupportsBuilder;
 	    attribute: (attribute: string) => ISupportsBuilder;
 	    value: (value: string) => ISupportsBuilder;
 	    type: (type: string) => ISupportsBuilder;
 	}
-	export function patchSupports(base: Supports): ISupportsBuilder;
-	export function buildSupports(): ISupportsBuilder;
+	export function patchSupports(base: Supports, builder: (build: ISupportsBuilder) => ISupportsBuilder): IAny[];
+	export function buildSupports(builder: (build: ISupportsBuilder) => ISupportsBuilder): Supports;
 	export interface IEncodingBuilder {
-	    build: () => Encoding;
-	    patch: () => any[];
+	    build?: () => Encoding;
+	    patch: () => IAny[];
 	    encodingDescriptions: (encodingDescriptions: string[]) => IEncodingBuilder;
-	    encodingDate: (build: (builder: IEncodingDateBuilder) => IEncodingDateBuilder) => IEncodingBuilder;
+	    encodingDate: (build: EncodingDate | ((builder: IEncodingDateBuilder) => IEncodingDateBuilder)) => IEncodingBuilder;
 	    set: (key: string, val: Supports) => IEncodingBuilder;
+	    encodersAt: (idx: number, build: Encoder | ((builder: IEncoderBuilder) => IEncoderBuilder)) => IEncodingBuilder;
+	    encodersSplice: (start: number, deleteCount: number, ...items: Encoder[]) => IEncodingBuilder;
 	    encoders: (encoders: Encoder[]) => IEncodingBuilder;
 	    softwares: (softwares: string[]) => IEncodingBuilder;
 	}
-	export function patchEncoding(base: Encoding): IEncodingBuilder;
-	export function buildEncoding(): IEncodingBuilder;
+	export function patchEncoding(base: Encoding, builder: (build: IEncodingBuilder) => IEncodingBuilder): IAny[];
+	export function buildEncoding(builder: (build: IEncodingBuilder) => IEncodingBuilder): Encoding;
 	export interface ITimeSeparatorBuilder {
-	    build: () => TimeSeparator;
-	    patch: () => any[];
+	    build?: () => TimeSeparator;
+	    patch: () => IAny[];
 	    separator: (separator: SeparatorType) => ITimeSeparatorBuilder;
 	}
-	export function patchTimeSeparator(base: TimeSeparator): ITimeSeparatorBuilder;
-	export function buildTimeSeparator(): ITimeSeparatorBuilder;
+	export function patchTimeSeparator(base: TimeSeparator, builder: (build: ITimeSeparatorBuilder) => ITimeSeparatorBuilder): IAny[];
+	export function buildTimeSeparator(builder: (build: ITimeSeparatorBuilder) => ITimeSeparatorBuilder): TimeSeparator;
 	export interface ITimeSymbolBuilder {
-	    build: () => TimeSymbol;
-	    patch: () => any[];
+	    build?: () => TimeSymbol;
+	    patch: () => IAny[];
 	    symbol: (symbol: TimeSymbolType) => ITimeSymbolBuilder;
 	}
-	export function patchTimeSymbol(base: TimeSymbol): ITimeSymbolBuilder;
-	export function buildTimeSymbol(): ITimeSymbolBuilder;
+	export function patchTimeSymbol(base: TimeSymbol, builder: (build: ITimeSymbolBuilder) => ITimeSymbolBuilder): IAny[];
+	export function buildTimeSymbol(builder: (build: ITimeSymbolBuilder) => ITimeSymbolBuilder): TimeSymbol;
 	export interface ICancelBuilder {
-	    build: () => Cancel;
-	    patch: () => any[];
+	    build?: () => Cancel;
+	    patch: () => IAny[];
 	    fifths: (fifths: number) => ICancelBuilder;
 	    location: (location: CancelLocation) => ICancelBuilder;
 	}
-	export function patchCancel(base: Cancel): ICancelBuilder;
-	export function buildCancel(): ICancelBuilder;
+	export function patchCancel(base: Cancel, builder: (build: ICancelBuilder) => ICancelBuilder): IAny[];
+	export function buildCancel(builder: (build: ICancelBuilder) => ICancelBuilder): Cancel;
 	export interface IKeyOctaveBuilder {
-	    build: () => KeyOctave;
-	    patch: () => any[];
+	    build?: () => KeyOctave;
+	    patch: () => IAny[];
 	    octave: (octave: number) => IKeyOctaveBuilder;
 	    number: (number: number) => IKeyOctaveBuilder;
 	    cancel: (cancel: boolean) => IKeyOctaveBuilder;
 	}
-	export function patchKeyOctave(base: KeyOctave): IKeyOctaveBuilder;
-	export function buildKeyOctave(): IKeyOctaveBuilder;
+	export function patchKeyOctave(base: KeyOctave, builder: (build: IKeyOctaveBuilder) => IKeyOctaveBuilder): IAny[];
+	export function buildKeyOctave(builder: (build: IKeyOctaveBuilder) => IKeyOctaveBuilder): KeyOctave;
 	export interface IKeyBuilder {
-	    build: () => Key;
-	    patch: () => any[];
-	    cancel: (build: (builder: ICancelBuilder) => ICancelBuilder) => IKeyBuilder;
+	    build?: () => Key;
+	    patch: () => IAny[];
+	    cancel: (build: Cancel | ((builder: ICancelBuilder) => ICancelBuilder)) => IKeyBuilder;
 	    keySteps: (keySteps: string[]) => IKeyBuilder;
+	    keyOctavesAt: (idx: number, build: KeyOctave | ((builder: IKeyOctaveBuilder) => IKeyOctaveBuilder)) => IKeyBuilder;
+	    keyOctavesSplice: (start: number, deleteCount: number, ...items: KeyOctave[]) => IKeyBuilder;
 	    keyOctaves: (keyOctaves: KeyOctave[]) => IKeyBuilder;
 	    number: (number: number) => IKeyBuilder;
 	    fifths: (fifths: number) => IKeyBuilder;
 	    keyAlters: (keyAlters: string[]) => IKeyBuilder;
 	    keyAccidentals: (keyAccidentals: string[]) => IKeyBuilder;
 	    mode: (mode: string) => IKeyBuilder;
-	    _class: (_class: string) => IKeyBuilder;
 	    defaultX: (defaultX: number) => IKeyBuilder;
 	    relativeY: (relativeY: number) => IKeyBuilder;
 	    defaultY: (defaultY: number) => IKeyBuilder;
 	    relativeX: (relativeX: number) => IKeyBuilder;
 	}
-	export function patchKey(base: Key): IKeyBuilder;
-	export function buildKey(): IKeyBuilder;
+	export function patchKey(base: Key, builder: (build: IKeyBuilder) => IKeyBuilder): IAny[];
+	export function buildKey(builder: (build: IKeyBuilder) => IKeyBuilder): Key;
 	export interface ITimeBuilder {
-	    build: () => Time;
-	    patch: () => any[];
-	    interchangeable: (build: (builder: IInterchangeableBuilder) => IInterchangeableBuilder) => ITimeBuilder;
+	    build?: () => Time;
+	    patch: () => IAny[];
+	    interchangeable: (build: Interchangeable | ((builder: IInterchangeableBuilder) => IInterchangeableBuilder)) => ITimeBuilder;
 	    beats: (beats: string[]) => ITimeBuilder;
 	    beatTypes: (beatTypes: number[]) => ITimeBuilder;
 	    senzaMisura: (senzaMisura: string) => ITimeBuilder;
-	    _class: (_class: string) => ITimeBuilder;
 	    symbol: (symbol: TimeSymbolType) => ITimeBuilder;
 	}
-	export function patchTime(base: Time): ITimeBuilder;
-	export function buildTime(): ITimeBuilder;
+	export function patchTime(base: Time, builder: (build: ITimeBuilder) => ITimeBuilder): IAny[];
+	export function buildTime(builder: (build: ITimeBuilder) => ITimeBuilder): Time;
 	export interface IInterchangeableBuilder {
-	    build: () => Interchangeable;
-	    patch: () => any[];
+	    build?: () => Interchangeable;
+	    patch: () => IAny[];
 	    beats: (beats: string[]) => IInterchangeableBuilder;
 	    beatTypes: (beatTypes: number[]) => IInterchangeableBuilder;
 	    timeRelation: (timeRelation: string) => IInterchangeableBuilder;
 	    symbol: (symbol: TimeSymbolType) => IInterchangeableBuilder;
 	}
-	export function patchInterchangeable(base: Interchangeable): IInterchangeableBuilder;
-	export function buildInterchangeable(): IInterchangeableBuilder;
+	export function patchInterchangeable(base: Interchangeable, builder: (build: IInterchangeableBuilder) => IInterchangeableBuilder): IAny[];
+	export function buildInterchangeable(builder: (build: IInterchangeableBuilder) => IInterchangeableBuilder): Interchangeable;
 	export interface IPartSymbolBuilder {
-	    build: () => PartSymbol;
-	    patch: () => any[];
+	    build?: () => PartSymbol;
+	    patch: () => IAny[];
 	    topStaff: (topStaff: number) => IPartSymbolBuilder;
 	    type: (type: PartSymbolType) => IPartSymbolBuilder;
 	    bottomStaff: (bottomStaff: number) => IPartSymbolBuilder;
-	    _class: (_class: string) => IPartSymbolBuilder;
 	    defaultX: (defaultX: number) => IPartSymbolBuilder;
 	    relativeY: (relativeY: number) => IPartSymbolBuilder;
 	    defaultY: (defaultY: number) => IPartSymbolBuilder;
 	    relativeX: (relativeX: number) => IPartSymbolBuilder;
 	}
-	export function patchPartSymbol(base: PartSymbol): IPartSymbolBuilder;
-	export function buildPartSymbol(): IPartSymbolBuilder;
+	export function patchPartSymbol(base: PartSymbol, builder: (build: IPartSymbolBuilder) => IPartSymbolBuilder): IAny[];
+	export function buildPartSymbol(builder: (build: IPartSymbolBuilder) => IPartSymbolBuilder): PartSymbol;
 	export interface IClefBuilder {
-	    build: () => Clef;
-	    patch: () => any[];
+	    build?: () => Clef;
+	    patch: () => IAny[];
 	    clefOctaveChange: (clefOctaveChange: string) => IClefBuilder;
 	    sign: (sign: string) => IClefBuilder;
 	    number: (number: number) => IClefBuilder;
@@ -5988,22 +6191,24 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IClefBuilder;
 	    relativeX: (relativeX: number) => IClefBuilder;
 	}
-	export function patchClef(base: Clef): IClefBuilder;
-	export function buildClef(): IClefBuilder;
+	export function patchClef(base: Clef, builder: (build: IClefBuilder) => IClefBuilder): IAny[];
+	export function buildClef(builder: (build: IClefBuilder) => IClefBuilder): Clef;
 	export interface IStaffTuningBuilder {
-	    build: () => StaffTuning;
-	    patch: () => any[];
+	    build?: () => StaffTuning;
+	    patch: () => IAny[];
 	    tuningAlter: (tuningAlter: string) => IStaffTuningBuilder;
 	    line: (line: string) => IStaffTuningBuilder;
 	    tuningStep: (tuningStep: string) => IStaffTuningBuilder;
 	    tuningOctave: (tuningOctave: string) => IStaffTuningBuilder;
 	}
-	export function patchStaffTuning(base: StaffTuning): IStaffTuningBuilder;
-	export function buildStaffTuning(): IStaffTuningBuilder;
+	export function patchStaffTuning(base: StaffTuning, builder: (build: IStaffTuningBuilder) => IStaffTuningBuilder): IAny[];
+	export function buildStaffTuning(builder: (build: IStaffTuningBuilder) => IStaffTuningBuilder): StaffTuning;
 	export interface IStaffDetailsBuilder {
-	    build: () => StaffDetails;
-	    patch: () => any[];
+	    build?: () => StaffDetails;
+	    patch: () => IAny[];
 	    staffLines: (staffLines: number) => IStaffDetailsBuilder;
+	    staffTuningsAt: (idx: number, build: StaffTuning | ((builder: IStaffTuningBuilder) => IStaffTuningBuilder)) => IStaffDetailsBuilder;
+	    staffTuningsSplice: (start: number, deleteCount: number, ...items: StaffTuning[]) => IStaffDetailsBuilder;
 	    staffTunings: (staffTunings: StaffTuning[]) => IStaffDetailsBuilder;
 	    staffSize: (staffSize: number) => IStaffDetailsBuilder;
 	    showFrets: (showFrets: ShowFretsType) => IStaffDetailsBuilder;
@@ -6012,242 +6217,268 @@ declare module 'musicxml-interfaces/builders' {
 	    staffType: (staffType: string) => IStaffDetailsBuilder;
 	    printObject: (printObject: boolean) => IStaffDetailsBuilder;
 	}
-	export function patchStaffDetails(base: StaffDetails): IStaffDetailsBuilder;
-	export function buildStaffDetails(): IStaffDetailsBuilder;
+	export function patchStaffDetails(base: StaffDetails, builder: (build: IStaffDetailsBuilder) => IStaffDetailsBuilder): IAny[];
+	export function buildStaffDetails(builder: (build: IStaffDetailsBuilder) => IStaffDetailsBuilder): StaffDetails;
 	export interface IDoubleBuilder {
-	    build: () => Double;
-	    patch: () => any[];
+	    build?: () => Double;
+	    patch: () => IAny[];
 	}
-	export function patchDouble(base: Double): IDoubleBuilder;
-	export function buildDouble(): IDoubleBuilder;
+	export function patchDouble(base: Double, builder: (build: IDoubleBuilder) => IDoubleBuilder): IAny[];
+	export function buildDouble(builder: (build: IDoubleBuilder) => IDoubleBuilder): Double;
 	export interface ITransposeBuilder {
-	    build: () => Transpose;
-	    patch: () => any[];
+	    build?: () => Transpose;
+	    patch: () => IAny[];
 	    number: (number: number) => ITransposeBuilder;
 	    diatonic: (diatonic: string) => ITransposeBuilder;
 	    octaveChange: (octaveChange: string) => ITransposeBuilder;
-	    double: (build: (builder: IDoubleBuilder) => IDoubleBuilder) => ITransposeBuilder;
+	    double: (build: Double | ((builder: IDoubleBuilder) => IDoubleBuilder)) => ITransposeBuilder;
 	    chromatic: (chromatic: string) => ITransposeBuilder;
 	}
-	export function patchTranspose(base: Transpose): ITransposeBuilder;
-	export function buildTranspose(): ITransposeBuilder;
+	export function patchTranspose(base: Transpose, builder: (build: ITransposeBuilder) => ITransposeBuilder): IAny[];
+	export function buildTranspose(builder: (build: ITransposeBuilder) => ITransposeBuilder): Transpose;
 	export interface IDirectiveBuilder {
-	    build: () => Directive;
-	    patch: () => any[];
+	    build?: () => Directive;
+	    patch: () => IAny[];
 	    data: (data: string) => IDirectiveBuilder;
 	    defaultX: (defaultX: number) => IDirectiveBuilder;
 	    relativeY: (relativeY: number) => IDirectiveBuilder;
 	    defaultY: (defaultY: number) => IDirectiveBuilder;
 	    relativeX: (relativeX: number) => IDirectiveBuilder;
 	}
-	export function patchDirective(base: Directive): IDirectiveBuilder;
-	export function buildDirective(): IDirectiveBuilder;
+	export function patchDirective(base: Directive, builder: (build: IDirectiveBuilder) => IDirectiveBuilder): IAny[];
+	export function buildDirective(builder: (build: IDirectiveBuilder) => IDirectiveBuilder): Directive;
 	export interface ISlashDotBuilder {
-	    build: () => SlashDot;
-	    patch: () => any[];
+	    build?: () => SlashDot;
+	    patch: () => IAny[];
 	}
-	export function patchSlashDot(base: SlashDot): ISlashDotBuilder;
-	export function buildSlashDot(): ISlashDotBuilder;
+	export function patchSlashDot(base: SlashDot, builder: (build: ISlashDotBuilder) => ISlashDotBuilder): IAny[];
+	export function buildSlashDot(builder: (build: ISlashDotBuilder) => ISlashDotBuilder): SlashDot;
 	export interface IMultipleRestBuilder {
-	    build: () => MultipleRest;
-	    patch: () => any[];
+	    build?: () => MultipleRest;
+	    patch: () => IAny[];
 	    useSymbols: (useSymbols: boolean) => IMultipleRestBuilder;
 	    count: (count: number) => IMultipleRestBuilder;
 	}
-	export function patchMultipleRest(base: MultipleRest): IMultipleRestBuilder;
-	export function buildMultipleRest(): IMultipleRestBuilder;
+	export function patchMultipleRest(base: MultipleRest, builder: (build: IMultipleRestBuilder) => IMultipleRestBuilder): IAny[];
+	export function buildMultipleRest(builder: (build: IMultipleRestBuilder) => IMultipleRestBuilder): MultipleRest;
 	export interface IMeasureRepeatBuilder {
-	    build: () => MeasureRepeat;
-	    patch: () => any[];
+	    build?: () => MeasureRepeat;
+	    patch: () => IAny[];
 	    data: (data: string) => IMeasureRepeatBuilder;
 	    type: (type: StartStop) => IMeasureRepeatBuilder;
 	    slashes: (slashes: number) => IMeasureRepeatBuilder;
 	}
-	export function patchMeasureRepeat(base: MeasureRepeat): IMeasureRepeatBuilder;
-	export function buildMeasureRepeat(): IMeasureRepeatBuilder;
+	export function patchMeasureRepeat(base: MeasureRepeat, builder: (build: IMeasureRepeatBuilder) => IMeasureRepeatBuilder): IAny[];
+	export function buildMeasureRepeat(builder: (build: IMeasureRepeatBuilder) => IMeasureRepeatBuilder): MeasureRepeat;
 	export interface IBeatRepeatBuilder {
-	    build: () => BeatRepeat;
-	    patch: () => any[];
+	    build?: () => BeatRepeat;
+	    patch: () => IAny[];
 	    slashType: (slashType: string) => IBeatRepeatBuilder;
 	    useDots: (useDots: boolean) => IBeatRepeatBuilder;
+	    slashDotsAt: (idx: number, build: SlashDot | ((builder: ISlashDotBuilder) => ISlashDotBuilder)) => IBeatRepeatBuilder;
+	    slashDotsSplice: (start: number, deleteCount: number, ...items: SlashDot[]) => IBeatRepeatBuilder;
 	    slashDots: (slashDots: SlashDot[]) => IBeatRepeatBuilder;
 	    slases: (slases: number) => IBeatRepeatBuilder;
 	    type: (type: StartStop) => IBeatRepeatBuilder;
 	}
-	export function patchBeatRepeat(base: BeatRepeat): IBeatRepeatBuilder;
-	export function buildBeatRepeat(): IBeatRepeatBuilder;
+	export function patchBeatRepeat(base: BeatRepeat, builder: (build: IBeatRepeatBuilder) => IBeatRepeatBuilder): IAny[];
+	export function buildBeatRepeat(builder: (build: IBeatRepeatBuilder) => IBeatRepeatBuilder): BeatRepeat;
 	export interface ISlashBuilder {
-	    build: () => Slash;
-	    patch: () => any[];
+	    build?: () => Slash;
+	    patch: () => IAny[];
 	    slashType: (slashType: string) => ISlashBuilder;
 	    useDots: (useDots: boolean) => ISlashBuilder;
 	    useStems: (useStems: boolean) => ISlashBuilder;
+	    slashDotsAt: (idx: number, build: SlashDot | ((builder: ISlashDotBuilder) => ISlashDotBuilder)) => ISlashBuilder;
+	    slashDotsSplice: (start: number, deleteCount: number, ...items: SlashDot[]) => ISlashBuilder;
 	    slashDots: (slashDots: SlashDot[]) => ISlashBuilder;
 	    type: (type: StartStop) => ISlashBuilder;
 	}
-	export function patchSlash(base: Slash): ISlashBuilder;
-	export function buildSlash(): ISlashBuilder;
+	export function patchSlash(base: Slash, builder: (build: ISlashBuilder) => ISlashBuilder): IAny[];
+	export function buildSlash(builder: (build: ISlashBuilder) => ISlashBuilder): Slash;
 	export interface IMeasureStyleBuilder {
-	    build: () => MeasureStyle;
-	    patch: () => any[];
-	    measureRepeat: (build: (builder: IMeasureRepeatBuilder) => IMeasureRepeatBuilder) => IMeasureStyleBuilder;
-	    beatRepeat: (build: (builder: IBeatRepeatBuilder) => IBeatRepeatBuilder) => IMeasureStyleBuilder;
-	    multipleRest: (build: (builder: IMultipleRestBuilder) => IMultipleRestBuilder) => IMeasureStyleBuilder;
-	    slash: (build: (builder: ISlashBuilder) => ISlashBuilder) => IMeasureStyleBuilder;
+	    build?: () => MeasureStyle;
+	    patch: () => IAny[];
+	    measureRepeat: (build: MeasureRepeat | ((builder: IMeasureRepeatBuilder) => IMeasureRepeatBuilder)) => IMeasureStyleBuilder;
+	    beatRepeat: (build: BeatRepeat | ((builder: IBeatRepeatBuilder) => IBeatRepeatBuilder)) => IMeasureStyleBuilder;
+	    multipleRest: (build: MultipleRest | ((builder: IMultipleRestBuilder) => IMultipleRestBuilder)) => IMeasureStyleBuilder;
+	    slash: (build: Slash | ((builder: ISlashBuilder) => ISlashBuilder)) => IMeasureStyleBuilder;
 	    number: (number: number) => IMeasureStyleBuilder;
 	    fontFamily: (fontFamily: string) => IMeasureStyleBuilder;
 	    fontWeight: (fontWeight: NormalBold) => IMeasureStyleBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IMeasureStyleBuilder;
 	    fontSize: (fontSize: string) => IMeasureStyleBuilder;
 	}
-	export function patchMeasureStyle(base: MeasureStyle): IMeasureStyleBuilder;
-	export function buildMeasureStyle(): IMeasureStyleBuilder;
+	export function patchMeasureStyle(base: MeasureStyle, builder: (build: IMeasureStyleBuilder) => IMeasureStyleBuilder): IAny[];
+	export function buildMeasureStyle(builder: (build: IMeasureStyleBuilder) => IMeasureStyleBuilder): MeasureStyle;
 	export interface IAttributesBuilder {
-	    build: () => Attributes;
-	    patch: () => any[];
+	    build?: () => Attributes;
+	    patch: () => IAny[];
 	    divisions: (divisions: number) => IAttributesBuilder;
-	    partSymbol: (build: (builder: IPartSymbolBuilder) => IPartSymbolBuilder) => IAttributesBuilder;
+	    partSymbol: (build: PartSymbol | ((builder: IPartSymbolBuilder) => IPartSymbolBuilder)) => IAttributesBuilder;
+	    clefsAt: (idx: number, build: Clef | ((builder: IClefBuilder) => IClefBuilder)) => IAttributesBuilder;
+	    clefsSplice: (start: number, deleteCount: number, ...items: Clef[]) => IAttributesBuilder;
 	    clefs: (clefs: Clef[]) => IAttributesBuilder;
+	    measureStylesAt: (idx: number, build: MeasureStyle | ((builder: IMeasureStyleBuilder) => IMeasureStyleBuilder)) => IAttributesBuilder;
+	    measureStylesSplice: (start: number, deleteCount: number, ...items: MeasureStyle[]) => IAttributesBuilder;
 	    measureStyles: (measureStyles: MeasureStyle[]) => IAttributesBuilder;
+	    timesAt: (idx: number, build: Time | ((builder: ITimeBuilder) => ITimeBuilder)) => IAttributesBuilder;
+	    timesSplice: (start: number, deleteCount: number, ...items: Time[]) => IAttributesBuilder;
 	    times: (times: Time[]) => IAttributesBuilder;
+	    staffDetailsAt: (idx: number, build: StaffDetails | ((builder: IStaffDetailsBuilder) => IStaffDetailsBuilder)) => IAttributesBuilder;
+	    staffDetailsSplice: (start: number, deleteCount: number, ...items: StaffDetails[]) => IAttributesBuilder;
 	    staffDetails: (staffDetails: StaffDetails[]) => IAttributesBuilder;
+	    transposesAt: (idx: number, build: Transpose | ((builder: ITransposeBuilder) => ITransposeBuilder)) => IAttributesBuilder;
+	    transposesSplice: (start: number, deleteCount: number, ...items: Transpose[]) => IAttributesBuilder;
 	    transposes: (transposes: Transpose[]) => IAttributesBuilder;
 	    staves: (staves: number) => IAttributesBuilder;
 	    instruments: (instruments: string) => IAttributesBuilder;
+	    keySignaturesAt: (idx: number, build: Key | ((builder: IKeyBuilder) => IKeyBuilder)) => IAttributesBuilder;
+	    keySignaturesSplice: (start: number, deleteCount: number, ...items: Key[]) => IAttributesBuilder;
 	    keySignatures: (keySignatures: Key[]) => IAttributesBuilder;
+	    directivesAt: (idx: number, build: Directive | ((builder: IDirectiveBuilder) => IDirectiveBuilder)) => IAttributesBuilder;
+	    directivesSplice: (start: number, deleteCount: number, ...items: Directive[]) => IAttributesBuilder;
 	    directives: (directives: Directive[]) => IAttributesBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IAttributesBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IAttributesBuilder;
-	    _class: (_class: string) => IAttributesBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IAttributesBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IAttributesBuilder;
 	}
-	export function patchAttributes(base: Attributes): IAttributesBuilder;
-	export function buildAttributes(): IAttributesBuilder;
+	export function patchAttributes(base: Attributes, builder: (build: IAttributesBuilder) => IAttributesBuilder): IAny[];
+	export function buildAttributes(builder: (build: IAttributesBuilder) => IAttributesBuilder): Attributes;
 	export interface ICueBuilder {
-	    build: () => Cue;
-	    patch: () => any[];
+	    build?: () => Cue;
+	    patch: () => IAny[];
 	}
-	export function patchCue(base: Cue): ICueBuilder;
-	export function buildCue(): ICueBuilder;
+	export function patchCue(base: Cue, builder: (build: ICueBuilder) => ICueBuilder): IAny[];
+	export function buildCue(builder: (build: ICueBuilder) => ICueBuilder): Cue;
 	export interface IGraceBuilder {
-	    build: () => Grace;
-	    patch: () => any[];
+	    build?: () => Grace;
+	    patch: () => IAny[];
 	    makeTime: (makeTime: string) => IGraceBuilder;
 	    stealTimePrevious: (stealTimePrevious: string) => IGraceBuilder;
 	    slash: (slash: boolean) => IGraceBuilder;
 	    stealTimeFollowing: (stealTimeFollowing: string) => IGraceBuilder;
 	}
-	export function patchGrace(base: Grace): IGraceBuilder;
-	export function buildGrace(): IGraceBuilder;
+	export function patchGrace(base: Grace, builder: (build: IGraceBuilder) => IGraceBuilder): IAny[];
+	export function buildGrace(builder: (build: IGraceBuilder) => IGraceBuilder): Grace;
 	export interface IChordBuilder {
-	    build: () => Chord;
-	    patch: () => any[];
+	    build?: () => Chord;
+	    patch: () => IAny[];
 	}
-	export function patchChord(base: Chord): IChordBuilder;
-	export function buildChord(): IChordBuilder;
+	export function patchChord(base: Chord, builder: (build: IChordBuilder) => IChordBuilder): IAny[];
+	export function buildChord(builder: (build: IChordBuilder) => IChordBuilder): Chord;
 	export interface IUnpitchedBuilder {
-	    build: () => Unpitched;
-	    patch: () => any[];
+	    build?: () => Unpitched;
+	    patch: () => IAny[];
 	    displayStep: (displayStep: string) => IUnpitchedBuilder;
 	    displayOctave: (displayOctave: string) => IUnpitchedBuilder;
 	}
-	export function patchUnpitched(base: Unpitched): IUnpitchedBuilder;
-	export function buildUnpitched(): IUnpitchedBuilder;
+	export function patchUnpitched(base: Unpitched, builder: (build: IUnpitchedBuilder) => IUnpitchedBuilder): IAny[];
+	export function buildUnpitched(builder: (build: IUnpitchedBuilder) => IUnpitchedBuilder): Unpitched;
 	export interface IPitchBuilder {
-	    build: () => Pitch;
-	    patch: () => any[];
+	    build?: () => Pitch;
+	    patch: () => IAny[];
 	    alter: (alter: number) => IPitchBuilder;
 	    step: (step: string) => IPitchBuilder;
 	    octave: (octave: number) => IPitchBuilder;
 	}
-	export function patchPitch(base: Pitch): IPitchBuilder;
-	export function buildPitch(): IPitchBuilder;
+	export function patchPitch(base: Pitch, builder: (build: IPitchBuilder) => IPitchBuilder): IAny[];
+	export function buildPitch(builder: (build: IPitchBuilder) => IPitchBuilder): Pitch;
 	export interface IFullNoteBuilder {
-	    build: () => FullNote;
-	    patch: () => any[];
-	    unpitched: (build: (builder: IUnpitchedBuilder) => IUnpitchedBuilder) => IFullNoteBuilder;
-	    chord: (build: (builder: IChordBuilder) => IChordBuilder) => IFullNoteBuilder;
-	    pitch: (build: (builder: IPitchBuilder) => IPitchBuilder) => IFullNoteBuilder;
-	    rest: (build: (builder: IRestBuilder) => IRestBuilder) => IFullNoteBuilder;
+	    build?: () => FullNote;
+	    patch: () => IAny[];
+	    unpitched: (build: Unpitched | ((builder: IUnpitchedBuilder) => IUnpitchedBuilder)) => IFullNoteBuilder;
+	    chord: (build: Chord | ((builder: IChordBuilder) => IChordBuilder)) => IFullNoteBuilder;
+	    pitch: (build: Pitch | ((builder: IPitchBuilder) => IPitchBuilder)) => IFullNoteBuilder;
+	    rest: (build: Rest | ((builder: IRestBuilder) => IRestBuilder)) => IFullNoteBuilder;
 	}
-	export function patchFullNote(base: FullNote): IFullNoteBuilder;
-	export function buildFullNote(): IFullNoteBuilder;
+	export function patchFullNote(base: FullNote, builder: (build: IFullNoteBuilder) => IFullNoteBuilder): IAny[];
+	export function buildFullNote(builder: (build: IFullNoteBuilder) => IFullNoteBuilder): FullNote;
 	export interface IRestBuilder {
-	    build: () => Rest;
-	    patch: () => any[];
+	    build?: () => Rest;
+	    patch: () => IAny[];
 	    measure: (measure: boolean) => IRestBuilder;
 	    displayStep: (displayStep: string) => IRestBuilder;
 	    displayOctave: (displayOctave: string) => IRestBuilder;
 	}
-	export function patchRest(base: Rest): IRestBuilder;
-	export function buildRest(): IRestBuilder;
+	export function patchRest(base: Rest, builder: (build: IRestBuilder) => IRestBuilder): IAny[];
+	export function buildRest(builder: (build: IRestBuilder) => IRestBuilder): Rest;
 	export interface ITieBuilder {
-	    build: () => Tie;
-	    patch: () => any[];
+	    build?: () => Tie;
+	    patch: () => IAny[];
 	    type: (type: StartStop) => ITieBuilder;
 	    timeOnly: (timeOnly: string) => ITieBuilder;
 	}
-	export function patchTie(base: Tie): ITieBuilder;
-	export function buildTie(): ITieBuilder;
+	export function patchTie(base: Tie, builder: (build: ITieBuilder) => ITieBuilder): IAny[];
+	export function buildTie(builder: (build: ITieBuilder) => ITieBuilder): Tie;
 	export interface IInstrumentBuilder {
-	    build: () => Instrument;
-	    patch: () => any[];
+	    build?: () => Instrument;
+	    patch: () => IAny[];
 	    id: (id: string) => IInstrumentBuilder;
 	}
-	export function patchInstrument(base: Instrument): IInstrumentBuilder;
-	export function buildInstrument(): IInstrumentBuilder;
+	export function patchInstrument(base: Instrument, builder: (build: IInstrumentBuilder) => IInstrumentBuilder): IAny[];
+	export function buildInstrument(builder: (build: IInstrumentBuilder) => IInstrumentBuilder): Instrument;
 	export interface INoteBuilder {
-	    build: () => Note;
-	    patch: () => any[];
-	    noteheadText: (build: (builder: INoteheadTextBuilder) => INoteheadTextBuilder) => INoteBuilder;
-	    timeModification: (build: (builder: ITimeModificationBuilder) => ITimeModificationBuilder) => INoteBuilder;
-	    accidental: (build: (builder: IAccidentalBuilder) => IAccidentalBuilder) => INoteBuilder;
-	    instrument: (build: (builder: IInstrumentBuilder) => IInstrumentBuilder) => INoteBuilder;
+	    build?: () => Note;
+	    patch: () => IAny[];
+	    noteheadText: (build: NoteheadText | ((builder: INoteheadTextBuilder) => INoteheadTextBuilder)) => INoteBuilder;
+	    timeModification: (build: TimeModification | ((builder: ITimeModificationBuilder) => ITimeModificationBuilder)) => INoteBuilder;
+	    accidental: (build: Accidental | ((builder: IAccidentalBuilder) => IAccidentalBuilder)) => INoteBuilder;
+	    instrument: (build: Instrument | ((builder: IInstrumentBuilder) => IInstrumentBuilder)) => INoteBuilder;
 	    attack: (attack: number) => INoteBuilder;
 	    endDynamics: (endDynamics: number) => INoteBuilder;
+	    lyricsAt: (idx: number, build: Lyric | ((builder: ILyricBuilder) => ILyricBuilder)) => INoteBuilder;
+	    lyricsSplice: (start: number, deleteCount: number, ...items: Lyric[]) => INoteBuilder;
 	    lyrics: (lyrics: Lyric[]) => INoteBuilder;
+	    dotsAt: (idx: number, build: Dot | ((builder: IDotBuilder) => IDotBuilder)) => INoteBuilder;
+	    dotsSplice: (start: number, deleteCount: number, ...items: Dot[]) => INoteBuilder;
 	    dots: (dots: Dot[]) => INoteBuilder;
+	    notationsAt: (idx: number, build: Notations | ((builder: INotationsBuilder) => INotationsBuilder)) => INoteBuilder;
+	    notationsSplice: (start: number, deleteCount: number, ...items: Notations[]) => INoteBuilder;
 	    notations: (notations: Notations[]) => INoteBuilder;
-	    stem: (build: (builder: IStemBuilder) => IStemBuilder) => INoteBuilder;
-	    noteType: (build: (builder: ITypeBuilder) => ITypeBuilder) => INoteBuilder;
+	    stem: (build: Stem | ((builder: IStemBuilder) => IStemBuilder)) => INoteBuilder;
+	    noteType: (build: Type | ((builder: ITypeBuilder) => ITypeBuilder)) => INoteBuilder;
 	    pizzicato: (pizzicato: boolean) => INoteBuilder;
-	    cue: (build: (builder: ICueBuilder) => ICueBuilder) => INoteBuilder;
+	    cue: (build: Cue | ((builder: ICueBuilder) => ICueBuilder)) => INoteBuilder;
 	    duration: (duration: number) => INoteBuilder;
+	    tiesAt: (idx: number, build: Tie | ((builder: ITieBuilder) => ITieBuilder)) => INoteBuilder;
+	    tiesSplice: (start: number, deleteCount: number, ...items: Tie[]) => INoteBuilder;
 	    ties: (ties: Tie[]) => INoteBuilder;
 	    dynamics: (dynamics: number) => INoteBuilder;
-	    play: (build: (builder: IPlayBuilder) => IPlayBuilder) => INoteBuilder;
+	    play: (build: Play | ((builder: IPlayBuilder) => IPlayBuilder)) => INoteBuilder;
 	    staff: (staff: number) => INoteBuilder;
-	    grace: (build: (builder: IGraceBuilder) => IGraceBuilder) => INoteBuilder;
-	    notehead: (build: (builder: INoteheadBuilder) => INoteheadBuilder) => INoteBuilder;
+	    grace: (build: Grace | ((builder: IGraceBuilder) => IGraceBuilder)) => INoteBuilder;
+	    notehead: (build: Notehead | ((builder: INoteheadBuilder) => INoteheadBuilder)) => INoteBuilder;
 	    release: (release: number) => INoteBuilder;
+	    beamsAt: (idx: number, build: Beam | ((builder: IBeamBuilder) => IBeamBuilder)) => INoteBuilder;
+	    beamsSplice: (start: number, deleteCount: number, ...items: Beam[]) => INoteBuilder;
 	    beams: (beams: Beam[]) => INoteBuilder;
 	    voice: (voice: number) => INoteBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => INoteBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => INoteBuilder;
-	    _class: (_class: string) => INoteBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => INoteBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => INoteBuilder;
 	}
-	export function patchNote(base: Note): INoteBuilder;
-	export function buildNote(): INoteBuilder;
+	export function patchNote(base: Note, builder: (build: INoteBuilder) => INoteBuilder): IAny[];
+	export function buildNote(builder: (build: INoteBuilder) => INoteBuilder): Note;
 	export interface ITypeBuilder {
-	    build: () => Type;
-	    patch: () => any[];
+	    build?: () => Type;
+	    patch: () => IAny[];
 	    duration: (duration: Count) => ITypeBuilder;
 	    size: (size: SymbolSize) => ITypeBuilder;
 	}
-	export function patchType(base: Type): ITypeBuilder;
-	export function buildType(): ITypeBuilder;
+	export function patchType(base: Type, builder: (build: ITypeBuilder) => ITypeBuilder): IAny[];
+	export function buildType(builder: (build: ITypeBuilder) => ITypeBuilder): Type;
 	export interface IDotBuilder {
-	    build: () => Dot;
-	    patch: () => any[];
+	    build?: () => Dot;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IDotBuilder;
 	    relativeY: (relativeY: number) => IDotBuilder;
 	    defaultY: (defaultY: number) => IDotBuilder;
 	    relativeX: (relativeX: number) => IDotBuilder;
 	}
-	export function patchDot(base: Dot): IDotBuilder;
-	export function buildDot(): IDotBuilder;
+	export function patchDot(base: Dot, builder: (build: IDotBuilder) => IDotBuilder): IAny[];
+	export function buildDot(builder: (build: IDotBuilder) => IDotBuilder): Dot;
 	export interface IAccidentalBuilder {
-	    build: () => Accidental;
-	    patch: () => any[];
+	    build?: () => Accidental;
+	    patch: () => IAny[];
 	    cautionary: (cautionary: boolean) => IAccidentalBuilder;
 	    accidental: (accidental: MxmlAccidental) => IAccidentalBuilder;
 	    editorial: (editorial: boolean) => IAccidentalBuilder;
@@ -6255,32 +6486,34 @@ declare module 'musicxml-interfaces/builders' {
 	    size: (size: SymbolSize) => IAccidentalBuilder;
 	    parentheses: (parentheses: boolean) => IAccidentalBuilder;
 	}
-	export function patchAccidental(base: Accidental): IAccidentalBuilder;
-	export function buildAccidental(): IAccidentalBuilder;
+	export function patchAccidental(base: Accidental, builder: (build: IAccidentalBuilder) => IAccidentalBuilder): IAny[];
+	export function buildAccidental(builder: (build: IAccidentalBuilder) => IAccidentalBuilder): Accidental;
 	export interface ITimeModificationBuilder {
-	    build: () => TimeModification;
-	    patch: () => any[];
+	    build?: () => TimeModification;
+	    patch: () => IAny[];
 	    actualNotes: (actualNotes: number) => ITimeModificationBuilder;
 	    normalType: (normalType: string) => ITimeModificationBuilder;
 	    normalNotes: (normalNotes: number) => ITimeModificationBuilder;
+	    normalDotsAt: (idx: number, build: NormalDot | ((builder: INormalDotBuilder) => INormalDotBuilder)) => ITimeModificationBuilder;
+	    normalDotsSplice: (start: number, deleteCount: number, ...items: NormalDot[]) => ITimeModificationBuilder;
 	    normalDots: (normalDots: NormalDot[]) => ITimeModificationBuilder;
 	}
-	export function patchTimeModification(base: TimeModification): ITimeModificationBuilder;
-	export function buildTimeModification(): ITimeModificationBuilder;
+	export function patchTimeModification(base: TimeModification, builder: (build: ITimeModificationBuilder) => ITimeModificationBuilder): IAny[];
+	export function buildTimeModification(builder: (build: ITimeModificationBuilder) => ITimeModificationBuilder): TimeModification;
 	export interface IStemBuilder {
-	    build: () => Stem;
-	    patch: () => any[];
+	    build?: () => Stem;
+	    patch: () => IAny[];
 	    type: (type: StemType) => IStemBuilder;
 	    defaultX: (defaultX: number) => IStemBuilder;
 	    relativeY: (relativeY: number) => IStemBuilder;
 	    defaultY: (defaultY: number) => IStemBuilder;
 	    relativeX: (relativeX: number) => IStemBuilder;
 	}
-	export function patchStem(base: Stem): IStemBuilder;
-	export function buildStem(): IStemBuilder;
+	export function patchStem(base: Stem, builder: (build: IStemBuilder) => IStemBuilder): IAny[];
+	export function buildStem(builder: (build: IStemBuilder) => IStemBuilder): Stem;
 	export interface INoteheadBuilder {
-	    build: () => Notehead;
-	    patch: () => any[];
+	    build?: () => Notehead;
+	    patch: () => IAny[];
 	    type: (type: NoteheadType) => INoteheadBuilder;
 	    filled: (filled: boolean) => INoteheadBuilder;
 	    parentheses: (parentheses: boolean) => INoteheadBuilder;
@@ -6289,268 +6522,303 @@ declare module 'musicxml-interfaces/builders' {
 	    fontStyle: (fontStyle: NormalItalic) => INoteheadBuilder;
 	    fontSize: (fontSize: string) => INoteheadBuilder;
 	}
-	export function patchNotehead(base: Notehead): INoteheadBuilder;
-	export function buildNotehead(): INoteheadBuilder;
+	export function patchNotehead(base: Notehead, builder: (build: INoteheadBuilder) => INoteheadBuilder): IAny[];
+	export function buildNotehead(builder: (build: INoteheadBuilder) => INoteheadBuilder): Notehead;
 	export interface INoteheadTextBuilder {
-	    build: () => NoteheadText;
-	    patch: () => any[];
-	    text: (build: (builder: ITextArrayBuilder) => ITextArrayBuilder) => INoteheadTextBuilder;
+	    build?: () => NoteheadText;
+	    patch: () => IAny[];
+	    textAt: (idx: number, build: TextSegment | ((builder: ITextSegmentBuilder) => ITextSegmentBuilder)) => INoteheadTextBuilder;
+	    textSplice: (start: number, deleteCount: number, ...items: TextSegment[]) => INoteheadTextBuilder;
+	    text: (text: TextSegment[]) => INoteheadTextBuilder;
 	}
-	export function patchNoteheadText(base: NoteheadText): INoteheadTextBuilder;
-	export function buildNoteheadText(): INoteheadTextBuilder;
+	export function patchNoteheadText(base: NoteheadText, builder: (build: INoteheadTextBuilder) => INoteheadTextBuilder): IAny[];
+	export function buildNoteheadText(builder: (build: INoteheadTextBuilder) => INoteheadTextBuilder): NoteheadText;
 	export interface IBeamBuilder {
-	    build: () => Beam;
-	    patch: () => any[];
+	    build?: () => Beam;
+	    patch: () => IAny[];
 	    repeater: (repeater: boolean) => IBeamBuilder;
 	    number: (number: number) => IBeamBuilder;
 	    type: (type: BeamType) => IBeamBuilder;
 	    fan: (fan: AccelRitNone) => IBeamBuilder;
 	}
-	export function patchBeam(base: Beam): IBeamBuilder;
-	export function buildBeam(): IBeamBuilder;
+	export function patchBeam(base: Beam, builder: (build: IBeamBuilder) => IBeamBuilder): IAny[];
+	export function buildBeam(builder: (build: IBeamBuilder) => IBeamBuilder): Beam;
 	export interface INotationsBuilder {
-	    build: () => Notations;
-	    patch: () => any[];
+	    build?: () => Notations;
+	    patch: () => IAny[];
+	    slursAt: (idx: number, build: Slur | ((builder: ISlurBuilder) => ISlurBuilder)) => INotationsBuilder;
+	    slursSplice: (start: number, deleteCount: number, ...items: Slur[]) => INotationsBuilder;
 	    slurs: (slurs: Slur[]) => INotationsBuilder;
+	    articulationsAt: (idx: number, build: Articulations | ((builder: IArticulationsBuilder) => IArticulationsBuilder)) => INotationsBuilder;
+	    articulationsSplice: (start: number, deleteCount: number, ...items: Articulations[]) => INotationsBuilder;
 	    articulations: (articulations: Articulations[]) => INotationsBuilder;
+	    slidesAt: (idx: number, build: Slide | ((builder: ISlideBuilder) => ISlideBuilder)) => INotationsBuilder;
+	    slidesSplice: (start: number, deleteCount: number, ...items: Slide[]) => INotationsBuilder;
 	    slides: (slides: Slide[]) => INotationsBuilder;
+	    technicalsAt: (idx: number, build: Technical | ((builder: ITechnicalBuilder) => ITechnicalBuilder)) => INotationsBuilder;
+	    technicalsSplice: (start: number, deleteCount: number, ...items: Technical[]) => INotationsBuilder;
 	    technicals: (technicals: Technical[]) => INotationsBuilder;
+	    tiedsAt: (idx: number, build: Tied | ((builder: ITiedBuilder) => ITiedBuilder)) => INotationsBuilder;
+	    tiedsSplice: (start: number, deleteCount: number, ...items: Tied[]) => INotationsBuilder;
 	    tieds: (tieds: Tied[]) => INotationsBuilder;
+	    tupletsAt: (idx: number, build: Tuplet | ((builder: ITupletBuilder) => ITupletBuilder)) => INotationsBuilder;
+	    tupletsSplice: (start: number, deleteCount: number, ...items: Tuplet[]) => INotationsBuilder;
 	    tuplets: (tuplets: Tuplet[]) => INotationsBuilder;
+	    glissandosAt: (idx: number, build: Glissando | ((builder: IGlissandoBuilder) => IGlissandoBuilder)) => INotationsBuilder;
+	    glissandosSplice: (start: number, deleteCount: number, ...items: Glissando[]) => INotationsBuilder;
 	    glissandos: (glissandos: Glissando[]) => INotationsBuilder;
+	    dynamicsAt: (idx: number, build: Dynamics | ((builder: IDynamicsBuilder) => IDynamicsBuilder)) => INotationsBuilder;
+	    dynamicsSplice: (start: number, deleteCount: number, ...items: Dynamics[]) => INotationsBuilder;
 	    dynamics: (dynamics: Dynamics[]) => INotationsBuilder;
+	    fermatasAt: (idx: number, build: Fermata | ((builder: IFermataBuilder) => IFermataBuilder)) => INotationsBuilder;
+	    fermatasSplice: (start: number, deleteCount: number, ...items: Fermata[]) => INotationsBuilder;
 	    fermatas: (fermatas: Fermata[]) => INotationsBuilder;
+	    accidentalMarksAt: (idx: number, build: AccidentalMark | ((builder: IAccidentalMarkBuilder) => IAccidentalMarkBuilder)) => INotationsBuilder;
+	    accidentalMarksSplice: (start: number, deleteCount: number, ...items: AccidentalMark[]) => INotationsBuilder;
 	    accidentalMarks: (accidentalMarks: AccidentalMark[]) => INotationsBuilder;
+	    ornamentsAt: (idx: number, build: Ornaments | ((builder: IOrnamentsBuilder) => IOrnamentsBuilder)) => INotationsBuilder;
+	    ornamentsSplice: (start: number, deleteCount: number, ...items: Ornaments[]) => INotationsBuilder;
 	    ornaments: (ornaments: Ornaments[]) => INotationsBuilder;
+	    arpeggiatesAt: (idx: number, build: Arpeggiate | ((builder: IArpeggiateBuilder) => IArpeggiateBuilder)) => INotationsBuilder;
+	    arpeggiatesSplice: (start: number, deleteCount: number, ...items: Arpeggiate[]) => INotationsBuilder;
 	    arpeggiates: (arpeggiates: Arpeggiate[]) => INotationsBuilder;
+	    nonArpeggiatesAt: (idx: number, build: NonArpeggiate | ((builder: INonArpeggiateBuilder) => INonArpeggiateBuilder)) => INotationsBuilder;
+	    nonArpeggiatesSplice: (start: number, deleteCount: number, ...items: NonArpeggiate[]) => INotationsBuilder;
 	    nonArpeggiates: (nonArpeggiates: NonArpeggiate[]) => INotationsBuilder;
+	    otherNotationsAt: (idx: number, build: OtherNotation | ((builder: IOtherNotationBuilder) => IOtherNotationBuilder)) => INotationsBuilder;
+	    otherNotationsSplice: (start: number, deleteCount: number, ...items: OtherNotation[]) => INotationsBuilder;
 	    otherNotations: (otherNotations: OtherNotation[]) => INotationsBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => INotationsBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => INotationsBuilder;
-	    _class: (_class: string) => INotationsBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => INotationsBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => INotationsBuilder;
 	}
-	export function patchNotations(base: Notations): INotationsBuilder;
-	export function buildNotations(): INotationsBuilder;
+	export function patchNotations(base: Notations, builder: (build: INotationsBuilder) => INotationsBuilder): IAny[];
+	export function buildNotations(builder: (build: INotationsBuilder) => INotationsBuilder): Notations;
 	export interface ITiedBuilder {
-	    build: () => Tied;
-	    patch: () => any[];
+	    build?: () => Tied;
+	    patch: () => IAny[];
 	    number: (number: number) => ITiedBuilder;
 	    type: (type: StartStopContinue) => ITiedBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => ITiedBuilder;
 	}
-	export function patchTied(base: Tied): ITiedBuilder;
-	export function buildTied(): ITiedBuilder;
+	export function patchTied(base: Tied, builder: (build: ITiedBuilder) => ITiedBuilder): IAny[];
+	export function buildTied(builder: (build: ITiedBuilder) => ITiedBuilder): Tied;
 	export interface ISlurBuilder {
-	    build: () => Slur;
-	    patch: () => any[];
+	    build?: () => Slur;
+	    patch: () => IAny[];
 	    number: (number: number) => ISlurBuilder;
 	    type: (type: StartStopContinue) => ISlurBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => ISlurBuilder;
 	}
-	export function patchSlur(base: Slur): ISlurBuilder;
-	export function buildSlur(): ISlurBuilder;
+	export function patchSlur(base: Slur, builder: (build: ISlurBuilder) => ISlurBuilder): IAny[];
+	export function buildSlur(builder: (build: ISlurBuilder) => ISlurBuilder): Slur;
 	export interface ITupletBuilder {
-	    build: () => Tuplet;
-	    patch: () => any[];
+	    build?: () => Tuplet;
+	    patch: () => IAny[];
 	    bracket: (bracket: boolean) => ITupletBuilder;
 	    number: (number: number) => ITupletBuilder;
 	    showNumber: (showNumber: ActualBothNone) => ITupletBuilder;
-	    tupletNormal: (build: (builder: ITupletNormalBuilder) => ITupletNormalBuilder) => ITupletBuilder;
+	    tupletNormal: (build: TupletNormal | ((builder: ITupletNormalBuilder) => ITupletNormalBuilder)) => ITupletBuilder;
 	    type: (type: StartStop) => ITupletBuilder;
 	    showType: (showType: ActualBothNone) => ITupletBuilder;
-	    tupletActual: (build: (builder: ITupletActualBuilder) => ITupletActualBuilder) => ITupletBuilder;
+	    tupletActual: (build: TupletActual | ((builder: ITupletActualBuilder) => ITupletActualBuilder)) => ITupletBuilder;
 	    lineShape: (lineShape: StraightCurved) => ITupletBuilder;
 	}
-	export function patchTuplet(base: Tuplet): ITupletBuilder;
-	export function buildTuplet(): ITupletBuilder;
+	export function patchTuplet(base: Tuplet, builder: (build: ITupletBuilder) => ITupletBuilder): IAny[];
+	export function buildTuplet(builder: (build: ITupletBuilder) => ITupletBuilder): Tuplet;
 	export interface ITupletActualBuilder {
-	    build: () => TupletActual;
-	    patch: () => any[];
-	    tupletNumber: (build: (builder: ITupletNumberBuilder) => ITupletNumberBuilder) => ITupletActualBuilder;
+	    build?: () => TupletActual;
+	    patch: () => IAny[];
+	    tupletNumber: (build: TupletNumber | ((builder: ITupletNumberBuilder) => ITupletNumberBuilder)) => ITupletActualBuilder;
+	    tupletDotsAt: (idx: number, build: TupletDot | ((builder: ITupletDotBuilder) => ITupletDotBuilder)) => ITupletActualBuilder;
+	    tupletDotsSplice: (start: number, deleteCount: number, ...items: TupletDot[]) => ITupletActualBuilder;
 	    tupletDots: (tupletDots: TupletDot[]) => ITupletActualBuilder;
-	    tupletType: (build: (builder: ITupletTypeBuilder) => ITupletTypeBuilder) => ITupletActualBuilder;
+	    tupletType: (build: TupletType | ((builder: ITupletTypeBuilder) => ITupletTypeBuilder)) => ITupletActualBuilder;
 	}
-	export function patchTupletActual(base: TupletActual): ITupletActualBuilder;
-	export function buildTupletActual(): ITupletActualBuilder;
+	export function patchTupletActual(base: TupletActual, builder: (build: ITupletActualBuilder) => ITupletActualBuilder): IAny[];
+	export function buildTupletActual(builder: (build: ITupletActualBuilder) => ITupletActualBuilder): TupletActual;
 	export interface ITupletNormalBuilder {
-	    build: () => TupletNormal;
-	    patch: () => any[];
-	    tupletNumber: (build: (builder: ITupletNumberBuilder) => ITupletNumberBuilder) => ITupletNormalBuilder;
+	    build?: () => TupletNormal;
+	    patch: () => IAny[];
+	    tupletNumber: (build: TupletNumber | ((builder: ITupletNumberBuilder) => ITupletNumberBuilder)) => ITupletNormalBuilder;
+	    tupletDotsAt: (idx: number, build: TupletDot | ((builder: ITupletDotBuilder) => ITupletDotBuilder)) => ITupletNormalBuilder;
+	    tupletDotsSplice: (start: number, deleteCount: number, ...items: TupletDot[]) => ITupletNormalBuilder;
 	    tupletDots: (tupletDots: TupletDot[]) => ITupletNormalBuilder;
-	    tupletType: (build: (builder: ITupletTypeBuilder) => ITupletTypeBuilder) => ITupletNormalBuilder;
+	    tupletType: (build: TupletType | ((builder: ITupletTypeBuilder) => ITupletTypeBuilder)) => ITupletNormalBuilder;
 	}
-	export function patchTupletNormal(base: TupletNormal): ITupletNormalBuilder;
-	export function buildTupletNormal(): ITupletNormalBuilder;
+	export function patchTupletNormal(base: TupletNormal, builder: (build: ITupletNormalBuilder) => ITupletNormalBuilder): IAny[];
+	export function buildTupletNormal(builder: (build: ITupletNormalBuilder) => ITupletNormalBuilder): TupletNormal;
 	export interface ITupletNumberBuilder {
-	    build: () => TupletNumber;
-	    patch: () => any[];
+	    build?: () => TupletNumber;
+	    patch: () => IAny[];
 	    text: (text: string) => ITupletNumberBuilder;
 	    fontFamily: (fontFamily: string) => ITupletNumberBuilder;
 	    fontWeight: (fontWeight: NormalBold) => ITupletNumberBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITupletNumberBuilder;
 	    fontSize: (fontSize: string) => ITupletNumberBuilder;
 	}
-	export function patchTupletNumber(base: TupletNumber): ITupletNumberBuilder;
-	export function buildTupletNumber(): ITupletNumberBuilder;
+	export function patchTupletNumber(base: TupletNumber, builder: (build: ITupletNumberBuilder) => ITupletNumberBuilder): IAny[];
+	export function buildTupletNumber(builder: (build: ITupletNumberBuilder) => ITupletNumberBuilder): TupletNumber;
 	export interface ITupletTypeBuilder {
-	    build: () => TupletType;
-	    patch: () => any[];
+	    build?: () => TupletType;
+	    patch: () => IAny[];
 	    text: (text: string) => ITupletTypeBuilder;
 	    fontFamily: (fontFamily: string) => ITupletTypeBuilder;
 	    fontWeight: (fontWeight: NormalBold) => ITupletTypeBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITupletTypeBuilder;
 	    fontSize: (fontSize: string) => ITupletTypeBuilder;
 	}
-	export function patchTupletType(base: TupletType): ITupletTypeBuilder;
-	export function buildTupletType(): ITupletTypeBuilder;
+	export function patchTupletType(base: TupletType, builder: (build: ITupletTypeBuilder) => ITupletTypeBuilder): IAny[];
+	export function buildTupletType(builder: (build: ITupletTypeBuilder) => ITupletTypeBuilder): TupletType;
 	export interface ITupletDotBuilder {
-	    build: () => TupletDot;
-	    patch: () => any[];
+	    build?: () => TupletDot;
+	    patch: () => IAny[];
 	    fontFamily: (fontFamily: string) => ITupletDotBuilder;
 	    fontWeight: (fontWeight: NormalBold) => ITupletDotBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITupletDotBuilder;
 	    fontSize: (fontSize: string) => ITupletDotBuilder;
 	}
-	export function patchTupletDot(base: TupletDot): ITupletDotBuilder;
-	export function buildTupletDot(): ITupletDotBuilder;
+	export function patchTupletDot(base: TupletDot, builder: (build: ITupletDotBuilder) => ITupletDotBuilder): IAny[];
+	export function buildTupletDot(builder: (build: ITupletDotBuilder) => ITupletDotBuilder): TupletDot;
 	export interface IGlissandoBuilder {
-	    build: () => Glissando;
-	    patch: () => any[];
+	    build?: () => Glissando;
+	    patch: () => IAny[];
 	    text: (text: string) => IGlissandoBuilder;
 	    type: (type: StartStop) => IGlissandoBuilder;
 	    normal: (normal: number) => IGlissandoBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => IGlissandoBuilder;
 	}
-	export function patchGlissando(base: Glissando): IGlissandoBuilder;
-	export function buildGlissando(): IGlissandoBuilder;
+	export function patchGlissando(base: Glissando, builder: (build: IGlissandoBuilder) => IGlissandoBuilder): IAny[];
+	export function buildGlissando(builder: (build: IGlissandoBuilder) => IGlissandoBuilder): Glissando;
 	export interface ISlideBuilder {
-	    build: () => Slide;
-	    patch: () => any[];
+	    build?: () => Slide;
+	    patch: () => IAny[];
 	    text: (text: string) => ISlideBuilder;
 	    type: (type: StartStop) => ISlideBuilder;
 	    normal: (normal: number) => ISlideBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => ISlideBuilder;
 	}
-	export function patchSlide(base: Slide): ISlideBuilder;
-	export function buildSlide(): ISlideBuilder;
+	export function patchSlide(base: Slide, builder: (build: ISlideBuilder) => ISlideBuilder): IAny[];
+	export function buildSlide(builder: (build: ISlideBuilder) => ISlideBuilder): Slide;
 	export interface IOtherNotationBuilder {
-	    build: () => OtherNotation;
-	    patch: () => any[];
+	    build?: () => OtherNotation;
+	    patch: () => IAny[];
 	    type: (type: StartStopSingle) => IOtherNotationBuilder;
 	    data: (data: string) => IOtherNotationBuilder;
 	    printObject: (printObject: boolean) => IOtherNotationBuilder;
 	}
-	export function patchOtherNotation(base: OtherNotation): IOtherNotationBuilder;
-	export function buildOtherNotation(): IOtherNotationBuilder;
+	export function patchOtherNotation(base: OtherNotation, builder: (build: IOtherNotationBuilder) => IOtherNotationBuilder): IAny[];
+	export function buildOtherNotation(builder: (build: IOtherNotationBuilder) => IOtherNotationBuilder): OtherNotation;
 	export interface IOtherDirectionBuilder {
-	    build: () => OtherDirection;
-	    patch: () => any[];
+	    build?: () => OtherDirection;
+	    patch: () => IAny[];
 	    data: (data: string) => IOtherDirectionBuilder;
 	    printObject: (printObject: boolean) => IOtherDirectionBuilder;
 	}
-	export function patchOtherDirection(base: OtherDirection): IOtherDirectionBuilder;
-	export function buildOtherDirection(): IOtherDirectionBuilder;
+	export function patchOtherDirection(base: OtherDirection, builder: (build: IOtherDirectionBuilder) => IOtherDirectionBuilder): IAny[];
+	export function buildOtherDirection(builder: (build: IOtherDirectionBuilder) => IOtherDirectionBuilder): OtherDirection;
 	export interface IOrnamentsBuilder {
-	    build: () => Ornaments;
-	    patch: () => any[];
-	    delayedInvertedTurn: (build: (builder: IDelayedInvertedTurnBuilder) => IDelayedInvertedTurnBuilder) => IOrnamentsBuilder;
-	    shake: (build: (builder: IShakeBuilder) => IShakeBuilder) => IOrnamentsBuilder;
-	    turn: (build: (builder: ITurnBuilder) => ITurnBuilder) => IOrnamentsBuilder;
-	    invertedTurn: (build: (builder: IInvertedTurnBuilder) => IInvertedTurnBuilder) => IOrnamentsBuilder;
-	    otherOrnament: (build: (builder: IOtherOrnamentBuilder) => IOtherOrnamentBuilder) => IOrnamentsBuilder;
-	    delayedTurn: (build: (builder: IDelayedTurnBuilder) => IDelayedTurnBuilder) => IOrnamentsBuilder;
-	    verticalTurn: (build: (builder: IVerticalTurnBuilder) => IVerticalTurnBuilder) => IOrnamentsBuilder;
-	    wavyLine: (build: (builder: IWavyLineBuilder) => IWavyLineBuilder) => IOrnamentsBuilder;
-	    tremolo: (build: (builder: ITremoloBuilder) => ITremoloBuilder) => IOrnamentsBuilder;
+	    build?: () => Ornaments;
+	    patch: () => IAny[];
+	    delayedInvertedTurn: (build: DelayedInvertedTurn | ((builder: IDelayedInvertedTurnBuilder) => IDelayedInvertedTurnBuilder)) => IOrnamentsBuilder;
+	    shake: (build: Shake | ((builder: IShakeBuilder) => IShakeBuilder)) => IOrnamentsBuilder;
+	    turn: (build: Turn | ((builder: ITurnBuilder) => ITurnBuilder)) => IOrnamentsBuilder;
+	    invertedTurn: (build: InvertedTurn | ((builder: IInvertedTurnBuilder) => IInvertedTurnBuilder)) => IOrnamentsBuilder;
+	    otherOrnament: (build: OtherOrnament | ((builder: IOtherOrnamentBuilder) => IOtherOrnamentBuilder)) => IOrnamentsBuilder;
+	    delayedTurn: (build: DelayedTurn | ((builder: IDelayedTurnBuilder) => IDelayedTurnBuilder)) => IOrnamentsBuilder;
+	    verticalTurn: (build: VerticalTurn | ((builder: IVerticalTurnBuilder) => IVerticalTurnBuilder)) => IOrnamentsBuilder;
+	    wavyLine: (build: WavyLine | ((builder: IWavyLineBuilder) => IWavyLineBuilder)) => IOrnamentsBuilder;
+	    tremolo: (build: Tremolo | ((builder: ITremoloBuilder) => ITremoloBuilder)) => IOrnamentsBuilder;
+	    accidentalMarksAt: (idx: number, build: AccidentalMark | ((builder: IAccidentalMarkBuilder) => IAccidentalMarkBuilder)) => IOrnamentsBuilder;
+	    accidentalMarksSplice: (start: number, deleteCount: number, ...items: AccidentalMark[]) => IOrnamentsBuilder;
 	    accidentalMarks: (accidentalMarks: AccidentalMark[]) => IOrnamentsBuilder;
-	    trillMark: (build: (builder: ITrillMarkBuilder) => ITrillMarkBuilder) => IOrnamentsBuilder;
-	    mordent: (build: (builder: IMordentBuilder) => IMordentBuilder) => IOrnamentsBuilder;
-	    invertedMordent: (build: (builder: IInvertedMordentBuilder) => IInvertedMordentBuilder) => IOrnamentsBuilder;
-	    schleifer: (build: (builder: ISchleiferBuilder) => ISchleiferBuilder) => IOrnamentsBuilder;
+	    trillMark: (build: TrillMark | ((builder: ITrillMarkBuilder) => ITrillMarkBuilder)) => IOrnamentsBuilder;
+	    mordent: (build: Mordent | ((builder: IMordentBuilder) => IMordentBuilder)) => IOrnamentsBuilder;
+	    invertedMordent: (build: InvertedMordent | ((builder: IInvertedMordentBuilder) => IInvertedMordentBuilder)) => IOrnamentsBuilder;
+	    schleifer: (build: Schleifer | ((builder: ISchleiferBuilder) => ISchleiferBuilder)) => IOrnamentsBuilder;
 	    defaultX: (defaultX: number) => IOrnamentsBuilder;
 	    relativeY: (relativeY: number) => IOrnamentsBuilder;
 	    defaultY: (defaultY: number) => IOrnamentsBuilder;
 	    relativeX: (relativeX: number) => IOrnamentsBuilder;
 	}
-	export function patchOrnaments(base: Ornaments): IOrnamentsBuilder;
-	export function buildOrnaments(): IOrnamentsBuilder;
+	export function patchOrnaments(base: Ornaments, builder: (build: IOrnamentsBuilder) => IOrnamentsBuilder): IAny[];
+	export function buildOrnaments(builder: (build: IOrnamentsBuilder) => IOrnamentsBuilder): Ornaments;
 	export interface ITrillMarkBuilder {
-	    build: () => TrillMark;
-	    patch: () => any[];
+	    build?: () => TrillMark;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ITrillMarkBuilder;
 	    relativeY: (relativeY: number) => ITrillMarkBuilder;
 	    defaultY: (defaultY: number) => ITrillMarkBuilder;
 	    relativeX: (relativeX: number) => ITrillMarkBuilder;
 	}
-	export function patchTrillMark(base: TrillMark): ITrillMarkBuilder;
-	export function buildTrillMark(): ITrillMarkBuilder;
+	export function patchTrillMark(base: TrillMark, builder: (build: ITrillMarkBuilder) => ITrillMarkBuilder): IAny[];
+	export function buildTrillMark(builder: (build: ITrillMarkBuilder) => ITrillMarkBuilder): TrillMark;
 	export interface ITurnBuilder {
-	    build: () => Turn;
-	    patch: () => any[];
+	    build?: () => Turn;
+	    patch: () => IAny[];
 	    slash: (slash: boolean) => ITurnBuilder;
 	    defaultX: (defaultX: number) => ITurnBuilder;
 	    relativeY: (relativeY: number) => ITurnBuilder;
 	    defaultY: (defaultY: number) => ITurnBuilder;
 	    relativeX: (relativeX: number) => ITurnBuilder;
 	}
-	export function patchTurn(base: Turn): ITurnBuilder;
-	export function buildTurn(): ITurnBuilder;
+	export function patchTurn(base: Turn, builder: (build: ITurnBuilder) => ITurnBuilder): IAny[];
+	export function buildTurn(builder: (build: ITurnBuilder) => ITurnBuilder): Turn;
 	export interface IDelayedTurnBuilder {
-	    build: () => DelayedTurn;
-	    patch: () => any[];
+	    build?: () => DelayedTurn;
+	    patch: () => IAny[];
 	    slash: (slash: boolean) => IDelayedTurnBuilder;
 	    defaultX: (defaultX: number) => IDelayedTurnBuilder;
 	    relativeY: (relativeY: number) => IDelayedTurnBuilder;
 	    defaultY: (defaultY: number) => IDelayedTurnBuilder;
 	    relativeX: (relativeX: number) => IDelayedTurnBuilder;
 	}
-	export function patchDelayedTurn(base: DelayedTurn): IDelayedTurnBuilder;
-	export function buildDelayedTurn(): IDelayedTurnBuilder;
+	export function patchDelayedTurn(base: DelayedTurn, builder: (build: IDelayedTurnBuilder) => IDelayedTurnBuilder): IAny[];
+	export function buildDelayedTurn(builder: (build: IDelayedTurnBuilder) => IDelayedTurnBuilder): DelayedTurn;
 	export interface IInvertedTurnBuilder {
-	    build: () => InvertedTurn;
-	    patch: () => any[];
+	    build?: () => InvertedTurn;
+	    patch: () => IAny[];
 	    slash: (slash: boolean) => IInvertedTurnBuilder;
 	    defaultX: (defaultX: number) => IInvertedTurnBuilder;
 	    relativeY: (relativeY: number) => IInvertedTurnBuilder;
 	    defaultY: (defaultY: number) => IInvertedTurnBuilder;
 	    relativeX: (relativeX: number) => IInvertedTurnBuilder;
 	}
-	export function patchInvertedTurn(base: InvertedTurn): IInvertedTurnBuilder;
-	export function buildInvertedTurn(): IInvertedTurnBuilder;
+	export function patchInvertedTurn(base: InvertedTurn, builder: (build: IInvertedTurnBuilder) => IInvertedTurnBuilder): IAny[];
+	export function buildInvertedTurn(builder: (build: IInvertedTurnBuilder) => IInvertedTurnBuilder): InvertedTurn;
 	export interface IDelayedInvertedTurnBuilder {
-	    build: () => DelayedInvertedTurn;
-	    patch: () => any[];
+	    build?: () => DelayedInvertedTurn;
+	    patch: () => IAny[];
 	    slash: (slash: boolean) => IDelayedInvertedTurnBuilder;
 	    defaultX: (defaultX: number) => IDelayedInvertedTurnBuilder;
 	    relativeY: (relativeY: number) => IDelayedInvertedTurnBuilder;
 	    defaultY: (defaultY: number) => IDelayedInvertedTurnBuilder;
 	    relativeX: (relativeX: number) => IDelayedInvertedTurnBuilder;
 	}
-	export function patchDelayedInvertedTurn(base: DelayedInvertedTurn): IDelayedInvertedTurnBuilder;
-	export function buildDelayedInvertedTurn(): IDelayedInvertedTurnBuilder;
+	export function patchDelayedInvertedTurn(base: DelayedInvertedTurn, builder: (build: IDelayedInvertedTurnBuilder) => IDelayedInvertedTurnBuilder): IAny[];
+	export function buildDelayedInvertedTurn(builder: (build: IDelayedInvertedTurnBuilder) => IDelayedInvertedTurnBuilder): DelayedInvertedTurn;
 	export interface IVerticalTurnBuilder {
-	    build: () => VerticalTurn;
-	    patch: () => any[];
+	    build?: () => VerticalTurn;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IVerticalTurnBuilder;
 	    relativeY: (relativeY: number) => IVerticalTurnBuilder;
 	    defaultY: (defaultY: number) => IVerticalTurnBuilder;
 	    relativeX: (relativeX: number) => IVerticalTurnBuilder;
 	}
-	export function patchVerticalTurn(base: VerticalTurn): IVerticalTurnBuilder;
-	export function buildVerticalTurn(): IVerticalTurnBuilder;
+	export function patchVerticalTurn(base: VerticalTurn, builder: (build: IVerticalTurnBuilder) => IVerticalTurnBuilder): IAny[];
+	export function buildVerticalTurn(builder: (build: IVerticalTurnBuilder) => IVerticalTurnBuilder): VerticalTurn;
 	export interface IShakeBuilder {
-	    build: () => Shake;
-	    patch: () => any[];
+	    build?: () => Shake;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IShakeBuilder;
 	    relativeY: (relativeY: number) => IShakeBuilder;
 	    defaultY: (defaultY: number) => IShakeBuilder;
 	    relativeX: (relativeX: number) => IShakeBuilder;
 	}
-	export function patchShake(base: Shake): IShakeBuilder;
-	export function buildShake(): IShakeBuilder;
+	export function patchShake(base: Shake, builder: (build: IShakeBuilder) => IShakeBuilder): IAny[];
+	export function buildShake(builder: (build: IShakeBuilder) => IShakeBuilder): Shake;
 	export interface IMordentBuilder {
-	    build: () => Mordent;
-	    patch: () => any[];
+	    build?: () => Mordent;
+	    patch: () => IAny[];
 	    long: (long: boolean) => IMordentBuilder;
 	    approach: (approach: AboveBelow) => IMordentBuilder;
 	    departure: (departure: AboveBelow) => IMordentBuilder;
@@ -6559,11 +6827,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IMordentBuilder;
 	    relativeX: (relativeX: number) => IMordentBuilder;
 	}
-	export function patchMordent(base: Mordent): IMordentBuilder;
-	export function buildMordent(): IMordentBuilder;
+	export function patchMordent(base: Mordent, builder: (build: IMordentBuilder) => IMordentBuilder): IAny[];
+	export function buildMordent(builder: (build: IMordentBuilder) => IMordentBuilder): Mordent;
 	export interface IInvertedMordentBuilder {
-	    build: () => InvertedMordent;
-	    patch: () => any[];
+	    build?: () => InvertedMordent;
+	    patch: () => IAny[];
 	    long: (long: boolean) => IInvertedMordentBuilder;
 	    approach: (approach: AboveBelow) => IInvertedMordentBuilder;
 	    departure: (departure: AboveBelow) => IInvertedMordentBuilder;
@@ -6572,21 +6840,21 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IInvertedMordentBuilder;
 	    relativeX: (relativeX: number) => IInvertedMordentBuilder;
 	}
-	export function patchInvertedMordent(base: InvertedMordent): IInvertedMordentBuilder;
-	export function buildInvertedMordent(): IInvertedMordentBuilder;
+	export function patchInvertedMordent(base: InvertedMordent, builder: (build: IInvertedMordentBuilder) => IInvertedMordentBuilder): IAny[];
+	export function buildInvertedMordent(builder: (build: IInvertedMordentBuilder) => IInvertedMordentBuilder): InvertedMordent;
 	export interface ISchleiferBuilder {
-	    build: () => Schleifer;
-	    patch: () => any[];
+	    build?: () => Schleifer;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ISchleiferBuilder;
 	    relativeY: (relativeY: number) => ISchleiferBuilder;
 	    defaultY: (defaultY: number) => ISchleiferBuilder;
 	    relativeX: (relativeX: number) => ISchleiferBuilder;
 	}
-	export function patchSchleifer(base: Schleifer): ISchleiferBuilder;
-	export function buildSchleifer(): ISchleiferBuilder;
+	export function patchSchleifer(base: Schleifer, builder: (build: ISchleiferBuilder) => ISchleiferBuilder): IAny[];
+	export function buildSchleifer(builder: (build: ISchleiferBuilder) => ISchleiferBuilder): Schleifer;
 	export interface ITremoloBuilder {
-	    build: () => Tremolo;
-	    patch: () => any[];
+	    build?: () => Tremolo;
+	    patch: () => IAny[];
 	    data: (data: string) => ITremoloBuilder;
 	    type: (type: StartStopSingle) => ITremoloBuilder;
 	    defaultX: (defaultX: number) => ITremoloBuilder;
@@ -6594,11 +6862,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => ITremoloBuilder;
 	    relativeX: (relativeX: number) => ITremoloBuilder;
 	}
-	export function patchTremolo(base: Tremolo): ITremoloBuilder;
-	export function buildTremolo(): ITremoloBuilder;
+	export function patchTremolo(base: Tremolo, builder: (build: ITremoloBuilder) => ITremoloBuilder): IAny[];
+	export function buildTremolo(builder: (build: ITremoloBuilder) => ITremoloBuilder): Tremolo;
 	export interface IOtherOrnamentBuilder {
-	    build: () => OtherOrnament;
-	    patch: () => any[];
+	    build?: () => OtherOrnament;
+	    patch: () => IAny[];
 	    type: (type: StartStopSingle) => IOtherOrnamentBuilder;
 	    data: (data: string) => IOtherOrnamentBuilder;
 	    defaultX: (defaultX: number) => IOtherOrnamentBuilder;
@@ -6606,72 +6874,72 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IOtherOrnamentBuilder;
 	    relativeX: (relativeX: number) => IOtherOrnamentBuilder;
 	}
-	export function patchOtherOrnament(base: OtherOrnament): IOtherOrnamentBuilder;
-	export function buildOtherOrnament(): IOtherOrnamentBuilder;
+	export function patchOtherOrnament(base: OtherOrnament, builder: (build: IOtherOrnamentBuilder) => IOtherOrnamentBuilder): IAny[];
+	export function buildOtherOrnament(builder: (build: IOtherOrnamentBuilder) => IOtherOrnamentBuilder): OtherOrnament;
 	export interface IAccidentalMarkBuilder {
-	    build: () => AccidentalMark;
-	    patch: () => any[];
+	    build?: () => AccidentalMark;
+	    patch: () => IAny[];
 	    mark: (mark: string) => IAccidentalMarkBuilder;
 	    defaultX: (defaultX: number) => IAccidentalMarkBuilder;
 	    relativeY: (relativeY: number) => IAccidentalMarkBuilder;
 	    defaultY: (defaultY: number) => IAccidentalMarkBuilder;
 	    relativeX: (relativeX: number) => IAccidentalMarkBuilder;
 	}
-	export function patchAccidentalMark(base: AccidentalMark): IAccidentalMarkBuilder;
-	export function buildAccidentalMark(): IAccidentalMarkBuilder;
+	export function patchAccidentalMark(base: AccidentalMark, builder: (build: IAccidentalMarkBuilder) => IAccidentalMarkBuilder): IAny[];
+	export function buildAccidentalMark(builder: (build: IAccidentalMarkBuilder) => IAccidentalMarkBuilder): AccidentalMark;
 	export interface ITechnicalBuilder {
-	    build: () => Technical;
-	    patch: () => any[];
-	    tripleTongue: (build: (builder: ITripleTongueBuilder) => ITripleTongueBuilder) => ITechnicalBuilder;
-	    toe: (build: (builder: IToeBuilder) => IToeBuilder) => ITechnicalBuilder;
-	    hole: (build: (builder: IHoleBuilder) => IHoleBuilder) => ITechnicalBuilder;
-	    hammerOn: (build: (builder: IHammerOnBuilder) => IHammerOnBuilder) => ITechnicalBuilder;
-	    upBow: (build: (builder: IUpBowBuilder) => IUpBowBuilder) => ITechnicalBuilder;
-	    downBow: (build: (builder: IDownBowBuilder) => IDownBowBuilder) => ITechnicalBuilder;
-	    fret: (build: (builder: IFretBuilder) => IFretBuilder) => ITechnicalBuilder;
-	    tap: (build: (builder: ITapBuilder) => ITapBuilder) => ITechnicalBuilder;
-	    pullOff: (build: (builder: IPullOffBuilder) => IPullOffBuilder) => ITechnicalBuilder;
-	    handbell: (build: (builder: IHandbellBuilder) => IHandbellBuilder) => ITechnicalBuilder;
-	    bend: (build: (builder: IBendBuilder) => IBendBuilder) => ITechnicalBuilder;
-	    thumbPosition: (build: (builder: IThumbPositionBuilder) => IThumbPositionBuilder) => ITechnicalBuilder;
-	    stopped: (build: (builder: IStoppedBuilder) => IStoppedBuilder) => ITechnicalBuilder;
-	    pluck: (build: (builder: IPluckBuilder) => IPluckBuilder) => ITechnicalBuilder;
-	    doubleTongue: (build: (builder: IDoubleTongueBuilder) => IDoubleTongueBuilder) => ITechnicalBuilder;
-	    string: (build: (builder: IStringBuilder) => IStringBuilder) => ITechnicalBuilder;
-	    openString: (build: (builder: IOpenStringBuilder) => IOpenStringBuilder) => ITechnicalBuilder;
-	    fingernails: (build: (builder: IFingernailsBuilder) => IFingernailsBuilder) => ITechnicalBuilder;
-	    arrow: (build: (builder: IArrowBuilder) => IArrowBuilder) => ITechnicalBuilder;
-	    harmonic: (build: (builder: IHarmonicBuilder) => IHarmonicBuilder) => ITechnicalBuilder;
-	    heel: (build: (builder: IHeelBuilder) => IHeelBuilder) => ITechnicalBuilder;
-	    otherTechnical: (build: (builder: IOtherTechnicalBuilder) => IOtherTechnicalBuilder) => ITechnicalBuilder;
-	    snapPizzicato: (build: (builder: ISnapPizzicatoBuilder) => ISnapPizzicatoBuilder) => ITechnicalBuilder;
-	    fingering: (build: (builder: IFingeringBuilder) => IFingeringBuilder) => ITechnicalBuilder;
+	    build?: () => Technical;
+	    patch: () => IAny[];
+	    tripleTongue: (build: TripleTongue | ((builder: ITripleTongueBuilder) => ITripleTongueBuilder)) => ITechnicalBuilder;
+	    toe: (build: Toe | ((builder: IToeBuilder) => IToeBuilder)) => ITechnicalBuilder;
+	    hole: (build: Hole | ((builder: IHoleBuilder) => IHoleBuilder)) => ITechnicalBuilder;
+	    hammerOn: (build: HammerOn | ((builder: IHammerOnBuilder) => IHammerOnBuilder)) => ITechnicalBuilder;
+	    upBow: (build: UpBow | ((builder: IUpBowBuilder) => IUpBowBuilder)) => ITechnicalBuilder;
+	    downBow: (build: DownBow | ((builder: IDownBowBuilder) => IDownBowBuilder)) => ITechnicalBuilder;
+	    fret: (build: Fret | ((builder: IFretBuilder) => IFretBuilder)) => ITechnicalBuilder;
+	    tap: (build: Tap | ((builder: ITapBuilder) => ITapBuilder)) => ITechnicalBuilder;
+	    pullOff: (build: PullOff | ((builder: IPullOffBuilder) => IPullOffBuilder)) => ITechnicalBuilder;
+	    handbell: (build: Handbell | ((builder: IHandbellBuilder) => IHandbellBuilder)) => ITechnicalBuilder;
+	    bend: (build: Bend | ((builder: IBendBuilder) => IBendBuilder)) => ITechnicalBuilder;
+	    thumbPosition: (build: ThumbPosition | ((builder: IThumbPositionBuilder) => IThumbPositionBuilder)) => ITechnicalBuilder;
+	    stopped: (build: Stopped | ((builder: IStoppedBuilder) => IStoppedBuilder)) => ITechnicalBuilder;
+	    pluck: (build: Pluck | ((builder: IPluckBuilder) => IPluckBuilder)) => ITechnicalBuilder;
+	    doubleTongue: (build: DoubleTongue | ((builder: IDoubleTongueBuilder) => IDoubleTongueBuilder)) => ITechnicalBuilder;
+	    string: (build: String | ((builder: IStringBuilder) => IStringBuilder)) => ITechnicalBuilder;
+	    openString: (build: OpenString | ((builder: IOpenStringBuilder) => IOpenStringBuilder)) => ITechnicalBuilder;
+	    fingernails: (build: Fingernails | ((builder: IFingernailsBuilder) => IFingernailsBuilder)) => ITechnicalBuilder;
+	    arrow: (build: Arrow | ((builder: IArrowBuilder) => IArrowBuilder)) => ITechnicalBuilder;
+	    harmonic: (build: Harmonic | ((builder: IHarmonicBuilder) => IHarmonicBuilder)) => ITechnicalBuilder;
+	    heel: (build: Heel | ((builder: IHeelBuilder) => IHeelBuilder)) => ITechnicalBuilder;
+	    otherTechnical: (build: OtherTechnical | ((builder: IOtherTechnicalBuilder) => IOtherTechnicalBuilder)) => ITechnicalBuilder;
+	    snapPizzicato: (build: SnapPizzicato | ((builder: ISnapPizzicatoBuilder) => ISnapPizzicatoBuilder)) => ITechnicalBuilder;
+	    fingering: (build: Fingering | ((builder: IFingeringBuilder) => IFingeringBuilder)) => ITechnicalBuilder;
 	}
-	export function patchTechnical(base: Technical): ITechnicalBuilder;
-	export function buildTechnical(): ITechnicalBuilder;
+	export function patchTechnical(base: Technical, builder: (build: ITechnicalBuilder) => ITechnicalBuilder): IAny[];
+	export function buildTechnical(builder: (build: ITechnicalBuilder) => ITechnicalBuilder): Technical;
 	export interface IUpBowBuilder {
-	    build: () => UpBow;
-	    patch: () => any[];
+	    build?: () => UpBow;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IUpBowBuilder;
 	    relativeY: (relativeY: number) => IUpBowBuilder;
 	    defaultY: (defaultY: number) => IUpBowBuilder;
 	    relativeX: (relativeX: number) => IUpBowBuilder;
 	}
-	export function patchUpBow(base: UpBow): IUpBowBuilder;
-	export function buildUpBow(): IUpBowBuilder;
+	export function patchUpBow(base: UpBow, builder: (build: IUpBowBuilder) => IUpBowBuilder): IAny[];
+	export function buildUpBow(builder: (build: IUpBowBuilder) => IUpBowBuilder): UpBow;
 	export interface IDownBowBuilder {
-	    build: () => DownBow;
-	    patch: () => any[];
+	    build?: () => DownBow;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IDownBowBuilder;
 	    relativeY: (relativeY: number) => IDownBowBuilder;
 	    defaultY: (defaultY: number) => IDownBowBuilder;
 	    relativeX: (relativeX: number) => IDownBowBuilder;
 	}
-	export function patchDownBow(base: DownBow): IDownBowBuilder;
-	export function buildDownBow(): IDownBowBuilder;
+	export function patchDownBow(base: DownBow, builder: (build: IDownBowBuilder) => IDownBowBuilder): IAny[];
+	export function buildDownBow(builder: (build: IDownBowBuilder) => IDownBowBuilder): DownBow;
 	export interface IHarmonicBuilder {
-	    build: () => Harmonic;
-	    patch: () => any[];
+	    build?: () => Harmonic;
+	    patch: () => IAny[];
 	    artificial: (artificial: boolean) => IHarmonicBuilder;
 	    touchingPitch: (touchingPitch: boolean) => IHarmonicBuilder;
 	    soundingPitch: (soundingPitch: boolean) => IHarmonicBuilder;
@@ -6679,82 +6947,82 @@ declare module 'musicxml-interfaces/builders' {
 	    basePitch: (basePitch: boolean) => IHarmonicBuilder;
 	    printObject: (printObject: boolean) => IHarmonicBuilder;
 	}
-	export function patchHarmonic(base: Harmonic): IHarmonicBuilder;
-	export function buildHarmonic(): IHarmonicBuilder;
+	export function patchHarmonic(base: Harmonic, builder: (build: IHarmonicBuilder) => IHarmonicBuilder): IAny[];
+	export function buildHarmonic(builder: (build: IHarmonicBuilder) => IHarmonicBuilder): Harmonic;
 	export interface IOpenStringBuilder {
-	    build: () => OpenString;
-	    patch: () => any[];
+	    build?: () => OpenString;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IOpenStringBuilder;
 	    relativeY: (relativeY: number) => IOpenStringBuilder;
 	    defaultY: (defaultY: number) => IOpenStringBuilder;
 	    relativeX: (relativeX: number) => IOpenStringBuilder;
 	}
-	export function patchOpenString(base: OpenString): IOpenStringBuilder;
-	export function buildOpenString(): IOpenStringBuilder;
+	export function patchOpenString(base: OpenString, builder: (build: IOpenStringBuilder) => IOpenStringBuilder): IAny[];
+	export function buildOpenString(builder: (build: IOpenStringBuilder) => IOpenStringBuilder): OpenString;
 	export interface IThumbPositionBuilder {
-	    build: () => ThumbPosition;
-	    patch: () => any[];
+	    build?: () => ThumbPosition;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IThumbPositionBuilder;
 	    relativeY: (relativeY: number) => IThumbPositionBuilder;
 	    defaultY: (defaultY: number) => IThumbPositionBuilder;
 	    relativeX: (relativeX: number) => IThumbPositionBuilder;
 	}
-	export function patchThumbPosition(base: ThumbPosition): IThumbPositionBuilder;
-	export function buildThumbPosition(): IThumbPositionBuilder;
+	export function patchThumbPosition(base: ThumbPosition, builder: (build: IThumbPositionBuilder) => IThumbPositionBuilder): IAny[];
+	export function buildThumbPosition(builder: (build: IThumbPositionBuilder) => IThumbPositionBuilder): ThumbPosition;
 	export interface IPluckBuilder {
-	    build: () => Pluck;
-	    patch: () => any[];
+	    build?: () => Pluck;
+	    patch: () => IAny[];
 	    data: (data: string) => IPluckBuilder;
 	    defaultX: (defaultX: number) => IPluckBuilder;
 	    relativeY: (relativeY: number) => IPluckBuilder;
 	    defaultY: (defaultY: number) => IPluckBuilder;
 	    relativeX: (relativeX: number) => IPluckBuilder;
 	}
-	export function patchPluck(base: Pluck): IPluckBuilder;
-	export function buildPluck(): IPluckBuilder;
+	export function patchPluck(base: Pluck, builder: (build: IPluckBuilder) => IPluckBuilder): IAny[];
+	export function buildPluck(builder: (build: IPluckBuilder) => IPluckBuilder): Pluck;
 	export interface IDoubleTongueBuilder {
-	    build: () => DoubleTongue;
-	    patch: () => any[];
+	    build?: () => DoubleTongue;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IDoubleTongueBuilder;
 	    relativeY: (relativeY: number) => IDoubleTongueBuilder;
 	    defaultY: (defaultY: number) => IDoubleTongueBuilder;
 	    relativeX: (relativeX: number) => IDoubleTongueBuilder;
 	}
-	export function patchDoubleTongue(base: DoubleTongue): IDoubleTongueBuilder;
-	export function buildDoubleTongue(): IDoubleTongueBuilder;
+	export function patchDoubleTongue(base: DoubleTongue, builder: (build: IDoubleTongueBuilder) => IDoubleTongueBuilder): IAny[];
+	export function buildDoubleTongue(builder: (build: IDoubleTongueBuilder) => IDoubleTongueBuilder): DoubleTongue;
 	export interface ITripleTongueBuilder {
-	    build: () => TripleTongue;
-	    patch: () => any[];
+	    build?: () => TripleTongue;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ITripleTongueBuilder;
 	    relativeY: (relativeY: number) => ITripleTongueBuilder;
 	    defaultY: (defaultY: number) => ITripleTongueBuilder;
 	    relativeX: (relativeX: number) => ITripleTongueBuilder;
 	}
-	export function patchTripleTongue(base: TripleTongue): ITripleTongueBuilder;
-	export function buildTripleTongue(): ITripleTongueBuilder;
+	export function patchTripleTongue(base: TripleTongue, builder: (build: ITripleTongueBuilder) => ITripleTongueBuilder): IAny[];
+	export function buildTripleTongue(builder: (build: ITripleTongueBuilder) => ITripleTongueBuilder): TripleTongue;
 	export interface IStoppedBuilder {
-	    build: () => Stopped;
-	    patch: () => any[];
+	    build?: () => Stopped;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IStoppedBuilder;
 	    relativeY: (relativeY: number) => IStoppedBuilder;
 	    defaultY: (defaultY: number) => IStoppedBuilder;
 	    relativeX: (relativeX: number) => IStoppedBuilder;
 	}
-	export function patchStopped(base: Stopped): IStoppedBuilder;
-	export function buildStopped(): IStoppedBuilder;
+	export function patchStopped(base: Stopped, builder: (build: IStoppedBuilder) => IStoppedBuilder): IAny[];
+	export function buildStopped(builder: (build: IStoppedBuilder) => IStoppedBuilder): Stopped;
 	export interface ISnapPizzicatoBuilder {
-	    build: () => SnapPizzicato;
-	    patch: () => any[];
+	    build?: () => SnapPizzicato;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ISnapPizzicatoBuilder;
 	    relativeY: (relativeY: number) => ISnapPizzicatoBuilder;
 	    defaultY: (defaultY: number) => ISnapPizzicatoBuilder;
 	    relativeX: (relativeX: number) => ISnapPizzicatoBuilder;
 	}
-	export function patchSnapPizzicato(base: SnapPizzicato): ISnapPizzicatoBuilder;
-	export function buildSnapPizzicato(): ISnapPizzicatoBuilder;
+	export function patchSnapPizzicato(base: SnapPizzicato, builder: (build: ISnapPizzicatoBuilder) => ISnapPizzicatoBuilder): IAny[];
+	export function buildSnapPizzicato(builder: (build: ISnapPizzicatoBuilder) => ISnapPizzicatoBuilder): SnapPizzicato;
 	export interface IHammerOnBuilder {
-	    build: () => HammerOn;
-	    patch: () => any[];
+	    build?: () => HammerOn;
+	    patch: () => IAny[];
 	    number: (number: number) => IHammerOnBuilder;
 	    type: (type: StartStop) => IHammerOnBuilder;
 	    data: (data: string) => IHammerOnBuilder;
@@ -6763,11 +7031,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IHammerOnBuilder;
 	    relativeX: (relativeX: number) => IHammerOnBuilder;
 	}
-	export function patchHammerOn(base: HammerOn): IHammerOnBuilder;
-	export function buildHammerOn(): IHammerOnBuilder;
+	export function patchHammerOn(base: HammerOn, builder: (build: IHammerOnBuilder) => IHammerOnBuilder): IAny[];
+	export function buildHammerOn(builder: (build: IHammerOnBuilder) => IHammerOnBuilder): HammerOn;
 	export interface IPullOffBuilder {
-	    build: () => PullOff;
-	    patch: () => any[];
+	    build?: () => PullOff;
+	    patch: () => IAny[];
 	    number: (number: number) => IPullOffBuilder;
 	    type: (type: StartStop) => IPullOffBuilder;
 	    data: (data: string) => IPullOffBuilder;
@@ -6776,13 +7044,13 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IPullOffBuilder;
 	    relativeX: (relativeX: number) => IPullOffBuilder;
 	}
-	export function patchPullOff(base: PullOff): IPullOffBuilder;
-	export function buildPullOff(): IPullOffBuilder;
+	export function patchPullOff(base: PullOff, builder: (build: IPullOffBuilder) => IPullOffBuilder): IAny[];
+	export function buildPullOff(builder: (build: IPullOffBuilder) => IPullOffBuilder): PullOff;
 	export interface IBendBuilder {
-	    build: () => Bend;
-	    patch: () => any[];
+	    build?: () => Bend;
+	    patch: () => IAny[];
 	    bendAlter: (bendAlter: string) => IBendBuilder;
-	    withBar: (build: (builder: IWithBarBuilder) => IWithBarBuilder) => IBendBuilder;
+	    withBar: (build: WithBar | ((builder: IWithBarBuilder) => IWithBarBuilder)) => IBendBuilder;
 	    preBend: (preBend: boolean) => IBendBuilder;
 	    release: (release: boolean) => IBendBuilder;
 	    defaultX: (defaultX: number) => IBendBuilder;
@@ -6790,66 +7058,66 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IBendBuilder;
 	    relativeX: (relativeX: number) => IBendBuilder;
 	}
-	export function patchBend(base: Bend): IBendBuilder;
-	export function buildBend(): IBendBuilder;
+	export function patchBend(base: Bend, builder: (build: IBendBuilder) => IBendBuilder): IAny[];
+	export function buildBend(builder: (build: IBendBuilder) => IBendBuilder): Bend;
 	export interface IWithBarBuilder {
-	    build: () => WithBar;
-	    patch: () => any[];
+	    build?: () => WithBar;
+	    patch: () => IAny[];
 	    data: (data: string) => IWithBarBuilder;
 	    defaultX: (defaultX: number) => IWithBarBuilder;
 	    relativeY: (relativeY: number) => IWithBarBuilder;
 	    defaultY: (defaultY: number) => IWithBarBuilder;
 	    relativeX: (relativeX: number) => IWithBarBuilder;
 	}
-	export function patchWithBar(base: WithBar): IWithBarBuilder;
-	export function buildWithBar(): IWithBarBuilder;
+	export function patchWithBar(base: WithBar, builder: (build: IWithBarBuilder) => IWithBarBuilder): IAny[];
+	export function buildWithBar(builder: (build: IWithBarBuilder) => IWithBarBuilder): WithBar;
 	export interface ITapBuilder {
-	    build: () => Tap;
-	    patch: () => any[];
+	    build?: () => Tap;
+	    patch: () => IAny[];
 	    data: (data: string) => ITapBuilder;
 	    defaultX: (defaultX: number) => ITapBuilder;
 	    relativeY: (relativeY: number) => ITapBuilder;
 	    defaultY: (defaultY: number) => ITapBuilder;
 	    relativeX: (relativeX: number) => ITapBuilder;
 	}
-	export function patchTap(base: Tap): ITapBuilder;
-	export function buildTap(): ITapBuilder;
+	export function patchTap(base: Tap, builder: (build: ITapBuilder) => ITapBuilder): IAny[];
+	export function buildTap(builder: (build: ITapBuilder) => ITapBuilder): Tap;
 	export interface IHeelBuilder {
-	    build: () => Heel;
-	    patch: () => any[];
+	    build?: () => Heel;
+	    patch: () => IAny[];
 	    substitution: (substitution: boolean) => IHeelBuilder;
 	    defaultX: (defaultX: number) => IHeelBuilder;
 	    relativeY: (relativeY: number) => IHeelBuilder;
 	    defaultY: (defaultY: number) => IHeelBuilder;
 	    relativeX: (relativeX: number) => IHeelBuilder;
 	}
-	export function patchHeel(base: Heel): IHeelBuilder;
-	export function buildHeel(): IHeelBuilder;
+	export function patchHeel(base: Heel, builder: (build: IHeelBuilder) => IHeelBuilder): IAny[];
+	export function buildHeel(builder: (build: IHeelBuilder) => IHeelBuilder): Heel;
 	export interface IToeBuilder {
-	    build: () => Toe;
-	    patch: () => any[];
+	    build?: () => Toe;
+	    patch: () => IAny[];
 	    substitution: (substitution: boolean) => IToeBuilder;
 	    defaultX: (defaultX: number) => IToeBuilder;
 	    relativeY: (relativeY: number) => IToeBuilder;
 	    defaultY: (defaultY: number) => IToeBuilder;
 	    relativeX: (relativeX: number) => IToeBuilder;
 	}
-	export function patchToe(base: Toe): IToeBuilder;
-	export function buildToe(): IToeBuilder;
+	export function patchToe(base: Toe, builder: (build: IToeBuilder) => IToeBuilder): IAny[];
+	export function buildToe(builder: (build: IToeBuilder) => IToeBuilder): Toe;
 	export interface IFingernailsBuilder {
-	    build: () => Fingernails;
-	    patch: () => any[];
+	    build?: () => Fingernails;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IFingernailsBuilder;
 	    relativeY: (relativeY: number) => IFingernailsBuilder;
 	    defaultY: (defaultY: number) => IFingernailsBuilder;
 	    relativeX: (relativeX: number) => IFingernailsBuilder;
 	}
-	export function patchFingernails(base: Fingernails): IFingernailsBuilder;
-	export function buildFingernails(): IFingernailsBuilder;
+	export function patchFingernails(base: Fingernails, builder: (build: IFingernailsBuilder) => IFingernailsBuilder): IAny[];
+	export function buildFingernails(builder: (build: IFingernailsBuilder) => IFingernailsBuilder): Fingernails;
 	export interface IHoleBuilder {
-	    build: () => Hole;
-	    patch: () => any[];
-	    holeClosed: (build: (builder: IHoleClosedBuilder) => IHoleClosedBuilder) => IHoleBuilder;
+	    build?: () => Hole;
+	    patch: () => IAny[];
+	    holeClosed: (build: HoleClosed | ((builder: IHoleClosedBuilder) => IHoleClosedBuilder)) => IHoleBuilder;
 	    holeShape: (holeShape: string) => IHoleBuilder;
 	    holeType: (holeType: string) => IHoleBuilder;
 	    defaultX: (defaultX: number) => IHoleBuilder;
@@ -6857,19 +7125,19 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IHoleBuilder;
 	    relativeX: (relativeX: number) => IHoleBuilder;
 	}
-	export function patchHole(base: Hole): IHoleBuilder;
-	export function buildHole(): IHoleBuilder;
+	export function patchHole(base: Hole, builder: (build: IHoleBuilder) => IHoleBuilder): IAny[];
+	export function buildHole(builder: (build: IHoleBuilder) => IHoleBuilder): Hole;
 	export interface IHoleClosedBuilder {
-	    build: () => HoleClosed;
-	    patch: () => any[];
+	    build?: () => HoleClosed;
+	    patch: () => IAny[];
 	    location: (location: HoleLocation) => IHoleClosedBuilder;
 	    data: (data: HoleClosedType) => IHoleClosedBuilder;
 	}
-	export function patchHoleClosed(base: HoleClosed): IHoleClosedBuilder;
-	export function buildHoleClosed(): IHoleClosedBuilder;
+	export function patchHoleClosed(base: HoleClosed, builder: (build: IHoleClosedBuilder) => IHoleClosedBuilder): IAny[];
+	export function buildHoleClosed(builder: (build: IHoleClosedBuilder) => IHoleClosedBuilder): HoleClosed;
 	export interface IArrowBuilder {
-	    build: () => Arrow;
-	    patch: () => any[];
+	    build?: () => Arrow;
+	    patch: () => IAny[];
 	    arrowStyle: (arrowStyle: string) => IArrowBuilder;
 	    arrowDirection: (arrowDirection: string) => IArrowBuilder;
 	    circularArrow: (circularArrow: string) => IArrowBuilder;
@@ -6878,203 +7146,205 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IArrowBuilder;
 	    relativeX: (relativeX: number) => IArrowBuilder;
 	}
-	export function patchArrow(base: Arrow): IArrowBuilder;
-	export function buildArrow(): IArrowBuilder;
+	export function patchArrow(base: Arrow, builder: (build: IArrowBuilder) => IArrowBuilder): IAny[];
+	export function buildArrow(builder: (build: IArrowBuilder) => IArrowBuilder): Arrow;
 	export interface IHandbellBuilder {
-	    build: () => Handbell;
-	    patch: () => any[];
+	    build?: () => Handbell;
+	    patch: () => IAny[];
 	    data: (data: string) => IHandbellBuilder;
 	    defaultX: (defaultX: number) => IHandbellBuilder;
 	    relativeY: (relativeY: number) => IHandbellBuilder;
 	    defaultY: (defaultY: number) => IHandbellBuilder;
 	    relativeX: (relativeX: number) => IHandbellBuilder;
 	}
-	export function patchHandbell(base: Handbell): IHandbellBuilder;
-	export function buildHandbell(): IHandbellBuilder;
+	export function patchHandbell(base: Handbell, builder: (build: IHandbellBuilder) => IHandbellBuilder): IAny[];
+	export function buildHandbell(builder: (build: IHandbellBuilder) => IHandbellBuilder): Handbell;
 	export interface IOtherTechnicalBuilder {
-	    build: () => OtherTechnical;
-	    patch: () => any[];
+	    build?: () => OtherTechnical;
+	    patch: () => IAny[];
 	    data: (data: string) => IOtherTechnicalBuilder;
 	    defaultX: (defaultX: number) => IOtherTechnicalBuilder;
 	    relativeY: (relativeY: number) => IOtherTechnicalBuilder;
 	    defaultY: (defaultY: number) => IOtherTechnicalBuilder;
 	    relativeX: (relativeX: number) => IOtherTechnicalBuilder;
 	}
-	export function patchOtherTechnical(base: OtherTechnical): IOtherTechnicalBuilder;
-	export function buildOtherTechnical(): IOtherTechnicalBuilder;
+	export function patchOtherTechnical(base: OtherTechnical, builder: (build: IOtherTechnicalBuilder) => IOtherTechnicalBuilder): IAny[];
+	export function buildOtherTechnical(builder: (build: IOtherTechnicalBuilder) => IOtherTechnicalBuilder): OtherTechnical;
 	export interface IArticulationsBuilder {
-	    build: () => Articulations;
-	    patch: () => any[];
-	    accent: (build: (builder: IAccentBuilder) => IAccentBuilder) => IArticulationsBuilder;
-	    doit: (build: (builder: IDoitBuilder) => IDoitBuilder) => IArticulationsBuilder;
-	    breathMark: (build: (builder: IBreathMarkBuilder) => IBreathMarkBuilder) => IArticulationsBuilder;
+	    build?: () => Articulations;
+	    patch: () => IAny[];
+	    accent: (build: Accent | ((builder: IAccentBuilder) => IAccentBuilder)) => IArticulationsBuilder;
+	    doit: (build: Doit | ((builder: IDoitBuilder) => IDoitBuilder)) => IArticulationsBuilder;
+	    breathMark: (build: BreathMark | ((builder: IBreathMarkBuilder) => IBreathMarkBuilder)) => IArticulationsBuilder;
+	    otherArticulationsAt: (idx: number, build: OtherArticulation | ((builder: IOtherArticulationBuilder) => IOtherArticulationBuilder)) => IArticulationsBuilder;
+	    otherArticulationsSplice: (start: number, deleteCount: number, ...items: OtherArticulation[]) => IArticulationsBuilder;
 	    otherArticulations: (otherArticulations: OtherArticulation[]) => IArticulationsBuilder;
-	    detachedLegato: (build: (builder: IDetachedLegatoBuilder) => IDetachedLegatoBuilder) => IArticulationsBuilder;
-	    staccatissimo: (build: (builder: IStaccatissimoBuilder) => IStaccatissimoBuilder) => IArticulationsBuilder;
-	    plop: (build: (builder: IPlopBuilder) => IPlopBuilder) => IArticulationsBuilder;
-	    unstress: (build: (builder: IUnstressBuilder) => IUnstressBuilder) => IArticulationsBuilder;
-	    strongAccent: (build: (builder: IStrongAccentBuilder) => IStrongAccentBuilder) => IArticulationsBuilder;
-	    staccato: (build: (builder: IStaccatoBuilder) => IStaccatoBuilder) => IArticulationsBuilder;
-	    spiccato: (build: (builder: ISpiccatoBuilder) => ISpiccatoBuilder) => IArticulationsBuilder;
-	    scoop: (build: (builder: IScoopBuilder) => IScoopBuilder) => IArticulationsBuilder;
-	    falloff: (build: (builder: IFalloffBuilder) => IFalloffBuilder) => IArticulationsBuilder;
-	    caesura: (build: (builder: ICaesuraBuilder) => ICaesuraBuilder) => IArticulationsBuilder;
-	    stress: (build: (builder: IStressBuilder) => IStressBuilder) => IArticulationsBuilder;
-	    tenuto: (build: (builder: ITenutoBuilder) => ITenutoBuilder) => IArticulationsBuilder;
+	    detachedLegato: (build: DetachedLegato | ((builder: IDetachedLegatoBuilder) => IDetachedLegatoBuilder)) => IArticulationsBuilder;
+	    staccatissimo: (build: Staccatissimo | ((builder: IStaccatissimoBuilder) => IStaccatissimoBuilder)) => IArticulationsBuilder;
+	    plop: (build: Plop | ((builder: IPlopBuilder) => IPlopBuilder)) => IArticulationsBuilder;
+	    unstress: (build: Unstress | ((builder: IUnstressBuilder) => IUnstressBuilder)) => IArticulationsBuilder;
+	    strongAccent: (build: StrongAccent | ((builder: IStrongAccentBuilder) => IStrongAccentBuilder)) => IArticulationsBuilder;
+	    staccato: (build: Staccato | ((builder: IStaccatoBuilder) => IStaccatoBuilder)) => IArticulationsBuilder;
+	    spiccato: (build: Spiccato | ((builder: ISpiccatoBuilder) => ISpiccatoBuilder)) => IArticulationsBuilder;
+	    scoop: (build: Scoop | ((builder: IScoopBuilder) => IScoopBuilder)) => IArticulationsBuilder;
+	    falloff: (build: Falloff | ((builder: IFalloffBuilder) => IFalloffBuilder)) => IArticulationsBuilder;
+	    caesura: (build: Caesura | ((builder: ICaesuraBuilder) => ICaesuraBuilder)) => IArticulationsBuilder;
+	    stress: (build: Stress | ((builder: IStressBuilder) => IStressBuilder)) => IArticulationsBuilder;
+	    tenuto: (build: Tenuto | ((builder: ITenutoBuilder) => ITenutoBuilder)) => IArticulationsBuilder;
 	}
-	export function patchArticulations(base: Articulations): IArticulationsBuilder;
-	export function buildArticulations(): IArticulationsBuilder;
+	export function patchArticulations(base: Articulations, builder: (build: IArticulationsBuilder) => IArticulationsBuilder): IAny[];
+	export function buildArticulations(builder: (build: IArticulationsBuilder) => IArticulationsBuilder): Articulations;
 	export interface IAccentBuilder {
-	    build: () => Accent;
-	    patch: () => any[];
+	    build?: () => Accent;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IAccentBuilder;
 	    relativeY: (relativeY: number) => IAccentBuilder;
 	    defaultY: (defaultY: number) => IAccentBuilder;
 	    relativeX: (relativeX: number) => IAccentBuilder;
 	}
-	export function patchAccent(base: Accent): IAccentBuilder;
-	export function buildAccent(): IAccentBuilder;
+	export function patchAccent(base: Accent, builder: (build: IAccentBuilder) => IAccentBuilder): IAny[];
+	export function buildAccent(builder: (build: IAccentBuilder) => IAccentBuilder): Accent;
 	export interface IStrongAccentBuilder {
-	    build: () => StrongAccent;
-	    patch: () => any[];
+	    build?: () => StrongAccent;
+	    patch: () => IAny[];
 	    type: (type: UpDown) => IStrongAccentBuilder;
 	    defaultX: (defaultX: number) => IStrongAccentBuilder;
 	    relativeY: (relativeY: number) => IStrongAccentBuilder;
 	    defaultY: (defaultY: number) => IStrongAccentBuilder;
 	    relativeX: (relativeX: number) => IStrongAccentBuilder;
 	}
-	export function patchStrongAccent(base: StrongAccent): IStrongAccentBuilder;
-	export function buildStrongAccent(): IStrongAccentBuilder;
+	export function patchStrongAccent(base: StrongAccent, builder: (build: IStrongAccentBuilder) => IStrongAccentBuilder): IAny[];
+	export function buildStrongAccent(builder: (build: IStrongAccentBuilder) => IStrongAccentBuilder): StrongAccent;
 	export interface IStaccatoBuilder {
-	    build: () => Staccato;
-	    patch: () => any[];
+	    build?: () => Staccato;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IStaccatoBuilder;
 	    relativeY: (relativeY: number) => IStaccatoBuilder;
 	    defaultY: (defaultY: number) => IStaccatoBuilder;
 	    relativeX: (relativeX: number) => IStaccatoBuilder;
 	}
-	export function patchStaccato(base: Staccato): IStaccatoBuilder;
-	export function buildStaccato(): IStaccatoBuilder;
+	export function patchStaccato(base: Staccato, builder: (build: IStaccatoBuilder) => IStaccatoBuilder): IAny[];
+	export function buildStaccato(builder: (build: IStaccatoBuilder) => IStaccatoBuilder): Staccato;
 	export interface ITenutoBuilder {
-	    build: () => Tenuto;
-	    patch: () => any[];
+	    build?: () => Tenuto;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ITenutoBuilder;
 	    relativeY: (relativeY: number) => ITenutoBuilder;
 	    defaultY: (defaultY: number) => ITenutoBuilder;
 	    relativeX: (relativeX: number) => ITenutoBuilder;
 	}
-	export function patchTenuto(base: Tenuto): ITenutoBuilder;
-	export function buildTenuto(): ITenutoBuilder;
+	export function patchTenuto(base: Tenuto, builder: (build: ITenutoBuilder) => ITenutoBuilder): IAny[];
+	export function buildTenuto(builder: (build: ITenutoBuilder) => ITenutoBuilder): Tenuto;
 	export interface IDetachedLegatoBuilder {
-	    build: () => DetachedLegato;
-	    patch: () => any[];
+	    build?: () => DetachedLegato;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IDetachedLegatoBuilder;
 	    relativeY: (relativeY: number) => IDetachedLegatoBuilder;
 	    defaultY: (defaultY: number) => IDetachedLegatoBuilder;
 	    relativeX: (relativeX: number) => IDetachedLegatoBuilder;
 	}
-	export function patchDetachedLegato(base: DetachedLegato): IDetachedLegatoBuilder;
-	export function buildDetachedLegato(): IDetachedLegatoBuilder;
+	export function patchDetachedLegato(base: DetachedLegato, builder: (build: IDetachedLegatoBuilder) => IDetachedLegatoBuilder): IAny[];
+	export function buildDetachedLegato(builder: (build: IDetachedLegatoBuilder) => IDetachedLegatoBuilder): DetachedLegato;
 	export interface IStaccatissimoBuilder {
-	    build: () => Staccatissimo;
-	    patch: () => any[];
+	    build?: () => Staccatissimo;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IStaccatissimoBuilder;
 	    relativeY: (relativeY: number) => IStaccatissimoBuilder;
 	    defaultY: (defaultY: number) => IStaccatissimoBuilder;
 	    relativeX: (relativeX: number) => IStaccatissimoBuilder;
 	}
-	export function patchStaccatissimo(base: Staccatissimo): IStaccatissimoBuilder;
-	export function buildStaccatissimo(): IStaccatissimoBuilder;
+	export function patchStaccatissimo(base: Staccatissimo, builder: (build: IStaccatissimoBuilder) => IStaccatissimoBuilder): IAny[];
+	export function buildStaccatissimo(builder: (build: IStaccatissimoBuilder) => IStaccatissimoBuilder): Staccatissimo;
 	export interface ISpiccatoBuilder {
-	    build: () => Spiccato;
-	    patch: () => any[];
+	    build?: () => Spiccato;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ISpiccatoBuilder;
 	    relativeY: (relativeY: number) => ISpiccatoBuilder;
 	    defaultY: (defaultY: number) => ISpiccatoBuilder;
 	    relativeX: (relativeX: number) => ISpiccatoBuilder;
 	}
-	export function patchSpiccato(base: Spiccato): ISpiccatoBuilder;
-	export function buildSpiccato(): ISpiccatoBuilder;
+	export function patchSpiccato(base: Spiccato, builder: (build: ISpiccatoBuilder) => ISpiccatoBuilder): IAny[];
+	export function buildSpiccato(builder: (build: ISpiccatoBuilder) => ISpiccatoBuilder): Spiccato;
 	export interface IScoopBuilder {
-	    build: () => Scoop;
-	    patch: () => any[];
+	    build?: () => Scoop;
+	    patch: () => IAny[];
 	    lineShape: (lineShape: StraightCurved) => IScoopBuilder;
 	}
-	export function patchScoop(base: Scoop): IScoopBuilder;
-	export function buildScoop(): IScoopBuilder;
+	export function patchScoop(base: Scoop, builder: (build: IScoopBuilder) => IScoopBuilder): IAny[];
+	export function buildScoop(builder: (build: IScoopBuilder) => IScoopBuilder): Scoop;
 	export interface IPlopBuilder {
-	    build: () => Plop;
-	    patch: () => any[];
+	    build?: () => Plop;
+	    patch: () => IAny[];
 	    lineShape: (lineShape: StraightCurved) => IPlopBuilder;
 	}
-	export function patchPlop(base: Plop): IPlopBuilder;
-	export function buildPlop(): IPlopBuilder;
+	export function patchPlop(base: Plop, builder: (build: IPlopBuilder) => IPlopBuilder): IAny[];
+	export function buildPlop(builder: (build: IPlopBuilder) => IPlopBuilder): Plop;
 	export interface IDoitBuilder {
-	    build: () => Doit;
-	    patch: () => any[];
+	    build?: () => Doit;
+	    patch: () => IAny[];
 	    lineShape: (lineShape: StraightCurved) => IDoitBuilder;
 	}
-	export function patchDoit(base: Doit): IDoitBuilder;
-	export function buildDoit(): IDoitBuilder;
+	export function patchDoit(base: Doit, builder: (build: IDoitBuilder) => IDoitBuilder): IAny[];
+	export function buildDoit(builder: (build: IDoitBuilder) => IDoitBuilder): Doit;
 	export interface IFalloffBuilder {
-	    build: () => Falloff;
-	    patch: () => any[];
+	    build?: () => Falloff;
+	    patch: () => IAny[];
 	    lineShape: (lineShape: StraightCurved) => IFalloffBuilder;
 	}
-	export function patchFalloff(base: Falloff): IFalloffBuilder;
-	export function buildFalloff(): IFalloffBuilder;
+	export function patchFalloff(base: Falloff, builder: (build: IFalloffBuilder) => IFalloffBuilder): IAny[];
+	export function buildFalloff(builder: (build: IFalloffBuilder) => IFalloffBuilder): Falloff;
 	export interface IBreathMarkBuilder {
-	    build: () => BreathMark;
-	    patch: () => any[];
+	    build?: () => BreathMark;
+	    patch: () => IAny[];
 	    type: (type: BreathMarkType) => IBreathMarkBuilder;
 	    lineShape: (lineShape: StraightCurved) => IBreathMarkBuilder;
 	}
-	export function patchBreathMark(base: BreathMark): IBreathMarkBuilder;
-	export function buildBreathMark(): IBreathMarkBuilder;
+	export function patchBreathMark(base: BreathMark, builder: (build: IBreathMarkBuilder) => IBreathMarkBuilder): IAny[];
+	export function buildBreathMark(builder: (build: IBreathMarkBuilder) => IBreathMarkBuilder): BreathMark;
 	export interface ICaesuraBuilder {
-	    build: () => Caesura;
-	    patch: () => any[];
+	    build?: () => Caesura;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => ICaesuraBuilder;
 	    relativeY: (relativeY: number) => ICaesuraBuilder;
 	    defaultY: (defaultY: number) => ICaesuraBuilder;
 	    relativeX: (relativeX: number) => ICaesuraBuilder;
 	}
-	export function patchCaesura(base: Caesura): ICaesuraBuilder;
-	export function buildCaesura(): ICaesuraBuilder;
+	export function patchCaesura(base: Caesura, builder: (build: ICaesuraBuilder) => ICaesuraBuilder): IAny[];
+	export function buildCaesura(builder: (build: ICaesuraBuilder) => ICaesuraBuilder): Caesura;
 	export interface IStressBuilder {
-	    build: () => Stress;
-	    patch: () => any[];
+	    build?: () => Stress;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IStressBuilder;
 	    relativeY: (relativeY: number) => IStressBuilder;
 	    defaultY: (defaultY: number) => IStressBuilder;
 	    relativeX: (relativeX: number) => IStressBuilder;
 	}
-	export function patchStress(base: Stress): IStressBuilder;
-	export function buildStress(): IStressBuilder;
+	export function patchStress(base: Stress, builder: (build: IStressBuilder) => IStressBuilder): IAny[];
+	export function buildStress(builder: (build: IStressBuilder) => IStressBuilder): Stress;
 	export interface IUnstressBuilder {
-	    build: () => Unstress;
-	    patch: () => any[];
+	    build?: () => Unstress;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IUnstressBuilder;
 	    relativeY: (relativeY: number) => IUnstressBuilder;
 	    defaultY: (defaultY: number) => IUnstressBuilder;
 	    relativeX: (relativeX: number) => IUnstressBuilder;
 	}
-	export function patchUnstress(base: Unstress): IUnstressBuilder;
-	export function buildUnstress(): IUnstressBuilder;
+	export function patchUnstress(base: Unstress, builder: (build: IUnstressBuilder) => IUnstressBuilder): IAny[];
+	export function buildUnstress(builder: (build: IUnstressBuilder) => IUnstressBuilder): Unstress;
 	export interface IOtherArticulationBuilder {
-	    build: () => OtherArticulation;
-	    patch: () => any[];
+	    build?: () => OtherArticulation;
+	    patch: () => IAny[];
 	    data: (data: string) => IOtherArticulationBuilder;
 	    defaultX: (defaultX: number) => IOtherArticulationBuilder;
 	    relativeY: (relativeY: number) => IOtherArticulationBuilder;
 	    defaultY: (defaultY: number) => IOtherArticulationBuilder;
 	    relativeX: (relativeX: number) => IOtherArticulationBuilder;
 	}
-	export function patchOtherArticulation(base: OtherArticulation): IOtherArticulationBuilder;
-	export function buildOtherArticulation(): IOtherArticulationBuilder;
+	export function patchOtherArticulation(base: OtherArticulation, builder: (build: IOtherArticulationBuilder) => IOtherArticulationBuilder): IAny[];
+	export function buildOtherArticulation(builder: (build: IOtherArticulationBuilder) => IOtherArticulationBuilder): OtherArticulation;
 	export interface IArpeggiateBuilder {
-	    build: () => Arpeggiate;
-	    patch: () => any[];
+	    build?: () => Arpeggiate;
+	    patch: () => IAny[];
 	    number: (number: number) => IArpeggiateBuilder;
 	    direction: (direction: UpDown) => IArpeggiateBuilder;
 	    defaultX: (defaultX: number) => IArpeggiateBuilder;
@@ -7082,11 +7352,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IArpeggiateBuilder;
 	    relativeX: (relativeX: number) => IArpeggiateBuilder;
 	}
-	export function patchArpeggiate(base: Arpeggiate): IArpeggiateBuilder;
-	export function buildArpeggiate(): IArpeggiateBuilder;
+	export function patchArpeggiate(base: Arpeggiate, builder: (build: IArpeggiateBuilder) => IArpeggiateBuilder): IAny[];
+	export function buildArpeggiate(builder: (build: IArpeggiateBuilder) => IArpeggiateBuilder): Arpeggiate;
 	export interface INonArpeggiateBuilder {
-	    build: () => NonArpeggiate;
-	    patch: () => any[];
+	    build?: () => NonArpeggiate;
+	    patch: () => IAny[];
 	    number: (number: number) => INonArpeggiateBuilder;
 	    type: (type: TopBottom) => INonArpeggiateBuilder;
 	    defaultX: (defaultX: number) => INonArpeggiateBuilder;
@@ -7094,212 +7364,204 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => INonArpeggiateBuilder;
 	    relativeX: (relativeX: number) => INonArpeggiateBuilder;
 	}
-	export function patchNonArpeggiate(base: NonArpeggiate): INonArpeggiateBuilder;
-	export function buildNonArpeggiate(): INonArpeggiateBuilder;
+	export function patchNonArpeggiate(base: NonArpeggiate, builder: (build: INonArpeggiateBuilder) => INonArpeggiateBuilder): IAny[];
+	export function buildNonArpeggiate(builder: (build: INonArpeggiateBuilder) => INonArpeggiateBuilder): NonArpeggiate;
 	export interface ILaughingBuilder {
-	    build: () => Laughing;
-	    patch: () => any[];
-	    _class: (_class: string) => ILaughingBuilder;
+	    build?: () => Laughing;
+	    patch: () => IAny[];
 	}
-	export function patchLaughing(base: Laughing): ILaughingBuilder;
-	export function buildLaughing(): ILaughingBuilder;
+	export function patchLaughing(base: Laughing, builder: (build: ILaughingBuilder) => ILaughingBuilder): IAny[];
+	export function buildLaughing(builder: (build: ILaughingBuilder) => ILaughingBuilder): Laughing;
 	export interface IHummingBuilder {
-	    build: () => Humming;
-	    patch: () => any[];
-	    _class: (_class: string) => IHummingBuilder;
+	    build?: () => Humming;
+	    patch: () => IAny[];
 	}
-	export function patchHumming(base: Humming): IHummingBuilder;
-	export function buildHumming(): IHummingBuilder;
+	export function patchHumming(base: Humming, builder: (build: IHummingBuilder) => IHummingBuilder): IAny[];
+	export function buildHumming(builder: (build: IHummingBuilder) => IHummingBuilder): Humming;
 	export interface IEndLineBuilder {
-	    build: () => EndLine;
-	    patch: () => any[];
-	    _class: (_class: string) => IEndLineBuilder;
+	    build?: () => EndLine;
+	    patch: () => IAny[];
 	}
-	export function patchEndLine(base: EndLine): IEndLineBuilder;
-	export function buildEndLine(): IEndLineBuilder;
+	export function patchEndLine(base: EndLine, builder: (build: IEndLineBuilder) => IEndLineBuilder): IAny[];
+	export function buildEndLine(builder: (build: IEndLineBuilder) => IEndLineBuilder): EndLine;
 	export interface IEndParagraphBuilder {
-	    build: () => EndParagraph;
-	    patch: () => any[];
-	    _class: (_class: string) => IEndParagraphBuilder;
+	    build?: () => EndParagraph;
+	    patch: () => IAny[];
 	}
-	export function patchEndParagraph(base: EndParagraph): IEndParagraphBuilder;
-	export function buildEndParagraph(): IEndParagraphBuilder;
+	export function patchEndParagraph(base: EndParagraph, builder: (build: IEndParagraphBuilder) => IEndParagraphBuilder): IAny[];
+	export function buildEndParagraph(builder: (build: IEndParagraphBuilder) => IEndParagraphBuilder): EndParagraph;
 	export interface ILyricPartsBuilder {
-	    build: () => LyricParts;
-	    patch: () => any[];
+	    build?: () => LyricParts;
+	    patch: () => IAny[];
 	}
-	export function patchLyricParts(base: LyricParts): ILyricPartsBuilder;
-	export function buildLyricParts(): ILyricPartsBuilder;
+	export function patchLyricParts(base: LyricParts, builder: (build: ILyricPartsBuilder) => ILyricPartsBuilder): IAny[];
+	export function buildLyricParts(builder: (build: ILyricPartsBuilder) => ILyricPartsBuilder): LyricParts;
 	export interface ILyricBuilder {
-	    build: () => Lyric;
-	    patch: () => any[];
+	    build?: () => Lyric;
+	    patch: () => IAny[];
 	    lyricParts: (lyricParts: boolean[]) => ILyricBuilder;
 	    number: (number: number) => ILyricBuilder;
 	    name: (name: string) => ILyricBuilder;
 	    justify: (justify: LeftCenterRight) => ILyricBuilder;
 	}
-	export function patchLyric(base: Lyric): ILyricBuilder;
-	export function buildLyric(): ILyricBuilder;
+	export function patchLyric(base: Lyric, builder: (build: ILyricBuilder) => ILyricBuilder): IAny[];
+	export function buildLyric(builder: (build: ILyricBuilder) => ILyricBuilder): Lyric;
 	export interface ITextBuilder {
-	    build: () => Text;
-	    patch: () => any[];
+	    build?: () => Text;
+	    patch: () => IAny[];
 	    data: (data: string) => ITextBuilder;
-	    _class: (_class: string) => ITextBuilder;
 	    fontFamily: (fontFamily: string) => ITextBuilder;
 	    fontWeight: (fontWeight: NormalBold) => ITextBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITextBuilder;
 	    fontSize: (fontSize: string) => ITextBuilder;
 	}
-	export function patchText(base: Text): ITextBuilder;
-	export function buildText(): ITextBuilder;
+	export function patchText(base: Text, builder: (build: ITextBuilder) => ITextBuilder): IAny[];
+	export function buildText(builder: (build: ITextBuilder) => ITextBuilder): Text;
 	export interface ISyllabicBuilder {
-	    build: () => Syllabic;
-	    patch: () => any[];
+	    build?: () => Syllabic;
+	    patch: () => IAny[];
 	    data: (data: SyllabicType) => ISyllabicBuilder;
-	    _class: (_class: string) => ISyllabicBuilder;
 	    fontFamily: (fontFamily: string) => ISyllabicBuilder;
 	    fontWeight: (fontWeight: NormalBold) => ISyllabicBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ISyllabicBuilder;
 	    fontSize: (fontSize: string) => ISyllabicBuilder;
 	}
-	export function patchSyllabic(base: Syllabic): ISyllabicBuilder;
-	export function buildSyllabic(): ISyllabicBuilder;
+	export function patchSyllabic(base: Syllabic, builder: (build: ISyllabicBuilder) => ISyllabicBuilder): IAny[];
+	export function buildSyllabic(builder: (build: ISyllabicBuilder) => ISyllabicBuilder): Syllabic;
 	export interface IElisionBuilder {
-	    build: () => Elision;
-	    patch: () => any[];
+	    build?: () => Elision;
+	    patch: () => IAny[];
 	    data: (data: string) => IElisionBuilder;
-	    _class: (_class: string) => IElisionBuilder;
 	    fontFamily: (fontFamily: string) => IElisionBuilder;
 	    fontWeight: (fontWeight: NormalBold) => IElisionBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IElisionBuilder;
 	    fontSize: (fontSize: string) => IElisionBuilder;
 	}
-	export function patchElision(base: Elision): IElisionBuilder;
-	export function buildElision(): IElisionBuilder;
+	export function patchElision(base: Elision, builder: (build: IElisionBuilder) => IElisionBuilder): IAny[];
+	export function buildElision(builder: (build: IElisionBuilder) => IElisionBuilder): Elision;
 	export interface IExtendBuilder {
-	    build: () => Extend;
-	    patch: () => any[];
+	    build?: () => Extend;
+	    patch: () => IAny[];
 	    type: (type: StartStopContinue) => IExtendBuilder;
-	    _class: (_class: string) => IExtendBuilder;
 	    defaultX: (defaultX: number) => IExtendBuilder;
 	    relativeY: (relativeY: number) => IExtendBuilder;
 	    defaultY: (defaultY: number) => IExtendBuilder;
 	    relativeX: (relativeX: number) => IExtendBuilder;
 	}
-	export function patchExtend(base: Extend): IExtendBuilder;
-	export function buildExtend(): IExtendBuilder;
+	export function patchExtend(base: Extend, builder: (build: IExtendBuilder) => IExtendBuilder): IAny[];
+	export function buildExtend(builder: (build: IExtendBuilder) => IExtendBuilder): Extend;
 	export interface IFiguredBassBuilder {
-	    build: () => FiguredBass;
-	    patch: () => any[];
+	    build?: () => FiguredBass;
+	    patch: () => IAny[];
+	    figuresAt: (idx: number, build: Figure | ((builder: IFigureBuilder) => IFigureBuilder)) => IFiguredBassBuilder;
+	    figuresSplice: (start: number, deleteCount: number, ...items: Figure[]) => IFiguredBassBuilder;
 	    figures: (figures: Figure[]) => IFiguredBassBuilder;
 	    duration: (duration: number) => IFiguredBassBuilder;
 	    parentheses: (parentheses: boolean) => IFiguredBassBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IFiguredBassBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IFiguredBassBuilder;
-	    _class: (_class: string) => IFiguredBassBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IFiguredBassBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IFiguredBassBuilder;
 	}
-	export function patchFiguredBass(base: FiguredBass): IFiguredBassBuilder;
-	export function buildFiguredBass(): IFiguredBassBuilder;
+	export function patchFiguredBass(base: FiguredBass, builder: (build: IFiguredBassBuilder) => IFiguredBassBuilder): IAny[];
+	export function buildFiguredBass(builder: (build: IFiguredBassBuilder) => IFiguredBassBuilder): FiguredBass;
 	export interface IFigureBuilder {
-	    build: () => Figure;
-	    patch: () => any[];
-	    prefix: (build: (builder: IPrefixBuilder) => IPrefixBuilder) => IFigureBuilder;
-	    figureNumber: (build: (builder: IFigureNumberBuilder) => IFigureNumberBuilder) => IFigureBuilder;
-	    extend: (build: (builder: IExtendBuilder) => IExtendBuilder) => IFigureBuilder;
-	    suffix: (build: (builder: ISuffixBuilder) => ISuffixBuilder) => IFigureBuilder;
+	    build?: () => Figure;
+	    patch: () => IAny[];
+	    prefix: (build: Prefix | ((builder: IPrefixBuilder) => IPrefixBuilder)) => IFigureBuilder;
+	    figureNumber: (build: FigureNumber | ((builder: IFigureNumberBuilder) => IFigureNumberBuilder)) => IFigureBuilder;
+	    extend: (build: Extend | ((builder: IExtendBuilder) => IExtendBuilder)) => IFigureBuilder;
+	    suffix: (build: Suffix | ((builder: ISuffixBuilder) => ISuffixBuilder)) => IFigureBuilder;
 	    defaultX: (defaultX: number) => IFigureBuilder;
 	    relativeY: (relativeY: number) => IFigureBuilder;
 	    defaultY: (defaultY: number) => IFigureBuilder;
 	    relativeX: (relativeX: number) => IFigureBuilder;
 	}
-	export function patchFigure(base: Figure): IFigureBuilder;
-	export function buildFigure(): IFigureBuilder;
+	export function patchFigure(base: Figure, builder: (build: IFigureBuilder) => IFigureBuilder): IAny[];
+	export function buildFigure(builder: (build: IFigureBuilder) => IFigureBuilder): Figure;
 	export interface IPrefixBuilder {
-	    build: () => Prefix;
-	    patch: () => any[];
+	    build?: () => Prefix;
+	    patch: () => IAny[];
 	    data: (data: string) => IPrefixBuilder;
 	    defaultX: (defaultX: number) => IPrefixBuilder;
 	    relativeY: (relativeY: number) => IPrefixBuilder;
 	    defaultY: (defaultY: number) => IPrefixBuilder;
 	    relativeX: (relativeX: number) => IPrefixBuilder;
 	}
-	export function patchPrefix(base: Prefix): IPrefixBuilder;
-	export function buildPrefix(): IPrefixBuilder;
+	export function patchPrefix(base: Prefix, builder: (build: IPrefixBuilder) => IPrefixBuilder): IAny[];
+	export function buildPrefix(builder: (build: IPrefixBuilder) => IPrefixBuilder): Prefix;
 	export interface IFigureNumberBuilder {
-	    build: () => FigureNumber;
-	    patch: () => any[];
+	    build?: () => FigureNumber;
+	    patch: () => IAny[];
 	    data: (data: string) => IFigureNumberBuilder;
 	    defaultX: (defaultX: number) => IFigureNumberBuilder;
 	    relativeY: (relativeY: number) => IFigureNumberBuilder;
 	    defaultY: (defaultY: number) => IFigureNumberBuilder;
 	    relativeX: (relativeX: number) => IFigureNumberBuilder;
 	}
-	export function patchFigureNumber(base: FigureNumber): IFigureNumberBuilder;
-	export function buildFigureNumber(): IFigureNumberBuilder;
+	export function patchFigureNumber(base: FigureNumber, builder: (build: IFigureNumberBuilder) => IFigureNumberBuilder): IAny[];
+	export function buildFigureNumber(builder: (build: IFigureNumberBuilder) => IFigureNumberBuilder): FigureNumber;
 	export interface ISuffixBuilder {
-	    build: () => Suffix;
-	    patch: () => any[];
+	    build?: () => Suffix;
+	    patch: () => IAny[];
 	    data: (data: string) => ISuffixBuilder;
 	    defaultX: (defaultX: number) => ISuffixBuilder;
 	    relativeY: (relativeY: number) => ISuffixBuilder;
 	    defaultY: (defaultY: number) => ISuffixBuilder;
 	    relativeX: (relativeX: number) => ISuffixBuilder;
 	}
-	export function patchSuffix(base: Suffix): ISuffixBuilder;
-	export function buildSuffix(): ISuffixBuilder;
+	export function patchSuffix(base: Suffix, builder: (build: ISuffixBuilder) => ISuffixBuilder): IAny[];
+	export function buildSuffix(builder: (build: ISuffixBuilder) => ISuffixBuilder): Suffix;
 	export interface IBackupBuilder {
-	    build: () => Backup;
-	    patch: () => any[];
+	    build?: () => Backup;
+	    patch: () => IAny[];
 	    duration: (duration: number) => IBackupBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IBackupBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IBackupBuilder;
-	    _class: (_class: string) => IBackupBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IBackupBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IBackupBuilder;
 	}
-	export function patchBackup(base: Backup): IBackupBuilder;
-	export function buildBackup(): IBackupBuilder;
+	export function patchBackup(base: Backup, builder: (build: IBackupBuilder) => IBackupBuilder): IAny[];
+	export function buildBackup(builder: (build: IBackupBuilder) => IBackupBuilder): Backup;
 	export interface IForwardBuilder {
-	    build: () => Forward;
-	    patch: () => any[];
+	    build?: () => Forward;
+	    patch: () => IAny[];
 	    duration: (duration: number) => IForwardBuilder;
 	    staff: (staff: number) => IForwardBuilder;
 	    voice: (voice: number) => IForwardBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IForwardBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IForwardBuilder;
-	    _class: (_class: string) => IForwardBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IForwardBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IForwardBuilder;
 	}
-	export function patchForward(base: Forward): IForwardBuilder;
-	export function buildForward(): IForwardBuilder;
+	export function patchForward(base: Forward, builder: (build: IForwardBuilder) => IForwardBuilder): IAny[];
+	export function buildForward(builder: (build: IForwardBuilder) => IForwardBuilder): Forward;
 	export interface IBarlineBuilder {
-	    build: () => Barline;
-	    patch: () => any[];
-	    segno: (build: (builder: ISegnoBuilder) => ISegnoBuilder) => IBarlineBuilder;
-	    coda: (build: (builder: ICodaBuilder) => ICodaBuilder) => IBarlineBuilder;
+	    build?: () => Barline;
+	    patch: () => IAny[];
+	    segno: (build: Segno | ((builder: ISegnoBuilder) => ISegnoBuilder)) => IBarlineBuilder;
+	    coda: (build: Coda | ((builder: ICodaBuilder) => ICodaBuilder)) => IBarlineBuilder;
 	    location: (location: BarlineLocation) => IBarlineBuilder;
 	    codaAttrib: (codaAttrib: string) => IBarlineBuilder;
-	    wavyLine: (build: (builder: IWavyLineBuilder) => IWavyLineBuilder) => IBarlineBuilder;
+	    wavyLine: (build: WavyLine | ((builder: IWavyLineBuilder) => IWavyLineBuilder)) => IBarlineBuilder;
+	    fermatasAt: (idx: number, build: Fermata | ((builder: IFermataBuilder) => IFermataBuilder)) => IBarlineBuilder;
+	    fermatasSplice: (start: number, deleteCount: number, ...items: Fermata[]) => IBarlineBuilder;
 	    fermatas: (fermatas: Fermata[]) => IBarlineBuilder;
 	    segnoAttrib: (segnoAttrib: string) => IBarlineBuilder;
 	    divisions: (divisions: number) => IBarlineBuilder;
-	    barStyle: (build: (builder: IBarStyleBuilder) => IBarStyleBuilder) => IBarlineBuilder;
-	    ending: (build: (builder: IEndingBuilder) => IEndingBuilder) => IBarlineBuilder;
-	    repeat: (build: (builder: IRepeatBuilder) => IRepeatBuilder) => IBarlineBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IBarlineBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IBarlineBuilder;
-	    _class: (_class: string) => IBarlineBuilder;
+	    barStyle: (build: BarStyle | ((builder: IBarStyleBuilder) => IBarStyleBuilder)) => IBarlineBuilder;
+	    ending: (build: Ending | ((builder: IEndingBuilder) => IEndingBuilder)) => IBarlineBuilder;
+	    repeat: (build: Repeat | ((builder: IRepeatBuilder) => IRepeatBuilder)) => IBarlineBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IBarlineBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IBarlineBuilder;
 	}
-	export function patchBarline(base: Barline): IBarlineBuilder;
-	export function buildBarline(): IBarlineBuilder;
+	export function patchBarline(base: Barline, builder: (build: IBarlineBuilder) => IBarlineBuilder): IAny[];
+	export function buildBarline(builder: (build: IBarlineBuilder) => IBarlineBuilder): Barline;
 	export interface IBarStyleBuilder {
-	    build: () => BarStyle;
-	    patch: () => any[];
+	    build?: () => BarStyle;
+	    patch: () => IAny[];
 	    data: (data: BarStyleType) => IBarStyleBuilder;
 	    color: (color: string) => IBarStyleBuilder;
 	}
-	export function patchBarStyle(base: BarStyle): IBarStyleBuilder;
-	export function buildBarStyle(): IBarStyleBuilder;
+	export function patchBarStyle(base: BarStyle, builder: (build: IBarStyleBuilder) => IBarStyleBuilder): IAny[];
+	export function buildBarStyle(builder: (build: IBarStyleBuilder) => IBarStyleBuilder): BarStyle;
 	export interface IEndingBuilder {
-	    build: () => Ending;
-	    patch: () => any[];
+	    build?: () => Ending;
+	    patch: () => IAny[];
 	    endLength: (endLength: number) => IEndingBuilder;
 	    textX: (textX: number) => IEndingBuilder;
 	    number: (number: number) => IEndingBuilder;
@@ -7308,110 +7570,121 @@ declare module 'musicxml-interfaces/builders' {
 	    ending: (ending: string) => IEndingBuilder;
 	    printObject: (printObject: boolean) => IEndingBuilder;
 	}
-	export function patchEnding(base: Ending): IEndingBuilder;
-	export function buildEnding(): IEndingBuilder;
+	export function patchEnding(base: Ending, builder: (build: IEndingBuilder) => IEndingBuilder): IAny[];
+	export function buildEnding(builder: (build: IEndingBuilder) => IEndingBuilder): Ending;
 	export interface IRepeatBuilder {
-	    build: () => Repeat;
-	    patch: () => any[];
+	    build?: () => Repeat;
+	    patch: () => IAny[];
 	    times: (times: string) => IRepeatBuilder;
 	    winged: (winged: WingedType) => IRepeatBuilder;
 	    direction: (direction: DirectionTypeBg) => IRepeatBuilder;
 	}
-	export function patchRepeat(base: Repeat): IRepeatBuilder;
-	export function buildRepeat(): IRepeatBuilder;
+	export function patchRepeat(base: Repeat, builder: (build: IRepeatBuilder) => IRepeatBuilder): IAny[];
+	export function buildRepeat(builder: (build: IRepeatBuilder) => IRepeatBuilder): Repeat;
 	export interface IDirectionBuilder {
-	    build: () => Direction;
-	    patch: () => any[];
+	    build?: () => Direction;
+	    patch: () => IAny[];
+	    directionTypesAt: (idx: number, build: DirectionType | ((builder: IDirectionTypeBuilder) => IDirectionTypeBuilder)) => IDirectionBuilder;
+	    directionTypesSplice: (start: number, deleteCount: number, ...items: DirectionType[]) => IDirectionBuilder;
 	    directionTypes: (directionTypes: DirectionType[]) => IDirectionBuilder;
 	    staff: (staff: number) => IDirectionBuilder;
-	    offset: (build: (builder: IOffsetBuilder) => IOffsetBuilder) => IDirectionBuilder;
-	    sound: (build: (builder: ISoundBuilder) => ISoundBuilder) => IDirectionBuilder;
+	    offset: (build: Offset | ((builder: IOffsetBuilder) => IOffsetBuilder)) => IDirectionBuilder;
+	    sound: (build: Sound | ((builder: ISoundBuilder) => ISoundBuilder)) => IDirectionBuilder;
 	    voice: (voice: number) => IDirectionBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IDirectionBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IDirectionBuilder;
-	    _class: (_class: string) => IDirectionBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IDirectionBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IDirectionBuilder;
 	}
-	export function patchDirection(base: Direction): IDirectionBuilder;
-	export function buildDirection(): IDirectionBuilder;
+	export function patchDirection(base: Direction, builder: (build: IDirectionBuilder) => IDirectionBuilder): IAny[];
+	export function buildDirection(builder: (build: IDirectionBuilder) => IDirectionBuilder): Direction;
 	export interface IDirectionTypeBuilder {
-	    build: () => DirectionType;
-	    patch: () => any[];
+	    build?: () => DirectionType;
+	    patch: () => IAny[];
+	    percussionsAt: (idx: number, build: Percussion | ((builder: IPercussionBuilder) => IPercussionBuilder)) => IDirectionTypeBuilder;
+	    percussionsSplice: (start: number, deleteCount: number, ...items: Percussion[]) => IDirectionTypeBuilder;
 	    percussions: (percussions: Percussion[]) => IDirectionTypeBuilder;
+	    rehearsalsAt: (idx: number, build: Rehearsal | ((builder: IRehearsalBuilder) => IRehearsalBuilder)) => IDirectionTypeBuilder;
+	    rehearsalsSplice: (start: number, deleteCount: number, ...items: Rehearsal[]) => IDirectionTypeBuilder;
 	    rehearsals: (rehearsals: Rehearsal[]) => IDirectionTypeBuilder;
-	    pedal: (build: (builder: IPedalBuilder) => IPedalBuilder) => IDirectionTypeBuilder;
-	    principalVoice: (build: (builder: IPrincipalVoiceBuilder) => IPrincipalVoiceBuilder) => IDirectionTypeBuilder;
-	    accordionRegistration: (build: (builder: IAccordionRegistrationBuilder) => IAccordionRegistrationBuilder) => IDirectionTypeBuilder;
-	    eyeglasses: (build: (builder: IEyeglassesBuilder) => IEyeglassesBuilder) => IDirectionTypeBuilder;
-	    image: (build: (builder: IImageBuilder) => IImageBuilder) => IDirectionTypeBuilder;
-	    harpPedals: (build: (builder: IHarpPedalsBuilder) => IHarpPedalsBuilder) => IDirectionTypeBuilder;
-	    metronome: (build: (builder: IMetronomeBuilder) => IMetronomeBuilder) => IDirectionTypeBuilder;
-	    otherDirection: (build: (builder: IOtherDirectionBuilder) => IOtherDirectionBuilder) => IDirectionTypeBuilder;
+	    pedal: (build: Pedal | ((builder: IPedalBuilder) => IPedalBuilder)) => IDirectionTypeBuilder;
+	    principalVoice: (build: PrincipalVoice | ((builder: IPrincipalVoiceBuilder) => IPrincipalVoiceBuilder)) => IDirectionTypeBuilder;
+	    accordionRegistration: (build: AccordionRegistration | ((builder: IAccordionRegistrationBuilder) => IAccordionRegistrationBuilder)) => IDirectionTypeBuilder;
+	    eyeglasses: (build: Eyeglasses | ((builder: IEyeglassesBuilder) => IEyeglassesBuilder)) => IDirectionTypeBuilder;
+	    image: (build: Image | ((builder: IImageBuilder) => IImageBuilder)) => IDirectionTypeBuilder;
+	    harpPedals: (build: HarpPedals | ((builder: IHarpPedalsBuilder) => IHarpPedalsBuilder)) => IDirectionTypeBuilder;
+	    metronome: (build: Metronome | ((builder: IMetronomeBuilder) => IMetronomeBuilder)) => IDirectionTypeBuilder;
+	    otherDirection: (build: OtherDirection | ((builder: IOtherDirectionBuilder) => IOtherDirectionBuilder)) => IDirectionTypeBuilder;
+	    segnosAt: (idx: number, build: Segno | ((builder: ISegnoBuilder) => ISegnoBuilder)) => IDirectionTypeBuilder;
+	    segnosSplice: (start: number, deleteCount: number, ...items: Segno[]) => IDirectionTypeBuilder;
 	    segnos: (segnos: Segno[]) => IDirectionTypeBuilder;
-	    scordatura: (build: (builder: IScordaturaBuilder) => IScordaturaBuilder) => IDirectionTypeBuilder;
-	    stringMute: (build: (builder: IStringMuteBuilder) => IStringMuteBuilder) => IDirectionTypeBuilder;
-	    wedge: (build: (builder: IWedgeBuilder) => IWedgeBuilder) => IDirectionTypeBuilder;
-	    dashes: (build: (builder: IDashesBuilder) => IDashesBuilder) => IDirectionTypeBuilder;
-	    damp: (build: (builder: IDampBuilder) => IDampBuilder) => IDirectionTypeBuilder;
-	    bracket: (build: (builder: IBracketBuilder) => IBracketBuilder) => IDirectionTypeBuilder;
-	    dynamics: (build: (builder: IDynamicsBuilder) => IDynamicsBuilder) => IDirectionTypeBuilder;
-	    octaveShift: (build: (builder: IOctaveShiftBuilder) => IOctaveShiftBuilder) => IDirectionTypeBuilder;
+	    scordatura: (build: Scordatura | ((builder: IScordaturaBuilder) => IScordaturaBuilder)) => IDirectionTypeBuilder;
+	    stringMute: (build: StringMute | ((builder: IStringMuteBuilder) => IStringMuteBuilder)) => IDirectionTypeBuilder;
+	    wedge: (build: Wedge | ((builder: IWedgeBuilder) => IWedgeBuilder)) => IDirectionTypeBuilder;
+	    dashes: (build: Dashes | ((builder: IDashesBuilder) => IDashesBuilder)) => IDirectionTypeBuilder;
+	    damp: (build: Damp | ((builder: IDampBuilder) => IDampBuilder)) => IDirectionTypeBuilder;
+	    bracket: (build: Bracket | ((builder: IBracketBuilder) => IBracketBuilder)) => IDirectionTypeBuilder;
+	    dynamics: (build: Dynamics | ((builder: IDynamicsBuilder) => IDynamicsBuilder)) => IDirectionTypeBuilder;
+	    octaveShift: (build: OctaveShift | ((builder: IOctaveShiftBuilder) => IOctaveShiftBuilder)) => IDirectionTypeBuilder;
+	    wordsAt: (idx: number, build: Words | ((builder: IWordsBuilder) => IWordsBuilder)) => IDirectionTypeBuilder;
+	    wordsSplice: (start: number, deleteCount: number, ...items: Words[]) => IDirectionTypeBuilder;
 	    words: (words: Words[]) => IDirectionTypeBuilder;
-	    dampAll: (build: (builder: IDampAllBuilder) => IDampAllBuilder) => IDirectionTypeBuilder;
+	    dampAll: (build: DampAll | ((builder: IDampAllBuilder) => IDampAllBuilder)) => IDirectionTypeBuilder;
+	    codasAt: (idx: number, build: Coda | ((builder: ICodaBuilder) => ICodaBuilder)) => IDirectionTypeBuilder;
+	    codasSplice: (start: number, deleteCount: number, ...items: Coda[]) => IDirectionTypeBuilder;
 	    codas: (codas: Coda[]) => IDirectionTypeBuilder;
 	}
-	export function patchDirectionType(base: DirectionType): IDirectionTypeBuilder;
-	export function buildDirectionType(): IDirectionTypeBuilder;
+	export function patchDirectionType(base: DirectionType, builder: (build: IDirectionTypeBuilder) => IDirectionTypeBuilder): IAny[];
+	export function buildDirectionType(builder: (build: IDirectionTypeBuilder) => IDirectionTypeBuilder): DirectionType;
 	export interface IRehearsalBuilder {
-	    build: () => Rehearsal;
-	    patch: () => any[];
+	    build?: () => Rehearsal;
+	    patch: () => IAny[];
 	    data: (data: string) => IRehearsalBuilder;
 	    justify: (justify: LeftCenterRight) => IRehearsalBuilder;
 	}
-	export function patchRehearsal(base: Rehearsal): IRehearsalBuilder;
-	export function buildRehearsal(): IRehearsalBuilder;
+	export function patchRehearsal(base: Rehearsal, builder: (build: IRehearsalBuilder) => IRehearsalBuilder): IAny[];
+	export function buildRehearsal(builder: (build: IRehearsalBuilder) => IRehearsalBuilder): Rehearsal;
 	export interface IWordsBuilder {
-	    build: () => Words;
-	    patch: () => any[];
+	    build?: () => Words;
+	    patch: () => IAny[];
 	    data: (data: string) => IWordsBuilder;
 	    justify: (justify: LeftCenterRight) => IWordsBuilder;
 	}
-	export function patchWords(base: Words): IWordsBuilder;
-	export function buildWords(): IWordsBuilder;
+	export function patchWords(base: Words, builder: (build: IWordsBuilder) => IWordsBuilder): IAny[];
+	export function buildWords(builder: (build: IWordsBuilder) => IWordsBuilder): Words;
 	export interface IWedgeBuilder {
-	    build: () => Wedge;
-	    patch: () => any[];
+	    build?: () => Wedge;
+	    patch: () => IAny[];
 	    number: (number: number) => IWedgeBuilder;
 	    niente: (niente: boolean) => IWedgeBuilder;
 	    type: (type: WedgeType) => IWedgeBuilder;
 	    spread: (spread: number) => IWedgeBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => IWedgeBuilder;
 	}
-	export function patchWedge(base: Wedge): IWedgeBuilder;
-	export function buildWedge(): IWedgeBuilder;
+	export function patchWedge(base: Wedge, builder: (build: IWedgeBuilder) => IWedgeBuilder): IAny[];
+	export function buildWedge(builder: (build: IWedgeBuilder) => IWedgeBuilder): Wedge;
 	export interface IDashesBuilder {
-	    build: () => Dashes;
-	    patch: () => any[];
+	    build?: () => Dashes;
+	    patch: () => IAny[];
 	    number: (number: number) => IDashesBuilder;
 	    type: (type: StartStopContinue) => IDashesBuilder;
 	    dashLength: (dashLength: number) => IDashesBuilder;
 	    spaceLength: (spaceLength: number) => IDashesBuilder;
 	}
-	export function patchDashes(base: Dashes): IDashesBuilder;
-	export function buildDashes(): IDashesBuilder;
+	export function patchDashes(base: Dashes, builder: (build: IDashesBuilder) => IDashesBuilder): IAny[];
+	export function buildDashes(builder: (build: IDashesBuilder) => IDashesBuilder): Dashes;
 	export interface IBracketBuilder {
-	    build: () => Bracket;
-	    patch: () => any[];
+	    build?: () => Bracket;
+	    patch: () => IAny[];
 	    endLength: (endLength: number) => IBracketBuilder;
 	    number: (number: number) => IBracketBuilder;
 	    type: (type: StartStopContinue) => IBracketBuilder;
 	    lineEnd: (lineEnd: LineEndType) => IBracketBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => IBracketBuilder;
 	}
-	export function patchBracket(base: Bracket): IBracketBuilder;
-	export function buildBracket(): IBracketBuilder;
+	export function patchBracket(base: Bracket, builder: (build: IBracketBuilder) => IBracketBuilder): IAny[];
+	export function buildBracket(builder: (build: IBracketBuilder) => IBracketBuilder): Bracket;
 	export interface IPedalBuilder {
-	    build: () => Pedal;
-	    patch: () => any[];
+	    build?: () => Pedal;
+	    patch: () => IAny[];
 	    line: (line: boolean) => IPedalBuilder;
 	    sign: (sign: boolean) => IPedalBuilder;
 	    type: (type: PedalType) => IPedalBuilder;
@@ -7420,17 +7693,23 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IPedalBuilder;
 	    relativeX: (relativeX: number) => IPedalBuilder;
 	}
-	export function patchPedal(base: Pedal): IPedalBuilder;
-	export function buildPedal(): IPedalBuilder;
+	export function patchPedal(base: Pedal, builder: (build: IPedalBuilder) => IPedalBuilder): IAny[];
+	export function buildPedal(builder: (build: IPedalBuilder) => IPedalBuilder): Pedal;
 	export interface IMetronomeBuilder {
-	    build: () => Metronome;
-	    patch: () => any[];
+	    build?: () => Metronome;
+	    patch: () => IAny[];
+	    metronomeNotesAt: (idx: number, build: MetronomeNote | ((builder: IMetronomeNoteBuilder) => IMetronomeNoteBuilder)) => IMetronomeBuilder;
+	    metronomeNotesSplice: (start: number, deleteCount: number, ...items: MetronomeNote[]) => IMetronomeBuilder;
 	    metronomeNotes: (metronomeNotes: MetronomeNote[]) => IMetronomeBuilder;
-	    perMinute: (build: (builder: IPerMinuteBuilder) => IPerMinuteBuilder) => IMetronomeBuilder;
+	    perMinute: (build: PerMinute | ((builder: IPerMinuteBuilder) => IPerMinuteBuilder)) => IMetronomeBuilder;
 	    parentheses: (parentheses: boolean) => IMetronomeBuilder;
 	    beatUnit: (beatUnit: string) => IMetronomeBuilder;
+	    beatUnitDotsAt: (idx: number, build: BeatUnitDot | ((builder: IBeatUnitDotBuilder) => IBeatUnitDotBuilder)) => IMetronomeBuilder;
+	    beatUnitDotsSplice: (start: number, deleteCount: number, ...items: BeatUnitDot[]) => IMetronomeBuilder;
 	    beatUnitDots: (beatUnitDots: BeatUnitDot[]) => IMetronomeBuilder;
 	    beatUnitChange: (beatUnitChange: string) => IMetronomeBuilder;
+	    beatUnitDotsChangeAt: (idx: number, build: BeatUnitDot | ((builder: IBeatUnitDotBuilder) => IBeatUnitDotBuilder)) => IMetronomeBuilder;
+	    beatUnitDotsChangeSplice: (start: number, deleteCount: number, ...items: BeatUnitDot[]) => IMetronomeBuilder;
 	    beatUnitDotsChange: (beatUnitDotsChange: BeatUnitDot[]) => IMetronomeBuilder;
 	    metronomeRelation: (metronomeRelation: string) => IMetronomeBuilder;
 	    defaultX: (defaultX: number) => IMetronomeBuilder;
@@ -7438,153 +7717,163 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IMetronomeBuilder;
 	    relativeX: (relativeX: number) => IMetronomeBuilder;
 	}
-	export function patchMetronome(base: Metronome): IMetronomeBuilder;
-	export function buildMetronome(): IMetronomeBuilder;
+	export function patchMetronome(base: Metronome, builder: (build: IMetronomeBuilder) => IMetronomeBuilder): IAny[];
+	export function buildMetronome(builder: (build: IMetronomeBuilder) => IMetronomeBuilder): Metronome;
 	export interface IBeatUnitDotBuilder {
-	    build: () => BeatUnitDot;
-	    patch: () => any[];
+	    build?: () => BeatUnitDot;
+	    patch: () => IAny[];
 	}
-	export function patchBeatUnitDot(base: BeatUnitDot): IBeatUnitDotBuilder;
-	export function buildBeatUnitDot(): IBeatUnitDotBuilder;
+	export function patchBeatUnitDot(base: BeatUnitDot, builder: (build: IBeatUnitDotBuilder) => IBeatUnitDotBuilder): IAny[];
+	export function buildBeatUnitDot(builder: (build: IBeatUnitDotBuilder) => IBeatUnitDotBuilder): BeatUnitDot;
 	export interface IPerMinuteBuilder {
-	    build: () => PerMinute;
-	    patch: () => any[];
+	    build?: () => PerMinute;
+	    patch: () => IAny[];
 	    data: (data: string) => IPerMinuteBuilder;
 	    fontFamily: (fontFamily: string) => IPerMinuteBuilder;
 	    fontWeight: (fontWeight: NormalBold) => IPerMinuteBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IPerMinuteBuilder;
 	    fontSize: (fontSize: string) => IPerMinuteBuilder;
 	}
-	export function patchPerMinute(base: PerMinute): IPerMinuteBuilder;
-	export function buildPerMinute(): IPerMinuteBuilder;
+	export function patchPerMinute(base: PerMinute, builder: (build: IPerMinuteBuilder) => IPerMinuteBuilder): IAny[];
+	export function buildPerMinute(builder: (build: IPerMinuteBuilder) => IPerMinuteBuilder): PerMinute;
 	export interface IMetronomeNoteBuilder {
-	    build: () => MetronomeNote;
-	    patch: () => any[];
+	    build?: () => MetronomeNote;
+	    patch: () => IAny[];
+	    metronomeDotsAt: (idx: number, build: MetronomeDot | ((builder: IMetronomeDotBuilder) => IMetronomeDotBuilder)) => IMetronomeNoteBuilder;
+	    metronomeDotsSplice: (start: number, deleteCount: number, ...items: MetronomeDot[]) => IMetronomeNoteBuilder;
 	    metronomeDots: (metronomeDots: MetronomeDot[]) => IMetronomeNoteBuilder;
+	    metronomeBeamsAt: (idx: number, build: MetronomeBeam | ((builder: IMetronomeBeamBuilder) => IMetronomeBeamBuilder)) => IMetronomeNoteBuilder;
+	    metronomeBeamsSplice: (start: number, deleteCount: number, ...items: MetronomeBeam[]) => IMetronomeNoteBuilder;
 	    metronomeBeams: (metronomeBeams: MetronomeBeam[]) => IMetronomeNoteBuilder;
 	    metronomeType: (metronomeType: string) => IMetronomeNoteBuilder;
-	    metronomeTuplet: (build: (builder: IMetronomeTupletBuilder) => IMetronomeTupletBuilder) => IMetronomeNoteBuilder;
+	    metronomeTuplet: (build: MetronomeTuplet | ((builder: IMetronomeTupletBuilder) => IMetronomeTupletBuilder)) => IMetronomeNoteBuilder;
 	}
-	export function patchMetronomeNote(base: MetronomeNote): IMetronomeNoteBuilder;
-	export function buildMetronomeNote(): IMetronomeNoteBuilder;
+	export function patchMetronomeNote(base: MetronomeNote, builder: (build: IMetronomeNoteBuilder) => IMetronomeNoteBuilder): IAny[];
+	export function buildMetronomeNote(builder: (build: IMetronomeNoteBuilder) => IMetronomeNoteBuilder): MetronomeNote;
 	export interface IMetronomeDotBuilder {
-	    build: () => MetronomeDot;
-	    patch: () => any[];
+	    build?: () => MetronomeDot;
+	    patch: () => IAny[];
 	}
-	export function patchMetronomeDot(base: MetronomeDot): IMetronomeDotBuilder;
-	export function buildMetronomeDot(): IMetronomeDotBuilder;
+	export function patchMetronomeDot(base: MetronomeDot, builder: (build: IMetronomeDotBuilder) => IMetronomeDotBuilder): IAny[];
+	export function buildMetronomeDot(builder: (build: IMetronomeDotBuilder) => IMetronomeDotBuilder): MetronomeDot;
 	export interface IMetronomeBeamBuilder {
-	    build: () => MetronomeBeam;
-	    patch: () => any[];
+	    build?: () => MetronomeBeam;
+	    patch: () => IAny[];
 	    number: (number: number) => IMetronomeBeamBuilder;
 	    data: (data: string) => IMetronomeBeamBuilder;
 	}
-	export function patchMetronomeBeam(base: MetronomeBeam): IMetronomeBeamBuilder;
-	export function buildMetronomeBeam(): IMetronomeBeamBuilder;
+	export function patchMetronomeBeam(base: MetronomeBeam, builder: (build: IMetronomeBeamBuilder) => IMetronomeBeamBuilder): IAny[];
+	export function buildMetronomeBeam(builder: (build: IMetronomeBeamBuilder) => IMetronomeBeamBuilder): MetronomeBeam;
 	export interface IMetronomeTupletBuilder {
-	    build: () => MetronomeTuplet;
-	    patch: () => any[];
+	    build?: () => MetronomeTuplet;
+	    patch: () => IAny[];
 	    actualNotes: (actualNotes: number) => IMetronomeTupletBuilder;
 	    bracket: (bracket: boolean) => IMetronomeTupletBuilder;
 	    showNumber: (showNumber: ActualBothNone) => IMetronomeTupletBuilder;
 	    normalType: (normalType: string) => IMetronomeTupletBuilder;
 	    type: (type: StartStop) => IMetronomeTupletBuilder;
 	    normalNotes: (normalNotes: number) => IMetronomeTupletBuilder;
+	    normalDotsAt: (idx: number, build: NormalDot | ((builder: INormalDotBuilder) => INormalDotBuilder)) => IMetronomeTupletBuilder;
+	    normalDotsSplice: (start: number, deleteCount: number, ...items: NormalDot[]) => IMetronomeTupletBuilder;
 	    normalDots: (normalDots: NormalDot[]) => IMetronomeTupletBuilder;
 	}
-	export function patchMetronomeTuplet(base: MetronomeTuplet): IMetronomeTupletBuilder;
-	export function buildMetronomeTuplet(): IMetronomeTupletBuilder;
+	export function patchMetronomeTuplet(base: MetronomeTuplet, builder: (build: IMetronomeTupletBuilder) => IMetronomeTupletBuilder): IAny[];
+	export function buildMetronomeTuplet(builder: (build: IMetronomeTupletBuilder) => IMetronomeTupletBuilder): MetronomeTuplet;
 	export interface IOctaveShiftBuilder {
-	    build: () => OctaveShift;
-	    patch: () => any[];
+	    build?: () => OctaveShift;
+	    patch: () => IAny[];
 	    number: (number: number) => IOctaveShiftBuilder;
 	    size: (size: number) => IOctaveShiftBuilder;
 	    type: (type: OctaveShiftType) => IOctaveShiftBuilder;
 	    dashLength: (dashLength: number) => IOctaveShiftBuilder;
 	    spaceLength: (spaceLength: number) => IOctaveShiftBuilder;
 	}
-	export function patchOctaveShift(base: OctaveShift): IOctaveShiftBuilder;
-	export function buildOctaveShift(): IOctaveShiftBuilder;
+	export function patchOctaveShift(base: OctaveShift, builder: (build: IOctaveShiftBuilder) => IOctaveShiftBuilder): IAny[];
+	export function buildOctaveShift(builder: (build: IOctaveShiftBuilder) => IOctaveShiftBuilder): OctaveShift;
 	export interface IHarpPedalsBuilder {
-	    build: () => HarpPedals;
-	    patch: () => any[];
+	    build?: () => HarpPedals;
+	    patch: () => IAny[];
+	    pedalTuningsAt: (idx: number, build: PedalTuning | ((builder: IPedalTuningBuilder) => IPedalTuningBuilder)) => IHarpPedalsBuilder;
+	    pedalTuningsSplice: (start: number, deleteCount: number, ...items: PedalTuning[]) => IHarpPedalsBuilder;
 	    pedalTunings: (pedalTunings: PedalTuning[]) => IHarpPedalsBuilder;
 	    defaultX: (defaultX: number) => IHarpPedalsBuilder;
 	    relativeY: (relativeY: number) => IHarpPedalsBuilder;
 	    defaultY: (defaultY: number) => IHarpPedalsBuilder;
 	    relativeX: (relativeX: number) => IHarpPedalsBuilder;
 	}
-	export function patchHarpPedals(base: HarpPedals): IHarpPedalsBuilder;
-	export function buildHarpPedals(): IHarpPedalsBuilder;
+	export function patchHarpPedals(base: HarpPedals, builder: (build: IHarpPedalsBuilder) => IHarpPedalsBuilder): IAny[];
+	export function buildHarpPedals(builder: (build: IHarpPedalsBuilder) => IHarpPedalsBuilder): HarpPedals;
 	export interface IPedalTuningBuilder {
-	    build: () => PedalTuning;
-	    patch: () => any[];
+	    build?: () => PedalTuning;
+	    patch: () => IAny[];
 	    pedalStep: (pedalStep: string) => IPedalTuningBuilder;
 	    pedalAlter: (pedalAlter: string) => IPedalTuningBuilder;
 	}
-	export function patchPedalTuning(base: PedalTuning): IPedalTuningBuilder;
-	export function buildPedalTuning(): IPedalTuningBuilder;
+	export function patchPedalTuning(base: PedalTuning, builder: (build: IPedalTuningBuilder) => IPedalTuningBuilder): IAny[];
+	export function buildPedalTuning(builder: (build: IPedalTuningBuilder) => IPedalTuningBuilder): PedalTuning;
 	export interface IDampBuilder {
-	    build: () => Damp;
-	    patch: () => any[];
+	    build?: () => Damp;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IDampBuilder;
 	    relativeY: (relativeY: number) => IDampBuilder;
 	    defaultY: (defaultY: number) => IDampBuilder;
 	    relativeX: (relativeX: number) => IDampBuilder;
 	}
-	export function patchDamp(base: Damp): IDampBuilder;
-	export function buildDamp(): IDampBuilder;
+	export function patchDamp(base: Damp, builder: (build: IDampBuilder) => IDampBuilder): IAny[];
+	export function buildDamp(builder: (build: IDampBuilder) => IDampBuilder): Damp;
 	export interface IDampAllBuilder {
-	    build: () => DampAll;
-	    patch: () => any[];
+	    build?: () => DampAll;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IDampAllBuilder;
 	    relativeY: (relativeY: number) => IDampAllBuilder;
 	    defaultY: (defaultY: number) => IDampAllBuilder;
 	    relativeX: (relativeX: number) => IDampAllBuilder;
 	}
-	export function patchDampAll(base: DampAll): IDampAllBuilder;
-	export function buildDampAll(): IDampAllBuilder;
+	export function patchDampAll(base: DampAll, builder: (build: IDampAllBuilder) => IDampAllBuilder): IAny[];
+	export function buildDampAll(builder: (build: IDampAllBuilder) => IDampAllBuilder): DampAll;
 	export interface IEyeglassesBuilder {
-	    build: () => Eyeglasses;
-	    patch: () => any[];
+	    build?: () => Eyeglasses;
+	    patch: () => IAny[];
 	    defaultX: (defaultX: number) => IEyeglassesBuilder;
 	    relativeY: (relativeY: number) => IEyeglassesBuilder;
 	    defaultY: (defaultY: number) => IEyeglassesBuilder;
 	    relativeX: (relativeX: number) => IEyeglassesBuilder;
 	}
-	export function patchEyeglasses(base: Eyeglasses): IEyeglassesBuilder;
-	export function buildEyeglasses(): IEyeglassesBuilder;
+	export function patchEyeglasses(base: Eyeglasses, builder: (build: IEyeglassesBuilder) => IEyeglassesBuilder): IAny[];
+	export function buildEyeglasses(builder: (build: IEyeglassesBuilder) => IEyeglassesBuilder): Eyeglasses;
 	export interface IStringMuteBuilder {
-	    build: () => StringMute;
-	    patch: () => any[];
+	    build?: () => StringMute;
+	    patch: () => IAny[];
 	    type: (type: string) => IStringMuteBuilder;
 	    defaultX: (defaultX: number) => IStringMuteBuilder;
 	    relativeY: (relativeY: number) => IStringMuteBuilder;
 	    defaultY: (defaultY: number) => IStringMuteBuilder;
 	    relativeX: (relativeX: number) => IStringMuteBuilder;
 	}
-	export function patchStringMute(base: StringMute): IStringMuteBuilder;
-	export function buildStringMute(): IStringMuteBuilder;
+	export function patchStringMute(base: StringMute, builder: (build: IStringMuteBuilder) => IStringMuteBuilder): IAny[];
+	export function buildStringMute(builder: (build: IStringMuteBuilder) => IStringMuteBuilder): StringMute;
 	export interface IScordaturaBuilder {
-	    build: () => Scordatura;
-	    patch: () => any[];
+	    build?: () => Scordatura;
+	    patch: () => IAny[];
+	    accordsAt: (idx: number, build: Accord | ((builder: IAccordBuilder) => IAccordBuilder)) => IScordaturaBuilder;
+	    accordsSplice: (start: number, deleteCount: number, ...items: Accord[]) => IScordaturaBuilder;
 	    accords: (accords: Accord[]) => IScordaturaBuilder;
 	}
-	export function patchScordatura(base: Scordatura): IScordaturaBuilder;
-	export function buildScordatura(): IScordaturaBuilder;
+	export function patchScordatura(base: Scordatura, builder: (build: IScordaturaBuilder) => IScordaturaBuilder): IAny[];
+	export function buildScordatura(builder: (build: IScordaturaBuilder) => IScordaturaBuilder): Scordatura;
 	export interface IAccordBuilder {
-	    build: () => Accord;
-	    patch: () => any[];
+	    build?: () => Accord;
+	    patch: () => IAny[];
 	    tuningAlter: (tuningAlter: string) => IAccordBuilder;
 	    string: (string: string) => IAccordBuilder;
 	    tuningStep: (tuningStep: string) => IAccordBuilder;
 	    tuningOctave: (tuningOctave: string) => IAccordBuilder;
 	}
-	export function patchAccord(base: Accord): IAccordBuilder;
-	export function buildAccord(): IAccordBuilder;
+	export function patchAccord(base: Accord, builder: (build: IAccordBuilder) => IAccordBuilder): IAny[];
+	export function buildAccord(builder: (build: IAccordBuilder) => IAccordBuilder): Accord;
 	export interface IImageBuilder {
-	    build: () => Image;
-	    patch: () => any[];
+	    build?: () => Image;
+	    patch: () => IAny[];
 	    type: (type: string) => IImageBuilder;
 	    source: (source: string) => IImageBuilder;
 	    defaultX: (defaultX: number) => IImageBuilder;
@@ -7592,11 +7881,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IImageBuilder;
 	    relativeX: (relativeX: number) => IImageBuilder;
 	}
-	export function patchImage(base: Image): IImageBuilder;
-	export function buildImage(): IImageBuilder;
+	export function patchImage(base: Image, builder: (build: IImageBuilder) => IImageBuilder): IAny[];
+	export function buildImage(builder: (build: IImageBuilder) => IImageBuilder): Image;
 	export interface IPrincipalVoiceBuilder {
-	    build: () => PrincipalVoice;
-	    patch: () => any[];
+	    build?: () => PrincipalVoice;
+	    patch: () => IAny[];
 	    symbol: (symbol: VoiceSymbol) => IPrincipalVoiceBuilder;
 	    data: (data: string) => IPrincipalVoiceBuilder;
 	    type: (type: StartStop) => IPrincipalVoiceBuilder;
@@ -7605,11 +7894,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IPrincipalVoiceBuilder;
 	    relativeX: (relativeX: number) => IPrincipalVoiceBuilder;
 	}
-	export function patchPrincipalVoice(base: PrincipalVoice): IPrincipalVoiceBuilder;
-	export function buildPrincipalVoice(): IPrincipalVoiceBuilder;
+	export function patchPrincipalVoice(base: PrincipalVoice, builder: (build: IPrincipalVoiceBuilder) => IPrincipalVoiceBuilder): IAny[];
+	export function buildPrincipalVoice(builder: (build: IPrincipalVoiceBuilder) => IPrincipalVoiceBuilder): PrincipalVoice;
 	export interface IAccordionRegistrationBuilder {
-	    build: () => AccordionRegistration;
-	    patch: () => any[];
+	    build?: () => AccordionRegistration;
+	    patch: () => IAny[];
 	    accordionMiddle: (accordionMiddle: string) => IAccordionRegistrationBuilder;
 	    accordionHigh: (accordionHigh: boolean) => IAccordionRegistrationBuilder;
 	    accordionLow: (accordionLow: boolean) => IAccordionRegistrationBuilder;
@@ -7618,100 +7907,104 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IAccordionRegistrationBuilder;
 	    relativeX: (relativeX: number) => IAccordionRegistrationBuilder;
 	}
-	export function patchAccordionRegistration(base: AccordionRegistration): IAccordionRegistrationBuilder;
-	export function buildAccordionRegistration(): IAccordionRegistrationBuilder;
+	export function patchAccordionRegistration(base: AccordionRegistration, builder: (build: IAccordionRegistrationBuilder) => IAccordionRegistrationBuilder): IAny[];
+	export function buildAccordionRegistration(builder: (build: IAccordionRegistrationBuilder) => IAccordionRegistrationBuilder): AccordionRegistration;
 	export interface IPercussionBuilder {
-	    build: () => Percussion;
-	    patch: () => any[];
+	    build?: () => Percussion;
+	    patch: () => IAny[];
 	    stickLocation: (stickLocation: string) => IPercussionBuilder;
 	    otherPercussion: (otherPercussion: string) => IPercussionBuilder;
 	    wood: (wood: string) => IPercussionBuilder;
 	    effect: (effect: string) => IPercussionBuilder;
 	    glass: (glass: string) => IPercussionBuilder;
-	    timpani: (build: (builder: ITimpaniBuilder) => ITimpaniBuilder) => IPercussionBuilder;
-	    stick: (build: (builder: IStickBuilder) => IStickBuilder) => IPercussionBuilder;
+	    timpani: (build: Timpani | ((builder: ITimpaniBuilder) => ITimpaniBuilder)) => IPercussionBuilder;
+	    stick: (build: Stick | ((builder: IStickBuilder) => IStickBuilder)) => IPercussionBuilder;
 	    metal: (metal: string) => IPercussionBuilder;
 	    pitched: (pitched: string) => IPercussionBuilder;
 	    membrane: (membrane: string) => IPercussionBuilder;
-	    beater: (build: (builder: IBeaterBuilder) => IBeaterBuilder) => IPercussionBuilder;
+	    beater: (build: Beater | ((builder: IBeaterBuilder) => IBeaterBuilder)) => IPercussionBuilder;
 	    defaultX: (defaultX: number) => IPercussionBuilder;
 	    relativeY: (relativeY: number) => IPercussionBuilder;
 	    defaultY: (defaultY: number) => IPercussionBuilder;
 	    relativeX: (relativeX: number) => IPercussionBuilder;
 	}
-	export function patchPercussion(base: Percussion): IPercussionBuilder;
-	export function buildPercussion(): IPercussionBuilder;
+	export function patchPercussion(base: Percussion, builder: (build: IPercussionBuilder) => IPercussionBuilder): IAny[];
+	export function buildPercussion(builder: (build: IPercussionBuilder) => IPercussionBuilder): Percussion;
 	export interface ITimpaniBuilder {
-	    build: () => Timpani;
-	    patch: () => any[];
+	    build?: () => Timpani;
+	    patch: () => IAny[];
 	}
-	export function patchTimpani(base: Timpani): ITimpaniBuilder;
-	export function buildTimpani(): ITimpaniBuilder;
+	export function patchTimpani(base: Timpani, builder: (build: ITimpaniBuilder) => ITimpaniBuilder): IAny[];
+	export function buildTimpani(builder: (build: ITimpaniBuilder) => ITimpaniBuilder): Timpani;
 	export interface IBeaterBuilder {
-	    build: () => Beater;
-	    patch: () => any[];
+	    build?: () => Beater;
+	    patch: () => IAny[];
 	    data: (data: string) => IBeaterBuilder;
 	    tip: (tip: TipDirection) => IBeaterBuilder;
 	}
-	export function patchBeater(base: Beater): IBeaterBuilder;
-	export function buildBeater(): IBeaterBuilder;
+	export function patchBeater(base: Beater, builder: (build: IBeaterBuilder) => IBeaterBuilder): IAny[];
+	export function buildBeater(builder: (build: IBeaterBuilder) => IBeaterBuilder): Beater;
 	export interface IStickBuilder {
-	    build: () => Stick;
-	    patch: () => any[];
+	    build?: () => Stick;
+	    patch: () => IAny[];
 	    stickMaterial: (stickMaterial: string) => IStickBuilder;
 	    stickType: (stickType: string) => IStickBuilder;
 	    tip: (tip: TipDirection) => IStickBuilder;
 	}
-	export function patchStick(base: Stick): IStickBuilder;
-	export function buildStick(): IStickBuilder;
+	export function patchStick(base: Stick, builder: (build: IStickBuilder) => IStickBuilder): IAny[];
+	export function buildStick(builder: (build: IStickBuilder) => IStickBuilder): Stick;
 	export interface IOffsetBuilder {
-	    build: () => Offset;
-	    patch: () => any[];
+	    build?: () => Offset;
+	    patch: () => IAny[];
 	    data: (data: string) => IOffsetBuilder;
 	    sound: (sound: boolean) => IOffsetBuilder;
 	}
-	export function patchOffset(base: Offset): IOffsetBuilder;
-	export function buildOffset(): IOffsetBuilder;
+	export function patchOffset(base: Offset, builder: (build: IOffsetBuilder) => IOffsetBuilder): IAny[];
+	export function buildOffset(builder: (build: IOffsetBuilder) => IOffsetBuilder): Offset;
 	export interface IHarmonyChordBuilder {
-	    build: () => HarmonyChord;
-	    patch: () => any[];
-	    root: (build: (builder: IRootBuilder) => IRootBuilder) => IHarmonyChordBuilder;
-	    function: (build: (builder: IFunctionBuilder) => IFunctionBuilder) => IHarmonyChordBuilder;
-	    kind: (build: (builder: IKindBuilder) => IKindBuilder) => IHarmonyChordBuilder;
+	    build?: () => HarmonyChord;
+	    patch: () => IAny[];
+	    root: (build: Root | ((builder: IRootBuilder) => IRootBuilder)) => IHarmonyChordBuilder;
+	    function: (build: Function | ((builder: IFunctionBuilder) => IFunctionBuilder)) => IHarmonyChordBuilder;
+	    kind: (build: Kind | ((builder: IKindBuilder) => IKindBuilder)) => IHarmonyChordBuilder;
+	    degreesAt: (idx: number, build: Degree | ((builder: IDegreeBuilder) => IDegreeBuilder)) => IHarmonyChordBuilder;
+	    degreesSplice: (start: number, deleteCount: number, ...items: Degree[]) => IHarmonyChordBuilder;
 	    degrees: (degrees: Degree[]) => IHarmonyChordBuilder;
-	    inversion: (build: (builder: IInversionBuilder) => IInversionBuilder) => IHarmonyChordBuilder;
-	    bass: (build: (builder: IBassBuilder) => IBassBuilder) => IHarmonyChordBuilder;
+	    inversion: (build: Inversion | ((builder: IInversionBuilder) => IInversionBuilder)) => IHarmonyChordBuilder;
+	    bass: (build: Bass | ((builder: IBassBuilder) => IBassBuilder)) => IHarmonyChordBuilder;
 	}
-	export function patchHarmonyChord(base: HarmonyChord): IHarmonyChordBuilder;
-	export function buildHarmonyChord(): IHarmonyChordBuilder;
+	export function patchHarmonyChord(base: HarmonyChord, builder: (build: IHarmonyChordBuilder) => IHarmonyChordBuilder): IAny[];
+	export function buildHarmonyChord(builder: (build: IHarmonyChordBuilder) => IHarmonyChordBuilder): HarmonyChord;
 	export interface IHarmonyBuilder {
-	    build: () => Harmony;
-	    patch: () => any[];
-	    frame: (build: (builder: IFrameBuilder) => IFrameBuilder) => IHarmonyBuilder;
+	    build?: () => Harmony;
+	    patch: () => IAny[];
+	    frame: (build: Frame | ((builder: IFrameBuilder) => IFrameBuilder)) => IHarmonyBuilder;
 	    printFrame: (printFrame: boolean) => IHarmonyBuilder;
 	    staff: (staff: number) => IHarmonyBuilder;
 	    type: (type: ExplicitImpliedAlternate) => IHarmonyBuilder;
-	    offset: (build: (builder: IOffsetBuilder) => IOffsetBuilder) => IHarmonyBuilder;
-	    root: (build: (builder: IRootBuilder) => IRootBuilder) => IHarmonyBuilder;
-	    function: (build: (builder: IFunctionBuilder) => IFunctionBuilder) => IHarmonyBuilder;
-	    kind: (build: (builder: IKindBuilder) => IKindBuilder) => IHarmonyBuilder;
+	    offset: (build: Offset | ((builder: IOffsetBuilder) => IOffsetBuilder)) => IHarmonyBuilder;
+	    root: (build: Root | ((builder: IRootBuilder) => IRootBuilder)) => IHarmonyBuilder;
+	    function: (build: Function | ((builder: IFunctionBuilder) => IFunctionBuilder)) => IHarmonyBuilder;
+	    kind: (build: Kind | ((builder: IKindBuilder) => IKindBuilder)) => IHarmonyBuilder;
+	    degreesAt: (idx: number, build: Degree | ((builder: IDegreeBuilder) => IDegreeBuilder)) => IHarmonyBuilder;
+	    degreesSplice: (start: number, deleteCount: number, ...items: Degree[]) => IHarmonyBuilder;
 	    degrees: (degrees: Degree[]) => IHarmonyBuilder;
-	    inversion: (build: (builder: IInversionBuilder) => IInversionBuilder) => IHarmonyBuilder;
-	    bass: (build: (builder: IBassBuilder) => IBassBuilder) => IHarmonyBuilder;
+	    inversion: (build: Inversion | ((builder: IInversionBuilder) => IInversionBuilder)) => IHarmonyBuilder;
+	    bass: (build: Bass | ((builder: IBassBuilder) => IBassBuilder)) => IHarmonyBuilder;
 	}
-	export function patchHarmony(base: Harmony): IHarmonyBuilder;
-	export function buildHarmony(): IHarmonyBuilder;
+	export function patchHarmony(base: Harmony, builder: (build: IHarmonyBuilder) => IHarmonyBuilder): IAny[];
+	export function buildHarmony(builder: (build: IHarmonyBuilder) => IHarmonyBuilder): Harmony;
 	export interface IRootBuilder {
-	    build: () => Root;
-	    patch: () => any[];
-	    rootStep: (build: (builder: IRootStepBuilder) => IRootStepBuilder) => IRootBuilder;
-	    rootAlter: (build: (builder: IRootAlterBuilder) => IRootAlterBuilder) => IRootBuilder;
+	    build?: () => Root;
+	    patch: () => IAny[];
+	    rootStep: (build: RootStep | ((builder: IRootStepBuilder) => IRootStepBuilder)) => IRootBuilder;
+	    rootAlter: (build: RootAlter | ((builder: IRootAlterBuilder) => IRootAlterBuilder)) => IRootBuilder;
 	}
-	export function patchRoot(base: Root): IRootBuilder;
-	export function buildRoot(): IRootBuilder;
+	export function patchRoot(base: Root, builder: (build: IRootBuilder) => IRootBuilder): IAny[];
+	export function buildRoot(builder: (build: IRootBuilder) => IRootBuilder): Root;
 	export interface IRootStepBuilder {
-	    build: () => RootStep;
-	    patch: () => any[];
+	    build?: () => RootStep;
+	    patch: () => IAny[];
 	    text: (text: string) => IRootStepBuilder;
 	    data: (data: string) => IRootStepBuilder;
 	    defaultX: (defaultX: number) => IRootStepBuilder;
@@ -7719,31 +8012,31 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IRootStepBuilder;
 	    relativeX: (relativeX: number) => IRootStepBuilder;
 	}
-	export function patchRootStep(base: RootStep): IRootStepBuilder;
-	export function buildRootStep(): IRootStepBuilder;
+	export function patchRootStep(base: RootStep, builder: (build: IRootStepBuilder) => IRootStepBuilder): IAny[];
+	export function buildRootStep(builder: (build: IRootStepBuilder) => IRootStepBuilder): RootStep;
 	export interface IRootAlterBuilder {
-	    build: () => RootAlter;
-	    patch: () => any[];
+	    build?: () => RootAlter;
+	    patch: () => IAny[];
 	    location: (location: LeftRight) => IRootAlterBuilder;
 	    data: (data: string) => IRootAlterBuilder;
 	    printObject: (printObject: boolean) => IRootAlterBuilder;
 	}
-	export function patchRootAlter(base: RootAlter): IRootAlterBuilder;
-	export function buildRootAlter(): IRootAlterBuilder;
+	export function patchRootAlter(base: RootAlter, builder: (build: IRootAlterBuilder) => IRootAlterBuilder): IAny[];
+	export function buildRootAlter(builder: (build: IRootAlterBuilder) => IRootAlterBuilder): RootAlter;
 	export interface IFunctionBuilder {
-	    build: () => Function;
-	    patch: () => any[];
+	    build?: () => Function;
+	    patch: () => IAny[];
 	    data: (data: string) => IFunctionBuilder;
 	    defaultX: (defaultX: number) => IFunctionBuilder;
 	    relativeY: (relativeY: number) => IFunctionBuilder;
 	    defaultY: (defaultY: number) => IFunctionBuilder;
 	    relativeX: (relativeX: number) => IFunctionBuilder;
 	}
-	export function patchFunction(base: Function): IFunctionBuilder;
-	export function buildFunction(): IFunctionBuilder;
+	export function patchFunction(base: Function, builder: (build: IFunctionBuilder) => IFunctionBuilder): IAny[];
+	export function buildFunction(builder: (build: IFunctionBuilder) => IFunctionBuilder): Function;
 	export interface IKindBuilder {
-	    build: () => Kind;
-	    patch: () => any[];
+	    build?: () => Kind;
+	    patch: () => IAny[];
 	    parenthesesDegrees: (parenthesesDegrees: boolean) => IKindBuilder;
 	    useSymbols: (useSymbols: boolean) => IKindBuilder;
 	    text: (text: string) => IKindBuilder;
@@ -7755,30 +8048,30 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IKindBuilder;
 	    relativeX: (relativeX: number) => IKindBuilder;
 	}
-	export function patchKind(base: Kind): IKindBuilder;
-	export function buildKind(): IKindBuilder;
+	export function patchKind(base: Kind, builder: (build: IKindBuilder) => IKindBuilder): IAny[];
+	export function buildKind(builder: (build: IKindBuilder) => IKindBuilder): Kind;
 	export interface IInversionBuilder {
-	    build: () => Inversion;
-	    patch: () => any[];
+	    build?: () => Inversion;
+	    patch: () => IAny[];
 	    data: (data: string) => IInversionBuilder;
 	    defaultX: (defaultX: number) => IInversionBuilder;
 	    relativeY: (relativeY: number) => IInversionBuilder;
 	    defaultY: (defaultY: number) => IInversionBuilder;
 	    relativeX: (relativeX: number) => IInversionBuilder;
 	}
-	export function patchInversion(base: Inversion): IInversionBuilder;
-	export function buildInversion(): IInversionBuilder;
+	export function patchInversion(base: Inversion, builder: (build: IInversionBuilder) => IInversionBuilder): IAny[];
+	export function buildInversion(builder: (build: IInversionBuilder) => IInversionBuilder): Inversion;
 	export interface IBassBuilder {
-	    build: () => Bass;
-	    patch: () => any[];
-	    bassStep: (build: (builder: IBassStepBuilder) => IBassStepBuilder) => IBassBuilder;
-	    bassAlter: (build: (builder: IBassAlterBuilder) => IBassAlterBuilder) => IBassBuilder;
+	    build?: () => Bass;
+	    patch: () => IAny[];
+	    bassStep: (build: BassStep | ((builder: IBassStepBuilder) => IBassStepBuilder)) => IBassBuilder;
+	    bassAlter: (build: BassAlter | ((builder: IBassAlterBuilder) => IBassAlterBuilder)) => IBassBuilder;
 	}
-	export function patchBass(base: Bass): IBassBuilder;
-	export function buildBass(): IBassBuilder;
+	export function patchBass(base: Bass, builder: (build: IBassBuilder) => IBassBuilder): IAny[];
+	export function buildBass(builder: (build: IBassBuilder) => IBassBuilder): Bass;
 	export interface IBassStepBuilder {
-	    build: () => BassStep;
-	    patch: () => any[];
+	    build?: () => BassStep;
+	    patch: () => IAny[];
 	    text: (text: string) => IBassStepBuilder;
 	    data: (data: string) => IBassStepBuilder;
 	    defaultX: (defaultX: number) => IBassStepBuilder;
@@ -7786,30 +8079,30 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IBassStepBuilder;
 	    relativeX: (relativeX: number) => IBassStepBuilder;
 	}
-	export function patchBassStep(base: BassStep): IBassStepBuilder;
-	export function buildBassStep(): IBassStepBuilder;
+	export function patchBassStep(base: BassStep, builder: (build: IBassStepBuilder) => IBassStepBuilder): IAny[];
+	export function buildBassStep(builder: (build: IBassStepBuilder) => IBassStepBuilder): BassStep;
 	export interface IBassAlterBuilder {
-	    build: () => BassAlter;
-	    patch: () => any[];
+	    build?: () => BassAlter;
+	    patch: () => IAny[];
 	    location: (location: LeftRight) => IBassAlterBuilder;
 	    data: (data: string) => IBassAlterBuilder;
 	    printObject: (printObject: boolean) => IBassAlterBuilder;
 	}
-	export function patchBassAlter(base: BassAlter): IBassAlterBuilder;
-	export function buildBassAlter(): IBassAlterBuilder;
+	export function patchBassAlter(base: BassAlter, builder: (build: IBassAlterBuilder) => IBassAlterBuilder): IAny[];
+	export function buildBassAlter(builder: (build: IBassAlterBuilder) => IBassAlterBuilder): BassAlter;
 	export interface IDegreeBuilder {
-	    build: () => Degree;
-	    patch: () => any[];
-	    degreeAlter: (build: (builder: IDegreeAlterBuilder) => IDegreeAlterBuilder) => IDegreeBuilder;
-	    degreeValue: (build: (builder: IDegreeValueBuilder) => IDegreeValueBuilder) => IDegreeBuilder;
-	    degreeType: (build: (builder: IDegreeTypeBuilder) => IDegreeTypeBuilder) => IDegreeBuilder;
+	    build?: () => Degree;
+	    patch: () => IAny[];
+	    degreeAlter: (build: DegreeAlter | ((builder: IDegreeAlterBuilder) => IDegreeAlterBuilder)) => IDegreeBuilder;
+	    degreeValue: (build: DegreeValue | ((builder: IDegreeValueBuilder) => IDegreeValueBuilder)) => IDegreeBuilder;
+	    degreeType: (build: DegreeType | ((builder: IDegreeTypeBuilder) => IDegreeTypeBuilder)) => IDegreeBuilder;
 	    printObject: (printObject: boolean) => IDegreeBuilder;
 	}
-	export function patchDegree(base: Degree): IDegreeBuilder;
-	export function buildDegree(): IDegreeBuilder;
+	export function patchDegree(base: Degree, builder: (build: IDegreeBuilder) => IDegreeBuilder): IAny[];
+	export function buildDegree(builder: (build: IDegreeBuilder) => IDegreeBuilder): Degree;
 	export interface IDegreeValueBuilder {
-	    build: () => DegreeValue;
-	    patch: () => any[];
+	    build?: () => DegreeValue;
+	    patch: () => IAny[];
 	    symbol: (symbol: ChordType) => IDegreeValueBuilder;
 	    text: (text: string) => IDegreeValueBuilder;
 	    data: (data: string) => IDegreeValueBuilder;
@@ -7818,11 +8111,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IDegreeValueBuilder;
 	    relativeX: (relativeX: number) => IDegreeValueBuilder;
 	}
-	export function patchDegreeValue(base: DegreeValue): IDegreeValueBuilder;
-	export function buildDegreeValue(): IDegreeValueBuilder;
+	export function patchDegreeValue(base: DegreeValue, builder: (build: IDegreeValueBuilder) => IDegreeValueBuilder): IAny[];
+	export function buildDegreeValue(builder: (build: IDegreeValueBuilder) => IDegreeValueBuilder): DegreeValue;
 	export interface IDegreeAlterBuilder {
-	    build: () => DegreeAlter;
-	    patch: () => any[];
+	    build?: () => DegreeAlter;
+	    patch: () => IAny[];
 	    plusMinus: (plusMinus: boolean) => IDegreeAlterBuilder;
 	    data: (data: string) => IDegreeAlterBuilder;
 	    defaultX: (defaultX: number) => IDegreeAlterBuilder;
@@ -7830,11 +8123,11 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IDegreeAlterBuilder;
 	    relativeX: (relativeX: number) => IDegreeAlterBuilder;
 	}
-	export function patchDegreeAlter(base: DegreeAlter): IDegreeAlterBuilder;
-	export function buildDegreeAlter(): IDegreeAlterBuilder;
+	export function patchDegreeAlter(base: DegreeAlter, builder: (build: IDegreeAlterBuilder) => IDegreeAlterBuilder): IAny[];
+	export function buildDegreeAlter(builder: (build: IDegreeAlterBuilder) => IDegreeAlterBuilder): DegreeAlter;
 	export interface IDegreeTypeBuilder {
-	    build: () => DegreeType;
-	    patch: () => any[];
+	    build?: () => DegreeType;
+	    patch: () => IAny[];
 	    text: (text: string) => IDegreeTypeBuilder;
 	    data: (data: string) => IDegreeTypeBuilder;
 	    defaultX: (defaultX: number) => IDegreeTypeBuilder;
@@ -7842,16 +8135,18 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IDegreeTypeBuilder;
 	    relativeX: (relativeX: number) => IDegreeTypeBuilder;
 	}
-	export function patchDegreeType(base: DegreeType): IDegreeTypeBuilder;
-	export function buildDegreeType(): IDegreeTypeBuilder;
+	export function patchDegreeType(base: DegreeType, builder: (build: IDegreeTypeBuilder) => IDegreeTypeBuilder): IAny[];
+	export function buildDegreeType(builder: (build: IDegreeTypeBuilder) => IDegreeTypeBuilder): DegreeType;
 	export interface IFrameBuilder {
-	    build: () => Frame;
-	    patch: () => any[];
+	    build?: () => Frame;
+	    patch: () => IAny[];
 	    frameStrings: (frameStrings: string) => IFrameBuilder;
+	    frameNotesAt: (idx: number, build: FrameNote | ((builder: IFrameNoteBuilder) => IFrameNoteBuilder)) => IFrameBuilder;
+	    frameNotesSplice: (start: number, deleteCount: number, ...items: FrameNote[]) => IFrameBuilder;
 	    frameNotes: (frameNotes: FrameNote[]) => IFrameBuilder;
 	    unplayed: (unplayed: string) => IFrameBuilder;
 	    frameFrets: (frameFrets: string) => IFrameBuilder;
-	    firstFret: (build: (builder: IFirstFretBuilder) => IFirstFretBuilder) => IFrameBuilder;
+	    firstFret: (build: FirstFret | ((builder: IFirstFretBuilder) => IFirstFretBuilder)) => IFrameBuilder;
 	    width: (width: number) => IFrameBuilder;
 	    height: (height: number) => IFrameBuilder;
 	    defaultX: (defaultX: number) => IFrameBuilder;
@@ -7859,88 +8154,92 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => IFrameBuilder;
 	    relativeX: (relativeX: number) => IFrameBuilder;
 	}
-	export function patchFrame(base: Frame): IFrameBuilder;
-	export function buildFrame(): IFrameBuilder;
+	export function patchFrame(base: Frame, builder: (build: IFrameBuilder) => IFrameBuilder): IAny[];
+	export function buildFrame(builder: (build: IFrameBuilder) => IFrameBuilder): Frame;
 	export interface IFirstFretBuilder {
-	    build: () => FirstFret;
-	    patch: () => any[];
+	    build?: () => FirstFret;
+	    patch: () => IAny[];
 	    text: (text: string) => IFirstFretBuilder;
 	    location: (location: LeftRight) => IFirstFretBuilder;
 	    data: (data: string) => IFirstFretBuilder;
 	}
-	export function patchFirstFret(base: FirstFret): IFirstFretBuilder;
-	export function buildFirstFret(): IFirstFretBuilder;
+	export function patchFirstFret(base: FirstFret, builder: (build: IFirstFretBuilder) => IFirstFretBuilder): IAny[];
+	export function buildFirstFret(builder: (build: IFirstFretBuilder) => IFirstFretBuilder): FirstFret;
 	export interface IFrameNoteBuilder {
-	    build: () => FrameNote;
-	    patch: () => any[];
-	    barre: (build: (builder: IBarreBuilder) => IBarreBuilder) => IFrameNoteBuilder;
-	    string: (build: (builder: IStringBuilder) => IStringBuilder) => IFrameNoteBuilder;
-	    fingering: (build: (builder: IFingeringBuilder) => IFingeringBuilder) => IFrameNoteBuilder;
-	    fret: (build: (builder: IFretBuilder) => IFretBuilder) => IFrameNoteBuilder;
+	    build?: () => FrameNote;
+	    patch: () => IAny[];
+	    barre: (build: Barre | ((builder: IBarreBuilder) => IBarreBuilder)) => IFrameNoteBuilder;
+	    string: (build: String | ((builder: IStringBuilder) => IStringBuilder)) => IFrameNoteBuilder;
+	    fingering: (build: Fingering | ((builder: IFingeringBuilder) => IFingeringBuilder)) => IFrameNoteBuilder;
+	    fret: (build: Fret | ((builder: IFretBuilder) => IFretBuilder)) => IFrameNoteBuilder;
 	}
-	export function patchFrameNote(base: FrameNote): IFrameNoteBuilder;
-	export function buildFrameNote(): IFrameNoteBuilder;
+	export function patchFrameNote(base: FrameNote, builder: (build: IFrameNoteBuilder) => IFrameNoteBuilder): IAny[];
+	export function buildFrameNote(builder: (build: IFrameNoteBuilder) => IFrameNoteBuilder): FrameNote;
 	export interface IBarreBuilder {
-	    build: () => Barre;
-	    patch: () => any[];
+	    build?: () => Barre;
+	    patch: () => IAny[];
 	    type: (type: StartStop) => IBarreBuilder;
 	    color: (color: string) => IBarreBuilder;
 	}
-	export function patchBarre(base: Barre): IBarreBuilder;
-	export function buildBarre(): IBarreBuilder;
+	export function patchBarre(base: Barre, builder: (build: IBarreBuilder) => IBarreBuilder): IAny[];
+	export function buildBarre(builder: (build: IBarreBuilder) => IBarreBuilder): Barre;
 	export interface IGroupingBuilder {
-	    build: () => Grouping;
-	    patch: () => any[];
+	    build?: () => Grouping;
+	    patch: () => IAny[];
+	    featuresAt: (idx: number, build: Feature | ((builder: IFeatureBuilder) => IFeatureBuilder)) => IGroupingBuilder;
+	    featuresSplice: (start: number, deleteCount: number, ...items: Feature[]) => IGroupingBuilder;
 	    features: (features: Feature[]) => IGroupingBuilder;
 	    number: (number: number) => IGroupingBuilder;
 	    type: (type: StartStopSingle) => IGroupingBuilder;
 	    memberOf: (memberOf: string) => IGroupingBuilder;
-	    _class: (_class: string) => IGroupingBuilder;
 	}
-	export function patchGrouping(base: Grouping): IGroupingBuilder;
-	export function buildGrouping(): IGroupingBuilder;
+	export function patchGrouping(base: Grouping, builder: (build: IGroupingBuilder) => IGroupingBuilder): IAny[];
+	export function buildGrouping(builder: (build: IGroupingBuilder) => IGroupingBuilder): Grouping;
 	export interface IFeatureBuilder {
-	    build: () => Feature;
-	    patch: () => any[];
+	    build?: () => Feature;
+	    patch: () => IAny[];
 	    data: (data: string) => IFeatureBuilder;
 	    type: (type: string) => IFeatureBuilder;
 	}
-	export function patchFeature(base: Feature): IFeatureBuilder;
-	export function buildFeature(): IFeatureBuilder;
+	export function patchFeature(base: Feature, builder: (build: IFeatureBuilder) => IFeatureBuilder): IAny[];
+	export function buildFeature(builder: (build: IFeatureBuilder) => IFeatureBuilder): Feature;
 	export interface IPrintBuilder {
-	    build: () => Print;
-	    patch: () => any[];
-	    measureNumbering: (build: (builder: IMeasureNumberingBuilder) => IMeasureNumberingBuilder) => IPrintBuilder;
-	    partNameDisplay: (build: (builder: IPartNameDisplayBuilder) => IPartNameDisplayBuilder) => IPrintBuilder;
+	    build?: () => Print;
+	    patch: () => IAny[];
+	    measureNumbering: (build: MeasureNumbering | ((builder: IMeasureNumberingBuilder) => IMeasureNumberingBuilder)) => IPrintBuilder;
+	    partNameDisplay: (build: PartNameDisplay | ((builder: IPartNameDisplayBuilder) => IPartNameDisplayBuilder)) => IPrintBuilder;
 	    newSystem: (newSystem: boolean) => IPrintBuilder;
 	    newPage: (newPage: boolean) => IPrintBuilder;
 	    blankPage: (blankPage: string) => IPrintBuilder;
-	    measureLayout: (build: (builder: IMeasureLayoutBuilder) => IMeasureLayoutBuilder) => IPrintBuilder;
-	    partAbbreviationDisplay: (build: (builder: IPartAbbreviationDisplayBuilder) => IPartAbbreviationDisplayBuilder) => IPrintBuilder;
-	    pageLayout: (build: (builder: IPageLayoutBuilder) => IPageLayoutBuilder) => IPrintBuilder;
-	    systemLayout: (build: (builder: ISystemLayoutBuilder) => ISystemLayoutBuilder) => IPrintBuilder;
+	    measureLayout: (build: MeasureLayout | ((builder: IMeasureLayoutBuilder) => IMeasureLayoutBuilder)) => IPrintBuilder;
+	    partAbbreviationDisplay: (build: PartAbbreviationDisplay | ((builder: IPartAbbreviationDisplayBuilder) => IPartAbbreviationDisplayBuilder)) => IPrintBuilder;
+	    pageLayout: (build: PageLayout | ((builder: IPageLayoutBuilder) => IPageLayoutBuilder)) => IPrintBuilder;
+	    systemLayout: (build: SystemLayout | ((builder: ISystemLayoutBuilder) => ISystemLayoutBuilder)) => IPrintBuilder;
 	    staffSpacing: (staffSpacing: number) => IPrintBuilder;
+	    staffLayoutsAt: (idx: number, build: StaffLayout | ((builder: IStaffLayoutBuilder) => IStaffLayoutBuilder)) => IPrintBuilder;
+	    staffLayoutsSplice: (start: number, deleteCount: number, ...items: StaffLayout[]) => IPrintBuilder;
 	    staffLayouts: (staffLayouts: StaffLayout[]) => IPrintBuilder;
 	    pageNumber: (pageNumber: string) => IPrintBuilder;
-	    _class: (_class: string) => IPrintBuilder;
 	}
-	export function patchPrint(base: Print): IPrintBuilder;
-	export function buildPrint(): IPrintBuilder;
+	export function patchPrint(base: Print, builder: (build: IPrintBuilder) => IPrintBuilder): IAny[];
+	export function buildPrint(builder: (build: IPrintBuilder) => IPrintBuilder): Print;
 	export interface IMeasureNumberingBuilder {
-	    build: () => MeasureNumbering;
-	    patch: () => any[];
+	    build?: () => MeasureNumbering;
+	    patch: () => IAny[];
 	    data: (data: string) => IMeasureNumberingBuilder;
 	    defaultX: (defaultX: number) => IMeasureNumberingBuilder;
 	    relativeY: (relativeY: number) => IMeasureNumberingBuilder;
 	    defaultY: (defaultY: number) => IMeasureNumberingBuilder;
 	    relativeX: (relativeX: number) => IMeasureNumberingBuilder;
 	}
-	export function patchMeasureNumbering(base: MeasureNumbering): IMeasureNumberingBuilder;
-	export function buildMeasureNumbering(): IMeasureNumberingBuilder;
+	export function patchMeasureNumbering(base: MeasureNumbering, builder: (build: IMeasureNumberingBuilder) => IMeasureNumberingBuilder): IAny[];
+	export function buildMeasureNumbering(builder: (build: IMeasureNumberingBuilder) => IMeasureNumberingBuilder): MeasureNumbering;
 	export interface ISoundBuilder {
-	    build: () => Sound;
-	    patch: () => any[];
+	    build?: () => Sound;
+	    patch: () => IAny[];
 	    softPedal: (softPedal: string) => ISoundBuilder;
+	    midiInstrumentsAt: (idx: number, build: MidiInstrument | ((builder: IMidiInstrumentBuilder) => IMidiInstrumentBuilder)) => ISoundBuilder;
+	    midiInstrumentsSplice: (start: number, deleteCount: number, ...items: MidiInstrument[]) => ISoundBuilder;
 	    midiInstruments: (midiInstruments: MidiInstrument[]) => ISoundBuilder;
 	    pan: (pan: string) => ISoundBuilder;
 	    tocoda: (tocoda: string) => ISoundBuilder;
@@ -7953,71 +8252,80 @@ declare module 'musicxml-interfaces/builders' {
 	    fine: (fine: string) => ISoundBuilder;
 	    damperPedal: (damperPedal: string) => ISoundBuilder;
 	    dynamics: (dynamics: string) => ISoundBuilder;
+	    playsAt: (idx: number, build: Play | ((builder: IPlayBuilder) => IPlayBuilder)) => ISoundBuilder;
+	    playsSplice: (start: number, deleteCount: number, ...items: Play[]) => ISoundBuilder;
 	    plays: (plays: Play[]) => ISoundBuilder;
-	    offset: (build: (builder: IOffsetBuilder) => IOffsetBuilder) => ISoundBuilder;
+	    offset: (build: Offset | ((builder: IOffsetBuilder) => IOffsetBuilder)) => ISoundBuilder;
 	    sostenutoPedal: (sostenutoPedal: string) => ISoundBuilder;
 	    dalsegno: (dalsegno: string) => ISoundBuilder;
+	    midiDevicesAt: (idx: number, build: MidiDevice | ((builder: IMidiDeviceBuilder) => IMidiDeviceBuilder)) => ISoundBuilder;
+	    midiDevicesSplice: (start: number, deleteCount: number, ...items: MidiDevice[]) => ISoundBuilder;
 	    midiDevices: (midiDevices: MidiDevice[]) => ISoundBuilder;
 	    tempo: (tempo: string) => ISoundBuilder;
 	    forwardRepeat: (forwardRepeat: boolean) => ISoundBuilder;
-	    _class: (_class: string) => ISoundBuilder;
 	    timeOnly: (timeOnly: string) => ISoundBuilder;
 	}
-	export function patchSound(base: Sound): ISoundBuilder;
-	export function buildSound(): ISoundBuilder;
+	export function patchSound(base: Sound, builder: (build: ISoundBuilder) => ISoundBuilder): IAny[];
+	export function buildSound(builder: (build: ISoundBuilder) => ISoundBuilder): Sound;
 	export interface IWorkBuilder {
-	    build: () => Work;
-	    patch: () => any[];
+	    build?: () => Work;
+	    patch: () => IAny[];
 	    workNumber: (workNumber: string) => IWorkBuilder;
 	    workTitle: (workTitle: string) => IWorkBuilder;
-	    opus: (build: (builder: IOpusBuilder) => IOpusBuilder) => IWorkBuilder;
+	    opus: (build: Opus | ((builder: IOpusBuilder) => IOpusBuilder)) => IWorkBuilder;
 	}
-	export function patchWork(base: Work): IWorkBuilder;
-	export function buildWork(): IWorkBuilder;
+	export function patchWork(base: Work, builder: (build: IWorkBuilder) => IWorkBuilder): IAny[];
+	export function buildWork(builder: (build: IWorkBuilder) => IWorkBuilder): Work;
 	export interface IOpusBuilder {
-	    build: () => Opus;
-	    patch: () => any[];
+	    build?: () => Opus;
+	    patch: () => IAny[];
 	}
-	export function patchOpus(base: Opus): IOpusBuilder;
-	export function buildOpus(): IOpusBuilder;
+	export function patchOpus(base: Opus, builder: (build: IOpusBuilder) => IOpusBuilder): IAny[];
+	export function buildOpus(builder: (build: IOpusBuilder) => IOpusBuilder): Opus;
 	export interface IDefaultsBuilder {
-	    build: () => Defaults;
-	    patch: () => any[];
-	    wordFont: (build: (builder: IWordFontBuilder) => IWordFontBuilder) => IDefaultsBuilder;
+	    build?: () => Defaults;
+	    patch: () => IAny[];
+	    wordFont: (build: WordFont | ((builder: IWordFontBuilder) => IWordFontBuilder)) => IDefaultsBuilder;
+	    lyricLanguagesAt: (idx: number, build: LyricLanguage | ((builder: ILyricLanguageBuilder) => ILyricLanguageBuilder)) => IDefaultsBuilder;
+	    lyricLanguagesSplice: (start: number, deleteCount: number, ...items: LyricLanguage[]) => IDefaultsBuilder;
 	    lyricLanguages: (lyricLanguages: LyricLanguage[]) => IDefaultsBuilder;
+	    lyricFontsAt: (idx: number, build: LyricFont | ((builder: ILyricFontBuilder) => ILyricFontBuilder)) => IDefaultsBuilder;
+	    lyricFontsSplice: (start: number, deleteCount: number, ...items: LyricFont[]) => IDefaultsBuilder;
 	    lyricFonts: (lyricFonts: LyricFont[]) => IDefaultsBuilder;
-	    pageLayout: (build: (builder: IPageLayoutBuilder) => IPageLayoutBuilder) => IDefaultsBuilder;
-	    systemLayout: (build: (builder: ISystemLayoutBuilder) => ISystemLayoutBuilder) => IDefaultsBuilder;
-	    appearance: (build: (builder: IAppearanceBuilder) => IAppearanceBuilder) => IDefaultsBuilder;
-	    scaling: (build: (builder: IScalingBuilder) => IScalingBuilder) => IDefaultsBuilder;
+	    pageLayout: (build: PageLayout | ((builder: IPageLayoutBuilder) => IPageLayoutBuilder)) => IDefaultsBuilder;
+	    systemLayout: (build: SystemLayout | ((builder: ISystemLayoutBuilder) => ISystemLayoutBuilder)) => IDefaultsBuilder;
+	    appearance: (build: Appearance | ((builder: IAppearanceBuilder) => IAppearanceBuilder)) => IDefaultsBuilder;
+	    scaling: (build: Scaling | ((builder: IScalingBuilder) => IScalingBuilder)) => IDefaultsBuilder;
+	    staffLayoutsAt: (idx: number, build: StaffLayout | ((builder: IStaffLayoutBuilder) => IStaffLayoutBuilder)) => IDefaultsBuilder;
+	    staffLayoutsSplice: (start: number, deleteCount: number, ...items: StaffLayout[]) => IDefaultsBuilder;
 	    staffLayouts: (staffLayouts: StaffLayout[]) => IDefaultsBuilder;
-	    musicFont: (build: (builder: IMusicFontBuilder) => IMusicFontBuilder) => IDefaultsBuilder;
+	    musicFont: (build: MusicFont | ((builder: IMusicFontBuilder) => IMusicFontBuilder)) => IDefaultsBuilder;
 	}
-	export function patchDefaults(base: Defaults): IDefaultsBuilder;
-	export function buildDefaults(): IDefaultsBuilder;
+	export function patchDefaults(base: Defaults, builder: (build: IDefaultsBuilder) => IDefaultsBuilder): IAny[];
+	export function buildDefaults(builder: (build: IDefaultsBuilder) => IDefaultsBuilder): Defaults;
 	export interface IMusicFontBuilder {
-	    build: () => MusicFont;
-	    patch: () => any[];
+	    build?: () => MusicFont;
+	    patch: () => IAny[];
 	    fontFamily: (fontFamily: string) => IMusicFontBuilder;
 	    fontWeight: (fontWeight: NormalBold) => IMusicFontBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IMusicFontBuilder;
 	    fontSize: (fontSize: string) => IMusicFontBuilder;
 	}
-	export function patchMusicFont(base: MusicFont): IMusicFontBuilder;
-	export function buildMusicFont(): IMusicFontBuilder;
+	export function patchMusicFont(base: MusicFont, builder: (build: IMusicFontBuilder) => IMusicFontBuilder): IAny[];
+	export function buildMusicFont(builder: (build: IMusicFontBuilder) => IMusicFontBuilder): MusicFont;
 	export interface IWordFontBuilder {
-	    build: () => WordFont;
-	    patch: () => any[];
+	    build?: () => WordFont;
+	    patch: () => IAny[];
 	    fontFamily: (fontFamily: string) => IWordFontBuilder;
 	    fontWeight: (fontWeight: NormalBold) => IWordFontBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IWordFontBuilder;
 	    fontSize: (fontSize: string) => IWordFontBuilder;
 	}
-	export function patchWordFont(base: WordFont): IWordFontBuilder;
-	export function buildWordFont(): IWordFontBuilder;
+	export function patchWordFont(base: WordFont, builder: (build: IWordFontBuilder) => IWordFontBuilder): IAny[];
+	export function buildWordFont(builder: (build: IWordFontBuilder) => IWordFontBuilder): WordFont;
 	export interface ILyricFontBuilder {
-	    build: () => LyricFont;
-	    patch: () => any[];
+	    build?: () => LyricFont;
+	    patch: () => IAny[];
 	    number: (number: number) => ILyricFontBuilder;
 	    name: (name: string) => ILyricFontBuilder;
 	    fontFamily: (fontFamily: string) => ILyricFontBuilder;
@@ -8025,37 +8333,39 @@ declare module 'musicxml-interfaces/builders' {
 	    fontStyle: (fontStyle: NormalItalic) => ILyricFontBuilder;
 	    fontSize: (fontSize: string) => ILyricFontBuilder;
 	}
-	export function patchLyricFont(base: LyricFont): ILyricFontBuilder;
-	export function buildLyricFont(): ILyricFontBuilder;
+	export function patchLyricFont(base: LyricFont, builder: (build: ILyricFontBuilder) => ILyricFontBuilder): IAny[];
+	export function buildLyricFont(builder: (build: ILyricFontBuilder) => ILyricFontBuilder): LyricFont;
 	export interface ILyricLanguageBuilder {
-	    build: () => LyricLanguage;
-	    patch: () => any[];
+	    build?: () => LyricLanguage;
+	    patch: () => IAny[];
 	    number: (number: number) => ILyricLanguageBuilder;
 	    name: (name: string) => ILyricLanguageBuilder;
 	}
-	export function patchLyricLanguage(base: LyricLanguage): ILyricLanguageBuilder;
-	export function buildLyricLanguage(): ILyricLanguageBuilder;
+	export function patchLyricLanguage(base: LyricLanguage, builder: (build: ILyricLanguageBuilder) => ILyricLanguageBuilder): IAny[];
+	export function buildLyricLanguage(builder: (build: ILyricLanguageBuilder) => ILyricLanguageBuilder): LyricLanguage;
 	export interface ICreditBuilder {
-	    build: () => Credit;
-	    patch: () => any[];
+	    build?: () => Credit;
+	    patch: () => IAny[];
 	    creditTypes: (creditTypes: string[]) => ICreditBuilder;
+	    creditWordsAt: (idx: number, build: CreditWords | ((builder: ICreditWordsBuilder) => ICreditWordsBuilder)) => ICreditBuilder;
+	    creditWordsSplice: (start: number, deleteCount: number, ...items: CreditWords[]) => ICreditBuilder;
 	    creditWords: (creditWords: CreditWords[]) => ICreditBuilder;
-	    creditImage: (build: (builder: ICreditImageBuilder) => ICreditImageBuilder) => ICreditBuilder;
+	    creditImage: (build: CreditImage | ((builder: ICreditImageBuilder) => ICreditImageBuilder)) => ICreditBuilder;
 	    page: (page: number) => ICreditBuilder;
 	}
-	export function patchCredit(base: Credit): ICreditBuilder;
-	export function buildCredit(): ICreditBuilder;
+	export function patchCredit(base: Credit, builder: (build: ICreditBuilder) => ICreditBuilder): IAny[];
+	export function buildCredit(builder: (build: ICreditBuilder) => ICreditBuilder): Credit;
 	export interface ICreditWordsBuilder {
-	    build: () => CreditWords;
-	    patch: () => any[];
+	    build?: () => CreditWords;
+	    patch: () => IAny[];
 	    words: (words: string) => ICreditWordsBuilder;
 	    justify: (justify: LeftCenterRight) => ICreditWordsBuilder;
 	}
-	export function patchCreditWords(base: CreditWords): ICreditWordsBuilder;
-	export function buildCreditWords(): ICreditWordsBuilder;
+	export function patchCreditWords(base: CreditWords, builder: (build: ICreditWordsBuilder) => ICreditWordsBuilder): IAny[];
+	export function buildCreditWords(builder: (build: ICreditWordsBuilder) => ICreditWordsBuilder): CreditWords;
 	export interface ICreditImageBuilder {
-	    build: () => CreditImage;
-	    patch: () => any[];
+	    build?: () => CreditImage;
+	    patch: () => IAny[];
 	    type: (type: string) => ICreditImageBuilder;
 	    source: (source: string) => ICreditImageBuilder;
 	    defaultX: (defaultX: number) => ICreditImageBuilder;
@@ -8063,190 +8373,202 @@ declare module 'musicxml-interfaces/builders' {
 	    defaultY: (defaultY: number) => ICreditImageBuilder;
 	    relativeX: (relativeX: number) => ICreditImageBuilder;
 	}
-	export function patchCreditImage(base: CreditImage): ICreditImageBuilder;
-	export function buildCreditImage(): ICreditImageBuilder;
+	export function patchCreditImage(base: CreditImage, builder: (build: ICreditImageBuilder) => ICreditImageBuilder): IAny[];
+	export function buildCreditImage(builder: (build: ICreditImageBuilder) => ICreditImageBuilder): CreditImage;
 	export interface IScorePartBuilder {
-	    build: () => ScorePart;
-	    patch: () => any[];
-	    identification: (build: (builder: IIdentificationBuilder) => IIdentificationBuilder) => IScorePartBuilder;
-	    partNameDisplay: (build: (builder: IPartNameDisplayBuilder) => IPartNameDisplayBuilder) => IScorePartBuilder;
+	    build?: () => ScorePart;
+	    patch: () => IAny[];
+	    identification: (build: Identification | ((builder: IIdentificationBuilder) => IIdentificationBuilder)) => IScorePartBuilder;
+	    partNameDisplay: (build: PartNameDisplay | ((builder: IPartNameDisplayBuilder) => IPartNameDisplayBuilder)) => IScorePartBuilder;
+	    scoreInstrumentsAt: (idx: number, build: ScoreInstrument | ((builder: IScoreInstrumentBuilder) => IScoreInstrumentBuilder)) => IScorePartBuilder;
+	    scoreInstrumentsSplice: (start: number, deleteCount: number, ...items: ScoreInstrument[]) => IScorePartBuilder;
 	    scoreInstruments: (scoreInstruments: ScoreInstrument[]) => IScorePartBuilder;
+	    midiDevicesAt: (idx: number, build: MidiDevice | ((builder: IMidiDeviceBuilder) => IMidiDeviceBuilder)) => IScorePartBuilder;
+	    midiDevicesSplice: (start: number, deleteCount: number, ...items: MidiDevice[]) => IScorePartBuilder;
 	    midiDevices: (midiDevices: MidiDevice[]) => IScorePartBuilder;
-	    partName: (build: (builder: IPartNameBuilder) => IPartNameBuilder) => IScorePartBuilder;
-	    partAbbreviationDisplay: (build: (builder: IPartAbbreviationDisplayBuilder) => IPartAbbreviationDisplayBuilder) => IScorePartBuilder;
-	    partAbbreviation: (build: (builder: IPartAbbreviationBuilder) => IPartAbbreviationBuilder) => IScorePartBuilder;
+	    partName: (build: PartName | ((builder: IPartNameBuilder) => IPartNameBuilder)) => IScorePartBuilder;
+	    partAbbreviationDisplay: (build: PartAbbreviationDisplay | ((builder: IPartAbbreviationDisplayBuilder) => IPartAbbreviationDisplayBuilder)) => IScorePartBuilder;
+	    partAbbreviation: (build: PartAbbreviation | ((builder: IPartAbbreviationBuilder) => IPartAbbreviationBuilder)) => IScorePartBuilder;
 	    groups: (groups: string[]) => IScorePartBuilder;
+	    midiInstrumentsAt: (idx: number, build: MidiInstrument | ((builder: IMidiInstrumentBuilder) => IMidiInstrumentBuilder)) => IScorePartBuilder;
+	    midiInstrumentsSplice: (start: number, deleteCount: number, ...items: MidiInstrument[]) => IScorePartBuilder;
 	    midiInstruments: (midiInstruments: MidiInstrument[]) => IScorePartBuilder;
 	    id: (id: string) => IScorePartBuilder;
-	    _class: (_class: string) => IScorePartBuilder;
 	}
-	export function patchScorePart(base: ScorePart): IScorePartBuilder;
-	export function buildScorePart(): IScorePartBuilder;
+	export function patchScorePart(base: ScorePart, builder: (build: IScorePartBuilder) => IScorePartBuilder): IAny[];
+	export function buildScorePart(builder: (build: IScorePartBuilder) => IScorePartBuilder): ScorePart;
 	export interface IPartNameBuilder {
-	    build: () => PartName;
-	    patch: () => any[];
+	    build?: () => PartName;
+	    patch: () => IAny[];
 	    partName: (partName: string) => IPartNameBuilder;
 	    defaultX: (defaultX: number) => IPartNameBuilder;
 	    relativeY: (relativeY: number) => IPartNameBuilder;
 	    defaultY: (defaultY: number) => IPartNameBuilder;
 	    relativeX: (relativeX: number) => IPartNameBuilder;
 	}
-	export function patchPartName(base: PartName): IPartNameBuilder;
-	export function buildPartName(): IPartNameBuilder;
+	export function patchPartName(base: PartName, builder: (build: IPartNameBuilder) => IPartNameBuilder): IAny[];
+	export function buildPartName(builder: (build: IPartNameBuilder) => IPartNameBuilder): PartName;
 	export interface IPartAbbreviationBuilder {
-	    build: () => PartAbbreviation;
-	    patch: () => any[];
+	    build?: () => PartAbbreviation;
+	    patch: () => IAny[];
 	    abbreviation: (abbreviation: string) => IPartAbbreviationBuilder;
 	    defaultX: (defaultX: number) => IPartAbbreviationBuilder;
 	    relativeY: (relativeY: number) => IPartAbbreviationBuilder;
 	    defaultY: (defaultY: number) => IPartAbbreviationBuilder;
 	    relativeX: (relativeX: number) => IPartAbbreviationBuilder;
 	}
-	export function patchPartAbbreviation(base: PartAbbreviation): IPartAbbreviationBuilder;
-	export function buildPartAbbreviation(): IPartAbbreviationBuilder;
+	export function patchPartAbbreviation(base: PartAbbreviation, builder: (build: IPartAbbreviationBuilder) => IPartAbbreviationBuilder): IAny[];
+	export function buildPartAbbreviation(builder: (build: IPartAbbreviationBuilder) => IPartAbbreviationBuilder): PartAbbreviation;
 	export interface IPartGroupBuilder {
-	    build: () => PartGroup;
-	    patch: () => any[];
-	    groupNameDisplay: (build: (builder: IGroupNameDisplayBuilder) => IGroupNameDisplayBuilder) => IPartGroupBuilder;
-	    groupSymbol: (build: (builder: IGroupSymbolBuilder) => IGroupSymbolBuilder) => IPartGroupBuilder;
-	    groupName: (build: (builder: IGroupNameBuilder) => IGroupNameBuilder) => IPartGroupBuilder;
-	    groupAbbreviationDisplay: (build: (builder: IGroupAbbreviationDisplayBuilder) => IGroupAbbreviationDisplayBuilder) => IPartGroupBuilder;
-	    groupBarline: (build: (builder: IGroupBarlineBuilder) => IGroupBarlineBuilder) => IPartGroupBuilder;
+	    build?: () => PartGroup;
+	    patch: () => IAny[];
+	    groupNameDisplay: (build: GroupNameDisplay | ((builder: IGroupNameDisplayBuilder) => IGroupNameDisplayBuilder)) => IPartGroupBuilder;
+	    groupSymbol: (build: GroupSymbol | ((builder: IGroupSymbolBuilder) => IGroupSymbolBuilder)) => IPartGroupBuilder;
+	    groupName: (build: GroupName | ((builder: IGroupNameBuilder) => IGroupNameBuilder)) => IPartGroupBuilder;
+	    groupAbbreviationDisplay: (build: GroupAbbreviationDisplay | ((builder: IGroupAbbreviationDisplayBuilder) => IGroupAbbreviationDisplayBuilder)) => IPartGroupBuilder;
+	    groupBarline: (build: GroupBarline | ((builder: IGroupBarlineBuilder) => IGroupBarlineBuilder)) => IPartGroupBuilder;
 	    number: (number: number) => IPartGroupBuilder;
-	    groupAbbreviation: (build: (builder: IGroupAbbreviationBuilder) => IGroupAbbreviationBuilder) => IPartGroupBuilder;
+	    groupAbbreviation: (build: GroupAbbreviation | ((builder: IGroupAbbreviationBuilder) => IGroupAbbreviationBuilder)) => IPartGroupBuilder;
 	    type: (type: StartStop) => IPartGroupBuilder;
-	    groupTime: (build: (builder: IGroupTimeBuilder) => IGroupTimeBuilder) => IPartGroupBuilder;
-	    _class: (_class: string) => IPartGroupBuilder;
-	    footnote: (build: (builder: IFootnoteBuilder) => IFootnoteBuilder) => IPartGroupBuilder;
-	    level: (build: (builder: ILevelBuilder) => ILevelBuilder) => IPartGroupBuilder;
+	    groupTime: (build: GroupTime | ((builder: IGroupTimeBuilder) => IGroupTimeBuilder)) => IPartGroupBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IPartGroupBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IPartGroupBuilder;
 	}
-	export function patchPartGroup(base: PartGroup): IPartGroupBuilder;
-	export function buildPartGroup(): IPartGroupBuilder;
+	export function patchPartGroup(base: PartGroup, builder: (build: IPartGroupBuilder) => IPartGroupBuilder): IAny[];
+	export function buildPartGroup(builder: (build: IPartGroupBuilder) => IPartGroupBuilder): PartGroup;
 	export interface IGroupNameBuilder {
-	    build: () => GroupName;
-	    patch: () => any[];
+	    build?: () => GroupName;
+	    patch: () => IAny[];
 	    name: (name: string) => IGroupNameBuilder;
 	    defaultX: (defaultX: number) => IGroupNameBuilder;
 	    relativeY: (relativeY: number) => IGroupNameBuilder;
 	    defaultY: (defaultY: number) => IGroupNameBuilder;
 	    relativeX: (relativeX: number) => IGroupNameBuilder;
 	}
-	export function patchGroupName(base: GroupName): IGroupNameBuilder;
-	export function buildGroupName(): IGroupNameBuilder;
+	export function patchGroupName(base: GroupName, builder: (build: IGroupNameBuilder) => IGroupNameBuilder): IAny[];
+	export function buildGroupName(builder: (build: IGroupNameBuilder) => IGroupNameBuilder): GroupName;
 	export interface IGroupNameDisplayBuilder {
-	    build: () => GroupNameDisplay;
-	    patch: () => any[];
-	    name: (build: (builder: ITextArrayBuilder) => ITextArrayBuilder) => IGroupNameDisplayBuilder;
+	    build?: () => GroupNameDisplay;
+	    patch: () => IAny[];
+	    nameAt: (idx: number, build: TextSegment | ((builder: ITextSegmentBuilder) => ITextSegmentBuilder)) => IGroupNameDisplayBuilder;
+	    nameSplice: (start: number, deleteCount: number, ...items: TextSegment[]) => IGroupNameDisplayBuilder;
+	    name: (name: TextSegment[]) => IGroupNameDisplayBuilder;
 	    printObject: (printObject: boolean) => IGroupNameDisplayBuilder;
 	}
-	export function patchGroupNameDisplay(base: GroupNameDisplay): IGroupNameDisplayBuilder;
-	export function buildGroupNameDisplay(): IGroupNameDisplayBuilder;
+	export function patchGroupNameDisplay(base: GroupNameDisplay, builder: (build: IGroupNameDisplayBuilder) => IGroupNameDisplayBuilder): IAny[];
+	export function buildGroupNameDisplay(builder: (build: IGroupNameDisplayBuilder) => IGroupNameDisplayBuilder): GroupNameDisplay;
 	export interface IGroupAbbreviationBuilder {
-	    build: () => GroupAbbreviation;
-	    patch: () => any[];
+	    build?: () => GroupAbbreviation;
+	    patch: () => IAny[];
 	    text: (text: string) => IGroupAbbreviationBuilder;
 	    defaultX: (defaultX: number) => IGroupAbbreviationBuilder;
 	    relativeY: (relativeY: number) => IGroupAbbreviationBuilder;
 	    defaultY: (defaultY: number) => IGroupAbbreviationBuilder;
 	    relativeX: (relativeX: number) => IGroupAbbreviationBuilder;
 	}
-	export function patchGroupAbbreviation(base: GroupAbbreviation): IGroupAbbreviationBuilder;
-	export function buildGroupAbbreviation(): IGroupAbbreviationBuilder;
+	export function patchGroupAbbreviation(base: GroupAbbreviation, builder: (build: IGroupAbbreviationBuilder) => IGroupAbbreviationBuilder): IAny[];
+	export function buildGroupAbbreviation(builder: (build: IGroupAbbreviationBuilder) => IGroupAbbreviationBuilder): GroupAbbreviation;
 	export interface IGroupAbbreviationDisplayBuilder {
-	    build: () => GroupAbbreviationDisplay;
-	    patch: () => any[];
-	    name: (build: (builder: ITextArrayBuilder) => ITextArrayBuilder) => IGroupAbbreviationDisplayBuilder;
+	    build?: () => GroupAbbreviationDisplay;
+	    patch: () => IAny[];
+	    nameAt: (idx: number, build: TextSegment | ((builder: ITextSegmentBuilder) => ITextSegmentBuilder)) => IGroupAbbreviationDisplayBuilder;
+	    nameSplice: (start: number, deleteCount: number, ...items: TextSegment[]) => IGroupAbbreviationDisplayBuilder;
+	    name: (name: TextSegment[]) => IGroupAbbreviationDisplayBuilder;
 	    printObject: (printObject: boolean) => IGroupAbbreviationDisplayBuilder;
 	}
-	export function patchGroupAbbreviationDisplay(base: GroupAbbreviationDisplay): IGroupAbbreviationDisplayBuilder;
-	export function buildGroupAbbreviationDisplay(): IGroupAbbreviationDisplayBuilder;
+	export function patchGroupAbbreviationDisplay(base: GroupAbbreviationDisplay, builder: (build: IGroupAbbreviationDisplayBuilder) => IGroupAbbreviationDisplayBuilder): IAny[];
+	export function buildGroupAbbreviationDisplay(builder: (build: IGroupAbbreviationDisplayBuilder) => IGroupAbbreviationDisplayBuilder): GroupAbbreviationDisplay;
 	export interface IGroupSymbolBuilder {
-	    build: () => GroupSymbol;
-	    patch: () => any[];
+	    build?: () => GroupSymbol;
+	    patch: () => IAny[];
 	    data: (data: PartSymbolType) => IGroupSymbolBuilder;
 	    defaultX: (defaultX: number) => IGroupSymbolBuilder;
 	    relativeY: (relativeY: number) => IGroupSymbolBuilder;
 	    defaultY: (defaultY: number) => IGroupSymbolBuilder;
 	    relativeX: (relativeX: number) => IGroupSymbolBuilder;
 	}
-	export function patchGroupSymbol(base: GroupSymbol): IGroupSymbolBuilder;
-	export function buildGroupSymbol(): IGroupSymbolBuilder;
+	export function patchGroupSymbol(base: GroupSymbol, builder: (build: IGroupSymbolBuilder) => IGroupSymbolBuilder): IAny[];
+	export function buildGroupSymbol(builder: (build: IGroupSymbolBuilder) => IGroupSymbolBuilder): GroupSymbol;
 	export interface IGroupBarlineBuilder {
-	    build: () => GroupBarline;
-	    patch: () => any[];
+	    build?: () => GroupBarline;
+	    patch: () => IAny[];
 	    data: (data: string) => IGroupBarlineBuilder;
 	    color: (color: string) => IGroupBarlineBuilder;
 	}
-	export function patchGroupBarline(base: GroupBarline): IGroupBarlineBuilder;
-	export function buildGroupBarline(): IGroupBarlineBuilder;
+	export function patchGroupBarline(base: GroupBarline, builder: (build: IGroupBarlineBuilder) => IGroupBarlineBuilder): IAny[];
+	export function buildGroupBarline(builder: (build: IGroupBarlineBuilder) => IGroupBarlineBuilder): GroupBarline;
 	export interface IGroupTimeBuilder {
-	    build: () => GroupTime;
-	    patch: () => any[];
+	    build?: () => GroupTime;
+	    patch: () => IAny[];
 	}
-	export function patchGroupTime(base: GroupTime): IGroupTimeBuilder;
-	export function buildGroupTime(): IGroupTimeBuilder;
+	export function patchGroupTime(base: GroupTime, builder: (build: IGroupTimeBuilder) => IGroupTimeBuilder): IAny[];
+	export function buildGroupTime(builder: (build: IGroupTimeBuilder) => IGroupTimeBuilder): GroupTime;
 	export interface IScoreInstrumentBuilder {
-	    build: () => ScoreInstrument;
-	    patch: () => any[];
+	    build?: () => ScoreInstrument;
+	    patch: () => IAny[];
 	    instrumentName: (instrumentName: string) => IScoreInstrumentBuilder;
 	    instrumentSound: (instrumentSound: string) => IScoreInstrumentBuilder;
 	    ensemble: (ensemble: string) => IScoreInstrumentBuilder;
-	    virtualInstrument: (build: (builder: IVirtualInstrumentBuilder) => IVirtualInstrumentBuilder) => IScoreInstrumentBuilder;
+	    virtualInstrument: (build: VirtualInstrument | ((builder: IVirtualInstrumentBuilder) => IVirtualInstrumentBuilder)) => IScoreInstrumentBuilder;
 	    instrumentAbbreviation: (instrumentAbbreviation: string) => IScoreInstrumentBuilder;
-	    solo: (build: (builder: ISoloBuilder) => ISoloBuilder) => IScoreInstrumentBuilder;
+	    solo: (build: Solo | ((builder: ISoloBuilder) => ISoloBuilder)) => IScoreInstrumentBuilder;
 	    id: (id: string) => IScoreInstrumentBuilder;
 	}
-	export function patchScoreInstrument(base: ScoreInstrument): IScoreInstrumentBuilder;
-	export function buildScoreInstrument(): IScoreInstrumentBuilder;
+	export function patchScoreInstrument(base: ScoreInstrument, builder: (build: IScoreInstrumentBuilder) => IScoreInstrumentBuilder): IAny[];
+	export function buildScoreInstrument(builder: (build: IScoreInstrumentBuilder) => IScoreInstrumentBuilder): ScoreInstrument;
 	export interface ISoloBuilder {
-	    build: () => Solo;
-	    patch: () => any[];
+	    build?: () => Solo;
+	    patch: () => IAny[];
 	}
-	export function patchSolo(base: Solo): ISoloBuilder;
-	export function buildSolo(): ISoloBuilder;
+	export function patchSolo(base: Solo, builder: (build: ISoloBuilder) => ISoloBuilder): IAny[];
+	export function buildSolo(builder: (build: ISoloBuilder) => ISoloBuilder): Solo;
 	export interface IVirtualInstrumentBuilder {
-	    build: () => VirtualInstrument;
-	    patch: () => any[];
+	    build?: () => VirtualInstrument;
+	    patch: () => IAny[];
 	    virtualLibrary: (virtualLibrary: string) => IVirtualInstrumentBuilder;
 	    virtualName: (virtualName: string) => IVirtualInstrumentBuilder;
 	}
-	export function patchVirtualInstrument(base: VirtualInstrument): IVirtualInstrumentBuilder;
-	export function buildVirtualInstrument(): IVirtualInstrumentBuilder;
+	export function patchVirtualInstrument(base: VirtualInstrument, builder: (build: IVirtualInstrumentBuilder) => IVirtualInstrumentBuilder): IAny[];
+	export function buildVirtualInstrument(builder: (build: IVirtualInstrumentBuilder) => IVirtualInstrumentBuilder): VirtualInstrument;
 	export interface IScoreHeaderBuilder {
-	    build: () => ScoreHeader;
-	    patch: () => any[];
+	    build?: () => ScoreHeader;
+	    patch: () => IAny[];
 	    movementTitle: (movementTitle: string) => IScoreHeaderBuilder;
-	    identification: (build: (builder: IIdentificationBuilder) => IIdentificationBuilder) => IScoreHeaderBuilder;
-	    defaults: (build: (builder: IDefaultsBuilder) => IDefaultsBuilder) => IScoreHeaderBuilder;
-	    work: (build: (builder: IWorkBuilder) => IWorkBuilder) => IScoreHeaderBuilder;
+	    identification: (build: Identification | ((builder: IIdentificationBuilder) => IIdentificationBuilder)) => IScoreHeaderBuilder;
+	    defaults: (build: Defaults | ((builder: IDefaultsBuilder) => IDefaultsBuilder)) => IScoreHeaderBuilder;
+	    work: (build: Work | ((builder: IWorkBuilder) => IWorkBuilder)) => IScoreHeaderBuilder;
+	    creditsAt: (idx: number, build: Credit | ((builder: ICreditBuilder) => ICreditBuilder)) => IScoreHeaderBuilder;
+	    creditsSplice: (start: number, deleteCount: number, ...items: Credit[]) => IScoreHeaderBuilder;
 	    credits: (credits: Credit[]) => IScoreHeaderBuilder;
 	    partList: (partList: PartList) => IScoreHeaderBuilder;
 	    movementNumber: (movementNumber: string) => IScoreHeaderBuilder;
 	}
-	export function patchScoreHeader(base: ScoreHeader): IScoreHeaderBuilder;
-	export function buildScoreHeader(): IScoreHeaderBuilder;
+	export function patchScoreHeader(base: ScoreHeader, builder: (build: IScoreHeaderBuilder) => IScoreHeaderBuilder): IAny[];
+	export function buildScoreHeader(builder: (build: IScoreHeaderBuilder) => IScoreHeaderBuilder): ScoreHeader;
 	export interface IScoreTimewiseBuilder {
-	    build: () => ScoreTimewise;
-	    patch: () => any[];
+	    build?: () => ScoreTimewise;
+	    patch: () => IAny[];
+	    measuresAt: (idx: number, build: Measure | ((builder: IMeasureBuilder) => IMeasureBuilder)) => IScoreTimewiseBuilder;
+	    measuresSplice: (start: number, deleteCount: number, ...items: Measure[]) => IScoreTimewiseBuilder;
 	    measures: (measures: Measure[]) => IScoreTimewiseBuilder;
 	    version: (version: string) => IScoreTimewiseBuilder;
 	}
-	export function patchScoreTimewise(base: ScoreTimewise): IScoreTimewiseBuilder;
-	export function buildScoreTimewise(): IScoreTimewiseBuilder;
+	export function patchScoreTimewise(base: ScoreTimewise, builder: (build: IScoreTimewiseBuilder) => IScoreTimewiseBuilder): IAny[];
+	export function buildScoreTimewise(builder: (build: IScoreTimewiseBuilder) => IScoreTimewiseBuilder): ScoreTimewise;
 	export interface IMeasureBuilder {
-	    build: () => Measure;
-	    patch: () => any[];
+	    build?: () => Measure;
+	    patch: () => IAny[];
 	    number: (number: string) => IMeasureBuilder;
 	    implicit: (implicit: boolean) => IMeasureBuilder;
 	    width: (width: number) => IMeasureBuilder;
 	    set: (key: string, val: boolean[]) => IMeasureBuilder;
 	    nonControlling: (nonControlling: boolean) => IMeasureBuilder;
 	}
-	export function patchMeasure(base: Measure): IMeasureBuilder;
-	export function buildMeasure(): IMeasureBuilder;
+	export function patchMeasure(base: Measure, builder: (build: IMeasureBuilder) => IMeasureBuilder): IAny[];
+	export function buildMeasure(builder: (build: IMeasureBuilder) => IMeasureBuilder): Measure;
 
 }
 declare module 'musicxml-interfaces' {
-	import main = require('musicxml-interfaces/musicxml-interfaces');
+	import main = require('musicxml-interfaces/index');
 	export = main;
 }

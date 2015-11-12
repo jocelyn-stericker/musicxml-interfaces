@@ -2,11 +2,14 @@
     "compilerOptions": {
         "target": "ES5",
         "module": "commonjs",
-        "declaration": false
+        "declaration": false,
+        "outDir": "lib"
     },
     "files": [
-        "operationGenerator.ts",
-        "musicxml-interfaces.ts",
-        "builders.ts"
+        "./src/index.ts",
+        "./src/operations.ts",
+        "./src/builders.ts",
+        "./src/private/operationGenerator.ts",
+        "./src/private/sanityTest.ts"
     ]
 }
