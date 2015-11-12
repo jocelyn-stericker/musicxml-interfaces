@@ -4,7 +4,7 @@
 [MusicXML songs](http://www.musicxml.com/).
 
 `musicxml-interfaces` does not provide users with utilities for rendering or analysing MusicXML songs.
-This project is used by [Satie](https://github.com/jnetterf/satie), which provides higher-level functionality.
+This project is used by [Satie](https://nettek.ca/satie), which provides higher-level functionality.
 
 This project is not affiliated with MakeMusic, Inc. MusicXML™ is a registered trademark owned by MakeMusic, Inc.
 

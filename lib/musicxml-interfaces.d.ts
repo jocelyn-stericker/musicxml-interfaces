@@ -1802,12 +1802,12 @@ declare module 'musicxml-interfaces/index' {
 	 */
 	export interface Key extends PrintStyle, PrintObject {
 	    cancel?: Cancel;
-	    keySteps: string[];
+	    keySteps?: string[];
 	    keyOctaves?: KeyOctave[];
 	    number?: number;
-	    fifths: number;
-	    keyAlters: string[];
-	    keyAccidentals: string[];
+	    fifths?: number;
+	    keyAlters?: string[];
+	    keyAccidentals?: string[];
 	    mode?: string;
 	    _class?: string;
 	}
@@ -1960,7 +1960,7 @@ declare module 'musicxml-interfaces/index' {
 	 * additional attribute has been set to "yes".
 	 */
 	export interface Clef extends PrintStyle, PrintObject {
-	    clefOctaveChange: string;
+	    clefOctaveChange?: string;
 	    sign: string;
 	    number?: number;
 	    size?: SymbolSize;
@@ -2250,7 +2250,7 @@ declare module 'musicxml-interfaces/index' {
 	 */
 	export interface Unpitched {
 	    displayStep?: string;
-	    displayOctave?: string;
+	    displayOctave?: number;
 	}
 	/**
 	 * Pitch is represented as a combination of the step of the
@@ -2292,7 +2292,7 @@ declare module 'musicxml-interfaces/index' {
 	export interface Rest {
 	    measure?: boolean;
 	    displayStep?: string;
-	    displayOctave?: string;
+	    displayOctave?: number;
 	}
 	/**
 	 * Duration is a positive number specified in division units.
@@ -5539,6 +5539,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPrintStyleBuilder;
 	    defaultY: (defaultY: number) => IPrintStyleBuilder;
 	    relativeX: (relativeX: number) => IPrintStyleBuilder;
+	    fontFamily: (fontFamily: string) => IPrintStyleBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPrintStyleBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPrintStyleBuilder;
+	    fontSize: (fontSize: string) => IPrintStyleBuilder;
+	    color: (color: string) => IPrintStyleBuilder;
 	}
 	export function patchPrintStyle(base: PrintStyle, builder: (build: IPrintStyleBuilder) => IPrintStyleBuilder): IAny[];
 	export function buildPrintStyle(builder: (build: IPrintStyleBuilder) => IPrintStyleBuilder): PrintStyle;
@@ -5549,6 +5554,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPrintStyleAlignBuilder;
 	    defaultY: (defaultY: number) => IPrintStyleAlignBuilder;
 	    relativeX: (relativeX: number) => IPrintStyleAlignBuilder;
+	    fontFamily: (fontFamily: string) => IPrintStyleAlignBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPrintStyleAlignBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPrintStyleAlignBuilder;
+	    fontSize: (fontSize: string) => IPrintStyleAlignBuilder;
+	    color: (color: string) => IPrintStyleAlignBuilder;
+	    halign: (halign: LeftCenterRight) => IPrintStyleAlignBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IPrintStyleAlignBuilder;
 	}
 	export function patchPrintStyleAlign(base: PrintStyleAlign, builder: (build: IPrintStyleAlignBuilder) => IPrintStyleAlignBuilder): IAny[];
 	export function buildPrintStyleAlign(builder: (build: IPrintStyleAlignBuilder) => IPrintStyleAlignBuilder): PrintStyleAlign;
@@ -5594,6 +5606,7 @@ declare module 'musicxml-interfaces/builders' {
 	    printDot: (printDot: boolean) => IPrintoutBuilder;
 	    printLyric: (printLyric: boolean) => IPrintoutBuilder;
 	    printObject: (printObject: boolean) => IPrintoutBuilder;
+	    printSpacing: (printSpacing: boolean) => IPrintoutBuilder;
 	}
 	export function patchPrintout(base: Printout, builder: (build: IPrintoutBuilder) => IPrintoutBuilder): IAny[];
 	export function buildPrintout(builder: (build: IPrintoutBuilder) => IPrintoutBuilder): Printout;
@@ -5601,6 +5614,25 @@ declare module 'musicxml-interfaces/builders' {
 	    build?: () => TextFormatting;
 	    patch: () => IAny[];
 	    justify: (justify: LeftCenterRight) => ITextFormattingBuilder;
+	    defaultX: (defaultX: number) => ITextFormattingBuilder;
+	    relativeY: (relativeY: number) => ITextFormattingBuilder;
+	    defaultY: (defaultY: number) => ITextFormattingBuilder;
+	    relativeX: (relativeX: number) => ITextFormattingBuilder;
+	    fontFamily: (fontFamily: string) => ITextFormattingBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITextFormattingBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITextFormattingBuilder;
+	    fontSize: (fontSize: string) => ITextFormattingBuilder;
+	    color: (color: string) => ITextFormattingBuilder;
+	    halign: (halign: LeftCenterRight) => ITextFormattingBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => ITextFormattingBuilder;
+	    underline: (underline: number) => ITextFormattingBuilder;
+	    overline: (overline: number) => ITextFormattingBuilder;
+	    lineThrough: (lineThrough: number) => ITextFormattingBuilder;
+	    rotation: (rotation: number) => ITextFormattingBuilder;
+	    letterSpacing: (letterSpacing: string) => ITextFormattingBuilder;
+	    lineHeight: (lineHeight: string) => ITextFormattingBuilder;
+	    dir: (dir: DirectionMode) => ITextFormattingBuilder;
+	    enclosure: (enclosure: EnclosureShape) => ITextFormattingBuilder;
 	}
 	export function patchTextFormatting(base: TextFormatting, builder: (build: ITextFormattingBuilder) => ITextFormattingBuilder): IAny[];
 	export function buildTextFormatting(builder: (build: ITextFormattingBuilder) => ITextFormattingBuilder): TextFormatting;
@@ -5672,6 +5704,25 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    text: (text: string) => IFootnoteBuilder;
 	    justify: (justify: LeftCenterRight) => IFootnoteBuilder;
+	    defaultX: (defaultX: number) => IFootnoteBuilder;
+	    relativeY: (relativeY: number) => IFootnoteBuilder;
+	    defaultY: (defaultY: number) => IFootnoteBuilder;
+	    relativeX: (relativeX: number) => IFootnoteBuilder;
+	    fontFamily: (fontFamily: string) => IFootnoteBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFootnoteBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFootnoteBuilder;
+	    fontSize: (fontSize: string) => IFootnoteBuilder;
+	    color: (color: string) => IFootnoteBuilder;
+	    halign: (halign: LeftCenterRight) => IFootnoteBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IFootnoteBuilder;
+	    underline: (underline: number) => IFootnoteBuilder;
+	    overline: (overline: number) => IFootnoteBuilder;
+	    lineThrough: (lineThrough: number) => IFootnoteBuilder;
+	    rotation: (rotation: number) => IFootnoteBuilder;
+	    letterSpacing: (letterSpacing: string) => IFootnoteBuilder;
+	    lineHeight: (lineHeight: string) => IFootnoteBuilder;
+	    dir: (dir: DirectionMode) => IFootnoteBuilder;
+	    enclosure: (enclosure: EnclosureShape) => IFootnoteBuilder;
 	}
 	export function patchFootnote(base: Footnote, builder: (build: IFootnoteBuilder) => IFootnoteBuilder): IAny[];
 	export function buildFootnote(builder: (build: IFootnoteBuilder) => IFootnoteBuilder): Footnote;
@@ -5695,6 +5746,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IFermataBuilder;
 	    defaultY: (defaultY: number) => IFermataBuilder;
 	    relativeX: (relativeX: number) => IFermataBuilder;
+	    fontFamily: (fontFamily: string) => IFermataBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFermataBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFermataBuilder;
+	    fontSize: (fontSize: string) => IFermataBuilder;
+	    color: (color: string) => IFermataBuilder;
 	}
 	export function patchFermata(base: Fermata, builder: (build: IFermataBuilder) => IFermataBuilder): IAny[];
 	export function buildFermata(builder: (build: IFermataBuilder) => IFermataBuilder): Fermata;
@@ -5707,6 +5763,15 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IWavyLineBuilder;
 	    defaultY: (defaultY: number) => IWavyLineBuilder;
 	    relativeX: (relativeX: number) => IWavyLineBuilder;
+	    color: (color: string) => IWavyLineBuilder;
+	    placement: (placement: AboveBelow) => IWavyLineBuilder;
+	    startNote: (startNote: UpperMainBelow) => IWavyLineBuilder;
+	    accelerate: (accelerate: boolean) => IWavyLineBuilder;
+	    beats: (beats: number) => IWavyLineBuilder;
+	    lastBeat: (lastBeat: number) => IWavyLineBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IWavyLineBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IWavyLineBuilder;
+	    secondBeat: (secondBeat: number) => IWavyLineBuilder;
 	}
 	export function patchWavyLine(base: WavyLine, builder: (build: IWavyLineBuilder) => IWavyLineBuilder): IAny[];
 	export function buildWavyLine(builder: (build: IWavyLineBuilder) => IWavyLineBuilder): WavyLine;
@@ -5717,6 +5782,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ISegnoBuilder;
 	    defaultY: (defaultY: number) => ISegnoBuilder;
 	    relativeX: (relativeX: number) => ISegnoBuilder;
+	    fontFamily: (fontFamily: string) => ISegnoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ISegnoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ISegnoBuilder;
+	    fontSize: (fontSize: string) => ISegnoBuilder;
+	    color: (color: string) => ISegnoBuilder;
+	    halign: (halign: LeftCenterRight) => ISegnoBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => ISegnoBuilder;
 	}
 	export function patchSegno(base: Segno, builder: (build: ISegnoBuilder) => ISegnoBuilder): IAny[];
 	export function buildSegno(builder: (build: ISegnoBuilder) => ISegnoBuilder): Segno;
@@ -5727,6 +5799,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ICodaBuilder;
 	    defaultY: (defaultY: number) => ICodaBuilder;
 	    relativeX: (relativeX: number) => ICodaBuilder;
+	    fontFamily: (fontFamily: string) => ICodaBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ICodaBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ICodaBuilder;
+	    fontSize: (fontSize: string) => ICodaBuilder;
+	    color: (color: string) => ICodaBuilder;
+	    halign: (halign: LeftCenterRight) => ICodaBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => ICodaBuilder;
 	}
 	export function patchCoda(base: Coda, builder: (build: ICodaBuilder) => ICodaBuilder): IAny[];
 	export function buildCoda(builder: (build: ICodaBuilder) => ICodaBuilder): Coda;
@@ -5767,6 +5846,18 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDynamicsBuilder;
 	    defaultY: (defaultY: number) => IDynamicsBuilder;
 	    relativeX: (relativeX: number) => IDynamicsBuilder;
+	    fontFamily: (fontFamily: string) => IDynamicsBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDynamicsBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDynamicsBuilder;
+	    fontSize: (fontSize: string) => IDynamicsBuilder;
+	    color: (color: string) => IDynamicsBuilder;
+	    halign: (halign: LeftCenterRight) => IDynamicsBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IDynamicsBuilder;
+	    underline: (underline: number) => IDynamicsBuilder;
+	    overline: (overline: number) => IDynamicsBuilder;
+	    lineThrough: (lineThrough: number) => IDynamicsBuilder;
+	    enclosure: (enclosure: EnclosureShape) => IDynamicsBuilder;
+	    placement: (placement: AboveBelow) => IDynamicsBuilder;
 	}
 	export function patchDynamics(base: Dynamics, builder: (build: IDynamicsBuilder) => IDynamicsBuilder): IAny[];
 	export function buildDynamics(builder: (build: IDynamicsBuilder) => IDynamicsBuilder): Dynamics;
@@ -5780,6 +5871,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IFingeringBuilder;
 	    defaultY: (defaultY: number) => IFingeringBuilder;
 	    relativeX: (relativeX: number) => IFingeringBuilder;
+	    fontFamily: (fontFamily: string) => IFingeringBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFingeringBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFingeringBuilder;
+	    fontSize: (fontSize: string) => IFingeringBuilder;
+	    color: (color: string) => IFingeringBuilder;
+	    placement: (placement: AboveBelow) => IFingeringBuilder;
 	}
 	export function patchFingering(base: Fingering, builder: (build: IFingeringBuilder) => IFingeringBuilder): IAny[];
 	export function buildFingering(builder: (build: IFingeringBuilder) => IFingeringBuilder): Fingering;
@@ -5791,6 +5888,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => IFretBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IFretBuilder;
 	    fontSize: (fontSize: string) => IFretBuilder;
+	    color: (color: string) => IFretBuilder;
 	}
 	export function patchFret(base: Fret, builder: (build: IFretBuilder) => IFretBuilder): IAny[];
 	export function buildFret(builder: (build: IFretBuilder) => IFretBuilder): Fret;
@@ -5802,6 +5900,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStringBuilder;
 	    defaultY: (defaultY: number) => IStringBuilder;
 	    relativeX: (relativeX: number) => IStringBuilder;
+	    fontFamily: (fontFamily: string) => IStringBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IStringBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IStringBuilder;
+	    fontSize: (fontSize: string) => IStringBuilder;
+	    color: (color: string) => IStringBuilder;
+	    placement: (placement: AboveBelow) => IStringBuilder;
 	}
 	export function patchString(base: String, builder: (build: IStringBuilder) => IStringBuilder): IAny[];
 	export function buildString(builder: (build: IStringBuilder) => IStringBuilder): String;
@@ -5810,6 +5914,25 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    text: (text: string) => IDisplayTextBuilder;
 	    justify: (justify: LeftCenterRight) => IDisplayTextBuilder;
+	    defaultX: (defaultX: number) => IDisplayTextBuilder;
+	    relativeY: (relativeY: number) => IDisplayTextBuilder;
+	    defaultY: (defaultY: number) => IDisplayTextBuilder;
+	    relativeX: (relativeX: number) => IDisplayTextBuilder;
+	    fontFamily: (fontFamily: string) => IDisplayTextBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDisplayTextBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDisplayTextBuilder;
+	    fontSize: (fontSize: string) => IDisplayTextBuilder;
+	    color: (color: string) => IDisplayTextBuilder;
+	    halign: (halign: LeftCenterRight) => IDisplayTextBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IDisplayTextBuilder;
+	    underline: (underline: number) => IDisplayTextBuilder;
+	    overline: (overline: number) => IDisplayTextBuilder;
+	    lineThrough: (lineThrough: number) => IDisplayTextBuilder;
+	    rotation: (rotation: number) => IDisplayTextBuilder;
+	    letterSpacing: (letterSpacing: string) => IDisplayTextBuilder;
+	    lineHeight: (lineHeight: string) => IDisplayTextBuilder;
+	    dir: (dir: DirectionMode) => IDisplayTextBuilder;
+	    enclosure: (enclosure: EnclosureShape) => IDisplayTextBuilder;
 	}
 	export function patchDisplayText(base: DisplayText, builder: (build: IDisplayTextBuilder) => IDisplayTextBuilder): IAny[];
 	export function buildDisplayText(builder: (build: IDisplayTextBuilder) => IDisplayTextBuilder): DisplayText;
@@ -5818,6 +5941,25 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    text: (text: string) => IAccidentalTextBuilder;
 	    justify: (justify: LeftCenterRight) => IAccidentalTextBuilder;
+	    defaultX: (defaultX: number) => IAccidentalTextBuilder;
+	    relativeY: (relativeY: number) => IAccidentalTextBuilder;
+	    defaultY: (defaultY: number) => IAccidentalTextBuilder;
+	    relativeX: (relativeX: number) => IAccidentalTextBuilder;
+	    fontFamily: (fontFamily: string) => IAccidentalTextBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IAccidentalTextBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IAccidentalTextBuilder;
+	    fontSize: (fontSize: string) => IAccidentalTextBuilder;
+	    color: (color: string) => IAccidentalTextBuilder;
+	    halign: (halign: LeftCenterRight) => IAccidentalTextBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IAccidentalTextBuilder;
+	    underline: (underline: number) => IAccidentalTextBuilder;
+	    overline: (overline: number) => IAccidentalTextBuilder;
+	    lineThrough: (lineThrough: number) => IAccidentalTextBuilder;
+	    rotation: (rotation: number) => IAccidentalTextBuilder;
+	    letterSpacing: (letterSpacing: string) => IAccidentalTextBuilder;
+	    lineHeight: (lineHeight: string) => IAccidentalTextBuilder;
+	    dir: (dir: DirectionMode) => IAccidentalTextBuilder;
+	    enclosure: (enclosure: EnclosureShape) => IAccidentalTextBuilder;
 	}
 	export function patchAccidentalText(base: AccidentalText, builder: (build: IAccidentalTextBuilder) => IAccidentalTextBuilder): IAny[];
 	export function buildAccidentalText(builder: (build: IAccidentalTextBuilder) => IAccidentalTextBuilder): AccidentalText;
@@ -5944,6 +6086,17 @@ declare module 'musicxml-interfaces/builders' {
 	    build?: () => LeftDivider;
 	    patch: () => IAny[];
 	    printObject: (printObject: boolean) => ILeftDividerBuilder;
+	    defaultX: (defaultX: number) => ILeftDividerBuilder;
+	    relativeY: (relativeY: number) => ILeftDividerBuilder;
+	    defaultY: (defaultY: number) => ILeftDividerBuilder;
+	    relativeX: (relativeX: number) => ILeftDividerBuilder;
+	    fontFamily: (fontFamily: string) => ILeftDividerBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ILeftDividerBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ILeftDividerBuilder;
+	    fontSize: (fontSize: string) => ILeftDividerBuilder;
+	    color: (color: string) => ILeftDividerBuilder;
+	    halign: (halign: LeftCenterRight) => ILeftDividerBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => ILeftDividerBuilder;
 	}
 	export function patchLeftDivider(base: LeftDivider, builder: (build: ILeftDividerBuilder) => ILeftDividerBuilder): IAny[];
 	export function buildLeftDivider(builder: (build: ILeftDividerBuilder) => ILeftDividerBuilder): LeftDivider;
@@ -5951,6 +6104,17 @@ declare module 'musicxml-interfaces/builders' {
 	    build?: () => RightDivider;
 	    patch: () => IAny[];
 	    printObject: (printObject: boolean) => IRightDividerBuilder;
+	    defaultX: (defaultX: number) => IRightDividerBuilder;
+	    relativeY: (relativeY: number) => IRightDividerBuilder;
+	    defaultY: (defaultY: number) => IRightDividerBuilder;
+	    relativeX: (relativeX: number) => IRightDividerBuilder;
+	    fontFamily: (fontFamily: string) => IRightDividerBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IRightDividerBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IRightDividerBuilder;
+	    fontSize: (fontSize: string) => IRightDividerBuilder;
+	    color: (color: string) => IRightDividerBuilder;
+	    halign: (halign: LeftCenterRight) => IRightDividerBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IRightDividerBuilder;
 	}
 	export function patchRightDivider(base: RightDivider, builder: (build: IRightDividerBuilder) => IRightDividerBuilder): IAny[];
 	export function buildRightDivider(builder: (build: IRightDividerBuilder) => IRightDividerBuilder): RightDivider;
@@ -6139,6 +6303,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IKeyBuilder;
 	    defaultY: (defaultY: number) => IKeyBuilder;
 	    relativeX: (relativeX: number) => IKeyBuilder;
+	    fontFamily: (fontFamily: string) => IKeyBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IKeyBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IKeyBuilder;
+	    fontSize: (fontSize: string) => IKeyBuilder;
+	    color: (color: string) => IKeyBuilder;
+	    printObject: (printObject: boolean) => IKeyBuilder;
 	}
 	export function patchKey(base: Key, builder: (build: IKeyBuilder) => IKeyBuilder): IAny[];
 	export function buildKey(builder: (build: IKeyBuilder) => IKeyBuilder): Key;
@@ -6149,7 +6319,20 @@ declare module 'musicxml-interfaces/builders' {
 	    beats: (beats: string[]) => ITimeBuilder;
 	    beatTypes: (beatTypes: number[]) => ITimeBuilder;
 	    senzaMisura: (senzaMisura: string) => ITimeBuilder;
+	    printObject: (printObject: boolean) => ITimeBuilder;
+	    defaultX: (defaultX: number) => ITimeBuilder;
+	    relativeY: (relativeY: number) => ITimeBuilder;
+	    defaultY: (defaultY: number) => ITimeBuilder;
+	    relativeX: (relativeX: number) => ITimeBuilder;
+	    fontFamily: (fontFamily: string) => ITimeBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITimeBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITimeBuilder;
+	    fontSize: (fontSize: string) => ITimeBuilder;
+	    color: (color: string) => ITimeBuilder;
+	    halign: (halign: LeftCenterRight) => ITimeBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => ITimeBuilder;
 	    symbol: (symbol: TimeSymbolType) => ITimeBuilder;
+	    separator: (separator: SeparatorType) => ITimeBuilder;
 	}
 	export function patchTime(base: Time, builder: (build: ITimeBuilder) => ITimeBuilder): IAny[];
 	export function buildTime(builder: (build: ITimeBuilder) => ITimeBuilder): Time;
@@ -6160,6 +6343,7 @@ declare module 'musicxml-interfaces/builders' {
 	    beatTypes: (beatTypes: number[]) => IInterchangeableBuilder;
 	    timeRelation: (timeRelation: string) => IInterchangeableBuilder;
 	    symbol: (symbol: TimeSymbolType) => IInterchangeableBuilder;
+	    separator: (separator: SeparatorType) => IInterchangeableBuilder;
 	}
 	export function patchInterchangeable(base: Interchangeable, builder: (build: IInterchangeableBuilder) => IInterchangeableBuilder): IAny[];
 	export function buildInterchangeable(builder: (build: IInterchangeableBuilder) => IInterchangeableBuilder): Interchangeable;
@@ -6173,6 +6357,7 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPartSymbolBuilder;
 	    defaultY: (defaultY: number) => IPartSymbolBuilder;
 	    relativeX: (relativeX: number) => IPartSymbolBuilder;
+	    color: (color: string) => IPartSymbolBuilder;
 	}
 	export function patchPartSymbol(base: PartSymbol, builder: (build: IPartSymbolBuilder) => IPartSymbolBuilder): IAny[];
 	export function buildPartSymbol(builder: (build: IPartSymbolBuilder) => IPartSymbolBuilder): PartSymbol;
@@ -6190,6 +6375,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IClefBuilder;
 	    defaultY: (defaultY: number) => IClefBuilder;
 	    relativeX: (relativeX: number) => IClefBuilder;
+	    fontFamily: (fontFamily: string) => IClefBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IClefBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IClefBuilder;
+	    fontSize: (fontSize: string) => IClefBuilder;
+	    color: (color: string) => IClefBuilder;
+	    printObject: (printObject: boolean) => IClefBuilder;
 	}
 	export function patchClef(base: Clef, builder: (build: IClefBuilder) => IClefBuilder): IAny[];
 	export function buildClef(builder: (build: IClefBuilder) => IClefBuilder): Clef;
@@ -6216,6 +6407,7 @@ declare module 'musicxml-interfaces/builders' {
 	    number: (number: number) => IStaffDetailsBuilder;
 	    staffType: (staffType: string) => IStaffDetailsBuilder;
 	    printObject: (printObject: boolean) => IStaffDetailsBuilder;
+	    printSpacing: (printSpacing: boolean) => IStaffDetailsBuilder;
 	}
 	export function patchStaffDetails(base: StaffDetails, builder: (build: IStaffDetailsBuilder) => IStaffDetailsBuilder): IAny[];
 	export function buildStaffDetails(builder: (build: IStaffDetailsBuilder) => IStaffDetailsBuilder): StaffDetails;
@@ -6244,6 +6436,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDirectiveBuilder;
 	    defaultY: (defaultY: number) => IDirectiveBuilder;
 	    relativeX: (relativeX: number) => IDirectiveBuilder;
+	    fontFamily: (fontFamily: string) => IDirectiveBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDirectiveBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDirectiveBuilder;
+	    fontSize: (fontSize: string) => IDirectiveBuilder;
+	    color: (color: string) => IDirectiveBuilder;
 	}
 	export function patchDirective(base: Directive, builder: (build: IDirectiveBuilder) => IDirectiveBuilder): IAny[];
 	export function buildDirective(builder: (build: IDirectiveBuilder) => IDirectiveBuilder): Directive;
@@ -6308,6 +6505,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => IMeasureStyleBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IMeasureStyleBuilder;
 	    fontSize: (fontSize: string) => IMeasureStyleBuilder;
+	    color: (color: string) => IMeasureStyleBuilder;
 	}
 	export function patchMeasureStyle(base: MeasureStyle, builder: (build: IMeasureStyleBuilder) => IMeasureStyleBuilder): IAny[];
 	export function buildMeasureStyle(builder: (build: IMeasureStyleBuilder) => IMeasureStyleBuilder): MeasureStyle;
@@ -6370,7 +6568,7 @@ declare module 'musicxml-interfaces/builders' {
 	    build?: () => Unpitched;
 	    patch: () => IAny[];
 	    displayStep: (displayStep: string) => IUnpitchedBuilder;
-	    displayOctave: (displayOctave: string) => IUnpitchedBuilder;
+	    displayOctave: (displayOctave: number) => IUnpitchedBuilder;
 	}
 	export function patchUnpitched(base: Unpitched, builder: (build: IUnpitchedBuilder) => IUnpitchedBuilder): IAny[];
 	export function buildUnpitched(builder: (build: IUnpitchedBuilder) => IUnpitchedBuilder): Unpitched;
@@ -6398,7 +6596,7 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    measure: (measure: boolean) => IRestBuilder;
 	    displayStep: (displayStep: string) => IRestBuilder;
-	    displayOctave: (displayOctave: string) => IRestBuilder;
+	    displayOctave: (displayOctave: number) => IRestBuilder;
 	}
 	export function patchRest(base: Rest, builder: (build: IRestBuilder) => IRestBuilder): IAny[];
 	export function buildRest(builder: (build: IRestBuilder) => IRestBuilder): Rest;
@@ -6452,9 +6650,27 @@ declare module 'musicxml-interfaces/builders' {
 	    beamsAt: (idx: number, build: Beam | ((builder: IBeamBuilder) => IBeamBuilder)) => INoteBuilder;
 	    beamsSplice: (start: number, deleteCount: number, ...items: Beam[]) => INoteBuilder;
 	    beams: (beams: Beam[]) => INoteBuilder;
+	    defaultX: (defaultX: number) => INoteBuilder;
+	    relativeY: (relativeY: number) => INoteBuilder;
+	    defaultY: (defaultY: number) => INoteBuilder;
+	    relativeX: (relativeX: number) => INoteBuilder;
+	    fontFamily: (fontFamily: string) => INoteBuilder;
+	    fontWeight: (fontWeight: NormalBold) => INoteBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => INoteBuilder;
+	    fontSize: (fontSize: string) => INoteBuilder;
+	    color: (color: string) => INoteBuilder;
+	    timeOnly: (timeOnly: string) => INoteBuilder;
 	    voice: (voice: number) => INoteBuilder;
 	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => INoteBuilder;
 	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => INoteBuilder;
+	    printDot: (printDot: boolean) => INoteBuilder;
+	    printLyric: (printLyric: boolean) => INoteBuilder;
+	    printObject: (printObject: boolean) => INoteBuilder;
+	    printSpacing: (printSpacing: boolean) => INoteBuilder;
+	    unpitched: (build: Unpitched | ((builder: IUnpitchedBuilder) => IUnpitchedBuilder)) => INoteBuilder;
+	    chord: (build: Chord | ((builder: IChordBuilder) => IChordBuilder)) => INoteBuilder;
+	    pitch: (build: Pitch | ((builder: IPitchBuilder) => IPitchBuilder)) => INoteBuilder;
+	    rest: (build: Rest | ((builder: IRestBuilder) => IRestBuilder)) => INoteBuilder;
 	}
 	export function patchNote(base: Note, builder: (build: INoteBuilder) => INoteBuilder): IAny[];
 	export function buildNote(builder: (build: INoteBuilder) => INoteBuilder): Note;
@@ -6473,6 +6689,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDotBuilder;
 	    defaultY: (defaultY: number) => IDotBuilder;
 	    relativeX: (relativeX: number) => IDotBuilder;
+	    fontFamily: (fontFamily: string) => IDotBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDotBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDotBuilder;
+	    fontSize: (fontSize: string) => IDotBuilder;
+	    color: (color: string) => IDotBuilder;
+	    placement: (placement: AboveBelow) => IDotBuilder;
 	}
 	export function patchDot(base: Dot, builder: (build: IDotBuilder) => IDotBuilder): IAny[];
 	export function buildDot(builder: (build: IDotBuilder) => IDotBuilder): Dot;
@@ -6482,6 +6704,15 @@ declare module 'musicxml-interfaces/builders' {
 	    cautionary: (cautionary: boolean) => IAccidentalBuilder;
 	    accidental: (accidental: MxmlAccidental) => IAccidentalBuilder;
 	    editorial: (editorial: boolean) => IAccidentalBuilder;
+	    defaultX: (defaultX: number) => IAccidentalBuilder;
+	    relativeY: (relativeY: number) => IAccidentalBuilder;
+	    defaultY: (defaultY: number) => IAccidentalBuilder;
+	    relativeX: (relativeX: number) => IAccidentalBuilder;
+	    fontFamily: (fontFamily: string) => IAccidentalBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IAccidentalBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IAccidentalBuilder;
+	    fontSize: (fontSize: string) => IAccidentalBuilder;
+	    color: (color: string) => IAccidentalBuilder;
 	    bracket: (bracket: boolean) => IAccidentalBuilder;
 	    size: (size: SymbolSize) => IAccidentalBuilder;
 	    parentheses: (parentheses: boolean) => IAccidentalBuilder;
@@ -6508,6 +6739,7 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStemBuilder;
 	    defaultY: (defaultY: number) => IStemBuilder;
 	    relativeX: (relativeX: number) => IStemBuilder;
+	    color: (color: string) => IStemBuilder;
 	}
 	export function patchStem(base: Stem, builder: (build: IStemBuilder) => IStemBuilder): IAny[];
 	export function buildStem(builder: (build: IStemBuilder) => IStemBuilder): Stem;
@@ -6521,6 +6753,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => INoteheadBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => INoteheadBuilder;
 	    fontSize: (fontSize: string) => INoteheadBuilder;
+	    color: (color: string) => INoteheadBuilder;
 	}
 	export function patchNotehead(base: Notehead, builder: (build: INoteheadBuilder) => INoteheadBuilder): IAny[];
 	export function buildNotehead(builder: (build: INoteheadBuilder) => INoteheadBuilder): Notehead;
@@ -6588,6 +6821,7 @@ declare module 'musicxml-interfaces/builders' {
 	    otherNotationsAt: (idx: number, build: OtherNotation | ((builder: IOtherNotationBuilder) => IOtherNotationBuilder)) => INotationsBuilder;
 	    otherNotationsSplice: (start: number, deleteCount: number, ...items: OtherNotation[]) => INotationsBuilder;
 	    otherNotations: (otherNotations: OtherNotation[]) => INotationsBuilder;
+	    printObject: (printObject: boolean) => INotationsBuilder;
 	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => INotationsBuilder;
 	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => INotationsBuilder;
 	}
@@ -6598,7 +6832,22 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    number: (number: number) => ITiedBuilder;
 	    type: (type: StartStopContinue) => ITiedBuilder;
+	    defaultX: (defaultX: number) => ITiedBuilder;
+	    relativeY: (relativeY: number) => ITiedBuilder;
+	    defaultY: (defaultY: number) => ITiedBuilder;
+	    relativeX: (relativeX: number) => ITiedBuilder;
+	    color: (color: string) => ITiedBuilder;
+	    placement: (placement: AboveBelow) => ITiedBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => ITiedBuilder;
+	    dashLength: (dashLength: number) => ITiedBuilder;
+	    spaceLength: (spaceLength: number) => ITiedBuilder;
+	    orientation: (orientation: OverUnder) => ITiedBuilder;
+	    bezierX2: (bezierX2: number) => ITiedBuilder;
+	    bezierOffset: (bezierOffset: number) => ITiedBuilder;
+	    bezierOffset2: (bezierOffset2: number) => ITiedBuilder;
+	    bezierX: (bezierX: number) => ITiedBuilder;
+	    bezierY: (bezierY: number) => ITiedBuilder;
+	    bezierY2: (bezierY2: number) => ITiedBuilder;
 	}
 	export function patchTied(base: Tied, builder: (build: ITiedBuilder) => ITiedBuilder): IAny[];
 	export function buildTied(builder: (build: ITiedBuilder) => ITiedBuilder): Tied;
@@ -6607,7 +6856,22 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    number: (number: number) => ISlurBuilder;
 	    type: (type: StartStopContinue) => ISlurBuilder;
+	    defaultX: (defaultX: number) => ISlurBuilder;
+	    relativeY: (relativeY: number) => ISlurBuilder;
+	    defaultY: (defaultY: number) => ISlurBuilder;
+	    relativeX: (relativeX: number) => ISlurBuilder;
+	    color: (color: string) => ISlurBuilder;
+	    placement: (placement: AboveBelow) => ISlurBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => ISlurBuilder;
+	    dashLength: (dashLength: number) => ISlurBuilder;
+	    spaceLength: (spaceLength: number) => ISlurBuilder;
+	    orientation: (orientation: OverUnder) => ISlurBuilder;
+	    bezierX2: (bezierX2: number) => ISlurBuilder;
+	    bezierOffset: (bezierOffset: number) => ISlurBuilder;
+	    bezierOffset2: (bezierOffset2: number) => ISlurBuilder;
+	    bezierX: (bezierX: number) => ISlurBuilder;
+	    bezierY: (bezierY: number) => ISlurBuilder;
+	    bezierY2: (bezierY2: number) => ISlurBuilder;
 	}
 	export function patchSlur(base: Slur, builder: (build: ISlurBuilder) => ISlurBuilder): IAny[];
 	export function buildSlur(builder: (build: ISlurBuilder) => ISlurBuilder): Slur;
@@ -6621,6 +6885,11 @@ declare module 'musicxml-interfaces/builders' {
 	    type: (type: StartStop) => ITupletBuilder;
 	    showType: (showType: ActualBothNone) => ITupletBuilder;
 	    tupletActual: (build: TupletActual | ((builder: ITupletActualBuilder) => ITupletActualBuilder)) => ITupletBuilder;
+	    defaultX: (defaultX: number) => ITupletBuilder;
+	    relativeY: (relativeY: number) => ITupletBuilder;
+	    defaultY: (defaultY: number) => ITupletBuilder;
+	    relativeX: (relativeX: number) => ITupletBuilder;
+	    placement: (placement: AboveBelow) => ITupletBuilder;
 	    lineShape: (lineShape: StraightCurved) => ITupletBuilder;
 	}
 	export function patchTuplet(base: Tuplet, builder: (build: ITupletBuilder) => ITupletBuilder): IAny[];
@@ -6655,6 +6924,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => ITupletNumberBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITupletNumberBuilder;
 	    fontSize: (fontSize: string) => ITupletNumberBuilder;
+	    color: (color: string) => ITupletNumberBuilder;
 	}
 	export function patchTupletNumber(base: TupletNumber, builder: (build: ITupletNumberBuilder) => ITupletNumberBuilder): IAny[];
 	export function buildTupletNumber(builder: (build: ITupletNumberBuilder) => ITupletNumberBuilder): TupletNumber;
@@ -6666,6 +6936,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => ITupletTypeBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITupletTypeBuilder;
 	    fontSize: (fontSize: string) => ITupletTypeBuilder;
+	    color: (color: string) => ITupletTypeBuilder;
 	}
 	export function patchTupletType(base: TupletType, builder: (build: ITupletTypeBuilder) => ITupletTypeBuilder): IAny[];
 	export function buildTupletType(builder: (build: ITupletTypeBuilder) => ITupletTypeBuilder): TupletType;
@@ -6676,6 +6947,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => ITupletDotBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITupletDotBuilder;
 	    fontSize: (fontSize: string) => ITupletDotBuilder;
+	    color: (color: string) => ITupletDotBuilder;
 	}
 	export function patchTupletDot(base: TupletDot, builder: (build: ITupletDotBuilder) => ITupletDotBuilder): IAny[];
 	export function buildTupletDot(builder: (build: ITupletDotBuilder) => ITupletDotBuilder): TupletDot;
@@ -6685,7 +6957,18 @@ declare module 'musicxml-interfaces/builders' {
 	    text: (text: string) => IGlissandoBuilder;
 	    type: (type: StartStop) => IGlissandoBuilder;
 	    normal: (normal: number) => IGlissandoBuilder;
+	    defaultX: (defaultX: number) => IGlissandoBuilder;
+	    relativeY: (relativeY: number) => IGlissandoBuilder;
+	    defaultY: (defaultY: number) => IGlissandoBuilder;
+	    relativeX: (relativeX: number) => IGlissandoBuilder;
+	    fontFamily: (fontFamily: string) => IGlissandoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IGlissandoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IGlissandoBuilder;
+	    fontSize: (fontSize: string) => IGlissandoBuilder;
+	    color: (color: string) => IGlissandoBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => IGlissandoBuilder;
+	    dashLength: (dashLength: number) => IGlissandoBuilder;
+	    spaceLength: (spaceLength: number) => IGlissandoBuilder;
 	}
 	export function patchGlissando(base: Glissando, builder: (build: IGlissandoBuilder) => IGlissandoBuilder): IAny[];
 	export function buildGlissando(builder: (build: IGlissandoBuilder) => IGlissandoBuilder): Glissando;
@@ -6695,7 +6978,22 @@ declare module 'musicxml-interfaces/builders' {
 	    text: (text: string) => ISlideBuilder;
 	    type: (type: StartStop) => ISlideBuilder;
 	    normal: (normal: number) => ISlideBuilder;
+	    defaultX: (defaultX: number) => ISlideBuilder;
+	    relativeY: (relativeY: number) => ISlideBuilder;
+	    defaultY: (defaultY: number) => ISlideBuilder;
+	    relativeX: (relativeX: number) => ISlideBuilder;
+	    fontFamily: (fontFamily: string) => ISlideBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ISlideBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ISlideBuilder;
+	    fontSize: (fontSize: string) => ISlideBuilder;
+	    color: (color: string) => ISlideBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => ISlideBuilder;
+	    dashLength: (dashLength: number) => ISlideBuilder;
+	    spaceLength: (spaceLength: number) => ISlideBuilder;
+	    accelerate: (accelerate: boolean) => ISlideBuilder;
+	    beats: (beats: number) => ISlideBuilder;
+	    firstBeat: (firstBeat: number) => ISlideBuilder;
+	    lastBeat: (lastBeat: number) => ISlideBuilder;
 	}
 	export function patchSlide(base: Slide, builder: (build: ISlideBuilder) => ISlideBuilder): IAny[];
 	export function buildSlide(builder: (build: ISlideBuilder) => ISlideBuilder): Slide;
@@ -6704,7 +7002,17 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    type: (type: StartStopSingle) => IOtherNotationBuilder;
 	    data: (data: string) => IOtherNotationBuilder;
+	    defaultX: (defaultX: number) => IOtherNotationBuilder;
+	    relativeY: (relativeY: number) => IOtherNotationBuilder;
+	    defaultY: (defaultY: number) => IOtherNotationBuilder;
+	    relativeX: (relativeX: number) => IOtherNotationBuilder;
+	    fontFamily: (fontFamily: string) => IOtherNotationBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOtherNotationBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOtherNotationBuilder;
+	    fontSize: (fontSize: string) => IOtherNotationBuilder;
+	    color: (color: string) => IOtherNotationBuilder;
 	    printObject: (printObject: boolean) => IOtherNotationBuilder;
+	    placement: (placement: AboveBelow) => IOtherNotationBuilder;
 	}
 	export function patchOtherNotation(base: OtherNotation, builder: (build: IOtherNotationBuilder) => IOtherNotationBuilder): IAny[];
 	export function buildOtherNotation(builder: (build: IOtherNotationBuilder) => IOtherNotationBuilder): OtherNotation;
@@ -6713,6 +7021,17 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    data: (data: string) => IOtherDirectionBuilder;
 	    printObject: (printObject: boolean) => IOtherDirectionBuilder;
+	    defaultX: (defaultX: number) => IOtherDirectionBuilder;
+	    relativeY: (relativeY: number) => IOtherDirectionBuilder;
+	    defaultY: (defaultY: number) => IOtherDirectionBuilder;
+	    relativeX: (relativeX: number) => IOtherDirectionBuilder;
+	    fontFamily: (fontFamily: string) => IOtherDirectionBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOtherDirectionBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOtherDirectionBuilder;
+	    fontSize: (fontSize: string) => IOtherDirectionBuilder;
+	    color: (color: string) => IOtherDirectionBuilder;
+	    halign: (halign: LeftCenterRight) => IOtherDirectionBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IOtherDirectionBuilder;
 	}
 	export function patchOtherDirection(base: OtherDirection, builder: (build: IOtherDirectionBuilder) => IOtherDirectionBuilder): IAny[];
 	export function buildOtherDirection(builder: (build: IOtherDirectionBuilder) => IOtherDirectionBuilder): OtherDirection;
@@ -6739,6 +7058,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IOrnamentsBuilder;
 	    defaultY: (defaultY: number) => IOrnamentsBuilder;
 	    relativeX: (relativeX: number) => IOrnamentsBuilder;
+	    fontFamily: (fontFamily: string) => IOrnamentsBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOrnamentsBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOrnamentsBuilder;
+	    fontSize: (fontSize: string) => IOrnamentsBuilder;
+	    color: (color: string) => IOrnamentsBuilder;
+	    placement: (placement: AboveBelow) => IOrnamentsBuilder;
+	    startNote: (startNote: UpperMainBelow) => IOrnamentsBuilder;
+	    accelerate: (accelerate: boolean) => IOrnamentsBuilder;
+	    beats: (beats: number) => IOrnamentsBuilder;
+	    lastBeat: (lastBeat: number) => IOrnamentsBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IOrnamentsBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IOrnamentsBuilder;
+	    secondBeat: (secondBeat: number) => IOrnamentsBuilder;
 	}
 	export function patchOrnaments(base: Ornaments, builder: (build: IOrnamentsBuilder) => IOrnamentsBuilder): IAny[];
 	export function buildOrnaments(builder: (build: IOrnamentsBuilder) => IOrnamentsBuilder): Ornaments;
@@ -6749,6 +7081,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ITrillMarkBuilder;
 	    defaultY: (defaultY: number) => ITrillMarkBuilder;
 	    relativeX: (relativeX: number) => ITrillMarkBuilder;
+	    fontFamily: (fontFamily: string) => ITrillMarkBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITrillMarkBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITrillMarkBuilder;
+	    fontSize: (fontSize: string) => ITrillMarkBuilder;
+	    color: (color: string) => ITrillMarkBuilder;
+	    placement: (placement: AboveBelow) => ITrillMarkBuilder;
+	    startNote: (startNote: UpperMainBelow) => ITrillMarkBuilder;
+	    accelerate: (accelerate: boolean) => ITrillMarkBuilder;
+	    beats: (beats: number) => ITrillMarkBuilder;
+	    lastBeat: (lastBeat: number) => ITrillMarkBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => ITrillMarkBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => ITrillMarkBuilder;
+	    secondBeat: (secondBeat: number) => ITrillMarkBuilder;
 	}
 	export function patchTrillMark(base: TrillMark, builder: (build: ITrillMarkBuilder) => ITrillMarkBuilder): IAny[];
 	export function buildTrillMark(builder: (build: ITrillMarkBuilder) => ITrillMarkBuilder): TrillMark;
@@ -6760,6 +7105,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ITurnBuilder;
 	    defaultY: (defaultY: number) => ITurnBuilder;
 	    relativeX: (relativeX: number) => ITurnBuilder;
+	    fontFamily: (fontFamily: string) => ITurnBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITurnBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITurnBuilder;
+	    fontSize: (fontSize: string) => ITurnBuilder;
+	    color: (color: string) => ITurnBuilder;
+	    placement: (placement: AboveBelow) => ITurnBuilder;
+	    startNote: (startNote: UpperMainBelow) => ITurnBuilder;
+	    accelerate: (accelerate: boolean) => ITurnBuilder;
+	    beats: (beats: number) => ITurnBuilder;
+	    lastBeat: (lastBeat: number) => ITurnBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => ITurnBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => ITurnBuilder;
+	    secondBeat: (secondBeat: number) => ITurnBuilder;
 	}
 	export function patchTurn(base: Turn, builder: (build: ITurnBuilder) => ITurnBuilder): IAny[];
 	export function buildTurn(builder: (build: ITurnBuilder) => ITurnBuilder): Turn;
@@ -6771,6 +7129,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDelayedTurnBuilder;
 	    defaultY: (defaultY: number) => IDelayedTurnBuilder;
 	    relativeX: (relativeX: number) => IDelayedTurnBuilder;
+	    fontFamily: (fontFamily: string) => IDelayedTurnBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDelayedTurnBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDelayedTurnBuilder;
+	    fontSize: (fontSize: string) => IDelayedTurnBuilder;
+	    color: (color: string) => IDelayedTurnBuilder;
+	    placement: (placement: AboveBelow) => IDelayedTurnBuilder;
+	    startNote: (startNote: UpperMainBelow) => IDelayedTurnBuilder;
+	    accelerate: (accelerate: boolean) => IDelayedTurnBuilder;
+	    beats: (beats: number) => IDelayedTurnBuilder;
+	    lastBeat: (lastBeat: number) => IDelayedTurnBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IDelayedTurnBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IDelayedTurnBuilder;
+	    secondBeat: (secondBeat: number) => IDelayedTurnBuilder;
 	}
 	export function patchDelayedTurn(base: DelayedTurn, builder: (build: IDelayedTurnBuilder) => IDelayedTurnBuilder): IAny[];
 	export function buildDelayedTurn(builder: (build: IDelayedTurnBuilder) => IDelayedTurnBuilder): DelayedTurn;
@@ -6782,6 +7153,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IInvertedTurnBuilder;
 	    defaultY: (defaultY: number) => IInvertedTurnBuilder;
 	    relativeX: (relativeX: number) => IInvertedTurnBuilder;
+	    fontFamily: (fontFamily: string) => IInvertedTurnBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IInvertedTurnBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IInvertedTurnBuilder;
+	    fontSize: (fontSize: string) => IInvertedTurnBuilder;
+	    color: (color: string) => IInvertedTurnBuilder;
+	    placement: (placement: AboveBelow) => IInvertedTurnBuilder;
+	    startNote: (startNote: UpperMainBelow) => IInvertedTurnBuilder;
+	    accelerate: (accelerate: boolean) => IInvertedTurnBuilder;
+	    beats: (beats: number) => IInvertedTurnBuilder;
+	    lastBeat: (lastBeat: number) => IInvertedTurnBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IInvertedTurnBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IInvertedTurnBuilder;
+	    secondBeat: (secondBeat: number) => IInvertedTurnBuilder;
 	}
 	export function patchInvertedTurn(base: InvertedTurn, builder: (build: IInvertedTurnBuilder) => IInvertedTurnBuilder): IAny[];
 	export function buildInvertedTurn(builder: (build: IInvertedTurnBuilder) => IInvertedTurnBuilder): InvertedTurn;
@@ -6793,6 +7177,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDelayedInvertedTurnBuilder;
 	    defaultY: (defaultY: number) => IDelayedInvertedTurnBuilder;
 	    relativeX: (relativeX: number) => IDelayedInvertedTurnBuilder;
+	    fontFamily: (fontFamily: string) => IDelayedInvertedTurnBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDelayedInvertedTurnBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDelayedInvertedTurnBuilder;
+	    fontSize: (fontSize: string) => IDelayedInvertedTurnBuilder;
+	    color: (color: string) => IDelayedInvertedTurnBuilder;
+	    placement: (placement: AboveBelow) => IDelayedInvertedTurnBuilder;
+	    startNote: (startNote: UpperMainBelow) => IDelayedInvertedTurnBuilder;
+	    accelerate: (accelerate: boolean) => IDelayedInvertedTurnBuilder;
+	    beats: (beats: number) => IDelayedInvertedTurnBuilder;
+	    lastBeat: (lastBeat: number) => IDelayedInvertedTurnBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IDelayedInvertedTurnBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IDelayedInvertedTurnBuilder;
+	    secondBeat: (secondBeat: number) => IDelayedInvertedTurnBuilder;
 	}
 	export function patchDelayedInvertedTurn(base: DelayedInvertedTurn, builder: (build: IDelayedInvertedTurnBuilder) => IDelayedInvertedTurnBuilder): IAny[];
 	export function buildDelayedInvertedTurn(builder: (build: IDelayedInvertedTurnBuilder) => IDelayedInvertedTurnBuilder): DelayedInvertedTurn;
@@ -6803,6 +7200,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IVerticalTurnBuilder;
 	    defaultY: (defaultY: number) => IVerticalTurnBuilder;
 	    relativeX: (relativeX: number) => IVerticalTurnBuilder;
+	    fontFamily: (fontFamily: string) => IVerticalTurnBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IVerticalTurnBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IVerticalTurnBuilder;
+	    fontSize: (fontSize: string) => IVerticalTurnBuilder;
+	    color: (color: string) => IVerticalTurnBuilder;
+	    placement: (placement: AboveBelow) => IVerticalTurnBuilder;
+	    startNote: (startNote: UpperMainBelow) => IVerticalTurnBuilder;
+	    accelerate: (accelerate: boolean) => IVerticalTurnBuilder;
+	    beats: (beats: number) => IVerticalTurnBuilder;
+	    lastBeat: (lastBeat: number) => IVerticalTurnBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IVerticalTurnBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IVerticalTurnBuilder;
+	    secondBeat: (secondBeat: number) => IVerticalTurnBuilder;
 	}
 	export function patchVerticalTurn(base: VerticalTurn, builder: (build: IVerticalTurnBuilder) => IVerticalTurnBuilder): IAny[];
 	export function buildVerticalTurn(builder: (build: IVerticalTurnBuilder) => IVerticalTurnBuilder): VerticalTurn;
@@ -6813,6 +7223,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IShakeBuilder;
 	    defaultY: (defaultY: number) => IShakeBuilder;
 	    relativeX: (relativeX: number) => IShakeBuilder;
+	    fontFamily: (fontFamily: string) => IShakeBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IShakeBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IShakeBuilder;
+	    fontSize: (fontSize: string) => IShakeBuilder;
+	    color: (color: string) => IShakeBuilder;
+	    placement: (placement: AboveBelow) => IShakeBuilder;
+	    startNote: (startNote: UpperMainBelow) => IShakeBuilder;
+	    accelerate: (accelerate: boolean) => IShakeBuilder;
+	    beats: (beats: number) => IShakeBuilder;
+	    lastBeat: (lastBeat: number) => IShakeBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IShakeBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IShakeBuilder;
+	    secondBeat: (secondBeat: number) => IShakeBuilder;
 	}
 	export function patchShake(base: Shake, builder: (build: IShakeBuilder) => IShakeBuilder): IAny[];
 	export function buildShake(builder: (build: IShakeBuilder) => IShakeBuilder): Shake;
@@ -6826,6 +7249,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IMordentBuilder;
 	    defaultY: (defaultY: number) => IMordentBuilder;
 	    relativeX: (relativeX: number) => IMordentBuilder;
+	    fontFamily: (fontFamily: string) => IMordentBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IMordentBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IMordentBuilder;
+	    fontSize: (fontSize: string) => IMordentBuilder;
+	    color: (color: string) => IMordentBuilder;
+	    placement: (placement: AboveBelow) => IMordentBuilder;
+	    startNote: (startNote: UpperMainBelow) => IMordentBuilder;
+	    accelerate: (accelerate: boolean) => IMordentBuilder;
+	    beats: (beats: number) => IMordentBuilder;
+	    lastBeat: (lastBeat: number) => IMordentBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IMordentBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IMordentBuilder;
+	    secondBeat: (secondBeat: number) => IMordentBuilder;
 	}
 	export function patchMordent(base: Mordent, builder: (build: IMordentBuilder) => IMordentBuilder): IAny[];
 	export function buildMordent(builder: (build: IMordentBuilder) => IMordentBuilder): Mordent;
@@ -6839,6 +7275,19 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IInvertedMordentBuilder;
 	    defaultY: (defaultY: number) => IInvertedMordentBuilder;
 	    relativeX: (relativeX: number) => IInvertedMordentBuilder;
+	    fontFamily: (fontFamily: string) => IInvertedMordentBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IInvertedMordentBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IInvertedMordentBuilder;
+	    fontSize: (fontSize: string) => IInvertedMordentBuilder;
+	    color: (color: string) => IInvertedMordentBuilder;
+	    placement: (placement: AboveBelow) => IInvertedMordentBuilder;
+	    startNote: (startNote: UpperMainBelow) => IInvertedMordentBuilder;
+	    accelerate: (accelerate: boolean) => IInvertedMordentBuilder;
+	    beats: (beats: number) => IInvertedMordentBuilder;
+	    lastBeat: (lastBeat: number) => IInvertedMordentBuilder;
+	    trillStep: (trillStep: WholeHalfUnison) => IInvertedMordentBuilder;
+	    twoNoteTurn: (twoNoteTurn: WholeHalfNone) => IInvertedMordentBuilder;
+	    secondBeat: (secondBeat: number) => IInvertedMordentBuilder;
 	}
 	export function patchInvertedMordent(base: InvertedMordent, builder: (build: IInvertedMordentBuilder) => IInvertedMordentBuilder): IAny[];
 	export function buildInvertedMordent(builder: (build: IInvertedMordentBuilder) => IInvertedMordentBuilder): InvertedMordent;
@@ -6849,6 +7298,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ISchleiferBuilder;
 	    defaultY: (defaultY: number) => ISchleiferBuilder;
 	    relativeX: (relativeX: number) => ISchleiferBuilder;
+	    fontFamily: (fontFamily: string) => ISchleiferBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ISchleiferBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ISchleiferBuilder;
+	    fontSize: (fontSize: string) => ISchleiferBuilder;
+	    color: (color: string) => ISchleiferBuilder;
+	    placement: (placement: AboveBelow) => ISchleiferBuilder;
 	}
 	export function patchSchleifer(base: Schleifer, builder: (build: ISchleiferBuilder) => ISchleiferBuilder): IAny[];
 	export function buildSchleifer(builder: (build: ISchleiferBuilder) => ISchleiferBuilder): Schleifer;
@@ -6861,6 +7316,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ITremoloBuilder;
 	    defaultY: (defaultY: number) => ITremoloBuilder;
 	    relativeX: (relativeX: number) => ITremoloBuilder;
+	    fontFamily: (fontFamily: string) => ITremoloBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITremoloBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITremoloBuilder;
+	    fontSize: (fontSize: string) => ITremoloBuilder;
+	    color: (color: string) => ITremoloBuilder;
+	    placement: (placement: AboveBelow) => ITremoloBuilder;
 	}
 	export function patchTremolo(base: Tremolo, builder: (build: ITremoloBuilder) => ITremoloBuilder): IAny[];
 	export function buildTremolo(builder: (build: ITremoloBuilder) => ITremoloBuilder): Tremolo;
@@ -6873,6 +7334,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IOtherOrnamentBuilder;
 	    defaultY: (defaultY: number) => IOtherOrnamentBuilder;
 	    relativeX: (relativeX: number) => IOtherOrnamentBuilder;
+	    fontFamily: (fontFamily: string) => IOtherOrnamentBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOtherOrnamentBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOtherOrnamentBuilder;
+	    fontSize: (fontSize: string) => IOtherOrnamentBuilder;
+	    color: (color: string) => IOtherOrnamentBuilder;
+	    placement: (placement: AboveBelow) => IOtherOrnamentBuilder;
 	}
 	export function patchOtherOrnament(base: OtherOrnament, builder: (build: IOtherOrnamentBuilder) => IOtherOrnamentBuilder): IAny[];
 	export function buildOtherOrnament(builder: (build: IOtherOrnamentBuilder) => IOtherOrnamentBuilder): OtherOrnament;
@@ -6884,6 +7351,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IAccidentalMarkBuilder;
 	    defaultY: (defaultY: number) => IAccidentalMarkBuilder;
 	    relativeX: (relativeX: number) => IAccidentalMarkBuilder;
+	    fontFamily: (fontFamily: string) => IAccidentalMarkBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IAccidentalMarkBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IAccidentalMarkBuilder;
+	    fontSize: (fontSize: string) => IAccidentalMarkBuilder;
+	    color: (color: string) => IAccidentalMarkBuilder;
+	    placement: (placement: AboveBelow) => IAccidentalMarkBuilder;
 	}
 	export function patchAccidentalMark(base: AccidentalMark, builder: (build: IAccidentalMarkBuilder) => IAccidentalMarkBuilder): IAny[];
 	export function buildAccidentalMark(builder: (build: IAccidentalMarkBuilder) => IAccidentalMarkBuilder): AccidentalMark;
@@ -6924,6 +7397,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IUpBowBuilder;
 	    defaultY: (defaultY: number) => IUpBowBuilder;
 	    relativeX: (relativeX: number) => IUpBowBuilder;
+	    fontFamily: (fontFamily: string) => IUpBowBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IUpBowBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IUpBowBuilder;
+	    fontSize: (fontSize: string) => IUpBowBuilder;
+	    color: (color: string) => IUpBowBuilder;
+	    placement: (placement: AboveBelow) => IUpBowBuilder;
 	}
 	export function patchUpBow(base: UpBow, builder: (build: IUpBowBuilder) => IUpBowBuilder): IAny[];
 	export function buildUpBow(builder: (build: IUpBowBuilder) => IUpBowBuilder): UpBow;
@@ -6934,6 +7413,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDownBowBuilder;
 	    defaultY: (defaultY: number) => IDownBowBuilder;
 	    relativeX: (relativeX: number) => IDownBowBuilder;
+	    fontFamily: (fontFamily: string) => IDownBowBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDownBowBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDownBowBuilder;
+	    fontSize: (fontSize: string) => IDownBowBuilder;
+	    color: (color: string) => IDownBowBuilder;
+	    placement: (placement: AboveBelow) => IDownBowBuilder;
 	}
 	export function patchDownBow(base: DownBow, builder: (build: IDownBowBuilder) => IDownBowBuilder): IAny[];
 	export function buildDownBow(builder: (build: IDownBowBuilder) => IDownBowBuilder): DownBow;
@@ -6945,7 +7430,17 @@ declare module 'musicxml-interfaces/builders' {
 	    soundingPitch: (soundingPitch: boolean) => IHarmonicBuilder;
 	    natural: (natural: boolean) => IHarmonicBuilder;
 	    basePitch: (basePitch: boolean) => IHarmonicBuilder;
+	    defaultX: (defaultX: number) => IHarmonicBuilder;
+	    relativeY: (relativeY: number) => IHarmonicBuilder;
+	    defaultY: (defaultY: number) => IHarmonicBuilder;
+	    relativeX: (relativeX: number) => IHarmonicBuilder;
+	    fontFamily: (fontFamily: string) => IHarmonicBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IHarmonicBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IHarmonicBuilder;
+	    fontSize: (fontSize: string) => IHarmonicBuilder;
+	    color: (color: string) => IHarmonicBuilder;
 	    printObject: (printObject: boolean) => IHarmonicBuilder;
+	    placement: (placement: AboveBelow) => IHarmonicBuilder;
 	}
 	export function patchHarmonic(base: Harmonic, builder: (build: IHarmonicBuilder) => IHarmonicBuilder): IAny[];
 	export function buildHarmonic(builder: (build: IHarmonicBuilder) => IHarmonicBuilder): Harmonic;
@@ -6956,6 +7451,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IOpenStringBuilder;
 	    defaultY: (defaultY: number) => IOpenStringBuilder;
 	    relativeX: (relativeX: number) => IOpenStringBuilder;
+	    fontFamily: (fontFamily: string) => IOpenStringBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOpenStringBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOpenStringBuilder;
+	    fontSize: (fontSize: string) => IOpenStringBuilder;
+	    color: (color: string) => IOpenStringBuilder;
+	    placement: (placement: AboveBelow) => IOpenStringBuilder;
 	}
 	export function patchOpenString(base: OpenString, builder: (build: IOpenStringBuilder) => IOpenStringBuilder): IAny[];
 	export function buildOpenString(builder: (build: IOpenStringBuilder) => IOpenStringBuilder): OpenString;
@@ -6966,6 +7467,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IThumbPositionBuilder;
 	    defaultY: (defaultY: number) => IThumbPositionBuilder;
 	    relativeX: (relativeX: number) => IThumbPositionBuilder;
+	    fontFamily: (fontFamily: string) => IThumbPositionBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IThumbPositionBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IThumbPositionBuilder;
+	    fontSize: (fontSize: string) => IThumbPositionBuilder;
+	    color: (color: string) => IThumbPositionBuilder;
+	    placement: (placement: AboveBelow) => IThumbPositionBuilder;
 	}
 	export function patchThumbPosition(base: ThumbPosition, builder: (build: IThumbPositionBuilder) => IThumbPositionBuilder): IAny[];
 	export function buildThumbPosition(builder: (build: IThumbPositionBuilder) => IThumbPositionBuilder): ThumbPosition;
@@ -6977,6 +7484,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPluckBuilder;
 	    defaultY: (defaultY: number) => IPluckBuilder;
 	    relativeX: (relativeX: number) => IPluckBuilder;
+	    fontFamily: (fontFamily: string) => IPluckBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPluckBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPluckBuilder;
+	    fontSize: (fontSize: string) => IPluckBuilder;
+	    color: (color: string) => IPluckBuilder;
+	    placement: (placement: AboveBelow) => IPluckBuilder;
 	}
 	export function patchPluck(base: Pluck, builder: (build: IPluckBuilder) => IPluckBuilder): IAny[];
 	export function buildPluck(builder: (build: IPluckBuilder) => IPluckBuilder): Pluck;
@@ -6987,6 +7500,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDoubleTongueBuilder;
 	    defaultY: (defaultY: number) => IDoubleTongueBuilder;
 	    relativeX: (relativeX: number) => IDoubleTongueBuilder;
+	    fontFamily: (fontFamily: string) => IDoubleTongueBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDoubleTongueBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDoubleTongueBuilder;
+	    fontSize: (fontSize: string) => IDoubleTongueBuilder;
+	    color: (color: string) => IDoubleTongueBuilder;
+	    placement: (placement: AboveBelow) => IDoubleTongueBuilder;
 	}
 	export function patchDoubleTongue(base: DoubleTongue, builder: (build: IDoubleTongueBuilder) => IDoubleTongueBuilder): IAny[];
 	export function buildDoubleTongue(builder: (build: IDoubleTongueBuilder) => IDoubleTongueBuilder): DoubleTongue;
@@ -6997,6 +7516,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ITripleTongueBuilder;
 	    defaultY: (defaultY: number) => ITripleTongueBuilder;
 	    relativeX: (relativeX: number) => ITripleTongueBuilder;
+	    fontFamily: (fontFamily: string) => ITripleTongueBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITripleTongueBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITripleTongueBuilder;
+	    fontSize: (fontSize: string) => ITripleTongueBuilder;
+	    color: (color: string) => ITripleTongueBuilder;
+	    placement: (placement: AboveBelow) => ITripleTongueBuilder;
 	}
 	export function patchTripleTongue(base: TripleTongue, builder: (build: ITripleTongueBuilder) => ITripleTongueBuilder): IAny[];
 	export function buildTripleTongue(builder: (build: ITripleTongueBuilder) => ITripleTongueBuilder): TripleTongue;
@@ -7007,6 +7532,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStoppedBuilder;
 	    defaultY: (defaultY: number) => IStoppedBuilder;
 	    relativeX: (relativeX: number) => IStoppedBuilder;
+	    fontFamily: (fontFamily: string) => IStoppedBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IStoppedBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IStoppedBuilder;
+	    fontSize: (fontSize: string) => IStoppedBuilder;
+	    color: (color: string) => IStoppedBuilder;
+	    placement: (placement: AboveBelow) => IStoppedBuilder;
 	}
 	export function patchStopped(base: Stopped, builder: (build: IStoppedBuilder) => IStoppedBuilder): IAny[];
 	export function buildStopped(builder: (build: IStoppedBuilder) => IStoppedBuilder): Stopped;
@@ -7017,6 +7548,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ISnapPizzicatoBuilder;
 	    defaultY: (defaultY: number) => ISnapPizzicatoBuilder;
 	    relativeX: (relativeX: number) => ISnapPizzicatoBuilder;
+	    fontFamily: (fontFamily: string) => ISnapPizzicatoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ISnapPizzicatoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ISnapPizzicatoBuilder;
+	    fontSize: (fontSize: string) => ISnapPizzicatoBuilder;
+	    color: (color: string) => ISnapPizzicatoBuilder;
+	    placement: (placement: AboveBelow) => ISnapPizzicatoBuilder;
 	}
 	export function patchSnapPizzicato(base: SnapPizzicato, builder: (build: ISnapPizzicatoBuilder) => ISnapPizzicatoBuilder): IAny[];
 	export function buildSnapPizzicato(builder: (build: ISnapPizzicatoBuilder) => ISnapPizzicatoBuilder): SnapPizzicato;
@@ -7030,6 +7567,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IHammerOnBuilder;
 	    defaultY: (defaultY: number) => IHammerOnBuilder;
 	    relativeX: (relativeX: number) => IHammerOnBuilder;
+	    fontFamily: (fontFamily: string) => IHammerOnBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IHammerOnBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IHammerOnBuilder;
+	    fontSize: (fontSize: string) => IHammerOnBuilder;
+	    color: (color: string) => IHammerOnBuilder;
+	    placement: (placement: AboveBelow) => IHammerOnBuilder;
 	}
 	export function patchHammerOn(base: HammerOn, builder: (build: IHammerOnBuilder) => IHammerOnBuilder): IAny[];
 	export function buildHammerOn(builder: (build: IHammerOnBuilder) => IHammerOnBuilder): HammerOn;
@@ -7043,6 +7586,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPullOffBuilder;
 	    defaultY: (defaultY: number) => IPullOffBuilder;
 	    relativeX: (relativeX: number) => IPullOffBuilder;
+	    fontFamily: (fontFamily: string) => IPullOffBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPullOffBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPullOffBuilder;
+	    fontSize: (fontSize: string) => IPullOffBuilder;
+	    color: (color: string) => IPullOffBuilder;
+	    placement: (placement: AboveBelow) => IPullOffBuilder;
 	}
 	export function patchPullOff(base: PullOff, builder: (build: IPullOffBuilder) => IPullOffBuilder): IAny[];
 	export function buildPullOff(builder: (build: IPullOffBuilder) => IPullOffBuilder): PullOff;
@@ -7057,6 +7606,15 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IBendBuilder;
 	    defaultY: (defaultY: number) => IBendBuilder;
 	    relativeX: (relativeX: number) => IBendBuilder;
+	    fontFamily: (fontFamily: string) => IBendBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IBendBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IBendBuilder;
+	    fontSize: (fontSize: string) => IBendBuilder;
+	    color: (color: string) => IBendBuilder;
+	    accelerate: (accelerate: boolean) => IBendBuilder;
+	    beats: (beats: number) => IBendBuilder;
+	    firstBeat: (firstBeat: number) => IBendBuilder;
+	    lastBeat: (lastBeat: number) => IBendBuilder;
 	}
 	export function patchBend(base: Bend, builder: (build: IBendBuilder) => IBendBuilder): IAny[];
 	export function buildBend(builder: (build: IBendBuilder) => IBendBuilder): Bend;
@@ -7068,6 +7626,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IWithBarBuilder;
 	    defaultY: (defaultY: number) => IWithBarBuilder;
 	    relativeX: (relativeX: number) => IWithBarBuilder;
+	    fontFamily: (fontFamily: string) => IWithBarBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IWithBarBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IWithBarBuilder;
+	    fontSize: (fontSize: string) => IWithBarBuilder;
+	    color: (color: string) => IWithBarBuilder;
+	    placement: (placement: AboveBelow) => IWithBarBuilder;
 	}
 	export function patchWithBar(base: WithBar, builder: (build: IWithBarBuilder) => IWithBarBuilder): IAny[];
 	export function buildWithBar(builder: (build: IWithBarBuilder) => IWithBarBuilder): WithBar;
@@ -7079,6 +7643,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ITapBuilder;
 	    defaultY: (defaultY: number) => ITapBuilder;
 	    relativeX: (relativeX: number) => ITapBuilder;
+	    fontFamily: (fontFamily: string) => ITapBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITapBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITapBuilder;
+	    fontSize: (fontSize: string) => ITapBuilder;
+	    color: (color: string) => ITapBuilder;
+	    placement: (placement: AboveBelow) => ITapBuilder;
 	}
 	export function patchTap(base: Tap, builder: (build: ITapBuilder) => ITapBuilder): IAny[];
 	export function buildTap(builder: (build: ITapBuilder) => ITapBuilder): Tap;
@@ -7090,6 +7660,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IHeelBuilder;
 	    defaultY: (defaultY: number) => IHeelBuilder;
 	    relativeX: (relativeX: number) => IHeelBuilder;
+	    fontFamily: (fontFamily: string) => IHeelBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IHeelBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IHeelBuilder;
+	    fontSize: (fontSize: string) => IHeelBuilder;
+	    color: (color: string) => IHeelBuilder;
+	    placement: (placement: AboveBelow) => IHeelBuilder;
 	}
 	export function patchHeel(base: Heel, builder: (build: IHeelBuilder) => IHeelBuilder): IAny[];
 	export function buildHeel(builder: (build: IHeelBuilder) => IHeelBuilder): Heel;
@@ -7101,6 +7677,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IToeBuilder;
 	    defaultY: (defaultY: number) => IToeBuilder;
 	    relativeX: (relativeX: number) => IToeBuilder;
+	    fontFamily: (fontFamily: string) => IToeBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IToeBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IToeBuilder;
+	    fontSize: (fontSize: string) => IToeBuilder;
+	    color: (color: string) => IToeBuilder;
+	    placement: (placement: AboveBelow) => IToeBuilder;
 	}
 	export function patchToe(base: Toe, builder: (build: IToeBuilder) => IToeBuilder): IAny[];
 	export function buildToe(builder: (build: IToeBuilder) => IToeBuilder): Toe;
@@ -7111,6 +7693,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IFingernailsBuilder;
 	    defaultY: (defaultY: number) => IFingernailsBuilder;
 	    relativeX: (relativeX: number) => IFingernailsBuilder;
+	    fontFamily: (fontFamily: string) => IFingernailsBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFingernailsBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFingernailsBuilder;
+	    fontSize: (fontSize: string) => IFingernailsBuilder;
+	    color: (color: string) => IFingernailsBuilder;
+	    placement: (placement: AboveBelow) => IFingernailsBuilder;
 	}
 	export function patchFingernails(base: Fingernails, builder: (build: IFingernailsBuilder) => IFingernailsBuilder): IAny[];
 	export function buildFingernails(builder: (build: IFingernailsBuilder) => IFingernailsBuilder): Fingernails;
@@ -7124,6 +7712,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IHoleBuilder;
 	    defaultY: (defaultY: number) => IHoleBuilder;
 	    relativeX: (relativeX: number) => IHoleBuilder;
+	    fontFamily: (fontFamily: string) => IHoleBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IHoleBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IHoleBuilder;
+	    fontSize: (fontSize: string) => IHoleBuilder;
+	    color: (color: string) => IHoleBuilder;
+	    placement: (placement: AboveBelow) => IHoleBuilder;
 	}
 	export function patchHole(base: Hole, builder: (build: IHoleBuilder) => IHoleBuilder): IAny[];
 	export function buildHole(builder: (build: IHoleBuilder) => IHoleBuilder): Hole;
@@ -7145,6 +7739,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IArrowBuilder;
 	    defaultY: (defaultY: number) => IArrowBuilder;
 	    relativeX: (relativeX: number) => IArrowBuilder;
+	    fontFamily: (fontFamily: string) => IArrowBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IArrowBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IArrowBuilder;
+	    fontSize: (fontSize: string) => IArrowBuilder;
+	    color: (color: string) => IArrowBuilder;
+	    placement: (placement: AboveBelow) => IArrowBuilder;
 	}
 	export function patchArrow(base: Arrow, builder: (build: IArrowBuilder) => IArrowBuilder): IAny[];
 	export function buildArrow(builder: (build: IArrowBuilder) => IArrowBuilder): Arrow;
@@ -7156,6 +7756,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IHandbellBuilder;
 	    defaultY: (defaultY: number) => IHandbellBuilder;
 	    relativeX: (relativeX: number) => IHandbellBuilder;
+	    fontFamily: (fontFamily: string) => IHandbellBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IHandbellBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IHandbellBuilder;
+	    fontSize: (fontSize: string) => IHandbellBuilder;
+	    color: (color: string) => IHandbellBuilder;
+	    placement: (placement: AboveBelow) => IHandbellBuilder;
 	}
 	export function patchHandbell(base: Handbell, builder: (build: IHandbellBuilder) => IHandbellBuilder): IAny[];
 	export function buildHandbell(builder: (build: IHandbellBuilder) => IHandbellBuilder): Handbell;
@@ -7167,6 +7773,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IOtherTechnicalBuilder;
 	    defaultY: (defaultY: number) => IOtherTechnicalBuilder;
 	    relativeX: (relativeX: number) => IOtherTechnicalBuilder;
+	    fontFamily: (fontFamily: string) => IOtherTechnicalBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOtherTechnicalBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOtherTechnicalBuilder;
+	    fontSize: (fontSize: string) => IOtherTechnicalBuilder;
+	    color: (color: string) => IOtherTechnicalBuilder;
+	    placement: (placement: AboveBelow) => IOtherTechnicalBuilder;
 	}
 	export function patchOtherTechnical(base: OtherTechnical, builder: (build: IOtherTechnicalBuilder) => IOtherTechnicalBuilder): IAny[];
 	export function buildOtherTechnical(builder: (build: IOtherTechnicalBuilder) => IOtherTechnicalBuilder): OtherTechnical;
@@ -7201,6 +7813,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IAccentBuilder;
 	    defaultY: (defaultY: number) => IAccentBuilder;
 	    relativeX: (relativeX: number) => IAccentBuilder;
+	    fontFamily: (fontFamily: string) => IAccentBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IAccentBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IAccentBuilder;
+	    fontSize: (fontSize: string) => IAccentBuilder;
+	    color: (color: string) => IAccentBuilder;
+	    placement: (placement: AboveBelow) => IAccentBuilder;
 	}
 	export function patchAccent(base: Accent, builder: (build: IAccentBuilder) => IAccentBuilder): IAny[];
 	export function buildAccent(builder: (build: IAccentBuilder) => IAccentBuilder): Accent;
@@ -7212,6 +7830,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStrongAccentBuilder;
 	    defaultY: (defaultY: number) => IStrongAccentBuilder;
 	    relativeX: (relativeX: number) => IStrongAccentBuilder;
+	    fontFamily: (fontFamily: string) => IStrongAccentBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IStrongAccentBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IStrongAccentBuilder;
+	    fontSize: (fontSize: string) => IStrongAccentBuilder;
+	    color: (color: string) => IStrongAccentBuilder;
+	    placement: (placement: AboveBelow) => IStrongAccentBuilder;
 	}
 	export function patchStrongAccent(base: StrongAccent, builder: (build: IStrongAccentBuilder) => IStrongAccentBuilder): IAny[];
 	export function buildStrongAccent(builder: (build: IStrongAccentBuilder) => IStrongAccentBuilder): StrongAccent;
@@ -7222,6 +7846,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStaccatoBuilder;
 	    defaultY: (defaultY: number) => IStaccatoBuilder;
 	    relativeX: (relativeX: number) => IStaccatoBuilder;
+	    fontFamily: (fontFamily: string) => IStaccatoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IStaccatoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IStaccatoBuilder;
+	    fontSize: (fontSize: string) => IStaccatoBuilder;
+	    color: (color: string) => IStaccatoBuilder;
+	    placement: (placement: AboveBelow) => IStaccatoBuilder;
 	}
 	export function patchStaccato(base: Staccato, builder: (build: IStaccatoBuilder) => IStaccatoBuilder): IAny[];
 	export function buildStaccato(builder: (build: IStaccatoBuilder) => IStaccatoBuilder): Staccato;
@@ -7232,6 +7862,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ITenutoBuilder;
 	    defaultY: (defaultY: number) => ITenutoBuilder;
 	    relativeX: (relativeX: number) => ITenutoBuilder;
+	    fontFamily: (fontFamily: string) => ITenutoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ITenutoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ITenutoBuilder;
+	    fontSize: (fontSize: string) => ITenutoBuilder;
+	    color: (color: string) => ITenutoBuilder;
+	    placement: (placement: AboveBelow) => ITenutoBuilder;
 	}
 	export function patchTenuto(base: Tenuto, builder: (build: ITenutoBuilder) => ITenutoBuilder): IAny[];
 	export function buildTenuto(builder: (build: ITenutoBuilder) => ITenutoBuilder): Tenuto;
@@ -7242,6 +7878,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDetachedLegatoBuilder;
 	    defaultY: (defaultY: number) => IDetachedLegatoBuilder;
 	    relativeX: (relativeX: number) => IDetachedLegatoBuilder;
+	    fontFamily: (fontFamily: string) => IDetachedLegatoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDetachedLegatoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDetachedLegatoBuilder;
+	    fontSize: (fontSize: string) => IDetachedLegatoBuilder;
+	    color: (color: string) => IDetachedLegatoBuilder;
+	    placement: (placement: AboveBelow) => IDetachedLegatoBuilder;
 	}
 	export function patchDetachedLegato(base: DetachedLegato, builder: (build: IDetachedLegatoBuilder) => IDetachedLegatoBuilder): IAny[];
 	export function buildDetachedLegato(builder: (build: IDetachedLegatoBuilder) => IDetachedLegatoBuilder): DetachedLegato;
@@ -7252,6 +7894,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStaccatissimoBuilder;
 	    defaultY: (defaultY: number) => IStaccatissimoBuilder;
 	    relativeX: (relativeX: number) => IStaccatissimoBuilder;
+	    fontFamily: (fontFamily: string) => IStaccatissimoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IStaccatissimoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IStaccatissimoBuilder;
+	    fontSize: (fontSize: string) => IStaccatissimoBuilder;
+	    color: (color: string) => IStaccatissimoBuilder;
+	    placement: (placement: AboveBelow) => IStaccatissimoBuilder;
 	}
 	export function patchStaccatissimo(base: Staccatissimo, builder: (build: IStaccatissimoBuilder) => IStaccatissimoBuilder): IAny[];
 	export function buildStaccatissimo(builder: (build: IStaccatissimoBuilder) => IStaccatissimoBuilder): Staccatissimo;
@@ -7262,12 +7910,31 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ISpiccatoBuilder;
 	    defaultY: (defaultY: number) => ISpiccatoBuilder;
 	    relativeX: (relativeX: number) => ISpiccatoBuilder;
+	    fontFamily: (fontFamily: string) => ISpiccatoBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ISpiccatoBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ISpiccatoBuilder;
+	    fontSize: (fontSize: string) => ISpiccatoBuilder;
+	    color: (color: string) => ISpiccatoBuilder;
+	    placement: (placement: AboveBelow) => ISpiccatoBuilder;
 	}
 	export function patchSpiccato(base: Spiccato, builder: (build: ISpiccatoBuilder) => ISpiccatoBuilder): IAny[];
 	export function buildSpiccato(builder: (build: ISpiccatoBuilder) => ISpiccatoBuilder): Spiccato;
 	export interface IScoopBuilder {
 	    build?: () => Scoop;
 	    patch: () => IAny[];
+	    defaultX: (defaultX: number) => IScoopBuilder;
+	    relativeY: (relativeY: number) => IScoopBuilder;
+	    defaultY: (defaultY: number) => IScoopBuilder;
+	    relativeX: (relativeX: number) => IScoopBuilder;
+	    fontFamily: (fontFamily: string) => IScoopBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IScoopBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IScoopBuilder;
+	    fontSize: (fontSize: string) => IScoopBuilder;
+	    color: (color: string) => IScoopBuilder;
+	    placement: (placement: AboveBelow) => IScoopBuilder;
+	    lineType: (lineType: SolidDashedDottedWavy) => IScoopBuilder;
+	    dashLength: (dashLength: number) => IScoopBuilder;
+	    spaceLength: (spaceLength: number) => IScoopBuilder;
 	    lineShape: (lineShape: StraightCurved) => IScoopBuilder;
 	}
 	export function patchScoop(base: Scoop, builder: (build: IScoopBuilder) => IScoopBuilder): IAny[];
@@ -7275,6 +7942,19 @@ declare module 'musicxml-interfaces/builders' {
 	export interface IPlopBuilder {
 	    build?: () => Plop;
 	    patch: () => IAny[];
+	    defaultX: (defaultX: number) => IPlopBuilder;
+	    relativeY: (relativeY: number) => IPlopBuilder;
+	    defaultY: (defaultY: number) => IPlopBuilder;
+	    relativeX: (relativeX: number) => IPlopBuilder;
+	    fontFamily: (fontFamily: string) => IPlopBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPlopBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPlopBuilder;
+	    fontSize: (fontSize: string) => IPlopBuilder;
+	    color: (color: string) => IPlopBuilder;
+	    placement: (placement: AboveBelow) => IPlopBuilder;
+	    lineType: (lineType: SolidDashedDottedWavy) => IPlopBuilder;
+	    dashLength: (dashLength: number) => IPlopBuilder;
+	    spaceLength: (spaceLength: number) => IPlopBuilder;
 	    lineShape: (lineShape: StraightCurved) => IPlopBuilder;
 	}
 	export function patchPlop(base: Plop, builder: (build: IPlopBuilder) => IPlopBuilder): IAny[];
@@ -7282,6 +7962,19 @@ declare module 'musicxml-interfaces/builders' {
 	export interface IDoitBuilder {
 	    build?: () => Doit;
 	    patch: () => IAny[];
+	    defaultX: (defaultX: number) => IDoitBuilder;
+	    relativeY: (relativeY: number) => IDoitBuilder;
+	    defaultY: (defaultY: number) => IDoitBuilder;
+	    relativeX: (relativeX: number) => IDoitBuilder;
+	    fontFamily: (fontFamily: string) => IDoitBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDoitBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDoitBuilder;
+	    fontSize: (fontSize: string) => IDoitBuilder;
+	    color: (color: string) => IDoitBuilder;
+	    placement: (placement: AboveBelow) => IDoitBuilder;
+	    lineType: (lineType: SolidDashedDottedWavy) => IDoitBuilder;
+	    dashLength: (dashLength: number) => IDoitBuilder;
+	    spaceLength: (spaceLength: number) => IDoitBuilder;
 	    lineShape: (lineShape: StraightCurved) => IDoitBuilder;
 	}
 	export function patchDoit(base: Doit, builder: (build: IDoitBuilder) => IDoitBuilder): IAny[];
@@ -7289,6 +7982,19 @@ declare module 'musicxml-interfaces/builders' {
 	export interface IFalloffBuilder {
 	    build?: () => Falloff;
 	    patch: () => IAny[];
+	    defaultX: (defaultX: number) => IFalloffBuilder;
+	    relativeY: (relativeY: number) => IFalloffBuilder;
+	    defaultY: (defaultY: number) => IFalloffBuilder;
+	    relativeX: (relativeX: number) => IFalloffBuilder;
+	    fontFamily: (fontFamily: string) => IFalloffBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFalloffBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFalloffBuilder;
+	    fontSize: (fontSize: string) => IFalloffBuilder;
+	    color: (color: string) => IFalloffBuilder;
+	    placement: (placement: AboveBelow) => IFalloffBuilder;
+	    lineType: (lineType: SolidDashedDottedWavy) => IFalloffBuilder;
+	    dashLength: (dashLength: number) => IFalloffBuilder;
+	    spaceLength: (spaceLength: number) => IFalloffBuilder;
 	    lineShape: (lineShape: StraightCurved) => IFalloffBuilder;
 	}
 	export function patchFalloff(base: Falloff, builder: (build: IFalloffBuilder) => IFalloffBuilder): IAny[];
@@ -7297,6 +8003,19 @@ declare module 'musicxml-interfaces/builders' {
 	    build?: () => BreathMark;
 	    patch: () => IAny[];
 	    type: (type: BreathMarkType) => IBreathMarkBuilder;
+	    defaultX: (defaultX: number) => IBreathMarkBuilder;
+	    relativeY: (relativeY: number) => IBreathMarkBuilder;
+	    defaultY: (defaultY: number) => IBreathMarkBuilder;
+	    relativeX: (relativeX: number) => IBreathMarkBuilder;
+	    fontFamily: (fontFamily: string) => IBreathMarkBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IBreathMarkBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IBreathMarkBuilder;
+	    fontSize: (fontSize: string) => IBreathMarkBuilder;
+	    color: (color: string) => IBreathMarkBuilder;
+	    placement: (placement: AboveBelow) => IBreathMarkBuilder;
+	    lineType: (lineType: SolidDashedDottedWavy) => IBreathMarkBuilder;
+	    dashLength: (dashLength: number) => IBreathMarkBuilder;
+	    spaceLength: (spaceLength: number) => IBreathMarkBuilder;
 	    lineShape: (lineShape: StraightCurved) => IBreathMarkBuilder;
 	}
 	export function patchBreathMark(base: BreathMark, builder: (build: IBreathMarkBuilder) => IBreathMarkBuilder): IAny[];
@@ -7308,6 +8027,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ICaesuraBuilder;
 	    defaultY: (defaultY: number) => ICaesuraBuilder;
 	    relativeX: (relativeX: number) => ICaesuraBuilder;
+	    fontFamily: (fontFamily: string) => ICaesuraBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ICaesuraBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ICaesuraBuilder;
+	    fontSize: (fontSize: string) => ICaesuraBuilder;
+	    color: (color: string) => ICaesuraBuilder;
+	    placement: (placement: AboveBelow) => ICaesuraBuilder;
 	}
 	export function patchCaesura(base: Caesura, builder: (build: ICaesuraBuilder) => ICaesuraBuilder): IAny[];
 	export function buildCaesura(builder: (build: ICaesuraBuilder) => ICaesuraBuilder): Caesura;
@@ -7318,6 +8043,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStressBuilder;
 	    defaultY: (defaultY: number) => IStressBuilder;
 	    relativeX: (relativeX: number) => IStressBuilder;
+	    fontFamily: (fontFamily: string) => IStressBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IStressBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IStressBuilder;
+	    fontSize: (fontSize: string) => IStressBuilder;
+	    color: (color: string) => IStressBuilder;
+	    placement: (placement: AboveBelow) => IStressBuilder;
 	}
 	export function patchStress(base: Stress, builder: (build: IStressBuilder) => IStressBuilder): IAny[];
 	export function buildStress(builder: (build: IStressBuilder) => IStressBuilder): Stress;
@@ -7328,6 +8059,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IUnstressBuilder;
 	    defaultY: (defaultY: number) => IUnstressBuilder;
 	    relativeX: (relativeX: number) => IUnstressBuilder;
+	    fontFamily: (fontFamily: string) => IUnstressBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IUnstressBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IUnstressBuilder;
+	    fontSize: (fontSize: string) => IUnstressBuilder;
+	    color: (color: string) => IUnstressBuilder;
+	    placement: (placement: AboveBelow) => IUnstressBuilder;
 	}
 	export function patchUnstress(base: Unstress, builder: (build: IUnstressBuilder) => IUnstressBuilder): IAny[];
 	export function buildUnstress(builder: (build: IUnstressBuilder) => IUnstressBuilder): Unstress;
@@ -7339,6 +8076,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IOtherArticulationBuilder;
 	    defaultY: (defaultY: number) => IOtherArticulationBuilder;
 	    relativeX: (relativeX: number) => IOtherArticulationBuilder;
+	    fontFamily: (fontFamily: string) => IOtherArticulationBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOtherArticulationBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOtherArticulationBuilder;
+	    fontSize: (fontSize: string) => IOtherArticulationBuilder;
+	    color: (color: string) => IOtherArticulationBuilder;
+	    placement: (placement: AboveBelow) => IOtherArticulationBuilder;
 	}
 	export function patchOtherArticulation(base: OtherArticulation, builder: (build: IOtherArticulationBuilder) => IOtherArticulationBuilder): IAny[];
 	export function buildOtherArticulation(builder: (build: IOtherArticulationBuilder) => IOtherArticulationBuilder): OtherArticulation;
@@ -7351,6 +8094,8 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IArpeggiateBuilder;
 	    defaultY: (defaultY: number) => IArpeggiateBuilder;
 	    relativeX: (relativeX: number) => IArpeggiateBuilder;
+	    color: (color: string) => IArpeggiateBuilder;
+	    placement: (placement: AboveBelow) => IArpeggiateBuilder;
 	}
 	export function patchArpeggiate(base: Arpeggiate, builder: (build: IArpeggiateBuilder) => IArpeggiateBuilder): IAny[];
 	export function buildArpeggiate(builder: (build: IArpeggiateBuilder) => IArpeggiateBuilder): Arpeggiate;
@@ -7363,6 +8108,8 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => INonArpeggiateBuilder;
 	    defaultY: (defaultY: number) => INonArpeggiateBuilder;
 	    relativeX: (relativeX: number) => INonArpeggiateBuilder;
+	    color: (color: string) => INonArpeggiateBuilder;
+	    placement: (placement: AboveBelow) => INonArpeggiateBuilder;
 	}
 	export function patchNonArpeggiate(base: NonArpeggiate, builder: (build: INonArpeggiateBuilder) => INonArpeggiateBuilder): IAny[];
 	export function buildNonArpeggiate(builder: (build: INonArpeggiateBuilder) => INonArpeggiateBuilder): NonArpeggiate;
@@ -7402,7 +8149,16 @@ declare module 'musicxml-interfaces/builders' {
 	    lyricParts: (lyricParts: boolean[]) => ILyricBuilder;
 	    number: (number: number) => ILyricBuilder;
 	    name: (name: string) => ILyricBuilder;
+	    defaultX: (defaultX: number) => ILyricBuilder;
+	    relativeY: (relativeY: number) => ILyricBuilder;
+	    defaultY: (defaultY: number) => ILyricBuilder;
+	    relativeX: (relativeX: number) => ILyricBuilder;
+	    color: (color: string) => ILyricBuilder;
+	    printObject: (printObject: boolean) => ILyricBuilder;
 	    justify: (justify: LeftCenterRight) => ILyricBuilder;
+	    placement: (placement: AboveBelow) => ILyricBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => ILyricBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => ILyricBuilder;
 	}
 	export function patchLyric(base: Lyric, builder: (build: ILyricBuilder) => ILyricBuilder): IAny[];
 	export function buildLyric(builder: (build: ILyricBuilder) => ILyricBuilder): Lyric;
@@ -7414,6 +8170,13 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => ITextBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ITextBuilder;
 	    fontSize: (fontSize: string) => ITextBuilder;
+	    color: (color: string) => ITextBuilder;
+	    underline: (underline: number) => ITextBuilder;
+	    overline: (overline: number) => ITextBuilder;
+	    lineThrough: (lineThrough: number) => ITextBuilder;
+	    rotation: (rotation: number) => ITextBuilder;
+	    letterSpacing: (letterSpacing: string) => ITextBuilder;
+	    dir: (dir: DirectionMode) => ITextBuilder;
 	}
 	export function patchText(base: Text, builder: (build: ITextBuilder) => ITextBuilder): IAny[];
 	export function buildText(builder: (build: ITextBuilder) => ITextBuilder): Text;
@@ -7425,6 +8188,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => ISyllabicBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => ISyllabicBuilder;
 	    fontSize: (fontSize: string) => ISyllabicBuilder;
+	    color: (color: string) => ISyllabicBuilder;
 	}
 	export function patchSyllabic(base: Syllabic, builder: (build: ISyllabicBuilder) => ISyllabicBuilder): IAny[];
 	export function buildSyllabic(builder: (build: ISyllabicBuilder) => ISyllabicBuilder): Syllabic;
@@ -7436,6 +8200,7 @@ declare module 'musicxml-interfaces/builders' {
 	    fontWeight: (fontWeight: NormalBold) => IElisionBuilder;
 	    fontStyle: (fontStyle: NormalItalic) => IElisionBuilder;
 	    fontSize: (fontSize: string) => IElisionBuilder;
+	    color: (color: string) => IElisionBuilder;
 	}
 	export function patchElision(base: Elision, builder: (build: IElisionBuilder) => IElisionBuilder): IAny[];
 	export function buildElision(builder: (build: IElisionBuilder) => IElisionBuilder): Elision;
@@ -7447,6 +8212,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IExtendBuilder;
 	    defaultY: (defaultY: number) => IExtendBuilder;
 	    relativeX: (relativeX: number) => IExtendBuilder;
+	    fontFamily: (fontFamily: string) => IExtendBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IExtendBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IExtendBuilder;
+	    fontSize: (fontSize: string) => IExtendBuilder;
+	    color: (color: string) => IExtendBuilder;
 	}
 	export function patchExtend(base: Extend, builder: (build: IExtendBuilder) => IExtendBuilder): IAny[];
 	export function buildExtend(builder: (build: IExtendBuilder) => IExtendBuilder): Extend;
@@ -7458,8 +8228,21 @@ declare module 'musicxml-interfaces/builders' {
 	    figures: (figures: Figure[]) => IFiguredBassBuilder;
 	    duration: (duration: number) => IFiguredBassBuilder;
 	    parentheses: (parentheses: boolean) => IFiguredBassBuilder;
+	    defaultX: (defaultX: number) => IFiguredBassBuilder;
+	    relativeY: (relativeY: number) => IFiguredBassBuilder;
+	    defaultY: (defaultY: number) => IFiguredBassBuilder;
+	    relativeX: (relativeX: number) => IFiguredBassBuilder;
+	    fontFamily: (fontFamily: string) => IFiguredBassBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFiguredBassBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFiguredBassBuilder;
+	    fontSize: (fontSize: string) => IFiguredBassBuilder;
+	    color: (color: string) => IFiguredBassBuilder;
 	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IFiguredBassBuilder;
 	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IFiguredBassBuilder;
+	    printDot: (printDot: boolean) => IFiguredBassBuilder;
+	    printLyric: (printLyric: boolean) => IFiguredBassBuilder;
+	    printObject: (printObject: boolean) => IFiguredBassBuilder;
+	    printSpacing: (printSpacing: boolean) => IFiguredBassBuilder;
 	}
 	export function patchFiguredBass(base: FiguredBass, builder: (build: IFiguredBassBuilder) => IFiguredBassBuilder): IAny[];
 	export function buildFiguredBass(builder: (build: IFiguredBassBuilder) => IFiguredBassBuilder): FiguredBass;
@@ -7474,6 +8257,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IFigureBuilder;
 	    defaultY: (defaultY: number) => IFigureBuilder;
 	    relativeX: (relativeX: number) => IFigureBuilder;
+	    fontFamily: (fontFamily: string) => IFigureBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFigureBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFigureBuilder;
+	    fontSize: (fontSize: string) => IFigureBuilder;
+	    color: (color: string) => IFigureBuilder;
 	}
 	export function patchFigure(base: Figure, builder: (build: IFigureBuilder) => IFigureBuilder): IAny[];
 	export function buildFigure(builder: (build: IFigureBuilder) => IFigureBuilder): Figure;
@@ -7485,6 +8273,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPrefixBuilder;
 	    defaultY: (defaultY: number) => IPrefixBuilder;
 	    relativeX: (relativeX: number) => IPrefixBuilder;
+	    fontFamily: (fontFamily: string) => IPrefixBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPrefixBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPrefixBuilder;
+	    fontSize: (fontSize: string) => IPrefixBuilder;
+	    color: (color: string) => IPrefixBuilder;
 	}
 	export function patchPrefix(base: Prefix, builder: (build: IPrefixBuilder) => IPrefixBuilder): IAny[];
 	export function buildPrefix(builder: (build: IPrefixBuilder) => IPrefixBuilder): Prefix;
@@ -7496,6 +8289,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IFigureNumberBuilder;
 	    defaultY: (defaultY: number) => IFigureNumberBuilder;
 	    relativeX: (relativeX: number) => IFigureNumberBuilder;
+	    fontFamily: (fontFamily: string) => IFigureNumberBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFigureNumberBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFigureNumberBuilder;
+	    fontSize: (fontSize: string) => IFigureNumberBuilder;
+	    color: (color: string) => IFigureNumberBuilder;
 	}
 	export function patchFigureNumber(base: FigureNumber, builder: (build: IFigureNumberBuilder) => IFigureNumberBuilder): IAny[];
 	export function buildFigureNumber(builder: (build: IFigureNumberBuilder) => IFigureNumberBuilder): FigureNumber;
@@ -7507,6 +8305,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ISuffixBuilder;
 	    defaultY: (defaultY: number) => ISuffixBuilder;
 	    relativeX: (relativeX: number) => ISuffixBuilder;
+	    fontFamily: (fontFamily: string) => ISuffixBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ISuffixBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ISuffixBuilder;
+	    fontSize: (fontSize: string) => ISuffixBuilder;
+	    color: (color: string) => ISuffixBuilder;
 	}
 	export function patchSuffix(base: Suffix, builder: (build: ISuffixBuilder) => ISuffixBuilder): IAny[];
 	export function buildSuffix(builder: (build: ISuffixBuilder) => ISuffixBuilder): Suffix;
@@ -7568,6 +8371,15 @@ declare module 'musicxml-interfaces/builders' {
 	    textY: (textY: number) => IEndingBuilder;
 	    type: (type: StartStopDiscontinue) => IEndingBuilder;
 	    ending: (ending: string) => IEndingBuilder;
+	    defaultX: (defaultX: number) => IEndingBuilder;
+	    relativeY: (relativeY: number) => IEndingBuilder;
+	    defaultY: (defaultY: number) => IEndingBuilder;
+	    relativeX: (relativeX: number) => IEndingBuilder;
+	    fontFamily: (fontFamily: string) => IEndingBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IEndingBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IEndingBuilder;
+	    fontSize: (fontSize: string) => IEndingBuilder;
+	    color: (color: string) => IEndingBuilder;
 	    printObject: (printObject: boolean) => IEndingBuilder;
 	}
 	export function patchEnding(base: Ending, builder: (build: IEndingBuilder) => IEndingBuilder): IAny[];
@@ -7590,9 +8402,11 @@ declare module 'musicxml-interfaces/builders' {
 	    staff: (staff: number) => IDirectionBuilder;
 	    offset: (build: Offset | ((builder: IOffsetBuilder) => IOffsetBuilder)) => IDirectionBuilder;
 	    sound: (build: Sound | ((builder: ISoundBuilder) => ISoundBuilder)) => IDirectionBuilder;
+	    placement: (placement: AboveBelow) => IDirectionBuilder;
 	    voice: (voice: number) => IDirectionBuilder;
 	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IDirectionBuilder;
 	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IDirectionBuilder;
+	    directive: (directive: boolean) => IDirectionBuilder;
 	}
 	export function patchDirection(base: Direction, builder: (build: IDirectionBuilder) => IDirectionBuilder): IAny[];
 	export function buildDirection(builder: (build: IDirectionBuilder) => IDirectionBuilder): Direction;
@@ -7639,6 +8453,25 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    data: (data: string) => IRehearsalBuilder;
 	    justify: (justify: LeftCenterRight) => IRehearsalBuilder;
+	    defaultX: (defaultX: number) => IRehearsalBuilder;
+	    relativeY: (relativeY: number) => IRehearsalBuilder;
+	    defaultY: (defaultY: number) => IRehearsalBuilder;
+	    relativeX: (relativeX: number) => IRehearsalBuilder;
+	    fontFamily: (fontFamily: string) => IRehearsalBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IRehearsalBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IRehearsalBuilder;
+	    fontSize: (fontSize: string) => IRehearsalBuilder;
+	    color: (color: string) => IRehearsalBuilder;
+	    halign: (halign: LeftCenterRight) => IRehearsalBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IRehearsalBuilder;
+	    underline: (underline: number) => IRehearsalBuilder;
+	    overline: (overline: number) => IRehearsalBuilder;
+	    lineThrough: (lineThrough: number) => IRehearsalBuilder;
+	    rotation: (rotation: number) => IRehearsalBuilder;
+	    letterSpacing: (letterSpacing: string) => IRehearsalBuilder;
+	    lineHeight: (lineHeight: string) => IRehearsalBuilder;
+	    dir: (dir: DirectionMode) => IRehearsalBuilder;
+	    enclosure: (enclosure: EnclosureShape) => IRehearsalBuilder;
 	}
 	export function patchRehearsal(base: Rehearsal, builder: (build: IRehearsalBuilder) => IRehearsalBuilder): IAny[];
 	export function buildRehearsal(builder: (build: IRehearsalBuilder) => IRehearsalBuilder): Rehearsal;
@@ -7647,6 +8480,25 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    data: (data: string) => IWordsBuilder;
 	    justify: (justify: LeftCenterRight) => IWordsBuilder;
+	    defaultX: (defaultX: number) => IWordsBuilder;
+	    relativeY: (relativeY: number) => IWordsBuilder;
+	    defaultY: (defaultY: number) => IWordsBuilder;
+	    relativeX: (relativeX: number) => IWordsBuilder;
+	    fontFamily: (fontFamily: string) => IWordsBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IWordsBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IWordsBuilder;
+	    fontSize: (fontSize: string) => IWordsBuilder;
+	    color: (color: string) => IWordsBuilder;
+	    halign: (halign: LeftCenterRight) => IWordsBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IWordsBuilder;
+	    underline: (underline: number) => IWordsBuilder;
+	    overline: (overline: number) => IWordsBuilder;
+	    lineThrough: (lineThrough: number) => IWordsBuilder;
+	    rotation: (rotation: number) => IWordsBuilder;
+	    letterSpacing: (letterSpacing: string) => IWordsBuilder;
+	    lineHeight: (lineHeight: string) => IWordsBuilder;
+	    dir: (dir: DirectionMode) => IWordsBuilder;
+	    enclosure: (enclosure: EnclosureShape) => IWordsBuilder;
 	}
 	export function patchWords(base: Words, builder: (build: IWordsBuilder) => IWordsBuilder): IAny[];
 	export function buildWords(builder: (build: IWordsBuilder) => IWordsBuilder): Words;
@@ -7657,7 +8509,14 @@ declare module 'musicxml-interfaces/builders' {
 	    niente: (niente: boolean) => IWedgeBuilder;
 	    type: (type: WedgeType) => IWedgeBuilder;
 	    spread: (spread: number) => IWedgeBuilder;
+	    defaultX: (defaultX: number) => IWedgeBuilder;
+	    relativeY: (relativeY: number) => IWedgeBuilder;
+	    defaultY: (defaultY: number) => IWedgeBuilder;
+	    relativeX: (relativeX: number) => IWedgeBuilder;
+	    color: (color: string) => IWedgeBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => IWedgeBuilder;
+	    dashLength: (dashLength: number) => IWedgeBuilder;
+	    spaceLength: (spaceLength: number) => IWedgeBuilder;
 	}
 	export function patchWedge(base: Wedge, builder: (build: IWedgeBuilder) => IWedgeBuilder): IAny[];
 	export function buildWedge(builder: (build: IWedgeBuilder) => IWedgeBuilder): Wedge;
@@ -7666,6 +8525,11 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    number: (number: number) => IDashesBuilder;
 	    type: (type: StartStopContinue) => IDashesBuilder;
+	    defaultX: (defaultX: number) => IDashesBuilder;
+	    relativeY: (relativeY: number) => IDashesBuilder;
+	    defaultY: (defaultY: number) => IDashesBuilder;
+	    relativeX: (relativeX: number) => IDashesBuilder;
+	    color: (color: string) => IDashesBuilder;
 	    dashLength: (dashLength: number) => IDashesBuilder;
 	    spaceLength: (spaceLength: number) => IDashesBuilder;
 	}
@@ -7678,7 +8542,14 @@ declare module 'musicxml-interfaces/builders' {
 	    number: (number: number) => IBracketBuilder;
 	    type: (type: StartStopContinue) => IBracketBuilder;
 	    lineEnd: (lineEnd: LineEndType) => IBracketBuilder;
+	    defaultX: (defaultX: number) => IBracketBuilder;
+	    relativeY: (relativeY: number) => IBracketBuilder;
+	    defaultY: (defaultY: number) => IBracketBuilder;
+	    relativeX: (relativeX: number) => IBracketBuilder;
+	    color: (color: string) => IBracketBuilder;
 	    lineType: (lineType: SolidDashedDottedWavy) => IBracketBuilder;
+	    dashLength: (dashLength: number) => IBracketBuilder;
+	    spaceLength: (spaceLength: number) => IBracketBuilder;
 	}
 	export function patchBracket(base: Bracket, builder: (build: IBracketBuilder) => IBracketBuilder): IAny[];
 	export function buildBracket(builder: (build: IBracketBuilder) => IBracketBuilder): Bracket;
@@ -7692,6 +8563,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPedalBuilder;
 	    defaultY: (defaultY: number) => IPedalBuilder;
 	    relativeX: (relativeX: number) => IPedalBuilder;
+	    fontFamily: (fontFamily: string) => IPedalBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPedalBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPedalBuilder;
+	    fontSize: (fontSize: string) => IPedalBuilder;
+	    color: (color: string) => IPedalBuilder;
+	    halign: (halign: LeftCenterRight) => IPedalBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IPedalBuilder;
 	}
 	export function patchPedal(base: Pedal, builder: (build: IPedalBuilder) => IPedalBuilder): IAny[];
 	export function buildPedal(builder: (build: IPedalBuilder) => IPedalBuilder): Pedal;
@@ -7712,10 +8590,18 @@ declare module 'musicxml-interfaces/builders' {
 	    beatUnitDotsChangeSplice: (start: number, deleteCount: number, ...items: BeatUnitDot[]) => IMetronomeBuilder;
 	    beatUnitDotsChange: (beatUnitDotsChange: BeatUnitDot[]) => IMetronomeBuilder;
 	    metronomeRelation: (metronomeRelation: string) => IMetronomeBuilder;
+	    justify: (justify: LeftCenterRight) => IMetronomeBuilder;
 	    defaultX: (defaultX: number) => IMetronomeBuilder;
 	    relativeY: (relativeY: number) => IMetronomeBuilder;
 	    defaultY: (defaultY: number) => IMetronomeBuilder;
 	    relativeX: (relativeX: number) => IMetronomeBuilder;
+	    fontFamily: (fontFamily: string) => IMetronomeBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IMetronomeBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IMetronomeBuilder;
+	    fontSize: (fontSize: string) => IMetronomeBuilder;
+	    color: (color: string) => IMetronomeBuilder;
+	    halign: (halign: LeftCenterRight) => IMetronomeBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IMetronomeBuilder;
 	}
 	export function patchMetronome(base: Metronome, builder: (build: IMetronomeBuilder) => IMetronomeBuilder): IAny[];
 	export function buildMetronome(builder: (build: IMetronomeBuilder) => IMetronomeBuilder): Metronome;
@@ -7785,6 +8671,15 @@ declare module 'musicxml-interfaces/builders' {
 	    number: (number: number) => IOctaveShiftBuilder;
 	    size: (size: number) => IOctaveShiftBuilder;
 	    type: (type: OctaveShiftType) => IOctaveShiftBuilder;
+	    defaultX: (defaultX: number) => IOctaveShiftBuilder;
+	    relativeY: (relativeY: number) => IOctaveShiftBuilder;
+	    defaultY: (defaultY: number) => IOctaveShiftBuilder;
+	    relativeX: (relativeX: number) => IOctaveShiftBuilder;
+	    fontFamily: (fontFamily: string) => IOctaveShiftBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IOctaveShiftBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IOctaveShiftBuilder;
+	    fontSize: (fontSize: string) => IOctaveShiftBuilder;
+	    color: (color: string) => IOctaveShiftBuilder;
 	    dashLength: (dashLength: number) => IOctaveShiftBuilder;
 	    spaceLength: (spaceLength: number) => IOctaveShiftBuilder;
 	}
@@ -7800,6 +8695,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IHarpPedalsBuilder;
 	    defaultY: (defaultY: number) => IHarpPedalsBuilder;
 	    relativeX: (relativeX: number) => IHarpPedalsBuilder;
+	    fontFamily: (fontFamily: string) => IHarpPedalsBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IHarpPedalsBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IHarpPedalsBuilder;
+	    fontSize: (fontSize: string) => IHarpPedalsBuilder;
+	    color: (color: string) => IHarpPedalsBuilder;
+	    halign: (halign: LeftCenterRight) => IHarpPedalsBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IHarpPedalsBuilder;
 	}
 	export function patchHarpPedals(base: HarpPedals, builder: (build: IHarpPedalsBuilder) => IHarpPedalsBuilder): IAny[];
 	export function buildHarpPedals(builder: (build: IHarpPedalsBuilder) => IHarpPedalsBuilder): HarpPedals;
@@ -7818,6 +8720,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDampBuilder;
 	    defaultY: (defaultY: number) => IDampBuilder;
 	    relativeX: (relativeX: number) => IDampBuilder;
+	    fontFamily: (fontFamily: string) => IDampBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDampBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDampBuilder;
+	    fontSize: (fontSize: string) => IDampBuilder;
+	    color: (color: string) => IDampBuilder;
+	    halign: (halign: LeftCenterRight) => IDampBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IDampBuilder;
 	}
 	export function patchDamp(base: Damp, builder: (build: IDampBuilder) => IDampBuilder): IAny[];
 	export function buildDamp(builder: (build: IDampBuilder) => IDampBuilder): Damp;
@@ -7828,6 +8737,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDampAllBuilder;
 	    defaultY: (defaultY: number) => IDampAllBuilder;
 	    relativeX: (relativeX: number) => IDampAllBuilder;
+	    fontFamily: (fontFamily: string) => IDampAllBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDampAllBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDampAllBuilder;
+	    fontSize: (fontSize: string) => IDampAllBuilder;
+	    color: (color: string) => IDampAllBuilder;
+	    halign: (halign: LeftCenterRight) => IDampAllBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IDampAllBuilder;
 	}
 	export function patchDampAll(base: DampAll, builder: (build: IDampAllBuilder) => IDampAllBuilder): IAny[];
 	export function buildDampAll(builder: (build: IDampAllBuilder) => IDampAllBuilder): DampAll;
@@ -7838,6 +8754,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IEyeglassesBuilder;
 	    defaultY: (defaultY: number) => IEyeglassesBuilder;
 	    relativeX: (relativeX: number) => IEyeglassesBuilder;
+	    fontFamily: (fontFamily: string) => IEyeglassesBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IEyeglassesBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IEyeglassesBuilder;
+	    fontSize: (fontSize: string) => IEyeglassesBuilder;
+	    color: (color: string) => IEyeglassesBuilder;
+	    halign: (halign: LeftCenterRight) => IEyeglassesBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IEyeglassesBuilder;
 	}
 	export function patchEyeglasses(base: Eyeglasses, builder: (build: IEyeglassesBuilder) => IEyeglassesBuilder): IAny[];
 	export function buildEyeglasses(builder: (build: IEyeglassesBuilder) => IEyeglassesBuilder): Eyeglasses;
@@ -7849,6 +8772,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IStringMuteBuilder;
 	    defaultY: (defaultY: number) => IStringMuteBuilder;
 	    relativeX: (relativeX: number) => IStringMuteBuilder;
+	    fontFamily: (fontFamily: string) => IStringMuteBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IStringMuteBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IStringMuteBuilder;
+	    fontSize: (fontSize: string) => IStringMuteBuilder;
+	    color: (color: string) => IStringMuteBuilder;
+	    halign: (halign: LeftCenterRight) => IStringMuteBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IStringMuteBuilder;
 	}
 	export function patchStringMute(base: StringMute, builder: (build: IStringMuteBuilder) => IStringMuteBuilder): IAny[];
 	export function buildStringMute(builder: (build: IStringMuteBuilder) => IStringMuteBuilder): StringMute;
@@ -7880,6 +8810,8 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IImageBuilder;
 	    defaultY: (defaultY: number) => IImageBuilder;
 	    relativeX: (relativeX: number) => IImageBuilder;
+	    halign: (halign: LeftCenterRight) => IImageBuilder;
+	    valignImage: (valignImage: TopMiddleBottomBaseline) => IImageBuilder;
 	}
 	export function patchImage(base: Image, builder: (build: IImageBuilder) => IImageBuilder): IAny[];
 	export function buildImage(builder: (build: IImageBuilder) => IImageBuilder): Image;
@@ -7893,6 +8825,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPrincipalVoiceBuilder;
 	    defaultY: (defaultY: number) => IPrincipalVoiceBuilder;
 	    relativeX: (relativeX: number) => IPrincipalVoiceBuilder;
+	    fontFamily: (fontFamily: string) => IPrincipalVoiceBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPrincipalVoiceBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPrincipalVoiceBuilder;
+	    fontSize: (fontSize: string) => IPrincipalVoiceBuilder;
+	    color: (color: string) => IPrincipalVoiceBuilder;
+	    halign: (halign: LeftCenterRight) => IPrincipalVoiceBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IPrincipalVoiceBuilder;
 	}
 	export function patchPrincipalVoice(base: PrincipalVoice, builder: (build: IPrincipalVoiceBuilder) => IPrincipalVoiceBuilder): IAny[];
 	export function buildPrincipalVoice(builder: (build: IPrincipalVoiceBuilder) => IPrincipalVoiceBuilder): PrincipalVoice;
@@ -7906,6 +8845,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IAccordionRegistrationBuilder;
 	    defaultY: (defaultY: number) => IAccordionRegistrationBuilder;
 	    relativeX: (relativeX: number) => IAccordionRegistrationBuilder;
+	    fontFamily: (fontFamily: string) => IAccordionRegistrationBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IAccordionRegistrationBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IAccordionRegistrationBuilder;
+	    fontSize: (fontSize: string) => IAccordionRegistrationBuilder;
+	    color: (color: string) => IAccordionRegistrationBuilder;
+	    halign: (halign: LeftCenterRight) => IAccordionRegistrationBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IAccordionRegistrationBuilder;
 	}
 	export function patchAccordionRegistration(base: AccordionRegistration, builder: (build: IAccordionRegistrationBuilder) => IAccordionRegistrationBuilder): IAny[];
 	export function buildAccordionRegistration(builder: (build: IAccordionRegistrationBuilder) => IAccordionRegistrationBuilder): AccordionRegistration;
@@ -7927,6 +8873,14 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPercussionBuilder;
 	    defaultY: (defaultY: number) => IPercussionBuilder;
 	    relativeX: (relativeX: number) => IPercussionBuilder;
+	    fontFamily: (fontFamily: string) => IPercussionBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPercussionBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPercussionBuilder;
+	    fontSize: (fontSize: string) => IPercussionBuilder;
+	    color: (color: string) => IPercussionBuilder;
+	    halign: (halign: LeftCenterRight) => IPercussionBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IPercussionBuilder;
+	    enclosure: (enclosure: EnclosureShape) => IPercussionBuilder;
 	}
 	export function patchPercussion(base: Percussion, builder: (build: IPercussionBuilder) => IPercussionBuilder): IAny[];
 	export function buildPercussion(builder: (build: IPercussionBuilder) => IPercussionBuilder): Percussion;
@@ -7983,6 +8937,19 @@ declare module 'musicxml-interfaces/builders' {
 	    staff: (staff: number) => IHarmonyBuilder;
 	    type: (type: ExplicitImpliedAlternate) => IHarmonyBuilder;
 	    offset: (build: Offset | ((builder: IOffsetBuilder) => IOffsetBuilder)) => IHarmonyBuilder;
+	    defaultX: (defaultX: number) => IHarmonyBuilder;
+	    relativeY: (relativeY: number) => IHarmonyBuilder;
+	    defaultY: (defaultY: number) => IHarmonyBuilder;
+	    relativeX: (relativeX: number) => IHarmonyBuilder;
+	    fontFamily: (fontFamily: string) => IHarmonyBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IHarmonyBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IHarmonyBuilder;
+	    fontSize: (fontSize: string) => IHarmonyBuilder;
+	    color: (color: string) => IHarmonyBuilder;
+	    printObject: (printObject: boolean) => IHarmonyBuilder;
+	    placement: (placement: AboveBelow) => IHarmonyBuilder;
+	    footnote: (build: Footnote | ((builder: IFootnoteBuilder) => IFootnoteBuilder)) => IHarmonyBuilder;
+	    level: (build: Level | ((builder: ILevelBuilder) => ILevelBuilder)) => IHarmonyBuilder;
 	    root: (build: Root | ((builder: IRootBuilder) => IRootBuilder)) => IHarmonyBuilder;
 	    function: (build: Function | ((builder: IFunctionBuilder) => IFunctionBuilder)) => IHarmonyBuilder;
 	    kind: (build: Kind | ((builder: IKindBuilder) => IKindBuilder)) => IHarmonyBuilder;
@@ -8011,6 +8978,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IRootStepBuilder;
 	    defaultY: (defaultY: number) => IRootStepBuilder;
 	    relativeX: (relativeX: number) => IRootStepBuilder;
+	    fontFamily: (fontFamily: string) => IRootStepBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IRootStepBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IRootStepBuilder;
+	    fontSize: (fontSize: string) => IRootStepBuilder;
+	    color: (color: string) => IRootStepBuilder;
 	}
 	export function patchRootStep(base: RootStep, builder: (build: IRootStepBuilder) => IRootStepBuilder): IAny[];
 	export function buildRootStep(builder: (build: IRootStepBuilder) => IRootStepBuilder): RootStep;
@@ -8019,6 +8991,15 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    location: (location: LeftRight) => IRootAlterBuilder;
 	    data: (data: string) => IRootAlterBuilder;
+	    defaultX: (defaultX: number) => IRootAlterBuilder;
+	    relativeY: (relativeY: number) => IRootAlterBuilder;
+	    defaultY: (defaultY: number) => IRootAlterBuilder;
+	    relativeX: (relativeX: number) => IRootAlterBuilder;
+	    fontFamily: (fontFamily: string) => IRootAlterBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IRootAlterBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IRootAlterBuilder;
+	    fontSize: (fontSize: string) => IRootAlterBuilder;
+	    color: (color: string) => IRootAlterBuilder;
 	    printObject: (printObject: boolean) => IRootAlterBuilder;
 	}
 	export function patchRootAlter(base: RootAlter, builder: (build: IRootAlterBuilder) => IRootAlterBuilder): IAny[];
@@ -8031,6 +9012,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IFunctionBuilder;
 	    defaultY: (defaultY: number) => IFunctionBuilder;
 	    relativeX: (relativeX: number) => IFunctionBuilder;
+	    fontFamily: (fontFamily: string) => IFunctionBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IFunctionBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IFunctionBuilder;
+	    fontSize: (fontSize: string) => IFunctionBuilder;
+	    color: (color: string) => IFunctionBuilder;
 	}
 	export function patchFunction(base: Function, builder: (build: IFunctionBuilder) => IFunctionBuilder): IAny[];
 	export function buildFunction(builder: (build: IFunctionBuilder) => IFunctionBuilder): Function;
@@ -8047,6 +9033,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IKindBuilder;
 	    defaultY: (defaultY: number) => IKindBuilder;
 	    relativeX: (relativeX: number) => IKindBuilder;
+	    fontFamily: (fontFamily: string) => IKindBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IKindBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IKindBuilder;
+	    fontSize: (fontSize: string) => IKindBuilder;
+	    color: (color: string) => IKindBuilder;
+	    halign: (halign: LeftCenterRight) => IKindBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IKindBuilder;
 	}
 	export function patchKind(base: Kind, builder: (build: IKindBuilder) => IKindBuilder): IAny[];
 	export function buildKind(builder: (build: IKindBuilder) => IKindBuilder): Kind;
@@ -8058,6 +9051,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IInversionBuilder;
 	    defaultY: (defaultY: number) => IInversionBuilder;
 	    relativeX: (relativeX: number) => IInversionBuilder;
+	    fontFamily: (fontFamily: string) => IInversionBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IInversionBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IInversionBuilder;
+	    fontSize: (fontSize: string) => IInversionBuilder;
+	    color: (color: string) => IInversionBuilder;
 	}
 	export function patchInversion(base: Inversion, builder: (build: IInversionBuilder) => IInversionBuilder): IAny[];
 	export function buildInversion(builder: (build: IInversionBuilder) => IInversionBuilder): Inversion;
@@ -8078,6 +9076,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IBassStepBuilder;
 	    defaultY: (defaultY: number) => IBassStepBuilder;
 	    relativeX: (relativeX: number) => IBassStepBuilder;
+	    fontFamily: (fontFamily: string) => IBassStepBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IBassStepBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IBassStepBuilder;
+	    fontSize: (fontSize: string) => IBassStepBuilder;
+	    color: (color: string) => IBassStepBuilder;
 	}
 	export function patchBassStep(base: BassStep, builder: (build: IBassStepBuilder) => IBassStepBuilder): IAny[];
 	export function buildBassStep(builder: (build: IBassStepBuilder) => IBassStepBuilder): BassStep;
@@ -8086,6 +9089,15 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    location: (location: LeftRight) => IBassAlterBuilder;
 	    data: (data: string) => IBassAlterBuilder;
+	    defaultX: (defaultX: number) => IBassAlterBuilder;
+	    relativeY: (relativeY: number) => IBassAlterBuilder;
+	    defaultY: (defaultY: number) => IBassAlterBuilder;
+	    relativeX: (relativeX: number) => IBassAlterBuilder;
+	    fontFamily: (fontFamily: string) => IBassAlterBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IBassAlterBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IBassAlterBuilder;
+	    fontSize: (fontSize: string) => IBassAlterBuilder;
+	    color: (color: string) => IBassAlterBuilder;
 	    printObject: (printObject: boolean) => IBassAlterBuilder;
 	}
 	export function patchBassAlter(base: BassAlter, builder: (build: IBassAlterBuilder) => IBassAlterBuilder): IAny[];
@@ -8110,6 +9122,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDegreeValueBuilder;
 	    defaultY: (defaultY: number) => IDegreeValueBuilder;
 	    relativeX: (relativeX: number) => IDegreeValueBuilder;
+	    fontFamily: (fontFamily: string) => IDegreeValueBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDegreeValueBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDegreeValueBuilder;
+	    fontSize: (fontSize: string) => IDegreeValueBuilder;
+	    color: (color: string) => IDegreeValueBuilder;
 	}
 	export function patchDegreeValue(base: DegreeValue, builder: (build: IDegreeValueBuilder) => IDegreeValueBuilder): IAny[];
 	export function buildDegreeValue(builder: (build: IDegreeValueBuilder) => IDegreeValueBuilder): DegreeValue;
@@ -8122,6 +9139,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDegreeAlterBuilder;
 	    defaultY: (defaultY: number) => IDegreeAlterBuilder;
 	    relativeX: (relativeX: number) => IDegreeAlterBuilder;
+	    fontFamily: (fontFamily: string) => IDegreeAlterBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDegreeAlterBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDegreeAlterBuilder;
+	    fontSize: (fontSize: string) => IDegreeAlterBuilder;
+	    color: (color: string) => IDegreeAlterBuilder;
 	}
 	export function patchDegreeAlter(base: DegreeAlter, builder: (build: IDegreeAlterBuilder) => IDegreeAlterBuilder): IAny[];
 	export function buildDegreeAlter(builder: (build: IDegreeAlterBuilder) => IDegreeAlterBuilder): DegreeAlter;
@@ -8134,6 +9156,11 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IDegreeTypeBuilder;
 	    defaultY: (defaultY: number) => IDegreeTypeBuilder;
 	    relativeX: (relativeX: number) => IDegreeTypeBuilder;
+	    fontFamily: (fontFamily: string) => IDegreeTypeBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IDegreeTypeBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IDegreeTypeBuilder;
+	    fontSize: (fontSize: string) => IDegreeTypeBuilder;
+	    color: (color: string) => IDegreeTypeBuilder;
 	}
 	export function patchDegreeType(base: DegreeType, builder: (build: IDegreeTypeBuilder) => IDegreeTypeBuilder): IAny[];
 	export function buildDegreeType(builder: (build: IDegreeTypeBuilder) => IDegreeTypeBuilder): DegreeType;
@@ -8153,6 +9180,9 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IFrameBuilder;
 	    defaultY: (defaultY: number) => IFrameBuilder;
 	    relativeX: (relativeX: number) => IFrameBuilder;
+	    color: (color: string) => IFrameBuilder;
+	    halign: (halign: LeftCenterRight) => IFrameBuilder;
+	    valignImage: (valignImage: TopMiddleBottomBaseline) => IFrameBuilder;
 	}
 	export function patchFrame(base: Frame, builder: (build: IFrameBuilder) => IFrameBuilder): IAny[];
 	export function buildFrame(builder: (build: IFrameBuilder) => IFrameBuilder): Frame;
@@ -8231,6 +9261,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IMeasureNumberingBuilder;
 	    defaultY: (defaultY: number) => IMeasureNumberingBuilder;
 	    relativeX: (relativeX: number) => IMeasureNumberingBuilder;
+	    fontFamily: (fontFamily: string) => IMeasureNumberingBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IMeasureNumberingBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IMeasureNumberingBuilder;
+	    fontSize: (fontSize: string) => IMeasureNumberingBuilder;
+	    color: (color: string) => IMeasureNumberingBuilder;
+	    halign: (halign: LeftCenterRight) => IMeasureNumberingBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => IMeasureNumberingBuilder;
 	}
 	export function patchMeasureNumbering(base: MeasureNumbering, builder: (build: IMeasureNumberingBuilder) => IMeasureNumberingBuilder): IAny[];
 	export function buildMeasureNumbering(builder: (build: IMeasureNumberingBuilder) => IMeasureNumberingBuilder): MeasureNumbering;
@@ -8360,6 +9397,25 @@ declare module 'musicxml-interfaces/builders' {
 	    patch: () => IAny[];
 	    words: (words: string) => ICreditWordsBuilder;
 	    justify: (justify: LeftCenterRight) => ICreditWordsBuilder;
+	    defaultX: (defaultX: number) => ICreditWordsBuilder;
+	    relativeY: (relativeY: number) => ICreditWordsBuilder;
+	    defaultY: (defaultY: number) => ICreditWordsBuilder;
+	    relativeX: (relativeX: number) => ICreditWordsBuilder;
+	    fontFamily: (fontFamily: string) => ICreditWordsBuilder;
+	    fontWeight: (fontWeight: NormalBold) => ICreditWordsBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => ICreditWordsBuilder;
+	    fontSize: (fontSize: string) => ICreditWordsBuilder;
+	    color: (color: string) => ICreditWordsBuilder;
+	    halign: (halign: LeftCenterRight) => ICreditWordsBuilder;
+	    valign: (valign: TopMiddleBottomBaseline) => ICreditWordsBuilder;
+	    underline: (underline: number) => ICreditWordsBuilder;
+	    overline: (overline: number) => ICreditWordsBuilder;
+	    lineThrough: (lineThrough: number) => ICreditWordsBuilder;
+	    rotation: (rotation: number) => ICreditWordsBuilder;
+	    letterSpacing: (letterSpacing: string) => ICreditWordsBuilder;
+	    lineHeight: (lineHeight: string) => ICreditWordsBuilder;
+	    dir: (dir: DirectionMode) => ICreditWordsBuilder;
+	    enclosure: (enclosure: EnclosureShape) => ICreditWordsBuilder;
 	}
 	export function patchCreditWords(base: CreditWords, builder: (build: ICreditWordsBuilder) => ICreditWordsBuilder): IAny[];
 	export function buildCreditWords(builder: (build: ICreditWordsBuilder) => ICreditWordsBuilder): CreditWords;
@@ -8372,6 +9428,8 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => ICreditImageBuilder;
 	    defaultY: (defaultY: number) => ICreditImageBuilder;
 	    relativeX: (relativeX: number) => ICreditImageBuilder;
+	    halign: (halign: LeftCenterRight) => ICreditImageBuilder;
+	    valignImage: (valignImage: TopMiddleBottomBaseline) => ICreditImageBuilder;
 	}
 	export function patchCreditImage(base: CreditImage, builder: (build: ICreditImageBuilder) => ICreditImageBuilder): IAny[];
 	export function buildCreditImage(builder: (build: ICreditImageBuilder) => ICreditImageBuilder): CreditImage;
@@ -8405,6 +9463,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPartNameBuilder;
 	    defaultY: (defaultY: number) => IPartNameBuilder;
 	    relativeX: (relativeX: number) => IPartNameBuilder;
+	    fontFamily: (fontFamily: string) => IPartNameBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPartNameBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPartNameBuilder;
+	    fontSize: (fontSize: string) => IPartNameBuilder;
+	    color: (color: string) => IPartNameBuilder;
+	    printObject: (printObject: boolean) => IPartNameBuilder;
+	    justify: (justify: LeftCenterRight) => IPartNameBuilder;
 	}
 	export function patchPartName(base: PartName, builder: (build: IPartNameBuilder) => IPartNameBuilder): IAny[];
 	export function buildPartName(builder: (build: IPartNameBuilder) => IPartNameBuilder): PartName;
@@ -8416,6 +9481,13 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IPartAbbreviationBuilder;
 	    defaultY: (defaultY: number) => IPartAbbreviationBuilder;
 	    relativeX: (relativeX: number) => IPartAbbreviationBuilder;
+	    fontFamily: (fontFamily: string) => IPartAbbreviationBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IPartAbbreviationBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IPartAbbreviationBuilder;
+	    fontSize: (fontSize: string) => IPartAbbreviationBuilder;
+	    color: (color: string) => IPartAbbreviationBuilder;
+	    printObject: (printObject: boolean) => IPartAbbreviationBuilder;
+	    justify: (justify: LeftCenterRight) => IPartAbbreviationBuilder;
 	}
 	export function patchPartAbbreviation(base: PartAbbreviation, builder: (build: IPartAbbreviationBuilder) => IPartAbbreviationBuilder): IAny[];
 	export function buildPartAbbreviation(builder: (build: IPartAbbreviationBuilder) => IPartAbbreviationBuilder): PartAbbreviation;
@@ -8444,6 +9516,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IGroupNameBuilder;
 	    defaultY: (defaultY: number) => IGroupNameBuilder;
 	    relativeX: (relativeX: number) => IGroupNameBuilder;
+	    fontFamily: (fontFamily: string) => IGroupNameBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IGroupNameBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IGroupNameBuilder;
+	    fontSize: (fontSize: string) => IGroupNameBuilder;
+	    color: (color: string) => IGroupNameBuilder;
+	    justify: (justify: LeftCenterRight) => IGroupNameBuilder;
 	}
 	export function patchGroupName(base: GroupName, builder: (build: IGroupNameBuilder) => IGroupNameBuilder): IAny[];
 	export function buildGroupName(builder: (build: IGroupNameBuilder) => IGroupNameBuilder): GroupName;
@@ -8465,6 +9543,12 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IGroupAbbreviationBuilder;
 	    defaultY: (defaultY: number) => IGroupAbbreviationBuilder;
 	    relativeX: (relativeX: number) => IGroupAbbreviationBuilder;
+	    fontFamily: (fontFamily: string) => IGroupAbbreviationBuilder;
+	    fontWeight: (fontWeight: NormalBold) => IGroupAbbreviationBuilder;
+	    fontStyle: (fontStyle: NormalItalic) => IGroupAbbreviationBuilder;
+	    fontSize: (fontSize: string) => IGroupAbbreviationBuilder;
+	    color: (color: string) => IGroupAbbreviationBuilder;
+	    justify: (justify: LeftCenterRight) => IGroupAbbreviationBuilder;
 	}
 	export function patchGroupAbbreviation(base: GroupAbbreviation, builder: (build: IGroupAbbreviationBuilder) => IGroupAbbreviationBuilder): IAny[];
 	export function buildGroupAbbreviation(builder: (build: IGroupAbbreviationBuilder) => IGroupAbbreviationBuilder): GroupAbbreviation;
@@ -8486,6 +9570,7 @@ declare module 'musicxml-interfaces/builders' {
 	    relativeY: (relativeY: number) => IGroupSymbolBuilder;
 	    defaultY: (defaultY: number) => IGroupSymbolBuilder;
 	    relativeX: (relativeX: number) => IGroupSymbolBuilder;
+	    color: (color: string) => IGroupSymbolBuilder;
 	}
 	export function patchGroupSymbol(base: GroupSymbol, builder: (build: IGroupSymbolBuilder) => IGroupSymbolBuilder): IAny[];
 	export function buildGroupSymbol(builder: (build: IGroupSymbolBuilder) => IGroupSymbolBuilder): GroupSymbol;
@@ -8552,6 +9637,15 @@ declare module 'musicxml-interfaces/builders' {
 	    measuresSplice: (start: number, deleteCount: number, ...items: Measure[]) => IScoreTimewiseBuilder;
 	    measures: (measures: Measure[]) => IScoreTimewiseBuilder;
 	    version: (version: string) => IScoreTimewiseBuilder;
+	    movementTitle: (movementTitle: string) => IScoreTimewiseBuilder;
+	    identification: (build: Identification | ((builder: IIdentificationBuilder) => IIdentificationBuilder)) => IScoreTimewiseBuilder;
+	    defaults: (build: Defaults | ((builder: IDefaultsBuilder) => IDefaultsBuilder)) => IScoreTimewiseBuilder;
+	    work: (build: Work | ((builder: IWorkBuilder) => IWorkBuilder)) => IScoreTimewiseBuilder;
+	    creditsAt: (idx: number, build: Credit | ((builder: ICreditBuilder) => ICreditBuilder)) => IScoreTimewiseBuilder;
+	    creditsSplice: (start: number, deleteCount: number, ...items: Credit[]) => IScoreTimewiseBuilder;
+	    credits: (credits: Credit[]) => IScoreTimewiseBuilder;
+	    partList: (partList: PartList) => IScoreTimewiseBuilder;
+	    movementNumber: (movementNumber: string) => IScoreTimewiseBuilder;
 	}
 	export function patchScoreTimewise(base: ScoreTimewise, builder: (build: IScoreTimewiseBuilder) => IScoreTimewiseBuilder): IAny[];
 	export function buildScoreTimewise(builder: (build: IScoreTimewiseBuilder) => IScoreTimewiseBuilder): ScoreTimewise;
