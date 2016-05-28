@@ -1,4 +1,8 @@
-# 0.0.12
+# 0.0.14
+
+ - Fixed usage of operations when using webpack.
+
+# 0.0.13
 
  - Fixed a bug in object insertion builders.
 

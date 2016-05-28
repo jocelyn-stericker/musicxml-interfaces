@@ -1,1 +1,1 @@
-module.exports = require("./operations");
+module.exports = require("./lib/operations");
