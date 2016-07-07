@@ -78,7 +78,7 @@ declare module 'musicxml-interfaces/index' {
 	 * Converts a MusicXML <grouping /> into JSON.
 	 */
 	export function parseGrouping(str: string): Grouping;
-	export function serializeScore(score: ScoreTimewise): string;
+	export function serializeScore(score: ScoreTimewise, parttime?: boolean): string;
 	export function serializeScoreHeader(scoreHeader: ScoreHeader): string;
 	export let serializeMeasure: (measure: Measure) => string;
 	export let serializeNote: (note: Note) => string;
