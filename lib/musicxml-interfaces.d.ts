@@ -959,30 +959,30 @@ declare module 'musicxml-interfaces/index' {
 	 * dynamics.
 	 */
 	export interface Dynamics extends PrintStyleAlign, Placement, TextDecoration, Enclosure {
-	    fp: boolean;
-	    pp: boolean;
-	    ppp: boolean;
-	    fff: boolean;
-	    sf: boolean;
-	    rf: boolean;
-	    mp: boolean;
-	    sfpp: boolean;
-	    f: boolean;
-	    ffffff: boolean;
-	    sfz: boolean;
-	    ff: boolean;
-	    pppppp: boolean;
-	    rfz: boolean;
+	    f?: boolean;
+	    ff?: boolean;
+	    fff?: boolean;
+	    ffff?: boolean;
+	    fffff?: boolean;
+	    ffffff?: boolean;
+	    fp?: boolean;
+	    fz?: boolean;
+	    mf?: boolean;
+	    mp?: boolean;
 	    otherDynamics?: string;
-	    fz: boolean;
-	    ppppp: boolean;
-	    mf: boolean;
-	    pppp: boolean;
-	    fffff: boolean;
-	    sffz: boolean;
-	    sfp: boolean;
-	    p: boolean;
-	    ffff: boolean;
+	    p?: boolean;
+	    pp?: boolean;
+	    ppp?: boolean;
+	    pppp?: boolean;
+	    ppppp?: boolean;
+	    pppppp?: boolean;
+	    rf?: boolean;
+	    rfz?: boolean;
+	    sf?: boolean;
+	    sffz?: boolean;
+	    sfp?: boolean;
+	    sfpp?: boolean;
+	    sfz?: boolean;
 	}
 	/**
 	 * Fingering is typically indicated 1,2,3,4,5. Multiple
@@ -1555,12 +1555,12 @@ declare module 'musicxml-interfaces/index' {
 	 * are based on Dublin Core.
 	 */
 	export interface Identification {
-	    miscellaneous: Miscellaneous;
+	    miscellaneous?: Miscellaneous;
 	    creators?: Creator[];
 	    relations?: Relation[];
 	    rights?: Rights[];
-	    encoding: Encoding;
-	    source: string;
+	    encoding?: Encoding;
+	    source?: string;
 	}
 	/**
 	 * The supports element indicates if the encoding supports
@@ -1577,8 +1577,8 @@ declare module 'musicxml-interfaces/index' {
 	export interface Supports {
 	    element: string;
 	    attribute?: string;
-	    value: string;
-	    type: string;
+	    value?: string;
+	    type: boolean;
 	}
 	/**
 	 * Encoding contains information about who did the digital
@@ -2183,7 +2183,7 @@ declare module 'musicxml-interfaces/index' {
 	 * music in score order, not in MusicXML document order.
 	 */
 	export interface Attributes extends Editorial {
-	    divisions: number;
+	    divisions?: number;
 	    partSymbol?: PartSymbol;
 	    clefs?: Clef[];
 	    measureStyles?: MeasureStyle[];
@@ -3797,11 +3797,11 @@ declare module 'musicxml-interfaces/index' {
 	    segno?: Segno;
 	    coda?: Coda;
 	    location?: BarlineLocation;
-	    codaAttrib: string;
+	    codaAttrib?: string;
 	    wavyLine?: WavyLine;
 	    fermatas?: Fermata[];
-	    segnoAttrib: string;
-	    divisions: number;
+	    segnoAttrib?: string;
+	    divisions?: number;
 	    barStyle?: BarStyle;
 	    ending?: Ending;
 	    repeat?: Repeat;
@@ -3940,28 +3940,28 @@ declare module 'musicxml-interfaces/index' {
 	 * common.mod file.
 	 */
 	export interface DirectionType {
-	    percussions: Percussion[];
-	    rehearsals: Rehearsal[];
-	    pedal: Pedal;
-	    principalVoice: PrincipalVoice;
-	    accordionRegistration: AccordionRegistration;
-	    eyeglasses: Eyeglasses;
-	    image: Image;
-	    harpPedals: HarpPedals;
-	    metronome: Metronome;
-	    otherDirection: OtherDirection;
-	    segnos: Segno[];
-	    scordatura: Scordatura;
-	    stringMute: StringMute;
+	    percussions?: Percussion[];
+	    rehearsals?: Rehearsal[];
+	    pedal?: Pedal;
+	    principalVoice?: PrincipalVoice;
+	    accordionRegistration?: AccordionRegistration;
+	    eyeglasses?: Eyeglasses;
+	    image?: Image;
+	    harpPedals?: HarpPedals;
+	    metronome?: Metronome;
+	    otherDirection?: OtherDirection;
+	    segnos?: Segno[];
+	    scordatura?: Scordatura;
+	    stringMute?: StringMute;
 	    wedge?: Wedge;
 	    dashes?: Dashes;
-	    damp: Damp;
-	    bracket: Bracket;
+	    damp?: Damp;
+	    bracket?: Bracket;
 	    dynamics?: Dynamics;
-	    octaveShift: OctaveShift;
-	    words: Words[];
-	    dampAll: DampAll;
-	    codas: Coda[];
+	    octaveShift?: OctaveShift;
+	    words?: Words[];
+	    dampAll?: DampAll;
+	    codas?: Coda[];
 	}
 	/**
 	 * Language is Italian ("it") by default. Enclosure is
@@ -4002,10 +4002,10 @@ declare module 'musicxml-interfaces/index' {
 	 * multiple segments.
 	 */
 	export interface Wedge extends LineType, DashedFormatting, Position, Color {
-	    number: number;
-	    niente: boolean;
+	    number?: number;
+	    niente?: boolean;
 	    type: WedgeType;
-	    spread: number;
+	    spread?: number;
 	}
 	/**
 	 * Dashes, used for instance with cresc. and dim. marks.
@@ -4957,18 +4957,18 @@ declare module 'musicxml-interfaces/index' {
 	 */
 	export type PartList = Array<ScorePart | PartGroup>;
 	export interface ScorePart {
-	    identification: Identification;
-	    partNameDisplay: PartNameDisplay;
-	    scoreInstruments: ScoreInstrument[];
-	    midiDevices: MidiDevice[];
+	    identification?: Identification;
+	    partNameDisplay?: PartNameDisplay;
+	    scoreInstruments?: ScoreInstrument[];
+	    midiDevices?: MidiDevice[];
 	    partName: PartName;
-	    partAbbreviationDisplay: PartAbbreviationDisplay;
-	    partAbbreviation: PartAbbreviation;
-	    groups: string[];
-	    midiInstruments: MidiInstrument[];
+	    partAbbreviationDisplay?: PartAbbreviationDisplay;
+	    partAbbreviation?: PartAbbreviation;
+	    groups?: string[];
+	    midiInstruments?: MidiInstrument[];
 	    id: string;
 	    /** Equals "ScorePart" */
-	    _class: string;
+	    _class?: string;
 	}
 	/**
 	 * The part-name indicates the full name of the musical part.
@@ -5025,7 +5025,7 @@ declare module 'musicxml-interfaces/index' {
 	    type: StartStop;
 	    groupTime: GroupTime;
 	    /** Equals "PartGroup" */
-	    _class: string;
+	    _class?: string;
 	}
 	/**
 	 * As with parts, groups can have a name and abbreviation.
@@ -5126,11 +5126,11 @@ declare module 'musicxml-interfaces/index' {
 	 */
 	export interface ScoreInstrument {
 	    instrumentName: string;
-	    instrumentSound: string;
-	    ensemble: string;
-	    virtualInstrument: VirtualInstrument;
-	    instrumentAbbreviation: string;
-	    solo: Solo;
+	    instrumentSound?: string;
+	    ensemble?: string;
+	    virtualInstrument?: VirtualInstrument;
+	    instrumentAbbreviation?: string;
+	    solo?: Solo;
 	    id: string;
 	}
 	export interface Solo {
@@ -5169,12 +5169,12 @@ declare module 'musicxml-interfaces/index' {
 	 */
 	export interface Measure {
 	    number: string;
-	    implicit: boolean;
-	    width: number;
+	    implicit?: boolean;
+	    width?: number;
 	    parts: {
 	        [key: string]: any[];
 	    };
-	    nonControlling: boolean;
+	    nonControlling?: boolean;
 	}
 
 }
@@ -5818,30 +5818,30 @@ declare module 'musicxml-interfaces/builders' {
 	export interface IDynamicsBuilder {
 	    build?: () => Dynamics;
 	    patch: () => IAny[];
+	    f: (f: boolean) => IDynamicsBuilder;
+	    ff: (ff: boolean) => IDynamicsBuilder;
+	    fff: (fff: boolean) => IDynamicsBuilder;
+	    ffff: (ffff: boolean) => IDynamicsBuilder;
+	    fffff: (fffff: boolean) => IDynamicsBuilder;
+	    ffffff: (ffffff: boolean) => IDynamicsBuilder;
 	    fp: (fp: boolean) => IDynamicsBuilder;
+	    fz: (fz: boolean) => IDynamicsBuilder;
+	    mf: (mf: boolean) => IDynamicsBuilder;
+	    mp: (mp: boolean) => IDynamicsBuilder;
+	    otherDynamics: (otherDynamics: string) => IDynamicsBuilder;
+	    p: (p: boolean) => IDynamicsBuilder;
 	    pp: (pp: boolean) => IDynamicsBuilder;
 	    ppp: (ppp: boolean) => IDynamicsBuilder;
-	    fff: (fff: boolean) => IDynamicsBuilder;
-	    sf: (sf: boolean) => IDynamicsBuilder;
-	    rf: (rf: boolean) => IDynamicsBuilder;
-	    mp: (mp: boolean) => IDynamicsBuilder;
-	    sfpp: (sfpp: boolean) => IDynamicsBuilder;
-	    f: (f: boolean) => IDynamicsBuilder;
-	    ffffff: (ffffff: boolean) => IDynamicsBuilder;
-	    sfz: (sfz: boolean) => IDynamicsBuilder;
-	    ff: (ff: boolean) => IDynamicsBuilder;
-	    pppppp: (pppppp: boolean) => IDynamicsBuilder;
-	    rfz: (rfz: boolean) => IDynamicsBuilder;
-	    otherDynamics: (otherDynamics: string) => IDynamicsBuilder;
-	    fz: (fz: boolean) => IDynamicsBuilder;
-	    ppppp: (ppppp: boolean) => IDynamicsBuilder;
-	    mf: (mf: boolean) => IDynamicsBuilder;
 	    pppp: (pppp: boolean) => IDynamicsBuilder;
-	    fffff: (fffff: boolean) => IDynamicsBuilder;
+	    ppppp: (ppppp: boolean) => IDynamicsBuilder;
+	    pppppp: (pppppp: boolean) => IDynamicsBuilder;
+	    rf: (rf: boolean) => IDynamicsBuilder;
+	    rfz: (rfz: boolean) => IDynamicsBuilder;
+	    sf: (sf: boolean) => IDynamicsBuilder;
 	    sffz: (sffz: boolean) => IDynamicsBuilder;
 	    sfp: (sfp: boolean) => IDynamicsBuilder;
-	    p: (p: boolean) => IDynamicsBuilder;
-	    ffff: (ffff: boolean) => IDynamicsBuilder;
+	    sfpp: (sfpp: boolean) => IDynamicsBuilder;
+	    sfz: (sfz: boolean) => IDynamicsBuilder;
 	    defaultX: (defaultX: number) => IDynamicsBuilder;
 	    relativeY: (relativeY: number) => IDynamicsBuilder;
 	    defaultY: (defaultY: number) => IDynamicsBuilder;
@@ -6238,7 +6238,7 @@ declare module 'musicxml-interfaces/builders' {
 	    element: (element: string) => ISupportsBuilder;
 	    attribute: (attribute: string) => ISupportsBuilder;
 	    value: (value: string) => ISupportsBuilder;
-	    type: (type: string) => ISupportsBuilder;
+	    type: (type: boolean) => ISupportsBuilder;
 	}
 	export function patchSupports(base: Supports, builder: (build: ISupportsBuilder) => ISupportsBuilder): IAny[];
 	export function buildSupports(builder: (build: ISupportsBuilder) => ISupportsBuilder): Supports;
