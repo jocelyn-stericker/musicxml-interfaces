@@ -1,6 +1,6 @@
 {
   "name": "musicxml-interfaces",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "MusicXML parser and serializer for JavaScript and TypeScript",
   "author": "Josh Netterfield",
   "license": "AGPL-3.0",
