@@ -1,3 +1,13 @@
+# 0.0.16
+
+ - When running from Node, the "vendor" folder does not need to be copied to the consuming library anymore.
+
+# 0.0.15
+
+ - Make notes capital letters
+ - Suport partwise exports (more supported than timewise)
+ - Some types were marked as required when they were actually optional. Fixed.
+
 # 0.0.14
 
  - Fixed usage of operations when using webpack.
