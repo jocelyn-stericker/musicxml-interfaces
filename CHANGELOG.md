@@ -1,3 +1,7 @@
+# 0.0.17
+
+ - The published npm version was missing the "vendor" folder. Fixed.
+
 # 0.0.16
 
  - When running from Node, the "vendor" folder does not need to be copied to the consuming library anymore.
