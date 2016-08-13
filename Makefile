@@ -1,6 +1,6 @@
 ##
-# (C) Josh Netterfield 2015
-# Part of the musicxml-interfaces <https://github.com/ripieno/musicxml-interfaces>.
+# (C) Joshua Netterfield 2015 - present
+# Part of the musicxml-interfaces <https://github.com/jnetterf/musicxml-interfaces>.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -27,7 +27,7 @@ WARN_COLOR=\033[33;01m
 INFO_COLOR=\033[36;01m
 
 OK_STRING=$(OK_COLOR)  ...ok!$(NO_COLOR)
-BOOTSTRAP_STRING=$(INFO_COLOR)musicxml-interfaces» Bootstraping musicxml-interfaces.d.ts...$(NO_COLOR)
+BOOTSTRAP_STRING=$(INFO_COLOR)musicxml-interfaces» Bootstraping index.d.ts...$(NO_COLOR)
 BUILDER_STRING=$(INFO_COLOR)musicxml-interfaces» Generating builders.ts...$(NO_COLOR)
 LIB_STRING=$(INFO_COLOR)musicxml-interfaces» Building lib...$(NO_COLOR)
 
@@ -36,14 +36,14 @@ main: ./node_modules/.bin/tsc
 	@printf "$(BOOTSTRAP_STRING)\n"
 	@echo '' > ./src/builders.ts
 	@./node_modules/.bin/tsc ./src/index.ts ./src/private/operationGenerator.ts --outDir lib --module commonjs
-	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./lib/musicxml-interfaces.d.ts --baseDir ./src ./src/index.ts
+	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./index.d.ts --baseDir ./src ./src/index.ts
 	@printf "$(BUILDER_STRING)\n"
-	@node ./lib/private/operationGenerator.js ./lib/musicxml-interfaces.d.ts --out ./src/private/symbols.json
+	@node ./lib/private/operationGenerator.js ./index.d.ts --out ./src/private/symbols.json
 	@node ./src/private/writeBuilders.js > ./src/builders.ts
 	@rm ./src/private/symbols.json
 	@printf "$(LIB_STRING)\n"
 	@./node_modules/.bin/tsc
-	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./lib/musicxml-interfaces.d.ts --baseDir ./src ./src/index.ts ./src/builders.ts ./src/operations.ts
+	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./index.d.ts --baseDir ./src ./src/index.ts ./src/builders.ts ./src/operations.ts
 	@node ./lib/private/sanityTest.js
 	@rm -rf ./lib/private
 

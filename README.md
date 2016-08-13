@@ -133,13 +133,13 @@ These should be considered expiremental.
 
 ## Types / usage with TypeScript
 There is a one-to-one mapping of MusicXML and the JSON produced by MusicXML Interfaces.
-The [TypeScript defintion file](lib/musicxml-interfaces.d.ts) fully documents MusicXML Interfaces types.
+The [TypeScript defintion file](index.d.ts) fully documents MusicXML Interfaces types.
 If you use TypeScript and tsd, `tsd link` will load types into your project.
 
 ## Contributing
 Please report issues! In particular,
 
- - If there is a discrepency between a DTD in `vendor/musicxml-dtd` and the TypeScript interfaces in `musicxml-interfaces.d.ts`, just state the discrepency.
+ - If there is a discrepency between a DTD in `vendor/musicxml-dtd` and the TypeScript interfaces in `index.d.ts`, just state the discrepency.
  - If the TypeScript interface definitions are correct, but there is an error in importing a file, provide a minimal MusicXML file that illustrates the issue.
  - If there is an error in exporting MusicXML interfaces back to MusicXML, provide a minimal valid JSON structure that is not exported correctly.
 
