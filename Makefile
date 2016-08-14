@@ -42,10 +42,9 @@ main: ./node_modules/.bin/tsc
 	@node ./src/private/writeBuilders.js > ./src/builders.ts
 	@rm ./src/private/symbols.json
 	@printf "$(LIB_STRING)\n"
-	@./node_modules/.bin/tsc
-	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./index.d.ts --baseDir ./src ./src/index.ts ./src/builders.ts ./src/operations.ts
+	@./node_modules/.bin/tsc -d
 	@node ./lib/private/sanityTest.js
-	@rm -rf ./lib/private
+	@rm -rf ./lib/private ./index.d.ts
 
 watch: ./node_modules/.bin/tsc
 	@./node_modules/.bin/tsc -w

@@ -1,6 +1,6 @@
 {
   "name": "musicxml-interfaces",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "MusicXML parser and serializer for JavaScript and TypeScript",
   "author": "Josh Netterfield",
   "license": "AGPL-3.0",
@@ -18,17 +18,22 @@
     "typescript": "2.0.0"
   },
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "browser": {
     "xmldom": false,
     "child_process": false
   },
   "files": [
-    "lib/builders.js",
-    "lib/index.js",
-    "index.d.ts",
-    "lib/operations.js",
-    "vendor/",
     "builders.js",
-    "operations.js"
+    "builders.d.ts",
+    "operations.d.ts",
+    "operations.js",
+    "lib/builders.d.ts",
+    "lib/builders.js",
+    "lib/index.d.ts",
+    "lib/index.js",
+    "lib/operations.d.ts",
+    "lib/operations.js",
+    "vendor/"
   ]
 }
