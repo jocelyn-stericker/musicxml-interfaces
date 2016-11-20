@@ -96,16 +96,19 @@ export declare let serializeSound: (sound: Sound) => string;
 export declare let serializeBarline: (barline: Barline) => string;
 export declare let serializeGrouping: (grouping: Grouping) => string;
 export interface TextSegment {
+    _snapshot?: TextSegment;
     acc?: AccidentalText;
     text?: DisplayText;
 }
 export interface EncodingDate extends CalendarDate {
+    _snapshot?: EncodingDate;
 }
 /**
  * Calendar dates are represented yyyy-mm-dd format, following
  * ISO 8601.
  */
 export interface CalendarDate {
+    _snapshot?: CalendarDate;
     /**
      * The 1-indexed month number
      */
@@ -280,6 +283,7 @@ export declare enum NormalBold {
  * of a staff resized by the staff-size element.
  */
 export interface Position {
+    _snapshot?: Position;
     /**
      * The default-x attribute changes the
      * computation of the default position. For most elements,
@@ -371,6 +375,7 @@ export interface Position {
  * notation.
  */
 export interface Placement {
+    _snapshot?: Placement;
     placement?: AboveBelow;
 }
 /**
@@ -380,6 +385,7 @@ export interface Placement {
  * notation type.
  */
 export interface Orientation {
+    _snapshot?: Orientation;
     orientation?: OverUnder;
 }
 /**
@@ -392,6 +398,7 @@ export interface Orientation {
  * attribute is present, it overrides the directive entity.
  */
 export interface DirectiveEntity {
+    _snapshot?: DirectiveEntity;
     directive?: boolean;
 }
 /**
@@ -421,6 +428,7 @@ export interface DirectiveEntity {
  * settings associated with the slur or tied element.
  */
 export interface Bezier {
+    _snapshot?: Bezier;
     bezierX2?: number;
     bezierOffset?: number;
     bezierOffset2?: number;
@@ -448,6 +456,7 @@ export interface Bezier {
  * a music font.
  */
 export interface Font {
+    _snapshot?: Font;
     fontFamily?: string;
     fontWeight?: NormalBold;
     fontStyle?: NormalItalic;
@@ -520,6 +529,7 @@ export declare enum WholeHalfNone {
  * sRGB color space (IEC 61966).
  */
 export interface Color {
+    _snapshot?: Color;
     color?: string;
 }
 /**
@@ -530,6 +540,7 @@ export interface Color {
  * triple lines instead of just being on or off.
  */
 export interface TextDecoration {
+    _snapshot?: TextDecoration;
     underline?: number;
     overline?: number;
     lineThrough?: number;
@@ -542,6 +553,7 @@ export interface TextDecoration {
  * indicates horizontal alignment as well as justification.
  */
 export interface Justify {
+    _snapshot?: Justify;
     justify?: LeftCenterRight;
 }
 /**
@@ -562,6 +574,7 @@ export interface Justify {
  * attribute.
  */
 export interface Halign {
+    _snapshot?: Halign;
     halign?: LeftCenterRight;
 }
 /**
@@ -570,6 +583,7 @@ export interface Halign {
  * of the text. Defaults are implementation-dependent.
  */
 export interface Valign {
+    _snapshot?: Valign;
     valign?: TopMiddleBottomBaseline;
 }
 /**
@@ -578,6 +592,7 @@ export interface Valign {
  * baseline value. Defaults are implementation-dependent.
  */
 export interface ValignImage {
+    _snapshot?: ValignImage;
     valignImage?: TopMiddleBottomBaseline;
 }
 /**
@@ -589,6 +604,7 @@ export interface ValignImage {
  * letter-spacing for purposes of text justification.
  */
 export interface LetterSpacing {
+    _snapshot?: LetterSpacing;
     letterSpacing?: string;
 }
 /**
@@ -600,6 +616,7 @@ export interface LetterSpacing {
  * between 100 and 120 are recommended.
  */
 export interface LineHeight {
+    _snapshot?: LineHeight;
     lineHeight?: string;
 }
 /**
@@ -616,6 +633,7 @@ export interface LineHeight {
  * support bidirectional text.
  */
 export interface TextDirection {
+    _snapshot?: TextDirection;
     dir?: DirectionMode;
 }
 /**
@@ -627,6 +645,7 @@ export interface TextDirection {
  * counter-clockwise rotations.
  */
 export interface TextRotation {
+    _snapshot?: TextRotation;
     rotation?: number;
 }
 /**
@@ -634,6 +653,7 @@ export interface TextRotation {
  * formatting of an enclosure around text or symbols.
  */
 export interface Enclosure {
+    _snapshot?: Enclosure;
     enclosure?: EnclosureShape;
 }
 /**
@@ -642,12 +662,14 @@ export interface Enclosure {
  * color.
  */
 export interface PrintStyle extends Position, Font, Color {
+    _snapshot?: PrintStyle;
 }
 /**
  * The print-style-align entity adds the halign and valign
  * attributes to the position, font, and color attributes.
  */
 export interface PrintStyleAlign extends PrintStyle, Halign, Valign {
+    _snapshot?: PrintStyleAlign;
 }
 /**
  * The line-shape entity is used to distinguish between
@@ -656,6 +678,7 @@ export interface PrintStyleAlign extends PrintStyle, Halign, Valign {
  * wavy lines.
  */
 export interface LineShape {
+    _snapshot?: LineShape;
     lineShape?: StraightCurved;
 }
 /**
@@ -665,6 +688,7 @@ export interface LineShape {
  * wavy lines.
  */
 export interface LineType {
+    _snapshot?: LineType;
     lineType?: SolidDashedDottedWavy;
 }
 /**
@@ -675,6 +699,7 @@ export interface LineType {
  * line-type attribute is not dashed.
  */
 export interface DashedFormatting {
+    _snapshot?: DashedFormatting;
     dashLength?: number;
     spaceLength?: number;
 }
@@ -694,6 +719,7 @@ export interface DashedFormatting {
  * interpreted to also be set to no if they are not present.
  */
 export interface PrintObject {
+    _snapshot?: PrintObject;
     printObject?: boolean;
 }
 /**
@@ -712,6 +738,7 @@ export interface PrintObject {
  * interpreted to also be set to no if they are not present.
  */
 export interface PrintSpacing {
+    _snapshot?: PrintSpacing;
     printSpacing?: boolean;
 }
 /**
@@ -730,6 +757,7 @@ export interface PrintSpacing {
  * interpreted to also be set to no if they are not present.
  */
 export interface Printout extends PrintObject, PrintSpacing {
+    _snapshot?: Printout;
     printDot?: boolean;
     printLyric?: boolean;
 }
@@ -739,6 +767,7 @@ export interface Printout extends PrintObject, PrintSpacing {
  * across the elements that use this entity.
  */
 export interface TextFormatting extends Justify, PrintStyleAlign, TextDecoration, TextRotation, LetterSpacing, LineHeight, TextDirection, Enclosure {
+    _snapshot?: TextFormatting;
 }
 /**
  * The level-display entity allows specification of three
@@ -749,6 +778,7 @@ export interface TextFormatting extends Justify, PrintStyleAlign, TextDecoration
  * accidental elements.
  */
 export interface LevelDisplay {
+    _snapshot?: LevelDisplay;
     bracket?: boolean;
     size?: SymbolSize;
     parentheses?: boolean;
@@ -777,6 +807,7 @@ export interface LevelDisplay {
  * The default for last-beat is "24", not "75".
  */
 export interface TrillSound {
+    _snapshot?: TrillSound;
     startNote?: UpperMainBelow;
     accelerate?: boolean;
     beats?: number;
@@ -802,6 +833,7 @@ export interface TrillSound {
  * last-beat = "75"
  */
 export interface BendSound {
+    _snapshot?: BendSound;
     accelerate?: boolean;
     beats?: number;
     firstBeat?: number;
@@ -813,6 +845,7 @@ export interface BendSound {
  * a repeated section.
  */
 export interface TimeOnly {
+    _snapshot?: TimeOnly;
     timeOnly?: string;
 }
 /**
@@ -821,6 +854,7 @@ export interface TimeOnly {
  * this is used for the version attribute.
  */
 export interface DocumentAttributes {
+    _snapshot?: DocumentAttributes;
     version: string;
 }
 /**
@@ -829,6 +863,7 @@ export interface DocumentAttributes {
  * across all the different component DTD modules.
  */
 export interface Editorial {
+    _snapshot?: Editorial;
     footnote?: Footnote;
     level?: Level;
     _class?: string;
@@ -839,6 +874,7 @@ export interface Editorial {
  * across all the different component DTD modules.
  */
 export interface EditorialVoice {
+    _snapshot?: EditorialVoice;
     voice?: number;
     footnote?: Footnote;
     level?: Level;
@@ -857,6 +893,7 @@ export interface EditorialVoice {
  * original clef, key, and time signature. It is no by default.
  */
 export interface Footnote extends TextFormatting {
+    _snapshot?: Footnote;
     text: string;
 }
 /**
@@ -872,6 +909,7 @@ export interface Footnote extends TextFormatting {
  * original clef, key, and time signature. It is no by default.
  */
 export interface Level extends LevelDisplay {
+    _snapshot?: Level;
     text: string;
     reference?: boolean;
 }
@@ -887,6 +925,7 @@ export interface Level extends LevelDisplay {
  * The fermata type is upright if not specified.
  */
 export interface Fermata extends PrintStyle {
+    _snapshot?: Fermata;
     shape: NormalAngledSquare;
     type?: UprightInverted;
 }
@@ -902,6 +941,7 @@ export interface Fermata extends PrintStyle {
  * The fermata type is upright if not specified.
  */
 export interface WavyLine extends Position, Placement, Color, TrillSound {
+    _snapshot?: WavyLine;
     number?: number;
     type: StartStopContinue;
 }
@@ -912,6 +952,7 @@ export interface WavyLine extends Position, Placement, Color, TrillSound {
  * playback applications reliably.
  */
 export interface Segno extends PrintStyleAlign {
+    _snapshot?: Segno;
 }
 /**
  * Segno and coda signs can be associated with a measure
@@ -920,6 +961,7 @@ export interface Segno extends PrintStyleAlign {
  * playback applications reliably.
  */
 export interface Coda extends PrintStyleAlign {
+    _snapshot?: Coda;
 }
 /**
  * These elements are used both in the time-modification and
@@ -934,6 +976,7 @@ export interface Coda extends PrintStyleAlign {
  * integer.
  */
 export interface NormalDot {
+    _snapshot?: NormalDot;
 }
 /**
  * Dynamics can be associated either with a note or a general
@@ -958,6 +1001,7 @@ export interface NormalDot {
  * dynamics.
  */
 export interface Dynamics extends PrintStyleAlign, Placement, TextDecoration, Enclosure {
+    _snapshot?: Dynamics;
     f?: boolean;
     ff?: boolean;
     fff?: boolean;
@@ -993,6 +1037,7 @@ export interface Dynamics extends PrintStyleAlign, Placement, TextDecoration, En
  * the pluck element represents the plucking finger.
  */
 export interface Fingering extends PrintStyle, Placement {
+    _snapshot?: Fingering;
     substitution?: boolean;
     finger?: number;
     alternate?: boolean;
@@ -1005,6 +1050,7 @@ export interface Fingering extends PrintStyle, Placement {
  * regular notation.
  */
 export interface Fret extends Font, Color {
+    _snapshot?: Fret;
     fret: number;
 }
 /**
@@ -1015,6 +1061,7 @@ export interface Fret extends Font, Color {
  * regular notation.
  */
 export interface String extends PrintStyle, Placement {
+    _snapshot?: String;
     stringNum: number;
 }
 /**
@@ -1024,6 +1071,7 @@ export interface String extends PrintStyle, Placement {
  * Enclosure is none by default.
  */
 export interface DisplayText extends TextFormatting {
+    _snapshot?: DisplayText;
     text: string;
 }
 /**
@@ -1033,6 +1081,7 @@ export interface DisplayText extends TextFormatting {
  * Enclosure is none by default.
  */
 export interface AccidentalText extends TextFormatting {
+    _snapshot?: AccidentalText;
     text: string;
 }
 /**
@@ -1048,6 +1097,7 @@ export interface AccidentalText extends TextFormatting {
  * respectively.
  */
 export interface PartNameDisplay extends PrintObject {
+    _snapshot?: PartNameDisplay;
     name: TextSegment[];
 }
 /**
@@ -1063,6 +1113,7 @@ export interface PartNameDisplay extends PrintObject {
  * respectively.
  */
 export interface PartAbbreviationDisplay extends PrintObject {
+    _snapshot?: PartAbbreviationDisplay;
     name: TextSegment[];
 }
 /**
@@ -1078,6 +1129,7 @@ export interface PartAbbreviationDisplay extends PrintObject {
  * all score-instrument elements in the score-part.
  */
 export interface MidiDevice {
+    _snapshot?: MidiDevice;
     port?: number;
     deviceName: string;
     id?: number;
@@ -1089,6 +1141,7 @@ export interface MidiDevice {
  * refers to the score-instrument affected by the change.
  */
 export interface MidiInstrument {
+    _snapshot?: MidiInstrument;
     midiUnpitched?: number;
     volume?: number;
     pan?: number;
@@ -1109,6 +1162,7 @@ export interface MidiInstrument {
  * to the current note only.
  */
 export interface Play {
+    _snapshot?: Play;
     ipa?: string;
     mute?: string;
     otherPlay?: OtherPlay;
@@ -1116,6 +1170,7 @@ export interface Play {
     id: string;
 }
 export interface OtherPlay {
+    _snapshot?: OtherPlay;
     data: string;
     type: string;
 }
@@ -1131,6 +1186,7 @@ export interface OtherPlay {
  * errors.
  */
 export interface Scaling {
+    _snapshot?: Scaling;
     tenths?: number;
     millimeters?: number;
 }
@@ -1146,6 +1202,7 @@ export declare enum OddEvenBoth {
  * page number values.
  */
 export interface PageMargins {
+    _snapshot?: PageMargins;
     topMargin: number;
     leftMargin: number;
     bottomMargin: number;
@@ -1161,6 +1218,7 @@ export interface PageMargins {
  * defaults element, "both" is the default.
  */
 export interface PageLayout {
+    _snapshot?: PageLayout;
     pageHeight?: number;
     pageWidth?: number;
     pageMargins?: PageMargins[];
@@ -1198,6 +1256,7 @@ export interface PageLayout {
  * from the defaults element are used there as well.
  */
 export interface SystemLayout {
+    _snapshot?: SystemLayout;
     systemDividers?: SystemDividers;
     systemMargins?: SystemMargins;
     systemDistance?: number;
@@ -1236,6 +1295,7 @@ export interface SystemLayout {
  * from the defaults element are used there as well.
  */
 export interface SystemMargins {
+    _snapshot?: SystemMargins;
     leftMargin: number;
     rightMargin: number;
 }
@@ -1255,6 +1315,7 @@ export interface SystemMargins {
  * system and the previous system.
  */
 export interface SystemDividers {
+    _snapshot?: SystemDividers;
     rightDivider: RightDivider;
     leftDivider: LeftDivider;
 }
@@ -1274,6 +1335,7 @@ export interface SystemDividers {
  * system and the previous system.
  */
 export interface LeftDivider extends PrintObject, PrintStyleAlign {
+    _snapshot?: LeftDivider;
 }
 /**
  * The system-dividers element indicates the presence or
@@ -1291,6 +1353,7 @@ export interface LeftDivider extends PrintObject, PrintStyleAlign {
  * system and the previous system.
  */
 export interface RightDivider extends PrintObject, PrintStyleAlign {
+    _snapshot?: RightDivider;
 }
 /**
  * Staff layout includes the vertical distance from the bottom
@@ -1303,6 +1366,7 @@ export interface RightDivider extends PrintObject, PrintStyleAlign {
  * ignored for the first staff in a system.
  */
 export interface StaffLayout {
+    _snapshot?: StaffLayout;
     staffDistance?: number;
     num: number;
 }
@@ -1314,6 +1378,7 @@ export interface StaffLayout {
  * width, use the width attribute of the measure element.
  */
 export interface MeasureLayout {
+    _snapshot?: MeasureLayout;
     measureDistance?: number;
 }
 /**
@@ -1354,6 +1419,7 @@ export interface MeasureLayout {
  * though without application interoperability.
  */
 export interface LineWidth {
+    _snapshot?: LineWidth;
     tenths: number;
     type: string;
 }
@@ -1400,6 +1466,7 @@ export declare enum CueGraceLarge {
  * though without application interoperability.
  */
 export interface NoteSize {
+    _snapshot?: NoteSize;
     size: number;
     type: CueGraceLarge;
 }
@@ -1441,6 +1508,7 @@ export interface NoteSize {
  * though without application interoperability.
  */
 export interface Distance {
+    _snapshot?: Distance;
     tenths: number;
     type: string;
 }
@@ -1482,6 +1550,7 @@ export interface Distance {
  * though without application interoperability.
  */
 export interface Appearance {
+    _snapshot?: Appearance;
     lineWidths?: {
         [key: string]: LineWidth;
     };
@@ -1500,6 +1569,7 @@ export interface Appearance {
  * there can be multiple creators within an identification.
  */
 export interface Creator {
+    _snapshot?: Creator;
     creator: string;
     type: string;
 }
@@ -1511,6 +1581,7 @@ export interface Creator {
  * are supported.
  */
 export interface Rights {
+    _snapshot?: Rights;
     type: string;
     rights: string;
 }
@@ -1518,6 +1589,7 @@ export interface Rights {
  * The software used to encode the music.
  */
 export interface Encoder {
+    _snapshot?: Encoder;
     encoder: string;
     type: string;
 }
@@ -1526,6 +1598,7 @@ export interface Encoder {
  * similar to the Dublin Core relation element.
  */
 export interface Relation {
+    _snapshot?: Relation;
     type: string;
     data: string;
 }
@@ -1534,6 +1607,7 @@ export interface Relation {
  * MusicXML format, it can go in the miscellaneous area.
  */
 export interface MiscellaneousField {
+    _snapshot?: MiscellaneousField;
     data: string;
     name: string;
 }
@@ -1543,6 +1617,7 @@ export interface MiscellaneousField {
  * MusicXML format, it can go in the miscellaneous area.
  */
 export interface Miscellaneous {
+    _snapshot?: Miscellaneous;
     miscellaneousFields?: MiscellaneousField[];
 }
 /**
@@ -1554,6 +1629,7 @@ export interface Miscellaneous {
  * are based on Dublin Core.
  */
 export interface Identification {
+    _snapshot?: Identification;
     miscellaneous?: Miscellaneous;
     creators?: Creator[];
     relations?: Relation[];
@@ -1574,6 +1650,7 @@ export interface Identification {
  * MusicXML file.
  */
 export interface Supports {
+    _snapshot?: Supports;
     element: string;
     attribute?: string;
     value?: string;
@@ -1584,6 +1661,7 @@ export interface Supports {
  * encoding, when, with what software, and in what aspects.
  */
 export interface Encoding {
+    _snapshot?: Encoding;
     encodingDescriptions?: string[];
     encodingDate?: EncodingDate;
     supports?: {
@@ -1612,6 +1690,7 @@ export declare enum SeparatorType {
  * beat-type arranged horizontally.
  */
 export interface TimeSeparator {
+    _snapshot?: TimeSeparator;
     separator?: SeparatorType;
 }
 export declare enum TimeSymbolType {
@@ -1636,6 +1715,7 @@ export declare enum TimeSymbolType {
  * one third the beats value.
  */
 export interface TimeSymbol {
+    _snapshot?: TimeSymbol;
     symbol?: TimeSymbolType;
 }
 export declare enum CancelLocation {
@@ -1693,6 +1773,7 @@ export declare enum CancelLocation {
  * the print-object attribute has been set to "no".
  */
 export interface Cancel {
+    _snapshot?: Cancel;
     fifths: number;
     location?: CancelLocation;
 }
@@ -1746,6 +1827,7 @@ export interface Cancel {
  * the print-object attribute has been set to "no".
  */
 export interface KeyOctave {
+    _snapshot?: KeyOctave;
     octave: number;
     number: number;
     cancel?: boolean;
@@ -1800,6 +1882,7 @@ export interface KeyOctave {
  * the print-object attribute has been set to "no".
  */
 export interface Key extends PrintStyle, PrintObject {
+    _snapshot?: Key;
     cancel?: Cancel;
     keySteps?: string[];
     keyOctaves?: KeyOctave[];
@@ -1847,6 +1930,7 @@ export interface Key extends PrintStyle, PrintObject {
  * part.
  */
 export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintObject {
+    _snapshot?: Time;
     interchangeable?: Interchangeable;
     beats: string[];
     beatTypes: number[];
@@ -1890,6 +1974,7 @@ export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintO
  * part.
  */
 export interface Interchangeable extends TimeSymbol, TimeSeparator {
+    _snapshot?: Interchangeable;
     beats: string[];
     beatTypes: number[];
     timeRelation?: string;
@@ -1915,6 +2000,7 @@ export declare enum PartSymbolType {
  * corresponding change in the common barlines within a part.
  */
 export interface PartSymbol extends Position, Color {
+    _snapshot?: PartSymbol;
     topStaff?: number;
     type: PartSymbolType;
     bottomStaff?: number;
@@ -1959,6 +2045,7 @@ export interface PartSymbol extends Position, Color {
  * additional attribute has been set to "yes".
  */
 export interface Clef extends PrintStyle, PrintObject {
+    _snapshot?: Clef;
     clefOctaveChange?: string;
     sign: string;
     number?: number;
@@ -1973,6 +2060,7 @@ export interface Clef extends PrintStyle, PrintObject {
  * lines are numbered from bottom to top.
  */
 export interface StaffTuning {
+    _snapshot?: StaffTuning;
     tuningAlter?: string;
     line: string;
     tuningStep: string;
@@ -2004,6 +2092,7 @@ export declare enum ShowFretsType {
  * for the empty part.
  */
 export interface StaffDetails extends PrintObject, PrintSpacing {
+    _snapshot?: StaffDetails;
     staffLines?: number;
     staffTunings?: StaffTuning[];
     staffSize?: number;
@@ -2034,6 +2123,7 @@ export interface StaffDetails extends PrintObject, PrintSpacing {
  * multiple instruments.
  */
 export interface Double {
+    _snapshot?: Double;
 }
 /**
  * If the part is being encoded for a transposing instrument
@@ -2057,6 +2147,7 @@ export interface Double {
  * multiple instruments.
  */
 export interface Transpose {
+    _snapshot?: Transpose;
     number?: number;
     diatonic?: string;
     octaveChange?: string;
@@ -2073,6 +2164,7 @@ export interface Transpose {
  * from ISO 3166.
  */
 export interface Directive extends PrintStyle {
+    _snapshot?: Directive;
     data: string;
 }
 /**
@@ -2083,6 +2175,7 @@ export interface Directive extends PrintStyle {
  * the beat is based on the current time signature.
  */
 export interface SlashDot {
+    _snapshot?: SlashDot;
 }
 /**
  * The text of the multiple-rest element indicates the number
@@ -2092,6 +2185,7 @@ export interface SlashDot {
  * if not specified.
  */
 export interface MultipleRest {
+    _snapshot?: MultipleRest;
     useSymbols?: boolean;
     count: number;
 }
@@ -2110,6 +2204,7 @@ export interface MultipleRest {
  * start and the stop of the measure-repeat must be specified.
  */
 export interface MeasureRepeat {
+    _snapshot?: MeasureRepeat;
     data?: string;
     type: StartStop;
     slashes?: number;
@@ -2131,6 +2226,7 @@ export interface MeasureRepeat {
  * value for use-dots is no.
  */
 export interface BeatRepeat {
+    _snapshot?: BeatRepeat;
     slashType?: string;
     useDots?: boolean;
     slashDots?: SlashDot[];
@@ -2147,6 +2243,7 @@ export interface BeatRepeat {
  * element, and only has effect if use-stems is no.
  */
 export interface Slash {
+    _snapshot?: Slash;
     slashType?: string;
     useDots?: boolean;
     useStems?: boolean;
@@ -2168,6 +2265,7 @@ export interface Slash {
  * top to bottom on the system, as with clef.
  */
 export interface MeasureStyle extends Font, Color {
+    _snapshot?: MeasureStyle;
     measureRepeat?: MeasureRepeat;
     beatRepeat?: BeatRepeat;
     multipleRest?: MultipleRest;
@@ -2182,6 +2280,7 @@ export interface MeasureStyle extends Font, Color {
  * music in score order, not in MusicXML document order.
  */
 export interface Attributes extends Editorial {
+    _snapshot?: Attributes;
     divisions?: number;
     partSymbol?: PartSymbol;
     clefs?: Clef[];
@@ -2207,6 +2306,7 @@ export interface Attributes extends Editorial {
  * the units are in real-time divisions for the grace note.
  */
 export interface Cue {
+    _snapshot?: Cue;
 }
 /**
  * The cue and grace elements indicate the presence of cue and
@@ -2221,6 +2321,7 @@ export interface Cue {
  * the units are in real-time divisions for the grace note.
  */
 export interface Grace {
+    _snapshot?: Grace;
     makeTime?: string;
     stealTimePrevious?: string;
     slash?: boolean;
@@ -2235,6 +2336,7 @@ export interface Grace {
  * notes too.
  */
 export interface Chord {
+    _snapshot?: Chord;
 }
 /**
  * The unpitched element indicates musical elements that are
@@ -2248,6 +2350,7 @@ export interface Chord {
  * line of the staff, generally used for a one-line staff.
  */
 export interface Unpitched {
+    _snapshot?: Unpitched;
     displayStep?: string;
     displayOctave?: number;
 }
@@ -2263,6 +2366,7 @@ export interface Unpitched {
  * started by middle C.
  */
 export interface Pitch {
+    _snapshot?: Pitch;
     alter?: number;
     step?: string;
     octave: number;
@@ -2276,6 +2380,7 @@ export interface Pitch {
  * elements lacking determinate pitch.
  */
 export interface FullNote {
+    _snapshot?: FullNote;
     unpitched?: Unpitched;
     chord?: Chord;
     pitch?: Pitch;
@@ -2289,6 +2394,7 @@ export interface FullNote {
  * indicates this is a complete measure rest.
  */
 export interface Rest {
+    _snapshot?: Rest;
     measure?: boolean;
     displayStep?: string;
     displayOctave?: number;
@@ -2309,6 +2415,7 @@ export interface Rest {
  * element indicates notation.
  */
 export interface Tie extends TimeOnly {
+    _snapshot?: Tie;
     type?: StartStop;
 }
 /**
@@ -2318,6 +2425,7 @@ export interface Tie extends TimeOnly {
  * to the score-instrument ID.
  */
 export interface Instrument {
+    _snapshot?: Instrument;
     id: string;
 }
 /**
@@ -2333,6 +2441,7 @@ export interface Instrument {
  * readily than the other.
  */
 export interface Note extends EditorialVoice, PrintStyle, Printout, TimeOnly, FullNote {
+    _snapshot?: Note;
     noteheadText?: NoteheadText;
     timeModification?: TimeModification;
     accidental?: Accidental;
@@ -2381,6 +2490,7 @@ export declare enum Count {
  * cue the default for cue and grace notes.
  */
 export interface Type {
+    _snapshot?: Type;
     duration: Count;
     size?: SymbolSize;
 }
@@ -2391,6 +2501,7 @@ export interface Type {
  * ignored for notes that appear on a staff space.
  */
 export interface Dot extends PrintStyle, Placement {
+    _snapshot?: Dot;
 }
 export declare enum MxmlAccidental {
     NaturalFlat = 7,
@@ -2459,6 +2570,7 @@ export declare enum MxmlAccidental {
  * entity defined in the common.mod file.
  */
 export interface Accidental extends LevelDisplay, PrintStyle {
+    _snapshot?: Accidental;
     cautionary?: boolean;
     accidental: MxmlAccidental;
     editorial?: boolean;
@@ -2475,6 +2587,7 @@ export interface Accidental extends LevelDisplay, PrintStyle {
  * accurately.
  */
 export interface TimeModification {
+    _snapshot?: TimeModification;
     actualNotes: number;
     normalType?: string;
     normalNotes: number;
@@ -2497,6 +2610,7 @@ export declare enum StemType {
  * refers to a stemlet.
  */
 export interface Stem extends Position, Color {
+    _snapshot?: Stem;
     type: StemType;
 }
 export declare enum NoteheadType {
@@ -2563,6 +2677,7 @@ export declare enum NoteheadType {
  * text and accidentals.
  */
 export interface Notehead extends Font, Color {
+    _snapshot?: Notehead;
     type: NoteheadType;
     filled?: boolean;
     parentheses?: boolean;
@@ -2603,6 +2718,7 @@ export interface Notehead extends Font, Color {
  * text and accidentals.
  */
 export interface NoteheadText {
+    _snapshot?: NoteheadText;
     text: TextSegment[];
 }
 export declare enum BeamType {
@@ -2641,6 +2757,7 @@ export declare enum AccelRitNone {
  * "yes" value for each beam using it.
  */
 export interface Beam {
+    _snapshot?: Beam;
     repeater?: boolean;
     number: number;
     type: BeamType;
@@ -2654,6 +2771,7 @@ export interface Beam {
  * such as fingerings, without having them appear in the score.
  */
 export interface Notations extends Editorial, PrintObject {
+    _snapshot?: Notations;
     slurs?: Slur[];
     articulations?: Articulations[];
     slides?: Slide[];
@@ -2680,6 +2798,7 @@ export interface Notations extends Editorial, PrintObject {
  * situations.
  */
 export interface Tied extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
+    _snapshot?: Tied;
     number?: number;
     type: StartStopContinue;
 }
@@ -2691,6 +2810,7 @@ export interface Tied extends LineType, DashedFormatting, Position, Placement, O
  * system slurs, or to specify the shape of very complex slurs.
  */
 export interface Slur extends LineType, DashedFormatting, Position, Placement, Orientation, Bezier, Color {
+    _snapshot?: Slur;
     number?: number;
     type: StartStopContinue;
 }
@@ -2731,6 +2851,7 @@ export declare enum ActualBothNone {
  * none by default.
  */
 export interface Tuplet extends LineShape, Position, Placement {
+    _snapshot?: Tuplet;
     bracket?: boolean;
     number: number;
     showNumber?: ActualBothNone;
@@ -2771,6 +2892,7 @@ export interface Tuplet extends LineShape, Position, Placement {
  * none by default.
  */
 export interface TupletActual {
+    _snapshot?: TupletActual;
     tupletNumber?: TupletNumber;
     tupletDots?: TupletDot[];
     tupletType?: TupletType;
@@ -2807,6 +2929,7 @@ export interface TupletActual {
  * none by default.
  */
 export interface TupletNormal {
+    _snapshot?: TupletNormal;
     tupletNumber?: TupletNumber;
     tupletDots?: TupletDot[];
     tupletType?: TupletType;
@@ -2843,6 +2966,7 @@ export interface TupletNormal {
  * none by default.
  */
 export interface TupletNumber extends Font, Color {
+    _snapshot?: TupletNumber;
     text: string;
 }
 /**
@@ -2877,6 +3001,7 @@ export interface TupletNumber extends Font, Color {
  * none by default.
  */
 export interface TupletType extends Font, Color {
+    _snapshot?: TupletType;
     text: string;
 }
 /**
@@ -2911,6 +3036,7 @@ export interface TupletType extends Font, Color {
  * none by default.
  */
 export interface TupletDot extends Font, Color {
+    _snapshot?: TupletDot;
 }
 /**
  * Glissando and slide elements both indicate rapidly moving
@@ -2923,6 +3049,7 @@ export interface TupletDot extends Font, Color {
  * printed alongside the line.
  */
 export interface Glissando extends LineType, DashedFormatting, PrintStyle {
+    _snapshot?: Glissando;
     text?: string;
     type: StartStop;
     normal?: number;
@@ -2938,6 +3065,7 @@ export interface Glissando extends LineType, DashedFormatting, PrintStyle {
  * printed alongside the line.
  */
 export interface Slide extends LineType, DashedFormatting, PrintStyle, BendSound {
+    _snapshot?: Slide;
     text?: string;
     type: StartStop;
     normal?: number;
@@ -2951,6 +3079,7 @@ export interface Slide extends LineType, DashedFormatting, PrintStyle, BendSound
  * appropriate.
  */
 export interface OtherNotation extends PrintObject, PrintStyle, Placement {
+    _snapshot?: OtherNotation;
     type: StartStopSingle;
     data?: string;
 }
@@ -2961,6 +3090,7 @@ export interface OtherNotation extends PrintObject, PrintStyle, Placement {
  * application interoperability.
  */
 export interface OtherDirection extends PrintObject, PrintStyleAlign {
+    _snapshot?: OtherDirection;
     data: string;
 }
 /**
@@ -2970,6 +3100,7 @@ export interface OtherDirection extends PrintObject, PrintStyleAlign {
  * different name to reflect the different musical meaning.
  */
 export interface Ornaments extends PrintStyle, Placement, TrillSound {
+    _snapshot?: Ornaments;
     delayedInvertedTurn?: DelayedInvertedTurn;
     shake?: Shake;
     turn?: Turn;
@@ -2986,6 +3117,7 @@ export interface Ornaments extends PrintStyle, Placement, TrillSound {
     schleifer?: Schleifer;
 }
 export interface TrillMark extends PrintStyle, Placement, TrillSound {
+    _snapshot?: TrillMark;
 }
 /**
  * the turn and delayed-turn elements are the normal turn
@@ -2999,6 +3131,7 @@ export interface TrillMark extends PrintStyle, Placement, TrillSound {
  * to slash the turn; it is no by default.
  */
 export interface Turn extends PrintStyle, Placement, TrillSound {
+    _snapshot?: Turn;
     slash?: boolean;
 }
 /**
@@ -3013,6 +3146,7 @@ export interface Turn extends PrintStyle, Placement, TrillSound {
  * to slash the turn; it is no by default.
  */
 export interface DelayedTurn extends PrintStyle, Placement, TrillSound {
+    _snapshot?: DelayedTurn;
     slash?: boolean;
 }
 /**
@@ -3027,6 +3161,7 @@ export interface DelayedTurn extends PrintStyle, Placement, TrillSound {
  * to slash the turn; it is no by default.
  */
 export interface InvertedTurn extends PrintStyle, Placement, TrillSound {
+    _snapshot?: InvertedTurn;
     slash?: boolean;
 }
 /**
@@ -3041,6 +3176,7 @@ export interface InvertedTurn extends PrintStyle, Placement, TrillSound {
  * to slash the turn; it is no by default.
  */
 export interface DelayedInvertedTurn extends PrintStyle, Placement, TrillSound {
+    _snapshot?: DelayedInvertedTurn;
     slash?: boolean;
 }
 /**
@@ -3055,6 +3191,7 @@ export interface DelayedInvertedTurn extends PrintStyle, Placement, TrillSound {
  * to slash the turn; it is no by default.
  */
 export interface VerticalTurn extends PrintStyle, Placement, TrillSound {
+    _snapshot?: VerticalTurn;
 }
 /**
  * The turn and delayed-turn elements are the normal turn
@@ -3068,6 +3205,7 @@ export interface VerticalTurn extends PrintStyle, Placement, TrillSound {
  * to slash the turn; it is no by default.
  */
 export interface Shake extends PrintStyle, Placement, TrillSound {
+    _snapshot?: Shake;
 }
 /**
  * The long attribute for the mordent and inverted-mordent
@@ -3079,6 +3217,7 @@ export interface Shake extends PrintStyle, Placement, TrillSound {
  * ornament look relative to the main part of the mordent.
  */
 export interface Mordent extends PrintStyle, Placement, TrillSound {
+    _snapshot?: Mordent;
     long?: boolean;
     approach?: AboveBelow;
     departure?: AboveBelow;
@@ -3093,6 +3232,7 @@ export interface Mordent extends PrintStyle, Placement, TrillSound {
  * ornament look relative to the main part of the mordent.
  */
 export interface InvertedMordent extends PrintStyle, Placement, TrillSound {
+    _snapshot?: InvertedMordent;
     long?: boolean;
     approach?: AboveBelow;
     departure?: AboveBelow;
@@ -3103,6 +3243,7 @@ export interface InvertedMordent extends PrintStyle, Placement, TrillSound {
  * defined earlier.
  */
 export interface Schleifer extends PrintStyle, Placement {
+    _snapshot?: Schleifer;
 }
 /**
  * The tremolo ornament can be used to indicate either
@@ -3126,6 +3267,7 @@ export interface Schleifer extends PrintStyle, Placement {
  * of MusicXML 3.0.
  */
 export interface Tremolo extends PrintStyle, Placement {
+    _snapshot?: Tremolo;
     data?: string;
     type: StartStopSingle;
 }
@@ -3135,6 +3277,7 @@ export interface Tremolo extends PrintStyle, Placement {
  * representation, though without application interoperability.
  */
 export interface OtherOrnament extends PrintStyle, Placement {
+    _snapshot?: OtherOrnament;
     type: StartStopSingle;
     data?: string;
 }
@@ -3145,6 +3288,7 @@ export interface OtherOrnament extends PrintStyle, Placement {
  * the note.
  */
 export interface AccidentalMark extends PrintStyle, Placement {
+    _snapshot?: AccidentalMark;
     mark: string;
 }
 /**
@@ -3152,6 +3296,7 @@ export interface AccidentalMark extends PrintStyle, Placement {
  * individual instruments.
  */
 export interface Technical {
+    _snapshot?: Technical;
     tripleTongue?: TripleTongue;
     toe?: Toe;
     hole?: Hole;
@@ -3183,6 +3328,7 @@ export interface Technical {
  * instruments.
  */
 export interface UpBow extends PrintStyle, Placement {
+    _snapshot?: UpBow;
 }
 /**
  * The down-bow element represents the symbol that is used both
@@ -3190,6 +3336,7 @@ export interface UpBow extends PrintStyle, Placement {
  * plucked instruments.
  */
 export interface DownBow extends PrintStyle, Placement {
+    _snapshot?: DownBow;
 }
 /**
  * The harmonic element indicates natural and artificial
@@ -3206,6 +3353,7 @@ export interface DownBow extends PrintStyle, Placement {
  * but not always used with natural harmonics.
  */
 export interface Harmonic extends PrintObject, PrintStyle, Placement {
+    _snapshot?: Harmonic;
     artificial: boolean;
     touchingPitch: boolean;
     soundingPitch: boolean;
@@ -3217,6 +3365,7 @@ export interface Harmonic extends PrintObject, PrintStyle, Placement {
  * open string symbol.
  */
 export interface OpenString extends PrintStyle, Placement {
+    _snapshot?: OpenString;
 }
 /**
  * The thumb-position element represents the thumb position
@@ -3225,6 +3374,7 @@ export interface OpenString extends PrintStyle, Placement {
  * pizzicato symbol, where the line comes inside the circle.
  */
 export interface ThumbPosition extends PrintStyle, Placement {
+    _snapshot?: ThumbPosition;
 }
 /**
  * The pluck element is used to specify the plucking fingering
@@ -3234,6 +3384,7 @@ export interface ThumbPosition extends PrintStyle, Placement {
  * fingers.
  */
 export interface Pluck extends PrintStyle, Placement {
+    _snapshot?: Pluck;
     data: string;
 }
 /**
@@ -3241,18 +3392,21 @@ export interface Pluck extends PrintStyle, Placement {
  * (two dots arranged horizontally).
  */
 export interface DoubleTongue extends PrintStyle, Placement {
+    _snapshot?: DoubleTongue;
 }
 /**
  * The triple-tongue element represents the triple tongue symbol
  * (three dots arranged horizontally).
  */
 export interface TripleTongue extends PrintStyle, Placement {
+    _snapshot?: TripleTongue;
 }
 /**
  * The stopped element represents the stopped symbol, which looks
  * like a plus sign.
  */
 export interface Stopped extends PrintStyle, Placement {
+    _snapshot?: Stopped;
 }
 /**
  * The snap-pizzicato element represents the snap pizzicato
@@ -3261,6 +3415,7 @@ export interface Stopped extends PrintStyle, Placement {
  * symbol, where the line does not come inside the circle.
  */
 export interface SnapPizzicato extends PrintStyle, Placement {
+    _snapshot?: SnapPizzicato;
 }
 /**
  * The hammer-on and pull-off elements are used in guitar
@@ -3272,6 +3427,7 @@ export interface SnapPizzicato extends PrintStyle, Placement {
  * element leaves this choice up to the application.
  */
 export interface HammerOn extends PrintStyle, Placement {
+    _snapshot?: HammerOn;
     number?: number;
     type: StartStop;
     data?: string;
@@ -3286,6 +3442,7 @@ export interface HammerOn extends PrintStyle, Placement {
  * element leaves this choice up to the application.
  */
 export interface PullOff extends PrintStyle, Placement {
+    _snapshot?: PullOff;
     number?: number;
     type: StartStop;
     data?: string;
@@ -3303,6 +3460,7 @@ export interface PullOff extends PrintStyle, Placement {
  * element indicates how this should be notated.
  */
 export interface Bend extends PrintStyle, BendSound {
+    _snapshot?: Bend;
     bendAlter: string;
     withBar?: WithBar;
     preBend: boolean;
@@ -3321,6 +3479,7 @@ export interface Bend extends PrintStyle, BendSound {
  * element indicates how this should be notated.
  */
 export interface WithBar extends PrintStyle, Placement {
+    _snapshot?: WithBar;
     data: string;
 }
 /**
@@ -3330,6 +3489,7 @@ export interface WithBar extends PrintStyle, Placement {
  * application-specific.
  */
 export interface Tap extends PrintStyle, Placement {
+    _snapshot?: Tap;
     data: string;
 }
 /**
@@ -3337,6 +3497,7 @@ export interface Tap extends PrintStyle, Placement {
  * substitution value is "no" if the attribute is not present.
  */
 export interface Heel extends PrintStyle, Placement {
+    _snapshot?: Heel;
     substitution?: boolean;
 }
 /**
@@ -3344,6 +3505,7 @@ export interface Heel extends PrintStyle, Placement {
  * substitution value is "no" if the attribute is not present.
  */
 export interface Toe extends PrintStyle, Placement {
+    _snapshot?: Toe;
     substitution?: boolean;
 }
 /**
@@ -3351,6 +3513,7 @@ export interface Toe extends PrintStyle, Placement {
  * other plucked string instruments.
  */
 export interface Fingernails extends PrintStyle, Placement {
+    _snapshot?: Fingernails;
 }
 /**
  * The hole element represents the symbols used for woodwind
@@ -3365,6 +3528,7 @@ export interface Fingernails extends PrintStyle, Placement {
  * of the hole symbol; the default is a circle.
  */
 export interface Hole extends PrintStyle, Placement {
+    _snapshot?: Hole;
     holeClosed: HoleClosed;
     holeShape: string;
     holeType?: string;
@@ -3393,6 +3557,7 @@ export declare enum HoleClosedType {
  * of the hole symbol; the default is a circle.
  */
 export interface HoleClosed {
+    _snapshot?: HoleClosed;
     location?: HoleLocation;
     data: HoleClosedType;
 }
@@ -3420,6 +3585,7 @@ export interface HoleClosed {
  * anticlockwise.
  */
 export interface Arrow extends PrintStyle, Placement {
+    _snapshot?: Arrow;
     arrowStyle?: string;
     arrowDirection?: string;
     circularArrow?: string;
@@ -3432,6 +3598,7 @@ export interface Arrow extends PrintStyle, Placement {
  * muted martellato, pluck lift, and swing.
  */
 export interface Handbell extends PrintStyle, Placement {
+    _snapshot?: Handbell;
     data: string;
 }
 /**
@@ -3441,12 +3608,14 @@ export interface Handbell extends PrintStyle, Placement {
  * interoperability.
  */
 export interface OtherTechnical extends PrintStyle, Placement {
+    _snapshot?: OtherTechnical;
     data: string;
 }
 /**
  * Articulations and accents are grouped together here.
  */
 export interface Articulations {
+    _snapshot?: Articulations;
     accent?: Accent;
     doit?: Doit;
     breathMark?: BreathMark;
@@ -3465,8 +3634,10 @@ export interface Articulations {
     tenuto?: Tenuto;
 }
 export interface Accent extends PrintStyle, Placement {
+    _snapshot?: Accent;
 }
 export interface StrongAccent extends PrintStyle, Placement {
+    _snapshot?: StrongAccent;
     type?: UpDown;
 }
 /**
@@ -3474,22 +3645,27 @@ export interface StrongAccent extends PrintStyle, Placement {
  * opposed to a stroke or a wedge.
  */
 export interface Staccato extends PrintStyle, Placement {
+    _snapshot?: Staccato;
 }
 export interface Tenuto extends PrintStyle, Placement {
+    _snapshot?: Tenuto;
 }
 export interface DetachedLegato extends PrintStyle, Placement {
+    _snapshot?: DetachedLegato;
 }
 /**
  * The staccatissimo element is used for a wedge articulation,
  * as opposed to a dot or a stroke.
  */
 export interface Staccatissimo extends PrintStyle, Placement {
+    _snapshot?: Staccatissimo;
 }
 /**
  * The spiccato element is used for a stroke articulation, as
  * opposed to a dot or a wedge.
  */
 export interface Spiccato extends PrintStyle, Placement {
+    _snapshot?: Spiccato;
 }
 /**
  * The scoop, plop, doit, and falloff elements are
@@ -3500,6 +3676,7 @@ export interface Spiccato extends PrintStyle, Placement {
  * and below the pitch, respectively.
  */
 export interface Scoop extends LineShape, LineType, DashedFormatting, PrintStyle, Placement {
+    _snapshot?: Scoop;
 }
 /**
  * The scoop, plop, doit, and falloff elements are
@@ -3510,6 +3687,7 @@ export interface Scoop extends LineShape, LineType, DashedFormatting, PrintStyle
  * and below the pitch, respectively.
  */
 export interface Plop extends LineShape, LineType, DashedFormatting, PrintStyle, Placement {
+    _snapshot?: Plop;
 }
 /**
  * The scoop, plop, doit, and falloff elements are
@@ -3520,6 +3698,7 @@ export interface Plop extends LineShape, LineType, DashedFormatting, PrintStyle,
  * and below the pitch, respectively.
  */
 export interface Doit extends LineShape, LineType, DashedFormatting, PrintStyle, Placement {
+    _snapshot?: Doit;
 }
 /**
  * The scoop, plop, doit, and falloff elements are
@@ -3530,6 +3709,7 @@ export interface Doit extends LineShape, LineType, DashedFormatting, PrintStyle,
  * and below the pitch, respectively.
  */
 export interface Falloff extends LineShape, LineType, DashedFormatting, PrintStyle, Placement {
+    _snapshot?: Falloff;
 }
 export declare enum BreathMarkType {
     Empty = 2,
@@ -3542,13 +3722,17 @@ export declare enum BreathMarkType {
  * comma, tick, and an empty string.
  */
 export interface BreathMark extends LineShape, LineType, DashedFormatting, PrintStyle, Placement {
+    _snapshot?: BreathMark;
     type: BreathMarkType;
 }
 export interface Caesura extends PrintStyle, Placement {
+    _snapshot?: Caesura;
 }
 export interface Stress extends PrintStyle, Placement {
+    _snapshot?: Stress;
 }
 export interface Unstress extends PrintStyle, Placement {
+    _snapshot?: Unstress;
 }
 /**
  * The other-articulation element is used to define any
@@ -3557,6 +3741,7 @@ export interface Unstress extends PrintStyle, Placement {
  * interoperability.
  */
 export interface OtherArticulation extends PrintStyle, Placement {
+    _snapshot?: OtherArticulation;
     data: string;
 }
 /**
@@ -3569,6 +3754,7 @@ export interface OtherArticulation extends PrintStyle, Placement {
  * highest note.
  */
 export interface Arpeggiate extends Position, Placement, Color {
+    _snapshot?: Arpeggiate;
     number?: number;
     direction?: UpDown;
 }
@@ -3580,6 +3766,7 @@ export interface Arpeggiate extends Position, Placement, Color {
  * as for the arpeggiate element.
  */
 export interface NonArpeggiate extends Position, Placement, Color {
+    _snapshot?: NonArpeggiate;
     number?: number;
     type: TopBottom;
 }
@@ -3588,6 +3775,7 @@ export interface NonArpeggiate extends Position, Placement, Color {
  * Humdrum.
  */
 export interface Laughing {
+    _snapshot?: Laughing;
     _class?: string;
 }
 /**
@@ -3595,6 +3783,7 @@ export interface Laughing {
  * Humdrum.
  */
 export interface Humming {
+    _snapshot?: Humming;
     _class?: string;
 }
 /**
@@ -3604,6 +3793,7 @@ export interface Humming {
  * similar applications.
  */
 export interface EndLine {
+    _snapshot?: EndLine;
     _class?: string;
 }
 /**
@@ -3613,12 +3803,14 @@ export interface EndLine {
  * similar applications.
  */
 export interface EndParagraph {
+    _snapshot?: EndParagraph;
     _class?: string;
 }
 /**
  * Fake element containing ordered content. Children of lyric-parts are actually children of lyric. See lyric.
  */
 export interface LyricParts {
+    _snapshot?: LyricParts;
 }
 /**
  * Text underlays for lyrics, based on Humdrum with support
@@ -3641,11 +3833,13 @@ export interface LyricParts {
  *
  */
 export interface Lyric extends Justify, Position, Placement, Color, PrintObject, Editorial {
+    _snapshot?: Lyric;
     lyricParts: any[];
     number?: number;
     name?: string;
 }
 export interface Text extends Font, Color, TextDecoration, TextRotation, LetterSpacing, TextDirection {
+    _snapshot?: Text;
     data: string;
     _class?: string;
 }
@@ -3662,6 +3856,7 @@ export declare enum SyllabicType {
  * and mid-word syllables.
  */
 export interface Syllabic extends Font, Color {
+    _snapshot?: Syllabic;
     data: SyllabicType;
     _class?: string;
 }
@@ -3678,6 +3873,7 @@ export interface Syllabic extends Font, Color {
  * (Unicode 203F).
  */
 export interface Elision extends Font, Color {
+    _snapshot?: Elision;
     data: string;
     _class?: string;
 }
@@ -3690,6 +3886,7 @@ export interface Elision extends Font, Color {
  * Version 3.0 to provide better formatting control.
  */
 export interface Extend extends PrintStyle {
+    _snapshot?: Extend;
     type?: StartStopContinue;
     _class?: string;
 }
@@ -3712,23 +3909,28 @@ export interface Extend extends PrintStyle {
  * is "no" if not present.
  */
 export interface FiguredBass extends Editorial, PrintStyle, Printout {
+    _snapshot?: FiguredBass;
     figures: Figure[];
     duration?: number;
     parentheses?: boolean;
 }
 export interface Figure extends PrintStyle {
+    _snapshot?: Figure;
     prefix?: Prefix;
     figureNumber?: FigureNumber;
     extend?: Extend;
     suffix?: Suffix;
 }
 export interface Prefix extends PrintStyle {
+    _snapshot?: Prefix;
     data: string;
 }
 export interface FigureNumber extends PrintStyle {
+    _snapshot?: FigureNumber;
     data: string;
 }
 export interface Suffix extends PrintStyle {
+    _snapshot?: Suffix;
     data: string;
 }
 /**
@@ -3743,6 +3945,7 @@ export interface Suffix extends PrintStyle {
  * boundaries or mid-measure changes in the divisions value.
  */
 export interface Backup extends Editorial {
+    _snapshot?: Backup;
     duration: number;
 }
 /**
@@ -3756,6 +3959,7 @@ export interface Backup extends Editorial {
  * in the divisions value.
  */
 export interface Forward extends EditorialVoice {
+    _snapshot?: Forward;
     duration: number;
     staff?: number;
 }
@@ -3793,6 +3997,7 @@ export declare enum BarlineLocation {
  * elements contain segno or coda child elements.
  */
 export interface Barline extends Editorial {
+    _snapshot?: Barline;
     segno?: Segno;
     coda?: Coda;
     location?: BarlineLocation;
@@ -3833,6 +4038,7 @@ export declare enum BarStyleType {
  * barline between the 2nd and 4th lines), and none.
  */
 export interface BarStyle extends Color {
+    _snapshot?: BarStyle;
     data: BarStyleType;
 }
 export declare enum StartStopDiscontinue {
@@ -3865,6 +4071,7 @@ export declare enum StartStopDiscontinue {
  * often the case for many parts in a full score.
  */
 export interface Ending extends PrintObject, PrintStyle {
+    _snapshot?: Ending;
     endLength: number;
     textX: number;
     number: number;
@@ -3895,6 +4102,7 @@ export declare enum DirectionTypeBg {
  * wings. The none value indicates no wings and is the default.
  */
 export interface Repeat {
+    _snapshot?: Repeat;
     times: string;
     winged: WingedType;
     direction: DirectionTypeBg;
@@ -3927,6 +4135,7 @@ export declare enum TipDirection {
  * the previous element by default.
  */
 export interface Direction extends EditorialVoice, Placement, DirectiveEntity {
+    _snapshot?: Direction;
     directionTypes: DirectionType[];
     staff?: number;
     offset?: Offset;
@@ -3939,6 +4148,7 @@ export interface Direction extends EditorialVoice, Placement, DirectiveEntity {
  * common.mod file.
  */
 export interface DirectionType {
+    _snapshot?: DirectionType;
     percussions?: Percussion[];
     rehearsals?: Rehearsal[];
     pedal?: Pedal;
@@ -3968,6 +4178,7 @@ export interface DirectionType {
  * not specified.
  */
 export interface Rehearsal extends TextFormatting {
+    _snapshot?: Rehearsal;
     data: string;
 }
 /**
@@ -3976,6 +4187,7 @@ export interface Rehearsal extends TextFormatting {
  * is none by default.
  */
 export interface Words extends TextFormatting {
+    _snapshot?: Words;
     data: string;
 }
 export declare enum WedgeType {
@@ -4001,6 +4213,7 @@ export declare enum WedgeType {
  * multiple segments.
  */
 export interface Wedge extends LineType, DashedFormatting, Position, Color {
+    _snapshot?: Wedge;
     number?: number;
     niente?: boolean;
     type: WedgeType;
@@ -4011,6 +4224,7 @@ export interface Wedge extends LineType, DashedFormatting, Position, Color {
  *
  */
 export interface Dashes extends DashedFormatting, Position, Color {
+    _snapshot?: Dashes;
     number: number;
     type: StartStopContinue;
 }
@@ -4031,6 +4245,7 @@ export declare enum LineEndType {
  * The line-type is solid by default.
  */
 export interface Bracket extends LineType, DashedFormatting, Position, Color {
+    _snapshot?: Bracket;
     endLength: number;
     number: number;
     type: StartStopContinue;
@@ -4056,6 +4271,7 @@ export declare enum PedalType {
  * ignored if the line attribute is yes.
  */
 export interface Pedal extends PrintStyleAlign {
+    _snapshot?: Pedal;
     line: boolean;
     sign: boolean;
     type: PedalType;
@@ -4093,6 +4309,7 @@ export interface Pedal extends PrintStyleAlign {
  * to allow display of an isolated Grundschlagnote.
  */
 export interface Metronome extends PrintStyleAlign, Justify {
+    _snapshot?: Metronome;
     metronomeNotes: MetronomeNote[];
     perMinute: PerMinute;
     parentheses: boolean;
@@ -4103,23 +4320,29 @@ export interface Metronome extends PrintStyleAlign, Justify {
     metronomeRelation: string;
 }
 export interface BeatUnitDot {
+    _snapshot?: BeatUnitDot;
 }
 export interface PerMinute extends Font {
+    _snapshot?: PerMinute;
     data: string;
 }
 export interface MetronomeNote {
+    _snapshot?: MetronomeNote;
     metronomeDots: MetronomeDot[];
     metronomeBeams: MetronomeBeam[];
     metronomeType: string;
     metronomeTuplet: MetronomeTuplet;
 }
 export interface MetronomeDot {
+    _snapshot?: MetronomeDot;
 }
 export interface MetronomeBeam {
+    _snapshot?: MetronomeBeam;
     number: number;
     data: string;
 }
 export interface MetronomeTuplet {
+    _snapshot?: MetronomeTuplet;
     actualNotes: number;
     bracket: boolean;
     showNumber: ActualBothNone;
@@ -4143,6 +4366,7 @@ export declare enum OctaveShiftType {
  * octave; a size of 15 indicates two octaves.
  */
 export interface OctaveShift extends DashedFormatting, PrintStyle {
+    _snapshot?: OctaveShift;
     number: number;
     size: number;
     type: OctaveShiftType;
@@ -4156,9 +4380,11 @@ export interface OctaveShift extends DashedFormatting, PrintStyle {
  * D, C, B, E, F, G, and A.
  */
 export interface HarpPedals extends PrintStyleAlign {
+    _snapshot?: HarpPedals;
     pedalTunings: PedalTuning[];
 }
 export interface PedalTuning {
+    _snapshot?: PedalTuning;
     pedalStep: string;
     pedalAlter: string;
 }
@@ -4166,12 +4392,16 @@ export interface PedalTuning {
  * Harp damping marks
  */
 export interface Damp extends PrintStyleAlign {
+    _snapshot?: Damp;
 }
 export interface DampAll extends PrintStyleAlign {
+    _snapshot?: DampAll;
 }
 export interface Eyeglasses extends PrintStyleAlign {
+    _snapshot?: Eyeglasses;
 }
 export interface StringMute extends PrintStyleAlign {
+    _snapshot?: StringMute;
     type: string;
 }
 /**
@@ -4182,6 +4412,7 @@ export interface StringMute extends PrintStyleAlign {
  * file. Strings are numbered from high to low.
  */
 export interface Scordatura {
+    _snapshot?: Scordatura;
     accords: Accord[];
 }
 /**
@@ -4192,6 +4423,7 @@ export interface Scordatura {
  * file. Strings are numbered from high to low.
  */
 export interface Accord {
+    _snapshot?: Accord;
     tuningAlter: string;
     string: string;
     tuningStep: string;
@@ -4206,6 +4438,7 @@ export interface Accord {
  * image/png, and image/tiff.
  */
 export interface Image extends Position, Halign, ValignImage {
+    _snapshot?: Image;
     type: string;
     source: string;
 }
@@ -4228,6 +4461,7 @@ export declare enum VoiceSymbol {
  * markings, the symbol attribute should be set to "none".
  */
 export interface PrincipalVoice extends PrintStyleAlign {
+    _snapshot?: PrincipalVoice;
     symbol: VoiceSymbol;
     data?: string;
     type: StartStop;
@@ -4245,6 +4479,7 @@ export interface PrincipalVoice extends PrintStyleAlign {
  * needs to have at least one of the child elements present.
  */
 export interface AccordionRegistration extends PrintStyleAlign {
+    _snapshot?: AccordionRegistration;
     accordionMiddle: string;
     accordionHigh: boolean;
     accordionLow: boolean;
@@ -4258,6 +4493,7 @@ export interface AccordionRegistration extends PrintStyleAlign {
  * the 30 years since Stone's book was published.
  */
 export interface Percussion extends PrintStyleAlign, Enclosure {
+    _snapshot?: Percussion;
     stickLocation: string;
     otherPercussion: string;
     wood: string;
@@ -4275,6 +4511,7 @@ export interface Percussion extends PrintStyleAlign, Enclosure {
  *
  */
 export interface Timpani {
+    _snapshot?: Timpani;
 }
 /**
  * The beater element represents pictograms for beaters,
@@ -4291,6 +4528,7 @@ export interface Timpani {
  * in which the tip of a beater points.
  */
 export interface Beater {
+    _snapshot?: Beater;
     data: string;
     tip: TipDirection;
 }
@@ -4305,6 +4543,7 @@ export interface Beater {
  * the direction in which the tip of a stick points.
  */
 export interface Stick {
+    _snapshot?: Stick;
     stickMaterial: string;
     stickType: string;
     tip: TipDirection;
@@ -4324,6 +4563,7 @@ export interface Stick {
  * element.
  */
 export interface Offset {
+    _snapshot?: Offset;
     data: string;
     sound: boolean;
 }
@@ -4354,6 +4594,7 @@ export interface Offset {
  * followed by a harmony-chord with a II function.
  */
 export interface HarmonyChord {
+    _snapshot?: HarmonyChord;
     root: Root;
     function: Function;
     kind: Kind;
@@ -4367,6 +4608,7 @@ export declare enum ExplicitImpliedAlternate {
     Alternate = 3,
 }
 export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyle, Placement {
+    _snapshot?: Harmony;
     frame: Frame;
     printFrame: boolean;
     staff: number;
@@ -4394,18 +4636,22 @@ export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyl
  * of the root-step; it is right by default.
  */
 export interface Root {
+    _snapshot?: Root;
     rootStep: RootStep;
     rootAlter: RootAlter;
 }
 export interface RootStep extends PrintStyle {
+    _snapshot?: RootStep;
     text: string;
     data: string;
 }
 export interface RootAlter extends PrintObject, PrintStyle {
+    _snapshot?: RootAlter;
     location: LeftRight;
     data: string;
 }
 export interface Function extends PrintStyle {
+    _snapshot?: Function;
     data: string;
 }
 /**
@@ -4495,6 +4741,7 @@ export interface Function extends PrintStyle {
  * entity of which this kind element is a part.
  */
 export interface Kind extends PrintStyle, Halign, Valign {
+    _snapshot?: Kind;
     parenthesesDegrees: boolean;
     useSymbols: boolean;
     text: string;
@@ -4507,6 +4754,7 @@ export interface Kind extends PrintStyle, Halign, Valign {
  * 0 for root position, 1 for first inversion, etc.
  */
 export interface Inversion extends PrintStyle {
+    _snapshot?: Inversion;
     data: string;
 }
 /**
@@ -4519,6 +4767,7 @@ export interface Inversion extends PrintStyle {
  * the corresponding attributes for root-step and root-alter.
  */
 export interface Bass {
+    _snapshot?: Bass;
     bassStep: BassStep;
     bassAlter: BassAlter;
 }
@@ -4532,10 +4781,12 @@ export interface Bass {
  * the corresponding attributes for root-step and root-alter.
  */
 export interface BassStep extends PrintStyle {
+    _snapshot?: BassStep;
     text: string;
     data: string;
 }
 export interface BassAlter extends PrintObject, PrintStyle {
+    _snapshot?: BassAlter;
     location: LeftRight;
     data: string;
 }
@@ -4570,6 +4821,7 @@ export interface BassAlter extends PrintObject, PrintStyle {
  * using a series of degree elements together with a root.
  */
 export interface Degree extends PrintObject {
+    _snapshot?: Degree;
     degreeAlter: DegreeAlter;
     degreeValue: DegreeValue;
     degreeType: DegreeType;
@@ -4582,15 +4834,18 @@ export declare enum ChordType {
     HalfDiminished = 5,
 }
 export interface DegreeValue extends PrintStyle {
+    _snapshot?: DegreeValue;
     symbol: ChordType;
     text: string;
     data: string;
 }
 export interface DegreeAlter extends PrintStyle {
+    _snapshot?: DegreeAlter;
     plusMinus: boolean;
     data: string;
 }
 export interface DegreeType extends PrintStyle {
+    _snapshot?: DegreeType;
     text: string;
     data: string;
 }
@@ -4609,6 +4864,7 @@ export interface DegreeType extends PrintStyle {
  * string is application-defined.
  */
 export interface Frame extends Position, Color, Halign, ValignImage {
+    _snapshot?: Frame;
     frameStrings: string;
     frameNotes: FrameNote[];
     unplayed: string;
@@ -4626,6 +4882,7 @@ export interface Frame extends Position, Color, Halign, ValignImage {
  * or right of the frame.
  */
 export interface FirstFret {
+    _snapshot?: FirstFret;
     text: string;
     location: LeftRight;
     data: string;
@@ -4638,6 +4895,7 @@ export interface FirstFret {
  * associated with a frame-note element.
  */
 export interface FrameNote {
+    _snapshot?: FrameNote;
     barre: Barre;
     string: String;
     fingering: Fingering;
@@ -4651,6 +4909,7 @@ export interface FrameNote {
  * highest pitched string.
  */
 export interface Barre extends Color {
+    _snapshot?: Barre;
     type: StartStop;
 }
 /**
@@ -4669,6 +4928,7 @@ export interface Barre extends Color {
  * data, allowing for easier data sharing.
  */
 export interface Grouping {
+    _snapshot?: Grouping;
     features: Feature[];
     number: number;
     type: StartStopSingle;
@@ -4676,6 +4936,7 @@ export interface Grouping {
     _class?: string;
 }
 export interface Feature {
+    _snapshot?: Feature;
     data: string;
     type: string;
 }
@@ -4716,6 +4977,7 @@ export interface Feature {
  * layout included in the defaults element.
  */
 export interface Print {
+    _snapshot?: Print;
     measureNumbering: MeasureNumbering;
     partNameDisplay: PartNameDisplay;
     newSystem: boolean;
@@ -4739,6 +5001,7 @@ export interface Print {
  * regardless of the measure-numbering setting.
  */
 export interface MeasureNumbering extends PrintStyleAlign {
+    _snapshot?: MeasureNumbering;
     data: string;
 }
 /**
@@ -4825,6 +5088,7 @@ export interface MeasureNumbering extends PrintStyleAlign {
  * particular hardware configurations.
  */
 export interface Sound extends TimeOnly {
+    _snapshot?: Sound;
     softPedal: string;
     midiInstruments: MidiInstrument[];
     pan: string;
@@ -4854,6 +5118,7 @@ export interface Sound extends TimeOnly {
  * into a collection.
  */
 export interface Work {
+    _snapshot?: Work;
     workNumber: string;
     workTitle: string;
     opus: Opus;
@@ -4862,6 +5127,7 @@ export interface Work {
  * Ripieno MusicXML does not support this field.
  */
 export interface Opus {
+    _snapshot?: Opus;
 }
 /**
  * Collect score-wide defaults. This includes scaling
@@ -4875,6 +5141,7 @@ export interface Opus {
  * numbers and names.
  */
 export interface Defaults {
+    _snapshot?: Defaults;
     wordFont: WordFont;
     lyricLanguages: LyricLanguage[];
     lyricFonts: LyricFont[];
@@ -4886,14 +5153,18 @@ export interface Defaults {
     musicFont: MusicFont;
 }
 export interface MusicFont extends Font {
+    _snapshot?: MusicFont;
 }
 export interface WordFont extends Font {
+    _snapshot?: WordFont;
 }
 export interface LyricFont extends Font {
+    _snapshot?: LyricFont;
     number: number;
     name: string;
 }
 export interface LyricLanguage {
+    _snapshot?: LyricLanguage;
     number: number;
     name: string;
 }
@@ -4922,15 +5193,18 @@ export interface LyricLanguage {
  * attribute.
  */
 export interface Credit {
+    _snapshot?: Credit;
     creditTypes: string[];
     creditWords: CreditWords[];
     creditImage: CreditImage;
     page: number;
 }
 export interface CreditWords extends TextFormatting {
+    _snapshot?: CreditWords;
     words: string;
 }
 export interface CreditImage extends Position, Halign, ValignImage {
+    _snapshot?: CreditImage;
     type: string;
     source: string;
 }
@@ -4956,6 +5230,7 @@ export interface CreditImage extends Position, Halign, ValignImage {
  */
 export declare type PartList = Array<ScorePart | PartGroup>;
 export interface ScorePart {
+    _snapshot?: ScorePart;
     identification?: Identification;
     partNameDisplay?: PartNameDisplay;
     scoreInstruments?: ScoreInstrument[];
@@ -4983,6 +5258,7 @@ export interface ScorePart {
  * and abbreviations appear in a score.
  */
 export interface PartName extends PrintStyle, PrintObject, Justify {
+    _snapshot?: PartName;
     partName: string;
 }
 /**
@@ -4999,6 +5275,7 @@ export interface PartName extends PrintStyle, PrintObject, Justify {
  * and abbreviations appear in a score.
  */
 export interface PartAbbreviation extends PrintStyle, PrintObject, Justify {
+    _snapshot?: PartAbbreviation;
     abbreviation: string;
 }
 /**
@@ -5014,6 +5291,7 @@ export interface PartAbbreviation extends PrintStyle, PrintObject, Justify {
  * fully specified using the part-symbol element.
  */
 export interface PartGroup extends Editorial {
+    _snapshot?: PartGroup;
     groupNameDisplay: GroupNameDisplay;
     groupSymbol: GroupSymbol;
     groupName: GroupName;
@@ -5033,6 +5311,7 @@ export interface PartGroup extends Editorial {
  * group-name-display and group-abbreviation-display elements.
  */
 export interface GroupName extends PrintStyle, Justify {
+    _snapshot?: GroupName;
     name: string;
 }
 /**
@@ -5042,6 +5321,7 @@ export interface GroupName extends PrintStyle, Justify {
  * elements, respectively.
  */
 export interface GroupNameDisplay extends PrintObject {
+    _snapshot?: GroupNameDisplay;
     name: TextSegment[];
 }
 /**
@@ -5051,6 +5331,7 @@ export interface GroupNameDisplay extends PrintObject {
  * group-name-display and group-abbreviation-display elements.
  */
 export interface GroupAbbreviation extends PrintStyle, Justify {
+    _snapshot?: GroupAbbreviation;
     text: string;
 }
 /**
@@ -5060,6 +5341,7 @@ export interface GroupAbbreviation extends PrintStyle, Justify {
  * elements, respectively.
  */
 export interface GroupAbbreviationDisplay extends PrintObject {
+    _snapshot?: GroupAbbreviationDisplay;
     name: TextSegment[];
 }
 /**
@@ -5068,6 +5350,7 @@ export interface GroupAbbreviationDisplay extends PrintObject {
  * brace, line, bracket, and square; the default is none.
  */
 export interface GroupSymbol extends Position, Color {
+    _snapshot?: GroupSymbol;
     data: PartSymbolType;
 }
 /**
@@ -5076,6 +5359,7 @@ export interface GroupSymbol extends Position, Color {
  * Mensurstrich.
  */
 export interface GroupBarline extends Color {
+    _snapshot?: GroupBarline;
     data: string;
 }
 /**
@@ -5084,6 +5368,7 @@ export interface GroupBarline extends Color {
  * and staves in the group.
  */
 export interface GroupTime {
+    _snapshot?: GroupTime;
 }
 /**
  * The score-instrument element allows for multiple
@@ -5124,6 +5409,7 @@ export interface GroupTime {
  * sound elements.
  */
 export interface ScoreInstrument {
+    _snapshot?: ScoreInstrument;
     instrumentName: string;
     instrumentSound?: string;
     ensemble?: string;
@@ -5133,8 +5419,10 @@ export interface ScoreInstrument {
     id: string;
 }
 export interface Solo {
+    _snapshot?: Solo;
 }
 export interface VirtualInstrument {
+    _snapshot?: VirtualInstrument;
     virtualLibrary: string;
     virtualName: string;
 }
@@ -5145,6 +5433,7 @@ export interface VirtualInstrument {
  * and the part list.
  */
 export interface ScoreHeader {
+    _snapshot?: ScoreHeader;
     movementTitle: string;
     identification: Identification;
     defaults: Defaults;
@@ -5161,12 +5450,14 @@ export interface ScoreHeader {
  * See also score-partwise.
  */
 export interface ScoreTimewise extends DocumentAttributes, ScoreHeader {
+    _snapshot?: ScoreTimewise;
     measures: Measure[];
 }
 /**
  * Represents a measure.
  */
 export interface Measure {
+    _snapshot?: Measure;
     number: string;
     implicit?: boolean;
     width?: number;

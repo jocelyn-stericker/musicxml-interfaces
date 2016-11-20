@@ -50,4 +50,4 @@ watch: ./node_modules/.bin/tsc
 	@./node_modules/.bin/tsc -w
 
 ./node_modules/.bin/tsc:
-	@npm install
+	@yarn
