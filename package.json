@@ -9,7 +9,7 @@
     "url": "git://github.com/ripieno/musicxml-interfaces"
   },
   "dependencies": {
-    "xmldom": "0.1.19"
+    "xmldom": "0.5.0"
   },
   "devDependencies": {
     "dts-generator": "1.6.2",
