@@ -14,7 +14,7 @@
   "devDependencies": {
     "dts-generator": "1.6.2",
     "tsd": "^0.6.5",
-    "lodash": "^3.10.1",
+    "lodash": "^4.17.21",
     "typescript": "2.0.0"
   },
   "main": "lib/index.js",
