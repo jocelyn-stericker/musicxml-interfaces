@@ -1,6 +1,6 @@
 ##
-# (C) Joshua Netterfield 2015 - present
-# Part of the musicxml-interfaces <https://github.com/jnetterf/musicxml-interfaces>.
+# (C) Jocelyn Stericker 2015 - present
+# Part of the musicxml-interfaces <https://github.com/emilyskidsister/musicxml-interfaces>.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -36,7 +36,7 @@ main: ./node_modules/.bin/tsc
 	@printf "$(BOOTSTRAP_STRING)\n"
 	@echo '' > ./src/builders.ts
 	@./node_modules/.bin/tsc ./src/index.ts ./src/private/operationGenerator.ts --outDir lib --module commonjs
-	@./node_modules/.bin/dts-generator --name 'musicxml-interfaces' --main 'musicxml-interfaces/index' --out ./index.d.ts --baseDir ./src ./src/index.ts
+	@./node_modules/.bin/tsc -d ./src/index.ts --outFile index.js --emitDeclarationOnly
 	@printf "$(BUILDER_STRING)\n"
 	@node ./lib/private/operationGenerator.js ./index.d.ts --out ./src/private/symbols.json
 	@node ./src/private/writeBuilders.js > ./src/builders.ts
@@ -50,4 +50,4 @@ watch: ./node_modules/.bin/tsc
 	@./node_modules/.bin/tsc -w
 
 ./node_modules/.bin/tsc:
-	@yarn
+	@npm i

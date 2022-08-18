@@ -58,6 +58,7 @@ fetch('/sonata.xml')
 ```
 
 ### Parsing
+
 ```
     /**
      * Converts a MusicXML document into a MusicXML parttime-inspired JSON object.
@@ -80,7 +81,7 @@ fetch('/sonata.xml')
      * Converts a MusicXML <measure /> from a **parttime** document into JSON.
      */
     MusicXML.parseMeasure(str: string): MusicXML.Measure;
-    
+
     /**
      * These functions convert an XML string into corresponding JSON.
      */
@@ -102,6 +103,7 @@ fetch('/sonata.xml')
 ```
 
 ### Serializing
+
 ```
     /**
      * These functions convert a parsed JSON into corresponding MusicXML.
@@ -132,32 +134,36 @@ fetch('/sonata.xml')
 These should be considered expiremental.
 
 ## Types / usage with TypeScript
+
 There is a one-to-one mapping of MusicXML and the JSON produced by MusicXML Interfaces.
 The [TypeScript defintion file](index.d.ts) fully documents MusicXML Interfaces types.
-If you use TypeScript and tsd, `tsd link` will load types into your project.
 
 ## Contributing
+
 Please report issues! In particular,
 
- - If there is a discrepency between a DTD in `vendor/musicxml-dtd` and the TypeScript interfaces in `index.d.ts`, just state the discrepency.
- - If the TypeScript interface definitions are correct, but there is an error in importing a file, provide a minimal MusicXML file that illustrates the issue.
- - If there is an error in exporting MusicXML interfaces back to MusicXML, provide a minimal valid JSON structure that is not exported correctly.
+- If there is a discrepency between a DTD in `vendor/musicxml-dtd` and the TypeScript interfaces in `index.d.ts`, just state the discrepency.
+- If the TypeScript interface definitions are correct, but there is an error in importing a file, provide a minimal MusicXML file that illustrates the issue.
+- If there is an error in exporting MusicXML interfaces back to MusicXML, provide a minimal valid JSON structure that is not exported correctly.
 
 To install:
+
 ```
-git clone git@github.com:jnetterf/musicxml-interfaces.git
+git clone git@github.com:emilyskidsister/musicxml-interfaces.git
 cd musicxml-interfaces
 npm install
 ```
 
 To build:
+
 ```
 make
 ```
 
 ## Copyright
+
 ```
-(C) Josh Netterfield <joshua@nettek.ca> 2015.
+(C) Jocelyn Stericker <jocelyn@nettek.ca> 2015.
 Part of the musicxml-interfaces <https://github.com/ripieno/musicxml-interfaces>.
 
 This program is free software: you can redistribute it and/or modify
@@ -175,6 +181,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ```
 
 ## MusicXML License
+
 ```
 MusicXML Version 3.0
 

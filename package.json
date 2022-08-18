@@ -2,25 +2,27 @@
   "name": "musicxml-interfaces",
   "version": "0.0.20",
   "description": "MusicXML parser and serializer for JavaScript and TypeScript",
-  "author": "Josh Netterfield",
+  "author": "Jocelyn Stericker",
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/ripieno/musicxml-interfaces"
   },
   "dependencies": {
-    "xmldom": "0.1.19"
+    "@xmldom/xmldom": "^0.8.2"
   },
   "devDependencies": {
-    "dts-generator": "1.6.2",
-    "tsd": "^0.6.5",
-    "lodash": "^3.10.1",
-    "typescript": "2.0.0"
+    "@types/lodash": "^4.14.183",
+    "@types/mkdirp": "^1.0.2",
+    "@types/node": "^18.7.6",
+    "lodash": "^4.17.21",
+    "mkdirp": "^1.0.4",
+    "typescript": "^4.7.4"
   },
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "browser": {
-    "xmldom": false,
+    "@xmldom/xmldom": false,
     "child_process": false
   },
   "files": [

@@ -1,4 +1,35 @@
 /**
+ * (C) Jocelyn Stericker <jocelyn@nettek.ca> 2015.
+ * Part of the musicxml-interfaces <https://github.com/emilyskidsister/musicxml-interfaces>.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *****************************************************************
+ *
+ * MusicXML™ Version 3.0
+ *
+ * Copyright © 2004-2011 MakeMusic, Inc.
+ * http://www.makemusic.com/
+ *
+ * This MusicXML™ work is being provided by the copyright
+ * holder under the MusicXML Public License Version 3.0,
+ * available from:
+ *
+ * http://www.musicxml.org/dtds/license.html
+ * This file contains multiple DTDs.
+ */
+/**
  * Converts a MusicXML document into a MusicXML parttime-inspired JSON object.
  * See ScoreTimewise for full return type specification.
  *
@@ -140,7 +171,7 @@ export interface CalendarDate {
  */
 export declare enum StartStop {
     Start = 0,
-    Stop = 1,
+    Stop = 1
 }
 /**
  * The start-stop-continue (as opposed to the start-stop entity)
@@ -161,7 +192,7 @@ export declare enum StartStop {
 export declare enum StartStopContinue {
     Start = 0,
     Stop = 1,
-    Continue = 2,
+    Continue = 2
 }
 /**
  * The start-stop-single entity (as opposed to start-stop
@@ -181,7 +212,7 @@ export declare enum StartStopContinue {
 export declare enum StartStopSingle {
     Single = 3,
     Start = 0,
-    Stop = 1,
+    Stop = 1
 }
 /**
  * The symbol-size entity is used to indicate full vs.
@@ -198,7 +229,7 @@ export declare enum SymbolSize {
     /**
      * Oversized.
      */
-    Large = 3,
+    Large = 3
 }
 /**
  * The above-below type is used to indicate whether one
@@ -207,7 +238,7 @@ export declare enum SymbolSize {
 export declare enum AboveBelow {
     Above = 1,
     Below = 2,
-    Unspecified = 0,
+    Unspecified = 0
 }
 /**
  * Specifies orientation.
@@ -215,7 +246,7 @@ export declare enum AboveBelow {
 export declare enum OverUnder {
     Over = 1,
     Under = 2,
-    Unspecified = 0,
+    Unspecified = 0
 }
 /**
  * The up-down entity is used for arrow direction,
@@ -223,7 +254,7 @@ export declare enum OverUnder {
  */
 export declare enum UpDown {
     Down = 1,
-    Up = 0,
+    Up = 0
 }
 /**
  * The top-bottom entity is used to indicate the top or
@@ -231,7 +262,7 @@ export declare enum UpDown {
  */
 export declare enum TopBottom {
     Top = 0,
-    Bottom = 1,
+    Bottom = 1
 }
 /**
  * The left-right entity is used to indicate whether one
@@ -240,7 +271,7 @@ export declare enum TopBottom {
  */
 export declare enum LeftRight {
     Right = 1,
-    Left = 0,
+    Left = 0
 }
 /**
  * The enclosure-shape entity describes the shape and
@@ -256,15 +287,15 @@ export declare enum EnclosureShape {
     None = 7,
     Square = 1,
     Oval = 2,
-    Rectangle = 0,
+    Rectangle = 0
 }
 export declare enum NormalItalic {
     Italic = 1,
-    Normal = 0,
+    Normal = 0
 }
 export declare enum NormalBold {
     Bold = 2,
-    Normal = 0,
+    Normal = 0
 }
 /**
  * The position attributes are based on MuseData print
@@ -465,53 +496,53 @@ export interface Font {
 export declare enum LeftCenterRight {
     Right = 1,
     Center = 2,
-    Left = 0,
+    Left = 0
 }
 export declare enum TopMiddleBottomBaseline {
     Top = 0,
     Middle = 1,
     Baseline = 3,
-    Bottom = 2,
+    Bottom = 2
 }
 export declare enum DirectionMode {
     Lro = 2,
     Rlo = 3,
     Ltr = 0,
-    Rtl = 1,
+    Rtl = 1
 }
 export declare enum StraightCurved {
     Curved = 1,
-    Straight = 0,
+    Straight = 0
 }
 export declare enum SolidDashedDottedWavy {
     Dashed = 1,
     Wavy = 3,
     Dotted = 2,
-    Solid = 0,
+    Solid = 0
 }
 export declare enum NormalAngledSquare {
     Angled = 1,
     Square = 2,
-    Normal = 0,
+    Normal = 0
 }
 export declare enum UprightInverted {
     Upright = 0,
-    Inverted = 1,
+    Inverted = 1
 }
 export declare enum UpperMainBelow {
     Main = 1,
     Below = 2,
-    Upper = 0,
+    Upper = 0
 }
 export declare enum WholeHalfUnison {
     Unison = 2,
     Whole = 0,
-    Half = 1,
+    Half = 1
 }
 export declare enum WholeHalfNone {
     None = 3,
     Whole = 0,
-    Half = 1,
+    Half = 1
 }
 /**
  * The color entity indicates the color of an element.
@@ -1193,7 +1224,7 @@ export interface Scaling {
 export declare enum OddEvenBoth {
     Both = 2,
     Even = 1,
-    Odd = 0,
+    Odd = 0
 }
 /**
  * Page layout can be defined both in score-wide defaults
@@ -1368,7 +1399,7 @@ export interface RightDivider extends PrintObject, PrintStyleAlign {
 export interface StaffLayout {
     _snapshot?: StaffLayout;
     staffDistance?: number;
-    num: number;
+    number: number;
 }
 /**
  * Measure layout includes the horizontal distance from the
@@ -1426,7 +1457,7 @@ export interface LineWidth {
 export declare enum CueGraceLarge {
     Grace = 1,
     Cue = 0,
-    Large = 2,
+    Large = 2
 }
 /**
  * The appearance element controls general graphical
@@ -1675,7 +1706,7 @@ export declare enum SeparatorType {
     Horizontal = 1,
     Diagonal = 2,
     Vertical = 3,
-    Adjacent = 4,
+    Adjacent = 4
 }
 /**
  * The time-separator entity indicates how to display the
@@ -1699,7 +1730,7 @@ export declare enum TimeSymbolType {
     SingleNumber = 2,
     Note = 3,
     Common = 0,
-    Normal = 5,
+    Normal = 5
 }
 /**
  * The time-symbol entity indicates how to display a time
@@ -1721,7 +1752,7 @@ export interface TimeSymbol {
 export declare enum CancelLocation {
     Right = 1,
     BeforeBarline = 2,
-    Left = 0,
+    Left = 0
 }
 /**
  * Traditional key signatures are represented by the number
@@ -1936,6 +1967,7 @@ export interface Time extends TimeSymbol, TimeSeparator, PrintStyleAlign, PrintO
     beatTypes: number[];
     senzaMisura?: string;
     _class?: string;
+    number?: number;
 }
 /**
  * Time signatures are represented by two elements. The
@@ -1984,7 +2016,7 @@ export declare enum PartSymbolType {
     Line = 2,
     Bracket = 3,
     Square = 4,
-    Brace = 1,
+    Brace = 1
 }
 /**
  * The part-symbol element indicates how a symbol for a
@@ -2068,7 +2100,7 @@ export interface StaffTuning {
 }
 export declare enum ShowFretsType {
     Letters = 1,
-    Numbers = 0,
+    Numbers = 0
 }
 /**
  * The staff-details element is used to indicate different
@@ -2479,7 +2511,7 @@ export declare enum Count {
     _256th = 256,
     _128th = 128,
     Half = 2,
-    Whole = 1,
+    Whole = 1
 }
 /**
  * Type indicates the graphic note type, Valid values (from
@@ -2540,7 +2572,7 @@ export declare enum MxmlAccidental {
     NaturalSharp = 6,
     FlatFlat = 5,
     Natural = 1,
-    DoubleFlat = 33,
+    DoubleFlat = 33
 }
 /**
  * Actual notated accidentals. Valid values include: sharp,
@@ -2597,7 +2629,7 @@ export declare enum StemType {
     None = 2,
     Double = 3,
     Down = 0,
-    Up = 1,
+    Up = 1
 }
 /**
  * Stems can be down, up, none, or double. For down and up
@@ -2639,7 +2671,7 @@ export declare enum NoteheadType {
     ArrowDown = 8,
     X = 5,
     Diamond = 2,
-    CircleX = 6,
+    CircleX = 6
 }
 /**
  * The notehead element indicates shapes other than the open
@@ -2726,12 +2758,12 @@ export declare enum BeamType {
     Begin = 0,
     ForwardHook = 3,
     Continue = 1,
-    End = 2,
+    End = 2
 }
 export declare enum AccelRitNone {
     Accel = 0,
     None = 2,
-    Rit = 1,
+    Rit = 1
 }
 /**
  * Beam types include begin, continue, end, forward hook, and
@@ -2817,7 +2849,7 @@ export interface Slur extends LineType, DashedFormatting, Position, Placement, O
 export declare enum ActualBothNone {
     None = 2,
     Both = 1,
-    Actual = 0,
+    Actual = 0
 }
 /**
  * A tuplet element is present when a tuplet is to be displayed
@@ -3052,7 +3084,7 @@ export interface Glissando extends LineType, DashedFormatting, PrintStyle {
     _snapshot?: Glissando;
     text?: string;
     type: StartStop;
-    normal?: number;
+    number?: number;
 }
 /**
  * Glissando and slide elements both indicate rapidly moving
@@ -3068,7 +3100,7 @@ export interface Slide extends LineType, DashedFormatting, PrintStyle, BendSound
     _snapshot?: Slide;
     text?: string;
     type: StartStop;
-    normal?: number;
+    number?: number;
 }
 /**
  * The other-notation element is used to define any notations
@@ -3082,6 +3114,7 @@ export interface OtherNotation extends PrintObject, PrintStyle, Placement {
     _snapshot?: OtherNotation;
     type: StartStopSingle;
     data?: string;
+    number?: number;
 }
 /**
  * The other-direction element is used to define any direction
@@ -3537,12 +3570,12 @@ export declare enum HoleLocation {
     Right = 0,
     Top = 3,
     Bottom = 1,
-    Left = 2,
+    Left = 2
 }
 export declare enum HoleClosedType {
     No = 1,
     Yes = 0,
-    Half = 2,
+    Half = 2
 }
 /**
  * The hole element represents the symbols used for woodwind
@@ -3714,7 +3747,7 @@ export interface Falloff extends LineShape, LineType, DashedFormatting, PrintSty
 export declare enum BreathMarkType {
     Empty = 2,
     Comma = 0,
-    Tick = 1,
+    Tick = 1
 }
 /**
  * The breath-mark element may have a text value to
@@ -3847,7 +3880,7 @@ export declare enum SyllabicType {
     Single = 0,
     Begin = 1,
     Middle = 3,
-    End = 2,
+    End = 2
 }
 /**
  * Hyphenation is indicated by the syllabic element, which can be single,
@@ -3966,7 +3999,7 @@ export interface Forward extends EditorialVoice {
 export declare enum BarlineLocation {
     Right = 1,
     Middle = 2,
-    Left = 0,
+    Left = 0
 }
 /**
  * If a barline is other than a normal single barline, it
@@ -4028,7 +4061,7 @@ export declare enum BarStyleType {
     Tick = 8,
     Dotted = 1,
     Heavy = 3,
-    LightLight = 4,
+    LightLight = 4
 }
 /**
  * Bar-style contains style information. Choices are
@@ -4044,7 +4077,7 @@ export interface BarStyle extends Color {
 export declare enum StartStopDiscontinue {
     Discontinue = 2,
     Start = 0,
-    Stop = 1,
+    Stop = 1
 }
 /**
  * Endings refers to multiple (e.g. first and second) endings.
@@ -4084,11 +4117,11 @@ export declare enum WingedType {
     Curved = 2,
     DoubleCurved = 4,
     Straight = 1,
-    DoubleStraight = 3,
+    DoubleStraight = 3
 }
 export declare enum DirectionTypeBg {
     Forward = 1,
-    Backward = 0,
+    Backward = 0
 }
 /**
  * Repeat marks. The start of the repeat has a forward direction
@@ -4120,7 +4153,7 @@ export declare enum TipDirection {
     Northeast = 5,
     Southeast = 6,
     Up = 0,
-    Left = 2,
+    Left = 2
 }
 /**
  * A direction is a musical indication that is not attached
@@ -4194,7 +4227,7 @@ export declare enum WedgeType {
     Diminuendo = 1,
     Crescendo = 0,
     Stop = 2,
-    Continue = 3,
+    Continue = 3
 }
 /**
  * Wedge spread is measured in tenths of staff line space.
@@ -4233,7 +4266,7 @@ export declare enum LineEndType {
     Both = 2,
     Arrow = 3,
     Down = 1,
-    Up = 0,
+    Up = 0
 }
 /**
  * Brackets are combined with words in a letiety of
@@ -4255,7 +4288,7 @@ export declare enum PedalType {
     Change = 3,
     Start = 0,
     Stop = 1,
-    Continue = 2,
+    Continue = 2
 }
 /**
  * Piano pedal marks. The line attribute is yes if pedal
@@ -4355,7 +4388,7 @@ export declare enum OctaveShiftType {
     Down = 2,
     Stop = 3,
     Up = 1,
-    Continue = 4,
+    Continue = 4
 }
 /**
  * Octave shifts indicate where notes are shifted up or down
@@ -4446,7 +4479,7 @@ export declare enum VoiceSymbol {
     None = 4,
     Hauptstimme = 1,
     Nebenstimme = 2,
-    Plain = 3,
+    Plain = 3
 }
 /**
  * The principal-voice element represents principal and
@@ -4605,7 +4638,7 @@ export interface HarmonyChord {
 export declare enum ExplicitImpliedAlternate {
     Explicit = 1,
     Implied = 2,
-    Alternate = 3,
+    Alternate = 3
 }
 export interface Harmony extends HarmonyChord, Editorial, PrintObject, PrintStyle, Placement {
     _snapshot?: Harmony;
@@ -4831,7 +4864,7 @@ export declare enum ChordType {
     Diminished = 4,
     Major = 1,
     Minor = 2,
-    HalfDiminished = 5,
+    HalfDiminished = 5
 }
 export interface DegreeValue extends PrintStyle {
     _snapshot?: DegreeValue;
