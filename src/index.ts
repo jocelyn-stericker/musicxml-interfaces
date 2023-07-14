@@ -26258,7 +26258,7 @@ function midiInstrumentToXML(midiInstrument: MidiInstrument): string {
   if (defined(midiInstrument.midiUnpitched)) {
     // <!ELEMENT midi-unpitched (#PCDATA)>
     children.push(
-      xml`<midi-unpitched>${midiInstrument.midiUnpitched}</midi-unpitche>`
+      xml`<midi-unpitched>${midiInstrument.midiUnpitched}</midi-unpitched>`
     );
   }
   if (defined(midiInstrument.volume)) {
