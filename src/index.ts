@@ -995,8 +995,10 @@ function xmlToMeasure(node: Element) {
   let foundNonControlling = false;
   let foundNumber = false;
   let foundWidth = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "part") {
       let dataPart = xmlToPart(ch);
       ret.parts = ret.parts || {};
@@ -1089,8 +1091,10 @@ function xmlToLyric(node: Element) {
   let foundColor = false;
   let foundPrintObject = false;
   let foundName = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "footnote") {
       let dataFootnote = xmlToFootnote(ch);
       ret.footnote = dataFootnote;
@@ -1520,8 +1524,10 @@ function xmlToBeamLevel(node: Node) {
 
 function xmlToPosition(node: Element) {
   let ret: Position = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1548,8 +1554,10 @@ function xmlToPosition(node: Element) {
 function xmlToPlacement(node: Element) {
   let ret: Placement = <any>{};
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1567,8 +1575,10 @@ function xmlToPlacement(node: Element) {
 
 function xmlToDirectiveEntity(node: Element) {
   let ret: DirectiveEntity = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1582,8 +1592,10 @@ function xmlToDirectiveEntity(node: Element) {
 
 function xmlToBezier(node: Element) {
   let ret: Bezier = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1618,8 +1630,10 @@ function xmlToBezier(node: Element) {
 function xmlToOrientation(node: Element) {
   let ret: Orientation = <any>{};
   let foundOrientation = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1639,8 +1653,10 @@ function xmlToFont(node: Element) {
   let ret: Font = <any>{};
   let foundFontWeight = false;
   let foundFontStyle = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1904,8 +1920,10 @@ function getWholeHalfNone(node: Node, fallbackVal?: WholeHalfNone) {
 function xmlToColor(node: Element) {
   let ret: Color = <any>{};
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1926,8 +1944,10 @@ function xmlToTextDecoration(node: Element) {
   let foundUnderline = false;
   let foundOverline = false;
   let foundLineThrough = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1962,8 +1982,10 @@ function xmlToTextDecoration(node: Element) {
 function xmlToJustify(node: Element) {
   let ret: Justify = <any>{};
   let foundJustify = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -1982,8 +2004,10 @@ function xmlToJustify(node: Element) {
 function xmlToHalign(node: Element) {
   let ret: Halign = <any>{};
   let foundHalign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2005,8 +2029,10 @@ function xmlToHalign(node: Element) {
 function xmlToValign(node: Element) {
   let ret: Valign = <any>{};
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2028,8 +2054,10 @@ function xmlToValign(node: Element) {
 function xmlToValignImage(node: Element) {
   let ret: ValignImage = <any>{};
   let foundValignImage = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2051,8 +2079,10 @@ function xmlToValignImage(node: Element) {
 function xmlToLetterSpacing(node: Element) {
   let ret: LetterSpacing = <any>{};
   let foundLetterSpacing = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2084,8 +2114,10 @@ export interface LineHeight {
 function xmlToLineHeight(node: Element) {
   let ret: LineHeight = <any>{};
   let foundLineHeight = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2122,8 +2154,10 @@ export interface TextDirection {
 function xmlToTextDirection(node: Element) {
   let ret: TextDirection = <any>{};
   let foundDir = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2155,8 +2189,10 @@ export interface TextRotation {
 function xmlToTextRotation(node: Element) {
   let ret: TextRotation = <any>{};
   let foundRotation = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2184,8 +2220,10 @@ export interface Enclosure {
 function xmlToEnclosure(node: Element) {
   let ret: Enclosure = <any>{};
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2215,8 +2253,10 @@ function xmlToPrintStyle(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2287,8 +2327,10 @@ function xmlToPrintStyleAlign(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2380,8 +2422,10 @@ export interface LineShape {
 function xmlToLineShape(node: Element) {
   let ret: LineShape = <any>{};
   let foundLineShape = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2425,8 +2469,10 @@ function xmlToDashedFormatting(node: Element) {
   let ret: DashedFormatting = <any>{};
   let foundDashLength = false;
   let foundSpaceLength = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2473,8 +2519,10 @@ export interface PrintObject {
 function xmlToPrintObject(node: Element) {
   let ret: PrintObject = <any>{};
   let foundPrintObject = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2513,8 +2561,10 @@ export interface PrintSpacing {
 function xmlToPrintSpacing(node: Element) {
   let ret: PrintSpacing = <any>{};
   let foundPrintSpacing = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2584,8 +2634,10 @@ function xmlToTextFormatting(node: Element) {
   let foundLineHeight = false;
   let foundDir = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2755,8 +2807,10 @@ function xmlToLevelDisplay(node: Element) {
   let foundBracket = false;
   let foundSize = false;
   let foundParentheses = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2831,8 +2885,10 @@ function xmlToTrillSound(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2926,8 +2982,10 @@ function xmlToBendSound(node: Element) {
   let foundBeats = false;
   let foundLastBeat = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -2979,8 +3037,10 @@ export interface TimeOnly {
 
 function xmlToTimeOnly(node: Element) {
   let ret: TimeOnly = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3005,8 +3065,10 @@ export interface DocumentAttributes {
 function xmlToDocumentAttributes(node: Element) {
   let ret: DocumentAttributes = <any>{};
   let foundVersion_ = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3036,8 +3098,10 @@ export interface Editorial {
 
 function xmlToEditorial(node: Element) {
   let ret: Editorial = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "footnote") {
       let dataFootnote = xmlToFootnote(ch);
       ret.footnote = dataFootnote;
@@ -3068,8 +3132,10 @@ export interface EditorialVoice {
 
 function xmlToEditorialVoice(node: Element) {
   let ret: EditorialVoice = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "voice") {
       let dataVoice = getNumber(ch, true);
       ret.voice = dataVoice;
@@ -3122,8 +3188,10 @@ function xmlToFootnote(node: Element) {
   let foundLineHeight = false;
   let foundDir = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3300,8 +3368,10 @@ function xmlToLevel(node: Element) {
   let foundSize = false;
   let foundParentheses = false;
   let foundReference = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3368,8 +3438,10 @@ function xmlToFermata(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundType = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3468,8 +3540,10 @@ function xmlToWavyLine(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3594,8 +3668,10 @@ function xmlToSegno(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3690,8 +3766,10 @@ function xmlToCoda(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3787,8 +3865,10 @@ export interface NormalDot {
 
 function xmlToNormalDot(node: Element) {
   let ret: NormalDot = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -3862,8 +3942,10 @@ function xmlToDynamics(node: Element) {
   let foundOverline = false;
   let foundLineThrough = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "fp") {
       let dataFp = true;
       ret.fp = dataFp;
@@ -4101,8 +4183,10 @@ function xmlToFingering(node: Element) {
   let foundColor = false;
   let foundPlacement = false;
   let foundAlternate = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -4205,8 +4289,10 @@ function xmlToFret(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -4267,8 +4353,10 @@ function xmlToString(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -4362,8 +4450,10 @@ function xmlToDisplayText(node: Element) {
   let foundLineHeight = false;
   let foundDir = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -4543,8 +4633,10 @@ function xmlToAccidentalText(node: Element) {
   let foundLineHeight = false;
   let foundDir = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -4755,8 +4847,10 @@ function xmlToMidiDevice(node: Element) {
   let foundDeviceName = false;
   let foundPort = false;
   let foundId = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -4934,8 +5028,10 @@ function xmlToMidiInstrument(node: Element) {
     midiChannel: null,
     midiName: "",
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "midi-unpitched") {
       let dataMidiUnpitched = getNumber(ch, true);
       ret.midiUnpitched = dataMidiUnpitched;
@@ -5005,8 +5101,10 @@ function xmlToPlay(node: Element) {
     semiPitched: "",
     id: "",
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "ipa") {
       let dataIpa = getString(ch, true);
       ret.ipa = dataIpa;
@@ -5045,8 +5143,10 @@ function xmlToOtherPlay(node: Element) {
     data: "",
     type: "",
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -5083,8 +5183,10 @@ function xmlToScaling(node: Element) {
     tenths: null,
     millimeters: null,
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "tenths") {
       let dataTenths = getNumber(ch, true);
       ret.tenths = dataTenths;
@@ -5146,8 +5248,10 @@ export interface PageMargins {
 function xmlToPageMargins(node: Element) {
   let ret: PageMargins = <any>{};
   let foundType = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "top-margin") {
       let dataTopMargin = getNumber(ch, true);
       ret.topMargin = dataTopMargin;
@@ -5196,8 +5300,10 @@ export interface PageLayout {
 
 function xmlToPageLayout(node: Element) {
   let ret: PageLayout = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "page-height") {
       let dataPageHeight = getNumber(ch, true);
       ret.pageHeight = dataPageHeight;
@@ -5259,8 +5365,10 @@ export interface SystemLayout {
 
 function xmlToSystemLayout(node: Element) {
   let ret: SystemLayout = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "system-dividers") {
       let dataSystemDividers = xmlToSystemDividers(ch);
       ret.systemDividers = dataSystemDividers;
@@ -5324,8 +5432,10 @@ export interface SystemMargins {
 
 function xmlToSystemMargins(node: Element) {
   let ret: SystemMargins = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "left-margin") {
       let dataLeftMargin = getNumber(ch, true);
       ret.leftMargin = dataLeftMargin;
@@ -5364,8 +5474,10 @@ export interface SystemDividers {
 
 function xmlToSystemDividers(node: Element) {
   let ret: SystemDividers = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "right-divider") {
       let dataRightDivider = xmlToRightDivider(ch);
       ret.rightDivider = dataRightDivider;
@@ -5408,8 +5520,10 @@ function xmlToLeftDivider(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -5522,8 +5636,10 @@ function xmlToRightDivider(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -5628,8 +5744,10 @@ export interface StaffLayout {
 function xmlToStaffLayout(node: Element) {
   let ret: StaffLayout = <any>{};
   let foundNum = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "staff-distance") {
       let dataStaffDistance = getNumber(ch, true);
       ret.staffDistance = dataStaffDistance;
@@ -5663,8 +5781,10 @@ export interface MeasureLayout {
 
 function xmlToMeasureLayout(node: Element) {
   let ret: MeasureLayout = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "measure-distance") {
       let dataMeasureDistance = getNumber(ch, true);
       ret.measureDistance = dataMeasureDistance;
@@ -5721,8 +5841,10 @@ export interface LineWidth {
 
 function xmlToLineWidth(node: Element) {
   let ret: LineWidth = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -5810,8 +5932,10 @@ export interface NoteSize {
 
 function xmlToNoteSize(node: Element) {
   let ret: NoteSize = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -5871,8 +5995,10 @@ export interface Distance {
 
 function xmlToDistance(node: Element) {
   let ret: Distance = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -5934,8 +6060,10 @@ export interface Appearance {
 
 function xmlToAppearance(node: Element) {
   let ret: Appearance = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "line-width") {
       let dataLineWidths = xmlToLineWidth(ch);
       ret.lineWidths = ret.lineWidths || {};
@@ -5990,8 +6118,10 @@ export interface Creator {
 
 function xmlToCreator(node: Element) {
   let ret: Creator = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6021,8 +6151,10 @@ export interface Rights {
 
 function xmlToRights(node: Element) {
   let ret: Rights = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6048,8 +6180,10 @@ export interface Encoder {
 
 function xmlToEncoder(node: Element) {
   let ret: Encoder = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6076,8 +6210,10 @@ export interface Relation {
 
 function xmlToRelation(node: Element) {
   let ret: Relation = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6104,8 +6240,10 @@ export interface MiscellaneousField {
 
 function xmlToMiscellaneousField(node: Element) {
   let ret: MiscellaneousField = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6132,8 +6270,10 @@ export interface Miscellaneous {
 
 function xmlToMiscellaneous(node: Element) {
   let ret: Miscellaneous = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "miscellaneous-field") {
       let dataMiscellaneousFields = xmlToMiscellaneousField(ch);
       ret.miscellaneousFields = (ret.miscellaneousFields || []).concat(
@@ -6167,8 +6307,10 @@ export interface Identification {
 
 function xmlToIdentification(node: Element) {
   let ret: Identification = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "miscellaneous") {
       let dataMiscellaneous = xmlToMiscellaneous(ch);
       ret.miscellaneous = dataMiscellaneous;
@@ -6222,8 +6364,10 @@ export interface Supports {
 
 function xmlToSupports(node: Element) {
   let ret: Supports = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6272,8 +6416,10 @@ function xmlToEncoding(node: Element) {
     encoders: [],
     softwares: [],
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "encoding-description") {
       let dataEncodingDescriptions = getString(ch, true);
       ret.encodingDescriptions = (ret.encodingDescriptions || []).concat(
@@ -6368,8 +6514,10 @@ export interface TimeSeparator {
 function xmlToTimeSeparator(node: Element) {
   let ret: TimeSeparator = <any>{};
   let foundSeparator = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6446,8 +6594,10 @@ export interface TimeSymbol {
 function xmlToTimeSymbol(node: Element) {
   let ret: TimeSymbol = <any>{};
   let foundSymbol = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6549,8 +6699,10 @@ export interface Cancel {
 function xmlToCancel(node: Element) {
   let ret: Cancel = <any>{};
   let foundLocation = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6628,8 +6780,10 @@ export interface KeyOctave {
 function xmlToKeyOctave(node: Element) {
   let ret: KeyOctave = <any>{};
   let foundCancel = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -6720,8 +6874,10 @@ function xmlToKey(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPrintObject = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "cancel") {
       let dataCancel = xmlToCancel(ch);
       ret.cancel = dataCancel;
@@ -6887,8 +7043,10 @@ function xmlToTime(node: Element) {
   let foundValign = false;
   let foundPrintObject = false;
   let foundNumber = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "interchangeable") {
       let dataInterchangeable = xmlToInterchangeable(ch);
       ret.interchangeable = dataInterchangeable;
@@ -7062,8 +7220,10 @@ function xmlToInterchangeable(node: Element) {
   let ret: Interchangeable = <any>{};
   let foundSymbol = false;
   let foundSeparator = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "beats") {
       let dataBeats = getString(ch, true);
       ret.beats = (ret.beats || []).concat(dataBeats);
@@ -7161,8 +7321,10 @@ function xmlToPartSymbol(node: Element) {
   let foundTopStaff = false;
   let foundColor = false;
   let foundBottomStaff = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -7273,8 +7435,10 @@ function xmlToClef(node: Element) {
   let foundPrintObject = false;
   let foundAfterBarline = false;
   let foundAdditional = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "clef-octave-change") {
       let dataClefOctaveChange = getString(ch, true);
       ret.clefOctaveChange = dataClefOctaveChange;
@@ -7397,8 +7561,10 @@ export interface StaffTuning {
 
 function xmlToStaffTuning(node: Element) {
   let ret: StaffTuning = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "tuning-alter") {
       let dataTuningAlter = getString(ch, true);
       ret.tuningAlter = dataTuningAlter;
@@ -7484,8 +7650,10 @@ function xmlToStaffDetails(node: Element) {
   let foundNumber_ = false;
   let foundPrintObject = false;
   let foundPrintSpacing = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "staff-lines") {
       let dataStaffLines = getNumber(ch, true);
       ret.staffLines = dataStaffLines;
@@ -7572,8 +7740,10 @@ export interface Double {
 
 function xmlToDouble(node: Element) {
   let ret: Double = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -7614,8 +7784,10 @@ export interface Transpose {
 function xmlToTranspose(node: Element) {
   let ret: Transpose = <any>{};
   let foundNumber_ = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "diatonic") {
       let dataDiatonic = getString(ch, true);
       ret.diatonic = dataDiatonic;
@@ -7666,8 +7838,10 @@ function xmlToDirective(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -7739,8 +7913,10 @@ export interface SlashDot {
 
 function xmlToSlashDot(node: Element) {
   let ret: SlashDot = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -7764,8 +7940,10 @@ export interface MultipleRest {
 function xmlToMultipleRest(node: Element) {
   let ret: MultipleRest = <any>{};
   let foundUseSymbols = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -7808,8 +7986,10 @@ export interface MeasureRepeat {
 function xmlToMeasureRepeat(node: Element) {
   let ret: MeasureRepeat = <any>{};
   let foundSlashes = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -7861,8 +8041,10 @@ function xmlToBeatRepeat(node: Element) {
   let ret: BeatRepeat = <any>{};
   let foundUseDots = false;
   let foundSlases = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "slash-type") {
       let dataSlashType = getString(ch, true);
       ret.slashType = dataSlashType;
@@ -7920,8 +8102,10 @@ function xmlToSlash(node: Element) {
   let ret: Slash = <any>{};
   let foundUseDots = false;
   let foundUseStems = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "slash-type") {
       let dataSlashType = getString(ch, true);
       ret.slashType = dataSlashType;
@@ -7986,8 +8170,10 @@ function xmlToMeasureStyle(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "measure-repeat") {
       let dataMeasureRepeat = xmlToMeasureRepeat(ch);
       ret.measureRepeat = dataMeasureRepeat;
@@ -8075,8 +8261,10 @@ export interface Attributes extends Editorial {
 
 function xmlToAttributes(node: Element) {
   let ret: Attributes = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "divisions") {
       let dataDivisions = getNumber(ch, true);
       ret.divisions = dataDivisions;
@@ -8155,8 +8343,10 @@ export interface Cue {
 
 function xmlToCue(node: Element) {
   let ret: Cue = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -8187,8 +8377,10 @@ export interface Grace {
 function xmlToGrace(node: Element) {
   let ret: Grace = <any>{};
   let foundSlash = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -8230,8 +8422,10 @@ export interface Chord {
 
 function xmlToChord(node: Element) {
   let ret: Chord = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -8258,8 +8452,10 @@ export interface Unpitched {
 
 function xmlToUnpitched(node: Element) {
   let ret: Unpitched = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "display-step") {
       let dataDisplayStep = getString(ch, true);
       ret.displayStep = dataDisplayStep;
@@ -8295,8 +8491,10 @@ export interface Pitch {
 
 function xmlToPitch(node: Element) {
   let ret: Pitch = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "alter") {
       let dataAlter = getNumber(ch, true);
       ret.alter = dataAlter;
@@ -8334,8 +8532,10 @@ export interface FullNote {
 
 function xmlToFullNote(node: Element) {
   let ret: FullNote = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "unpitched") {
       let dataUnpitched = xmlToUnpitched(ch);
       ret.unpitched = dataUnpitched;
@@ -8376,8 +8576,10 @@ export interface Rest {
 function xmlToRest(node: Element) {
   let ret: Rest = <any>{};
   let foundMeasure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "display-step") {
       let dataDisplayStep = getString(ch, true);
       ret.displayStep = dataDisplayStep;
@@ -8423,8 +8625,10 @@ export interface Tie extends TimeOnly {
 
 function xmlToTie(node: Element) {
   let ret: Tie = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -8453,8 +8657,10 @@ export interface Instrument {
 
 function xmlToInstrument(node: Element) {
   let ret: Instrument = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -8521,8 +8727,10 @@ function xmlToNote(node: Element) {
   let foundColor = false;
   let foundPrintObject = false;
   let foundPrintSpacing = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "notehead-text") {
       let dataNoteheadText = xmlToNoteheadText(ch);
       ret.noteheadText = dataNoteheadText;
@@ -8832,8 +9040,10 @@ export interface Type {
 function xmlToType(node: Element) {
   let ret: Type = <any>{};
   let foundSize = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -8868,8 +9078,10 @@ function xmlToDot(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -9141,8 +9353,10 @@ function xmlToAccidental(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundEditorial = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -9262,8 +9476,10 @@ export interface TimeModification {
 
 function xmlToTimeModification(node: Element) {
   let ret: TimeModification = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "actual-notes") {
       let dataActualNotes = getNumber(ch, true);
       ret.actualNotes = dataActualNotes;
@@ -9337,8 +9553,10 @@ export interface Stem extends Position, Color {
 function xmlToStem(node: Element) {
   let ret: Stem = <any>{};
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -9540,8 +9758,10 @@ function xmlToNotehead(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -9732,8 +9952,10 @@ function xmlToBeam(node: Element) {
   let foundRepeater = false;
   let foundNumber_ = false;
   let foundFan = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -9796,8 +10018,10 @@ export interface Notations extends Editorial, PrintObject {
 function xmlToNotations(node: Element) {
   let ret: Notations = <any>{};
   let foundPrintObject = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "slur") {
       let dataSlurs = xmlToSlur(ch);
       ret.slurs = (ret.slurs || []).concat(dataSlurs);
@@ -9914,8 +10138,10 @@ function xmlToTied(node: Element) {
   let foundPlacement = false;
   let foundOrientation = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -10051,8 +10277,10 @@ function xmlToSlur(node: Element) {
   let foundPlacement = false;
   let foundOrientation = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -10240,8 +10468,10 @@ function xmlToTuplet(node: Element) {
   let foundLineShape = false;
   let foundPlacement = false;
   let foundShowType = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "tuplet-normal") {
       let dataTupletNormal = xmlToTupletNormal(ch);
       ret.tupletNormal = dataTupletNormal;
@@ -10361,8 +10591,10 @@ export interface TupletActual {
 
 function xmlToTupletActual(node: Element) {
   let ret: TupletActual = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "tuplet-number") {
       let dataTupletNumber = xmlToTupletNumber(ch);
       ret.tupletNumber = dataTupletNumber;
@@ -10422,8 +10654,10 @@ export interface TupletNormal {
 
 function xmlToTupletNormal(node: Element) {
   let ret: TupletNormal = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "tuplet-number") {
       let dataTupletNumber = xmlToTupletNumber(ch);
       ret.tupletNumber = dataTupletNumber;
@@ -10484,8 +10718,10 @@ function xmlToTupletNumber(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -10569,8 +10805,10 @@ function xmlToTupletType(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -10653,8 +10891,10 @@ function xmlToTupletDot(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -10720,8 +10960,10 @@ function xmlToGlissando(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundNumber = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -10853,8 +11095,10 @@ function xmlToSlide(node: Element) {
   let foundLastBeat = false;
   let foundFirstBeat = false;
   let foundNumber = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -11007,8 +11251,10 @@ function xmlToOtherNotation(node: Element) {
   let foundColor = false;
   let foundPlacement = false;
   let foundNumber = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -11114,8 +11360,10 @@ function xmlToOtherDirection(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -11241,8 +11489,10 @@ function xmlToOrnaments(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "delayed-inverted-turn") {
       let dataDelayedInvertedTurn = xmlToDelayedInvertedTurn(ch);
       ret.delayedInvertedTurn = dataDelayedInvertedTurn;
@@ -11437,8 +11687,10 @@ function xmlToTrillMark(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -11588,8 +11840,10 @@ function xmlToTurn(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -11747,8 +12001,10 @@ function xmlToDelayedTurn(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -11906,8 +12162,10 @@ function xmlToInvertedTurn(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -12065,8 +12323,10 @@ function xmlToDelayedInvertedTurn(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -12222,8 +12482,10 @@ function xmlToVerticalTurn(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -12371,8 +12633,10 @@ function xmlToShake(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -12521,8 +12785,10 @@ function xmlToMordent(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -12683,8 +12949,10 @@ function xmlToInvertedMordent(node: Element) {
   let foundTrillStep = false;
   let foundTwoNoteTurn = false;
   let foundSecondBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -12831,8 +13099,10 @@ function xmlToSchleifer(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -12930,8 +13200,10 @@ function xmlToTremolo(node: Element) {
   let foundColor = false;
   let foundPlacement = false;
   let foundType = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13023,8 +13295,10 @@ function xmlToOtherOrnament(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13112,8 +13386,10 @@ function xmlToAccidentalMark(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13214,8 +13490,10 @@ export interface Technical {
 
 function xmlToTechnical(node: Element) {
   let ret: Technical = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "triple-tongue") {
       let dataTripleTongue = xmlToTripleTongue(ch);
       ret.tripleTongue = dataTripleTongue;
@@ -13334,8 +13612,10 @@ function xmlToUpBow(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13414,8 +13694,10 @@ function xmlToDownBow(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13509,8 +13791,10 @@ function xmlToHarmonic(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "artificial") {
       let dataArtificial = true;
       ret.artificial = dataArtificial;
@@ -13616,8 +13900,10 @@ function xmlToOpenString(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13697,8 +13983,10 @@ function xmlToThumbPosition(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13780,8 +14068,10 @@ function xmlToPluck(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13862,8 +14152,10 @@ function xmlToDoubleTongue(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -13941,8 +14233,10 @@ function xmlToTripleTongue(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14020,8 +14314,10 @@ function xmlToStopped(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14101,8 +14397,10 @@ function xmlToSnapPizzicato(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14189,8 +14487,10 @@ function xmlToHammerOn(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14292,8 +14592,10 @@ function xmlToPullOff(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14401,8 +14703,10 @@ function xmlToBend(node: Element) {
   let foundBeats = false;
   let foundLastBeat = false;
   let foundFirstBeat = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "bend-alter") {
       let dataBendAlter = getString(ch, true);
       ret.bendAlter = dataBendAlter;
@@ -14529,8 +14833,10 @@ function xmlToWithBar(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14614,8 +14920,10 @@ function xmlToTap(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14698,8 +15006,10 @@ function xmlToHeel(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14787,8 +15097,10 @@ function xmlToToe(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14874,8 +15186,10 @@ function xmlToFingernails(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -14964,8 +15278,10 @@ function xmlToHole(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "hole-closed") {
       let dataHoleClosed = xmlToHoleClosed(ch);
       ret.holeClosed = dataHoleClosed;
@@ -15121,8 +15437,10 @@ export interface HoleClosed {
 
 function xmlToHoleClosed(node: Element) {
   let ret: HoleClosed = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15173,8 +15491,10 @@ function xmlToArrow(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "arrow-style") {
       let dataArrowStyle = getString(ch, true);
       ret.arrowStyle = dataArrowStyle;
@@ -15268,8 +15588,10 @@ function xmlToHandbell(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15353,8 +15675,10 @@ function xmlToOtherTechnical(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15446,8 +15770,10 @@ export interface Articulations {
 
 function xmlToArticulations(node: Element) {
   let ret: Articulations = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "accent") {
       let dataAccent = xmlToAccent(ch);
       ret.accent = dataAccent;
@@ -15531,8 +15857,10 @@ function xmlToAccent(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15608,8 +15936,10 @@ function xmlToStrongAccent(node: Element) {
   let foundColor = false;
   let foundPlacement = false;
   let foundType = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15695,8 +16025,10 @@ function xmlToStaccato(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15770,8 +16102,10 @@ function xmlToTenuto(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15845,8 +16179,10 @@ function xmlToDetachedLegato(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -15924,8 +16260,10 @@ function xmlToStaccatissimo(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16003,8 +16341,10 @@ function xmlToSpiccato(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16095,8 +16435,10 @@ function xmlToScoop(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16222,8 +16564,10 @@ function xmlToPlop(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16349,8 +16693,10 @@ function xmlToDoit(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16476,8 +16822,10 @@ function xmlToFalloff(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16629,8 +16977,10 @@ function xmlToBreathMark(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16742,8 +17092,10 @@ function xmlToCaesura(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16817,8 +17169,10 @@ function xmlToStress(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16892,8 +17246,10 @@ function xmlToUnstress(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -16974,8 +17330,10 @@ function xmlToOtherArticulation(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17063,8 +17421,10 @@ function xmlToArpeggiate(node: Element) {
   let foundPlacement = false;
   let foundColor = false;
   let foundDirection = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17138,8 +17498,10 @@ function xmlToNonArpeggiate(node: Element) {
   let foundNumber_ = false;
   let foundPlacement = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17202,8 +17564,10 @@ export interface Laughing {
 
 function xmlToLaughing(node: Element) {
   let ret: Laughing = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17223,8 +17587,10 @@ export interface Humming {
 
 function xmlToHumming(node: Element) {
   let ret: Humming = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17246,8 +17612,10 @@ export interface EndLine {
 
 function xmlToEndLine(node: Element) {
   let ret: EndLine = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17269,8 +17637,10 @@ export interface EndParagraph {
 
 function xmlToEndParagraph(node: Element) {
   let ret: EndParagraph = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17288,8 +17658,10 @@ export interface LyricParts {
 
 function xmlToLyricParts(node: Element) {
   let rarr: any[] = [];
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "extend") {
       let data: any = xmlToExtend(ch);
       rarr = (rarr || []).concat(data);
@@ -17385,8 +17757,10 @@ function xmlToText(node: Element) {
   let foundRotation = false;
   let foundLetterSpacing = false;
   let foundDir = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17527,8 +17901,10 @@ function xmlToSyllabic(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17595,8 +17971,10 @@ function xmlToElision(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17660,8 +18038,10 @@ function xmlToExtend(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundType = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -17759,8 +18139,10 @@ function xmlToFiguredBass(node: Element) {
   let foundPrintObject = false;
   let foundPrintSpacing = false;
   let foundParentheses = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "footnote") {
       let dataFootnote = xmlToFootnote(ch);
       ret.footnote = dataFootnote;
@@ -17878,8 +18260,10 @@ function xmlToFigure(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "prefix") {
       let dataPrefix = xmlToPrefix(ch);
       ret.prefix = dataPrefix;
@@ -17961,8 +18345,10 @@ function xmlToPrefix(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -18031,8 +18417,10 @@ function xmlToFigureNumber(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -18101,8 +18489,10 @@ function xmlToSuffix(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -18179,8 +18569,10 @@ export interface Backup extends Editorial {
 
 function xmlToBackup(node: Element) {
   let ret: Backup = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "footnote") {
       let dataFootnote = xmlToFootnote(ch);
       ret.footnote = dataFootnote;
@@ -18219,8 +18611,10 @@ export interface Forward extends EditorialVoice {
 
 function xmlToForward(node: Element) {
   let ret: Forward = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "voice") {
       let dataVoice = getNumber(ch, true);
       ret.voice = dataVoice;
@@ -18322,8 +18716,10 @@ export interface Barline extends Editorial {
 
 function xmlToBarline(node: Element) {
   let ret: Barline = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "segno") {
       let dataSegno = xmlToSegno(ch);
       ret.segno = dataSegno;
@@ -18466,8 +18862,10 @@ export interface BarStyle extends Color {
 function xmlToBarStyle(node: Element) {
   let ret: BarStyle = <any>{};
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -18557,8 +18955,10 @@ function xmlToEnding(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -18726,8 +19126,10 @@ export interface Repeat {
 function xmlToRepeat(node: Element) {
   let ret: Repeat = <any>{};
   let foundWinged = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -18827,8 +19229,10 @@ export interface Direction extends EditorialVoice, Placement, DirectiveEntity {
 function xmlToDirection(node: Element) {
   let ret: Direction = <any>{};
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "voice") {
       let dataVoice = getNumber(ch, true);
       ret.voice = dataVoice;
@@ -18913,8 +19317,10 @@ export interface DirectionType {
 
 function xmlToDirectionType(node: Element) {
   let ret: DirectionType = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "percussion") {
       let dataPercussions = xmlToPercussion(ch);
       ret.percussions = (ret.percussions || []).concat(dataPercussions);
@@ -19036,8 +19442,10 @@ function xmlToRehearsal(node: Element) {
   let foundLineHeight = false;
   let foundDir = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -19216,8 +19624,10 @@ function xmlToWords(node: Element) {
   let foundLineHeight = false;
   let foundDir = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -19434,8 +19844,10 @@ function xmlToWedge(node: Element) {
   let foundDashLength = false;
   let foundSpaceLength = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -19534,8 +19946,10 @@ function xmlToDashes(node: Element) {
   let foundDashLength = false;
   let foundSpaceLength = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -19655,8 +20069,10 @@ function xmlToBracket(node: Element) {
   let foundDashLength = false;
   let foundSpaceLength = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -19794,8 +20210,10 @@ function xmlToPedal(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -19939,8 +20357,10 @@ function xmlToMetronome(node: Element) {
   let foundJustify = false;
   let gotFirstPair = false;
   let gotSecondPair = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "metronome-note") {
       let dataMetronomeNotes = xmlToMetronomeNote(ch);
       ret.metronomeNotes = (ret.metronomeNotes || []).concat(
@@ -20072,8 +20492,10 @@ export interface BeatUnitDot {
 
 function xmlToBeatUnitDot(node: Element) {
   let ret: BeatUnitDot = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20090,8 +20512,10 @@ function xmlToPerMinute(node: Element) {
   let ret: PerMinute = <any>{};
   let foundFontWeight = false;
   let foundFontStyle = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20136,8 +20560,10 @@ export interface MetronomeNote {
 
 function xmlToMetronomeNote(node: Element) {
   let ret: MetronomeNote = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "metronome-dot") {
       let dataMetronomeDots = xmlToMetronomeDot(ch);
       ret.metronomeDots = (ret.metronomeDots || []).concat(dataMetronomeDots);
@@ -20169,8 +20595,10 @@ export interface MetronomeDot {
 
 function xmlToMetronomeDot(node: Element) {
   let ret: MetronomeDot = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20187,8 +20615,10 @@ export interface MetronomeBeam {
 function xmlToMetronomeBeam(node: Element) {
   let ret: MetronomeBeam = <any>{};
   let foundNumber_ = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20222,8 +20652,10 @@ function xmlToMetronomeTuplet(node: Element) {
   let ret: MetronomeTuplet = <any>{};
   let foundBracket = false;
   let foundShowNumber = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "actual-notes") {
       let dataActualNotes = getNumber(ch, true);
       ret.actualNotes = dataActualNotes;
@@ -20322,8 +20754,10 @@ function xmlToOctaveShift(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20431,8 +20865,10 @@ function xmlToHarpPedals(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "pedal-tuning") {
       let dataPedalTunings = xmlToPedalTuning(ch);
       ret.pedalTunings = (ret.pedalTunings || []).concat(dataPedalTunings);
@@ -20522,8 +20958,10 @@ export interface PedalTuning {
 
 function xmlToPedalTuning(node: Element) {
   let ret: PedalTuning = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "pedal-step") {
       let dataPedalStep = getString(ch, true);
       ret.pedalStep = dataPedalStep;
@@ -20553,8 +20991,10 @@ function xmlToDamp(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20643,8 +21083,10 @@ function xmlToDampAll(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20733,8 +21175,10 @@ function xmlToEyeglasses(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20824,8 +21268,10 @@ function xmlToStringMute(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -20921,8 +21367,10 @@ export interface Scordatura {
 
 function xmlToScordatura(node: Element) {
   let ret: Scordatura = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "accord") {
       let dataAccords = xmlToAccord(ch);
       ret.accords = (ret.accords || []).concat(dataAccords);
@@ -20951,8 +21399,10 @@ export interface Accord {
 
 function xmlToAccord(node: Element) {
   let ret: Accord = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "tuning-alter") {
       let dataTuningAlter = getString(ch, true);
       ret.tuningAlter = dataTuningAlter;
@@ -20994,8 +21444,10 @@ function xmlToImage(node: Element) {
   let ret: Image = <any>{};
   let foundHalign = false;
   let foundValignImage = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -21107,8 +21559,10 @@ function xmlToPrincipalVoice(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -21223,8 +21677,10 @@ function xmlToAccordionRegistration(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "accordion-middle") {
       let dataAccordionMiddle = getString(ch, true);
       ret.accordionMiddle = dataAccordionMiddle;
@@ -21345,8 +21801,10 @@ function xmlToPercussion(node: Element) {
   let foundHalign = false;
   let foundValign = false;
   let foundEnclosure = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "stick-location") {
       let dataStickLocation = getString(ch, true);
       ret.stickLocation = dataStickLocation;
@@ -21486,8 +21944,10 @@ export interface Timpani {
 
 function xmlToTimpani(node: Element) {
   let ret: Timpani = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -21517,8 +21977,10 @@ export interface Beater {
 
 function xmlToBeater(node: Element) {
   let ret: Beater = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -21552,8 +22014,10 @@ export interface Stick {
 
 function xmlToStick(node: Element) {
   let ret: Stick = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "stick-material") {
       let dataStickMaterial = getString(ch, true);
       ret.stickMaterial = dataStickMaterial;
@@ -21596,8 +22060,10 @@ export interface Offset {
 function xmlToOffset(node: Element) {
   let ret: Offset = <any>{};
   let foundSound = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -21661,8 +22127,10 @@ function xmlToHarmonyChord(node: Element) {
     inversion: null,
     bass: null,
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "root") {
       let dataRoot = xmlToRoot(ch);
       ret.root = dataRoot;
@@ -21758,8 +22226,10 @@ function xmlToHarmony(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundPlacement = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "frame") {
       let dataFrame = xmlToFrame(ch);
       ret.frame = dataFrame;
@@ -21912,8 +22382,10 @@ export interface Root {
 
 function xmlToRoot(node: Element) {
   let ret: Root = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "root-step") {
       let dataRootStep = xmlToRootStep(ch);
       ret.rootStep = dataRootStep;
@@ -21940,8 +22412,10 @@ function xmlToRootStep(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22016,8 +22490,10 @@ function xmlToRootAlter(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22098,8 +22574,10 @@ function xmlToFunction(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22261,8 +22739,10 @@ function xmlToKind(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22377,8 +22857,10 @@ function xmlToInversion(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22454,8 +22936,10 @@ export interface Bass {
 
 function xmlToBass(node: Element) {
   let ret: Bass = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "bass-step") {
       let dataBassStep = xmlToBassStep(ch);
       ret.bassStep = dataBassStep;
@@ -22491,8 +22975,10 @@ function xmlToBassStep(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22567,8 +23053,10 @@ function xmlToBassAlter(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22679,8 +23167,10 @@ export interface Degree extends PrintObject {
 function xmlToDegree(node: Element) {
   let ret: Degree = <any>{};
   let foundPrintObject = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "degree-alter") {
       let dataDegreeAlter = xmlToDegreeAlter(ch);
       ret.degreeAlter = dataDegreeAlter;
@@ -22756,8 +23246,10 @@ function xmlToDegreeValue(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22835,8 +23327,10 @@ function xmlToDegreeAlter(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -22910,8 +23404,10 @@ function xmlToDegreeType(node: Element) {
   let foundFontWeight = false;
   let foundFontStyle = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23004,8 +23500,10 @@ function xmlToFrame(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValignImage = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "frame-strings") {
       let dataFrameStrings = getString(ch, true);
       ret.frameStrings = dataFrameStrings;
@@ -23104,8 +23602,10 @@ export interface FirstFret {
 
 function xmlToFirstFret(node: Element) {
   let ret: FirstFret = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23141,8 +23641,10 @@ export interface FrameNote {
 
 function xmlToFrameNote(node: Element) {
   let ret: FrameNote = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "barre") {
       let dataBarre = xmlToBarre(ch);
       ret.barre = dataBarre;
@@ -23181,8 +23683,10 @@ export interface Barre extends Color {
 function xmlToBarre(node: Element) {
   let ret: Barre = <any>{};
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23229,8 +23733,10 @@ export interface Grouping {
 function xmlToGrouping(node: Element) {
   let ret: Grouping = <any>{};
   let foundNumber_ = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "feature") {
       let dataFeatures = xmlToFeature(ch);
       ret.features = (ret.features || []).concat(dataFeatures);
@@ -23267,8 +23773,10 @@ export interface Feature {
 
 function xmlToFeature(node: Element) {
   let ret: Feature = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23338,8 +23846,10 @@ export interface Print {
 
 function xmlToPrint(node: Element) {
   let ret: Print = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "measure-numbering") {
       let dataMeasureNumbering = xmlToMeasureNumbering(ch);
       ret.measureNumbering = dataMeasureNumbering;
@@ -23416,8 +23926,10 @@ function xmlToMeasureNumbering(node: Element) {
   let foundColor = false;
   let foundHalign = false;
   let foundValign = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23608,8 +24120,10 @@ export interface Sound extends TimeOnly {
 
 function xmlToSound(node: Element) {
   let ret: Sound = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "midi-instrument") {
       let dataMidiInstruments = xmlToMidiInstrument(ch);
       ret.midiInstruments = (ret.midiInstruments || []).concat(
@@ -23719,8 +24233,10 @@ export interface Work {
 
 function xmlToWork(node: Element) {
   let ret: Work = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "work-number") {
       let dataWorkNumber = getString(ch, true);
       ret.workNumber = dataWorkNumber;
@@ -23749,8 +24265,10 @@ export interface Opus {
 
 function xmlToOpus(node: Element) {
   let ret: Opus = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23784,8 +24302,10 @@ export interface Defaults {
 
 function xmlToDefaults(node: Element) {
   let ret: Defaults = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "word-font") {
       let dataWordFont = xmlToWordFont(ch);
       ret.wordFont = dataWordFont;
@@ -23839,8 +24359,10 @@ function xmlToMusicFont(node: Element) {
   let ret: MusicFont = <any>{};
   let foundFontWeight = false;
   let foundFontStyle = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23880,8 +24402,10 @@ function xmlToWordFont(node: Element) {
   let ret: WordFont = <any>{};
   let foundFontWeight = false;
   let foundFontStyle = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23923,8 +24447,10 @@ function xmlToLyricFont(node: Element) {
   let ret: LyricFont = <any>{};
   let foundFontWeight = false;
   let foundFontStyle = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -23972,8 +24498,10 @@ export interface LyricLanguage {
 
 function xmlToLyricLanguage(node: Element) {
   let ret: LyricLanguage = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -24025,8 +24553,10 @@ function xmlToCredit(node: Element) {
   let ret: Credit = <any>{};
   ret.creditWords = [];
   let foundCreditTypes = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "credit-type") {
       let dataCreditTypes = getString(ch, true);
       ret.creditTypes = (ret.creditTypes || []).concat(dataCreditTypes);
@@ -24080,8 +24610,10 @@ function xmlToCreditWords(node: Element) {
   let foundRelativeY = false;
   let foundDefaultX = false;
   let foundDefaultY = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -24264,8 +24796,10 @@ function xmlToCreditImage(node: Element) {
   let ret: CreditImage = <any>{};
   let foundHalign = false;
   let foundValignImage = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -24343,8 +24877,10 @@ export type PartList = Array<ScorePart | PartGroup>;
 
 function xmlToPartList(node: Element): PartList {
   let ret: PartList = [];
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "score-part") {
       let dataScoreParts = xmlToScorePart(ch);
       ret.push(dataScoreParts);
@@ -24390,8 +24926,10 @@ function xmlToScorePart(node: Element) {
     midiInstruments: [],
     id: "",
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "identification") {
       let dataIdentification = xmlToIdentification(ch);
       ret.identification = dataIdentification;
@@ -24476,8 +25014,10 @@ function xmlToPartName(node: Element) {
   let foundColor = false;
   let foundPrintObject = false;
   let foundJustify = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -24577,8 +25117,10 @@ function xmlToPartAbbreviation(node: Element) {
   let foundColor = false;
   let foundPrintObject = false;
   let foundJustify = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -24685,8 +25227,10 @@ function xmlToPartGroup(node: Element) {
     _class: "PartGroup",
   };
   let foundNumber_ = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "group-name-display") {
       let dataGroupNameDisplay = xmlToGroupNameDisplay(ch);
       ret.groupNameDisplay = dataGroupNameDisplay;
@@ -24759,8 +25303,10 @@ function xmlToGroupName(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundJustify = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -24855,8 +25401,10 @@ function xmlToGroupAbbreviation(node: Element) {
   let foundFontStyle = false;
   let foundColor = false;
   let foundJustify = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -24948,8 +25496,10 @@ function xmlToGroupSymbol(node: Element) {
   let ret: GroupSymbol = <any>{};
   let foundData = false;
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -25000,8 +25550,10 @@ export interface GroupBarline extends Color {
 function xmlToGroupBarline(node: Element) {
   let ret: GroupBarline = <any>{};
   let foundColor = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -25031,8 +25583,10 @@ export interface GroupTime {
 
 function xmlToGroupTime(node: Element) {
   let ret: GroupTime = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -25099,8 +25653,10 @@ function xmlToScoreInstrument(node: Element) {
     solo: null,
     id: "",
   };
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "instrument-name") {
       let dataInstrumentName = getString(ch, true);
       ret.instrumentName = dataInstrumentName;
@@ -25142,8 +25698,10 @@ export interface Solo {
 
 function xmlToSolo(node: Element) {
   let ret: Solo = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
   }
   for (let i = 0; i < node.attributes.length; ++i) {
     let ch2 = node.attributes[i];
@@ -25159,8 +25717,10 @@ export interface VirtualInstrument {
 
 function xmlToVirtualInstrument(node: Element) {
   let ret: VirtualInstrument = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "virtual-library") {
       let dataVirtualLibrary = getString(ch, true);
       ret.virtualLibrary = dataVirtualLibrary;
@@ -25195,8 +25755,10 @@ export interface ScoreHeader {
 
 function xmlToScoreHeader(node: Element) {
   let ret: ScoreHeader = <any>{};
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "movement-title") {
       let dataMovementTitle = getString(ch, true);
       ret.movementTitle = dataMovementTitle;
@@ -25247,8 +25809,10 @@ export interface ScoreTimewise extends DocumentAttributes, ScoreHeader {
 function xmlToScoreTimewise(node: Element) {
   let ret: ScoreTimewise = <any>{};
   let foundVersion_ = false;
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "measure") {
       let dataMeasures = xmlToMeasure(ch);
       ret.measures = (ret.measures || []).concat(dataMeasures);
@@ -25298,8 +25862,10 @@ function xmlToScoreTimewise(node: Element) {
 
 function xmlToPart(node: Element) {
   let rarr: any[] = [];
-  for (let i = 0; i < node.children.length; ++i) {
-    let ch = node.children[i];
+  for (const c in node.children ? node.children : node.childNodes) {
+    const ch = node.children
+      ? node.children[c]
+      : (node.childNodes[c] as Element);
     if (ch.nodeName === "note") {
       let data: any = xmlToNote(ch);
       rarr = (rarr || []).concat(data);
