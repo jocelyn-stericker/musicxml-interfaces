@@ -20,7 +20,7 @@
 /**
  * A path to an element in a JSON document.
  */
-export declare type OTPath = (number | string)[];
+export type OTPath = (number | string)[];
 /**
  * Adds x to the number at path
  */
@@ -170,7 +170,7 @@ export interface IStringDelete {
      */
     sd: string;
 }
-export declare type Operation<T> = INumberAdd | IListInsert<T> | IListDelete<T> | IListReplace<T> | IListMove | IObjectInsert<T> | IObjectDelete<T> | IObjectReplace<T> | IObjectApply | IStringInsert | IStringDelete;
+export type Operation<T> = INumberAdd | IListInsert<T> | IListDelete<T> | IListReplace<T> | IListMove | IObjectInsert<T> | IObjectDelete<T> | IObjectReplace<T> | IObjectApply | IStringInsert | IStringDelete;
 export interface IAny {
     /**
      * Path to string

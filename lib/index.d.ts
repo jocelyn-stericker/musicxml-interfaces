@@ -5261,7 +5261,7 @@ export interface CreditImage extends Position, Halign, ValignImage {
  * instruments. Initial midi-instrument assignments may be
  * made here as well.
  */
-export declare type PartList = Array<ScorePart | PartGroup>;
+export type PartList = Array<ScorePart | PartGroup>;
 export interface ScorePart {
     _snapshot?: ScorePart;
     identification?: Identification;
